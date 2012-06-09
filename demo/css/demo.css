@@ -58,20 +58,86 @@ hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin:
 
 input, select { vertical-align: middle; }
 
-/* Layout
+/* General page styles
 *****************************************************************/
 
-.demo1,
-.demo1 .tse-content {
-  width: 250px; /* example of overwiting default width */
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin: 20px;
 }
-
-/* General
-*****************************************************************/
-
 .tse-content {
   background-color: #DDD;
 }
-p {
-  margin: 0;
+.demo1-col {
+  float: left;
+  width: 250px;
+  margin: 0 20px 20px 0;
 }
+.demo2-col {
+  float: left;
+  width: 500px;
+}
+.add-more,
+.tall,
+.short {
+  display: inline-block;
+  background: #666;
+  color: #fff;
+  padding: 8px 12px;
+  line-height: 1;
+  text-decoration: none;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  }
+  .add-more:hover,
+  .tall:hover,
+  .short:hover {
+    background: #999;
+    }
+
+/* Scrollable elements
+*****************************************************************/
+.demo1 {
+  margin: 10px 0;
+}
+.demo1,
+.demo1 .tse-content {
+  width: 250px; /* example of overwiting default width */
+  }
+  .demo1 p {
+    margin: 0;
+    padding: 10px;
+    }
+    .demo1 p.odd {
+      background: #f0f0f0;
+      }
+.demo2 {
+  width: 500px; /* example of overwiting default width */
+  height: 130px; /* example of overwiting default height */
+  margin: 10px 0;
+  }
+  .demo2 .tse-content {
+    width: 1110px;
+    height: 130px;
+    }
+    .demo2 .boxes {
+      overflow: auto;
+      padding: 10px 0 0 10px;
+      }
+      .demo2 .box {
+        float: left;
+        margin-right: 10px;
+        width: 100px;
+        height: 100px;
+        background: #666;
+        color: #fff;
+        text-align: center;
+        line-height: 100px;
+        font-size: 24px;
+        }
+
+
+

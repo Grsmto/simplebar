@@ -7,16 +7,16 @@
   width: 200px; /* Default value. Overwite this if you want. */
   height: 300px; /* Default value. Overwite this if you want. */
   overflow: hidden;
+  overflow-y: scroll; /* Fallback for non-JS clients. */
   }
-  .tse-scrollable .tse-scroll-content,
-  .tse-scrollable .tse-content {
-    overflow-x: hidden;
+  .tse-scrollable .tse-scroll-content {
+    overflow: hidden;
     overflow-y: scroll;
     }
     .tse-scrollable .tse-content {
       /* Default height, used as a fallback for non-JS clients.
       If you overwite .tse-scrollable's height, overwrite this too. */
-      height: 300px;
+      /*height: 300px;*/
       }
 .tse-scrollbar {
   z-index: 99;
@@ -56,3 +56,26 @@
     .tse-scrollbar .drag-handle.visible {
       opacity: 0.7;
       }
+/* Horizontal scroller */
+.tse-scrollable.horizontal {
+  overflow-x: scroll; /* Fallback for non-JS clients. */ 
+  overflow-y: hidden; /* Fallback for non-JS clients. */
+  }
+.tse-scrollable.horizontal .tse-scroll-content {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  }
+.tse-scrollable.horizontal .tse-scrollbar {
+  top: auto;
+  left: 0;
+  width: auto;
+  height: 10px;
+  }
+  .tse-scrollable.horizontal .tse-scrollbar .drag-handle {
+    right: auto;
+    top: 2px;
+    height: 6px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+    }

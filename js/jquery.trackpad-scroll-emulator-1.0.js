@@ -14,6 +14,10 @@
     var $dragHandleEl;
     var dragOffset;
     var flashTimeout;
+    var scrollDirection = 'vert';
+    var scrollOffsetAttr = 'scrollTop';
+    var sizeAttr = 'height';
+    var offsetAttr = 'top';
 
     options = $.extend({}, $.fn[pluginName].defaults, options);
 
@@ -21,6 +25,13 @@
      * Initialize plugin
      */
     function init() {
+      if ($el.hasClass('horizontal')){
+        scrollDirection = 'horiz';
+        scrollOffsetAttr = 'scrollLeft';
+        sizeAttr = 'width';
+        offsetAttr = 'left';
+      }
+
       $el.prepend('<div class="tse-scrollbar"><div class="drag-handle"></div></div>');
       $scrollbarEl = $el.find('.tse-scrollbar');
       $dragHandleEl = $el.find('.drag-handle');
@@ -30,7 +41,7 @@
 
       // So that scrollbars are visible with JS disabled, the content element has
       // default height and overflow values, which we need to reset.
-      $contentEl.css({'height': 'auto', 'overflow': 'visible'});
+      $el.css({'overflow': 'hidden'});
       resizeScrollContent();
 
       $el.on('mouseenter', flashScrollbar);
@@ -46,7 +57,11 @@
       e.preventDefault();
 
       // Measure how far the user's mouse is from the top of the scrollbar drag handle.
-      dragOffset = e.pageY - $dragHandleEl.offset().top;
+      var eventOffset = e.pageY;
+      if (scrollDirection === 'horiz') {
+        eventOffset = e.pageX;
+      }
+      dragOffset = eventOffset - $dragHandleEl.offset()[offsetAttr];
 
       $(document).on('mousemove', drag);
       $(document).on('mouseup', endDrag);
@@ -55,14 +70,18 @@
     function drag(e) {
       e.preventDefault();
 
-      // Calculate how far the user's mouse is from the top of the scrollbar (minus the dragOffset).
-      var dragPos = e.pageY - $scrollbarEl.offset().top - dragOffset;
-      // Convert the mouse position into a percentage of the scrollbar height.
-      var dragPerc = dragPos / $scrollbarEl.height();
+      // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
+      var eventOffset = e.pageY;
+      if (scrollDirection === 'horiz') {
+        eventOffset = e.pageX;
+      }
+      var dragPos = eventOffset - $scrollbarEl.offset()[offsetAttr] - dragOffset;
+      // Convert the mouse position into a percentage of the scrollbar height/width.
+      var dragPerc = dragPos / $scrollbarEl[sizeAttr]();
       // Scroll the content by the same percentage.
-      var scrollPos = dragPerc * $contentEl.height();
+      var scrollPos = dragPerc * $contentEl[sizeAttr]();
 
-      $scrollContentEl.scrollTop(scrollPos);
+      $scrollContentEl[scrollOffsetAttr](scrollPos);
     }
 
     function endDrag() {
@@ -81,29 +100,26 @@
      * Resize scrollbar
      */
     function resizeScrollbar() {
-      var contentHeight = $contentEl.height();
-      var scrollTop = contentScrollTop();
-      var scrollbarHeight = $scrollbarEl.height();
-      var scrollbarRatio = scrollbarHeight / contentHeight;
+      var contentSize = $contentEl[sizeAttr]();
+      var scrollOffset = $scrollContentEl[scrollOffsetAttr](); // Either scrollTop() or scrollLeft().
+      var scrollbarSize = $scrollbarEl[sizeAttr]();
+      var scrollbarRatio = scrollbarSize / contentSize;
 
       // Calculate new height/position of drag handle.
       // Offset of 2px allows for a small top/bottom margin around handle.
-      var handleTop = Math.round(scrollbarRatio * scrollTop) + 2;
-      var handleHeight = Math.floor(scrollbarRatio * (scrollbarHeight - 2)) - 2;
+      var handleOffset = Math.round(scrollbarRatio * scrollOffset) + 2;
+      var handleSize = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
 
-      if (scrollbarHeight < contentHeight) {
-          $dragHandleEl.css({'top': handleTop, 'height': handleHeight});
-          $scrollbarEl.show();
+      if (scrollbarSize < contentSize) {
+        if (scrollDirection === 'vert'){
+          $dragHandleEl.css({'top': handleOffset, 'height': handleSize});
+        } else {
+          $dragHandleEl.css({'left': handleOffset, 'width': handleSize});
+        }
+        $scrollbarEl.show();
       } else {
-          $scrollbarEl.hide();
+         $scrollbarEl.hide();
       }
-    }
-
-    /**
-     * Get content scrollTop value
-     */
-    function contentScrollTop() {
-      return $scrollContentEl.scrollTop();
     }
 
     /**
@@ -139,8 +155,14 @@
     }
 
     function resizeScrollContent() {
-      $scrollContentEl.width($el.width()+20);
-      $scrollContentEl.height($el.height());
+      if (scrollDirection === 'vert'){
+        $scrollContentEl.width($el.width()+20);
+        $scrollContentEl.height($el.height());
+      } else {
+        $scrollContentEl.width($el.width());
+        $scrollContentEl.height($el.height()+20);
+        $contentEl.height($el.height());
+      }
     }
 
     function recalculate() {

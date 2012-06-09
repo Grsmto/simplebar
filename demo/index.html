@@ -6,59 +6,81 @@
 <link rel="stylesheet" href="css/demo.css" />
 </head>
 <body>
-<div class="tse-scrollable demo1">
-  <div class="tse-content">
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
-    <p>some content</p>
-    <p>some content 2</p>
+<div class="demo1-col">
+  <div class="tse-scrollable demo1">
+    <div class="tse-content">
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+    </div>
+  </div>
+  <a class="add-more" href="#">Add content</a>
+  <a class="tall" href="#">Tall</a>
+  <a class="short" href="#">Short</a>
+</div>
+
+<div class="demo2-col">
+  <div class="tse-scrollable horizontal demo2">
+    <div class="tse-content">
+      <div class="boxes">
+         <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+        <div class="box">8</div>
+        <div class="box">9</div>
+        <div class="box">10</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="add-more"><a href="#">Add more content</a></div>
-<div class="tall"><a href="#">Tall</a></div>
-<div class="short"><a href="#">Short</a></div>
 <!-- JavaScript -->
 <script src="lib/jquery-1.7.1.min.js"></script>
 <script src="../js/jquery.trackpad-scroll-emulator-1.0.min.js"></script>
 <script>
   $('.demo1').TrackpadScrollEmulator();
+  $('.demo2').TrackpadScrollEmulator();
   // $('.demo1').TrackpadScrollEmulator('destroy');
-  $('.add-more a').on('click', function(e){
+  $('.add-more').on('click', function(e){
     e.preventDefault();
-    $('.content').append('<p>more content</p><p>more content 2</p><p>more content 3</p><p>more content 4</p>');
+    $('.demo1 .tse-content').append('<p class="odd">Additional content 1</p><p>Additional content 2</p><p p class="odd">Additional content 3</p><p>Additional content 4</p>');
     $('.demo1').TrackpadScrollEmulator('recalculate');
   });
-  $('.tall a').on('click', function(e){
+  $('.tall').on('click', function(e){
     e.preventDefault();
     $('.demo1').height(400);
     $('.demo1').TrackpadScrollEmulator('recalculate');
   });
-  $('.short a').on('click', function(e){
+  $('.short').on('click', function(e){
     e.preventDefault();
     $('.demo1').height(300);
     $('.demo1').TrackpadScrollEmulator('recalculate');
