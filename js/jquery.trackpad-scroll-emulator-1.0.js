@@ -158,13 +158,28 @@
      */
     function resizeScrollContent() {
       if (scrollDirection === 'vert'){
-        $scrollContentEl.width($el.width()+20);
+        $scrollContentEl.width($el.width()+scrollbarWidth());
         $scrollContentEl.height($el.height());
       } else {
         $scrollContentEl.width($el.width());
-        $scrollContentEl.height($el.height()+20);
+        $scrollContentEl.height($el.height()+scrollbarWidth());
         $contentEl.height($el.height());
       }
+    }
+
+    /**
+     * Calculate scrollbar width
+     */
+    function scrollbarWidth() {
+      // Append a temporary element to the DOM, measure its width,
+      // add scrollbars, then measure the difference.
+      var tempEl = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');
+      $('body').append(tempEl);
+      var width = $('div', tempEl).innerWidth();
+      tempEl.css('overflow-y', 'scroll');
+      var widthWithScrollbars = $('div', tempEl).innerWidth();
+      tempEl.remove();
+      return (width - widthWithScrollbars);
     }
 
     /**

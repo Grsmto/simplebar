@@ -12,6 +12,10 @@
     overflow: hidden;
     overflow-y: scroll;
     }
+    .tse-scrollable .tse-scroll-content::-webkit-scrollbar,
+    .tse-scrollable .tse-scroll-content::scrollbar {
+      width: 0;
+      }
 .tse-scrollbar {
   z-index: 99;
   position: absolute;
@@ -55,6 +59,11 @@
   overflow-x: scroll;
   overflow-y: hidden;
   }
+  .tse-scrollable.horizontal .tse-scroll-content::-webkit-scrollbar,
+  .tse-scrollable.horizontal .tse-scroll-content::scrollbar {
+    width: auto;
+    height: 0;
+    }
 .tse-scrollable.horizontal .tse-scrollbar {
   top: auto;
   left: 0;
