@@ -1,9 +1,29 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
   <title>TrackpadScrollEmulator demo</title>
   <link rel="stylesheet" href="../css/trackpad-scroll-emulator.css" />
   <link rel="stylesheet" href="css/demo.css" />
+  <noscript>
+    <style>
+      /**
+       * Reinstate scrolling for non-JS clients
+       * 
+       * You coud do this in a regular stylesheet, but be aware that
+       * even in JS-enabled clients the browser scrollbars may be visible
+       * briefly until JS kicks in. This is especially noticeable in IE.
+       * Wrapping these rules in a noscript tag ensures that never happens.
+       */
+      .tse-scrollable {
+        overflow-y: scroll;
+      }
+      .tse-scrollable.horizontal {
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+    </style>
+  </noscript>
 </head>
 <body>
   <h1>TrackpadScrollEmulator demo</h1>
@@ -94,24 +114,5 @@
     });
   });
   </script>
-  <noscript>
-    <style>
-      /**
-       * Reinstate scrolling for non-JS clients
-       * 
-       * You coud do this in a regular stylesheet, but be aware that
-       * even in JS-enabled clients the browser scrollbars may be visible
-       * briefly until JS kicks in. This is especially noticeable in IE.
-       * Wrapping these rules in a noscript tag ensures that never happens.
-       */
-      .tse-scrollable {
-        overflow-y: scroll;
-      }
-      .tse-scrollable.horizontal {
-        overflow-x: scroll;
-        overflow-y: hidden;
-      }
-    </style>
-  </noscript>
 </body>
 </html>
