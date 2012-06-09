@@ -169,6 +169,9 @@
 
     /**
      * Calculate scrollbar width
+     *
+     * Original function by Jonathan Sharp:
+     * http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php
      */
     function scrollbarWidth() {
       // Append a temporary element to the DOM, measure its width,
