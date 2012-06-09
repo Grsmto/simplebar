@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="css/demo.css" />
 </head>
 <body>
-<div class="wrapper">
+<div class="tse-scrollable demo1">
   <div class="content">
     <p>some content</p>
     <p>some content 2</p>
@@ -46,22 +46,22 @@
 <script src="lib/jquery-1.7.1.min.js"></script>
 <script src="../js/jquery.trackpad-scroll-emulator-1.0.min.js"></script>
 <script>
-  $('.wrapper').TrackpadScrollEmulator();
-  // $('.wrapper').TrackpadScrollEmulator('destroy');
+  $('.demo1').TrackpadScrollEmulator();
+  // $('.demo1').TrackpadScrollEmulator('destroy');
   $('.add-more a').on('click', function(e){
     e.preventDefault();
     $('.content').append('<p>more content</p><p>more content 2</p><p>more content 3</p><p>more content 4</p>');
-    $('.wrapper').TrackpadScrollEmulator('recalculate');
+    $('.demo1').TrackpadScrollEmulator('recalculate');
   });
   $('.tall a').on('click', function(e){
     e.preventDefault();
-    $('.wrapper').height(400);
-    $('.wrapper').TrackpadScrollEmulator('recalculate');
+    $('.demo1').height(400);
+    $('.demo1').TrackpadScrollEmulator('recalculate');
   });
   $('.short a').on('click', function(e){
     e.preventDefault();
-    $('.wrapper').height(300);
-    $('.wrapper').TrackpadScrollEmulator('recalculate');
+    $('.demo1').height(300);
+    $('.demo1').TrackpadScrollEmulator('recalculate');
   });
 </script>
 </body>

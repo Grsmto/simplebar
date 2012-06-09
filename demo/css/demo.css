@@ -1,4 +1,12 @@
-/* Global reset
+/**
+ * TrackpadScrollEmulator demo.
+ * Author: Jonathan Nicol @f6design
+ * 
+ * These styles are not required for TrackpadScrollEmulator
+ * to function. They are used only for styling the demo.
+ */
+
+ /* Global reset
    html5doctor.com/html-5-reset-stylesheet/
 *****************************************************************/
 
@@ -53,8 +61,8 @@ input, select { vertical-align: middle; }
 /* Layout
 *****************************************************************/
 
-.wrapper,
-.wrapper .content {
+.demo1,
+.demo1 .content {
   width: 250px; /* example of overwiting default width */
 }
 
