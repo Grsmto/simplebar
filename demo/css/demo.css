@@ -66,6 +66,17 @@ body {
   font-size: 14px;
   margin: 20px;
 }
+h1 {
+  font-size: 30px;
+  margin: 0 0 10px 0;
+}
+h2 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+p {
+  margin: 1em 0;
+}
 .tse-content {
   background-color: #DDD;
 }
@@ -82,7 +93,7 @@ body {
 .tall,
 .short {
   display: inline-block;
-  background: #666;
+  background: #000;
   color: #fff;
   padding: 8px 12px;
   line-height: 1;
@@ -95,7 +106,7 @@ body {
   .add-more:hover,
   .tall:hover,
   .short:hover {
-    background: #999;
+    background: #666;
     }
 
 /* Scrollable elements
