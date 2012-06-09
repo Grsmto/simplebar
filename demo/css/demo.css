@@ -62,14 +62,14 @@ input, select { vertical-align: middle; }
 *****************************************************************/
 
 .demo1,
-.demo1 .content {
+.demo1 .tse-content {
   width: 250px; /* example of overwiting default width */
 }
 
 /* General
 *****************************************************************/
 
-.content {
+.tse-content {
   background-color: #DDD;
 }
 p {

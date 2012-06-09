@@ -9,7 +9,7 @@
     var el = element;
     var $el = $(element);
     var $scrollContentEl;
-    var $contentEl = $el.find('.content');
+    var $contentEl = $el.find('.tse-content');
     var $scrollbarEl;
     var $dragHandleEl;
     var dragOffset;
@@ -21,12 +21,12 @@
      * Initialize plugin
      */
     function init() {
-      $el.prepend('<div class="scrollbar"><div class="drag-handle"></div></div>');
-      $scrollbarEl = $el.find('.scrollbar');
+      $el.prepend('<div class="tse-scrollbar"><div class="drag-handle"></div></div>');
+      $scrollbarEl = $el.find('.tse-scrollbar');
       $dragHandleEl = $el.find('.drag-handle');
 
-      $contentEl.wrap('<div class="scroll-content" />');
-      $scrollContentEl = $el.find('.scroll-content');
+      $contentEl.wrap('<div class="tse-scroll-content" />');
+      $scrollContentEl = $el.find('.tse-scroll-content');
 
       // So that scrollbars are visible with JS disabled, the content element has
       // default height and overflow values, which we need to reset.
