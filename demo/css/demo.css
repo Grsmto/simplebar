@@ -89,9 +89,7 @@ p {
   float: left;
   width: 500px;
 }
-.add-more,
-.tall,
-.short {
+.btn {
   display: inline-block;
   background: #000;
   color: #fff;
@@ -103,9 +101,7 @@ p {
   -o-border-radius: 5px;
   border-radius: 5px;
   }
-  .add-more:hover,
-  .tall:hover,
-  .short:hover {
+  .btn:hover {
     background: #666;
     }
 

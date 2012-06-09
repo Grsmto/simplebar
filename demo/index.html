@@ -45,9 +45,8 @@
         <p>Some more content</p>
       </div>
     </div>
-    <a class="add-more" href="#">Add content</a>
-    <a class="tall" href="#">Tall</a>
-    <a class="short" href="#">Short</a>
+    <a class="btn add-more" href="#">Add content</a>
+    <a class="btn toggle-height" href="#">Toggle height</a>
   </div>
 
   <div class="demo2-col">
@@ -75,22 +74,22 @@
   <script src="../js/jquery.trackpad-scroll-emulator-1.0.min.js"></script>
   <script>
   $(document).ready(function() {
+    // Initialize scrollers.
     $('.demo1').TrackpadScrollEmulator();
     $('.demo2').TrackpadScrollEmulator();
-    // $('.demo1').TrackpadScrollEmulator('destroy');
+    // Demonstration of changing the scroller content and dimensions.
     $('.add-more').on('click', function(e){
       e.preventDefault();
       $('.demo1 .tse-content').append('<p class="odd">Additional content 1</p><p>Additional content 2</p><p p class="odd">Additional content 3</p><p>Additional content 4</p>');
       $('.demo1').TrackpadScrollEmulator('recalculate');
     });
-    $('.tall').on('click', function(e){
+    $('.toggle-height').on('click', function(e){
       e.preventDefault();
-      $('.demo1').height(400);
-      $('.demo1').TrackpadScrollEmulator('recalculate');
-    });
-    $('.short').on('click', function(e){
-      e.preventDefault();
-      $('.demo1').height(300);
+      if ($('.demo1').height() === 400) {
+        $('.demo1').height(300);
+      } else {
+        $('.demo1').height(400);
+      }
       $('.demo1').TrackpadScrollEmulator('recalculate');
     });
   });
