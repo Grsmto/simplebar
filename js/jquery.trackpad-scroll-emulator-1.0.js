@@ -27,6 +27,10 @@
 
       $contentEl.wrap('<div class="scroll-content" />');
       $scrollContentEl = $el.find('.scroll-content');
+
+      // So that scrollbars are visible with JS disabled, the content element has
+      // default height and overflow values, which we need to reset.
+      $contentEl.css({'height': 'auto', 'overflow': 'visible'});
       resizeScrollContent();
 
       $el.on('mouseenter', flashScrollbar);

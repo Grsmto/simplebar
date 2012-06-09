@@ -53,16 +53,17 @@ input, select { vertical-align: middle; }
 /* Layout
 *****************************************************************/
 
-.wrapper {
-    width: 250px; /* exaple overwiting default width */
+.wrapper,
+.wrapper .content {
+  width: 250px; /* example of overwiting default width */
 }
 
 /* General
 *****************************************************************/
 
 .content {
-    background-color: #DDD;
+  background-color: #DDD;
 }
 p {
-    margin: 0;
+  margin: 0;
 }

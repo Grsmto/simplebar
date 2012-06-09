@@ -7,36 +7,36 @@
 </head>
 <body>
 <div class="wrapper">
-      <div class="content">
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-            <p>some content</p>
-            <p>some content 2</p>
-      </div>
+  <div class="content">
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+    <p>some content</p>
+    <p>some content 2</p>
+  </div>
 </div>
 
 <div class="add-more"><a href="#">Add more content</a></div>
@@ -46,23 +46,23 @@
 <script src="lib/jquery-1.7.1.min.js"></script>
 <script src="../js/jquery.trackpad-scroll-emulator-1.0.min.js"></script>
 <script>
-      $('.wrapper').TrackpadScrollEmulator();
-      // $('.wrapper').TrackpadScrollEmulator('destroy');
-      $('.add-more a').on('click', function(e){
-            e.preventDefault();
-            $('.content').append('<p>more content</p><p>more content 2</p><p>more content 3</p><p>more content 4</p>');
-            $('.wrapper').TrackpadScrollEmulator('recalculate');
-      });
-      $('.tall a').on('click', function(e){
-            e.preventDefault();
-            $('.wrapper').height(400);
-            $('.wrapper').TrackpadScrollEmulator('recalculate');
-      });
-      $('.short a').on('click', function(e){
-            e.preventDefault();
-            $('.wrapper').height(300);
-            $('.wrapper').TrackpadScrollEmulator('recalculate');
-      });
+  $('.wrapper').TrackpadScrollEmulator();
+  // $('.wrapper').TrackpadScrollEmulator('destroy');
+  $('.add-more a').on('click', function(e){
+    e.preventDefault();
+    $('.content').append('<p>more content</p><p>more content 2</p><p>more content 3</p><p>more content 4</p>');
+    $('.wrapper').TrackpadScrollEmulator('recalculate');
+  });
+  $('.tall a').on('click', function(e){
+    e.preventDefault();
+    $('.wrapper').height(400);
+    $('.wrapper').TrackpadScrollEmulator('recalculate');
+  });
+  $('.short a').on('click', function(e){
+    e.preventDefault();
+    $('.wrapper').height(300);
+    $('.wrapper').TrackpadScrollEmulator('recalculate');
+  });
 </script>
 </body>
 </html>

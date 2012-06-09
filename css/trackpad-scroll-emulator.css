@@ -3,52 +3,56 @@
  * Author: Jonathan Nicol @f6design
  */
  .wrapper {
-    position: relative;
-    width: 200px; /* Default value. Overwite this if you want. */
-    height: 300px; /* Default value. Overwite this if you want. */
-    overflow: hidden;
+  position: relative;
+  width: 200px; /* Default value. Overwite this if you want. */
+  height: 300px; /* Default value. Overwite this if you want. */
+  overflow: hidden;
+  }
+  .wrapper .scroll-content,
+  .wrapper .content {
+    overflow-x: hidden;
+    overflow-y: scroll;
     }
-    .wrapper .scroll-content {
-        width: 220px; /* Default value. Overwitten by plugin. */
-        height: 300px; /* Default value. Overwitten by plugin. */
-        overflow: hidden;
-        overflow-y: scroll;
-        }
+    .wrapper .content {
+      /* Default height, used as a fallback for non-JS clients.
+      If you overwite .wrapper's height, overwrite this too. */
+      height: 300px;
+      }
 .scrollbar {
-    z-index: 99;
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  }
+  .scrollbar .drag-handle {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 10px;
+    right: 2px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    min-height: 10px;
+    width: 6px;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s linear;
+    -moz-transition: opacity 0.2s linear;
+    -o-transition: opacity 0.2s linear;
+    -ms-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+    background: #68757E;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
     }
-    .scrollbar .drag-handle {
-        position: absolute;
-        right: 2px;
-        -webkit-border-radius: 6px;
-        -moz-border-radius: 6px;
-        border-radius: 6px;
-        min-height: 10px;
-        width: 6px;
-        opacity: 0;
-        -webkit-transition: opacity 0.2s linear;
-        -moz-transition: opacity 0.2s linear;
-        -o-transition: opacity 0.2s linear;
-        -ms-transition: opacity 0.2s linear;
-        transition: opacity 0.2s linear;
-        background: #68757E;
-        -webkit-background-clip: padding-box;
-        -moz-background-clip: padding;
-        }
-    .scrollbar:hover .drag-handle {
-        /* When hovered, remove all transitions from drag handle */
-        opacity: 0.7;
-        -webkit-transition: opacity 0 linear;
-        -moz-transition: opacity 0 linear;
-        -o-transition: opacity 0 linear;
-        -ms-transition: opacity 0 linear;
-        transition: opacity 0 linear;
-        }
-        .scrollbar .drag-handle.visible {
-            opacity: 0.7;
-            }
+  .scrollbar:hover .drag-handle {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.7;
+    -webkit-transition: opacity 0 linear;
+    -moz-transition: opacity 0 linear;
+    -o-transition: opacity 0 linear;
+    -ms-transition: opacity 0 linear;
+    transition: opacity 0 linear;
+    }
+    .scrollbar .drag-handle.visible {
+      opacity: 0.7;
+      }
