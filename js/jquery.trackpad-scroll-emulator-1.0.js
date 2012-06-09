@@ -163,18 +163,14 @@
      * Destroy plugin.
      */
     function destroy() {
-      //$el.each(function() {
-        //var el = this;
-        //var $el = $(this);
- 
-        // Restore the element to its original state.
-        $contentEl.insertBefore($scrollbarEl);
-        $scrollbarEl.remove();
-        $scrollContentEl.remove();
- 
-        hook('onDestroy');
-        $el.removeData('plugin_' + pluginName);
-      //});
+      // Restore the element to its original state.
+      $contentEl.insertBefore($scrollbarEl);
+      $scrollbarEl.remove();
+      $scrollContentEl.remove();
+      $contentEl.css({'height': $el.height()+'px', 'overflow-y': 'scroll'});
+
+      hook('onDestroy');
+      $el.removeData('plugin_' + pluginName);
     }
   
     /**
