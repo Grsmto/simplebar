@@ -18,16 +18,16 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 10px;
+  width: 11px;
   }
   .tse-scrollbar .drag-handle {
     position: absolute;
     right: 2px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
     min-height: 10px;
-    width: 6px;
+    width: 7px;
     opacity: 0;
     -webkit-transition: opacity 0.2s linear;
     -moz-transition: opacity 0.2s linear;
@@ -59,12 +59,12 @@
   top: auto;
   left: 0;
   width: auto;
-  height: 10px;
+  height: 11px;
   }
   .tse-scrollable.horizontal .tse-scrollbar .drag-handle {
     right: auto;
     top: 2px;
-    height: 6px;
+    height: 7px;
     min-height: 0;
     min-width: 10px;
     width: auto;
