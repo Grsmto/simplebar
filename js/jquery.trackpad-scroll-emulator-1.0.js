@@ -1,6 +1,9 @@
 /**
  * TrackpadScrollEmulator
  * Author: Jonathan Nicol @f6design
+ *
+ * Todo:
+ * - Hide browser scrollbars in IE until plugin kicks in (see Rdio)
  */
 ;(function($) {
   var pluginName = 'TrackpadScrollEmulator';
@@ -39,9 +42,6 @@
       $contentEl.wrap('<div class="tse-scroll-content" />');
       $scrollContentEl = $el.find('.tse-scroll-content');
 
-      // So that scrollbars are visible with JS disabled, the content element has
-      // default height and overflow values, which we need to reset.
-      $el.css({'overflow': 'hidden'});
       resizeScrollContent();
 
       $el.on('mouseenter', flashScrollbar);
@@ -106,7 +106,7 @@
       var scrollbarRatio = scrollbarSize / contentSize;
 
       // Calculate new height/position of drag handle.
-      // Offset of 2px allows for a small top/bottom margin around handle.
+      // Offset of 2px allows for a small top/bottom or left/right margin around handle.
       var handleOffset = Math.round(scrollbarRatio * scrollOffset) + 2;
       var handleSize = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
 
@@ -139,7 +139,6 @@
           window.clearTimeout(flashTimeout);
         }
         flashTimeout = window.setTimeout(function() {
-            //self.hideScrollbar();
             hideScrollbar();
         }, 1000);
     }
@@ -154,6 +153,9 @@
         }
     }
 
+    /**
+     * Resize content element
+     */
     function resizeScrollContent() {
       if (scrollDirection === 'vert'){
         $scrollContentEl.width($el.width()+20);
@@ -165,6 +167,9 @@
       }
     }
 
+    /**
+     * Recalculate scrollbar
+     */
     function recalculate() {
       resizeScrollContent();
       resizeScrollbar();

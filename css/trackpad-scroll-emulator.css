@@ -7,17 +7,11 @@
   width: 200px; /* Default value. Overwite this if you want. */
   height: 300px; /* Default value. Overwite this if you want. */
   overflow: hidden;
-  overflow-y: scroll; /* Fallback for non-JS clients. */
   }
   .tse-scrollable .tse-scroll-content {
     overflow: hidden;
     overflow-y: scroll;
     }
-    .tse-scrollable .tse-content {
-      /* Default height, used as a fallback for non-JS clients.
-      If you overwite .tse-scrollable's height, overwrite this too. */
-      /*height: 300px;*/
-      }
 .tse-scrollbar {
   z-index: 99;
   position: absolute;
@@ -57,10 +51,6 @@
       opacity: 0.7;
       }
 /* Horizontal scroller */
-.tse-scrollable.horizontal {
-  overflow-x: scroll; /* Fallback for non-JS clients. */ 
-  overflow-y: hidden; /* Fallback for non-JS clients. */
-  }
 .tse-scrollable.horizontal .tse-scroll-content {
   overflow-x: scroll;
   overflow-y: hidden;
