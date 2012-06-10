@@ -12,7 +12,7 @@ A jQuery plugin that emulates OSX Lion trackpad-style scrollbars in any browser 
 
 ## 1. What it does
 
-Traditionally scrollbars are permanently displayed whenever an area of a webpage - or the entire page - is scrollable. By contrast, Mac OSX Lion users with a 'magic' trackpad pointing device are used to scrollbars being hidden from sight, and revealed only when they scroll using a swipe gesture.
+Traditionally scrollbars are permanently displayed whenever an area of a webpage is scrollable. By contrast, scrollbars in OSX Lion are hidden from sight, and revealed only when the user executes a swipe gesture with a 'magic' trackpad pointing device.
 
 This plugin emulates Lion's UI pattern by replacing the browser's default scrollbars with a custom CSS-styled scrollbar that is only revealed when the user hovers over a scrollable element.
 
