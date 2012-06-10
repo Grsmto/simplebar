@@ -1,4 +1,4 @@
-#TrackpadScrollEmulator
+#Trackpad Scroll Emulator
 
 A jQuery plugin that emulates OSX Lion trackpad-style scrollbars in any browser or platform. Based on the scrollbars in the Rdio app.
 
@@ -19,13 +19,13 @@ Modern browsers get a very accurate emulation of Lion's scrollbars, while less c
 
 ##2. Dependencies
 
-TrackpadScrollEmulator has the following dependencies:
+Trackpad Scroll Emulator has the following dependencies:
 
 - jQuery
 
 ##3. Usage
 
-Include jQuery and TrackpadScrollEmulator in your document. The paths and filenames may differ from those shown here:
+Include jQuery and Trackpad Scroll Emulator in your document. The paths and filenames may differ from those shown here:
 
     <link rel="stylesheet" href="css/trackpad-scroll-emulator.css" />
     <script src="js/jquery-1.7.1.min.js"></script>
@@ -71,11 +71,11 @@ The dimensions of the `tse-scrollable` wrapping element determine the visible di
       width: 250px; /* Example of overwiting default width */
     }
 
-The demo bundled with TrackpadScrollEmulator demonstrates how you might dynamically alter the dimensions of `tse-scrollable` using JavaScript.
+The demo bundled with Trackpad Scroll Emulator demonstrates how you might dynamically alter the dimensions of `tse-scrollable` using JavaScript.
 
 ###Non-JS fallback
 
-TrackpadScrollEmulator hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:
+Trackpad Scroll Emulator hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:
 
     <noscript>
       <style>
@@ -91,13 +91,13 @@ TrackpadScrollEmulator hides the browser's default scrollbars, which obviously i
 
 ##4. How it works
 
-For the most part TrackpadScrollEmulator uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
+For the most part Trackpad Scroll Emulator uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
 
 Key to this technique is hiding the native browser scrollbar. In modern browsers (i.e. WebKit) this is achieved simply by giving the scrollbar a width/height of zero using the `::webkit-scrollbar` and `::scrollbar`pseudo selectors. In other browsers the scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
 ##5. Limitations
 
-TrackpadScrollEmulator can currently handle vertical or horizontal scrollbars, but not both simultaneously.
+Trackpad Scroll Emulator can currently handle vertical or horizontal scrollbars, but not both simultaneously.
 
 ##6. Credits
 
