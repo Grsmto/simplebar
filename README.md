@@ -86,7 +86,7 @@ TrackpadScrollEmulator hides the browser's default scrollbars, which obviously i
 
 ## 4. How it works
 
-TrackpadScrollEmulator actually still uses the native browser scrollbar to scroll content, but hides the conventional scrollbar from the user and replaces it with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
+TrackpadScrollEmulator actually uses the native browser scrollbar to scroll content, but hides the conventional scrollbar from the user and replaces it with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
 
 Whether scrolling using a trackpad or mousewheel the experience is identical to the browser's native behaviour. OSX users still get intertial scrolling when they perform a trackpad swipe, without any additional calculation required on the plugin's part.
 
