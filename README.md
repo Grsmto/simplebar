@@ -25,7 +25,7 @@ TrackpadScrollEmulator has the following dependencies:
 
 ##3. Usage
 
-Include jQuery, the TrackpadScrollEmulator JS and CSS in your document. The paths and filenames may be different from those shown here:
+Include jQuery and TrackpadScrollEmulator in your document. The paths and filenames may differ from those shown here:
 
     <link rel="stylesheet" href="css/trackpad-scroll-emulator.css" />
     <script src="js/jquery-1.7.1.min.js"></script>
@@ -93,7 +93,7 @@ TrackpadScrollEmulator hides the browser's default scrollbars, which obviously i
 
 For the most part TrackpadScrollEmulator uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
 
-Key to this technique is hiding the native browser scrollbar. In modern browsers (i.e. WebKit) this is achieved simply by giving the scrollbar a width/height of zero using the `::webkit-scrollbar` and `::scrollbar`pseudo selectors. In other browsers the scrollable element is made slightly wider than its containing element, effectively hiding the scrollbar from view.
+Key to this technique is hiding the native browser scrollbar. In modern browsers (i.e. WebKit) this is achieved simply by giving the scrollbar a width/height of zero using the `::webkit-scrollbar` and `::scrollbar`pseudo selectors. In other browsers the scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
 ##5. Limitations
 

@@ -111,6 +111,7 @@ a:visited {
   }
   .btn:hover {
     background: #666;
+    color: #fff;
     }
 
 /* Scrollable elements
