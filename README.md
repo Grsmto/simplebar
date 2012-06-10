@@ -2,16 +2,17 @@
 
 A jQuery plugin that emulates OSX Lion trackpad-style scrollbars in any browser or platform. Based on the scrollbars in the Rdio app.
 
-1. [What it does](1-what-it-does)
-2. [Dependencies](2-dependencies)
-3. [Usage](3-usage)
-4. [How it works](4-how-it-works)
-5. [Limitations](5-limitations)
-6. [Credits](6-credits)
+1. [What it does](#1-what-it-does)
+2. [Dependencies](#2-dependencies)
+3. [Usage](#3-usage)
+4. [How it works](#4-how-it-works)
+5. [When to use it](#5-when-to-use-it)
+6. [Limitations](#6-limitations)
+7. [Credits](#7-credits)
 
 ## 1. What it does
 
-Traditionally scrollbars are permanently displayed whenever an area of a webpage - or the entire page - is scrollable. By contrast, Mac OSX Lion users with a trackpad pointing device (MacBook Pro, MacBook Air, Magic Mouse or Magic Trackpad) are used to scrollbars being hidden from sight, and revealed only when they scroll using a swipe gesture.
+Traditionally scrollbars are permanently displayed whenever an area of a webpage - or the entire page - is scrollable. By contrast, Mac OSX Lion users with a 'magic' trackpad pointing device are used to scrollbars being hidden from sight, and revealed only when they scroll using a swipe gesture.
 
 This plugin emulates Lion's UI pattern by replacing the browser's default scrollbars with a custom CSS-styled scrollbar that is only revealed when the user hovers over a scrollable element.
 
@@ -89,13 +90,19 @@ TrackpadScrollEmulator actually still uses the native browser scrollbar to scrol
 
 Whether scrolling using a trackpad or mousewheel the experience is identical to the browser's native behaviour. OSX users still get intertial scrolling when they perform a trackpad swipe, without any additional calculation required on the plugin's part.
 
-Key to this technique is hiding the native browser scrollbars. In modern browsers (webkit) this is achieved simply by hiding the scrollbar using the ::webkit-scrollbar pseudo selector. In other browsers the width of the browser scrollbar is added to the content element, which has its overflow hidden, effectively hiding the scrollbar from view.
+Key to this technique is hiding the native browser scrollbars. In modern browsers (i.e. webkit) this is achieved simply by hiding the scrollbar using the ::webkit-scrollbar pseudo selector. In other browsers the width of the browser scrollbar is added to the content element, which has its overflow hidden, effectively hiding the scrollbar from view.
 
-## 5. Limitations
+## 5. When to use it
+
+TrackpadScrollEmulator is designed for use in web application UIs. A good example is the Rdio app, on which the plugin is based. In Rdio the UI is divided into a number of discrete segments, each of which contains an infinitely long content blob - a list of online friends, for instance. Traditionally a browser scrollbar would be permanently displayed alongside each content blob, which eats into valuable screen real estate and clutters the interface.
+
+TrackpadScrollEmulator hides the scrollbars, leaving a much more attractive interface. The user can still scroll each segment independently, but scrollbars are only revealed as required.
+
+## 6. Limitations
 
 TrackpadScrollEmulator can currently handle vertical or horizontal scrollbars, but not both simultaneously.
 
-## 6. Credits
+## 7. Credits
 
 Obviously most of the credit for this technique goes to Rdio's developers. Rdio is a Backbone application, so their solution is a combination of Backbone, Underscore, jQuery, CSS and Bujagali (their own templating system). All I have really done is to port their scrolling functionality to jQuery.
 
