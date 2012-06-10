@@ -104,7 +104,6 @@ TrackpadScrollEmulator can currently handle vertical or horizontal scrollbars, b
 
 ## 7. Credits
 
-Obviously most of the credit for this technique goes to Rdio's developers. Rdio is a Backbone application, so their solution is a combination of Backbone, Underscore, jQuery, CSS and Bujagali (their own templating system). All I have really done is to port their scrolling functionality to jQuery.
+Obviously most of the credit for this technique goes to Rdio's developers. Rdio is a Backbone application, so their solution is a combination of Backbone, Underscore, jQuery, CSS and Bujagali (their own templating system). What I have done is to recreate the same scrolling functionality using only jQuery and CSS.
 
 Credit is also due to Jonathan Sharp, who wrote the original function for measuring the width of the browser's scrollbar (http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php).
-
