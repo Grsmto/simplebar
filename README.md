@@ -6,18 +6,11 @@ A jQuery plugin that emulates OSX Lion trackpad-style scrollbars in any browser 
 What it does
 ------------
 
-If you use a regular mouse or a Windows PC you're probably used to seeing scrollbars whenever an area of a webpage - or the entire page - is scrollable. By contrast, Mac OSX users with a trackpad pointing device (MacBook Pro, MacBook Air, Magic Mouse or Magic Trackpad) are used to scrollbars being hidden from sight, and revealed only when they scroll using a swipe gesture.
+If you use a regular mouse or a Windows PC you're probably used to seeing scrollbars permanently displayed whenever an area of a webpage - or the entire page - is scrollable. By contrast, Mac OSX Lion users with a trackpad pointing device (MacBook Pro, MacBook Air, Magic Mouse or Magic Trackpad) are used to scrollbars being hidden from sight, and revealed only when they scroll using a swipe gesture.
 
 This plugin emulates this UI pattern by replacing the browser's default scrollbars with a custom CSS-styled scrollbar that is only revealed when the user hovers over a scrollable element.
 
 Modern browsers get a very accurate emulation of Lion's scrollbars, while less capable browsers miss out on a few bells and whistles such as rounded corners, opacity, and animated fades.
-
-When to use it
---------------
-
-TrackpadScrollEmulator is designed for use in complex web applications. A good example is the Rdio app, on which the plugin is based. In Rdio the UI is divided into a number of discrete segments, each of which contains an infinitely long content blob - a list of online friends, for instance. Traditionally a browser scrollbar would be displayed for each content blob, which eats into valuable screen real estate and clutters the interface.
-
-TrackpadScrollEmulator hides the scrollbars, leaving a much more attractive interface. The user can still scroll each segment independently, but scrollbars are only revealed as required.
 
 Usage
 -----
@@ -51,8 +44,6 @@ In the above examples the `wrapper` class is not required, but gives us a unique
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 
     $('wrapper').TrackpadScrollEmulator('recalculate');
-
-See the demo bundled with TrackpadScrollEmulator to see this method in action.
 
 To remove the plugin from your element, call its `destroy` method:
 

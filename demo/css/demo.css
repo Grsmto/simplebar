@@ -77,6 +77,14 @@ h2 {
 p {
   margin: 1em 0;
 }
+a,
+a:visited {
+  color: #000;
+  }
+  a.active,
+  a:hover {
+    color: #666;
+    }
 .tse-content {
   background-color: #DDD;
 }
