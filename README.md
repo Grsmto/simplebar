@@ -1,19 +1,29 @@
-TrackpadScrollEmulator
-======================
+# TrackpadScrollEmulator
 
 A jQuery plugin that emulates OSX Lion trackpad-style scrollbars in any browser or platform. Based on the scrollbars in the Rdio app.
 
-What it does
-------------
+1. [What it does](1-what-it-does)
+2. [Dependencies](2-dependencies)
+3. [Usage](3-usage)
+4. [How it works](4-how-it-works)
+5. [Limitations](5-limitations)
+6. [Credits](6-credits)
 
-If you use a regular mouse or a Windows PC you're probably used to seeing scrollbars permanently displayed whenever an area of a webpage - or the entire page - is scrollable. By contrast, Mac OSX Lion users with a trackpad pointing device (MacBook Pro, MacBook Air, Magic Mouse or Magic Trackpad) are used to scrollbars being hidden from sight, and revealed only when they scroll using a swipe gesture.
+## 1. What it does
 
-This plugin emulates this UI pattern by replacing the browser's default scrollbars with a custom CSS-styled scrollbar that is only revealed when the user hovers over a scrollable element.
+Traditionally scrollbars are permanently displayed whenever an area of a webpage - or the entire page - is scrollable. By contrast, Mac OSX Lion users with a trackpad pointing device (MacBook Pro, MacBook Air, Magic Mouse or Magic Trackpad) are used to scrollbars being hidden from sight, and revealed only when they scroll using a swipe gesture.
+
+This plugin emulates Lion's UI pattern by replacing the browser's default scrollbars with a custom CSS-styled scrollbar that is only revealed when the user hovers over a scrollable element.
 
 Modern browsers get a very accurate emulation of Lion's scrollbars, while less capable browsers miss out on a few bells and whistles such as rounded corners, opacity, and animated fades.
 
-Usage
------
+## 2. Dependencies
+
+TrackpadScrollEmulator has the following dependencies:
+
+- jQuery
+
+## 3. Usage
 
 Include jQuery, the TrackpadScrollEmulator JS and CSS in your document. The paths and filenames may be different from those shown here:
 
@@ -29,7 +39,7 @@ Mark up the content you wish to scroll like so:
       </div>
     </div>
 
-For horizontal scrolling add the class name `horizontal` to the `tse-content` element:
+For horizontal scrolling add the class `horizontal` to the `tse-content` element:
 
     <div class="tse-scrollable wrapper">
       <div class="tse-content horizontal">
@@ -57,23 +67,23 @@ The dimensions of the `tse-scrollable` wrapping element determine the visible di
 
 The demo bundled with TrackpadScrollEmulator demonstrates how you might dynamically alter the dimensions of `tse-scrollable` using JavaScript.
 
-Non-JS fallback
----------------
+### Non-JS fallback
 
 TrackpadScrollEmulator hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:
 
-    <style>
-      .tse-scrollable {
-        overflow-y: scroll;
-      }
-      .tse-scrollable.horizontal {
-        overflow-x: scroll;
-        overflow-y: hidden;
-      }
-    </style>
+    <noscript>
+      <style>
+        .tse-scrollable {
+          overflow-y: scroll;
+        }
+        .tse-scrollable.horizontal {
+          overflow-x: scroll;
+          overflow-y: hidden;
+        }
+      </style>
+    </noscript>
 
-How it works
-------------
+## 4. How it works
 
 TrackpadScrollEmulator actually still uses the native browser scrollbar to scroll content, but hides the conventional scrollbar from the user and replaces it with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
 
@@ -81,13 +91,11 @@ Whether scrolling using a trackpad or mousewheel the experience is identical to 
 
 Key to this technique is hiding the native browser scrollbars. In modern browsers (webkit) this is achieved simply by hiding the scrollbar using the ::webkit-scrollbar pseudo selector. In other browsers the width of the browser scrollbar is added to the content element, which has its overflow hidden, effectively hiding the scrollbar from view.
 
-Limitations
------------
+## 5. Limitations
 
 TrackpadScrollEmulator can currently handle vertical or horizontal scrollbars, but not both simultaneously.
 
-Credits
--------
+## 6. Credits
 
 Obviously most of the credit for this technique goes to Rdio's developers. Rdio is a Backbone application, so their solution is a combination of Backbone, Underscore, jQuery, CSS and Bujagali (their own templating system). All I have really done is to port their scrolling functionality to jQuery.
 
