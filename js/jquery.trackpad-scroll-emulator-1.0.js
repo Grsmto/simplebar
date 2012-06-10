@@ -1,5 +1,6 @@
 /**
  * TrackpadScrollEmulator
+ * Version: 1.0
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  *
@@ -52,6 +53,9 @@
       resizeScrollbar();
     }
 
+    /**
+     * Start scrollbar handle drag
+     */
     function startDrag(e) {
       // Preventing the event's default action stops text being
       // selectable during the drag.
@@ -68,6 +72,9 @@
       $(document).on('mouseup', endDrag);
     }
 
+    /**
+     * Drag scrollbar handle
+     */
     function drag(e) {
       e.preventDefault();
 
@@ -85,6 +92,9 @@
       $scrollContentEl[scrollOffsetAttr](scrollPos);
     }
 
+    /**
+     * End scroll handle drag
+     */
     function endDrag() {
       $(document).off('mousemove', drag);
       $(document).off('mouseup', endDrag);

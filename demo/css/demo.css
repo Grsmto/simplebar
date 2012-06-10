@@ -110,8 +110,7 @@ p {
 .demo1 {
   margin: 10px 0;
 }
-.demo1,
-.demo1 .tse-content {
+.demo1 {
   width: 250px; /* example of overwiting default width */
   }
   .demo1 p {
