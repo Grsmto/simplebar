@@ -1,9 +1,10 @@
 /**
  * TrackpadScrollEmulator
  * Author: Jonathan Nicol @f6design
+ * https://github.com/jnicol/trackpad-scroll-emulator
  *
  * Todo:
- * - Hide browser scrollbars in IE until plugin kicks in (see Rdio)
+ * - Horizontal AND vertical scrollbars simultaneously?
  */
 ;(function($) {
   var pluginName = 'TrackpadScrollEmulator';
