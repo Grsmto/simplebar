@@ -1,9 +1,10 @@
 /**
  * TrackpadScrollEmulator
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  */
+ 
  .tse-scrollable {
   position: relative;
   width: 200px; /* Default value. Overwite this if you want. */
@@ -14,9 +15,10 @@
     overflow: hidden;
     overflow-y: scroll;
     }
-    .tse-scrollable .tse-scroll-content::-webkit-scrollbar,
-    .tse-scrollable .tse-scroll-content::scrollbar {
+    /* No longer using ::scrollbar too, since it breaks Chrome 25 */
+    .tse-scrollable .tse-scroll-content::-webkit-scrollbar {
       width: 0;
+      height: 0;
       }
 .tse-scrollbar {
   z-index: 99;
@@ -56,6 +58,12 @@
     .tse-scrollbar .drag-handle.visible {
       opacity: 0.7;
       }
+/* Used when testing the scrollbar width */
+/* No longer using ::scrollbar too, since it breaks Chrome 25 */
+.scrollbar-width-tester::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 /* Horizontal scroller */
 .tse-scrollable.horizontal .tse-scroll-content {
   overflow-x: scroll;

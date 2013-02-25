@@ -1,12 +1,12 @@
 /**
  * TrackpadScrollEmulator
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  *
  * The MIT License
  *
- * Copyright (c) 2012 Jonathan Nicol
+ * Copyright (c) 2012-2013 Jonathan Nicol
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -202,14 +202,14 @@
      *
      * Original function by Jonathan Sharp:
      * http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php
+     * Updated to work in Chrome v25.
      */
     function scrollbarWidth() {
-      // Append a temporary element to the DOM, measure its width,
-      // add scrollbars, then measure the difference.
-      var tempEl = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');
+      // Append a temporary scrolling element to the DOM, then measure
+      // the difference between between its outer and inner elements.
+      var tempEl = $('<div class="scrollbar-width-tester" style="width:50px;height:50px;overflow-y:scroll;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');
       $('body').append(tempEl);
-      var width = $('div', tempEl).innerWidth();
-      tempEl.css('overflow-y', 'scroll');
+      var width = $(tempEl).innerWidth();
       var widthMinusScrollbars = $('div', tempEl).innerWidth();
       tempEl.remove();
       return (width - widthMinusScrollbars);
