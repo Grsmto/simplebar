@@ -60,7 +60,9 @@
       $scrollbarEl = $el.find('.tse-scrollbar');
       $dragHandleEl = $el.find('.drag-handle');
 
-      $contentEl.wrap('<div class="tse-scroll-content" />');
+      if (options.wrapContent) {
+        $contentEl.wrap('<div class="tse-scroll-content" />');
+      }
       $scrollContentEl = $el.find('.tse-scroll-content');
 
       resizeScrollContent();
@@ -294,7 +296,8 @@
  
   $.fn[pluginName].defaults = {
     onInit: function() {},
-    onDestroy: function() {}
+    onDestroy: function() {},
+    wrapContent: true
   };
  
 })(jQuery);
