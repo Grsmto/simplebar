@@ -1,6 +1,6 @@
 /**
  * TrackpadScrollEmulator
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  *
@@ -28,7 +28,7 @@
  */
 ;(function($) {
   var pluginName = 'TrackpadScrollEmulator';
- 
+
   function Plugin(element, options) {
     var el = element;
     var $el = $(element);
@@ -224,7 +224,7 @@
       resizeScrollContent();
       resizeScrollbar();
     }
-    
+
     /**
      * Get/Set plugin option.
      */
@@ -235,7 +235,7 @@
         return options[key];
       }
     }
- 
+
     /**
      * Destroy plugin.
      */
@@ -249,7 +249,7 @@
       hook('onDestroy');
       $el.removeData('plugin_' + pluginName);
     }
-  
+
     /**
      * Plugin callback hook.
      */
@@ -258,16 +258,16 @@
         options[hookName].call(el);
       }
     }
- 
+
     init();
- 
+
     return {
       option: option,
       destroy: destroy,
       recalculate: recalculate
     };
   }
- 
+
   $.fn[pluginName] = function(options) {
     if (typeof arguments[0] === 'string') {
       var methodName = arguments[0];
@@ -293,11 +293,11 @@
       });
     }
   };
- 
+
   $.fn[pluginName].defaults = {
     onInit: function() {},
     onDestroy: function() {},
     wrapContent: true
   };
- 
+
 })(jQuery);

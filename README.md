@@ -51,6 +51,25 @@ In the above examples the `wrapper` class is not required, but gives us a unique
 
     $('wrapper').TrackpadScrollEmulator();
 
+###Options
+
+Options can be applied to the plugin during initialization:
+
+    $('wrapper').TrackpadScrollEmulator({
+      option1: value1,
+      option2: value2
+    });
+
+Available options are:
+
+####wrapContent
+
+By default TrackpadScrollEmulator requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the wrapContent option to `false`:
+
+    $('wrapper').TrackpadScrollEmulator({wrapContent: false});
+
+Default value is `true`
+
 ###Notifying the plugin of content changes
 
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
@@ -104,3 +123,5 @@ Trackpad Scroll Emulator can currently handle vertical or horizontal scrollbars,
 Obviously most of the credit for this technique goes to Rdio's developers. Rdio is a Backbone application, so their solution is a combination of Backbone, Underscore, jQuery, CSS and Bujagali (their own templating system). What I have done is to recreate the same scrolling functionality using only jQuery and CSS.
 
 Credit is also due to Jonathan Sharp, who wrote the original function for measuring the width of the browser's scrollbar (http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php).
+
+Additional contributors: Yoh Suzuki
