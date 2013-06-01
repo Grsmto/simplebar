@@ -49,7 +49,7 @@
      * Initialize plugin
      */
     function init() {
-      if(!hasOverflowScrolling()) {
+      if(hasOverflowScrolling()) {
         $el.css('overflow', 'auto');
 
         return;
