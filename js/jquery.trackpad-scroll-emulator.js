@@ -78,6 +78,10 @@
       $scrollContentEl.on('scroll', onScrolled);
 
       resizeScrollbar();
+
+      if (!options.autoHide) {
+        showScrollbar();
+      }
     }
 
     /**
@@ -173,6 +177,10 @@
      */
     function showScrollbar() {
         $dragHandleEl.addClass('visible');
+
+        if (!options.autoHide) {
+          return;
+        }
         if(typeof flashTimeout === 'number') {
           window.clearTimeout(flashTimeout);
         }
@@ -343,7 +351,8 @@
   $.fn[pluginName].defaults = {
     onInit: function() {},
     onDestroy: function() {},
-    wrapContent: true
+    wrapContent: true,
+    autoHide: true
   };
 
 })(jQuery);
