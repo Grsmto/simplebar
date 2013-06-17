@@ -67,7 +67,10 @@
 
       resizeScrollContent();
 
-      $el.on('mouseenter', flashScrollbar);
+      if (options.autoHide) { 
+        $el.on('mouseenter', flashScrollbar);
+      }
+      
       $dragHandleEl.on('mousedown', startDrag);
       $scrollContentEl.on('scroll', onScrolled);
 
