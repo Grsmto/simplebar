@@ -70,6 +70,12 @@ By default TrackpadScrollEmulator requires minimal markup, as shown above. When 
 
 Default value is `true`
 
+####autoHide
+
+By default TrackpadScrollEmulator has default osx behaviour that automatically hide scrollbar if user is not scrolling. But as osx, you have the option to disable it if you find hard to know if content is scrollable or not.
+
+Default value is `true`
+
 ###Notifying the plugin of content changes
 
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
