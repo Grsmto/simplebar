@@ -135,7 +135,8 @@ a:visited {
   margin: 10px 0;
   }
   .demo2 .tse-content {
-    width: 1110px;
+    display: inline-block; /* allows element to expand outside container without setting explicit width */
+    white-space: nowrap; /* allows element to expand outside container without setting explicit width */
     height: 130px;
     }
     .demo2 .boxes {
