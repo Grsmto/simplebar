@@ -64,15 +64,17 @@ Available options are:
 
 ####wrapContent
 
-By default TrackpadScrollEmulator requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the wrapContent option to `false`:
+By default TrackpadScrollEmulator requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
-    $('wrapper').TrackpadScrollEmulator({wrapContent: false});
+    $('wrapper').TrackpadScrollEmulator({ wrapContent: false });
 
 Default value is `true`
 
 ####autoHide
 
-By default TrackpadScrollEmulator has default osx behaviour that automatically hide scrollbar if user is not scrolling. But as osx, you have the option to disable it if you find hard to know if content is scrollable or not.
+By default TrackpadScrollEmulator automatically hides the scrollbar if the user is not scrolling. You can make the scrollbar always visible by setting the `autoHide` option to `false`:
+
+    $('wrapper').TrackpadScrollEmulator({ autoHide: false });
 
 Default value is `true`
 
@@ -130,4 +132,7 @@ Obviously most of the credit for this technique goes to Rdio's developers. Rdio 
 
 Credit is also due to Jonathan Sharp, who wrote the original function for measuring the width of the browser's scrollbar (http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php).
 
-Additional contributors: Yoh Suzuki
+###Additional contributors
+
+Yoh Suzuki: wrapContent option
+Adrien Grsmto: autoHide option
