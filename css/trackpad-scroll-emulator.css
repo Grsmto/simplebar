@@ -10,6 +10,7 @@
   width: 200px; /* Default value. Overwite this if you want. */
   height: 300px; /* Default value. Overwite this if you want. */
   overflow: hidden;
+  -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
   }
   .tse-scrollable .tse-scroll-content {
     overflow: hidden;
