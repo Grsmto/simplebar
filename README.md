@@ -1,6 +1,6 @@
 #Trackpad Scroll Emulator
 
-A jQuery plugin that emulates OSX Lion trackpad-style scrollbars in any browser or platform. Based on the scrollbars in the Rdio app.
+A jQuery plugin that emulates OS X Lion trackpad-style scrollbars in any browser or platform. Based on the scrollbars in the Rdio app.
 
 1. [What it does](#1-what-it-does)
 2. [Dependencies](#2-dependencies)
@@ -16,6 +16,8 @@ Traditionally scrollbars are permanently displayed whenever an area of a webpage
 This plugin emulates Lion's UI pattern by replacing the browser's default scrollbars with a custom CSS-styled scrollbar that is only revealed when the user hovers over a scrollable element.
 
 Modern browsers get a very accurate emulation of Lion's scrollbars, while less capable browsers miss out on a few bells and whistles such as rounded corners, opacity, and animated fades.
+
+View a demo: http://jnicol.github.io/trackpad-scroll-emulator/
 
 ##2. Dependencies
 
@@ -64,9 +66,17 @@ Available options are:
 
 ####wrapContent
 
-By default TrackpadScrollEmulator requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the wrapContent option to `false`:
+By default TrackpadScrollEmulator requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
-    $('wrapper').TrackpadScrollEmulator({wrapContent: false});
+    $('wrapper').TrackpadScrollEmulator({ wrapContent: false });
+
+Default value is `true`
+
+####autoHide
+
+By default TrackpadScrollEmulator automatically hides the scrollbar if the user is not scrolling. You can make the scrollbar always visible by setting the `autoHide` option to `false`:
+
+    $('wrapper').TrackpadScrollEmulator({ autoHide: false });
 
 Default value is `true`
 
@@ -124,4 +134,8 @@ Obviously most of the credit for this technique goes to Rdio's developers. Rdio 
 
 Credit is also due to Jonathan Sharp, who wrote the original function for measuring the width of the browser's scrollbar (http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php).
 
-Additional contributors: Yoh Suzuki
+###Additional contributors
+
+Yoh Suzuki: wrapContent option
+
+Adrien Grsmto: autoHide option

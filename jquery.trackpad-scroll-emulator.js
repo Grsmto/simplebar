@@ -1,6 +1,6 @@
 /**
  * TrackpadScrollEmulator
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  *
@@ -73,7 +73,10 @@
 
       resizeScrollContent();
 
-      $el.on('mouseenter', flashScrollbar);
+      if (options.autoHide) { 
+        $el.on('mouseenter', flashScrollbar);
+      }
+      
       $dragHandleEl.on('mousedown', startDrag);
       $scrollContentEl.on('scroll', onScrolled);
 
