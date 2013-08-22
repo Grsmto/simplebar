@@ -10,11 +10,11 @@
   width: 200px; /* Default value. Overwite this if you want. */
   height: 300px; /* Default value. Overwite this if you want. */
   overflow: hidden;
+  -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
   }
   .tse-scrollable .tse-scroll-content {
     overflow: hidden;
     overflow-y: scroll;
-    -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
     }
     /* No longer using ::scrollbar too, since it breaks Chrome 25 */
     .tse-scrollable .tse-scroll-content::-webkit-scrollbar {
