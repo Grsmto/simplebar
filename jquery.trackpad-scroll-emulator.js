@@ -278,6 +278,7 @@
 
     /**
      * Check for mobile Overflow scrolling support
+     * Source: https://gist.github.com/hay/4032527
      */
     function hasOverflowScrolling() {
         var prefixes = ['webkit', 'moz', 'o', 'ms'];
