@@ -88,17 +88,19 @@
         </div>
       </div>
     </div>
+    <a class="btn add-more-horiz" href="#">Add content</a>
+    <a class="btn toggle-width" href="#">Toggle width</a>
   </div>
 
   <!-- JavaScript -->
   <script src="lib/jquery-1.7.1.min.js"></script>
-  <script src="js/jquery.trackpad-scroll-emulator.js"></script>
+  <script src="../js/jquery.trackpad-scroll-emulator.js"></script>
   <script>
   $(document).ready(function() {
     // Initialize scrollers.
     $('.demo1').TrackpadScrollEmulator({ autoHide: false });
     $('.demo2').TrackpadScrollEmulator();
-    // Demonstration of changing the scroller content and dimensions.
+    // Demonstration of changing the vertical scroller content and dimensions.
     $('.add-more').on('click', function(e){
       e.preventDefault();
       $('.demo1 .tse-content').append('<p class="odd">Additional content 1</p><p>Additional content 2</p><p p class="odd">Additional content 3</p><p>Additional content 4</p>');
@@ -112,6 +114,21 @@
         $('.demo1').height(400);
       }
       $('.demo1').TrackpadScrollEmulator('recalculate');
+    });
+    // Demonstration of changing the horizontal scroller content and dimensions.
+    $('.add-more-horiz').on('click', function(e){
+      e.preventDefault();
+      $('.demo2 .tse-content .boxes').append('<div class="box">A</div><div class="box">B</div><div class="box">C</div><div class="box">D</div>');
+      $('.demo2').TrackpadScrollEmulator('recalculate');
+    });
+    $('.toggle-width').on('click', function(e){
+      e.preventDefault();
+      if ($('.demo2').width() === 600) {
+        $('.demo2').width(500);
+      } else {
+        $('.demo2').width(600);
+      }
+      $('.demo2').TrackpadScrollEmulator('recalculate');
     });
   });
   </script>

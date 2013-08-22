@@ -1,6 +1,6 @@
 /**
  * TrackpadScrollEmulator
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  *
@@ -73,7 +73,10 @@
 
       resizeScrollContent();
 
-      $el.on('mouseenter', flashScrollbar);
+      if (options.autoHide) { 
+        $el.on('mouseenter', flashScrollbar);
+      }
+      
       $dragHandleEl.on('mousedown', startDrag);
       $scrollContentEl.on('scroll', onScrolled);
 
@@ -275,6 +278,7 @@
 
     /**
      * Check for mobile Overflow scrolling support
+     * Source: https://gist.github.com/hay/4032527
      */
     function hasOverflowScrolling() {
         var prefixes = ['webkit', 'moz', 'o', 'ms'];
