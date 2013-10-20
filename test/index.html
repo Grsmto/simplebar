@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>SimpleBar Plugin Test Suite</title>
+
+  <!-- jquery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../demo/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+  <!-- qunit -->
+  <link rel="stylesheet" href="../node_modules/grunt-contrib-qunit/test/libs/qunit.css" media="screen">
+  <script src="../node_modules/grunt-contrib-qunit/test/libs/qunit.js"></script>
+
+  <!--  plugin sources -->
+  <link rel="stylesheet" href="../src/simplebar.css" media="screen">
+  <script src="../src/simplebar.js"></script>
+
+  <!-- unit tests -->
+  <script src="test.js"></script>
+
+</head>
+<body>
+  <div>
+    <h1 id="qunit-header">SimpleBar Plugin Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">
+      <div class="test" data-simplebar="vertical">
+        <div style="height: 3000px">test</div>
+      </div>
+
+      <div class="test2">
+        <div style="height: 3000px">test</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

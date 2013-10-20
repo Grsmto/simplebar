@@ -113,15 +113,17 @@ a:visited {
     background: #666;
     color: #fff;
     }
+  .btn:visited {
+    color: #fff;
+    }
 
 /* Scrollable elements
 *****************************************************************/
 .demo1 {
   margin: 10px 0;
+  width: 250px; 
+  height: 300px;
 }
-.demo1 {
-  width: 250px; /* example of overwiting default width */
-  }
   .demo1 p {
     margin: 0;
     padding: 10px;
@@ -130,30 +132,27 @@ a:visited {
       background: #f0f0f0;
       }
 .demo2 {
-  width: 500px; /* example of overwiting default width */
-  height: 130px; /* example of overwiting default height */
+  width: 500px;
+  height: 130px;
   margin: 10px 0;
+  white-space: nowrap;
   }
-  .demo2 .tse-content {
-    display: inline-block; /* allows element to expand outside container without setting explicit width */
-    white-space: nowrap; /* allows element to expand outside container without setting explicit width */
-    height: 130px;
-    }
-    .demo2 .boxes {
-      overflow: auto;
-      padding: 10px 0 0 10px;
+    .demo2 .box {
+      display: inline-block;
+      margin-right: 10px;
+      width: 100px;
+      height: 100px;
+      background: #666;
+      color: #fff;
+      text-align: center;
+      line-height: 100px;
+      font-size: 24px;
       }
-      .demo2 .box {
-        float: left;
-        margin-right: 10px;
-        width: 100px;
-        height: 100px;
-        background: #666;
-        color: #fff;
-        text-align: center;
-        line-height: 100px;
-        font-size: 24px;
-        }
-
+.demo-raw {
+  margin: 10px 0;
+  width: 250px; 
+  height: 300px;
+  overflow: auto;
+}
 
 
