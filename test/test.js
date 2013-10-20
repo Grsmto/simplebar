@@ -13,7 +13,7 @@ $(function () {
       });
 
       test("should return element", function () {
-        ok($('.test2').simplebar()[0] == $('.test2')[0], 'document.body returned')
+        ok($('.test2').simplebar()[0] == $('.test2')[0], 'test2 dom element returned')
       });
 
     module("DOM manipulation tests");
