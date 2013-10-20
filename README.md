@@ -6,7 +6,8 @@ SimpleBar is a plugin that tries to solve a long time problem : how to get custo
 2. [Usage](#2-usage)
 3. [How it works](#3-how-it-works)
 4. [Limitations](#4-limitations)
-5. [Credits](#5-credits)
+5. [Changelog](#5-changelog)
+6. [Credits](#6-credits)
 
 ##1. What it does
 
@@ -15,7 +16,7 @@ Design your scrollbar like you want, with CSS, on all browsers.
 
 SimpleBar works with jQuery.
 
-##3. Usage
+##2. Usage
 
 Include jQuery and SimpleBar in your document. The paths and filenames may differ from those shown here:
 
@@ -82,15 +83,19 @@ SimpleBar hides the browser's default scrollbars, which obviously is undesirable
       </style>
     </noscript>
 
-##4. How it works
+##3. How it works
 
 For the most part SimpleBar uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
 
 Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
-##5. Limitations
+##4. Limitations
 
 SimpleBar can currently handle vertical or horizontal scrollbars, but not both simultaneously.
+
+##5. Changelog
+
+See changelog here : https://github.com/Grsmto/simplebar/releases
 
 ##6. Credits
 
