@@ -108,4 +108,3 @@ Credit is also due to Jonathan Sharp, who wrote the original function for measur
 ###Additional contributors
 
 Yoh Suzuki: wrapContent option
-Adrien Grsmto: autoHide option
