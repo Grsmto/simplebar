@@ -19,9 +19,9 @@ module.exports = function(grunt) {
 
 		// Concat definitions
 		concat: {
-			dist: {
-				src: ["src/<%= pkg.name %>.js"],
-				dest: "dist/<%= pkg.name %>.<%= pkg.version %>.js"
+			css: {
+				src: "src/<%= pkg.name %>.css",
+				dest: "dist/<%= pkg.name %>.<%= pkg.version %>.css",
 			},
 			options: {
 				banner: "<%= meta.banner %>"
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask("default", ["jshint", "uglify", "qunit"]);
+	grunt.registerTask("default", ["concat", "jshint", "uglify", "qunit"]);
 	grunt.registerTask("travis", ["jshint", "qunit"]);
 
 };
