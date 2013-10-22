@@ -63,7 +63,7 @@
 
           return;
         }
-        if (this.$el.data('simplebar') === 'horizontal'){
+        if (this.$el.data('simplebar') === 'horizontal' || this.$el.hasClass('simplebar horizontal')){
             this.scrollDirection    = 'horiz';
             this.scrollOffsetAttr   = 'scrollLeft';
             this.sizeAttr           = 'width';

@@ -47,13 +47,15 @@
       opacity: 0.7;
     }
 
-[data-simplebar="horizontal"] .simplebar-scrollbar {
+[data-simplebar="horizontal"] .simplebar-scrollbar,
+.simplebar.horizontal .simplebar-scrollbar {
   top: auto;
   left: 0;
   width: auto;
   height: 11px;
 }
-  [data-simplebar="horizontal"] .simplebar-scrollbar .drag-handle {
+  [data-simplebar="horizontal"] .simplebar-scrollbar .drag-handle,
+  .simplebar.horizontal .simplebar-scrollbar .drag-handle {
     right: auto;
     top: 2px;
     height: 7px;

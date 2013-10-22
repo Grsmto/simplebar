@@ -1,24 +1,21 @@
-/**
- * SimpleBarJS
- * Version: 1.0.1
- * Author: Jonathan Nicol @f6design
- * https://github.com/jnicol/trackpad-scroll-emulator
+/*
+ *  SimpleBar.js - v1.0.0
+ *  Scrollbars, simpler.
+ *  https://grsmto.github.io/simplebar/
+ *
+ *  Made by Adrien Grsmto from a fork by Jonathan Nicol
+ *  Under MIT License
  */
- 
- .simplebar, [data-simplebar] {
+.simplebar, [data-simplebar] {
   position: relative;
   overflow: hidden;
   -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
-  }
+}
   .simplebar .simplebar-scroll-content,
   [data-simplebar] .simplebar-scroll-content {
     overflow: auto;
-    }
-    /* No longer using ::scrollbar too, since it breaks Chrome 25 */
-    /*.simplebar .simplebar-scroll-content::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-      }*/
+  }
+
 .simplebar-scrollbar {
   z-index: 99;
   position: absolute;
@@ -26,7 +23,7 @@
   right: 0;
   bottom: 0;
   width: 11px;
-  }
+}
   .simplebar-scrollbar .drag-handle {
     position: absolute;
     right: 2px;
@@ -44,7 +41,7 @@
     background: #6c6e71;
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
-    }
+  }
   .simplebar-scrollbar:hover .drag-handle {
     /* When hovered, remove all transitions from drag handle */
     opacity: 0.7;
@@ -53,37 +50,24 @@
     -o-transition: opacity 0 linear;
     -ms-transition: opacity 0 linear;
     transition: opacity 0 linear;
-    }
+  }
     .simplebar-scrollbar .drag-handle.visible {
       opacity: 0.7;
-      }
-/* Used when testing the scrollbar width */
-/* No longer using ::scrollbar too, since it breaks Chrome 25 */
-/*.scrollbar-width-tester::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}*/
-/* Horizontal scroller */
-/*.simplebar-scrollable.horizontal .simplebar-scroll-content {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  }*/
-  /*.simplebar-scrollable.horizontal .simplebar-scroll-content::-webkit-scrollbar,
-  .simplebar-scrollable.horizontal .simplebar-scroll-content::scrollbar {
-    width: auto;
-    height: 0;
-    }*/
-[data-simplebar="horizontal"] .simplebar-scrollbar {
+    }
+
+[data-simplebar="horizontal"] .simplebar-scrollbar,
+.simplebar.horizontal .simplebar-scrollbar {
   top: auto;
   left: 0;
   width: auto;
   height: 11px;
-  }
-  [data-simplebar="horizontal"] .simplebar-scrollbar .drag-handle {
+}
+  [data-simplebar="horizontal"] .simplebar-scrollbar .drag-handle,
+  .simplebar.horizontal .simplebar-scrollbar .drag-handle {
     right: auto;
     top: 2px;
     height: 7px;
     min-height: 0;
     min-width: 10px;
     width: auto;
-    }
+  }
