@@ -37,6 +37,10 @@ Set `data-simplebar="vertical"` on the element where you want your custom scroll
 
 You will also have to add the `simplebar` class to the element : `<div id="myElement" class="simplebar">`
 
+###Scroll orientation
+
+Vertical is the default, but horizontal scrollbars are supported! Simply add `horizontal` class to your element when doing with JavaScript. Or use the value `horizontal` via data-attribute.
+
 ###Options
 
 Options can be applied to the plugin during initialization:
@@ -50,7 +54,7 @@ Available options are:
 
 ####wrapContent
 
-By default TrackpadScrollEmulator requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
+By default SimpleBar requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
     $('#myElement').simplebar({ wrapContent: false });
 
