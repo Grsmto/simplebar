@@ -22,16 +22,16 @@ SimpleBar works with jQuery.
 
 Include jQuery and SimpleBar in your document. The paths and filenames may differ from those shown here:
 
-    <link rel="stylesheet" href="css/trackpad-scroll-emulator.css" />
-    <script src="js/jquery.simplebar.1.0.min.js"></script>
+    <link rel="stylesheet" href="css/simplebar.1.0.0.css" />
+    <script src="js/simplebar.1.0.0.min.js"></script>
 
-**Via data attributes
+###Via data attributes
 
 You can get SimpleBar basic usage purely through the markup API without writing a single line of JavaScript.
 
 Set `data-simplebar="vertical"` on the element where you want your custom scrollbar. You're done.
 
-**Via JavaScript
+###Via JavaScript
 
     $('#myElement').simplebar();
 
