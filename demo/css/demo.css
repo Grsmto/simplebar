@@ -144,7 +144,7 @@ a:visited {
       padding: 10px 0 0 10px;
       }
       .demo2 .box {
-        float: left;
+        display: inline-block;
         margin-right: 10px;
         width: 100px;
         height: 100px;
