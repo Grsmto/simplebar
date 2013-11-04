@@ -1,6 +1,6 @@
 /**
  * TrackpadScrollEmulator
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  *
@@ -75,6 +75,10 @@
       $scrollContentEl.on('scroll', onScrolled);
 
       resizeScrollbar();
+
+      $(window).on('resize', function() {
+        recalculate();
+      });
 
       if (!options.autoHide) {
         showScrollbar();
