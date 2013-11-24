@@ -32,18 +32,18 @@
 
     // SimpleBar Constructor
     function SimpleBar (element, options) {
-        this.el = element;
-        this.$el = $(element);
-        this.$scrollContentEl;
-        this.$contentEl;
-        this.$scrollbarEl;
-        this.$dragHandleEl;
-        this.dragOffset;
-        this.flashTimeout;
-        this.scrollDirection    = 'vert';
-        this.scrollOffsetAttr   = 'scrollTop';
-        this.sizeAttr           = 'height';
-        this.scrollSizeAttr     = 'scrollHeight';
+        this.el = element,
+        this.$el = $(element),
+        this.$scrollContentEl,
+        this.$contentEl,
+        this.$scrollbarEl,
+        this.$dragHandleEl,
+        this.dragOffset,
+        this.flashTimeout,
+        this.scrollDirection    = 'vert',
+        this.scrollOffsetAttr   = 'scrollTop',
+        this.sizeAttr           = 'height',
+        this.scrollSizeAttr     = 'scrollHeight',
         this.offsetAttr         = 'top';
 
         this.options = $.extend({}, SimpleBar.DEFAULTS, options);
