@@ -51,13 +51,13 @@ For horizontal scrolling add the class `horizontal` to the `tse-content` element
 
 In the above examples the `wrapper` class is not required, but gives us a unique hook to use as a jQuery selector when initializing the plugin:
 
-    $('wrapper').TrackpadScrollEmulator();
+    $('.wrapper').TrackpadScrollEmulator();
 
 ###Options
 
 Options can be applied to the plugin during initialization:
 
-    $('wrapper').TrackpadScrollEmulator({
+    $('.wrapper').TrackpadScrollEmulator({
       option1: value1,
       option2: value2
     });
@@ -68,7 +68,7 @@ Available options are:
 
 By default TrackpadScrollEmulator requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
-    $('wrapper').TrackpadScrollEmulator({ wrapContent: false });
+    $('.wrapper').TrackpadScrollEmulator({ wrapContent: false });
 
 Default value is `true`
 
@@ -76,7 +76,7 @@ Default value is `true`
 
 By default TrackpadScrollEmulator automatically hides the scrollbar if the user is not scrolling. You can make the scrollbar always visible by setting the `autoHide` option to `false`:
 
-    $('wrapper').TrackpadScrollEmulator({ autoHide: false });
+    $('.wrapper').TrackpadScrollEmulator({ autoHide: false });
 
 Default value is `true`
 
@@ -84,13 +84,13 @@ Default value is `true`
 
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 
-    $('wrapper').TrackpadScrollEmulator('recalculate');
+    $('.wrapper').TrackpadScrollEmulator('recalculate');
 
 ###Destroying the plugin
 
 To remove the plugin from your element, call its `destroy` method:
 
-    $('wrapper').TrackpadScrollEmulator('destroy');
+    $('.wrapper').TrackpadScrollEmulator('destroy');
 
 ###Overwriting the content dimensions
 
