@@ -83,10 +83,12 @@ For example you will notice that it will use native scrollbar on mac OSX 10.8+ (
 
 ###Subscribe to `scroll` event
 You can subscribe to the `scroll` event just like you do with native scrolling element :
+
     $('#myElement').simplebar().on('scroll', function(...));
     
 ###Trigger programmatical scrolling
 If you are using another plugins like jQuery.scrollTo or simply want to access to original scroll element, you can retrieve it via a getter :
+
     $('#myElement').simplebar('getScrollElement');
 
 ###Non-JS fallback
