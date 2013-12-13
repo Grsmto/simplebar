@@ -1,14 +1,14 @@
-.simplebar, [data-simplebar] {
+.simplebar, [data-simplebar-direction] {
   position: relative;
   overflow: hidden;
   -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
 }
   .simplebar .simplebar-scroll-content,
-  [data-simplebar] .simplebar-scroll-content {
+  [data-simplebar-direction] .simplebar-scroll-content {
     overflow: auto;
   }
 
-.simplebar-scrollbar {
+.simplebar-track {
   z-index: 99;
   position: absolute;
   top: 0;
@@ -16,7 +16,7 @@
   bottom: 0;
   width: 11px;
 }
-  .simplebar-scrollbar .drag-handle {
+  .simplebar-track .simplebar-scrollbar {
     position: absolute;
     right: 2px;
     -webkit-border-radius: 7px;
@@ -34,7 +34,7 @@
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
   }
-  .simplebar-scrollbar:hover .drag-handle {
+  .simplebar-track:hover .simplebar-scrollbar {
     /* When hovered, remove all transitions from drag handle */
     opacity: 0.7;
     -webkit-transition: opacity 0 linear;
@@ -43,17 +43,19 @@
     -ms-transition: opacity 0 linear;
     transition: opacity 0 linear;
   }
-    .simplebar-scrollbar .drag-handle.visible {
+    .simplebar-track .simplebar-scrollbar.visible {
       opacity: 0.7;
     }
 
-[data-simplebar="horizontal"] .simplebar-scrollbar {
+[data-simplebar-direction="horizontal"] .simplebar-track,
+.simplebar.horizontal .simplebar-track {
   top: auto;
   left: 0;
   width: auto;
   height: 11px;
 }
-  [data-simplebar="horizontal"] .simplebar-scrollbar .drag-handle {
+  [data-simplebar-direction="horizontal"] .simplebar-track .simplebar-scrollbar,
+  .simplebar.horizontal .simplebar-track .simplebar-scrollbar {
     right: auto;
     top: 2px;
     height: 7px;

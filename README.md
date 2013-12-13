@@ -1,12 +1,15 @@
 #SimpleBar.js
 
+[![Build Status](https://travis-ci.org/Grsmto/simplebar.png?branch=v1.0)](https://travis-ci.org/Grsmto/simplebar)
+
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app ?
 
 1. [What it does](#1-what-it-does)
 2. [Usage](#2-usage)
 3. [How it works](#3-how-it-works)
 4. [Limitations](#4-limitations)
-5. [Credits](#5-credits)
+5. [Changelog](#5-changelog)
+6. [Credits](#6-credits)
 
 ##1. What it does
 
@@ -15,24 +18,28 @@ Design your scrollbar like you want, with CSS, on all browsers.
 
 SimpleBar works with jQuery.
 
-##3. Usage
+##2. Usage
 
 Include jQuery and SimpleBar in your document. The paths and filenames may differ from those shown here:
 
-    <link rel="stylesheet" href="css/trackpad-scroll-emulator.css" />
-    <script src="js/jquery.simplebar.1.0.min.js"></script>
+    <link rel="stylesheet" href="css/simplebar.1.1.0.css" />
+    <script src="js/simplebar.1.1.0.min.js"></script>
 
-**Via data attributes
+###Via data attributes
 
 You can get SimpleBar basic usage purely through the markup API without writing a single line of JavaScript.
 
-Set `data-simplebar="vertical"` on the element where you want your custom scrollbar. You're done.
+Set `data-simplebar-direction="vertical"` on the element where you want your custom scrollbar. You're done.
 
-**Via JavaScript
+###Via JavaScript
 
     $('#myElement').simplebar();
 
 You will also have to add the `simplebar` class to the element : `<div id="myElement" class="simplebar">`
+
+###Scroll orientation
+
+Vertical is the default, but horizontal scrollbars are supported! Simply add `horizontal` class to your element when doing with JavaScript. Or use the value `horizontal` via data-attribute.
 
 ###Options
 
@@ -47,7 +54,7 @@ Available options are:
 
 ####wrapContent
 
-By default TrackpadScrollEmulator requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
+By default SimpleBar requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
     $('#myElement').simplebar({ wrapContent: false });
 
@@ -70,27 +77,45 @@ If you later dynamically modify your content, for instance changing its height o
 
     $('#myElement').simplebar('recalculate');
 
+###Mobile support
+Most of the mobile browsers have "floating" scrollbars. Also, they are not all currently supporting hardware acceleration on `overflow: auto` elements. So we decided to automatically disable SimpleBar when a "floating" scrollbar is detected. So mobile browsers will use native scrollbar seemlessly.
+For example you will notice that it will use native scrollbar on mac OSX 10.8+ (when using trackpad) as the scrollbar is natively floating.
+
+###Subscribe to `scroll` event
+You can subscribe to the `scroll` event just like you do with native scrolling element :
+
+    $('#myElement').simplebar().on('scroll', function(...));
+    
+###Trigger programmatical scrolling
+If you are using another plugins like jQuery.scrollTo or simply want to access to original scroll element, you can retrieve it via a getter :
+
+    $('#myElement').simplebar('getScrollElement');
+
 ###Non-JS fallback
 
 SimpleBar hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:
 
     <noscript>
       <style>
-        .simplebar, [data-simplebar] {
+        .simplebar, [data-simplebar-direction] {
           overflow: auto;
         }
       </style>
     </noscript>
 
-##4. How it works
+##3. How it works
 
 For the most part SimpleBar uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
 
 Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
-##5. Limitations
+##4. Limitations
 
 SimpleBar can currently handle vertical or horizontal scrollbars, but not both simultaneously.
+
+##5. Changelog
+
+See changelog here : https://github.com/Grsmto/simplebar/releases
 
 ##6. Credits
 
@@ -101,4 +126,3 @@ Credit is also due to Jonathan Sharp, who wrote the original function for measur
 ###Additional contributors
 
 Yoh Suzuki: wrapContent option
-Adrien Grsmto: autoHide option

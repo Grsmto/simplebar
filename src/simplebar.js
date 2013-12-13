@@ -32,18 +32,18 @@
 
     // SimpleBar Constructor
     function SimpleBar (element, options) {
-        this.el = element;
-        this.$el = $(element);
-        this.$scrollContentEl;
-        this.$contentEl;
-        this.$scrollbarEl;
-        this.$dragHandleEl;
-        this.dragOffset;
-        this.flashTimeout;
-        this.scrollDirection    = 'vert';
-        this.scrollOffsetAttr   = 'scrollTop';
-        this.sizeAttr           = 'height';
-        this.scrollSizeAttr     = 'scrollHeight';
+        this.el = element,
+        this.$el = $(element),
+        this.$scrollContentEl,
+        this.$contentEl,
+        this.$track,
+        this.$scrollbar,
+        this.dragOffset,
+        this.flashTimeout,
+        this.scrollDirection    = 'vert',
+        this.scrollOffsetAttr   = 'scrollTop',
+        this.sizeAttr           = 'height',
+        this.scrollSizeAttr     = 'scrollHeight',
         this.offsetAttr         = 'top';
 
         this.options = $.extend({}, SimpleBar.DEFAULTS, options);
@@ -63,7 +63,8 @@
 
           return;
         }
-        if (this.$el.data('simplebar') === 'horizontal'){
+
+        if (this.$el.data('simplebar-direction') === 'horizontal' || this.$el.hasClass('simplebar horizontal')){
             this.scrollDirection    = 'horiz';
             this.scrollOffsetAttr   = 'scrollLeft';
             this.sizeAttr           = 'width';
@@ -77,9 +78,9 @@
 
         this.$contentEl = this.$el.find('.simplebar-content');
 
-        this.$el.prepend('<div class="simplebar-scrollbar"><div class="drag-handle"></div></div>');
-        this.$scrollbarEl = this.$el.find('.simplebar-scrollbar');
-        this.$dragHandleEl = this.$el.find('.drag-handle');
+        this.$el.prepend('<div class="simplebar-track"><div class="simplebar-scrollbar"></div></div>');
+        this.$track = this.$el.find('.simplebar-track');
+        this.$scrollbar = this.$el.find('.simplebar-scrollbar');
 
         this.$scrollContentEl = this.$el.find('.simplebar-scroll-content');
 
@@ -89,8 +90,8 @@
             this.$el.on('mouseenter', $.proxy(this.flashScrollbar, this));
         }
 
-        this.$dragHandleEl.on('mousedown', $.proxy(this.startDrag, this));
-        this.$scrollContentEl.on('scroll', $.proxy(this.flashScrollbar, this));
+        this.$scrollbar.on('mousedown', $.proxy(this.startDrag, this));
+        this.$scrollContentEl.on('scroll', $.proxy(this.startScroll, this));
 
         this.resizeScrollbar();
 
@@ -113,7 +114,7 @@
         if (this.scrollDirection === 'horiz') {
             eventOffset = e.pageX;
         }
-        this.dragOffset = eventOffset - this.$dragHandleEl.offset()[this.offsetAttr];
+        this.dragOffset = eventOffset - this.$scrollbar.offset()[this.offsetAttr];
 
         $(document).on('mousemove', $.proxy(this.drag, this));
         $(document).on('mouseup', $.proxy(this.endDrag, this));
@@ -136,9 +137,9 @@
           eventOffset = e.pageX;
         }
 
-        dragPos = eventOffset - this.$scrollbarEl.offset()[this.offsetAttr] - this.dragOffset;
+        dragPos = eventOffset - this.$track.offset()[this.offsetAttr] - this.dragOffset;
         // Convert the mouse position into a percentage of the scrollbar height/width.
-        dragPerc = dragPos / this.$scrollbarEl[this.sizeAttr]();
+        dragPerc = dragPos / this.$track[this.sizeAttr]();
         // Scroll the content by the same percentage.
         scrollPos = dragPerc * this.$contentEl[0][this.scrollSizeAttr];
 
@@ -154,13 +155,14 @@
         $(document).off('mouseup', this.endDrag);
     };
 
+
     /**
      * Resize scrollbar
      */
     SimpleBar.prototype.resizeScrollbar = function () {
         var contentSize     = this.$contentEl[0][this.scrollSizeAttr],
             scrollOffset    = this.$scrollContentEl[this.scrollOffsetAttr](), // Either scrollTop() or scrollLeft().
-            scrollbarSize   = this.$scrollbarEl[this.sizeAttr](),
+            scrollbarSize   = this.$track[this.sizeAttr](),
             scrollbarRatio  = scrollbarSize / contentSize,
             // Calculate new height/position of drag handle.
             // Offset of 2px allows for a small top/bottom or left/right margin around handle.
@@ -170,14 +172,25 @@
 
         if (scrollbarSize < contentSize) {
             if (this.scrollDirection === 'vert'){
-                this.$dragHandleEl.css({'top': handleOffset, 'height': handleSize});
+                this.$scrollbar.css({'top': handleOffset, 'height': handleSize});
             } else {
-                this.$dragHandleEl.css({'left': handleOffset, 'width': handleSize});
+                this.$scrollbar.css({'left': handleOffset, 'width': handleSize});
             }
-            this.$scrollbarEl.show();
+            this.$track.show();
         } else {
-            this.$scrollbarEl.hide();
+            this.$track.hide();
         }
+    };
+
+
+    /**
+     * On scroll event handling
+     */
+    SimpleBar.prototype.startScroll = function(e) {
+        // Simulate event bubbling to root element
+        this.$el.trigger(e);
+
+        this.flashScrollbar();
     };
 
 
@@ -194,7 +207,7 @@
      * Show scrollbar
      */
     SimpleBar.prototype.showScrollbar = function () {
-        this.$dragHandleEl.addClass('visible');
+        this.$scrollbar.addClass('visible');
 
         if (!this.options.autoHide) {
             return;
@@ -211,7 +224,7 @@
      * Hide Scrollbar
      */
     SimpleBar.prototype.hideScrollbar = function () {
-        this.$dragHandleEl.removeClass('visible');
+        this.$scrollbar.removeClass('visible');
         if(typeof this.flashTimeout === 'number') {
             window.clearTimeout(this.flashTimeout);
         }
@@ -240,38 +253,75 @@
     };
 
     /**
+     * Getter for original scrolling element
+     */
+    SimpleBar.prototype.getScrollElement = function () {
+        return typeof this.$scrollContentEl === 'undefined' ? this.$el : this.$scrollContentEl;
+    };
+
+    /**
      * Data API
      */
     $(window).on('load', function () {
-        $('[data-simplebar]').each(function () {
+        $('[data-simplebar-direction]').each(function () {
             $(this).simplebar();
         });
     });
 
 
-    // MODAL PLUGIN DEFINITION
-    // =======================
-
+    /**
+     * Plugin definition
+     */
     var old = $.fn.simplebar;
 
-    $.fn.simplebar = function (option, _relatedTarget) {
-        return this.each(function () {
-            var $this   = $(this),
-                data    = $this.data('scrollbars'),
-                options = $.extend({}, SimpleBar.DEFAULTS, $this.data(), typeof option === 'object' && option);
+    $.fn.simplebar = function (options) {
+        var args = arguments,
+            returns;
 
-            if (!data) { $this.data('scrollbars', (data = new SimpleBar(this, options))); }
-            if (typeof option === 'string') { data[option](_relatedTarget); }
-            else if (options.show) { data.show(_relatedTarget); }
-        });
+        // If the first parameter is an object (options), or was omitted,
+        // instantiate a new instance of the plugin.
+        if (typeof options === 'undefined' || typeof options === 'object') {
+            return this.each(function () {
+
+                // Only allow the plugin to be instantiated once,
+                // so we check that the element has no plugin instantiation yet
+                if (!$.data(this, 'simplebar')) { $.data(this, 'simplebar', new SimpleBar(this, options)); }
+            });
+
+        // If the first parameter is a string
+        // treat this as a call to a public method.
+        } else if (typeof options === 'string') {
+            this.each(function () {
+                var instance = $.data(this, 'simplebar');
+
+                // Tests that there's already a plugin-instance
+                // and checks that the requested public method exists
+                if (instance instanceof SimpleBar && typeof instance[options] === 'function') {
+
+                    // Call the method of our plugin instance,
+                    // and pass it the supplied arguments.
+                    returns = instance[options].apply( instance, Array.prototype.slice.call( args, 1 ) );
+                }
+
+                // Allow instances to be destroyed via the 'destroy' method
+                if (options === 'destroy') {
+                  $.data(this, 'simplebar', null);
+                }
+            });
+
+            // If the earlier cached method
+            // gives a value back return the value,
+            // otherwise return this to preserve chainability.
+            return returns !== undefined ? returns : this;
+        }
     };
 
     $.fn.simplebar.Constructor = SimpleBar;
 
 
-    // MODAL NO CONFLICT
-    // =================
-
+    /**
+     * No conflict
+     */
     $.fn.simplebar.noConflict = function () {
         $.fn.simplebar = old;
         return this;
