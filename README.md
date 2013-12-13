@@ -78,7 +78,7 @@ If you later dynamically modify your content, for instance changing its height o
     $('#myElement').simplebar('recalculate');
 
 ###Mobile support
-Most of the mobile browsers have "floating" scrollbars. Also, they are not all currently supporting hardware acceleration on `overflow: auto` elements. So we decided to automatically disable SimpleBar when a "floating" scrollbar is detected. So mobile browsers will uses native scrollbar seemlessly.
+Most of the mobile browsers have "floating" scrollbars. Also, they are not all currently supporting hardware acceleration on `overflow: auto` elements. So we decided to automatically disable SimpleBar when a "floating" scrollbar is detected. So mobile browsers will use native scrollbar seemlessly.
 For example you will notice that it will use native scrollbar on mac OSX 10.8+ (when using trackpad) as the scrollbar is natively floating.
 
 ###Subscribe to `scroll` event
