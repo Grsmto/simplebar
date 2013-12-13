@@ -91,7 +91,7 @@
         }
 
         this.$scrollbar.on('mousedown', $.proxy(this.startDrag, this));
-        this.$scrollContentEl.on('scroll', $.proxy(this.flashScrollbar, this));
+        this.$scrollContentEl.on('scroll', $.proxy(this.startScroll, this));
 
         this.resizeScrollbar();
 
@@ -180,6 +180,17 @@
         } else {
             this.$track.hide();
         }
+    };
+
+
+    /**
+     * On scroll event handling
+     */
+    SimpleBar.prototype.startScroll = function(e) {
+        // Simulate event bubbling to root element
+        this.$el.trigger(e);
+
+        this.flashScrollbar();
     };
 
 
