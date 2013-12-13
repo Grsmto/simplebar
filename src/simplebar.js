@@ -242,6 +242,13 @@
     };
 
     /**
+     * Getter for original scrolling element
+     */
+    SimpleBar.prototype.getScrollElement = function () {
+        return typeof this.$scrollContentEl === 'undefined' ? this.$el : this.$scrollContentEl;
+    };
+
+    /**
      * Data API
      */
     $(window).on('load', function () {
@@ -251,29 +258,59 @@
     });
 
 
-    // MODAL PLUGIN DEFINITION
-    // =======================
-
+    /**
+     * Plugin definition
+     */
     var old = $.fn.simplebar;
 
-    $.fn.simplebar = function (option, _relatedTarget) {
-        return this.each(function () {
-            var $this   = $(this),
-                data    = $this.data('scrollbars'),
-                options = $.extend({}, SimpleBar.DEFAULTS, $this.data(), typeof option === 'object' && option);
+    $.fn.simplebar = function (options) {
+        var args = arguments,
+            returns;
 
-            if (!data) { $this.data('scrollbars', (data = new SimpleBar(this, options))); }
-            if (typeof option === 'string') { data[option](_relatedTarget); }
-            else if (options.show) { data.show(_relatedTarget); }
-        });
+        // If the first parameter is an object (options), or was omitted,
+        // instantiate a new instance of the plugin.
+        if (typeof options === 'undefined' || typeof options === 'object') {
+            return this.each(function () {
+
+                // Only allow the plugin to be instantiated once,
+                // so we check that the element has no plugin instantiation yet
+                if (!$.data(this, 'simplebar')) { $.data(this, 'simplebar', new SimpleBar(this, options)); }
+            });
+
+        // If the first parameter is a string
+        // treat this as a call to a public method.
+        } else if (typeof options === 'string') {
+            this.each(function () {
+                var instance = $.data(this, 'simplebar');
+
+                // Tests that there's already a plugin-instance
+                // and checks that the requested public method exists
+                if (instance instanceof SimpleBar && typeof instance[options] === 'function') {
+
+                    // Call the method of our plugin instance,
+                    // and pass it the supplied arguments.
+                    returns = instance[options].apply( instance, Array.prototype.slice.call( args, 1 ) );
+                }
+
+                // Allow instances to be destroyed via the 'destroy' method
+                if (options === 'destroy') {
+                  $.data(this, 'simplebar', null);
+                }
+            });
+
+            // If the earlier cached method
+            // gives a value back return the value,
+            // otherwise return this to preserve chainability.
+            return returns !== undefined ? returns : this;
+        }
     };
 
     $.fn.simplebar.Constructor = SimpleBar;
 
 
-    // MODAL NO CONFLICT
-    // =================
-
+    /**
+     * No conflict
+     */
     $.fn.simplebar.noConflict = function () {
         $.fn.simplebar = old;
         return this;
