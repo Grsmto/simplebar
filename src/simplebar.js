@@ -36,8 +36,8 @@
         this.$el = $(element),
         this.$scrollContentEl,
         this.$contentEl,
-        this.$scrollbarEl,
-        this.$dragHandleEl,
+        this.$track,
+        this.$scrollbar,
         this.dragOffset,
         this.flashTimeout,
         this.scrollDirection    = 'vert',
@@ -63,7 +63,8 @@
 
           return;
         }
-        if (this.$el.data('simplebar') === 'horizontal' || this.$el.hasClass('simplebar horizontal')){
+
+        if (this.$el.data('simplebar-direction') === 'horizontal' || this.$el.hasClass('simplebar horizontal')){
             this.scrollDirection    = 'horiz';
             this.scrollOffsetAttr   = 'scrollLeft';
             this.sizeAttr           = 'width';
@@ -77,9 +78,9 @@
 
         this.$contentEl = this.$el.find('.simplebar-content');
 
-        this.$el.prepend('<div class="simplebar-scrollbar"><div class="drag-handle"></div></div>');
-        this.$scrollbarEl = this.$el.find('.simplebar-scrollbar');
-        this.$dragHandleEl = this.$el.find('.drag-handle');
+        this.$el.prepend('<div class="simplebar-track"><div class="simplebar-scrollbar"></div></div>');
+        this.$track = this.$el.find('.simplebar-track');
+        this.$scrollbar = this.$el.find('.simplebar-scrollbar');
 
         this.$scrollContentEl = this.$el.find('.simplebar-scroll-content');
 
@@ -89,7 +90,7 @@
             this.$el.on('mouseenter', $.proxy(this.flashScrollbar, this));
         }
 
-        this.$dragHandleEl.on('mousedown', $.proxy(this.startDrag, this));
+        this.$scrollbar.on('mousedown', $.proxy(this.startDrag, this));
         this.$scrollContentEl.on('scroll', $.proxy(this.flashScrollbar, this));
 
         this.resizeScrollbar();
@@ -113,7 +114,7 @@
         if (this.scrollDirection === 'horiz') {
             eventOffset = e.pageX;
         }
-        this.dragOffset = eventOffset - this.$dragHandleEl.offset()[this.offsetAttr];
+        this.dragOffset = eventOffset - this.$scrollbar.offset()[this.offsetAttr];
 
         $(document).on('mousemove', $.proxy(this.drag, this));
         $(document).on('mouseup', $.proxy(this.endDrag, this));
@@ -136,9 +137,9 @@
           eventOffset = e.pageX;
         }
 
-        dragPos = eventOffset - this.$scrollbarEl.offset()[this.offsetAttr] - this.dragOffset;
+        dragPos = eventOffset - this.$track.offset()[this.offsetAttr] - this.dragOffset;
         // Convert the mouse position into a percentage of the scrollbar height/width.
-        dragPerc = dragPos / this.$scrollbarEl[this.sizeAttr]();
+        dragPerc = dragPos / this.$track[this.sizeAttr]();
         // Scroll the content by the same percentage.
         scrollPos = dragPerc * this.$contentEl[0][this.scrollSizeAttr];
 
@@ -154,13 +155,14 @@
         $(document).off('mouseup', this.endDrag);
     };
 
+
     /**
      * Resize scrollbar
      */
     SimpleBar.prototype.resizeScrollbar = function () {
         var contentSize     = this.$contentEl[0][this.scrollSizeAttr],
             scrollOffset    = this.$scrollContentEl[this.scrollOffsetAttr](), // Either scrollTop() or scrollLeft().
-            scrollbarSize   = this.$scrollbarEl[this.sizeAttr](),
+            scrollbarSize   = this.$track[this.sizeAttr](),
             scrollbarRatio  = scrollbarSize / contentSize,
             // Calculate new height/position of drag handle.
             // Offset of 2px allows for a small top/bottom or left/right margin around handle.
@@ -170,13 +172,13 @@
 
         if (scrollbarSize < contentSize) {
             if (this.scrollDirection === 'vert'){
-                this.$dragHandleEl.css({'top': handleOffset, 'height': handleSize});
+                this.$scrollbar.css({'top': handleOffset, 'height': handleSize});
             } else {
-                this.$dragHandleEl.css({'left': handleOffset, 'width': handleSize});
+                this.$scrollbar.css({'left': handleOffset, 'width': handleSize});
             }
-            this.$scrollbarEl.show();
+            this.$track.show();
         } else {
-            this.$scrollbarEl.hide();
+            this.$track.hide();
         }
     };
 
@@ -194,7 +196,7 @@
      * Show scrollbar
      */
     SimpleBar.prototype.showScrollbar = function () {
-        this.$dragHandleEl.addClass('visible');
+        this.$scrollbar.addClass('visible');
 
         if (!this.options.autoHide) {
             return;
@@ -211,7 +213,7 @@
      * Hide Scrollbar
      */
     SimpleBar.prototype.hideScrollbar = function () {
-        this.$dragHandleEl.removeClass('visible');
+        this.$scrollbar.removeClass('visible');
         if(typeof this.flashTimeout === 'number') {
             window.clearTimeout(this.flashTimeout);
         }
@@ -243,7 +245,7 @@
      * Data API
      */
     $(window).on('load', function () {
-        $('[data-simplebar]').each(function () {
+        $('[data-simplebar-direction]').each(function () {
             $(this).simplebar();
         });
     });

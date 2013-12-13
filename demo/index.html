@@ -29,7 +29,7 @@
     <h1>SimpleBar demo</h1>
     <div class="demo1-col">
       <h2>Vertical scroller</h2>
-      <div class="demo1" data-simplebar="vertical">
+      <div class="demo1" data-simplebar-direction="vertical">
         <p class="odd">Some content</p>
         <p>Some more content</p>
         <p class="odd">Some content</p>
@@ -91,7 +91,7 @@
 	    $(document).ready(function() {
 	      // Initialize scrollers.
           $('.demo2').simplebar();
-	      
+          
 	      // Demonstration of changing the vertical scroller content and dimensions.
 	      $('.add-more').on('click', function(e){
 	        e.preventDefault();
