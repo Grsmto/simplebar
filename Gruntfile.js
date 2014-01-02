@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 		concat: {
 			css: {
 				src: "src/<%= pkg.name %>.css",
-				dest: "dist/<%= pkg.name %>.<%= pkg.version %>.css",
+				dest: "dist/<%= pkg.name %>.css",
 			},
 			options: {
 				banner: "<%= meta.banner %>"
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 		uglify: {
 			my_target: {
 				src: ["src/<%= pkg.name %>.js"],
-				dest: "dist/<%= pkg.name %>.<%= pkg.version %>.min.js"
+				dest: "dist/<%= pkg.name %>.min.js"
 			},
 			options: {
 				banner: "<%= meta.banner %>"
