@@ -91,6 +91,13 @@ If you are using another plugins like jQuery.scrollTo or simply want to access t
 
     $('#myElement').simplebar('getScrollElement');
 
+###Add content dynamically (ajax)
+You can retrieve the element containing datas like this :
+
+    $('#myElement').simplebar('getContentElement');
+
+This is best to use this rather than querying it via DOM cause it avoids problem when the plugin is disabled (like on mobiles).
+
 ###Non-JS fallback
 
 SimpleBar hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:

@@ -1,5 +1,5 @@
 /*
- *  SimpleBar.js - v1.1.0
+ *  SimpleBar.js - v1.1.1
  *  Scrollbars, simpler.
  *  https://grsmto.github.io/simplebar/
  *
