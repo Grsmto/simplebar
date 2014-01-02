@@ -244,6 +244,7 @@
         }
     };
 
+
     /**
      * Recalculate scrollbar
      */
@@ -252,12 +253,22 @@
         this.resizeScrollbar();
     };
 
+
     /**
      * Getter for original scrolling element
      */
     SimpleBar.prototype.getScrollElement = function () {
         return typeof this.$scrollContentEl === 'undefined' ? this.$el : this.$scrollContentEl;
     };
+
+
+    /**
+     * Getter for content element
+     */
+    SimpleBar.prototype.getContentElement = function () {
+        return typeof this.$contentEl === 'undefined' ? this.$el : this.$contentEl;
+    };
+
 
     /**
      * Data API
