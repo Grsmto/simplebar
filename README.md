@@ -22,8 +22,8 @@ SimpleBar works with jQuery.
 
 Include jQuery and SimpleBar in your document. The paths and filenames may differ from those shown here:
 
-    <link rel="stylesheet" href="css/simplebar.1.1.0.css" />
-    <script src="js/simplebar.1.1.0.min.js"></script>
+    <link rel="stylesheet" href="css/simplebar.css" />
+    <script src="js/simplebar.min.js"></script>
 
 ###Via data attributes
 
