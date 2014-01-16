@@ -13,7 +13,14 @@
 }
   .simplebar .simplebar-scroll-content,
   [data-simplebar-direction] .simplebar-scroll-content {
-    overflow: auto;
+    overflow-y: scroll;
+    overflow-x: auto;
+  }
+
+  [data-simplebar-direction="horizontal"] .simplebar-scroll-content,
+  .simplebar.horizontal .simplebar-scroll-content {
+    overflow-x: scroll;
+    overflow-y: auto;
   }
 
 .simplebar-track {
