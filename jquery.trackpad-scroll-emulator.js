@@ -38,6 +38,7 @@
     var $dragHandleEl;
     var dragOffset;
     var flashTimeout;
+    var pageJumpMultp = 7/8;
     var scrollDirection = 'vert';
     var scrollOffsetAttr = 'scrollTop';
     var sizeAttr = 'height';
@@ -67,11 +68,12 @@
 
       resizeScrollContent();
 
-      if (options.autoHide) { 
+      if (options.autoHide) {
         $el.on('mouseenter', flashScrollbar);
       }
-      
+
       $dragHandleEl.on('mousedown', startDrag);
+      $scrollbarEl.on('mousedown', jumpScroll);
       $scrollContentEl.on('scroll', onScrolled);
 
       resizeScrollbar();
@@ -130,6 +132,35 @@
     function endDrag() {
       $(document).off('mousemove', drag);
       $(document).off('mouseup', endDrag);
+    }
+
+    /**
+     * Scroll in the same manner as the PAGE UP/DOWN keys
+     */
+    function jumpScroll(e) {
+      // If the drag handle element was pressed, don't do anything here.
+      if (e.target === $dragHandleEl[0]) {
+        return;
+      }
+
+      // The content will scroll by 7/8 of a page.
+      var jumpAmt = pageJumpMultp * $scrollContentEl[sizeAttr]();
+
+      // Calculate where along the scrollbar the user clicked.
+      var eventOffset = e.originalEvent.layerY;
+      if (scrollDirection === 'horiz') {
+        eventOffset = e.originalEvent.layerX;
+      }
+      // Get the position of the top (or left) of the drag handle.
+      var dragHandleOffset = $dragHandleEl.position()[offsetAttr];
+
+      // Determine which direction to scroll.
+      var scrollPos = $scrollContentEl[scrollOffsetAttr]() + jumpAmt;
+      if (eventOffset < dragHandleOffset) {
+        scrollPos = $scrollContentEl[scrollOffsetAttr]() - jumpAmt;
+      }
+
+      $scrollContentEl[scrollOffsetAttr](scrollPos);
     }
 
     /**
