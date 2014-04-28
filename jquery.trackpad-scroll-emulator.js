@@ -1,12 +1,12 @@
 /**
  * TrackpadScrollEmulator
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  *
  * The MIT License
  *
- * Copyright (c) 2012-2013 Jonathan Nicol
+ * Copyright (c) 2012-2014 Jonathan Nicol
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -147,18 +147,13 @@
       var jumpAmt = pageJumpMultp * $scrollContentEl[sizeAttr]();
 
       // Calculate where along the scrollbar the user clicked.
-      var eventOffset = e.originalEvent.layerY;
-      if (scrollDirection === 'horiz') {
-        eventOffset = e.originalEvent.layerX;
-      }
+      var eventOffset = (scrollDirection === 'vert') ? e.originalEvent.layerY : e.originalEvent.layerX;
+
       // Get the position of the top (or left) of the drag handle.
       var dragHandleOffset = $dragHandleEl.position()[offsetAttr];
 
       // Determine which direction to scroll.
-      var scrollPos = $scrollContentEl[scrollOffsetAttr]() + jumpAmt;
-      if (eventOffset < dragHandleOffset) {
-        scrollPos = $scrollContentEl[scrollOffsetAttr]() - jumpAmt;
-      }
+      var scrollPos = (eventOffset < dragHandleOffset) ? $scrollContentEl[scrollOffsetAttr]() - jumpAmt : $scrollContentEl[scrollOffsetAttr]() + jumpAmt;
 
       $scrollContentEl[scrollOffsetAttr](scrollPos);
     }
