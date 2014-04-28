@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TrackpadScrollEmulator demo</title>
+  <link rel="stylesheet" href="../css/trackpad-scroll-emulator.css" />
+  <link rel="stylesheet" href="css/demo-fullscreen.css" />
+  <noscript>
+    <style>
+      /**
+       * Reinstate scrolling for non-JS clients
+       * 
+       * You coud do this in a regular stylesheet, but be aware that
+       * even in JS-enabled clients the browser scrollbars may be visible
+       * briefly until JS kicks in. This is especially noticeable in IE.
+       * Wrapping these rules in a noscript tag ensures that never happens.
+       */
+      .tse-scrollable {
+        overflow-y: scroll;
+      }
+    </style>
+  </noscript>
+</head>
+<body>
+  <div class="tse-scrollable demo-fullscreen">
+    <div class="tse-content">
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+      <p class="odd">Some content</p>
+      <p>Some more content</p>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/lib/jquery-1.7.1.min.js"></script>
+  <script src="../jquery.trackpad-scroll-emulator.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    // Initialize scroller.
+    $('.demo-fullscreen').TrackpadScrollEmulator();
+  });
+  </script>
+</body>
+</html>
