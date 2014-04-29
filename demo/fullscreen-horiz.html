@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TrackpadScrollEmulator demo</title>
+  <link rel="stylesheet" href="../css/trackpad-scroll-emulator.css" />
+  <link rel="stylesheet" href="css/demo-fullscreen.css" />
+  <noscript>
+    <style>
+      /**
+       * Reinstate scrolling for non-JS clients
+       * 
+       * You coud do this in a regular stylesheet, but be aware that
+       * even in JS-enabled clients the browser scrollbars may be visible
+       * briefly until JS kicks in. This is especially noticeable in IE.
+       * Wrapping these rules in a noscript tag ensures that never happens.
+       */
+      .tse-scrollable {
+        overflow-y: scroll;
+      }
+    </style>
+  </noscript>
+</head>
+<body>
+  <div class="tse-scrollable horizontal demo-fullscreen">
+    <div class="tse-content">
+      <div class="boxes">
+          <div class="box">1</div>
+          <div class="box">2</div>
+          <div class="box">3</div>
+          <div class="box">4</div>
+          <div class="box">5</div>
+          <div class="box">6</div>
+          <div class="box">7</div>
+          <div class="box">8</div>
+          <div class="box">9</div>
+          <div class="box">10</div>
+          <div class="box">11</div>
+          <div class="box">12</div>
+          <div class="box">13</div>
+          <div class="box">14</div>
+          <div class="box">15</div>
+          <div class="box">16</div>
+          <div class="box">17</div>
+          <div class="box">18</div>
+          <div class="box">19</div>
+          <div class="box">20</div>
+        </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/lib/jquery-1.7.1.min.js"></script>
+  <script src="../jquery.trackpad-scroll-emulator.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    // Initialize scroller.
+    $('.demo-fullscreen').TrackpadScrollEmulator();
+  });
+  </script>
+</body>
+</html>

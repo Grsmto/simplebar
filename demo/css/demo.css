@@ -139,6 +139,7 @@ a:visited {
     white-space: nowrap; /* allows element to expand outside container without setting explicit width */
     height: 130px;
     }
+    /* Box styling is purely for demo puposes. Your scrollable content can be styled however you like. */
     .demo2 .boxes {
       overflow: auto;
       padding: 10px 0 0 10px;
@@ -148,11 +149,11 @@ a:visited {
         margin-right: 10px;
         width: 100px;
         height: 100px;
-        background: #666;
         color: #fff;
         text-align: center;
         line-height: 100px;
         font-size: 24px;
+        background: #666;
         }
 
 

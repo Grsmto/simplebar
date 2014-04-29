@@ -89,3 +89,27 @@ p {
     .demo-fullscreen p.odd {
       background: #f0f0f0;
       }
+.demo-fullscreen.horizontal .tse-content {
+    display: inline-block; /* allows element to expand outside container without setting explicit width */
+    white-space: nowrap; /* allows element to expand outside container without setting explicit width */
+    }
+    /* Box styling is purely for demo puposes. Your scrollable content can be styled however you like. */
+    .demo-fullscreen.horizontal .boxes {
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      overflow: auto;
+      padding: 20px;
+      height: 100%;
+      }
+      .demo-fullscreen.horizontal .box {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: inline-block;
+        margin-right: 10px;
+        padding: 20px;
+        width: 300px;
+        height: 100%;
+        color: #fff;
+        font-size: 24px;
+        background: #666;
+        }
