@@ -1,6 +1,6 @@
 /**
  * TrackpadScrollEmulator
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  *
@@ -255,6 +255,13 @@
       var width = $(tempEl).innerWidth();
       var widthMinusScrollbars = $('div', tempEl).innerWidth();
       tempEl.remove();
+      // On OS X if the scrollbar is set to auto hide it will have zero width. On webkit we can still
+      // hide it using ::-webkit-scrollbar { width:0; height:0; } but there is no moz equivalent. So we're
+      // forced to sniff Firefox and return a hard-coded scrollbar width. I know, I know...
+      if (width === widthMinusScrollbars && navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+        return 17;
+      }
+      console.log(width - widthMinusScrollbars);
       return (width - widthMinusScrollbars);
     }
 
