@@ -261,7 +261,6 @@
       if (width === widthMinusScrollbars && navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
         return 17;
       }
-      console.log(width - widthMinusScrollbars);
       return (width - widthMinusScrollbars);
     }
 
