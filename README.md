@@ -2,14 +2,15 @@
 
 [![Build Status](https://travis-ci.org/Grsmto/simplebar.png?branch=v1.0)](https://travis-ci.org/Grsmto/simplebar)
 
-SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app ?
+SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 
 1. [What it does](#1-what-it-does)
 2. [Usage](#2-usage)
-3. [How it works](#3-how-it-works)
-4. [Limitations](#4-limitations)
-5. [Changelog](#5-changelog)
-6. [Credits](#6-credits)
+3. [Demos](#3-demos)
+4. [How it works](#4-how-it-works)
+5. [Limitations](#5-limitations)
+6. [Changelog](#6-changelog)
+7. [Credits](#7-credits)
 
 ##1. What it does
 
@@ -54,7 +55,7 @@ Available options are:
 
 ####wrapContent
 
-By default SimpleBar requires minimal markup, as shown above. When initialized it will wrap the `tse-content`element in a div with the class `tse-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
+By default SimpleBar requires minimal markup. When initialized it will wrap a `simplebar-content`element in a div with the class `simplebar-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
     $('#myElement').simplebar({ wrapContent: false });
 
@@ -110,21 +111,24 @@ SimpleBar hides the browser's default scrollbars, which obviously is undesirable
       </style>
     </noscript>
 
-##3. How it works
+##3. Demos
+http://grsmto.github.io/simplebar/
+
+##4. How it works
 
 For the most part SimpleBar uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
 
 Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
-##4. Limitations
+##5. Limitations
 
 SimpleBar can currently handle vertical or horizontal scrollbars, but not both simultaneously.
 
-##5. Changelog
+##6. Changelog
 
 See changelog here : https://github.com/Grsmto/simplebar/releases
 
-##6. Credits
+##7. Credits
 
 Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made the original plugin called [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
 
