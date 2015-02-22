@@ -33,7 +33,7 @@
     var el = element;
     var $el = $(element);
     var $scrollContentEl;
-    var $contentEl = $el.find('.tse-content');
+    var $contentEl = $el.find('.tse-content:first');
     var $scrollbarEl;
     var $dragHandleEl;
     var dragOffset;
@@ -58,13 +58,13 @@
       }
 
       $el.prepend('<div class="tse-scrollbar"><div class="drag-handle"></div></div>');
-      $scrollbarEl = $el.find('.tse-scrollbar');
-      $dragHandleEl = $el.find('.drag-handle');
+      $scrollbarEl = $el.find('.tse-scrollbar:first');
+      $dragHandleEl = $el.find('.drag-handle:first');
 
       if (options.wrapContent) {
         $contentEl.wrap('<div class="tse-scroll-content" />');
       }
-      $scrollContentEl = $el.find('.tse-scroll-content');
+      $scrollContentEl = $el.find('.tse-scroll-content:first');
 
       resizeScrollContent();
 
