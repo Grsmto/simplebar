@@ -1,6 +1,6 @@
 #Trackpad Scroll Emulator
 
-A jQuery plugin that emulates OS X Lion trackpad-style scrollbars in any browser or platform. Based on the scrollbars in the Rdio app.
+A jQuery plugin that emulates OS X trackpad-style scrollbars in any browser or platform. Based on the scrollbars in the Rdio app.
 
 1. [What it does](#1-what-it-does)
 2. [Dependencies](#2-dependencies)
@@ -11,11 +11,11 @@ A jQuery plugin that emulates OS X Lion trackpad-style scrollbars in any browser
 
 ##1. What it does
 
-Traditionally scrollbars are permanently displayed whenever an area of a webpage is scrollable. By contrast, scrollbars in OSX Lion are hidden from sight, and revealed only when the user executes a swipe gesture with a 'magic' trackpad pointing device.
+Traditionally scrollbars are permanently displayed whenever an area of a webpage is scrollable. By contrast, scrollbars in OS X are hidden from sight, and revealed only when the user executes a swipe gesture with a 'magic' trackpad pointing device.
 
-This plugin emulates Lion's UI pattern by replacing the browser's default scrollbars with a custom CSS-styled scrollbar that is only revealed when the user hovers over a scrollable element.
+This plugin emulates OS X's UI pattern by replacing the browser's default scrollbars with a custom CSS-styled scrollbar that is only revealed when the user hovers over a scrollable element.
 
-Modern browsers get a very accurate emulation of Lion's scrollbars, while less capable browsers miss out on a few bells and whistles such as rounded corners, opacity, and animated fades.
+Modern browsers get a very accurate emulation of OS X's scrollbars, while less capable browsers miss out on a few bells and whistles such as rounded corners, opacity, and animated fades.
 
 View a demo: http://jnicol.github.io/trackpad-scroll-emulator/
 
