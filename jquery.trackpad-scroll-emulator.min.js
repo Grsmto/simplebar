@@ -1,6 +1,6 @@
 /*!
  * TrackpadScrollEmulator
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: Jonathan Nicol @f6design
  * https://github.com/jnicol/trackpad-scroll-emulator
  */
