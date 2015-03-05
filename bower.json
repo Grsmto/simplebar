@@ -20,7 +20,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "gruntfile.js",
+    "Gruntfile.js",
     "package.json"
   ],
   "dependencies": {
