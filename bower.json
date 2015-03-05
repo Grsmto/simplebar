@@ -21,6 +21,8 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "gruntfile.js",
+    "package.json"
   ]
 }
