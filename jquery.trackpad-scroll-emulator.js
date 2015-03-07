@@ -147,7 +147,7 @@
      * Resize scrollbar
      */
     function resizeScrollbar() {
-      var contentSize = $contentEl[sizeAttr]();
+      var contentSize = sizeAttr === 'height' ? $contentEl.outerHeight() : $contentEl.outerWidth();
       var scrollOffset = $scrollContentEl[scrollOffsetAttr](); // Either scrollTop() or scrollLeft().
       var scrollbarSize = $scrollbarEl[sizeAttr]();
       var scrollbarRatio = scrollbarSize / contentSize;
