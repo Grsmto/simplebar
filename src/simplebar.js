@@ -34,12 +34,12 @@
     function SimpleBar (element, options) {
         this.el = element,
         this.$el = $(element),
-        this.$scrollContentEl,
-        this.$contentEl,
         this.$track,
         this.$scrollbar,
         this.dragOffset,
         this.flashTimeout,
+        this.$contentEl         = this.$el,
+        this.$scrollContentEl   = this.$el,
         this.scrollDirection    = 'vert',
         this.scrollOffsetAttr   = 'scrollTop',
         this.sizeAttr           = 'height',
@@ -160,6 +160,10 @@
      * Resize scrollbar
      */
     SimpleBar.prototype.resizeScrollbar = function () {
+        if(SCROLLBAR_WIDTH === 0) {
+            return;
+        }
+
         var contentSize     = this.$contentEl[0][this.scrollSizeAttr],
             scrollOffset    = this.$scrollContentEl[this.scrollOffsetAttr](), // Either scrollTop() or scrollLeft().
             scrollbarSize   = this.$track[this.sizeAttr](),
@@ -237,7 +241,7 @@
     SimpleBar.prototype.resizeScrollContent = function () {
         if (this.scrollDirection === 'vert'){
             this.$scrollContentEl.width(this.$el.width()+SCROLLBAR_WIDTH);
-            this.$scrollContentEl.height(this.$el.height());
+            this.$scrollContentEl.height(this.$el.height()+SCROLLBAR_WIDTH);
         } else {
             this.$scrollContentEl.width(this.$el.width());
             this.$scrollContentEl.height(this.$el.height()+SCROLLBAR_WIDTH);
@@ -258,7 +262,7 @@
      * Getter for original scrolling element
      */
     SimpleBar.prototype.getScrollElement = function () {
-        return typeof this.$scrollContentEl === 'undefined' ? this.$el : this.$scrollContentEl;
+        return this.$scrollContentEl;
     };
 
 
@@ -266,7 +270,7 @@
      * Getter for content element
      */
     SimpleBar.prototype.getContentElement = function () {
-        return typeof this.$contentEl === 'undefined' ? this.$el : this.$contentEl;
+        return this.$contentEl;
     };
 
 

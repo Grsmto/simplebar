@@ -57,12 +57,13 @@
       <a class="btn add-more-horiz" href="#">Add content</a>
       <a class="btn toggle-width" href="#">Toggle width</a>
     </div>
+    <div style="clear:both;"></div>
   
     <!-- JavaScript -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="vendor/jquery-1.10.2.min.js"><\/script>')</script>
     
-    <script src="../dist/simplebar.min.js"></script>
+    <script src="../src/simplebar.js"></script>
     
     <script>
 	    $(document).ready(function() {
@@ -72,7 +73,7 @@
 	      // Demonstration of changing the vertical scroller content and dimensions.
 	      $('.add-more').on('click', function(e){
 	        e.preventDefault();
-	        $('.demo1 .simplebar-content').append('<p class="odd">Additional content 1</p><p>Additional content 2</p><p p class="odd">Additional content 3</p><p>Additional content 4</p>');
+	        $('.demo1').simplebar('getContentElement').append('<p class="odd">Additional content 1</p><p>Additional content 2</p><p p class="odd">Additional content 3</p><p>Additional content 4</p>');
 	        $('.demo1').simplebar('recalculate');
 	      });
 	      $('.toggle-height').on('click', function(e){
@@ -87,7 +88,7 @@
 	      // Demonstration of changing the horizontal scroller content and dimensions.
 	      $('.add-more-horiz').on('click', function(e){
 	        e.preventDefault();
-	        $('.demo2 .simplebar-content .boxes').append('<div class="box">A</div><div class="box">B</div><div class="box">C</div><div class="box">D</div>');
+	        $('.demo2').simplebar('getContentElement').append('<div class="box">A</div><div class="box">B</div><div class="box">C</div><div class="box">D</div>');
 	        $('.demo2').simplebar('recalculate');
 	      });
 	      $('.toggle-width').on('click', function(e){
