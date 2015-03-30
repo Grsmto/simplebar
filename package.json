@@ -26,5 +26,8 @@
 			"type": "MIT",
 			"url": "http://zenorocha.mit-license.org/"
 		}
-	]
+	],
+	"engines": {
+		"node": ">=0.11.0"
+	}
 }
