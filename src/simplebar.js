@@ -241,7 +241,7 @@
     SimpleBar.prototype.resizeScrollContent = function () {
         if (this.scrollDirection === 'vert'){
             this.$scrollContentEl.width(this.$el.width()+SCROLLBAR_WIDTH);
-            this.$scrollContentEl.height(this.$el.height()+SCROLLBAR_WIDTH);
+            this.$scrollContentEl.height(this.$el.height());
         } else {
             this.$scrollContentEl.width(this.$el.width());
             this.$scrollContentEl.height(this.$el.height()+SCROLLBAR_WIDTH);
