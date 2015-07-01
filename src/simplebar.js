@@ -9,7 +9,7 @@
      * Original function by Jonathan Sharp:
      * http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php
      */
-    SCROLLBAR_WIDTH = scrollbarWidth();
+    var SCROLLBAR_WIDTH = scrollbarWidth();
 
     function scrollbarWidth () {
         // Append a temporary scrolling element to the DOM, then measure
