@@ -1,4 +1,16 @@
-;(function ( $, window, document, undefined ) {
+;(function (factory) {
+    'use strict';
+    if (typeof define === 'function' && define.amd) {
+        // Register as an anonymous AMD module:
+        define(['jquery'], factory($, window, document, undefined));
+    } else if (typeof exports === 'object') {
+        // Node/CommonJS:
+        factory(require('jquery'), window, document, undefined);
+    } else {
+        // Browser globals:
+        factory(window.jQuery, window, document, undefined);
+    }
+}(function ( $, window, document, undefined ) {
 
 
     /**
@@ -346,4 +358,4 @@
         return this;
     };
 
-})(jQuery, window, document);
+}));
