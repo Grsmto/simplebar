@@ -17,7 +17,7 @@
      * Calculate scrollbar width
      *
      * Called only once as a constant variable: we assume that scrollbar width never change
-     * 
+     *
      * Original function by Jonathan Sharp:
      * http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php
      */
@@ -65,7 +65,14 @@
 
     SimpleBar.DEFAULTS = {
         wrapContent: true,
-        autoHide: true
+        autoHide: true,
+        css: {
+          container: 'simplebar',
+          content: 'simplebar-content',
+          scrollContent: 'simple-bar-scroll-content',
+          scrollbar: 'simplebar-scrollbar',
+          scrollbarTrack: 'simplebar-track'
+        }
     };
 
     SimpleBar.prototype.init = function () {
