@@ -70,7 +70,7 @@
         css: {
           container: 'simplebar',
           content: 'simplebar-content',
-          scrollContent: 'simple-bar-scroll-content',
+          scrollContent: 'simplebar-scroll-content',
           scrollbar: 'simplebar-scrollbar',
           scrollbarTrack: 'simplebar-track'
         }
