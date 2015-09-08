@@ -72,6 +72,21 @@ Default value is `true`
 
 You can also control the animation via CSS as it's a simple CSS opacity transition.
 
+####css
+
+It is possible to specify css classes to change the design of the scrollbar. To get your own styles to work refer to `simplebar.css` to get an idea how to setup your css.
+
+- `scrollbar` defines the style of the scrollbar with which the user can interact to scroll the content.
+- `scrollbar-track` styles the area surrounding the `scrollbar`.
+
+```javascript
+css: {
+  // defaults
+  scrollbar: 'simplebar-scrollbar'
+  scrollbar-track: 'simplebar-track'
+}
+```
+
 ###Notifying the plugin of content changes
 
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
@@ -86,7 +101,7 @@ For example you will notice that it will use native scrollbar on mac OSX 10.8+ (
 You can subscribe to the `scroll` event just like you do with native scrolling element :
 
     $('#myElement').simplebar().on('scroll', function(...));
-    
+
 ###Trigger programmatical scrolling
 If you are using another plugins like jQuery.scrollTo or simply want to access to original scroll element, you can retrieve it via a getter :
 
