@@ -17,11 +17,11 @@
      * Calculate scrollbar width
      *
      * Called only once as a constant variable: we assume that scrollbar width never change
-     * 
+     *
      * Original function by Jonathan Sharp:
      * http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php
      */
-    var SCROLLBAR_WIDTH = scrollbarWidth();
+    var SCROLLBAR_WIDTH = -1;
 
     function scrollbarWidth () {
         // Append a temporary scrolling element to the DOM, then measure
@@ -71,6 +71,10 @@
     };
 
     SimpleBar.prototype.init = function () {
+        // Measure scrollbar width, -1 means it hasn't been obtained yet
+        if( SCROLLBAR_WIDTH === -1){
+            SCROLLBAR_WIDTH = scrollbarWidth();
+        }
         // If scrollbar is a floating scrollbar, disable the plugin
         if(SCROLLBAR_WIDTH === 0) {
           this.$el.css('overflow', 'auto');
