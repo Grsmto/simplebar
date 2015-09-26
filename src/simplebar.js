@@ -64,11 +64,11 @@
         wrapContent: true,
         autoHide: true,
         css: {
-          container: 'simplebar',
-          content: 'simplebar-content',
-          scrollContent: 'simplebar-scroll-content',
-          scrollbar: 'simplebar-scrollbar',
-          scrollbarTrack: 'simplebar-track'
+            container: 'simplebar',
+            content: 'simplebar-content',
+            scrollContent: 'simplebar-scroll-content',
+            scrollbar: 'simplebar-scrollbar',
+            scrollbarTrack: 'simplebar-track'
         }
     };
 
@@ -94,7 +94,7 @@
         }
 
         if (this.options.wrapContent) {
-            this.$el.wrapInner('<div class=""' + this.theme.scrollContent + '"><div class="' + this.theme.content + '"></div></div>');
+            this.$el.wrapInner('<div class="' + this.theme.scrollContent + '"><div class="' + this.theme.content + '"></div></div>');
         }
 
         this.$contentEl = this.$el.find('.' + this.theme.content);
