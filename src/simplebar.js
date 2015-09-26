@@ -40,6 +40,8 @@
         return (width - widthMinusScrollbars);
     }
 
+    var IS_WEBKIT = 'WebkitAppearance' in document.documentElement.style;
+
 
 
     // SimpleBar Constructor
@@ -251,10 +253,10 @@
      * Resize content element
      */
     SimpleBar.prototype.resizeScrollContent = function () {
-        var is_firefox = /firefox/i.test(navigator.userAgent);
-        if (! is_firefox) {
+        if (IS_WEBKIT) {
             return;
         }
+
         if (this.scrollDirection === 'vert'){
             this.$scrollContentEl.width(this.$el.width()+SCROLLBAR_WIDTH);
             this.$scrollContentEl.height(this.$el.height());
