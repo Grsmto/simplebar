@@ -1,14 +1,8 @@
 ;(function (factory) {
-    'use strict';
-    if (typeof define === 'function' && define.amd) {
-        // Register as an anonymous AMD module:
-        define(['jquery'], factory($, window, document, undefined));
-    } else if (typeof exports === 'object') {
-        // Node/CommonJS:
-        factory(require('jquery'), window, document, undefined);
+    if (typeof module === "object" && typeof module.exports === "object") {
+        factory(require('jquery'), window, document);
     } else {
-        // Browser globals:
-        factory(window.jQuery, window, document, undefined);
+        factory(window.jQuery, window, document);
     }
 }(function ( $, window, document, undefined ) {
 
