@@ -142,7 +142,7 @@ Key to this technique is hiding the native browser scrollbar. The scrollable ele
 
 SimpleBar can currently handle vertical or horizontal scrollbars, but not both simultaneously.
 
-##6.Browsers support
+##6. Browsers support
 
 Simplebar is supported and has been tested pretty much everywhere, including IE6+.
 
