@@ -1,5 +1,5 @@
 /*
- *  SimpleBar.js - v1.1.6
+ *  SimpleBar.js - v1.1.8
  *  Scrollbars, simpler.
  *  https://grsmto.github.io/simplebar/
  *
@@ -52,6 +52,7 @@
     border-radius: 7px;
     min-height: 10px;
     width: 7px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
     -webkit-transition: opacity 0.2s linear;
     -moz-transition: opacity 0.2s linear;
@@ -65,6 +66,7 @@
 
 .simplebar-track:hover .simplebar-scrollbar {
     /* When hovered, remove all transitions from drag handle */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
     opacity: 0.7;
     -webkit-transition: opacity 0 linear;
     -moz-transition: opacity 0 linear;
@@ -74,6 +76,7 @@
 }
 
 .simplebar-track .simplebar-scrollbar.visible {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
     opacity: 0.7;
 }
 
