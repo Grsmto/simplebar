@@ -9,8 +9,9 @@ SimpleBar is a plugin that tries to solve a long time problem : how to get custo
 3. [Demos](#3-demos)
 4. [How it works](#4-how-it-works)
 5. [Limitations](#5-limitations)
-6. [Changelog](#6-changelog)
-7. [Credits](#7-credits)
+6. [Browsers support](#6-browsers-support)
+7. [Changelog](#7-changelog)
+8. [Credits](#8-credits)
 
 ##1. What it does
 
@@ -99,10 +100,6 @@ If you later dynamically modify your content, for instance changing its height o
 
     $('#myElement').simplebar('recalculate');
 
-###Mobile support
-Most of the mobile browsers have "floating" scrollbars. Also, they are not all currently supporting hardware acceleration on `overflow: auto` elements. So we decided to automatically disable SimpleBar when a "floating" scrollbar is detected. So mobile browsers will use native scrollbar seemlessly.
-For example you will notice that it will use native scrollbar on mac OSX 10.8+ (when using trackpad) as the scrollbar is natively floating.
-
 ###Subscribe to `scroll` event
 You can subscribe to the `scroll` event just like you do with native scrolling element :
 
@@ -144,6 +141,14 @@ Key to this technique is hiding the native browser scrollbar. The scrollable ele
 ##5. Limitations
 
 SimpleBar can currently handle vertical or horizontal scrollbars, but not both simultaneously.
+
+##6.Browsers support
+
+Simplebar is supported and has been tested pretty much everywhere, including IE6+.
+
+###Mobile support
+Most of the mobile browsers have "floating" scrollbars. Also, they are not all currently supporting hardware acceleration on `overflow: auto` elements. So we decided to automatically disable SimpleBar when a "floating" scrollbar is detected. So mobile browsers will use native scrollbar seemlessly.
+For example you will notice that it will use native scrollbar on mac OSX 10.8+ (when using trackpad) as the scrollbar is natively floating.
 
 ##6. Changelog
 
