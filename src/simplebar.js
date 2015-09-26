@@ -55,13 +55,21 @@
         this.offsetAttr         = 'top';
 
         this.options = $.extend({}, SimpleBar.DEFAULTS, options);
+        this.theme   = this.options.css;
 
         this.init();
     }
 
     SimpleBar.DEFAULTS = {
         wrapContent: true,
-        autoHide: true
+        autoHide: true,
+        css: {
+          container: 'simplebar',
+          content: 'simplebar-content',
+          scrollContent: 'simplebar-scroll-content',
+          scrollbar: 'simplebar-scrollbar',
+          scrollbarTrack: 'simplebar-track'
+        }
     };
 
     SimpleBar.prototype.init = function () {
@@ -77,7 +85,7 @@
           return;
         }
 
-        if (this.$el.data('simplebar-direction') === 'horizontal' || this.$el.hasClass('simplebar horizontal')) {
+        if (this.$el.data('simplebar-direction') === 'horizontal' || this.$el.hasClass(this.theme.container + ' horizontal')){
             this.scrollDirection    = 'horiz';
             this.scrollOffsetAttr   = 'scrollLeft';
             this.sizeAttr           = 'width';
@@ -86,16 +94,16 @@
         }
 
         if (this.options.wrapContent) {
-            this.$el.wrapInner('<div class="simplebar-scroll-content"><div class="simplebar-content"></div></div>');
+            this.$el.wrapInner('<div class=""' + this.theme.scrollContent + '"><div class="' + this.theme.content + '"></div></div>');
         }
 
-        this.$contentEl = this.$el.find('.simplebar-content');
+        this.$contentEl = this.$el.find('.' + this.theme.content);
 
-        this.$el.prepend('<div class="simplebar-track"><div class="simplebar-scrollbar"></div></div>');
-        this.$track = this.$el.find('.simplebar-track');
-        this.$scrollbar = this.$el.find('.simplebar-scrollbar');
+        this.$el.prepend('<div class="' + this.theme.scrollbarTrack + '"><div class="' + this.theme.scrollbar + '"></div></div>');
+        this.$track = this.$el.find('.' + this.theme.scrollbarTrack);
+        this.$scrollbar = this.$el.find('.' + this.theme.scrollbar);
 
-        this.$scrollContentEl = this.$el.find('.simplebar-scroll-content');
+        this.$scrollContentEl = this.$el.find('.' + this.theme.scrollContent);
 
         this.resizeScrollContent();
 
