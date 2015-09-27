@@ -1,0 +1,99 @@
+@import 'libs/vars';
+@import 'libs/functions';
+@import 'libs/mixins';
+@import 'libs/skel';
+
+/*
+	Fractal by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/* Button */
+
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"],
+	button,
+	.button {
+		position: relative;
+		-ms-behavior: url('assets/js/ie/PIE.htc');
+		border: solid (_size(border-width) * 2) _palette(border) !important;
+
+		&:hover {
+			border: solid (_size(border-width) * 2) _palette(border) !important;
+		}
+
+		&.special {
+			border: none !important;
+
+			&:hover {
+				border: none !important;
+			}
+		}
+	}
+
+/* Image */
+
+	.image {
+		-ms-behavior: url('assets/js/ie/PIE.htc');
+
+		img {
+			position: relative;
+			-ms-behavior: url('assets/js/ie/PIE.htc');
+		}
+
+		&.phone {
+			&:before, &:after {
+				display: none;
+			}
+
+			.inner {
+				&:before, &:after {
+					display: none;
+				}
+			}
+		}
+	}
+
+/* List */
+
+	ul {
+		&.icons {
+			li {
+				padding: 0 0 0 1.5em;
+
+				&:first-child {
+					padding-left: 0 !important;
+				}
+
+				.icon {
+					&:before {
+						font-size: 24px;
+					}
+				}
+			}
+
+			&.major {
+				li {
+					padding: 0 0 0 2.5em;
+
+					.icon {
+						&:before {
+							font-size: 48px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+/* Header */
+
+	#header {
+		min-height: 0;
+
+		.image {
+			margin: 0 0 (_size(element-margin)) 0;
+		}
+	}

@@ -1,0 +1,90 @@
+@import '../libs/vars';
+@import '../libs/functions';
+@import '../libs/mixins';
+
+///
+/// Fractal by HTML5 UP
+/// html5up.net | @n33co
+/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+///
+
+/* Wrapper */
+
+	.wrapper {
+		@include padding(4.5em, 0);
+		background-color: _palette(bg);
+		border-bottom: solid (_size(border-width) * 2) lighten(_palette(border), 3);
+
+		> .inner {
+			margin-left: auto;
+			margin-right: auto;
+			width: 50em;
+
+			&.alt {
+				> * {
+					border-top: solid (_size(border-width) * 2) lighten(_palette(border), 3);
+					margin-bottom: 0;
+					margin-top: 3em;
+					padding-top: 3em;
+
+					&:first-child {
+						border-top: 0;
+						margin-top: 0;
+						padding-top: 0;
+					}
+				}
+			}
+		}
+
+		&.style1 {
+			@include color(accent1);
+		}
+
+		&.style2 {
+			@include color(accent2);
+		}
+
+		&.style3 {
+			@include color(accent3);
+		}
+
+		// Medium.
+			@include breakpoint(medium) {
+				@include padding(4em, 4em);
+
+				> .inner {
+					width: 100%;
+				}
+			}
+
+		// Small.
+			@include breakpoint(small) {
+
+				// Landscape.
+					@include orientation(landscape) {
+						@include padding(3em, 3em);
+					}
+
+				// Portrait.
+					@include orientation(portrait) {
+						@include padding(3em, 1.5em);
+					}
+
+			}
+
+		// XSmall.
+			@include breakpoint(xsmall) {
+
+				// Landscape.
+					@include orientation(landscape) {
+						@include padding(2em, 1.5em);
+					}
+
+				// Portrait.
+					@include orientation(portrait) {
+						@include padding(2em, 1em);
+					}
+
+			}
+
+	}
