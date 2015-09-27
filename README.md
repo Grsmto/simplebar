@@ -160,6 +160,8 @@ Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made t
 
 Credit is also due to Jonathan Sharp, who wrote the original function for measuring the width of the browser's scrollbar (http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php).
 
+Website: http://html5up.net/
+
 ###Additional contributors
 
 Yoh Suzuki: wrapContent option
