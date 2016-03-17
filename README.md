@@ -15,7 +15,7 @@ SimpleBar is a plugin that tries to solve a long time problem : how to get custo
 
 ##1. What it does
 
-SimpleBar does only one thing : replace the browser's default scrollbars with a custom CSS-styled scrollbar without loosing performance. Unlike most of others plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...You keep the awesomeness of native scrolling...with a custom scrollbar!
+SimpleBar does only one thing : replace the browser's default scrollbars with a custom CSS-styled scrollbar without losing performance. Unlike most of others plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...You keep the awesomeness of native scrolling...with a custom scrollbar!
 Design your scrollbar like you want, with CSS, on all browsers.
 
 SimpleBar works with jQuery.
