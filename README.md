@@ -2,6 +2,11 @@
 
 [![Build Status](https://travis-ci.org/Grsmto/simplebar.png?branch=v1.0)](https://travis-ci.org/Grsmto/simplebar)
 
+> I'm currently rewriting SimpleBar!
+> Before the update, I recommend to use: 
+> - http://noraesae.github.io/perfect-scrollbar/
+> - or http://noeldelgado.github.io/gemini-scrollbar/
+
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 
 1. [What it does](#1-what-it-does)
