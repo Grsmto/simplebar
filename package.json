@@ -1,33 +1,38 @@
 {
-	"name": "simplebar",
-	"title": "SimpleBar.js",
-	"description": "Scrollbars, simpler.",
-	"author": "Adrien Grsmto from a fork by Jonathan Nicol",
-	"repository": {
-		"type" : "git",
-		"url" : "http://github.com/grsmto/simplebar.git"
-	},
-	"homepage": "https://grsmto.github.io/simplebar/",
-	"version": "1.1.9",
-	"devDependencies": {
-		"grunt": "~0.4.5",
-		"grunt-cli": "~0.1.13",
-		"grunt-contrib-jshint": "~0.11.0",
-		"grunt-contrib-concat": "~0.5.1",
-		"grunt-contrib-uglify": "~0.8.0",
-		"grunt-contrib-qunit": "~0.3.0",
-		"grunt-contrib-watch": "~0.6.1"
-	},
-	"scripts": {
-		"test": "grunt travis --verbose"
-	},
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "http://zenorocha.mit-license.org/"
-		}
-	],
-	"engines": {
-		"node": ">=0.11.0"
-	}
+  "name": "simplebar",
+  "title": "SimpleBar.js",
+  "description": "Scrollbars, simpler.",
+  "author": "Adrien Grsmto from a fork by Jonathan Nicol",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/grsmto/simplebar.git"
+  },
+  "homepage": "https://grsmto.github.io/simplebar/",
+  "version": "1.1.9",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "eslint": "^2.13.1",
+    "grunt": "~0.4.5",
+    "grunt-babel": "^6.0.0",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-jshint": "~0.11.0",
+    "grunt-contrib-qunit": "~0.3.0",
+    "grunt-contrib-uglify": "~0.8.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "load-grunt-tasks": "^3.5.0"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://zenorocha.mit-license.org/"
+    }
+  ],
+  "engines": {
+    "node": ">=0.11.0"
+  }
 }
