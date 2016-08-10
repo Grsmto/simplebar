@@ -1,4 +1,10 @@
 {
-  "plugins": ["transform-es2015-modules-umd"],
+  "plugins": [
+    "add-module-exports", 
+    "transform-es2015-modules-umd",
+    ["rename-umd-globals", {
+      "simplebar": "SimpleBar"
+    }]
+  ],
   "presets": ["es2015"]
 }
