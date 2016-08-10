@@ -1,28 +1,28 @@
 import { scrollbarWidth } from './scrollbar-width'
 
-const IS_WEBKIT = 'WebkitAppearance' in document.documentElement.style
+const IS_WEBKIT = 'WebkitAppearance' in document.documentElement.style;
 
 const hasClass = function(el, className) {
     if (el.classList)
-        return el.classList.contains(className)
+        return el.classList.contains(className);
     else
-        return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className)
+        return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
 }
 
 export default class SimpleBar {
     constructor(element, options) {
-        this.el = element,
-        this.track,
-        this.scrollbar,
-        this.dragOffset,
-        this.flashTimeout,
-        this.contentEl          = this.el,
-        this.scrollContentEl    = this.el,
-        this.scrollDirection    = 'vert',
-        this.scrollOffsetAttr   = 'scrollTop',
-        this.sizeAttr           = 'height',
-        this.scrollSizeAttr     = 'scrollHeight',
-        this.offsetAttr         = 'top'
+        this.el = document.querySelector(element);
+        this.track;
+        this.scrollbar;
+        this.dragOffset;
+        this.flashTimeout;
+        this.contentEl          = this.el;
+        this.scrollContentEl    = this.el;
+        this.scrollDirection    = 'vert';
+        this.scrollOffsetAttr   = 'scrollTop';
+        this.sizeAttr           = 'offsetHeight';
+        this.scrollSizeAttr     = 'scrollHeight';
+        this.offsetAttr         = 'top';
 
         const DEFAULTS = {
             wrapContent: true,
@@ -36,60 +36,76 @@ export default class SimpleBar {
             }
         }
 
-        this.options = Object.assign({}, DEFAULTS, options)
-        this.theme   = this.options.css
+        this.options = Object.assign({}, DEFAULTS, options);
+        this.theme   = this.options.css;
 
-        this.init()
+        this.flashScrollbar = this.flashScrollbar.bind(this);
+        this.startScroll = this.startScroll.bind(this);
+        this.startDrag = this.startDrag.bind(this);
+        this.drag = this.drag.bind(this);
+        this.endDrag = this.endDrag.bind(this);
+
+        this.init();
     }
 
     init() {
         // If scrollbar is a floating scrollbar, disable the plugin
-        if(scrollbarWidth() === 0) {
-            this.el.style.overflow = 'auto'
+        if(scrollbarWidth === 0) {
+            this.el.style.overflow = 'auto';
 
             return
         }
 
-        if (hasClass(this.el, this.theme.container + ' horizontal')) {
+        if (hasClass(this.el, this.theme.container) && hasClass(this.el, 'horizontal')) {
             this.scrollDirection    = 'horiz'
             this.scrollOffsetAttr   = 'scrollLeft'
-            this.sizeAttr           = 'width'
+            this.sizeAttr           = 'offsetWidth'
             this.scrollSizeAttr     = 'scrollWidth'
             this.offsetAttr         = 'left'
         }
 
         if (this.options.wrapContent) {
-            const wrapperScrollContent = document.createElement('div')
+            const wrapperScrollContent = document.createElement('div');
+            const wrapperContent = document.createElement('div');
+            
+            wrapperScrollContent.classList.add(this.theme.scrollContent);
+            wrapperContent.classList.add(this.theme.content);
+            
             while (this.el.firstChild)
-                wrapperScrollContent.append(this.el.firstChild)
-            this.el.append(wrapperScrollContent)
-            wrapperScrollContent.classList.add(this.theme.scrollContent)
-
-            const wrapperContent = document.createElement('div')
-            wrapperContent.classList.add(this.theme.content)
+                wrapperContent.appendChild(this.el.firstChild)
+            
+            wrapperScrollContent.appendChild(wrapperContent);
+            this.el.appendChild(wrapperScrollContent);
         }
 
-        this.contentEl = this.$el.find('.' + this.theme.content)
+        this.contentEl = this.el.querySelector('.' + this.theme.content);
 
-        this.$el.prepend('<div class="' + this.theme.scrollbarTrack + '"><div class="' + this.theme.scrollbar + '"></div></div>')
-        this.$track = this.$el.find('.' + this.theme.scrollbarTrack)
-        this.$scrollbar = this.$el.find('.' + this.theme.scrollbar)
+        const scrollbarTrack = document.createElement('div');
+        const scrollbar = document.createElement('div');
 
-        this.$scrollContentEl = this.$el.find('.' + this.theme.scrollContent)
+        scrollbarTrack.classList.add(this.theme.scrollbarTrack);
+        scrollbar.classList.add(this.theme.scrollbar);
 
-        this.resizeScrollContent()
+        this.el.insertBefore(scrollbarTrack, this.el.firstChild);
+        scrollbarTrack.appendChild(scrollbar);
+        
+        this.track = this.el.querySelector('.' + this.theme.scrollbarTrack);
+        this.scrollbar = this.el.querySelector('.' + this.theme.scrollbar);
+        this.scrollContentEl = this.el.querySelector('.' + this.theme.scrollContent);
+
+        this.resizeScrollContent();
 
         if (this.options.autoHide) {
-            this.$el.on('mouseenter', this.flashScrollbar.bind(this))
+            this.el.addEventListener('mouseenter', this.flashScrollbar);
         }
 
-        this.$scrollbar.on('mousedown', this.startDrag.bind(this))
-        this.$scrollContentEl.on('scroll', this.startScroll.bind(this))
+        this.scrollbar.addEventListener('mousedown', this.startDrag);
+        this.scrollContentEl.addEventListener('scroll', this.startScroll);
 
-        this.resizeScrollbar()
+        this.resizeScrollbar();
 
         if (!this.options.autoHide) {
-            this.showScrollbar()
+            this.showScrollbar();
         }
     }
     
@@ -102,14 +118,16 @@ export default class SimpleBar {
         e.preventDefault()
 
         // Measure how far the user's mouse is from the top of the scrollbar drag handle.
-        var eventOffset = e.pageY
+        var eventOffset = e.pageY;
+        
         if (this.scrollDirection === 'horiz') {
-            eventOffset = e.pageX
+            eventOffset = e.pageX;
         }
-        this.dragOffset = eventOffset - this.$scrollbar.offset()[this.offsetAttr]
+        
+        this.dragOffset = eventOffset - this.scrollbar.getBoundingClientRect()[this.offsetAttr];
 
-        $(document).on('mousemove', this.drag.bind(this))
-        $(document).on('mouseup', this.endDrag.bind(this))
+        document.addEventListener('mousemove', this.drag);
+        document.addEventListener('mouseup', this.endDrag);
     }
 
 
@@ -117,25 +135,25 @@ export default class SimpleBar {
      * Drag scrollbar handle
      */
     drag(e) {
-        e.preventDefault()
+        e.preventDefault();
 
         // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
         var eventOffset = e.pageY,
             dragPos     = null,
             dragPerc    = null,
-            scrollPos   = null
+            scrollPos   = null;
 
         if (this.scrollDirection === 'horiz') {
-          eventOffset = e.pageX
+          eventOffset = e.pageX;
         }
 
-        dragPos = eventOffset - this.$track.offset()[this.offsetAttr] - this.dragOffset
+        dragPos = eventOffset - this.track.getBoundingClientRect()[this.offsetAttr] - this.dragOffset;
         // Convert the mouse position into a percentage of the scrollbar height/width.
-        dragPerc = dragPos / this.$track[this.sizeAttr]()
+        dragPerc = dragPos / this.track[this.sizeAttr];
         // Scroll the content by the same percentage.
-        scrollPos = dragPerc * this.$contentEl[0][this.scrollSizeAttr]
+        scrollPos = dragPerc * this.contentEl[this.scrollSizeAttr];
 
-        this.$scrollContentEl[this.scrollOffsetAttr](scrollPos)
+        this.scrollContentEl[this.scrollOffsetAttr] = scrollPos;
     }
 
 
@@ -143,8 +161,8 @@ export default class SimpleBar {
      * End scroll handle drag
      */
     endDrag() {
-        $(document).off('mousemove', this.drag)
-        $(document).off('mouseup', this.endDrag)
+        document.removeEventListener('mousemove', this.drag);
+        document.removeEventListener('mouseup', this.endDrag);
     }
 
 
@@ -156,25 +174,26 @@ export default class SimpleBar {
             return
         }
 
-        var contentSize     = this.$contentEl[0][this.scrollSizeAttr],
-            scrollOffset    = this.$scrollContentEl[this.scrollOffsetAttr](), // Either scrollTop() or scrollLeft().
-            scrollbarSize   = this.$track[this.sizeAttr](),
+        var contentSize     = this.contentEl[this.scrollSizeAttr],
+            scrollOffset    = this.scrollContentEl[this.scrollOffsetAttr], // Either scrollTop() or scrollLeft().
+            scrollbarSize   = this.track[this.sizeAttr],
             scrollbarRatio  = scrollbarSize / contentSize,
             // Calculate new height/position of drag handle.
             // Offset of 2px allows for a small top/bottom or left/right margin around handle.
             handleOffset    = Math.round(scrollbarRatio * scrollOffset) + 2,
-            handleSize      = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2
-
+            handleSize      = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
 
         if (scrollbarSize < contentSize) {
             if (this.scrollDirection === 'vert'){
-                this.$scrollbar.css({'top': handleOffset, 'height': handleSize})
+                this.scrollbar.style.top = `${handleOffset}px`;
+                this.scrollbar.style.height = `${handleSize}px`;
             } else {
-                this.$scrollbar.css({'left': handleOffset, 'width': handleSize})
+                this.scrollbar.style.left = `${handleOffset}px`;
+                this.scrollbar.style.width = `${handleSize}px`;
             }
-            this.$track.show()
+            this.track.style.display = '';
         } else {
-            this.$track.hide()
+            this.track.style.display = 'none';
         }
     }
 
@@ -182,11 +201,11 @@ export default class SimpleBar {
     /**
      * On scroll event handling
      */
-    startScroll(e) {
+    startScroll() {
         // Simulate event bubbling to root element
-        this.$el.trigger(e)
+        // this.el.dispatchEvent(e)
 
-        this.flashScrollbar()
+        this.flashScrollbar();
     }
 
 
@@ -194,8 +213,8 @@ export default class SimpleBar {
      * Flash scrollbar visibility
      */
     flashScrollbar() {
-        this.resizeScrollbar()
-        this.showScrollbar()
+        this.resizeScrollbar();
+        this.showScrollbar();
     }
 
 
@@ -203,16 +222,16 @@ export default class SimpleBar {
      * Show scrollbar
      */
     showScrollbar() {
-        this.$scrollbar.addClass('visible')
+        this.scrollbar.classList.add('visible');
 
         if (!this.options.autoHide) {
             return
         }
         if(typeof this.flashTimeout === 'number') {
-            window.clearTimeout(this.flashTimeout)
+            window.clearTimeout(this.flashTimeout);
         }
 
-        this.flashTimeout = window.setTimeout(this.hideScrollbar.bind(this), 1000)
+        this.flashTimeout = window.setTimeout(this.hideScrollbar.bind(this), 1000);
     }
 
 
@@ -220,9 +239,9 @@ export default class SimpleBar {
      * Hide Scrollbar
      */
     hideScrollbar() {
-        this.$scrollbar.removeClass('visible')
+        this.scrollbar.classList.remove('visible');
         if(typeof this.flashTimeout === 'number') {
-            window.clearTimeout(this.flashTimeout)
+            window.clearTimeout(this.flashTimeout);
         }
     }
 
@@ -235,12 +254,12 @@ export default class SimpleBar {
             return
         }
 
-        if (this.scrollDirection === 'vert'){
-            this.$scrollContentEl.width(this.$el.width() + scrollbarWidth)
-            this.$scrollContentEl.height(this.$el.height())
+        if (this.scrollDirection === 'vert') {
+            this.scrollContentEl.style.width = `${this.el.outerWidth() + scrollbarWidth}px`;
+            this.scrollContentEl.style.height = `${this.el.outerHeight()}px`;
         } else {
-            this.$scrollContentEl.width(this.$el.width())
-            this.$scrollContentEl.height(this.$el.height() + scrollbarWidth)
+            this.scrollContentEl.style.width = `${this.el.outerWidth()}px`;
+            this.scrollContentEl.style.height = `${this.el.outerHeight() + scrollbarWidth}px`;
         }
     }
 
@@ -249,8 +268,8 @@ export default class SimpleBar {
      * Recalculate scrollbar
      */
     recalculate() {
-        this.resizeScrollContent()
-        this.resizeScrollbar()
+        this.resizeScrollContent();
+        this.resizeScrollbar();
     }
 
 
@@ -258,7 +277,7 @@ export default class SimpleBar {
      * Getter for original scrolling element
      */
     getScrollElement() {
-        return this.scrollContentEl
+        return this.scrollContentEl;
     }
 
 
@@ -266,6 +285,6 @@ export default class SimpleBar {
      * Getter for content element
      */
     getContentElement() {
-        return this.contentEl
+        return this.contentEl;
     }
 }

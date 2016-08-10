@@ -1,324 +1,362 @@
+/*
+ *  SimpleBar.js - v1.1.9
+ *  Scrollbars, simpler.
+ *  https://grsmto.github.io/simplebar/
+ *
+ *  Made by Adrien Grsmto from a fork by Jonathan Nicol
+ *  Under MIT License
+ */
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(['./scrollbar-width'], factory);
+        define(['exports'], factory);
     } else if (typeof exports !== "undefined") {
-        factory(require('./scrollbar-width'));
+        factory(exports);
     } else {
         var mod = {
             exports: {}
         };
-        factory(global.scrollbarWidth);
-        global.simplebar = mod.exports;
+        factory(mod.exports);
+        global.scrollbarWidth = mod.exports;
     }
-})(this, function (_scrollbarWidth) {
+})(this, function (exports) {
     'use strict';
 
-    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-        return typeof obj;
-    } : function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
-    };
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    /**
+     * Calculate scrollbar width
+     *
+     * Called only once as a constant variable: we assume that scrollbar width never change
+     *
+     * Original function by Jonathan Sharp:
+     * http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php
+     */
+    function getScrollbarWidth() {
+        // Append a temporary scrolling element to the DOM, then measure
+        // the difference between its outer and inner elements.
+        var tempEl = document.implementation.createHTMLDocument(),
+            width = 0,
+            widthMinusScrollbars = 0;
+
+        tempEl.body.innerHTML = '<div class="scrollbar-width-tester" style="width:50px;height:50px;overflow-y:scroll;top:-200px;left:-200px;"><div style="height:100px;"></div>';
+        tempEl = tempEl.body.children[0];
+
+        document.querySelector('body').appendChild(tempEl);
+
+        width = tempEl.offsetWidth;
+        widthMinusScrollbars = document.querySelectorAll('div', tempEl).offsetWidth;
+
+        tempEl.parentNode.removeChild(tempEl);
+
+        return width - widthMinusScrollbars;
+    }
+
+    var scrollbarWidth = exports.scrollbarWidth = getScrollbarWidth();
+});
+
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['module', 'exports', './scrollbar-width'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(module, exports, require('./scrollbar-width'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod, mod.exports, global.scrollbarWidth);
+        global.SimpleBar = mod.exports;
+    }
+})(this, function (module, exports, _scrollbarWidth) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
+
+    var _createClass = function () {
+        function defineProperties(target, props) {
+            for (var i = 0; i < props.length; i++) {
+                var descriptor = props[i];
+                descriptor.enumerable = descriptor.enumerable || false;
+                descriptor.configurable = true;
+                if ("value" in descriptor) descriptor.writable = true;
+                Object.defineProperty(target, descriptor.key, descriptor);
+            }
+        }
+
+        return function (Constructor, protoProps, staticProps) {
+            if (protoProps) defineProperties(Constructor.prototype, protoProps);
+            if (staticProps) defineProperties(Constructor, staticProps);
+            return Constructor;
+        };
+    }();
 
     var IS_WEBKIT = 'WebkitAppearance' in document.documentElement.style;
 
-    // SimpleBar Constructor
-    function SimpleBar(element, options) {
-        this.el = element, this.$el = $(element), this.$track, this.$scrollbar, this.dragOffset, this.flashTimeout, this.$contentEl = this.$el, this.$scrollContentEl = this.$el, this.scrollDirection = 'vert', this.scrollOffsetAttr = 'scrollTop', this.sizeAttr = 'height', this.scrollSizeAttr = 'scrollHeight', this.offsetAttr = 'top';
-
-        this.options = $.extend({}, SimpleBar.DEFAULTS, options);
-        this.theme = this.options.css;
-
-        this.init();
-    }
-
-    SimpleBar.DEFAULTS = {
-        wrapContent: true,
-        autoHide: true,
-        css: {
-            container: 'simplebar',
-            content: 'simplebar-content',
-            scrollContent: 'simplebar-scroll-content',
-            scrollbar: 'simplebar-scrollbar',
-            scrollbarTrack: 'simplebar-track'
-        }
+    var hasClass = function hasClass(el, className) {
+        if (el.classList) return el.classList.contains(className);else return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
     };
 
-    SimpleBar.prototype.init = function () {
-        // If scrollbar is a floating scrollbar, disable the plugin
-        if (_scrollbarWidth.SCROLLBAR_WIDTH === 0) {
-            this.$el.css('overflow', 'auto');
+    var SimpleBar = function () {
+        function SimpleBar(element, options) {
+            _classCallCheck(this, SimpleBar);
 
-            return;
-        }
+            this.el = document.querySelector(element);
+            this.track;
+            this.scrollbar;
+            this.dragOffset;
+            this.flashTimeout;
+            this.contentEl = this.el;
+            this.scrollContentEl = this.el;
+            this.scrollDirection = 'vert';
+            this.scrollOffsetAttr = 'scrollTop';
+            this.sizeAttr = 'offsetHeight';
+            this.scrollSizeAttr = 'scrollHeight';
+            this.offsetAttr = 'top';
 
-        if (this.$el.data('simplebar-direction') === 'horizontal' || this.$el.hasClass(this.theme.container + ' horizontal')) {
-            this.scrollDirection = 'horiz';
-            this.scrollOffsetAttr = 'scrollLeft';
-            this.sizeAttr = 'width';
-            this.scrollSizeAttr = 'scrollWidth';
-            this.offsetAttr = 'left';
-        }
-
-        if (this.options.wrapContent) {
-            this.$el.wrapInner('<div class="' + this.theme.scrollContent + '"><div class="' + this.theme.content + '"></div></div>');
-        }
-
-        this.$contentEl = this.$el.find('.' + this.theme.content);
-
-        this.$el.prepend('<div class="' + this.theme.scrollbarTrack + '"><div class="' + this.theme.scrollbar + '"></div></div>');
-        this.$track = this.$el.find('.' + this.theme.scrollbarTrack);
-        this.$scrollbar = this.$el.find('.' + this.theme.scrollbar);
-
-        this.$scrollContentEl = this.$el.find('.' + this.theme.scrollContent);
-
-        this.resizeScrollContent();
-
-        if (this.options.autoHide) {
-            this.$el.on('mouseenter', $.proxy(this.flashScrollbar, this));
-        }
-
-        this.$scrollbar.on('mousedown', $.proxy(this.startDrag, this));
-        this.$scrollContentEl.on('scroll', $.proxy(this.startScroll, this));
-
-        this.resizeScrollbar();
-
-        if (!this.options.autoHide) {
-            this.showScrollbar();
-        }
-    };
-
-    /**
-     * Start scrollbar handle drag
-     */
-    SimpleBar.prototype.startDrag = function (e) {
-        // Preventing the event's default action stops text being
-        // selectable during the drag.
-        e.preventDefault();
-
-        // Measure how far the user's mouse is from the top of the scrollbar drag handle.
-        var eventOffset = e.pageY;
-        if (this.scrollDirection === 'horiz') {
-            eventOffset = e.pageX;
-        }
-        this.dragOffset = eventOffset - this.$scrollbar.offset()[this.offsetAttr];
-
-        $(document).on('mousemove', $.proxy(this.drag, this));
-        $(document).on('mouseup', $.proxy(this.endDrag, this));
-    };
-
-    /**
-     * Drag scrollbar handle
-     */
-    SimpleBar.prototype.drag = function (e) {
-        e.preventDefault();
-
-        // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
-        var eventOffset = e.pageY,
-            dragPos = null,
-            dragPerc = null,
-            scrollPos = null;
-
-        if (this.scrollDirection === 'horiz') {
-            eventOffset = e.pageX;
-        }
-
-        dragPos = eventOffset - this.$track.offset()[this.offsetAttr] - this.dragOffset;
-        // Convert the mouse position into a percentage of the scrollbar height/width.
-        dragPerc = dragPos / this.$track[this.sizeAttr]();
-        // Scroll the content by the same percentage.
-        scrollPos = dragPerc * this.$contentEl[0][this.scrollSizeAttr];
-
-        this.$scrollContentEl[this.scrollOffsetAttr](scrollPos);
-    };
-
-    /**
-     * End scroll handle drag
-     */
-    SimpleBar.prototype.endDrag = function () {
-        $(document).off('mousemove', this.drag);
-        $(document).off('mouseup', this.endDrag);
-    };
-
-    /**
-     * Resize scrollbar
-     */
-    SimpleBar.prototype.resizeScrollbar = function () {
-        if (_scrollbarWidth.SCROLLBAR_WIDTH === 0) {
-            return;
-        }
-
-        var contentSize = this.$contentEl[0][this.scrollSizeAttr],
-            scrollOffset = this.$scrollContentEl[this.scrollOffsetAttr](),
-            // Either scrollTop() or scrollLeft().
-        scrollbarSize = this.$track[this.sizeAttr](),
-            scrollbarRatio = scrollbarSize / contentSize,
-
-        // Calculate new height/position of drag handle.
-        // Offset of 2px allows for a small top/bottom or left/right margin around handle.
-        handleOffset = Math.round(scrollbarRatio * scrollOffset) + 2,
-            handleSize = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
-
-        if (scrollbarSize < contentSize) {
-            if (this.scrollDirection === 'vert') {
-                this.$scrollbar.css({ 'top': handleOffset, 'height': handleSize });
-            } else {
-                this.$scrollbar.css({ 'left': handleOffset, 'width': handleSize });
-            }
-            this.$track.show();
-        } else {
-            this.$track.hide();
-        }
-    };
-
-    /**
-     * On scroll event handling
-     */
-    SimpleBar.prototype.startScroll = function (e) {
-        // Simulate event bubbling to root element
-        this.$el.trigger(e);
-
-        this.flashScrollbar();
-    };
-
-    /**
-     * Flash scrollbar visibility
-     */
-    SimpleBar.prototype.flashScrollbar = function () {
-        this.resizeScrollbar();
-        this.showScrollbar();
-    };
-
-    /**
-     * Show scrollbar
-     */
-    SimpleBar.prototype.showScrollbar = function () {
-        this.$scrollbar.addClass('visible');
-
-        if (!this.options.autoHide) {
-            return;
-        }
-        if (typeof this.flashTimeout === 'number') {
-            window.clearTimeout(this.flashTimeout);
-        }
-
-        this.flashTimeout = window.setTimeout($.proxy(this.hideScrollbar, this), 1000);
-    };
-
-    /**
-     * Hide Scrollbar
-     */
-    SimpleBar.prototype.hideScrollbar = function () {
-        this.$scrollbar.removeClass('visible');
-        if (typeof this.flashTimeout === 'number') {
-            window.clearTimeout(this.flashTimeout);
-        }
-    };
-
-    /**
-     * Resize content element
-     */
-    SimpleBar.prototype.resizeScrollContent = function () {
-        if (IS_WEBKIT) {
-            return;
-        }
-
-        if (this.scrollDirection === 'vert') {
-            this.$scrollContentEl.width(this.$el.width() + _scrollbarWidth.SCROLLBAR_WIDTH);
-            this.$scrollContentEl.height(this.$el.height());
-        } else {
-            this.$scrollContentEl.width(this.$el.width());
-            this.$scrollContentEl.height(this.$el.height() + _scrollbarWidth.SCROLLBAR_WIDTH);
-        }
-    };
-
-    /**
-     * Recalculate scrollbar
-     */
-    SimpleBar.prototype.recalculate = function () {
-        this.resizeScrollContent();
-        this.resizeScrollbar();
-    };
-
-    /**
-     * Getter for original scrolling element
-     */
-    SimpleBar.prototype.getScrollElement = function () {
-        return this.$scrollContentEl;
-    };
-
-    /**
-     * Getter for content element
-     */
-    SimpleBar.prototype.getContentElement = function () {
-        return this.$contentEl;
-    };
-
-    /**
-     * Data API
-     */
-    $(window).on('load', function () {
-        $('[data-simplebar-direction]').each(function () {
-            $(this).simplebar();
-        });
-    });
-
-    /**
-     * Plugin definition
-     */
-    var old = $.fn.simplebar;
-
-    $.fn.simplebar = function (options) {
-        var args = arguments,
-            returns;
-
-        // If the first parameter is an object (options), or was omitted,
-        // instantiate a new instance of the plugin.
-        if (typeof options === 'undefined' || (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
-            return this.each(function () {
-
-                // Only allow the plugin to be instantiated once,
-                // so we check that the element has no plugin instantiation yet
-                if (!$.data(this, 'simplebar')) {
-                    $.data(this, 'simplebar', new SimpleBar(this, options));
+            var DEFAULTS = {
+                wrapContent: true,
+                autoHide: true,
+                css: {
+                    container: 'simplebar',
+                    content: 'simplebar-content',
+                    scrollContent: 'simplebar-scroll-content',
+                    scrollbar: 'simplebar-scrollbar',
+                    scrollbarTrack: 'simplebar-track'
                 }
-            });
+            };
 
-            // If the first parameter is a string
-            // treat this as a call to a public method.
-        } else if (typeof options === 'string') {
-                this.each(function () {
-                    var instance = $.data(this, 'simplebar');
+            this.options = Object.assign({}, DEFAULTS, options);
+            this.theme = this.options.css;
 
-                    // Tests that there's already a plugin-instance
-                    // and checks that the requested public method exists
-                    if (instance instanceof SimpleBar && typeof instance[options] === 'function') {
+            this.flashScrollbar = this.flashScrollbar.bind(this);
+            this.startScroll = this.startScroll.bind(this);
+            this.startDrag = this.startDrag.bind(this);
+            this.drag = this.drag.bind(this);
+            this.endDrag = this.endDrag.bind(this);
 
-                        // Call the method of our plugin instance,
-                        // and pass it the supplied arguments.
-                        returns = instance[options].apply(instance, Array.prototype.slice.call(args, 1));
-                    }
+            this.init();
+        }
 
-                    // Allow instances to be destroyed via the 'destroy' method
-                    if (options === 'destroy') {
-                        $.data(this, 'simplebar', null);
-                    }
-                });
+        _createClass(SimpleBar, [{
+            key: 'init',
+            value: function init() {
+                // If scrollbar is a floating scrollbar, disable the plugin
+                if (_scrollbarWidth.scrollbarWidth === 0) {
+                    this.el.style.overflow = 'auto';
 
-                // If the earlier cached method
-                // gives a value back return the value,
-                // otherwise return this to preserve chainability.
-                return returns !== undefined ? returns : this;
+                    return;
+                }
+
+                if (hasClass(this.el, this.theme.container) && hasClass(this.el, 'horizontal')) {
+                    this.scrollDirection = 'horiz';
+                    this.scrollOffsetAttr = 'scrollLeft';
+                    this.sizeAttr = 'offsetWidth';
+                    this.scrollSizeAttr = 'scrollWidth';
+                    this.offsetAttr = 'left';
+                }
+
+                if (this.options.wrapContent) {
+                    var wrapperScrollContent = document.createElement('div');
+                    var wrapperContent = document.createElement('div');
+
+                    wrapperScrollContent.classList.add(this.theme.scrollContent);
+                    wrapperContent.classList.add(this.theme.content);
+
+                    while (this.el.firstChild) {
+                        wrapperContent.appendChild(this.el.firstChild);
+                    }wrapperScrollContent.appendChild(wrapperContent);
+                    this.el.appendChild(wrapperScrollContent);
+                }
+
+                this.contentEl = this.el.querySelector('.' + this.theme.content);
+
+                var scrollbarTrack = document.createElement('div');
+                var scrollbar = document.createElement('div');
+
+                scrollbarTrack.classList.add(this.theme.scrollbarTrack);
+                scrollbar.classList.add(this.theme.scrollbar);
+
+                this.el.insertBefore(scrollbarTrack, this.el.firstChild);
+                scrollbarTrack.appendChild(scrollbar);
+
+                this.track = this.el.querySelector('.' + this.theme.scrollbarTrack);
+                this.scrollbar = this.el.querySelector('.' + this.theme.scrollbar);
+                this.scrollContentEl = this.el.querySelector('.' + this.theme.scrollContent);
+
+                this.resizeScrollContent();
+
+                if (this.options.autoHide) {
+                    this.el.addEventListener('mouseenter', this.flashScrollbar);
+                }
+
+                this.scrollbar.addEventListener('mousedown', this.startDrag);
+                this.scrollContentEl.addEventListener('scroll', this.startScroll);
+
+                this.resizeScrollbar();
+
+                if (!this.options.autoHide) {
+                    this.showScrollbar();
+                }
             }
-    };
+        }, {
+            key: 'startDrag',
+            value: function startDrag(e) {
+                // Preventing the event's default action stops text being
+                // selectable during the drag.
+                e.preventDefault();
 
-    $.fn.simplebar.Constructor = SimpleBar;
+                // Measure how far the user's mouse is from the top of the scrollbar drag handle.
+                var eventOffset = e.pageY;
 
-    /**
-     * No conflict
-     */
-    $.fn.simplebar.noConflict = function () {
-        $.fn.simplebar = old;
-        return this;
-    };
+                if (this.scrollDirection === 'horiz') {
+                    eventOffset = e.pageX;
+                }
+
+                this.dragOffset = eventOffset - this.scrollbar.getBoundingClientRect()[this.offsetAttr];
+
+                document.addEventListener('mousemove', this.drag);
+                document.addEventListener('mouseup', this.endDrag);
+            }
+        }, {
+            key: 'drag',
+            value: function drag(e) {
+                e.preventDefault();
+
+                // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
+                var eventOffset = e.pageY,
+                    dragPos = null,
+                    dragPerc = null,
+                    scrollPos = null;
+
+                if (this.scrollDirection === 'horiz') {
+                    eventOffset = e.pageX;
+                }
+
+                dragPos = eventOffset - this.track.getBoundingClientRect()[this.offsetAttr] - this.dragOffset;
+                // Convert the mouse position into a percentage of the scrollbar height/width.
+                dragPerc = dragPos / this.track[this.sizeAttr];
+                // Scroll the content by the same percentage.
+                scrollPos = dragPerc * this.contentEl[this.scrollSizeAttr];
+
+                this.scrollContentEl[this.scrollOffsetAttr] = scrollPos;
+            }
+        }, {
+            key: 'endDrag',
+            value: function endDrag() {
+                document.removeEventListener('mousemove', this.drag);
+                document.removeEventListener('mouseup', this.endDrag);
+            }
+        }, {
+            key: 'resizeScrollbar',
+            value: function resizeScrollbar() {
+                if (_scrollbarWidth.scrollbarWidth === 0) {
+                    return;
+                }
+
+                var contentSize = this.contentEl[this.scrollSizeAttr],
+                    scrollOffset = this.scrollContentEl[this.scrollOffsetAttr],
+                    // Either scrollTop() or scrollLeft().
+                scrollbarSize = this.track[this.sizeAttr],
+                    scrollbarRatio = scrollbarSize / contentSize,
+
+                // Calculate new height/position of drag handle.
+                // Offset of 2px allows for a small top/bottom or left/right margin around handle.
+                handleOffset = Math.round(scrollbarRatio * scrollOffset) + 2,
+                    handleSize = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
+
+                if (scrollbarSize < contentSize) {
+                    if (this.scrollDirection === 'vert') {
+                        this.scrollbar.style.top = handleOffset + 'px';
+                        this.scrollbar.style.height = handleSize + 'px';
+                    } else {
+                        this.scrollbar.style.left = handleOffset + 'px';
+                        this.scrollbar.style.width = handleSize + 'px';
+                    }
+                    this.track.style.display = '';
+                } else {
+                    this.track.style.display = 'none';
+                }
+            }
+        }, {
+            key: 'startScroll',
+            value: function startScroll() {
+                // Simulate event bubbling to root element
+                // this.el.dispatchEvent(e)
+
+                this.flashScrollbar();
+            }
+        }, {
+            key: 'flashScrollbar',
+            value: function flashScrollbar() {
+                this.resizeScrollbar();
+                this.showScrollbar();
+            }
+        }, {
+            key: 'showScrollbar',
+            value: function showScrollbar() {
+                this.scrollbar.classList.add('visible');
+
+                if (!this.options.autoHide) {
+                    return;
+                }
+                if (typeof this.flashTimeout === 'number') {
+                    window.clearTimeout(this.flashTimeout);
+                }
+
+                this.flashTimeout = window.setTimeout(this.hideScrollbar.bind(this), 1000);
+            }
+        }, {
+            key: 'hideScrollbar',
+            value: function hideScrollbar() {
+                this.scrollbar.classList.remove('visible');
+                if (typeof this.flashTimeout === 'number') {
+                    window.clearTimeout(this.flashTimeout);
+                }
+            }
+        }, {
+            key: 'resizeScrollContent',
+            value: function resizeScrollContent() {
+                if (IS_WEBKIT) {
+                    return;
+                }
+
+                if (this.scrollDirection === 'vert') {
+                    this.scrollContentEl.style.width = this.el.outerWidth() + _scrollbarWidth.scrollbarWidth + 'px';
+                    this.scrollContentEl.style.height = this.el.outerHeight() + 'px';
+                } else {
+                    this.scrollContentEl.style.width = this.el.outerWidth() + 'px';
+                    this.scrollContentEl.style.height = this.el.outerHeight() + _scrollbarWidth.scrollbarWidth + 'px';
+                }
+            }
+        }, {
+            key: 'recalculate',
+            value: function recalculate() {
+                this.resizeScrollContent();
+                this.resizeScrollbar();
+            }
+        }, {
+            key: 'getScrollElement',
+            value: function getScrollElement() {
+                return this.scrollContentEl;
+            }
+        }, {
+            key: 'getContentElement',
+            value: function getContentElement() {
+                return this.contentEl;
+            }
+        }]);
+
+        return SimpleBar;
+    }();
+
+    exports.default = SimpleBar;
+    module.exports = exports['default'];
 });
-//# sourceMappingURL=simplebar.js.map
