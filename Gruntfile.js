@@ -21,6 +21,10 @@ module.exports = function(grunt) {
 
         // Concat definitions
         concat: {
+            js: {
+                src: ".temp/*.js",
+                dest: "dist/<%= pkg.name %>.js"
+            },
             css: {
                 src: "src/<%= pkg.name %>.css",
                 dest: "dist/<%= pkg.name %>.css",
@@ -41,7 +45,7 @@ module.exports = function(grunt) {
         // Minify definitions
         uglify: {
             my_target: {
-                src: ["src/<%= pkg.name %>.js"],
+                src: "dist/<%= pkg.name %>.js",
                 dest: "dist/<%= pkg.name %>.min.js"
             },
             options: {
@@ -55,18 +59,18 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            files: ['src/<%= pkg.name %>.js'],
-            tasks: ['default']
+            files: ['src/*.js'],
+            tasks: ['babel' ,'concat']
         },
 
         babel: {
-            options: {
-                sourceMap: true
-            },
             dist: {
-                files: {
-                    'dist/<%= pkg.name %>.js': 'src/<%= pkg.name %>.js'
-                }
+                files: [{
+                    cwd: 'src/',
+                    expand: true,
+                    src: ['*.js'],
+                    dest: '.temp/'
+                }]
             }
         }
     });
