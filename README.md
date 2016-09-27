@@ -26,6 +26,8 @@ Design your scrollbar like you want, with CSS, on all browsers.
 SimpleBar works with jQuery.
 
 ##2. Usage
+Via NPM:
+`npm install --save simplebar`
 
 Include jQuery and SimpleBar in your document. The paths and filenames may differ from those shown here:
 
