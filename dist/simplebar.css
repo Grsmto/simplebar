@@ -25,9 +25,9 @@
 }
 
 /* hide browser scrollbar on Webkit (Safari & Chrome) */
-.simplebar-scroll-content::-webkit-scrollbar {
+/*.simplebar-scroll-content::-webkit-scrollbar {
     display: none;
-}
+}*/
 
 [data-simplebar-direction="horizontal"] .simplebar-scroll-content,
 .simplebar.horizontal .simplebar-scroll-content {

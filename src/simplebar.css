@@ -6,8 +6,7 @@
 
 .simplebar .simplebar-scroll-content,
 [data-simplebar-direction] .simplebar-scroll-content {
-    overflow-y: scroll;
-    overflow-x: auto;
+    overflow: scroll;
     position: absolute;
     left: 0;
     right: 0;
@@ -17,15 +16,9 @@
 }
 
 /* hide browser scrollbar on Webkit (Safari & Chrome) */
-.simplebar-scroll-content::-webkit-scrollbar {
+/*.simplebar-scroll-content::-webkit-scrollbar {
     display: none;
-}
-
-[data-simplebar-direction="horizontal"] .simplebar-scroll-content,
-.simplebar.horizontal .simplebar-scroll-content {
-    overflow-x: scroll;
-    overflow-y: auto;
-}
+}*/
 
 .simplebar-track {
     z-index: 99;
@@ -73,7 +66,7 @@
 }
 
 [data-simplebar-direction="horizontal"] .simplebar-track,
-.simplebar.horizontal .simplebar-track {
+.horizontal.simplebar-track {
     top: auto;
     left: 0;
     width: auto;
@@ -81,7 +74,7 @@
 }
 
 [data-simplebar-direction="horizontal"] .simplebar-track .simplebar-scrollbar,
-.simplebar.horizontal .simplebar-track .simplebar-scrollbar {
+.horizontal.simplebar-track .simplebar-scrollbar {
     right: auto;
     top: 2px;
     height: 7px;
