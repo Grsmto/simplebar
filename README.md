@@ -161,3 +161,9 @@ Website: http://html5up.net/
 ###Additional contributors
 
 Yoh Suzuki: wrapContent option
+
+[build-badge]: https://img.shields.io/travis/grsmto/simplebar/master.svg?style=flat-square
+[build]: https://travis-ci.org/grsmto/simplebar
+
+[npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
+[npm]: https://www.npmjs.org/package/simplebar
