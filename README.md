@@ -1,52 +1,39 @@
-#SimpleBar.js
-
-[![Build Status](https://travis-ci.org/Grsmto/simplebar.png?branch=v1.0)](https://travis-ci.org/Grsmto/simplebar)
-
-> I'm currently rewriting SimpleBar!
-> Before the update, I recommend to use: 
-> - http://noraesae.github.io/perfect-scrollbar/
-> - or http://noeldelgado.github.io/gemini-scrollbar/
+#SimpleBar 2 [![Travis][build-badge]][build] [![npm package][npm-badge]][npm]
 
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 
-1. [What it does](#1-what-it-does)
-2. [Usage](#2-usage)
-3. [Demos](#3-demos)
+**SimpleBar 2 is here!**
+See the changes:
+- **Feature:** No need to manually instantiate SimpleBar with `new` or to call `recalculate()` anymore. Thanks to mutation observers, this is handled "automatically". Just add `data-simplebar` to any scrollable element you want and it will be SimpleBar-ified.
+- **Feature:** No need to know what scroll direction you want, horizontal and vertical scrolls are now supported simultaneously.
+- **Feature:** Dependency free. Fully rewritten with ES6 (transpiled to ES6 using Babel).
+
+1. [Usage](#1-usage)
+2. [Browsers support](#2-browsers-support)
+3. [Demo](#3-demo)
 4. [How it works](#4-how-it-works)
-5. [Limitations](#5-limitations)
-6. [Browsers support](#6-browsers-support)
 7. [Changelog](#7-changelog)
 8. [Credits](#8-credits)
 
-##1. What it does
+##1. Usage
 
-SimpleBar does only one thing : replace the browser's default scrollbars with a custom CSS-styled scrollbar without losing performance. Unlike most of others plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...You keep the awesomeness of native scrolling...with a custom scrollbar!
-Design your scrollbar like you want, with CSS, on all browsers.
+###Installation
 
-SimpleBar works with jQuery.
+**- Via npm**
+`npm install simplebar --save`
 
-##2. Usage
-
-Include jQuery and SimpleBar in your document. The paths and filenames may differ from those shown here:
-
+**- Via `<script>` tag**
+  Download the files there: 
+  Then include in your page:
     <link rel="stylesheet" href="css/simplebar.css" />
     <script src="js/simplebar.min.js"></script>
 
-###Via data attributes
+###Usage
 
-You can get SimpleBar basic usage purely through the markup API without writing a single line of JavaScript.
-
-Set `data-simplebar-direction="vertical"` on the element where you want your custom scrollbar. You're done.
-
-###Via JavaScript
-
-    $('#myElement').simplebar();
-
-You will also have to add the `simplebar` class to the element : `<div id="myElement" class="simplebar">`
-
-###Scroll orientation
-
-Vertical is the default, but horizontal scrollbars are supported! Simply add `horizontal` class to your element when doing with JavaScript. Or use the value `horizontal` via data-attribute.
+Set `data-simplebar` on the element where you want your custom scrollbar. You're done.
+```
+<div data-simplebar></div>
+```
 
 ###Options
 
@@ -128,32 +115,38 @@ SimpleBar hides the browser's default scrollbars, which obviously is undesirable
 
     <noscript>
       <style>
-        .simplebar, [data-simplebar-direction] {
+        [data-simplebar] {
           overflow: auto;
         }
       </style>
     </noscript>
 
-##3. Demos
-http://grsmto.github.io/simplebar/
+##2. Browsers support
 
-##4. How it works
+Simplebar has been tested on the following browsers: Chrome, Firefox, Safari, Edge, IE11.
 
-For the most part SimpleBar uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
+Notice: IE10 doesn't support `MutationObserver` so you will still need to instantiate SimpleBar manually and call `recalculate()` as needed (or you can just use a polyfill for `MutationObserver`).
 
-Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
+If you want to support IE9 you will need polyfills for:
+- `classList`
 
-##5. Limitations
-
-SimpleBar can currently handle vertical or horizontal scrollbars, but not both simultaneously.
-
-##6. Browsers support
-
-Simplebar is supported and has been tested pretty much everywhere, including IE6+.
+Or you can use SimpleBar v1.
 
 ###Mobile support
 Most of the mobile browsers have "floating" scrollbars. Also, they are not all currently supporting hardware acceleration on `overflow: auto` elements. So we decided to automatically disable SimpleBar when a "floating" scrollbar is detected. So mobile browsers will use native scrollbar seemlessly.
 For example you will notice that it will use native scrollbar on mac OSX 10.8+ (when using trackpad) as the scrollbar is natively floating.
+
+##3. Demo
+http://grsmto.github.io/simplebar/
+
+##4. How it works
+
+SimpleBar does only one thing : replace the browser's default scrollbars with a custom CSS-styled scrollbar without losing performance. Unlike most of others plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...You keep the awesomeness of native scrolling...with a custom scrollbar!
+Design your scrollbar like you want, with CSS, on all browsers.
+
+For the most part SimpleBar uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
+
+Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
 ##6. Changelog
 
@@ -162,8 +155,6 @@ See changelog here : https://github.com/Grsmto/simplebar/releases
 ##7. Credits
 
 Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made the original plugin called [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
-
-Credit is also due to Jonathan Sharp, who wrote the original function for measuring the width of the browser's scrollbar (http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php).
 
 Website: http://html5up.net/
 
