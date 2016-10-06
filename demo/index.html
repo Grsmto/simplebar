@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>SimpleBar demo</title>
-	<link rel="stylesheet" href="css/demo.css" />
+  <link rel="stylesheet" href="css/demo.css" />
+	<link rel="stylesheet" href="simplebar.css" />
 	<noscript>
 		<style>
 			/**
@@ -14,12 +15,8 @@
 			* briefly until JS kicks in. This is especially noticeable in IE.
 			* Wrapping these rules in a noscript tag ensures that never happens.
 			*/
-			.simplebar {
-				overflow-y: scroll;
-			}
-			.simplebar.horizontal {
-				overflow-x: scroll;
-				overflow-y: hidden;
+			[data-simplebar] {
+				overflow: auto;
 			}
 		</style>
 	</noscript>
@@ -28,7 +25,7 @@
     <h1>SimpleBar demo</h1>
     <div class="demo1-col">
       <h2>Vertical scroller</h2>
-      <div class="demo1 simplebar" style="text-align: right;">
+      <div class="demo1" data-simplebar data-simplebar-autohide="false" style="text-align: right;">
         <p class="odd">Some content</p>
         <p>Some more content</p>
         <p class="odd">Some content</p>
@@ -42,6 +39,22 @@
       </div>
       <a class="btn add-more" href="#">Add content</a>
       <a class="btn toggle-height" href="#">Toggle height</a>
+    </div>
+
+    <div class="demo1-col">
+      <h2>Vertical scroller</h2>
+      <div class="demo1" style="text-align: right; overflow: auto;">
+        <p class="odd">Some content</p>
+        <p>Some more content</p>
+        <p class="odd">Some content</p>
+        <p>Some more content</p>
+        <p class="odd">Some content</p>
+        <p>Some more content</p>
+        <p class="odd">Some content</p>
+        <p>Some more content</p>
+        <p class="odd">Some content</p>
+        <p>Some more content</p>
+      </div>
     </div>
   
     <div class="demo2-col">
@@ -69,7 +82,7 @@
         // Demonstration of changing the vertical scroller content and dimensions.
         $('.add-more').on('click', function(e){
           e.preventDefault();
-          $(demo1.getContentElement()).append('<p class="odd">Additional content 1</p><p>Additional content 2</p><p p class="odd">Additional content 3</p><p>Additional content 4</p>');
+          $($('.demo1')[0].SimpleBar.getContentElement()).append('<p class="odd">Additional content 1</p><p>Additional content 2</p><p p class="odd">Additional content 3</p><p>Additional content 4</p>');
           // demo1.recalculate();
         });
         $('.toggle-height').on('click', function(e){
@@ -84,8 +97,7 @@
         // Demonstration of changing the horizontal scroller content and dimensions.
         $('.add-more-horiz').on('click', function(e){
           e.preventDefault();
-          $(demo2.getContentElement()).append('<div class="box">A</div><div class="box">B</div><div class="box">C</div><div class="box">D</div>');
-          demo2.recalculate();
+          $($('.demo2')[0].SimpleBar.getContentElement()).append('<div class="box">A</div><div class="box">B</div><div class="box">C</div><div class="box">D</div>');
         });
         $('.toggle-width').on('click', function(e){
           e.preventDefault();
@@ -94,12 +106,11 @@
           } else {
             $('.demo2').width(600);
           }
-          demo2.recalculate();
         });
       </script>
       <script type="text/babel">
         ReactDOM.render(
-          <div className={"demo2 simplebar"} data-simplebar>
+          <div className={"demo2"} data-simplebar>
             <div className={"box"}>1</div>
             <div className={"box"}>2</div>
             <div className={"box"}>3</div>
