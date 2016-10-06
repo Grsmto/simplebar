@@ -7,16 +7,12 @@ const autoprefixer = require('autoprefixer');
 
 const production = process.env.NODE_ENV == 'production';
 
+const pkg = require('./package.json');
+
 console.log(`Running ${production ? 'production' : 'dev'} app`);
 console.log(`  NODE_ENV: ${process.env.NODE_ENV}`);
 
-var plugins = [
-    new webpack.DefinePlugin({
-        'process.env': {
-            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-        }
-    })
-];
+var plugins = [];
 
 var loaders = [
     {
@@ -52,20 +48,28 @@ if (production) {
         // how much they are used in your app
         new webpack.optimize.OccurrenceOrderPlugin(),
     
-        new ExtractTextWebpackPlugin('app-[hash].css', {
+        new ExtractTextWebpackPlugin('simplebar.css', {
             allChunks: true
         }),
     
         // This plugin minifies all the Javascript code of the final bundle
         new webpack.optimize.UglifyJsPlugin({
             mangle: true,
-            comments: false,
             sourceMap: false,
             compress: {
                 warnings: false,
                 screw_ie8: true
             }
-        })
+        }),
+
+        new webpack.BannerPlugin(`
+            ${pkg.title || pkg.name} - v${pkg.version}
+            ${pkg.description}
+            ${pkg.homepage}
+            
+            Made by ${pkg.author}
+            Under ${pkg.licenses[0].type} License
+        `),
   
     ]);
 
@@ -82,7 +86,7 @@ module.exports = {
     },
   
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: 'umd',
         filename: 'simplebar.js',
         libraryTarget: 'umd',
         library: 'SimpleBar'

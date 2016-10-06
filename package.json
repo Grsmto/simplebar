@@ -2,13 +2,18 @@
   "name": "simplebar",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
+  "files": [
+    "umd"
+  ],
   "author": "Adrien Grsmto from a fork by Jonathan Nicol",
   "repository": {
     "type": "git",
     "url": "http://github.com/grsmto/simplebar.git"
   },
+  "main": "dist/simplebar",
   "homepage": "https://grsmto.github.io/simplebar/",
-  "version": "1.1.9",
+  "bugs": "https://github.com/grsmto/simplebar/issues",
+  "version": "2.0.0-beta.1",
   "scripts": {
     "start": "webpack-dev-server --inline",
     "start:prod": "NODE_ENV=production webpack-dev-server",
@@ -25,6 +30,7 @@
     "node": ">=0.11.0"
   },
   "dependencies": {
+    "babel-runtime": "^6.11.6",
     "scrollbarwidth": "^0.1.0"
   },
   "devDependencies": {
