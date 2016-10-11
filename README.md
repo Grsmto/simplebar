@@ -1,4 +1,4 @@
-#SimpleBar 2 [![Travis][build-badge]][build] [![npm package][npm-badge]][npm]
+#SimpleBar 2 [![npm package][npm-badge]][npm]
 
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 
@@ -8,25 +8,16 @@ See the changes:
 - **Feature:** No need to know what scroll direction you want, horizontal and vertical scrolls are now supported simultaneously.
 - **Feature:** Dependency free. Fully rewritten with ES6 (transpiled to ES6 using Babel).
 
-1. [Usage](#1-usage)
-2. [Browsers support](#2-browsers-support)
-3. [Demo](#3-demo)
-4. [How it works](#4-how-it-works)
-7. [Changelog](#7-changelog)
-8. [Credits](#8-credits)
-
-##1. Usage
-
 ###Installation
 
 **- Via npm**
 `npm install simplebar --save`
 
 **- Via `<script>` tag**
-  Download the files there: 
-  Then include in your page:
-    <link rel="stylesheet" href="css/simplebar.css" />
-    <script src="js/simplebar.min.js"></script>
+```
+<link rel="stylesheet" href="https://unpkg.com/simplebar@2.0.0-beta.1/umd/simplebar.css" />
+<script src="https://unpkg.com/simplebar@2.0.0-beta.1/umd/simplebar.js"></script>
+```
 
 ###Usage
 
@@ -35,14 +26,39 @@ Set `data-simplebar` on the element where you want your custom scrollbar. You're
 <div data-simplebar></div>
 ```
 
+
+
+
+
+
+
+1. [Documentation](#1-documentation)
+2. [Browsers support](#2-browsers-support)
+3. [Demo](#3-demo)
+4. [How it works](#4-how-it-works)
+5. [Changelog](#5-changelog)
+6. [Credits](#6-credits)
+
+##1. Documentation
+
+### Other usages
+You can start SimpleBar mannually if you need to:
+
+    new SimpleBar(document.getElementById('#myElement'))
+
+If you want to use jQuery:
+ 
+    new SimpleBar($('#myElement')[0])
+
 ###Options
 
 Options can be applied to the plugin during initialization:
-
-    $('#myElement').simplebar({
-      option1: value1,
-      option2: value2
-    });
+```
+new SimpleBar(document.getElementById('#myElement'), {
+    option1: value1,
+    option2: value2
+})
+```
 
 Available options are:
 
@@ -50,7 +66,7 @@ Available options are:
 
 By default SimpleBar requires minimal markup. When initialized it will wrap a `simplebar-content`element in a div with the class `simplebar-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
-    $('#myElement').simplebar({ wrapContent: false });
+    new SimpleBar(document.getElementById('#myElement'), { wrapContent: false });
 
 Default value is `true`
 
@@ -58,7 +74,7 @@ Default value is `true`
 
 By default SimpleBar automatically hides the scrollbar if the user is not scrolling (it emulates Mac OSX Lion's scrollbar). You can make the scrollbar always visible by setting the `autoHide` option to `false`:
 
-    $('#myElement').simplebar({ autoHide: false });
+    new SimpleBar(document.getElementById('#myElement'), { autoHide: false });
 
 
 Default value is `true`
@@ -90,24 +106,28 @@ css: {
 
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 
-    $('#myElement').simplebar('recalculate');
+    var el = new SimpleBar(document.getElementById('#myElement'));
+    el.SimpleBar.recalculate()
+
+###Trigger programmatical scrolling
+If you want to access to original scroll element, you can retrieve it via a getter :
+
+    var el = new SimpleBar(document.getElementById('#myElement'));
+    el.SimpleBar.getScrollElement()
 
 ###Subscribe to `scroll` event
 You can subscribe to the `scroll` event just like you do with native scrolling element :
-
-    $('#myElement').simplebar().on('scroll', function(...));
-
-###Trigger programmatical scrolling
-If you are using another plugins like jQuery.scrollTo or simply want to access to original scroll element, you can retrieve it via a getter :
-
-    $('#myElement').simplebar('getScrollElement');
+    
+    var el = new SimpleBar(document.getElementById('#myElement'));
+    el.SimpleBar.getScrollElement().addEventListener('scroll', function(...));
 
 ###Add content dynamically (ajax)
 You can retrieve the element containing datas like this :
+    
+    var el = new SimpleBar(document.getElementById('#myElement'));
+    el.SimpleBar.getContentElement();
 
-    $('#myElement').simplebar('getContentElement');
-
-This is best to use this rather than querying it via DOM cause it avoids problem when the plugin is disabled (like on mobiles).
+This is best to use this rather than querying it via the DOM directly cause it avoids problem when the plugin is disabled (like on mobiles).
 
 ###Non-JS fallback
 
@@ -148,11 +168,11 @@ For the most part SimpleBar uses the browser's native scrolling functionality, b
 
 Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
-##6. Changelog
+##5. Changelog
 
 See changelog here : https://github.com/Grsmto/simplebar/releases
 
-##7. Credits
+##6. Credits
 
 Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made the original plugin called [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
 
@@ -161,9 +181,6 @@ Website: http://html5up.net/
 ###Additional contributors
 
 Yoh Suzuki: wrapContent option
-
-[build-badge]: https://img.shields.io/travis/grsmto/simplebar/master.svg?style=flat-square
-[build]: https://travis-ci.org/grsmto/simplebar
 
 [npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/simplebar
