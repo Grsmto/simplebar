@@ -21,7 +21,7 @@ See the changes:
 
 ###Usage
 
-Set `data-simplebar` on the element where you want your custom scrollbar. You're done.
+Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 ```
 <div data-simplebar></div>
 ```
