@@ -345,19 +345,17 @@ if (typeof MutationObserver !== 'undefined') {
     const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
             Array.from(mutation.addedNodes).forEach(addedNode => {
-                if (addedNode.nodeType === 1 && 
-                    addedNode.hasAttribute('data-simplebar') &&
-                    typeof addedNode.SimpleBar === 'undefined') {
-                    new SimpleBar(addedNode, getElOptions(addedNode));
-                }
-            })
+                addedNode.nodeType === 1 && addedNode.querySelectorAll('[data-simplebar]').forEach(function(el) {
+                    if (typeof addedNode.SimpleBar === 'undefined') {
+                        new SimpleBar(el, getElOptions(el));
+                    }
+                });
+            });
 
             Array.from(mutation.removedNodes).forEach(removedNode => {
-                if (removedNode.nodeType === 1 && 
-                    removedNode.hasAttribute('data-simplebar') &&
-                    removedNode.SimpleBar) {
-                    removedNode.SimpleBar.unMount();
-                }
+                removedNode.nodeType === 1 && removedNode.querySelectorAll('[data-simplebar]').forEach(function(el) {
+                    el.SimpleBar && el.SimpleBar.unMount();
+                });
             })
         });
     });
