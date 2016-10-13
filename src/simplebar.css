@@ -7,11 +7,8 @@
 
 [data-simplebar] .simplebar-scroll-content {
     overflow: scroll;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    position: relative;
+    z-index: 0;
 }
 
 .simplebar-track {
