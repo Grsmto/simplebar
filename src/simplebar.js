@@ -316,7 +316,7 @@ export default class SimpleBar {
     /**
      * UnMount mutation observer and delete SimpleBar instance from DOM element
      */
-    unMount() { 
+    unMount() {
         this.observer && this.observer.disconnect();
         this.el.SimpleBar = null;
         delete this.el.SimpleBar;
@@ -345,18 +345,32 @@ if (typeof MutationObserver !== 'undefined') {
     const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
             Array.from(mutation.addedNodes).forEach(addedNode => {
-                addedNode.nodeType === 1 && addedNode.querySelectorAll('[data-simplebar]').forEach(function(el) {
-                    if (typeof addedNode.SimpleBar === 'undefined') {
-                        new SimpleBar(el, getElOptions(el));
+                if (addedNode.nodeType === 1) {
+                    if (addedNode.hasAttribute('data-simplebar')) {
+                        if (typeof addedNode.SimpleBar === 'undefined') {
+                            new SimpleBar(addedNode, getElOptions(addedNode));
+                        }
+                    } else {
+                        addedNode.querySelectorAll('[data-simplebar]').forEach(el => {
+                            if (typeof el.SimpleBar === 'undefined') {
+                                new SimpleBar(el, getElOptions(el));
+                            }
+                        });
                     }
-                });
+                }
             });
 
             Array.from(mutation.removedNodes).forEach(removedNode => {
-                removedNode.nodeType === 1 && removedNode.querySelectorAll('[data-simplebar]').forEach(function(el) {
-                    el.SimpleBar && el.SimpleBar.unMount();
-                });
-            })
+                if (removedNode.nodeType === 1) {
+                    if (removedNode.hasAttribute('data-simplebar')) {
+                        removedNode.SimpleBar && removedNode.SimpleBar.unMount();
+                    } else {
+                        removedNode.querySelectorAll('[data-simplebar]').forEach(el => {
+                            el.SimpleBar && el.SimpleBar.unMount();
+                        });
+                    }
+                }
+            });
         });
     });
 
