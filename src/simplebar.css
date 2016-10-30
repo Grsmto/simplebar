@@ -5,8 +5,8 @@
     -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
 }
 
-[data-simplebar] .simplebar-scroll-content {
-    overflow: scroll;
+.simplebar-scroll-content {
+    overflow: auto;
     position: relative;
     z-index: 0;
 }
