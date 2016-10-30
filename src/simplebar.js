@@ -23,7 +23,6 @@ export default class SimpleBar {
             wrapContent: true,
             autoHide: true,
             classNames: {
-                container: 'simplebar',
                 content: 'simplebar-content',
                 scrollContent: 'simplebar-scroll-content',
                 scrollbar: 'simplebar-scrollbar',
