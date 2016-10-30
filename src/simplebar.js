@@ -254,10 +254,28 @@ export default class SimpleBar {
      * Resize content element
      */
     resizeScrollContent() {
-        const _scrollbarWidth = scrollbarWidth()
+        const _scrollbarWidth = scrollbarWidth();
 
-        this.scrollContentEl.style.width = `${this.el.offsetWidth + _scrollbarWidth}px`;
-        this.scrollContentEl.style.height = `${this.el.offsetHeight + _scrollbarWidth}px`;
+        // If no X overflow
+        if (this.contentEl.scrollWidth <= this.el.offsetWidth) {
+            // If no Y overflow
+            if (this.contentEl.scrollHeight <= this.el.offsetHeight) {
+                this.scrollContentEl.style.width = 'auto';
+                this.scrollContentEl.style.height = 'auto';
+            } else { // If no X overflow && Y overflow
+                this.scrollContentEl.style.width = `${this.el.offsetWidth + _scrollbarWidth}px`;
+                this.scrollContentEl.style.height = `${this.el.offsetHeight}px`;
+            }
+        } else { // If X overflow
+            // If If X overflow && no Y overflow
+            if (this.contentEl.scrollHeight <= this.el.offsetHeight) {
+                this.scrollContentEl.style.width = 'auto';
+                this.scrollContentEl.style.height = `${this.el.offsetHeight + _scrollbarWidth}px`;
+            } else { // If X overflow && Y overflow
+                this.scrollContentEl.style.height = `${this.el.offsetHeight + _scrollbarWidth}px`;
+                this.scrollContentEl.style.width = `${this.el.offsetWidth + _scrollbarWidth}px`;
+            }
+        }
     }
 
 
