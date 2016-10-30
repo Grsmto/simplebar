@@ -54,6 +54,34 @@ export default class SimpleBar {
             return
         }
 
+        this.initDOM();
+
+        this.trackX = this.el.querySelector(`.${this.classNames.track}.horizontal`);
+        this.trackY = this.el.querySelector(`.${this.classNames.track}.vertical`);
+
+        this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
+        this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
+        this.scrollContentEl = this.el.querySelector('.' + this.classNames.scrollContent);
+        this.contentEl = this.el.querySelector('.' + this.classNames.content);
+
+        // Calculate content size
+        this.resizeScrollContent();
+        this.resizeScrollbar('x');
+        this.resizeScrollbar('y');
+
+        if (!this.options.autoHide) {
+            this.showScrollbar('x');
+            this.showScrollbar('y');
+        }
+
+        this.initListeners();
+    }
+
+    initDOM() {
+        if (this.el.querySelectorAll(`.${this.classNames.content}`).length) {
+            return;
+        }
+        
         // Prepare DOM
         if (this.options.wrapContent) {
             const wrapperScrollContent = document.createElement('div');
@@ -85,22 +113,9 @@ export default class SimpleBar {
 
         this.el.insertBefore(this.trackX, this.el.firstChild);
         this.el.insertBefore(this.trackY, this.el.firstChild);
+    }
 
-        this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
-        this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
-        this.scrollContentEl = this.el.querySelector('.' + this.classNames.scrollContent);
-        this.contentEl = this.el.querySelector('.' + this.classNames.content);
-
-        // Calculate content size
-        this.resizeScrollContent();
-        this.resizeScrollbar('x');
-        this.resizeScrollbar('y');
-
-        if (!this.options.autoHide) {
-            this.showScrollbar('x');
-            this.showScrollbar('y');
-        }
-
+    initListeners() {
         // Event listeners
         if (this.options.autoHide) {
             this.el.addEventListener('mouseenter', this.flashScrollbar);
@@ -108,7 +123,7 @@ export default class SimpleBar {
 
         this.scrollbarX.addEventListener('mousedown', (e) => this.startDrag(e, 'x'));
         this.scrollbarY.addEventListener('mousedown', (e) => this.startDrag(e, 'y'));
-        
+
         this.scrollContentEl.addEventListener('scroll', this.startScroll);
 
         // MutationObserver is IE11+
@@ -125,6 +140,20 @@ export default class SimpleBar {
             // pass in the target node, as well as the observer options
             this.observer.observe(this.el, { attributes: true, childList: true, characterData: true, subtree: true });
         }
+    }
+
+    removeListeners() {
+        // Event listeners
+        if (this.options.autoHide) {
+            this.el.removeEventListener('mouseenter', this.flashScrollbar);
+        }
+
+        this.scrollbarX.removeEventListener('mousedown', (e) => this.startDrag(e, 'x'));
+        this.scrollbarY.removeEventListener('mousedown', (e) => this.startDrag(e, 'y'));
+
+        this.scrollContentEl.removeEventListener('scroll', this.startScroll);
+
+        this.observer && this.observer.disconnect();
     }
     
     /**
@@ -317,9 +346,8 @@ export default class SimpleBar {
      * UnMount mutation observer and delete SimpleBar instance from DOM element
      */
     unMount() {
-        this.observer && this.observer.disconnect();
+        this.removeListeners();
         this.el.SimpleBar = null;
-        delete this.el.SimpleBar;
     }
 }
 
@@ -347,14 +375,10 @@ if (typeof MutationObserver !== 'undefined') {
             Array.from(mutation.addedNodes).forEach(addedNode => {
                 if (addedNode.nodeType === 1) {
                     if (addedNode.hasAttribute('data-simplebar')) {
-                        if (typeof addedNode.SimpleBar === 'undefined') {
-                            new SimpleBar(addedNode, getElOptions(addedNode));
-                        }
+                        new SimpleBar(addedNode, getElOptions(addedNode));
                     } else {
                         addedNode.querySelectorAll('[data-simplebar]').forEach(el => {
-                            if (typeof el.SimpleBar === 'undefined') {
-                                new SimpleBar(el, getElOptions(el));
-                            }
+                            new SimpleBar(el, getElOptions(el));
                         });
                     }
                 }
