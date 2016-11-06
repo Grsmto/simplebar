@@ -15,8 +15,8 @@ See the changes:
 
 **- Via `<script>` tag**
 ```
-<link rel="stylesheet" href="https://unpkg.com/simplebar@2.0.0-beta.2/umd/simplebar.css" />
-<script src="https://unpkg.com/simplebar@2.0.0-beta.2/umd/simplebar.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/simplebar@2.0.0-beta.3/umd/simplebar.css" />
+<script src="https://unpkg.com/simplebar@2.0.0-beta.3/umd/simplebar.js"></script>
 ```
 
 ###Usage
@@ -103,6 +103,7 @@ css: {
 ```
 
 ###Notifying the plugin of content changes
+####Note: you shouldn't need to use these functions as SimpleBar is taking care of that automatically. This is for advanced usage only.
 
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 
@@ -128,6 +129,9 @@ You can retrieve the element containing datas like this :
     el.SimpleBar.getContentElement();
 
 This is best to use this rather than querying it via the DOM directly cause it avoids problem when the plugin is disabled (like on mobiles).
+
+###Disable Mutation Observer
+    `SimpleBar.removeObserver();`
 
 ###Non-JS fallback
 
