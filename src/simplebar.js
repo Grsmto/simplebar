@@ -100,6 +100,10 @@ export default class SimpleBar {
         return options;
     }
 
+    static removeObserver() {
+        this.observer && this.observer.disconnect();
+    }
+
     init() {
         // Save a reference to the instance, so we know this DOM node has already been instancied
         this.el.SimpleBar = this;
