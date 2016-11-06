@@ -131,7 +131,7 @@ You can retrieve the element containing datas like this :
 This is best to use this rather than querying it via the DOM directly cause it avoids problem when the plugin is disabled (like on mobiles).
 
 ###Disable Mutation Observer
-    `SimpleBar.removeObserver();`
+    SimpleBar.removeObserver();
 
 ###Non-JS fallback
 
