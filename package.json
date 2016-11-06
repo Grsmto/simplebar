@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.11.6",
+    "lodash.debounce": "^4.0.8",
     "scrollbarwidth": "^0.1.0"
   },
   "devDependencies": {

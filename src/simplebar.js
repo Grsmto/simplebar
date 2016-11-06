@@ -1,4 +1,5 @@
 import scrollbarWidth from 'scrollbarwidth'
+import debounce from 'lodash.debounce'
 
 import './simplebar.css'
 
@@ -40,6 +41,8 @@ export default class SimpleBar {
         this.endDrag = this.endDrag.bind(this);
 
         this.init();
+
+        this.recalculate = debounce(this.recalculate, 100, { leading: true });
     }
 
     init() {
