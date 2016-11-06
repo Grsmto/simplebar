@@ -45,6 +45,61 @@ export default class SimpleBar {
         this.recalculate = debounce(this.recalculate, 100, { leading: true });
     }
 
+    static initHtmlApi() {
+        // MutationObserver is IE11+
+        if (typeof MutationObserver !== 'undefined') {
+            // Mutation observer to observe dynamically added elements
+            this.observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    Array.from(mutation.addedNodes).forEach(addedNode => {
+                        if (addedNode.nodeType === 1) {
+                            if (addedNode.hasAttribute('data-simplebar')) {
+                                new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
+                            } else {
+                                addedNode.querySelectorAll('[data-simplebar]').forEach(el => {
+                                    new SimpleBar(el, SimpleBar.getElOptions(el));
+                                });
+                            }
+                        }
+                    });
+
+                    Array.from(mutation.removedNodes).forEach(removedNode => {
+                        if (removedNode.nodeType === 1) {
+                            if (removedNode.hasAttribute('data-simplebar')) {
+                                removedNode.SimpleBar && removedNode.SimpleBar.unMount();
+                            } else {
+                                removedNode.querySelectorAll('[data-simplebar]').forEach(el => {
+                                    el.SimpleBar && el.SimpleBar.unMount();
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+
+            this.observer.observe(document, { childList: true, subtree: true });
+        }
+
+        // Instantiate elements already present on the page
+        document.addEventListener('DOMContentLoaded', () => {
+            Array.from(document.querySelectorAll('[data-simplebar]')).forEach(el => {
+                new SimpleBar(el, SimpleBar.getElOptions(el));
+            });
+        });
+    }
+
+    // Helper function to retrieve options from element attributes
+    static getElOptions(el) {
+        const attributes = [{ autoHide: 'data-simplebar-autohide' }];
+        const options = attributes.reduce((acc, obj) => {
+            let attribute = obj[Object.keys(obj)[0]];
+            acc[Object.keys(obj)[0]] = el.hasAttribute(attribute) ? el.getAttribute(attribute) === 'false' ? false : true : true;
+            return acc;
+        }, {})
+
+        return options;
+    }
+
     init() {
         // Save a reference to the instance, so we know this DOM node has already been instancied
         this.el.SimpleBar = this;
@@ -138,7 +193,7 @@ export default class SimpleBar {
                     }
                 });
             });
-             
+
             // pass in the target node, as well as the observer options
             this.observer.observe(this.el, { attributes: true, childList: true, characterData: true, subtree: true });
         }
@@ -374,56 +429,4 @@ export default class SimpleBar {
 /**
  * HTML API
  */
-
-// Helper function to retrieve options from element attributes
-const getElOptions = function(el) {
-    const attributes = [{ autoHide: 'data-simplebar-autohide' }];
-    const options = attributes.reduce((acc, obj) => {
-        let attribute = obj[Object.keys(obj)[0]];
-        acc[Object.keys(obj)[0]] = el.hasAttribute(attribute) ? el.getAttribute(attribute) === 'false' ? false : true : true;
-        return acc;
-    }, {})
-
-    return options;
-}
-
-// MutationObserver is IE11+
-if (typeof MutationObserver !== 'undefined') {
-    // Mutation observer to observe dynamically added elements
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            Array.from(mutation.addedNodes).forEach(addedNode => {
-                if (addedNode.nodeType === 1) {
-                    if (addedNode.hasAttribute('data-simplebar')) {
-                        new SimpleBar(addedNode, getElOptions(addedNode));
-                    } else {
-                        addedNode.querySelectorAll('[data-simplebar]').forEach(el => {
-                            new SimpleBar(el, getElOptions(el));
-                        });
-                    }
-                }
-            });
-
-            Array.from(mutation.removedNodes).forEach(removedNode => {
-                if (removedNode.nodeType === 1) {
-                    if (removedNode.hasAttribute('data-simplebar')) {
-                        removedNode.SimpleBar && removedNode.SimpleBar.unMount();
-                    } else {
-                        removedNode.querySelectorAll('[data-simplebar]').forEach(el => {
-                            el.SimpleBar && el.SimpleBar.unMount();
-                        });
-                    }
-                }
-            });
-        });
-    });
-
-    observer.observe(document, { childList: true, subtree: true });
-}
-
-// Instantiate elements already present on the page
-document.addEventListener('DOMContentLoaded', () => {
-    Array.from(document.querySelectorAll('[data-simplebar]')).forEach(el => {
-        new SimpleBar(el, getElOptions(el));
-    });
-});
+SimpleBar.initHtmlApi();
