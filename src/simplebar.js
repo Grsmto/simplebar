@@ -21,18 +21,7 @@ export default class SimpleBar {
         this.currentAxis;
         this.enabled;
 
-        const DEFAULT_OPTIONS = {
-            wrapContent: true,
-            autoHide: true,
-            classNames: {
-                content: 'simplebar-content',
-                scrollContent: 'simplebar-scroll-content',
-                scrollbar: 'simplebar-scrollbar',
-                track: 'simplebar-track'
-            }
-        }
-
-        this.options = Object.assign({}, DEFAULT_OPTIONS, options);
+        this.options = Object.assign({}, SimpleBar.defaultOptions, options);
         this.classNames = this.options.classNames;
 
         this.flashScrollbar = this.flashScrollbar.bind(this);
@@ -44,6 +33,25 @@ export default class SimpleBar {
         this.init();
 
         this.recalculate = debounce(this.recalculate, 100, { leading: true });
+    }
+
+    static get defaultOptions() {
+        return {
+            wrapContent: true,
+            autoHide: true,
+            classNames: {
+                content: 'simplebar-content',
+                scrollContent: 'simplebar-scroll-content',
+                scrollbar: 'simplebar-scrollbar',
+                track: 'simplebar-track'
+            }
+        }
+    }
+
+    static get htmlAttributes() {
+        return [{ 
+            autoHide: 'data-simplebar-autohide',
+        }]
     }
 
     static initHtmlApi() {
@@ -91,8 +99,7 @@ export default class SimpleBar {
 
     // Helper function to retrieve options from element attributes
     static getElOptions(el) {
-        const attributes = [{ autoHide: 'data-simplebar-autohide' }];
-        const options = attributes.reduce((acc, obj) => {
+        const options = SimpleBar.htmlAttributes.reduce((acc, obj) => {
             let attribute = obj[Object.keys(obj)[0]];
             acc[Object.keys(obj)[0]] = el.hasAttribute(attribute) ? el.getAttribute(attribute) === 'false' ? false : true : true;
             return acc;
