@@ -39,6 +39,7 @@ export default class SimpleBar {
         return {
             wrapContent: true,
             autoHide: true,
+            forceEnabled: false,
             classNames: {
                 content: 'simplebar-content',
                 scrollContent: 'simplebar-scroll-content',
@@ -51,6 +52,7 @@ export default class SimpleBar {
     static get htmlAttributes() {
         return [{ 
             autoHide: 'data-simplebar-autohide',
+            forceEnabled: 'data-simplebar-force-enabled'
         }]
     }
 
@@ -119,7 +121,7 @@ export default class SimpleBar {
         // If scrollbar is a floating scrollbar, disable the plugin
         this.enabled = scrollbarWidth() === 0;
 
-        if (!this.enabled) {
+        if (!this.enabled && !this.options.forceEnabled) {
             this.el.style.overflow = 'auto';
 
             return
