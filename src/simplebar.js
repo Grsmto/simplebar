@@ -19,6 +19,7 @@ export default class SimpleBar {
         this.offsetAttr         = { x: 'left', y: 'top' };
         this.observer;
         this.currentAxis;
+        this.enabled;
 
         const DEFAULT_OPTIONS = {
             wrapContent: true,
@@ -109,7 +110,9 @@ export default class SimpleBar {
         this.el.SimpleBar = this;
 
         // If scrollbar is a floating scrollbar, disable the plugin
-        if (scrollbarWidth() === 0) {
+        this.enabled = scrollbarWidth() === 0;
+
+        if (!this.enabled) {
             this.el.style.overflow = 'auto';
 
             return
@@ -401,6 +404,8 @@ export default class SimpleBar {
      * Recalculate scrollbar
      */
     recalculate() {
+        if (!this.enabled) return;
+
         this.resizeScrollContent();
         this.resizeScrollbar();
     }
