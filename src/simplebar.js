@@ -138,7 +138,7 @@
         this.dragOffset = eventOffset - this.$scrollbar.offset()[this.offsetAttr];
 
         $(document).on('mousemove', $.proxy(this.drag, this));
-        $(document).on('mouseup', $.proxy(this.endDrag, this));
+        $(document).on('mouseup blur', $.proxy(this.endDrag, this));
     };
 
 
