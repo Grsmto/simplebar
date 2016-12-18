@@ -67,7 +67,7 @@ export default class SimpleBar {
                             if (addedNode.hasAttribute('data-simplebar')) {
                                 new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
                             } else {
-                                addedNode.querySelectorAll('[data-simplebar]').forEach(el => {
+                                Array.from(addedNode.querySelectorAll('[data-simplebar]')).forEach(el => {
                                     new SimpleBar(el, SimpleBar.getElOptions(el));
                                 });
                             }
@@ -79,7 +79,7 @@ export default class SimpleBar {
                             if (removedNode.hasAttribute('data-simplebar')) {
                                 removedNode.SimpleBar && removedNode.SimpleBar.unMount();
                             } else {
-                                removedNode.querySelectorAll('[data-simplebar]').forEach(el => {
+                                Array.from(removedNode.querySelectorAll('[data-simplebar]')).forEach(el => {
                                     el.SimpleBar && el.SimpleBar.unMount();
                                 });
                             }
