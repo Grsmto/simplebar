@@ -1,33 +1,53 @@
 {
-	"name": "simplebar",
-	"title": "SimpleBar.js",
-	"description": "Scrollbars, simpler.",
-	"author": "Adrien Grsmto from a fork by Jonathan Nicol",
-	"repository": {
-		"type" : "git",
-		"url" : "http://github.com/grsmto/simplebar.git"
-	},
-	"homepage": "https://grsmto.github.io/simplebar/",
-	"version": "1.1.9",
-	"devDependencies": {
-		"grunt": "~0.4.5",
-		"grunt-cli": "~0.1.13",
-		"grunt-contrib-jshint": "~0.11.0",
-		"grunt-contrib-concat": "~0.5.1",
-		"grunt-contrib-uglify": "~0.8.0",
-		"grunt-contrib-qunit": "~0.3.0",
-		"grunt-contrib-watch": "~0.6.1"
-	},
-	"scripts": {
-		"test": "grunt travis --verbose"
-	},
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "http://zenorocha.mit-license.org/"
-		}
-	],
-	"engines": {
-		"node": ">=0.11.0"
-	}
+  "name": "simplebar",
+  "title": "SimpleBar.js",
+  "description": "Scrollbars, simpler.",
+  "files": [
+    "umd"
+  ],
+  "author": "Adrien Grsmto from a fork by Jonathan Nicol",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/grsmto/simplebar.git"
+  },
+  "main": "umd/simplebar.js",
+  "homepage": "https://grsmto.github.io/simplebar/",
+  "bugs": "https://github.com/grsmto/simplebar/issues",
+  "version": "2.0.0",
+  "scripts": {
+    "start": "webpack-dev-server --inline",
+    "start:prod": "NODE_ENV=production webpack-dev-server",
+    "build": "NODE_ENV=production webpack",
+    "test": "grunt travis --verbose"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://zenorocha.mit-license.org/"
+    }
+  ],
+  "engines": {
+    "node": ">=0.11.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.11.6",
+    "lodash.debounce": "^4.0.8",
+    "scrollbarwidth": "^0.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.0",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-latest": "^6.16.0",
+    "css-loader": "^0.25.0",
+    "eslint": "^3.5.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "postcss-loader": "^0.13.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  }
 }
