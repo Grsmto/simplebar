@@ -63,6 +63,12 @@ new SimpleBar(document.getElementById('#myElement'), {
 
 Available options are:
 
+####forceEnabled
+
+By default SimpleBar is not enabled on floating scrollbars environments like on mobile or on mac OS. To force SimpleBar to be enabled, use this option.
+
+Default value is `false`
+
 ####wrapContent
 
 By default SimpleBar requires minimal markup. When initialized it will wrap a `simplebar-content`element in a div with the class `simplebar-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
