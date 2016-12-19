@@ -303,6 +303,10 @@ export default class SimpleBar {
             // Offset of 2px allows for a small top/bottom or left/right margin around handle.
             handleOffset    = Math.round(scrollbarRatio * scrollOffset) + 2,
             handleSize      = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
+            
+            if (handleOffset + (handleSize > 10 ? handleSize : 10)  > this.$track.height()) { //in the css there is a min-height: 10 for the handle
+                 handleOffset -= handleOffset + (handleSize > 10 ? handleSize : 10) - this.$track.height();
+             }
 
         // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
         this.isVisible[axis] = scrollbarSize < contentSize
