@@ -26,7 +26,11 @@ Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 <div data-simplebar></div>
 ```
 
-##2. Usage
+###Warning!
+SimpleBar is not intended to be used on the `body` element! I don't recommand wrapping your entire web page inside a custom scroll as it will often affect badly the user experience (slower scroll performances compare to natural body scroll, no usual scroll behaviours like arrow keys, etc.).
+SimpleBar is mean to improve the experience of **internal web pages scrolls**: like a chat box or a small scrolling area.
+
+
 
 
 
