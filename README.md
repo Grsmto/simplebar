@@ -92,6 +92,11 @@ Default value is `true`
 
 You can also control the animation via CSS as it's a simple CSS opacity transition.
 
+####scrollbarMinSize
+Define the minimum scrollbar size in pixels.
+
+Default value is `10`
+
 ####css
 
 It is possible to specify css classes to change the design of the scrollbar. To get your own styles to work refer to `simplebar.css` to get an idea how to setup your css.
