@@ -139,9 +139,7 @@ export default class SimpleBar {
         this.contentEl = this.el.querySelector('.' + this.classNames.content);
 
         // Calculate content size
-        this.resizeScrollContent();
-        this.resizeScrollbar('x');
-        this.resizeScrollbar('y');
+        this.recalculate();
 
         if (!this.options.autoHide) {
             this.showScrollbar('x');
@@ -419,7 +417,8 @@ export default class SimpleBar {
         if (!this.enabled) return;
 
         this.resizeScrollContent();
-        this.resizeScrollbar();
+        this.resizeScrollbar('x');
+        this.resizeScrollbar('y');
     }
 
 
