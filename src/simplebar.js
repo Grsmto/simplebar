@@ -45,7 +45,8 @@ export default class SimpleBar {
                 scrollContent: 'simplebar-scroll-content',
                 scrollbar: 'simplebar-scrollbar',
                 track: 'simplebar-track'
-            }
+            },
+            scrollbarMinSize: 10
         }
     }
 
@@ -138,9 +139,7 @@ export default class SimpleBar {
         this.contentEl = this.el.querySelector('.' + this.classNames.content);
 
         // Calculate content size
-        this.resizeScrollContent();
-        this.resizeScrollbar('x');
-        this.resizeScrollbar('y');
+        this.recalculate();
 
         if (!this.options.autoHide) {
             this.showScrollbar('x');
@@ -295,14 +294,16 @@ export default class SimpleBar {
             scrollbar = this.scrollbarY;
         }
 
-        let contentSize     = this.contentEl[this.scrollSizeAttr[axis]],
-            scrollOffset    = this.scrollContentEl[this.scrollOffsetAttr[axis]], // Either scrollTop() or scrollLeft().
-            scrollbarSize   = track[this.sizeAttr[axis]],
-            scrollbarRatio  = scrollbarSize / contentSize,
+        let contentSize     = this.contentEl[this.scrollSizeAttr[axis]];
+        let scrollOffset    = this.scrollContentEl[this.scrollOffsetAttr[axis]]; // Either scrollTop() or scrollLeft().
+        let scrollbarSize   = track[this.sizeAttr[axis]];
+        let scrollbarRatio  = scrollbarSize / contentSize;
+        let scrollPourcent  = scrollOffset / (contentSize - scrollbarSize);
             // Calculate new height/position of drag handle.
             // Offset of 2px allows for a small top/bottom or left/right margin around handle.
-            handleOffset    = Math.round(scrollbarRatio * scrollOffset) + 2,
-            handleSize      = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
+        let handleSize      = Math.max(Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2, this.options.scrollbarMinSize);
+        let handleOffset    = (scrollbarSize - 4 - handleSize) * scrollPourcent + 2;
+
 
         // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
         this.isVisible[axis] = scrollbarSize < contentSize
@@ -416,7 +417,8 @@ export default class SimpleBar {
         if (!this.enabled) return;
 
         this.resizeScrollContent();
-        this.resizeScrollbar();
+        this.resizeScrollbar('x');
+        this.resizeScrollbar('y');
     }
 
 
