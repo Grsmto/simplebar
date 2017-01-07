@@ -1,3 +1,12 @@
+## [v2.0.2]
+> Jan 7, 2017
+
+- **Fix:** Scrollbar size was not recalculated properly on the Y axis (#49)
+- **Fix:** Scrollbar size calculation was wrong when reaching the minimum width/height and was breaking the layout in certain situations (#46)
+- **Fix:** Options were just not working properly :)
+- **Feature:** Scrollbar minimum size is now configurable with an option (`data-simplebar-scrollbar-min-size' on the element or via options object `scrollbarMinSize`) (#44)
+
+[v2.0.0-beta.1]: https://github.com/reactjs/react-router/compare/v1.1.9...v2.0.0-beta.1
 ## [v2.0.0-beta.1]
 > Oct 7, 2016
 
