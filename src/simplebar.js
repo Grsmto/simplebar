@@ -51,10 +51,11 @@ export default class SimpleBar {
     }
 
     static get htmlAttributes() {
-        return [{ 
+        return { 
             autoHide: 'data-simplebar-autohide',
-            forceEnabled: 'data-simplebar-force-enabled'
-        }]
+            forceEnabled: 'data-simplebar-force-enabled',
+            scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
+        }
     }
 
     static initHtmlApi() {
@@ -102,11 +103,13 @@ export default class SimpleBar {
 
     // Helper function to retrieve options from element attributes
     static getElOptions(el) {
-        const options = SimpleBar.htmlAttributes.reduce((acc, obj) => {
-            let attribute = obj[Object.keys(obj)[0]];
-            acc[Object.keys(obj)[0]] = el.hasAttribute(attribute) ? el.getAttribute(attribute) === 'false' ? false : true : true;
+        const options = Object.keys(SimpleBar.htmlAttributes).reduce((acc, obj) => {
+            const attribute = SimpleBar.htmlAttributes[obj];
+            if (el.hasAttribute(attribute)) {
+                acc[obj] = JSON.parse(el.getAttribute(attribute));
+            }
             return acc;
-        }, {})
+        }, {});
 
         return options;
     }
