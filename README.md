@@ -1,6 +1,7 @@
 #SimpleBar 2 [![npm package][npm-badge]][npm]
 
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
+SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
 **SimpleBar 2 is here!**
 See the changes:
