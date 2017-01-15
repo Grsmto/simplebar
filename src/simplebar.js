@@ -153,7 +153,7 @@ export default class SimpleBar {
     }
 
     initDOM() {
-        if (this.el.querySelectorAll(`.${this.classNames.content}`).length) {
+        if (this._isDomInitialized) {
             return;
         }
         
@@ -188,6 +188,8 @@ export default class SimpleBar {
 
         this.el.insertBefore(this.trackX, this.el.firstChild);
         this.el.insertBefore(this.trackY, this.el.firstChild);
+
+		this.__isDomInitialized = true;
     }
 
     initListeners() {
