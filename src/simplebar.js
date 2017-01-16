@@ -54,7 +54,8 @@ export default class SimpleBar {
         return { 
             autoHide: 'data-simplebar-autohide',
             forceEnabled: 'data-simplebar-force-enabled',
-            scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
+            scrollbarMinSize: 'data-simplebar-scrollbar-min-size',
+            wrapContent: 'data-simplebar-wrap-content'
         }
     }
 
@@ -188,8 +189,8 @@ export default class SimpleBar {
 
         this.el.insertBefore(this.trackX, this.el.firstChild);
         this.el.insertBefore(this.trackY, this.el.firstChild);
-
-		this.__isDomInitialized = true;
+        
+        this.__isDomInitialized = true;
     }
 
     initListeners() {
