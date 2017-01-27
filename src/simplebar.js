@@ -265,9 +265,9 @@
         }
 
         if (this.scrollDirection === 'vert'){
-            this.$scrollContentEl.css({'margin-right': '-'+SCROLLBAR_WIDTH+'px'})
+            this.$scrollContentEl.css({'margin-right': '-'+SCROLLBAR_WIDTH+'px'});
         } else {
-            this.$scrollContentEl.css({'margin-bottom': '-'+SCROLLBAR_WIDTH+'px'})
+            this.$scrollContentEl.css({'margin-bottom': '-'+SCROLLBAR_WIDTH+'px'});
         }
     };
 

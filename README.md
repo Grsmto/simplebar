@@ -1,8 +1,6 @@
 #SimpleBar.js
 
-[![Build Status](https://travis-ci.org/Grsmto/simplebar.png?branch=v1.0)](https://travis-ci.org/Grsmto/simplebar)
-
-# SimpleBar 2 is here! Check out the beta version: https://github.com/Grsmto/simplebar/tree/v2.0.0-beta.3#simplebar-2-
+##This is a fork of SimpleBar 1. For SimpleBar 2 follow [this link](https://github.com/Grsmto/simplebar/tree/v2)
 
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 
@@ -134,7 +132,7 @@ SimpleBar hides the browser's default scrollbars, which obviously is undesirable
     </noscript>
 
 ##3. Demos
-http://grsmto.github.io/simplebar/
+http://0chan.one
 
 ##4. How it works
 
@@ -156,9 +154,11 @@ For example you will notice that it will use native scrollbar on mac OSX 10.8+ (
 
 ##6. Changelog
 
-See changelog here : https://github.com/Grsmto/simplebar/releases
+See changelog here : https://github.com/Juribiyan/simplebar/releases
 
 ##7. Credits
+
+This project was forked from [Adrien Grsmto](https://github.com/Grsmto) because I've decided to continue on v.1 branch. See Changelog for details. Below are the original credits.
 
 Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made the original plugin called [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
 
