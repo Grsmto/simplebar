@@ -105,7 +105,7 @@
 
         this.$scrollContentEl = this.$el.find('.' + this.theme.scrollContent);
 
-        this.resizeScrollContent();
+        this.setMargins();
 
         if (this.options.autoHide) {
             this.$el.on('mouseenter', $.proxy(this.flashScrollbar, this));
@@ -257,28 +257,24 @@
 
 
     /**
-     * Resize content element
+     * Apply negative margins to element so scrollbars get hidden
      */
-    SimpleBar.prototype.resizeScrollContent = function () {
+    SimpleBar.prototype.setMargins = function () {
         if (IS_WEBKIT) {
             return;
         }
 
         if (this.scrollDirection === 'vert'){
-            this.$scrollContentEl.width(this.$el.width()+SCROLLBAR_WIDTH);
-            this.$scrollContentEl.height(this.$el.height());
+            this.$scrollContentEl.css({'margin-right': '-'+SCROLLBAR_WIDTH+'px'})
         } else {
-            this.$scrollContentEl.width(this.$el.width());
-            this.$scrollContentEl.height(this.$el.height()+SCROLLBAR_WIDTH);
+            this.$scrollContentEl.css({'margin-bottom': '-'+SCROLLBAR_WIDTH+'px'})
         }
     };
-
 
     /**
      * Recalculate scrollbar
      */
     SimpleBar.prototype.recalculate = function () {
-        this.resizeScrollContent();
         this.resizeScrollbar();
     };
 
