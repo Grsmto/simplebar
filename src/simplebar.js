@@ -453,7 +453,7 @@ export default class SimpleBar {
      */
     isChildNode(el) {
         if (el === null) return false;
-        if (el === this.el) return true
+        if (el === this.el) return true;
         
         return this.isChildNode(el.parentNode);
     }
