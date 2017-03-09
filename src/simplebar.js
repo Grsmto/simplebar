@@ -206,7 +206,7 @@ export default class SimpleBar {
             // create an observer instance
             this.observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
-                    if (mutation.target === this.el || mutation.addedNodes.length) {
+                    if (this.isChildNode(mutation.target) || mutation.addedNodes.length) {
                         this.recalculate();
                     }
                 });
@@ -446,6 +446,16 @@ export default class SimpleBar {
     unMount() {
         this.removeListeners();
         this.el.SimpleBar = null;
+    }
+
+    /**
+     * Recursively walks up the parent nodes looking for this.el
+     */
+    isChildNode(el) {
+        if (el === null) return false;
+        if (el === this.el) return true
+        
+        return this.isChildNode(el.parentNode);
     }
 }
 
