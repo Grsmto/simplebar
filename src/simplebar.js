@@ -215,6 +215,8 @@ export default class SimpleBar {
             // pass in the target node, as well as the observer options
             this.observer.observe(this.el, { attributes: true, childList: true, characterData: true, subtree: true });
         }
+
+        window.addEventListener('resize', this.recalculate.bind(this), true);
     }
 
     removeListeners() {
