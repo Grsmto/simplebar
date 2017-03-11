@@ -123,12 +123,12 @@ export default class SimpleBar {
         this.el.SimpleBar = this;
 
         // If scrollbar is a floating scrollbar, disable the plugin
-        this.enabled = scrollbarWidth() !== 0;
+        this.enabled = scrollbarWidth() !== 0 && !this.options.forceEnabled;
 
-        if (!this.enabled && !this.options.forceEnabled) {
+        if (!this.enabled) {
             this.el.style.overflow = 'auto';
 
-            return
+            return;
         }
 
         this.initDOM();
@@ -218,6 +218,10 @@ export default class SimpleBar {
     }
 
     removeListeners() {
+        if (!this.enabled) {
+            return;
+        }
+
         // Event listeners
         if (this.options.autoHide) {
             this.el.removeEventListener('mouseenter', this.flashScrollbar);
