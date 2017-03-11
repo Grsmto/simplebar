@@ -216,9 +216,7 @@ export default class SimpleBar {
             this.observer.observe(this.el, { attributes: true, childList: true, characterData: true, subtree: true });
         }
 
-        window.addEventListener('resize', function () { 
-            this.recalculate();
-        }.bind(this), true);
+        window.addEventListener('resize', this.recalculate.bind(this), true);
     }
 
     removeListeners() {
