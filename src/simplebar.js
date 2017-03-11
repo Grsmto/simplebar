@@ -123,12 +123,12 @@ export default class SimpleBar {
         this.el.SimpleBar = this;
 
         // If scrollbar is a floating scrollbar, disable the plugin
-        this.enabled = scrollbarWidth() !== 0;
+        this.enabled = scrollbarWidth() !== 0 && !this.options.forceEnabled;
 
-        if (!this.enabled && !this.options.forceEnabled) {
+        if (!this.enabled) {
             this.el.style.overflow = 'auto';
 
-            return
+            return;
         }
 
         this.initDOM();
@@ -206,7 +206,7 @@ export default class SimpleBar {
             // create an observer instance
             this.observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
-                    if (mutation.target === this.el || mutation.addedNodes.length) {
+                    if (this.isChildNode(mutation.target) || mutation.addedNodes.length) {
                         this.recalculate();
                     }
                 });
@@ -222,6 +222,10 @@ export default class SimpleBar {
     }
 
     removeListeners() {
+        if (!this.enabled) {
+            return;
+        }
+
         // Event listeners
         if (this.options.autoHide) {
             this.el.removeEventListener('mouseenter', this.flashScrollbar);
@@ -450,6 +454,16 @@ export default class SimpleBar {
     unMount() {
         this.removeListeners();
         this.el.SimpleBar = null;
+    }
+
+    /**
+     * Recursively walks up the parent nodes looking for this.el
+     */
+    isChildNode(el) {
+        if (el === null) return false;
+        if (el === this.el) return true;
+        
+        return this.isChildNode(el.parentNode);
     }
 }
 
