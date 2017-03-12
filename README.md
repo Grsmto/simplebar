@@ -16,8 +16,8 @@ See the changes:
 
 **- Via `<script>` tag**
 ```
-<link rel="stylesheet" href="https://unpkg.com/simplebar@2.0.3/umd/simplebar.css" />
-<script src="https://unpkg.com/simplebar@2.0.3/umd/simplebar.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/simplebar@2.1.0/dist/simplebar.css" />
+<script src="https://unpkg.com/simplebar@2.1.0/dist/simplebar.js"></script>
 ```
 
 ###Usage
