@@ -86,7 +86,7 @@ module.exports = {
     },
   
     output: {
-        path: 'umd',
+        path: 'dist',
         filename: 'simplebar.js',
         libraryTarget: 'umd',
         library: 'SimpleBar'

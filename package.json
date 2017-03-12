@@ -3,14 +3,14 @@
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
   "files": [
-    "umd"
+    "dist"
   ],
   "author": "Adrien Grsmto from a fork by Jonathan Nicol",
   "repository": {
     "type": "git",
     "url": "http://github.com/grsmto/simplebar.git"
   },
-  "main": "umd/simplebar.js",
+  "main": "dist/simplebar.js",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "version": "2.0.3",
