@@ -3,17 +3,17 @@
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
   "files": [
-    "umd"
+    "dist"
   ],
   "author": "Adrien Grsmto from a fork by Jonathan Nicol",
   "repository": {
     "type": "git",
     "url": "http://github.com/grsmto/simplebar.git"
   },
-  "main": "umd/simplebar.js",
+  "main": "dist/simplebar.js",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "scripts": {
     "start": "webpack-dev-server --inline",
     "start:prod": "NODE_ENV=production webpack-dev-server",
@@ -46,6 +46,7 @@
     "eslint": "^3.5.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "postcss-loader": "^0.13.0",
+    "resize-observer-polyfill": "^1.4.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"

@@ -1,7 +1,8 @@
-import scrollbarWidth from 'scrollbarwidth'
-import debounce from 'lodash.debounce'
+import scrollbarWidth from 'scrollbarwidth';
+import debounce from 'lodash.debounce';
+import ResizeObserver from 'resize-observer-polyfill';
 
-import './simplebar.css'
+import './simplebar.css';
 
 export default class SimpleBar {
     constructor(element, options) {
@@ -62,7 +63,7 @@ export default class SimpleBar {
         // MutationObserver is IE11+
         if (typeof MutationObserver !== 'undefined') {
             // Mutation observer to observe dynamically added elements
-            this.observer = new MutationObserver(mutations => {
+            const globalObserver = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     Array.from(mutation.addedNodes).forEach(addedNode => {
                         if (addedNode.nodeType === 1) {
@@ -90,7 +91,7 @@ export default class SimpleBar {
                 });
             });
 
-            this.observer.observe(document, { childList: true, subtree: true });
+            globalObserver.observe(document, { childList: true, subtree: true });
         }
 
         // Instantiate elements already present on the page
@@ -204,7 +205,7 @@ export default class SimpleBar {
         // MutationObserver is IE11+
         if (typeof MutationObserver !== 'undefined') {
             // create an observer instance
-            this.observer = new MutationObserver(mutations => {
+            this.mutationObserver = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     if (this.isChildNode(mutation.target) || mutation.addedNodes.length) {
                         this.recalculate();
@@ -213,8 +214,14 @@ export default class SimpleBar {
             });
 
             // pass in the target node, as well as the observer options
-            this.observer.observe(this.el, { attributes: true, childList: true, characterData: true, subtree: true });
+            this.mutationObserver.observe(this.el, { attributes: true, childList: true, characterData: true, subtree: true });
         }
+
+        this.resizeObserver = new ResizeObserver(() => {
+            this.recalculate();
+        });
+
+        this.resizeObserver.observe(this.el);
     }
 
     removeListeners() {
