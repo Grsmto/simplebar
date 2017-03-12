@@ -62,7 +62,7 @@ export default class SimpleBar {
         // MutationObserver is IE11+
         if (typeof MutationObserver !== 'undefined') {
             // Mutation observer to observe dynamically added elements
-            this.observer = new MutationObserver(mutations => {
+            const globalObserver = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     Array.from(mutation.addedNodes).forEach(addedNode => {
                         if (addedNode.nodeType === 1) {
@@ -90,7 +90,7 @@ export default class SimpleBar {
                 });
             });
 
-            this.observer.observe(document, { childList: true, subtree: true });
+            globalObserver.observe(document, { childList: true, subtree: true });
         }
 
         // Instantiate elements already present on the page
