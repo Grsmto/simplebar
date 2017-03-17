@@ -94,12 +94,16 @@ export default class SimpleBar {
             globalObserver.observe(document, { childList: true, subtree: true });
         }
 
+        // Taken from jQuery `ready` function
         // Instantiate elements already present on the page
-        document.addEventListener('DOMContentLoaded', () => {
-            Array.from(document.querySelectorAll('[data-simplebar]')).forEach(el => {
-                new SimpleBar(el, SimpleBar.getElOptions(el));
-            });
-        });
+        if (document.readyState === 'complete' ||
+                (document.readyState !== 'loading' && !document.documentElement.doScroll)) {
+            // Handle it asynchronously to allow scripts the opportunity to delay init
+            window.setTimeout(this.initDOMLoadedElements.bind(this));
+        } else {
+            document.addEventListener('DOMContentLoaded', this.initDOMLoadedElements.bind(this));
+            window.addEventListener('load', this.initDOMLoadedElements.bind(this));
+        }
     }
 
     // Helper function to retrieve options from element attributes
@@ -117,6 +121,15 @@ export default class SimpleBar {
 
     static removeObserver() {
         this.observer && this.observer.disconnect();
+    }
+
+    static initDOMLoadedElements() {
+        document.removeEventListener('DOMContentLoaded', this.initDOMLoadedElements);
+        window.removeEventListener('load', this.initDOMLoadedElements);
+
+        Array.from(document.querySelectorAll('[data-simplebar]')).forEach(el => {
+            new SimpleBar(el, SimpleBar.getElOptions(el));
+        });
     }
 
     init() {
