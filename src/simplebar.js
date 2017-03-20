@@ -225,9 +225,7 @@ export default class SimpleBar {
             this.mutationObserver.observe(this.el, { attributes: true, childList: true, characterData: true, subtree: true });
         }
 
-        this.resizeObserver = new ResizeObserver(() => {
-            this.recalculate();
-        });
+        this.resizeObserver = new ResizeObserver(this.recalculate.bind(this));
 
         this.resizeObserver.observe(this.el);
     }
