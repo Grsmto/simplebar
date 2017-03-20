@@ -128,7 +128,8 @@ export default class SimpleBar {
         window.removeEventListener('load', this.initDOMLoadedElements);
 
         Array.from(document.querySelectorAll('[data-simplebar]')).forEach(el => {
-            new SimpleBar(el, SimpleBar.getElOptions(el));
+            if (!el.SimpleBar)
+                new SimpleBar(el, SimpleBar.getElOptions(el));
         });
     }
 
