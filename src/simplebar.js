@@ -21,6 +21,8 @@ export default class SimpleBar {
         this.observer;
         this.currentAxis;
         this.enabled;
+        this.scrollbarWidth = scrollbarWidth(); // we consider that scrollbar width won't change
+                                                // during lifespan of the component
 
         this.options = Object.assign({}, SimpleBar.defaultOptions, options);
         this.classNames = this.options.classNames;
@@ -67,6 +69,8 @@ export default class SimpleBar {
                 mutations.forEach(mutation => {
                     Array.from(mutation.addedNodes).forEach(addedNode => {
                         if (addedNode.nodeType === 1) {
+                            if (addedNode.SimpleBar) return;
+
                             if (addedNode.hasAttribute('data-simplebar')) {
                                 new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
                             } else {
@@ -138,7 +142,7 @@ export default class SimpleBar {
         this.el.SimpleBar = this;
 
         // If scrollbar is a floating scrollbar, disable the plugin
-        this.enabled = scrollbarWidth() !== 0 && !this.options.forceEnabled;
+        this.enabled = this.scrollbarWidth !== 0 && !this.options.forceEnabled;
 
         if (!this.enabled) {
             this.el.style.overflow = 'auto';
@@ -173,6 +177,10 @@ export default class SimpleBar {
 
             this.scrollContentEl.classList.add(this.classNames.scrollContent);
             this.contentEl.classList.add(this.classNames.content);
+
+            this.scrollContentEl.style.padding = `0 ${this.scrollbarWidth}px ${this.scrollbarWidth}px 0`;
+            this.scrollContentEl.style.margin = `0 -${this.scrollbarWidth}px -${this.scrollbarWidth}px 0`;
+            this.contentEl.style.marginBottom = `-${this.scrollbarWidth}px`;
 
             while (this.el.firstChild)
                 this.contentEl.appendChild(this.el.firstChild)
