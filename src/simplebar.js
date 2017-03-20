@@ -69,6 +69,8 @@ export default class SimpleBar {
                 mutations.forEach(mutation => {
                     Array.from(mutation.addedNodes).forEach(addedNode => {
                         if (addedNode.nodeType === 1) {
+                            if (addedNode.SimpleBar) return;
+
                             if (addedNode.hasAttribute('data-simplebar')) {
                                 new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
                             } else {
