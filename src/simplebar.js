@@ -344,41 +344,11 @@ export default class SimpleBar {
             } else {
                 scrollbar.style.top = `${handleOffset}px`;
                 scrollbar.style.height = `${handleSize}px`;
-            } 
+            }
         } else {
             track.style.visibility = 'hidden';
         }
     }
-
-
-    /**
-     * Resize content element
-     */
-    resizeScrollContent() {
-        const _scrollbarWidth = scrollbarWidth();
-
-        // If no X overflow
-        if (this.contentEl.scrollWidth <= this.el.offsetWidth) {
-            // If no Y overflow
-            if (this.contentEl.scrollHeight <= this.el.offsetHeight) {
-                this.scrollContentEl.style.width = 'auto';
-                this.scrollContentEl.style.height = 'auto';
-            } else { // If no X overflow && Y overflow
-                this.scrollContentEl.style.width = `${this.el.offsetWidth + _scrollbarWidth}px`;
-                this.scrollContentEl.style.height = `${this.el.offsetHeight}px`;
-            }
-        } else { // If X overflow
-            // If If X overflow && no Y overflow
-            if (this.contentEl.scrollHeight <= this.el.offsetHeight) {
-                this.scrollContentEl.style.width = 'auto';
-                this.scrollContentEl.style.height = `${this.el.offsetHeight + _scrollbarWidth}px`;
-            } else { // If X overflow && Y overflow
-                this.scrollContentEl.style.height = `${this.el.offsetHeight + _scrollbarWidth}px`;
-                this.scrollContentEl.style.width = `${this.el.offsetWidth + _scrollbarWidth}px`;
-            }
-        }
-    }
-
 
     /**
      * On scroll event handling
@@ -443,7 +413,6 @@ export default class SimpleBar {
     recalculate() {
         if (!this.enabled) return;
 
-        this.resizeScrollContent();
         this.resizeScrollbar('x');
         this.resizeScrollbar('y');
     }
