@@ -10,8 +10,8 @@ export default class SimpleBar {
         this.track;
         this.scrollbar;
         this.flashTimeout;
-        this.contentEl          = this.el;
-        this.scrollContentEl    = this.el;
+        this.contentEl;
+        this.scrollContentEl;
         this.dragOffset         = { x: 0, y: 0 };
         this.isVisible          = { x: true, y: true };
         this.scrollOffsetAttr   = { x: 'scrollLeft', y: 'scrollTop' };
@@ -31,9 +31,9 @@ export default class SimpleBar {
         this.drag = this.drag.bind(this);
         this.endDrag = this.endDrag.bind(this);
 
-        this.init();
+        this.recalculate = debounce(this.recalculate, 100, { leading: true, trailing: false });
 
-        this.recalculate = debounce(this.recalculate, 100, { leading: true });
+        this.init();
     }
 
     static get defaultOptions() {
@@ -52,7 +52,7 @@ export default class SimpleBar {
     }
 
     static get htmlAttributes() {
-        return { 
+        return {
             autoHide: 'data-simplebar-autohide',
             forceEnabled: 'data-simplebar-force-enabled',
             scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
@@ -128,7 +128,8 @@ export default class SimpleBar {
         window.removeEventListener('load', this.initDOMLoadedElements);
 
         Array.from(document.querySelectorAll('[data-simplebar]')).forEach(el => {
-            new SimpleBar(el, SimpleBar.getElOptions(el));
+            if (!el.SimpleBar)
+                new SimpleBar(el, SimpleBar.getElOptions(el));
         });
     }
 
@@ -152,8 +153,6 @@ export default class SimpleBar {
 
         this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
         this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
-        this.scrollContentEl = this.el.querySelector('.' + this.classNames.scrollContent);
-        this.contentEl = this.el.querySelector('.' + this.classNames.content);
 
         // Calculate content size
         this.recalculate();
@@ -167,23 +166,19 @@ export default class SimpleBar {
     }
 
     initDOM() {
-        if (this.el.querySelectorAll(`.${this.classNames.content}`).length) {
-            return;
-        }
-        
         // Prepare DOM
         if (this.options.wrapContent) {
-            const wrapperScrollContent = document.createElement('div');
-            const wrapperContent = document.createElement('div');
-            
-            wrapperScrollContent.classList.add(this.classNames.scrollContent);
-            wrapperContent.classList.add(this.classNames.content);
-            
+            this.scrollContentEl = document.createElement('div');
+            this.contentEl = document.createElement('div');
+
+            this.scrollContentEl.classList.add(this.classNames.scrollContent);
+            this.contentEl.classList.add(this.classNames.content);
+
             while (this.el.firstChild)
-                wrapperContent.appendChild(this.el.firstChild)
-            
-            wrapperScrollContent.appendChild(wrapperContent);
-            this.el.appendChild(wrapperScrollContent);
+                this.contentEl.appendChild(this.el.firstChild)
+
+            this.scrollContentEl.appendChild(this.contentEl);
+            this.el.appendChild(this.scrollContentEl);
         }
 
         const track = document.createElement('div');
@@ -230,9 +225,7 @@ export default class SimpleBar {
             this.mutationObserver.observe(this.el, { attributes: true, childList: true, characterData: true, subtree: true });
         }
 
-        this.resizeObserver = new ResizeObserver(() => {
-            this.recalculate();
-        });
+        this.resizeObserver = new ResizeObserver(this.recalculate.bind(this));
 
         this.resizeObserver.observe(this.el);
     }
@@ -344,41 +337,11 @@ export default class SimpleBar {
             } else {
                 scrollbar.style.top = `${handleOffset}px`;
                 scrollbar.style.height = `${handleSize}px`;
-            } 
+            }
         } else {
             track.style.visibility = 'hidden';
         }
     }
-
-
-    /**
-     * Resize content element
-     */
-    resizeScrollContent() {
-        const _scrollbarWidth = scrollbarWidth();
-
-        // If no X overflow
-        if (this.contentEl.scrollWidth <= this.el.offsetWidth) {
-            // If no Y overflow
-            if (this.contentEl.scrollHeight <= this.el.offsetHeight) {
-                this.scrollContentEl.style.width = 'auto';
-                this.scrollContentEl.style.height = 'auto';
-            } else { // If no X overflow && Y overflow
-                this.scrollContentEl.style.width = `${this.el.offsetWidth + _scrollbarWidth}px`;
-                this.scrollContentEl.style.height = `${this.el.offsetHeight}px`;
-            }
-        } else { // If X overflow
-            // If If X overflow && no Y overflow
-            if (this.contentEl.scrollHeight <= this.el.offsetHeight) {
-                this.scrollContentEl.style.width = 'auto';
-                this.scrollContentEl.style.height = `${this.el.offsetHeight + _scrollbarWidth}px`;
-            } else { // If X overflow && Y overflow
-                this.scrollContentEl.style.height = `${this.el.offsetHeight + _scrollbarWidth}px`;
-                this.scrollContentEl.style.width = `${this.el.offsetWidth + _scrollbarWidth}px`;
-            }
-        }
-    }
-
 
     /**
      * On scroll event handling
@@ -443,7 +406,6 @@ export default class SimpleBar {
     recalculate() {
         if (!this.enabled) return;
 
-        this.resizeScrollContent();
         this.resizeScrollbar('x');
         this.resizeScrollbar('y');
     }

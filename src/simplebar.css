@@ -3,12 +3,21 @@
     z-index: 0;
     overflow: hidden;
     -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
+    display: flex;
 }
 
 .simplebar-scroll-content {
-    overflow: auto;
+    overflow: scroll;
     position: relative;
     z-index: 0;
+    padding: 0 15px 15px 0;
+    margin: 0 -15px -15px 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+.simplebar-content {
+    margin-bottom: -15px;
 }
 
 .simplebar-track {
