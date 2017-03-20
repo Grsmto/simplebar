@@ -10,8 +10,8 @@ export default class SimpleBar {
         this.track;
         this.scrollbar;
         this.flashTimeout;
-        this.contentEl          = this.el;
-        this.scrollContentEl    = this.el;
+        this.contentEl;
+        this.scrollContentEl;
         this.dragOffset         = { x: 0, y: 0 };
         this.isVisible          = { x: true, y: true };
         this.scrollOffsetAttr   = { x: 'scrollLeft', y: 'scrollTop' };
@@ -152,8 +152,6 @@ export default class SimpleBar {
 
         this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
         this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
-        this.scrollContentEl = this.el.querySelector('.' + this.classNames.scrollContent);
-        this.contentEl = this.el.querySelector('.' + this.classNames.content);
 
         // Calculate content size
         this.recalculate();
@@ -173,17 +171,17 @@ export default class SimpleBar {
         
         // Prepare DOM
         if (this.options.wrapContent) {
-            const wrapperScrollContent = document.createElement('div');
-            const wrapperContent = document.createElement('div');
-            
-            wrapperScrollContent.classList.add(this.classNames.scrollContent);
-            wrapperContent.classList.add(this.classNames.content);
-            
+            this.scrollContentEl = document.createElement('div');
+            this.contentEl = document.createElement('div');
+
+            this.scrollContentEl.classList.add(this.classNames.scrollContent);
+            this.contentEl.classList.add(this.classNames.content);
+
             while (this.el.firstChild)
-                wrapperContent.appendChild(this.el.firstChild)
-            
-            wrapperScrollContent.appendChild(wrapperContent);
-            this.el.appendChild(wrapperScrollContent);
+                this.contentEl.appendChild(this.el.firstChild)
+
+            this.scrollContentEl.appendChild(this.contentEl);
+            this.el.appendChild(this.scrollContentEl);
         }
 
         const track = document.createElement('div');
