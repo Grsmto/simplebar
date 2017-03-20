@@ -166,10 +166,6 @@ export default class SimpleBar {
     }
 
     initDOM() {
-        if (this.el.querySelectorAll(`.${this.classNames.content}`).length) {
-            return;
-        }
-        
         // Prepare DOM
         if (this.options.wrapContent) {
             this.scrollContentEl = document.createElement('div');
