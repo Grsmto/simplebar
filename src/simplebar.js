@@ -31,9 +31,9 @@ export default class SimpleBar {
         this.drag = this.drag.bind(this);
         this.endDrag = this.endDrag.bind(this);
 
-        this.init();
+        this.recalculate = debounce(this.recalculate, 100, { leading: true, trailing: false });
 
-        this.recalculate = debounce(this.recalculate, 100, { leading: true });
+        this.init();
     }
 
     static get defaultOptions() {
@@ -52,7 +52,7 @@ export default class SimpleBar {
     }
 
     static get htmlAttributes() {
-        return { 
+        return {
             autoHide: 'data-simplebar-autohide',
             forceEnabled: 'data-simplebar-force-enabled',
             scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
