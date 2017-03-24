@@ -1,4 +1,4 @@
-#SimpleBar 2 [![npm package][npm-badge]][npm]
+# SimpleBar 2 [![npm package][npm-badge]][npm]
 
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
@@ -9,7 +9,7 @@ See the changes:
 - **Feature:** No need to know what scroll direction you want, horizontal and vertical scrolls are now supported simultaneously.
 - **Feature:** Dependency free. Fully rewritten with ES6 (transpiled to ES6 using Babel).
 
-###Installation
+### Installation
 
 **- Via npm**
 `npm install simplebar --save`
@@ -20,23 +20,18 @@ See the changes:
 <script src="https://unpkg.com/simplebar@2.1.0/dist/simplebar.js"></script>
 ```
 
-###Usage
+### Usage
 
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 ```
 <div data-simplebar></div>
 ```
 
-###Warning!
+### :warning: Warning!
 SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often affect badly the user experience (slower scroll performances compare to natural body scroll, no usual scroll behaviours like arrow keys, etc.). Do it at your own risk!
 SimpleBar is mean to improve the experience of **internal web pages scrolls**: like a chat box or a small scrolling area.
 
-
-
-
-
-
-
+---
 
 1. [Documentation](#1-documentation)
 2. [Browsers support](#2-browsers-support)
@@ -45,7 +40,7 @@ SimpleBar is mean to improve the experience of **internal web pages scrolls**: l
 5. [Changelog](#5-changelog)
 6. [Credits](#6-credits)
 
-##1. Documentation
+## 1. Documentation
 
 ### Other usages
 You can start SimpleBar mannually if you need to:
@@ -56,7 +51,7 @@ If you want to use jQuery:
  
     new SimpleBar($('#myElement')[0])
 
-###Options
+### Options
 
 Options can be applied to the plugin during initialization:
 ```
@@ -68,13 +63,13 @@ new SimpleBar(document.getElementById('#myElement'), {
 
 Available options are:
 
-####forceEnabled
+#### forceEnabled
 
 By default SimpleBar is not enabled on floating scrollbars environments like on mobile or on mac OS. To force SimpleBar to be enabled, use this option.
 
 Default value is `false`
 
-####wrapContent
+#### wrapContent
 
 By default SimpleBar requires minimal markup. When initialized it will wrap a `simplebar-content`element in a div with the class `simplebar-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
@@ -82,7 +77,7 @@ By default SimpleBar requires minimal markup. When initialized it will wrap a `s
 
 Default value is `true`
 
-####autoHide
+#### autoHide
 
 By default SimpleBar automatically hides the scrollbar if the user is not scrolling (it emulates Mac OSX Lion's scrollbar). You can make the scrollbar always visible by setting the `autoHide` option to `false`:
 
@@ -93,12 +88,12 @@ Default value is `true`
 
 You can also control the animation via CSS as it's a simple CSS opacity transition.
 
-####scrollbarMinSize
+#### scrollbarMinSize
 Define the minimum scrollbar size in pixels.
 
 Default value is `10`
 
-####css
+#### css
 
 It is possible to specify css classes to change the design of the scrollbar. To get your own styles to work refer to `simplebar.css` to get an idea how to setup your css.
 
@@ -119,27 +114,27 @@ css: {
 }
 ```
 
-###Notifying the plugin of content changes
-####Note: you shouldn't need to use these functions as SimpleBar is taking care of that automatically. This is for advanced usage only.
+### Notifying the plugin of content changes
+#### Note: you shouldn't need to use these functions as SimpleBar is taking care of that automatically. This is for advanced usage only.
 
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 
     var el = new SimpleBar(document.getElementById('#myElement'));
     el.SimpleBar.recalculate()
 
-###Trigger programmatical scrolling
+### Trigger programmatical scrolling
 If you want to access to original scroll element, you can retrieve it via a getter :
 
     var el = new SimpleBar(document.getElementById('#myElement'));
     el.SimpleBar.getScrollElement()
 
-###Subscribe to `scroll` event
+### Subscribe to `scroll` event
 You can subscribe to the `scroll` event just like you do with native scrolling element :
     
     var el = new SimpleBar(document.getElementById('#myElement'));
     el.SimpleBar.getScrollElement().addEventListener('scroll', function(...));
 
-###Add content dynamically (ajax)
+### Add content dynamically (ajax)
 You can retrieve the element containing datas like this :
     
     var el = new SimpleBar(document.getElementById('#myElement'));
@@ -147,10 +142,10 @@ You can retrieve the element containing datas like this :
 
 This is best to use this rather than querying it via the DOM directly cause it avoids problem when the plugin is disabled (like on mobiles).
 
-###Disable Mutation Observer
+### Disable Mutation Observer
     SimpleBar.removeObserver();
 
-###Non-JS fallback
+### Non-JS fallback
 
 SimpleBar hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:
 
@@ -162,7 +157,7 @@ SimpleBar hides the browser's default scrollbars, which obviously is undesirable
       </style>
     </noscript>
 
-##2. Browsers support
+## 2. Browsers support
 
 Simplebar has been tested on the following browsers: Chrome, Firefox, Safari, Edge, IE11.
 
@@ -173,14 +168,14 @@ If you want to support IE9 you will need polyfills for:
 
 Or you can use SimpleBar v1.
 
-###Mobile support
+### Mobile support
 Most of the mobile browsers have "floating" scrollbars. Also, they are not all currently supporting hardware acceleration on `overflow: auto` elements. So we decided to automatically disable SimpleBar when a "floating" scrollbar is detected. So mobile browsers will use native scrollbar seemlessly.
 For example you will notice that it will use native scrollbar on mac OSX 10.8+ (when using trackpad) as the scrollbar is natively floating.
 
-##3. Demo
+## 3. Demo
 http://grsmto.github.io/simplebar/
 
-##4. How it works
+## 4. How it works
 
 SimpleBar does only one thing : replace the browser's default scrollbars with a custom CSS-styled scrollbar without losing performance. Unlike most of others plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...You keep the awesomeness of native scrolling...with a custom scrollbar!
 Design your scrollbar like you want, with CSS, on all browsers.
@@ -189,17 +184,17 @@ For the most part SimpleBar uses the browser's native scrolling functionality, b
 
 Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
-##5. Changelog
+## 5. Changelog
 
 See changelog here : https://github.com/Grsmto/simplebar/releases
 
-##6. Credits
+## 6. Credits
 
 Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made the original plugin called [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
 
 Website: http://html5up.net/
 
-###Additional contributors
+### Additional contributors
 
 Yoh Suzuki: wrapContent option
 
