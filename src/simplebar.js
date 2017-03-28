@@ -105,8 +105,8 @@ export default class SimpleBar {
             // Handle it asynchronously to allow scripts the opportunity to delay init
             window.setTimeout(this.initDOMLoadedElements.bind(this));
         } else {
-            document.addEventListener('DOMContentLoaded', this.initDOMLoadedElements.bind(this));
-            window.addEventListener('load', this.initDOMLoadedElements.bind(this));
+            document.addEventListener('DOMContentLoaded', this.initDOMLoadedElements.call(this));
+            window.addEventListener('load', this.initDOMLoadedElements.call(this));
         }
     }
 
