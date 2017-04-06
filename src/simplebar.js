@@ -115,7 +115,7 @@ export default class SimpleBar {
         const options = Object.keys(SimpleBar.htmlAttributes).reduce((acc, obj) => {
             const attribute = SimpleBar.htmlAttributes[obj];
             if (el.hasAttribute(attribute)) {
-                acc[obj] = JSON.parse(el.getAttribute(attribute));
+                acc[obj] = JSON.parse(el.getAttribute(attribute) || true);
             }
             return acc;
         }, {});
