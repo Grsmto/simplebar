@@ -13,7 +13,7 @@
   "main": "dist/simplebar.js",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "scripts": {
     "start": "webpack-dev-server --inline",
     "start:prod": "NODE_ENV=production webpack-dev-server",
