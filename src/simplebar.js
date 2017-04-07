@@ -142,7 +142,7 @@ export default class SimpleBar {
         this.el.SimpleBar = this;
 
         // If scrollbar is a floating scrollbar, disable the plugin
-        this.enabled = this.scrollbarWidth !== 0 && !this.options.forceEnabled;
+        this.enabled = this.scrollbarWidth !== 0 || this.options.forceEnabled;
 
         if (!this.enabled) {
             this.el.style.overflow = 'auto';
