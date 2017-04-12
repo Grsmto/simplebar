@@ -7,17 +7,16 @@
 }
 
 .simplebar-scroll-content {
-    overflow: scroll;
-    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
     z-index: 0;
-    padding: 0 15px 15px 0;
-    margin: 0 -15px -15px 0;
     max-width: 100%;
     width: 100%;
 }
 
 .simplebar-content {
-    margin-bottom: -15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 .simplebar-track {
