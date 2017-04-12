@@ -151,6 +151,9 @@ export default class SimpleBar {
 
         this.initDOM();
 
+        this.scrollContentEl = this.el.querySelector(`.${this.classNames.scrollContent}`);
+        this.contentEl = this.el.querySelector(`.${this.classNames.content}`);
+
         this.trackX = this.el.querySelector(`.${this.classNames.track}.horizontal`);
         this.trackY = this.el.querySelector(`.${this.classNames.track}.vertical`);
 
