@@ -20,12 +20,12 @@ export default class SimpleBar {
         this.offsetAttr         = { x: 'left', y: 'top' };
         this.observer;
         this.currentAxis;
-        this.enabled;
-        this.scrollbarWidth = scrollbarWidth(); // we consider that scrollbar width won't change
-                                                // during lifespan of the component
-
         this.options = Object.assign({}, SimpleBar.defaultOptions, options);
         this.classNames = this.options.classNames;
+        this.scrollbarWidth = scrollbarWidth();
+        this.offsetSize = 15;
+        // If scrollbar is a floating scrollbar, disable the plugin
+        this.enabled = this.scrollbarWidth !== 0 || this.options.forceEnabled;
 
         this.flashScrollbar = this.flashScrollbar.bind(this);
         this.startDrag = this.startDrag.bind(this);
@@ -144,12 +144,7 @@ export default class SimpleBar {
         // Save a reference to the instance, so we know this DOM node has already been instancied
         this.el.SimpleBar = this;
 
-        // If scrollbar is a floating scrollbar, disable the plugin
-        this.enabled = this.scrollbarWidth !== 0 || this.options.forceEnabled;
-
         if (!this.enabled) {
-            this.el.style.overflow = 'auto';
-
             return;
         }
 
