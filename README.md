@@ -45,7 +45,7 @@ SimpleBar is mean to improve the experience of **internal web pages scrolls**: l
 ### Other usages
 You can start SimpleBar mannually if you need to:
 
-    new SimpleBar(document.getElementById('#myElement'))
+    new SimpleBar(document.getElementById('myElement'))
 
 If you want to use jQuery:
  
@@ -55,7 +55,7 @@ If you want to use jQuery:
 
 Options can be applied to the plugin during initialization:
 ```
-new SimpleBar(document.getElementById('#myElement'), {
+new SimpleBar(document.getElementById('myElement'), {
     option1: value1,
     option2: value2
 })
@@ -73,7 +73,7 @@ Default value is `false`
 
 By default SimpleBar requires minimal markup. When initialized it will wrap a `simplebar-content`element in a div with the class `simplebar-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
-    new SimpleBar(document.getElementById('#myElement'), { wrapContent: false });
+    new SimpleBar(document.getElementById('myElement'), { wrapContent: false });
 
 Default value is `true`
 
@@ -81,7 +81,7 @@ Default value is `true`
 
 By default SimpleBar automatically hides the scrollbar if the user is not scrolling (it emulates Mac OSX Lion's scrollbar). You can make the scrollbar always visible by setting the `autoHide` option to `false`:
 
-    new SimpleBar(document.getElementById('#myElement'), { autoHide: false });
+    new SimpleBar(document.getElementById('myElement'), { autoHide: false });
 
 
 Default value is `true`
@@ -119,25 +119,25 @@ css: {
 
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 
-    var el = new SimpleBar(document.getElementById('#myElement'));
+    var el = new SimpleBar(document.getElementById('myElement'));
     el.SimpleBar.recalculate()
 
 ### Trigger programmatical scrolling
 If you want to access to original scroll element, you can retrieve it via a getter :
 
-    var el = new SimpleBar(document.getElementById('#myElement'));
+    var el = new SimpleBar(document.getElementById('myElement'));
     el.SimpleBar.getScrollElement()
 
 ### Subscribe to `scroll` event
 You can subscribe to the `scroll` event just like you do with native scrolling element :
     
-    var el = new SimpleBar(document.getElementById('#myElement'));
+    var el = new SimpleBar(document.getElementById('myElement'));
     el.SimpleBar.getScrollElement().addEventListener('scroll', function(...));
 
 ### Add content dynamically (ajax)
 You can retrieve the element containing datas like this :
     
-    var el = new SimpleBar(document.getElementById('#myElement'));
+    var el = new SimpleBar(document.getElementById('myElement'));
     el.SimpleBar.getContentElement();
 
 This is best to use this rather than querying it via the DOM directly cause it avoids problem when the plugin is disabled (like on mobiles).
