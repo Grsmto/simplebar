@@ -319,17 +319,21 @@ export default class SimpleBar {
     resizeScrollbar(axis = 'y') {
         let track;
         let scrollbar;
+        let scrollOffset;
+        let contentSize;
 
         if (axis === 'x') {
             track = this.trackX;
             scrollbar = this.scrollbarX;
+            scrollOffset = this.contentEl[this.scrollOffsetAttr[axis]]; // Either scrollTop() or scrollLeft().
+            contentSize = this.contentEl[this.scrollSizeAttr[axis]];
         } else { // 'y'
             track = this.trackY;
             scrollbar = this.scrollbarY;
+            scrollOffset = this.scrollContentEl[this.scrollOffsetAttr[axis]]; // Either scrollTop() or scrollLeft().
+            contentSize = this.contentEl[this.scrollSizeAttr[axis]] - 15;
         }
 
-        let contentSize     = this.contentEl[this.scrollSizeAttr[axis]];
-        let scrollOffset    = this.scrollContentEl[this.scrollOffsetAttr[axis]]; // Either scrollTop() or scrollLeft().
         let scrollbarSize   = track[this.sizeAttr[axis]];
         let scrollbarRatio  = scrollbarSize / contentSize;
         let scrollPourcent  = scrollOffset / (contentSize - scrollbarSize);
