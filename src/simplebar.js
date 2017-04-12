@@ -62,6 +62,8 @@ export default class SimpleBar {
     }
 
     static initHtmlApi() {
+        this.initDOMLoadedElements = this.initDOMLoadedElements.bind(this);
+
         // MutationObserver is IE11+
         if (typeof MutationObserver !== 'undefined') {
             // Mutation observer to observe dynamically added elements
@@ -105,8 +107,8 @@ export default class SimpleBar {
             // Handle it asynchronously to allow scripts the opportunity to delay init
             window.setTimeout(this.initDOMLoadedElements.bind(this));
         } else {
-            document.addEventListener('DOMContentLoaded', this.initDOMLoadedElements.call(this));
-            window.addEventListener('load', this.initDOMLoadedElements.call(this));
+            document.addEventListener('DOMContentLoaded', this.initDOMLoadedElements);
+            window.addEventListener('load', this.initDOMLoadedElements);
         }
     }
 
