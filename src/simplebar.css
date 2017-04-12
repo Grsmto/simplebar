@@ -69,11 +69,3 @@
     min-width: 10px;
     width: auto;
 }
-
-[data-simplebar-force-enabled] ::-webkit-scrollbar {
-    visibility: hidden;
-}
-
-[data-simplebar-force-enabled] ::-webkit-scrollbar-thumb {
-    visibility: hidden;
-}
