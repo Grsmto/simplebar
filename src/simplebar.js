@@ -354,11 +354,11 @@ export default class SimpleBar {
             track.style.visibility = 'visible';
 
             if (axis === 'x') {
-                scrollbar.style.left = `${handleOffset}px`;
-                scrollbar.style.width = `${handleSize}px`;
+                scrollbar.style.left = `${~~handleOffset}px`;
+                scrollbar.style.width = `${~~handleSize}px`;
             } else {
-                scrollbar.style.top = `${handleOffset}px`;
-                scrollbar.style.height = `${handleSize}px`;
+                scrollbar.style.top = `${~~handleOffset}px`;
+                scrollbar.style.height = `${~~handleSize}px`;
             }
         } else {
             track.style.visibility = 'hidden';
