@@ -210,6 +210,7 @@ export default class SimpleBar {
 
         this.el.insertBefore(this.trackX, this.el.firstChild);
         this.el.insertBefore(this.trackY, this.el.firstChild);
+        this.el.setAttribute('data-simplebar', 'init');
     }
 
     initListeners() {
