@@ -28,8 +28,9 @@ export default class SimpleBar {
         this.classNames = this.options.classNames;
 
         this.flashScrollbar = this.flashScrollbar.bind(this);
-        this.startScroll = this.startScroll.bind(this);
         this.startDrag = this.startDrag.bind(this);
+        this.onScrollY = this.onScrollY.bind(this);
+        this.onScrollX = this.onScrollX.bind(this);
         this.drag = this.drag.bind(this);
         this.endDrag = this.endDrag.bind(this);
 
@@ -219,6 +220,8 @@ export default class SimpleBar {
         this.scrollbarY.addEventListener('mousedown', (e) => this.startDrag(e, 'y'));
 
         this.scrollContentEl.addEventListener('scroll', this.startScroll);
+        this.scrollContentEl.addEventListener('scroll', this.onScrollY);
+        this.contentEl.addEventListener('scroll', this.onScrollX);
 
         // MutationObserver is IE11+
         if (typeof MutationObserver !== 'undefined') {
@@ -253,7 +256,8 @@ export default class SimpleBar {
         this.scrollbarX.removeEventListener('mousedown', (e) => this.startDrag(e, 'x'));
         this.scrollbarY.removeEventListener('mousedown', (e) => this.startDrag(e, 'y'));
 
-        this.scrollContentEl.removeEventListener('scroll', this.startScroll);
+        this.scrollContentEl.removeEventListener('scroll', this.onScrollY);
+        this.contentEl.removeEventListener('scroll', this.onScrollX);
 
         this.observer && this.observer.disconnect();
     }
@@ -353,11 +357,17 @@ export default class SimpleBar {
         }
     }
 
+
     /**
      * On scroll event handling
      */
-    startScroll() {
-        this.flashScrollbar();
+    onScrollX() {
+        this.flashScrollbar('x');
+    }
+
+    onScrollY() {
+        this.flashScrollbar('y');
+    }
     }
 
 
