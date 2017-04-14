@@ -93,24 +93,22 @@ Define the minimum scrollbar size in pixels.
 
 Default value is `10`
 
-#### css
+#### classNames
 
 It is possible to specify css classes to change the design of the scrollbar. To get your own styles to work refer to `simplebar.css` to get an idea how to setup your css.
 
-- `container` represents the wrapper for the area scrolled by simplebar.
 - `content` represents the wrapper for the content being scrolled.
 - `scrollContent` represents the container containing elements being scrolled.
 - `scrollbar` defines the style of the scrollbar with which the user can interact to scroll the content.
-- `scrollbarTrack` styles the area surrounding the `scrollbar`.
+- `track` styles the area surrounding the `scrollbar`.
 
 ```javascript
-css: {
+classNames: {
   // defaults
-  container: 'simplebar',
   content: 'simplebar-content',
   scrollContent: 'simplebar-scroll-content',
   scrollbar: 'simplebar-scrollbar',
-  scrollbarTrack: 'simplebar-track'
+  track: 'simplebar-track'
 }
 ```
 
