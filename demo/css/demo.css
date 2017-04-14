@@ -1,62 +1,10 @@
 /**
- * TrackpadScrollEmulator demo.
- * Author: Jonathan Nicol @f6design
+ * SimpleBar demo.
+ * Author: Adrien Grsmto
  * 
- * These styles are not required for TrackpadScrollEmulator
+ * These styles are not required for SimpleBar
  * to function. They are used only for styling the demo.
  */
-
- /* Global reset
-   html5doctor.com/html-5-reset-stylesheet/
-*****************************************************************/
-
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, figure, footer, header, 
-hgroup, menu, nav, section, menu,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  background: transparent;
-}                  
-
-article, aside, figure, footer, header, 
-hgroup, nav, section { display: block; }
-
-nav ul { list-style: none; }
-
-blockquote, q { quotes: none; }
-
-blockquote:before, blockquote:after,
-q:before, q:after { content: ''; content: none; }
-
-a { margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
-
-ins { background-color: #ff9; color: #000; text-decoration: none; }
-
-mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
-
-del { text-decoration: line-through; }
-
-abbr[title], dfn[title] { border-bottom: 1px dotted #000; cursor: help; }
-
-/* tables still need cellspacing="0" in the markup */
-table { border-collapse: collapse; border-spacing: 0; }
-
-hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-
-input, select { vertical-align: middle; }
 
 /* General page styles
 *****************************************************************/
@@ -66,6 +14,21 @@ body {
   font-size: 14px;
   margin: 20px;
 }
+
+section {
+
+}
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+section + section {
+  margin-top: 40px;
+}
+
 h1 {
   font-size: 30px;
   margin: 0 0 10px 0;
@@ -88,14 +51,12 @@ a:visited {
 .tse-content {
   background-color: #DDD;
 }
-.demo1-col {
+.col {
   float: left;
-  width: 20%;
-  margin: 0 20px 20px 0;
+  width: calc(50% - 20px);
 }
-.demo2-col {
-  float: left;
-  width: 40%;
+.col + .col {
+  margin-left: 40px;
 }
 .btn {
   display: inline-block;
@@ -132,13 +93,18 @@ a:visited {
     .demo1 p.odd {
       background: #f0f0f0;
       }
-.demo2 {
+  .demo1.width {
+    width: 230px;
+  }
+  .demo1.height {
+    height: 200px;
+  }
+.demo4 {
   width: 100%;
-  height: 90px;
   margin: 10px 0;
   white-space: nowrap;
   }
-    .demo2 .box {
+    .demo4 .box {
       display: inline-block;
       margin-right: 10px;
       width: 100px;
@@ -159,4 +125,8 @@ a:visited {
 .demo3 {
   height: auto;
   max-height: 300px;
+}
+
+.demo5 {
+  height: 200px;
 }
