@@ -356,8 +356,8 @@ export default class SimpleBar {
         let scrollPourcent  = scrollOffset / (contentSize - scrollbarSize);
             // Calculate new height/position of drag handle.
             // Offset of 2px allows for a small top/bottom or left/right margin around handle.
-        let handleSize      = Math.max(Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2, this.options.scrollbarMinSize);
-        let handleOffset    = (scrollbarSize - 4 - handleSize) * scrollPourcent + 2;
+        let handleSize      = Math.max(~~(scrollbarRatio * (scrollbarSize - 2)) - 2, this.options.scrollbarMinSize);
+        let handleOffset    = ~~((scrollbarSize - 4 - handleSize) * scrollPourcent + 2);
 
         // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
         this.isVisible[axis] = scrollbarSize < contentSize
@@ -366,11 +366,11 @@ export default class SimpleBar {
             track.style.visibility = 'visible';
 
             if (axis === 'x') {
-                scrollbar.style.left = `${~~handleOffset}px`;
-                scrollbar.style.width = `${~~handleSize}px`;
+                scrollbar.style.left = `${handleOffset}px`;
+                scrollbar.style.width = `${handleSize}px`;
             } else {
-                scrollbar.style.top = `${~~handleOffset}px`;
-                scrollbar.style.height = `${~~handleSize}px`;
+                scrollbar.style.top = `${handleOffset}px`;
+                scrollbar.style.height = `${handleSize}px`;
             }
         } else {
             track.style.visibility = 'hidden';
