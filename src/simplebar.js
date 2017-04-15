@@ -18,7 +18,9 @@ export default class SimpleBar {
         this.sizeAttr           = { x: 'offsetWidth', y: 'offsetHeight' };
         this.scrollSizeAttr     = { x: 'scrollWidth', y: 'scrollHeight' };
         this.offsetAttr         = { x: 'left', y: 'top' };
-        this.observer;
+        this.globalObserver;
+        this.mutationObserver;
+        this.resizeObserver;
         this.currentAxis;
         this.options = Object.assign({}, SimpleBar.defaultOptions, options);
         this.classNames = this.options.classNames;
@@ -69,7 +71,7 @@ export default class SimpleBar {
         // MutationObserver is IE11+
         if (typeof MutationObserver !== 'undefined') {
             // Mutation observer to observe dynamically added elements
-            const globalObserver = new MutationObserver(mutations => {
+            this.globalObserver = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     Array.from(mutation.addedNodes).forEach(addedNode => {
                         if (addedNode.nodeType === 1) {
@@ -99,7 +101,7 @@ export default class SimpleBar {
                 });
             });
 
-            globalObserver.observe(document, { childList: true, subtree: true });
+            this.globalObserver.observe(document, { childList: true, subtree: true });
         }
 
         // Taken from jQuery `ready` function
@@ -128,7 +130,7 @@ export default class SimpleBar {
     }
 
     static removeObserver() {
-        this.observer && this.observer.disconnect();
+        this.globalObserver.disconnect();
     }
 
     static initDOMLoadedElements() {
@@ -244,7 +246,6 @@ export default class SimpleBar {
         }
 
         this.resizeObserver = new ResizeObserver(this.recalculate.bind(this));
-
         this.resizeObserver.observe(this.el);
     }
 
@@ -264,7 +265,8 @@ export default class SimpleBar {
         this.scrollContentEl.removeEventListener('scroll', this.onScrollY);
         this.contentEl.removeEventListener('scroll', this.onScrollX);
 
-        this.observer && this.observer.disconnect();
+        this.mutationObserver.disconnect();
+        this.resizeObserver.disconnect();
     }
 
     /**
