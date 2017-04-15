@@ -175,11 +175,6 @@ export default class SimpleBar {
         // Calculate content size
         this.recalculate();
 
-        if (!this.options.autoHide) {
-            this.showScrollbar('x');
-            this.showScrollbar('y');
-        }
-
         this.initListeners();
     }
 
@@ -454,6 +449,11 @@ export default class SimpleBar {
 
         this.resizeScrollbar('x');
         this.resizeScrollbar('y');
+
+        if (!this.options.autoHide) {
+            this.showScrollbar('x');
+            this.showScrollbar('y');
+        }
     }
 
 
