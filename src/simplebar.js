@@ -273,11 +273,12 @@ export default class SimpleBar {
     onDrag(e, axis = 'y') {
         // Preventing the event's default action stops text being
         // selectable during the drag.
-        e.preventDefault()
+        e.preventDefault();
 
-        let scrollbar = axis === 'y' ? this.scrollbarY : this.scrollbarX;
+        const scrollbar = axis === 'y' ? this.scrollbarY : this.scrollbarX;
+
         // Measure how far the user's mouse is from the top of the scrollbar drag handle.
-        let eventOffset = axis === 'y' ? e.pageY : e.pageX;
+        const eventOffset = axis === 'y' ? e.pageY : e.pageX;
 
         this.dragOffset[axis] = eventOffset - scrollbar.getBoundingClientRect()[this.offsetAttr[axis]];
         this.currentAxis = axis;
@@ -291,10 +292,19 @@ export default class SimpleBar {
      * Drag scrollbar handle
      */
     drag(e) {
+        let eventOffset, track, scrollEl;
+
         e.preventDefault();
 
-        let eventOffset = this.currentAxis === 'y' ? e.pageY : e.pageX;
-        let track = this.currentAxis === 'y' ? this.trackY : this.trackX;
+        if (this.currentAxis === 'y') {
+            eventOffset = e.pageY;
+            track = this.trackY;
+            scrollEl = this.scrollContentEl;
+        } else {
+            eventOffset = e.pageX;
+            track = this.trackX;
+            scrollEl = this.contentEl;
+        }
 
         // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
         let dragPos = eventOffset - track.getBoundingClientRect()[this.offsetAttr[this.currentAxis]] - this.dragOffset[this.currentAxis];
@@ -305,7 +315,7 @@ export default class SimpleBar {
         // Scroll the content by the same percentage.
         let scrollPos = dragPerc * this.contentEl[this.scrollSizeAttr[this.currentAxis]];
 
-        this.scrollContentEl[this.scrollOffsetAttr[this.currentAxis]] = scrollPos;
+        scrollEl[this.scrollOffsetAttr[this.currentAxis]] = scrollPos;
     }
 
 
