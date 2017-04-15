@@ -57,7 +57,7 @@
           </div>
         </div>
         <div class="col demo4-col">
-          <h2>X only scroller</h2>
+          <h2>X only scroller + React init</h2>
           <div id="demo4">
           </div>
           <a class="btn add-more-horiz" href="#">Add content</a>
@@ -154,6 +154,12 @@
         );
 
         var demo5 = new SimpleBar(document.getElementById('demo5'), { wrapContent: false });
+
+        //setTimeout(function() {
+        //    demo5.unMount();
+        //}, 2000);
+
+        //SimpleBar.removeObserver();
     </script>
 </body>
 </html>
