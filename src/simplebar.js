@@ -25,7 +25,7 @@ export default class SimpleBar {
         this.options = Object.assign({}, SimpleBar.defaultOptions, options);
         this.classNames = this.options.classNames;
         this.scrollbarWidth = scrollbarWidth();
-        this.offsetSize = 15;
+        this.offsetSize = 20;
         // If scrollbar is a floating scrollbar, disable the plugin
         this.enabled = this.scrollbarWidth !== 0 || this.options.forceEnabled;
 
@@ -168,8 +168,8 @@ export default class SimpleBar {
         this.contentEl.style.paddingBottom = `${this.offsetSize}px`;
 
         if (this.enabled && this.scrollbarWidth !== 0) {
-            this.scrollContentEl.style.marginBottom = `-${this.offsetSize*2}px`;
-            this.contentEl.style.marginRight = `-${this.offsetSize}px`;
+            this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth*2}px`;
+            this.contentEl.style.marginRight = `-${this.scrollbarWidth}px`;
         }
 
         // Calculate content size
