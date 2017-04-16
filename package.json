@@ -6,7 +6,7 @@
     "node": ">=0.11.0"
   },
   "dependencies": {
-    "simplebar": "^2.3.0"
+    "simplebar": "^2.3.1"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
