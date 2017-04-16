@@ -28,11 +28,11 @@ export default class SimpleBar {
         this.offsetSize = 20;
         // If scrollbar is a floating scrollbar, disable the plugin
         this.enabled = this.scrollbarWidth !== 0 || this.options.forceEnabled;
-
         this.flashScrollbar = this.flashScrollbar.bind(this);
+        this.onDragY = this.onDragY.bind(this);
+        this.onDragX = this.onDragX.bind(this);
         this.onScrollY = this.onScrollY.bind(this);
         this.onScrollX = this.onScrollX.bind(this);
-        this.onDrag = this.onDrag.bind(this);
         this.drag = this.drag.bind(this);
         this.onEndDrag = this.onEndDrag.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
@@ -219,8 +219,8 @@ export default class SimpleBar {
             this.el.addEventListener('mouseenter', this.onMouseEnter);
         }
 
-        this.scrollbarX.addEventListener('mousedown', (e) => this.onDrag(e, 'x'));
-        this.scrollbarY.addEventListener('mousedown', (e) => this.onDrag(e, 'y'));
+        this.scrollbarY.addEventListener('mousedown', this.onDragY);
+        this.scrollbarX.addEventListener('mousedown', this.onDragX);
 
         this.scrollContentEl.addEventListener('scroll', this.onScrollY);
         this.contentEl.addEventListener('scroll', this.onScrollX);
@@ -254,14 +254,22 @@ export default class SimpleBar {
             this.el.removeEventListener('mouseenter', this.onMouseEnter);
         }
 
-        this.scrollbarX.removeEventListener('mousedown', (e) => this.onDrag(e, 'x'));
-        this.scrollbarY.removeEventListener('mousedown', (e) => this.onDrag(e, 'y'));
+        this.scrollbarX.removeEventListener('mousedown', this.onDragX);
+        this.scrollbarY.removeEventListener('mousedown', this.onDragY);
 
         this.scrollContentEl.removeEventListener('scroll', this.onScrollY);
         this.contentEl.removeEventListener('scroll', this.onScrollX);
 
         this.mutationObserver.disconnect();
         this.resizeObserver.disconnect();
+    }
+
+    onDragX(e) {
+        this.onDrag(e, 'x');
+    }
+
+    onDragY(e) {
+        this.onDrag(e, 'y');
     }
 
     /**
