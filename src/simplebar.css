@@ -13,14 +13,15 @@
 .simplebar-scroll-content {
     overflow-x: hidden;
     overflow-y: scroll;
-    z-index: 0;
     max-width: 100%;
     width: 100%;
+    box-sizing: content-box;
 }
 
 .simplebar-content {
     overflow-x: scroll;
     overflow-y: hidden;
+    box-sizing: content-box;
 }
 
 .simplebar-track {
