@@ -7,8 +7,6 @@ import './simplebar.css';
 export default class SimpleBar {
     constructor(element, options) {
         this.el = element;
-        this.track;
-        this.scrollbar;
         this.flashTimeout;
         this.contentEl;
         this.scrollContentEl;
