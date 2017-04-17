@@ -24,8 +24,6 @@ export default class SimpleBar {
         this.classNames = this.options.classNames;
         this.scrollbarWidth = scrollbarWidth();
         this.offsetSize = 20;
-        // If scrollbar is a floating scrollbar, disable the plugin
-        this.enabled = this.scrollbarWidth !== 0 || this.options.forceEnabled;
         this.flashScrollbar = this.flashScrollbar.bind(this);
         this.onDragY = this.onDragY.bind(this);
         this.onDragX = this.onDragX.bind(this);
@@ -44,7 +42,6 @@ export default class SimpleBar {
         return {
             wrapContent: true,
             autoHide: true,
-            forceEnabled: false,
             classNames: {
                 content: 'simplebar-content',
                 scrollContent: 'simplebar-scroll-content',
@@ -58,7 +55,6 @@ export default class SimpleBar {
     static get htmlAttributes() {
         return {
             autoHide: 'data-simplebar-autohide',
-            forceEnabled: 'data-simplebar-force-enabled',
             scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
         }
     }
@@ -143,10 +139,6 @@ export default class SimpleBar {
         // Save a reference to the instance, so we know this DOM node has already been instancied
         this.el.SimpleBar = this;
 
-        if (!this.enabled) {
-            return;
-        }
-
         this.initDOM();
 
         this.scrollContentEl = this.el.querySelector(`.${this.classNames.scrollContent}`);
@@ -161,7 +153,7 @@ export default class SimpleBar {
         this.scrollContentEl.style.paddingRight = `${this.offsetSize}px`;
         this.scrollContentEl.style.marginBottom = `-${this.offsetSize}px`;
 
-        if (this.enabled && this.scrollbarWidth !== 0) {
+        if (this.scrollbarWidth !== 0) {
             this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth*2}px`;
             this.contentEl.style.marginRight = `-${this.scrollbarWidth}px`;
             this.contentEl.style.paddingBottom = `${this.scrollbarWidth}px`;
@@ -242,10 +234,6 @@ export default class SimpleBar {
     }
 
     removeListeners() {
-        if (!this.enabled) {
-            return;
-        }
-
         // Event listeners
         if (this.options.autoHide) {
             this.el.removeEventListener('mouseenter', this.onMouseEnter);
@@ -450,8 +438,6 @@ export default class SimpleBar {
      * Recalculate scrollbar
      */
     recalculate() {
-        if (!this.enabled) return;
-
         this.resizeScrollbar('x');
         this.resizeScrollbar('y');
 
