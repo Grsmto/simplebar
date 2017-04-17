@@ -48,7 +48,7 @@ export default class SimpleBar {
                 scrollbar: 'simplebar-scrollbar',
                 track: 'simplebar-track'
             },
-            scrollbarMinSize: 10
+            scrollbarMinSize: 25
         }
     }
 
