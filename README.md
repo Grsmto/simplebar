@@ -3,7 +3,7 @@
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
-SimpleBar is meant to be simple to use and lightweight. If you want something more advanced I recommend https://github.com/noraesae/perfect-scrollbar
+SimpleBar is meant to be as easy to use as possible and lightweight. If you want something more advanced I recommend https://github.com/noraesae/perfect-scrollbar
 
 ### Installation
 
