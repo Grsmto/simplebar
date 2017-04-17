@@ -323,20 +323,22 @@ export default class SimpleBar {
         let scrollbar;
         let scrollOffset;
         let contentSize;
+        let scrollbarSize;
 
         if (axis === 'x') {
             track = this.trackX;
             scrollbar = this.scrollbarX;
             scrollOffset = this.contentEl[this.scrollOffsetAttr[axis]]; // Either scrollTop() or scrollLeft().
-            contentSize = this.contentEl[this.scrollSizeAttr[axis]];
+            contentSize = this.contentSizeX;
+            scrollbarSize = this.scrollbarXSize;
         } else { // 'y'
             track = this.trackY;
             scrollbar = this.scrollbarY;
             scrollOffset = this.scrollContentEl[this.scrollOffsetAttr[axis]]; // Either scrollTop() or scrollLeft().
-            contentSize = this.contentEl[this.scrollSizeAttr[axis]] - 15;
+            contentSize = this.contentSizeY;
+            scrollbarSize = this.scrollbarYSize;
         }
 
-        let scrollbarSize   = track[this.sizeAttr[axis]];
         let scrollbarRatio  = scrollbarSize / contentSize;
         let scrollPourcent  = scrollOffset / (contentSize - scrollbarSize);
         // Calculate new height/position of drag handle.
@@ -435,6 +437,11 @@ export default class SimpleBar {
      * Recalculate scrollbar
      */
     recalculate() {
+        this.contentSizeX = this.contentEl[this.scrollSizeAttr['x']];
+        this.contentSizeY = this.contentEl[this.scrollSizeAttr['y']] - (this.scrollbarWidth || this.offsetSize);
+        this.scrollbarXSize   = this.trackX[this.sizeAttr['x']];
+        this.scrollbarYSize   = this.trackY[this.sizeAttr['y']];
+
         this.resizeScrollbar('x');
         this.resizeScrollbar('y');
 
