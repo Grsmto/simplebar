@@ -150,15 +150,12 @@ export default class SimpleBar {
         this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
         this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
 
-        this.scrollContentEl.style.paddingRight = `${this.offsetSize}px`;
-        this.scrollContentEl.style.marginBottom = `-${this.offsetSize}px`;
+        this.scrollContentEl.style.paddingRight = `${this.scrollbarWidth || this.offsetSize}px`;
+        this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth*2 || this.offsetSize}px`;
+        this.contentEl.style.paddingBottom = `${this.scrollbarWidth || this.offsetSize}px`;
 
         if (this.scrollbarWidth !== 0) {
-            this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth*2}px`;
             this.contentEl.style.marginRight = `-${this.scrollbarWidth}px`;
-            this.contentEl.style.paddingBottom = `${this.scrollbarWidth}px`;
-        } else {
-            this.contentEl.style.paddingBottom = `${this.offsetSize}px`;
         }
 
         // Calculate content size
