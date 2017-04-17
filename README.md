@@ -3,16 +3,14 @@
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
-**SimpleBar 2 is here!**
-See the changes:
-- **Feature:** No need to manually instantiate SimpleBar with `new` or to call `recalculate()` anymore. Thanks to mutation observers, this is handled "automatically". Just add `data-simplebar` to any scrollable element you want and it will be SimpleBar-ified.
-- **Feature:** No need to know what scroll direction you want, horizontal and vertical scrolls are now supported simultaneously.
-- **Feature:** Dependency free. Fully rewritten with ES6 (transpiled to ES6 using Babel).
+SimpleBar is meant to be simple to use and lightweight. If you want something more advanced I recommend https://github.com/noraesae/perfect-scrollbar
 
 ### Installation
 
 **- Via npm**
 `npm install simplebar --save`
+
+Then don't forget to import both css and js in your project.
 
 **- Via `<script>` tag**
 ```
