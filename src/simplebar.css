@@ -1,13 +1,12 @@
 [data-simplebar] {
     position: relative;
     z-index: 0;
-    overflow: auto;
+    overflow: hidden;
     -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
 }
 
 [data-simplebar="init"] {
     display: flex;
-    overflow: hidden;
 }
 
 .simplebar-scroll-content {
