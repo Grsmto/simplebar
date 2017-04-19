@@ -14,8 +14,8 @@ Then don't forget to import both css and js in your project.
 
 **- Via `<script>` tag**
 ```
-<link rel="stylesheet" href="https://unpkg.com/simplebar@2.3.2/dist/simplebar.css" />
-<script src="https://unpkg.com/simplebar@2.3.2/dist/simplebar.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/simplebar@2.4.1/dist/simplebar.css" />
+<script src="https://unpkg.com/simplebar@2.4.1/dist/simplebar.js"></script>
 ```
 
 ### Usage
