@@ -61,12 +61,6 @@ new SimpleBar(document.getElementById('myElement'), {
 
 Available options are:
 
-#### forceEnabled
-
-By default SimpleBar is not enabled on floating scrollbars environments like on mobile or on mac OS. To force SimpleBar to be enabled, use this option.
-
-Default value is `false`
-
 #### wrapContent
 
 By default SimpleBar requires minimal markup. When initialized it will wrap a `simplebar-content`element in a div with the class `simplebar-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
@@ -136,8 +130,6 @@ You can retrieve the element containing datas like this :
     var el = new SimpleBar(document.getElementById('myElement'));
     el.SimpleBar.getContentElement();
 
-This is best to use this rather than querying it via the DOM directly cause it avoids problem when the plugin is disabled (like on mobiles).
-
 ### Disable Mutation Observer
     SimpleBar.removeObserver();
 
@@ -163,10 +155,6 @@ If you want to support IE9 you will need polyfills for:
 - `classList`
 
 Or you can use SimpleBar v1.
-
-### Mobile support
-Most of the mobile browsers have "floating" scrollbars. Also, they are not all currently supporting hardware acceleration on `overflow: auto` elements. So we decided to automatically disable SimpleBar when a "floating" scrollbar is detected. So mobile browsers will use native scrollbar seemlessly.
-For example you will notice that it will use native scrollbar on mac OSX 10.8+ (when using trackpad) as the scrollbar is natively floating.
 
 ## 3. Demo
 http://grsmto.github.io/simplebar/
