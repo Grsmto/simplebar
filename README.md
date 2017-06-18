@@ -61,13 +61,15 @@ new SimpleBar(document.getElementById('myElement'), {
 
 Available options are:
 
-#### wrapContent
+#### wrapContent (deprecated)
 
 By default SimpleBar requires minimal markup. When initialized it will wrap a `simplebar-content`element in a div with the class `simplebar-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
 
     new SimpleBar(document.getElementById('myElement'), { wrapContent: false });
 
 Default value is `true`
+
+:warning: this option is deprecated and shouldn't be needed anymore (just prepare your DOM as you want and it should work without having to use this option).
 
 #### autoHide
 

@@ -40,7 +40,6 @@ export default class SimpleBar {
 
     static get defaultOptions() {
         return {
-            wrapContent: true,
             autoHide: true,
             classNames: {
                 content: 'simplebar-content',
