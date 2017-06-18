@@ -17,7 +17,7 @@ Then don't forget to import both css and js in your project.
 <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
 <script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
 ```
-note: you can replace `@latest` to the latest version (ex `@4.2.2`), if you want to lock to a specific version
+note: you can replace `@latest` to the latest version (ex `@2.4.3`), if you want to lock to a specific version
 
 ### Usage
 
