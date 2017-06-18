@@ -141,12 +141,6 @@ export default class SimpleBar {
 
         this.initDOM();
 
-        this.scrollContentEl = this.el.querySelector(`.${this.classNames.scrollContent}`);
-        this.contentEl = this.el.querySelector(`.${this.classNames.content}`);
-
-        this.trackX = this.el.querySelector(`.${this.classNames.track}.horizontal`);
-        this.trackY = this.el.querySelector(`.${this.classNames.track}.vertical`);
-
         this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
         this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
 
@@ -165,8 +159,15 @@ export default class SimpleBar {
     }
 
     initDOM() {
-        // Prepare DOM
-        if (this.options.wrapContent) {
+        // make sure this element doesn't have the elements yet
+        if (Array.from(this.el.children).find(child => child.classList.contains(this.classNames.scrollContent))) {
+            // assume that element has his DOM already initiated
+            this.trackX = this.el.querySelector(`.${this.classNames.track}.horizontal`);
+            this.trackY = this.el.querySelector(`.${this.classNames.track}.vertical`);
+            this.scrollContentEl = this.el.querySelector(`.${this.classNames.scrollContent}`);
+            this.contentEl = this.el.querySelector(`.${this.classNames.content}`);
+        } else {
+            // Prepare DOM
             this.scrollContentEl = document.createElement('div');
             this.contentEl = document.createElement('div');
 
@@ -180,22 +181,25 @@ export default class SimpleBar {
             this.el.appendChild(this.scrollContentEl);
         }
 
-        const track = document.createElement('div');
-        const scrollbar = document.createElement('div');
+        if (!this.trackX || !this.trackY) {
+            const track = document.createElement('div');
+            const scrollbar = document.createElement('div');
 
-        track.classList.add(this.classNames.track);
-        scrollbar.classList.add(this.classNames.scrollbar);
+            track.classList.add(this.classNames.track);
+            scrollbar.classList.add(this.classNames.scrollbar);
 
-        track.appendChild(scrollbar);
+            track.appendChild(scrollbar);
 
-        this.trackX = track.cloneNode(true);
-        this.trackX.classList.add('horizontal');
+            this.trackX = track.cloneNode(true);
+            this.trackX.classList.add('horizontal');
 
-        this.trackY = track.cloneNode(true);
-        this.trackY.classList.add('vertical');
+            this.trackY = track.cloneNode(true);
+            this.trackY.classList.add('vertical');
 
-        this.el.insertBefore(this.trackX, this.el.firstChild);
-        this.el.insertBefore(this.trackY, this.el.firstChild);
+            this.el.insertBefore(this.trackX, this.el.firstChild);
+            this.el.insertBefore(this.trackY, this.el.firstChild);
+        }
+
         this.el.setAttribute('data-simplebar', 'init');
     }
 

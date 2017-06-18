@@ -99,6 +99,10 @@ a:visited {
   .demo1.height {
     height: 200px;
   }
+.demo1-internal {
+  width: 50%;
+  height: 300px;
+}
 .demo4 {
   width: 100%;
   margin: 10px 0;
