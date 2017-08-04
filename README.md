@@ -19,6 +19,10 @@ Then don't forget to import both css and js in your project.
 ```
 note: you can replace `@latest` to the latest version (ex `@2.4.3`), if you want to lock to a specific version
 
+**- For Ruby On Rails**
+
+To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem. 
+
 ### Usage
 
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
