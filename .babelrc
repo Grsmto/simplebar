@@ -1,7 +1,17 @@
 {
   "plugins": [
-    "transform-runtime",
     "add-module-exports"
   ],
-  "presets": ["latest"]
+  "presets": [
+    ["env", {
+      "useBuiltIns": "entry",
+      "debug": true,
+      "targets": {
+      	"browsers": [
+      	  "> 1%",
+      	  "last 2 versions"
+      	]
+      }
+    }]
+  ]
 }
