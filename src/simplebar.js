@@ -1,8 +1,9 @@
+import 'core-js/fn/array/from';
+
 import scrollbarWidth from 'scrollbarwidth';
 import debounce from 'lodash.debounce';
 import ResizeObserver from 'resize-observer-polyfill';
 
-import 'babel-polyfill';
 import './simplebar.css';
 
 export default class SimpleBar {
@@ -160,7 +161,7 @@ export default class SimpleBar {
 
     initDOM() {
         // make sure this element doesn't have the elements yet
-        if (Array.from(this.el.children).find(child => child.classList.contains(this.classNames.scrollContent))) {
+        if (Array.from(this.el.children).filter(child => child.classList.contains(this.classNames.scrollContent)).length) {
             // assume that element has his DOM already initiated
             this.trackX = this.el.querySelector(`.${this.classNames.track}.horizontal`);
             this.trackY = this.el.querySelector(`.${this.classNames.track}.vertical`);

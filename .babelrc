@@ -1,17 +1,3 @@
 {
-  "plugins": [
-    "add-module-exports"
-  ],
-  "presets": [
-    ["env", {
-      "useBuiltIns": "entry",
-      "debug": true,
-      "targets": {
-      	"browsers": [
-      	  "> 1%",
-      	  "last 2 versions"
-      	]
-      }
-    }]
-  ]
+  "presets": ["@babel/env"]
 }
