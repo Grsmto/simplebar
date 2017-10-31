@@ -1,105 +1,105 @@
 const path = require('path');
-
 const webpack = require('webpack');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
-
-const autoprefixer = require('autoprefixer');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const production = process.env.NODE_ENV == 'production';
 
 const pkg = require('./package.json');
 
-console.log(`Running ${production ? 'production' : 'dev'} app`);
-console.log(`  NODE_ENV: ${process.env.NODE_ENV}`);
-
 var plugins = [];
 
 var loaders = [
-    {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel'
-    },
-    {
-        test: /\.css$/,
-        loader: 'style!css!postcss'
-    }
+  {
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loader: 'babel-loader'
+  },
+  {
+    test: /\.css$/,
+    use: [
+      'style-loader',
+      'css-loader',
+      'postcss-loader'
+    ]
+  }
 ];
 
 if (production) {
-    loaders = [
-        {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'babel'
-        },
-        {
-            test: /\.css$/,
-            loader: ExtractTextWebpackPlugin.extract('style-loader', '!css!postcss')
+  loaders = [
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/env']
         }
-    ];
-  
-    plugins = plugins.concat([
-        // This plugin looks for similar chunks and files
-        // and merges them for better caching by the user
-        new webpack.optimize.DedupePlugin(),
-    
-        // This plugins optimizes chunks and modules by
-        // how much they are used in your app
-        new webpack.optimize.OccurrenceOrderPlugin(),
-    
-        new ExtractTextWebpackPlugin('simplebar.css', {
-            allChunks: true
-        }),
-    
-        // This plugin minifies all the Javascript code of the final bundle
-        new webpack.optimize.UglifyJsPlugin({
-            mangle: true,
-            sourceMap: false,
-            compress: {
-                warnings: false,
-                screw_ie8: true
-            }
-        }),
+      }
+    },
+    {
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          { loader: 'css-loader', options: { importLoaders: 1 } }, 
+          'postcss-loader'
+        ]
+      })
+    }
+  ];
 
-        new webpack.BannerPlugin(`
-            ${pkg.title || pkg.name} - v${pkg.version}
-            ${pkg.description}
-            ${pkg.homepage}
-            
-            Made by ${pkg.author}
-            Under ${pkg.licenses[0].type} License
-        `),
-  
-    ]);
+  plugins = [
+    new UglifyJSPlugin({
+      sourceMap: true,
+      mangle: true,
+      compress: {
+        screw_ie8: true
+      }
+    }),
+    
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
 
+    new ExtractTextPlugin('simplebar.css'),
+
+    new webpack.BannerPlugin({
+      banner: `
+        ${pkg.title || pkg.name} - v${pkg.version}
+        ${pkg.description}
+        ${pkg.homepage}
+        
+        Made by ${pkg.author}
+        Under ${pkg.license.type} License
+      `
+    })
+  ];
 }
 
 module.exports = {
-    debug: !production,
-    devtool: production ? false : 'source-map',
-  
-    entry: './src/simplebar',
-  
-    devServer: {
-        contentBase: './demo'
-    },
-  
-    output: {
-        path: 'dist',
-        filename: 'simplebar.js',
-        libraryTarget: 'umd',
-        library: 'SimpleBar'
-    },
-  
-    module: {
-        loaders
-    },
-  
-    plugins,
-  
-    postcss() {
-        return [autoprefixer];
-    }
+  devtool: production ? false : 'source-map',
+
+  entry: './src/simplebar',
+
+  devServer: {
+    contentBase: './demo'
+  },
+
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'simplebar.js',
+    libraryTarget: 'umd',
+    library: 'SimpleBar',
+    libraryExport: 'default'
+  },
+
+  module: {
+    rules: loaders
+  },
+
+  plugins
 
 };
