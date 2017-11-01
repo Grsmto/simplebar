@@ -194,4 +194,4 @@ Yoh Suzuki: wrapContent option
 
 [npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/simplebar
-[size-badge]: http://img.badgesize.io/Grsmto/simplebar/master/dist/simplebar.js?compression=gzip
+[size-badge]: http://img.badgesize.io/Grsmto/simplebar/master/dist/simplebar.js?compression=gzip&&style=flat-square
