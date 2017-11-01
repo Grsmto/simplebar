@@ -120,25 +120,25 @@ classNames: {
 If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 
     var el = new SimpleBar(document.getElementById('myElement'));
-    el.SimpleBar.recalculate()
+    el.recalculate()
 
 ### Trigger programmatical scrolling
 If you want to access to original scroll element, you can retrieve it via a getter :
 
     var el = new SimpleBar(document.getElementById('myElement'));
-    el.SimpleBar.getScrollElement()
+    el.getScrollElement()
 
 ### Subscribe to `scroll` event
 You can subscribe to the `scroll` event just like you do with native scrolling element :
     
     var el = new SimpleBar(document.getElementById('myElement'));
-    el.SimpleBar.getScrollElement().addEventListener('scroll', function(...));
+    el.getScrollElement().addEventListener('scroll', function(...));
 
 ### Add content dynamically (ajax)
 You can retrieve the element containing datas like this :
     
     var el = new SimpleBar(document.getElementById('myElement'));
-    el.SimpleBar.getContentElement();
+    el.getContentElement();
 
 ### Disable Mutation Observer
     SimpleBar.removeObserver();
