@@ -1,4 +1,4 @@
-# SimpleBar [![npm package][npm-badge]][npm]
+# SimpleBar [![npm package][npm-badge]][npm][size-badge]
 
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
@@ -194,3 +194,4 @@ Yoh Suzuki: wrapContent option
 
 [npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/simplebar
+[size-badge]: http://img.badgesize.io/Grsmto/simplebar/master/dist/simplebar.js?compression=gzip
