@@ -28,6 +28,9 @@ To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rai
 
 ### Usage
 
+If you are using a module loader you first need to load SimpleBar:
+`import 'SimpleBar';` or `import SimpleBar from 'SimpleBar';`
+
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 ```
 <div data-simplebar></div>
