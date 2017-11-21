@@ -1,4 +1,6 @@
+// Polyfills
 import 'core-js/fn/array/from';
+Object.assign = require('object-assign');
 
 import scrollbarWidth from 'scrollbarwidth';
 import debounce from 'lodash.debounce';

@@ -30,8 +30,9 @@
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
-    "scrollbarwidth": "^0.1.3",
-    "resize-observer-polyfill": "^1.4.2"
+    "object-assign": "^4.1.1",
+    "resize-observer-polyfill": "^1.4.2",
+    "scrollbarwidth": "^0.1.3"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.5",
