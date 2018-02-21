@@ -40,6 +40,9 @@ Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often affect badly the user experience (slower scroll performances compare to native body scroll, no native scroll behaviours like click on track, etc.). Do it at your own risk!
 SimpleBar is meant to improve the experience of **internal web pages scroll**: like a chat box or a small scrolling area.
 
+### Troubleshoot
+If you are experiencing issues when setting up SimpleBar it is most likely because your styles are clashing with SimpleBar ones. Make sure the element you are setting SimpleBar on does not override any SimpleBar css properties! We recommend to not style at all that element and use an inner element instead.
+
 ---
 
 1. [Documentation](#1-documentation)
