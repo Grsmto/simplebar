@@ -37,7 +37,7 @@ export default class SimpleBar {
         this.onEndDrag = this.onEndDrag.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
 
-        this.recalculate = debounce(this.recalculate, 100, { leading: true, trailing: false });
+        this.recalculate = debounce(this.recalculate, 100, { leading: true });
 
         this.init();
     }
