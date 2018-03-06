@@ -462,8 +462,8 @@ export default class SimpleBar {
     /**
      * Getter for original scrolling element
      */
-    getScrollElement() {
-        return this.scrollContentEl;
+    getScrollElement(axis = 'y') {
+        return axis === 'y' ? this.scrollContentEl : this.contentEl;
     }
 
 
