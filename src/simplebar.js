@@ -349,9 +349,8 @@ export default class SimpleBar {
         let scrollbarRatio  = scrollbarSize / contentSize;
         let scrollPourcent  = scrollOffset / (contentSize - scrollbarSize);
         // Calculate new height/position of drag handle.
-        // Offset of 2px allows for a small top/bottom or left/right margin around handle.
-        let handleSize      = Math.max(~~(scrollbarRatio * (scrollbarSize - 2)) - 2, this.options.scrollbarMinSize);
-        let handleOffset    = ~~((scrollbarSize - 4 - handleSize) * scrollPourcent + 2);
+        let handleSize      = Math.max(~~(scrollbarRatio * scrollbarSize), this.options.scrollbarMinSize);
+        let handleOffset    = ~~((scrollbarSize - handleSize) * scrollPourcent);
 
         // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
         this.isVisible[axis] = scrollbarSize < contentSize;
