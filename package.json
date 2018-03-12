@@ -64,6 +64,9 @@
     ],
     "moduleFileExtensions": [
       "js"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(css)$": "<rootDir>/jest/cssTransform.js"
+    }
   }
 }
