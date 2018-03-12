@@ -43,8 +43,6 @@
     content: "";
     background: black;
     border-radius: 7px;
-    top: 2px;
-    bottom: 2px;
     left: 0;
     right: 0;
     opacity: 0;
@@ -58,14 +56,25 @@
     transition: opacity 0 linear;
 }
 
+.simplebar-track.vertical {
+    top: 0;
+}
+
+.simplebar-track.vertical .simplebar-scrollbar:before {
+    top: 2px;
+    bottom: 2px;
+}
+
 .simplebar-track.horizontal {
     left: 0;
     width: auto;
     height: 11px;
 }
 
-.simplebar-track.vertical {
-    top: 0;
+.simplebar-track.horizontal .simplebar-scrollbar:before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
 }
 
 .horizontal.simplebar-track .simplebar-scrollbar {
