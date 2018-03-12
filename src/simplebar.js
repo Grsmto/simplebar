@@ -24,6 +24,7 @@ export default class SimpleBar {
         this.mutationObserver;
         this.resizeObserver;
         this.currentAxis;
+        this.isRtl;
         this.options = Object.assign({}, SimpleBar.defaultOptions, options);
         this.classNames = this.options.classNames;
         this.scrollbarWidth = scrollbarWidth();
@@ -147,12 +148,14 @@ export default class SimpleBar {
         this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
         this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
 
-        this.scrollContentEl.style.paddingRight = `${this.scrollbarWidth || this.offsetSize}px`;
+        this.isRtl = getComputedStyle(this.contentEl).direction === 'rtl';
+
+        this.scrollContentEl.style[this.isRtl ? 'paddingLeft' : 'paddingRight'] = `${this.scrollbarWidth || this.offsetSize}px`;
         this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth*2 || this.offsetSize}px`;
         this.contentEl.style.paddingBottom = `${this.scrollbarWidth || this.offsetSize}px`;
 
         if (this.scrollbarWidth !== 0) {
-            this.contentEl.style.marginRight = `-${this.scrollbarWidth}px`;
+            this.contentEl.style[this.isRtl ? 'marginLeft' : 'marginRight'] = `-${this.scrollbarWidth}px`;
         }
 
         // Calculate content size
