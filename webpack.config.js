@@ -73,7 +73,7 @@ if (production) {
         ${pkg.homepage}
         
         Made by ${pkg.author}
-        Under ${pkg.license.type} License
+        Under ${pkg.license} License
       `
     })
   ];
