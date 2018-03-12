@@ -58,7 +58,7 @@ export default class SimpleBar {
 
     static get htmlAttributes() {
         return {
-            autoHide: 'data-simplebar-autohide',
+            autoHide: 'data-simplebar-auto-hide',
             scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
         }
     }
