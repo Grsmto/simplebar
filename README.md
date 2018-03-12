@@ -66,24 +66,19 @@ If you want to use jQuery:
 ### Options
 
 Options can be applied to the plugin during initialization:
-```
+```javascript
 new SimpleBar(document.getElementById('myElement'), {
     option1: value1,
     option2: value2
 })
 ```
 
+or using data-attributes:
+```html
+<div data-simplebar data-simplebar-auto-hide="false">
+```
+
 Available options are:
-
-#### wrapContent (deprecated)
-
-By default SimpleBar requires minimal markup. When initialized it will wrap a `simplebar-content`element in a div with the class `simplebar-scroll-content`. If you prefer to include this wrapper element directly in your markup you can switch the default behaviour off by setting the `wrapContent` option to `false`:
-
-    new SimpleBar(document.getElementById('myElement'), { wrapContent: false });
-
-Default value is `true`
-
-:warning: this option is deprecated and shouldn't be needed anymore (just prepare your DOM as you want and it should work without having to use this option).
 
 #### autoHide
 
@@ -103,7 +98,7 @@ Default value is `10`
 
 #### classNames
 
-It is possible to specify css classes to change the design of the scrollbar. To get your own styles to work refer to `simplebar.css` to get an idea how to setup your css.
+It is possible to change the default class names that SimpleBar uses. To get your own styles to work refer to `simplebar.css` to get an idea how to setup your css.
 
 - `content` represents the wrapper for the content being scrolled.
 - `scrollContent` represents the container containing elements being scrolled.
