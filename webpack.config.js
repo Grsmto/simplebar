@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const production = process.env.NODE_ENV == 'production';
 
@@ -14,14 +13,6 @@ var loaders = [
     test: /\.js$/,
     exclude: /node_modules/,
     loader: 'babel-loader'
-  },
-  {
-    test: /\.css$/,
-    use: [
-      'style-loader',
-      'css-loader',
-      'postcss-loader'
-    ]
   }
 ];
 
@@ -36,16 +27,6 @@ if (production) {
           presets: ['@babel/env']
         }
       }
-    },
-    {
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          { loader: 'css-loader', options: { importLoaders: 1 } }, 
-          'postcss-loader'
-        ]
-      })
     }
   ];
 
@@ -63,8 +44,6 @@ if (production) {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-
-    new ExtractTextPlugin('simplebar.css'),
 
     new webpack.BannerPlugin({
       banner: `
