@@ -6,8 +6,6 @@ import scrollbarWidth from 'scrollbarwidth';
 import debounce from 'lodash.debounce';
 import ResizeObserver from 'resize-observer-polyfill';
 
-import './simplebar.css';
-
 export default class SimpleBar {
     constructor(element, options) {
         this.el = element;
