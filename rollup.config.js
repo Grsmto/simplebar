@@ -13,8 +13,8 @@ export default [
       format: 'umd'
     },
     plugins: [
-      resolve(), // so Rollup can find `ms`
-      commonjs(), // so Rollup can convert `ms` to an ES module
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
       babel({
         exclude: ['node_modules/**']
       })
@@ -29,7 +29,7 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/simplebar.js',
-    external: Object.keys(pkg.dependencies),
+    external: [...Object.keys(pkg.dependencies), 'core-js/fn/array/from'],
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' }
