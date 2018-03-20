@@ -12,7 +12,9 @@
   },
   "main": "dist/simplebar.cjs.js",
   "module": "dist/simplebar.esm.js",
-  "browser": "dist/simplebar.umd.js",
+  "browser": {
+    "./dist/simplebar.esm.js": "./dist/simplebar.esm.js"
+  },
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "version": "2.5.1",
