@@ -46,6 +46,7 @@ export default class SimpleBar {
     static get defaultOptions() {
         return {
             autoHide: true,
+            forceVisible: false,
             classNames: {
                 content: 'simplebar-content',
                 scrollContent: 'simplebar-scroll-content',
@@ -59,6 +60,7 @@ export default class SimpleBar {
     static get htmlAttributes() {
         return {
             autoHide: 'data-simplebar-auto-hide',
+            forceVisible: 'data-simplebar-force-visible',
             scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
         }
     }
@@ -358,8 +360,14 @@ export default class SimpleBar {
         // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
         this.isVisible[axis] = scrollbarSize < contentSize;
 
-        if (this.isVisible[axis]) {
+        if (this.isVisible[axis] || this.options.forceVisible) {
             track.style.visibility = 'visible';
+
+            if (this.options.forceVisible) {
+                scrollbar.style.visibility = 'hidden';
+            } else {
+                scrollbar.style.visibility = 'visible';
+            }
 
             if (axis === 'x') {
                 scrollbar.style.left = `${handleOffset}px`;
