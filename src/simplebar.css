@@ -2,6 +2,7 @@
     position: relative!important;
     z-index: 0!important;
     overflow: hidden!important;
+    max-height: inherit;
     -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
 }
 
@@ -13,6 +14,7 @@
     overflow-x: hidden!important;
     overflow-y: scroll!important;
     min-width: 100%!important;
+    max-height: inherit!important;
     box-sizing: content-box!important;
 }
 
