@@ -1,6 +1,6 @@
 /*!
  * 
- *         SimpleBar.js - v2.6.0
+ *         SimpleBar.js - v2.6.1
  *         Scrollbars, simpler.
  *         https://grsmto.github.io/simplebar/
  *         
@@ -9,29 +9,31 @@
  *       
  */
 [data-simplebar] {
-    position: relative!important;
-    z-index: 0!important;
+    position: relative;
+    z-index: 0;
     overflow: hidden!important;
+    max-height: inherit;
     -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
 }
 
 [data-simplebar="init"] {
-    display: -webkit-box!important;
-    display: -ms-flexbox!important;
-    display: flex!important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
 }
 
 .simplebar-scroll-content {
     overflow-x: hidden!important;
-    overflow-y: scroll!important;
+    overflow-y: scroll;
     min-width: 100%!important;
+    max-height: inherit!important;
     -webkit-box-sizing: content-box!important;
             box-sizing: content-box!important;
 }
 
 .simplebar-content {
-    overflow-x: scroll!important;
     overflow-y: hidden!important;
+    overflow-x: scroll;
     -webkit-box-sizing: border-box!important;
             box-sizing: border-box!important;
     min-height: 100%!important;
