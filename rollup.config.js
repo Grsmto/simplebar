@@ -1,6 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
+import license from 'rollup-plugin-license';
 import pkg from './package.json';
 
 export default [
@@ -17,6 +18,16 @@ export default [
       commonjs(), // so Rollup can convert dependencies to an ES module
       babel({
         exclude: ['node_modules/**']
+      }),
+      license({
+        banner: `
+        ${pkg.title || pkg.name} - v${pkg.version}
+        ${pkg.description}
+        ${pkg.homepage}
+        
+        Made by ${pkg.author}
+        Under ${pkg.license} License
+      `
       })
     ]
   },

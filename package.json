@@ -41,7 +41,7 @@
     "eslint": "^4.18.2",
     "jest": "^20.0.4",
     "jest-cli": "^22.4.2",
-    "rollup": "^0.56.5",
+    "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.2",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-license": "^0.6.0",
