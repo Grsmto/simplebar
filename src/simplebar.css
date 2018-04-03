@@ -87,3 +87,13 @@
     min-width: 10px;
     width: auto;
 }
+
+/* Rtl support */
+[data-simplebar-direction="rtl"] .simplebar-track {
+    right: auto;
+    left: 0;
+}
+
+[data-simplebar-direction="rtl"] .simplebar-track.horizontal {
+    right: 0;
+}

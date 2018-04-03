@@ -156,6 +156,10 @@ export default class SimpleBar {
         this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth*2 || this.offsetSize}px`;
         this.contentEl.style.paddingBottom = `${this.scrollbarWidth || this.offsetSize}px`;
 
+        if (this.isRtl) {
+            this.el.setAttribute('data-simplebar-direction', 'rtl');
+        }
+
         if (this.scrollbarWidth !== 0) {
             this.contentEl.style[this.isRtl ? 'marginLeft' : 'marginRight'] = `-${this.scrollbarWidth}px`;
         }
