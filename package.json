@@ -10,11 +10,8 @@
     "type": "git",
     "url": "http://github.com/grsmto/simplebar.git"
   },
-  "main": "dist/simplebar.cjs.js",
+  "main": "dist/simplebar.umd.js",
   "module": "dist/simplebar.esm.js",
-  "browser": {
-    "./dist/simplebar.esm.js": "./dist/simplebar.esm.js"
-  },
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "version": "2.5.1",
@@ -45,7 +42,8 @@
     "rollup-plugin-babel": "^4.0.0-beta.2",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-license": "^0.6.0",
-    "rollup-plugin-node-resolve": "^3.2.0"
+    "rollup-plugin-node-resolve": "^3.2.0",
+    "rollup-plugin-uglify": "^3.0.0"
   },
   "browserslist": [
     "> 1%",

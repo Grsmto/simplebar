@@ -2,7 +2,19 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import license from 'rollup-plugin-license';
+import uglify from 'rollup-plugin-uglify';
 import pkg from './package.json';
+
+const banner = {
+  banner: `
+        ${pkg.title || pkg.name} - v${pkg.version}
+        ${pkg.description}
+        ${pkg.homepage}
+        
+        Made by ${pkg.author}
+        Under ${pkg.license} License
+      `
+};
 
 export default [
   // browser-friendly UMD build
@@ -10,7 +22,7 @@ export default [
     input: 'src/simplebar.js',
     output: {
       name: 'SimpleBar',
-      file: pkg.browser,
+      file: pkg.main,
       format: 'umd'
     },
     plugins: [
@@ -19,16 +31,8 @@ export default [
       babel({
         exclude: ['node_modules/**']
       }),
-      license({
-        banner: `
-        ${pkg.title || pkg.name} - v${pkg.version}
-        ${pkg.description}
-        ${pkg.homepage}
-        
-        Made by ${pkg.author}
-        Under ${pkg.license} License
-      `
-      })
+      uglify(),
+      license(banner)
     ]
   },
 
@@ -41,9 +45,12 @@ export default [
   {
     input: 'src/simplebar.js',
     external: [...Object.keys(pkg.dependencies), 'core-js/fn/array/from'],
-    output: [
-      { file: pkg.main, format: 'cjs' },
-      { file: pkg.module, format: 'es' }
+    output: { 
+      file: pkg.module, 
+      format: 'es' 
+    },
+    plugins: [
+      license(banner)
     ]
   }
 ];
