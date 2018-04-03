@@ -419,7 +419,7 @@ export default class SimpleBar {
         if (!this.options.autoHide) {
             return
         }
-        if(typeof this.flashTimeout === 'number') {
+        if(this.flashTimeout) {
             window.clearTimeout(this.flashTimeout);
         }
 
@@ -434,7 +434,7 @@ export default class SimpleBar {
         this.scrollbarX.classList.remove('visible');
         this.scrollbarY.classList.remove('visible');
 
-        if(typeof this.flashTimeout === 'number') {
+        if(this.flashTimeout) {
             window.clearTimeout(this.flashTimeout);
         }
     }
