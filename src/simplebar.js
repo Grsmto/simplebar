@@ -53,15 +53,7 @@ export default class SimpleBar {
                 scrollbar: 'simplebar-scrollbar',
                 track: 'simplebar-track'
             },
-            scrollbarMinSize: 25
-        }
-    }
-
-    static get htmlAttributes() {
-        return {
-            autoHide: 'data-simplebar-auto-hide',
-            forceVisible: 'data-simplebar-force-visible',
-            scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
+            direction: 'ltr'
         }
     }
 
@@ -116,14 +108,14 @@ export default class SimpleBar {
 
     // Helper function to retrieve options from element attributes
     static getElOptions(el) {
-        const options = Object.keys(SimpleBar.htmlAttributes).reduce((acc, obj) => {
-            const attribute = SimpleBar.htmlAttributes[obj];
-            if (el.hasAttribute(attribute)) {
-                acc[obj] = JSON.parse(el.getAttribute(attribute) || true);
+        const options = Array.from(el.attributes).reduce((acc, attribute) => {
+            const option = attribute.name.match(/data-simplebar-(.+)/);
+            if (option) {
+                const key = option[1].replace(/\W+(.)/g, (x, chr) => chr.toUpperCase());
+                acc[key] = attribute.value ? JSON.parse(attribute.value) : true;
             }
             return acc;
         }, {});
-
         return options;
     }
 
