@@ -53,6 +53,8 @@ export default class SimpleBar {
                 scrollbar: 'simplebar-scrollbar',
                 track: 'simplebar-track'
             },
+            scrollbarMinSize: 25,
+            scrollbarMaxSize: 0,
             direction: 'ltr'
         }
     }
@@ -345,6 +347,11 @@ export default class SimpleBar {
         let scrollPourcent  = scrollOffset / (contentSize - scrollbarSize);
         // Calculate new height/position of drag handle.
         let handleSize      = Math.max(~~(scrollbarRatio * scrollbarSize), this.options.scrollbarMinSize);
+        
+        if (this.options.scrollbarMaxSize) {
+            handleSize = Math.min(handleSize, this.options.scrollbarMaxSize);
+        }
+        
         let handleOffset    = ~~((scrollbarSize - handleSize) * scrollPourcent);
 
         // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
