@@ -14,7 +14,7 @@
   "module": "dist/simplebar.esm.js",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
-  "version": "2.5.1",
+  "version": "2.6.1",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",

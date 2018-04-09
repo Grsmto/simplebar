@@ -22,8 +22,8 @@ export default class SimpleBar {
         this.mutationObserver;
         this.resizeObserver;
         this.currentAxis;
-        this.isRtl;
         this.options = Object.assign({}, SimpleBar.defaultOptions, options);
+        this.isRtl = this.options.direction === 'rtl';
         this.classNames = this.options.classNames;
         this.scrollbarWidth = scrollbarWidth();
         this.offsetSize = 20;
@@ -44,20 +44,16 @@ export default class SimpleBar {
     static get defaultOptions() {
         return {
             autoHide: true,
+            forceVisible: false,
             classNames: {
                 content: 'simplebar-content',
                 scrollContent: 'simplebar-scroll-content',
                 scrollbar: 'simplebar-scrollbar',
                 track: 'simplebar-track'
             },
-            scrollbarMinSize: 25
-        }
-    }
-
-    static get htmlAttributes() {
-        return {
-            autoHide: 'data-simplebar-auto-hide',
-            scrollbarMinSize: 'data-simplebar-scrollbar-min-size'
+            scrollbarMinSize: 25,
+            scrollbarMaxSize: 0,
+            direction: 'ltr'
         }
     }
 
@@ -112,14 +108,14 @@ export default class SimpleBar {
 
     // Helper function to retrieve options from element attributes
     static getElOptions(el) {
-        const options = Object.keys(SimpleBar.htmlAttributes).reduce((acc, obj) => {
-            const attribute = SimpleBar.htmlAttributes[obj];
-            if (el.hasAttribute(attribute)) {
-                acc[obj] = JSON.parse(el.getAttribute(attribute) || true);
+        const options = Array.from(el.attributes).reduce((acc, attribute) => {
+            const option = attribute.name.match(/data-simplebar-(.+)/);
+            if (option) {
+                const key = option[1].replace(/\W+(.)/g, (x, chr) => chr.toUpperCase());
+                acc[key] = attribute.value ? JSON.parse(attribute.value) : true;
             }
             return acc;
         }, {});
-
         return options;
     }
 
@@ -145,8 +141,6 @@ export default class SimpleBar {
 
         this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
         this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
-
-        this.isRtl = getComputedStyle(this.contentEl).direction === 'rtl';
 
         this.scrollContentEl.style[this.isRtl ? 'paddingLeft' : 'paddingRight'] = `${this.scrollbarWidth || this.offsetSize}px`;
         this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth*2 || this.offsetSize}px`;
@@ -351,13 +345,24 @@ export default class SimpleBar {
         let scrollPourcent  = scrollOffset / (contentSize - scrollbarSize);
         // Calculate new height/position of drag handle.
         let handleSize      = Math.max(~~(scrollbarRatio * scrollbarSize), this.options.scrollbarMinSize);
+        
+        if (this.options.scrollbarMaxSize) {
+            handleSize = Math.min(handleSize, this.options.scrollbarMaxSize);
+        }
+        
         let handleOffset    = ~~((scrollbarSize - handleSize) * scrollPourcent);
 
         // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
         this.isVisible[axis] = scrollbarSize < contentSize;
 
-        if (this.isVisible[axis]) {
+        if (this.isVisible[axis] || this.options.forceVisible) {
             track.style.visibility = 'visible';
+
+            if (this.options.forceVisible) {
+                scrollbar.style.visibility = 'hidden';
+            } else {
+                scrollbar.style.visibility = 'visible';
+            }
 
             if (axis === 'x') {
                 scrollbar.style.left = `${handleOffset}px`;

@@ -1,24 +1,26 @@
 [data-simplebar] {
-    position: relative!important;
-    z-index: 0!important;
+    position: relative;
+    z-index: 0;
     overflow: hidden!important;
+    max-height: inherit;
     -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
 }
 
 [data-simplebar="init"] {
-    display: flex!important;
+    display: flex;
 }
 
 .simplebar-scroll-content {
     overflow-x: hidden!important;
-    overflow-y: scroll!important;
+    overflow-y: scroll;
     min-width: 100%!important;
+    max-height: inherit!important;
     box-sizing: content-box!important;
 }
 
 .simplebar-content {
-    overflow-x: scroll!important;
     overflow-y: hidden!important;
+    overflow-x: scroll;
     box-sizing: border-box!important;
     min-height: 100%!important;
 }
@@ -84,4 +86,14 @@
     min-height: 0;
     min-width: 10px;
     width: auto;
+}
+
+/* Rtl support */
+[data-simplebar-direction="rtl"] .simplebar-track {
+    right: auto;
+    left: 0;
+}
+
+[data-simplebar-direction="rtl"] .simplebar-track.horizontal {
+    right: 0;
 }
