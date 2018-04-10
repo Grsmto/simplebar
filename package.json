@@ -39,6 +39,8 @@
     "eslint": "^4.18.2",
     "jest": "^22.4.2",
     "jest-cli": "^22.4.2",
+    "jest-puppeteer": "^2.3.0",
+    "puppeteer": "^1.2.0",
     "regenerator-runtime": "^0.11.1",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.2",
@@ -52,6 +54,7 @@
     "last 2 versions"
   ],
   "jest": {
+    "preset": "jest-puppeteer",
     "transform": {
       "^.+\\.js?$": "babel-jest"
     },

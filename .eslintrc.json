@@ -8,5 +8,9 @@
     "extends": "eslint:recommended",
     "parserOptions": {
         "sourceType": "module"
+    },
+    "globals": {
+        "page": true,
+        "browser": true
     }
 }
