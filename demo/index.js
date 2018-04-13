@@ -5,9 +5,10 @@ import 'SimpleBar';
 
 ReactDOM.render(
     <section>
+        <h1>Simplebar demo page</h1>
         <section>
             <div className="col demo1-col">
-                <div className="demo1" data-simplebar data-simplebar-auto-hide="false">
+                <div id="demo1" className="demo1" data-simplebar data-simplebar-auto-hide="false">
                     {[...Array(50)].map((x, i) =>
                         <p key={i} className="odd">Some content</p>
                     )}
@@ -15,7 +16,7 @@ ReactDOM.render(
             </div>
             <div className="col demo2-col">
                 <h2>Default</h2>
-                <div className="demo1" data-simplebar>
+                <div id="demo2" className="demo1" data-simplebar>
                     {[...Array(10)].map((x, i) =>
                         <p key={i} className="odd">Some content</p>
                     )}

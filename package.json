@@ -16,9 +16,11 @@
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "version": "2.6.1",
   "scripts": {
+    "start": "webpack-dev-server --inline",
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "jest"
+    "test": "jest",
+    "precommit": "lint-staged && npm run test"
   },
   "license": "MIT",
   "engines": {
@@ -34,7 +36,9 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/preset-react": "^7.0.0-beta.44",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.0-beta.2",
     "babel-jest": "^22.4.3",
     "eslint": "^4.18.2",
     "eslint-config-prettier": "^2.9.0",
@@ -48,12 +52,17 @@
     "prettier-eslint-cli": "^4.7.1",
     "puppeteer": "^1.2.0",
     "regenerator-runtime": "^0.11.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.2",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-license": "^0.6.0",
     "rollup-plugin-node-resolve": "^3.2.0",
-    "rollup-plugin-uglify": "^3.0.0"
+    "rollup-plugin-uglify": "^3.0.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
   },
   "browserslist": [
     "> 1%",
