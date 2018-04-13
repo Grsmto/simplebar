@@ -79,5 +79,11 @@
     "moduleFileExtensions": [
       "js"
     ]
+  },
+  "lint-staged": {
+    "client/src/**/*.{js,jsx,json}": [
+      "prettier-eslint --single-quote --write",
+      "git add"
+    ]
   }
 }

@@ -3,7 +3,7 @@ module.exports = {
         headless: process.env.CI === 'true',
     },
     server: {
-        command: 'npm run:dev',
-        port: 4444,
+        command: 'npm start',
+        port: 8080,
     },
 }
