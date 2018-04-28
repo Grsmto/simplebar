@@ -10,17 +10,17 @@
 //     const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 //     const scrollElementY = simpleBar.getScrollElement();
 //     const scrollElementX = simpleBar.getScrollElement('x');
-    
+
 //     expect(scrollElementY).toBe(simpleBar.scrollContentEl);
 //     expect(scrollElementX).toBe(simpleBar.contentEl);
 // });
 
 describe('Load', () => {
-    beforeAll(async () => {
-        await page.goto('http://localhost:8080/demo/');
-    })
-    
-    it('should render demo page', async () => {
-        await expect(page).toMatch('Simplebar demo page');
-    })
+  beforeAll(async () => {
+    await page.goto('http://localhost:8080/demo/');
+  });
+
+  it('should render demo page', async () => {
+    await expect(page).toMatch('Simplebar demo page');
+  });
 });
