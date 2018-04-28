@@ -2,15 +2,28 @@
     "env": {
         "browser": true,
         "node": true,
-        "es6": true,
-        "jest": true
+        "es6": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion": 8
     },
-    "globals": {
-        "page": true,
-        "browser": true
-    }
+    "overrides": [
+        {
+            "files": [
+                "**/*.test.js"
+            ],
+            "env": {
+                "jest": true,
+                "jest/globals": true
+            },
+            "globals": {
+                "page": true
+            },
+            "plugins": [
+                "jest"
+            ]
+        }
+    ]
 }
