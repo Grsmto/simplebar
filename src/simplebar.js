@@ -357,7 +357,7 @@ export default class SimpleBar {
   toggleTrackVisibility(axis = 'y') {
     let track = axis === 'y' ? this.trackY : this.trackX;
 
-    if (this.isVisible[axis]) {
+    if (this.isVisible[axis] || this.options.forceVisible) {
       track.style.visibility = 'visible';
     } else {
       track.style.visibility = 'hidden';
