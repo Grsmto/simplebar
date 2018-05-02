@@ -29,7 +29,7 @@ note: you can replace `@latest` to the latest version (ex `@2.4.3`), if you want
 If you are using a module loader (like Webpack) you first need to load SimpleBar:
 ```
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
-import 'simplebar/src/simplebar.css';
+import 'simplebar/dist/simplebar.css';
 ```
 
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
