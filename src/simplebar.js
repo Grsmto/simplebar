@@ -11,6 +11,7 @@ import './simplebar.css';
 export default class SimpleBar {
     constructor(element, options) {
         this.el = element;
+        this.originalParent = element.parentNode;
         this.flashTimeout;
         this.contentEl;
         this.scrollContentEl;
@@ -487,6 +488,22 @@ export default class SimpleBar {
     unMount() {
         this.removeListeners();
         this.el.SimpleBar = null;
+    }
+    
+    /**
+     * Destroy the object and remove traces of it in dom. 
+     * Restore element to original parent.
+     */
+    destroy() {
+        this.unMount();
+        this.originalParent.apendChild(this.el);
+        this.originalParent.querySelector('[class*="simplebar-"]').remove();
+        /**
+         * clean up DOM references to prevent leakage
+         */
+        this.el = null;
+        this.originalParent = null;
+        
     }
 
     /**
