@@ -11,9 +11,14 @@ describe('Load', () => {
     await expect(page).toMatchElement('[data-simplebar] .simplebar-content');
   });
 
+  it('should not auto hide the scrollbar', async () => {
+    const demo = await expect(page).toMatchElement('[data-simplebar-auto-hide="false"]');
+    await expect(demo).toMatchElement('.simplebar-scrollbar.visible');
+  });
+  
   it('should force scrollbar track to be visible but scrollbar to be hidden', async () => {
     const trackSelector = '[data-simplebar-force-visible] .simplebar-track.vertical';
-
+    
     await page.waitForSelector(trackSelector, { visible: true });
     await page.waitForSelector(`${trackSelector} .simplebar-scrollbar`, { hidden: true });
   });
