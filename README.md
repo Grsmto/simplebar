@@ -10,7 +10,8 @@ SimpleBar is meant to be as easy to use as possible and lightweight. If you want
 **- Via npm**
 `npm install simplebar --save`
 
-Then don't forget to import both css and js in your project.
+**- Via Yarn**
+`yarn add simplebar`
 
 **- Via `<script>` tag**
 ```
@@ -22,19 +23,21 @@ Then don't forget to import both css and js in your project.
 ```
 note: you can replace `@latest` to the latest version (ex `@2.4.3`), if you want to lock to a specific version
 
-**- For Ruby On Rails**
-
-To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem. 
 
 ### Usage
 
-If you are using a module loader you first need to load SimpleBar:
-`import 'SimpleBar';` or `import SimpleBar from 'SimpleBar';`
+If you are using a module loader (like Webpack) you first need to load SimpleBar:
+```
+import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+import 'simplebar/src/simplebar.css';
+```
 
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 ```
 <div data-simplebar></div>
 ```
+
+**Don't forget to import both css and js in your project!**
 
 ### :warning: Warning!
 SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often affect badly the user experience (slower scroll performances compare to native body scroll, no native scroll behaviours like click on track, etc.). Do it at your own risk!
@@ -193,9 +196,10 @@ Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made t
 
 Website: http://html5up.net/
 
-### Additional contributors
+### Community plugins
 
-Yoh Suzuki: wrapContent option
+**Ruby On Rails**
+To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem. 
 
 [npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/simplebar
