@@ -42,10 +42,12 @@ ReactDOM.render(
                 </div>
             </div>
             <div className="col">
+                <h2>direction RTL</h2>
                 <div 
                     className={"demo4"} 
                     style={{ width: '200px', direction: 'rtl' }} 
                     data-simplebar
+                    data-simplebar-direction="rtl"
                 >
                     <div className={"box"}>1</div>
                     <div className={"box"}>2</div>

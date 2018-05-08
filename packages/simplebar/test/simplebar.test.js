@@ -26,7 +26,8 @@ describe('Load', () => {
   });
 
   it('should display SimpleBar right to left', async () => {
-    const demo = await expect(page).toMatchElement('[data-simplebar-direction="rtl"]');
-    // await expect(demo).toMatchElement('.simplebar-scrollbar.visible');
+    await expect(page).toMatchElement('[data-simplebar-direction="rtl"]');
+    const options = await page.$eval('[data-simplebar-direction="rtl"]', el => el.SimpleBar.options);
+    await expect(options.direction).toEqual('rtl');
   });
 });
