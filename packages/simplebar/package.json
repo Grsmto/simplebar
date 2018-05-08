@@ -25,6 +25,9 @@
     "resize-observer-polyfill": "^1.5.0",
     "scrollbarwidth": "^0.1.3"
   },
+  "devDependencies": {
+    "react-select": "^1.2.1"
+  },
   "jest": {
     "preset": "jest-puppeteer",
     "transform": {
