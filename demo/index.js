@@ -1,7 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'SimpleBar';
+import Select from 'react-select';
+import SimpleBar from 'simplebar-react';
+import 'simplebar';
 
+function menuRenderer(params) {
+    // use default renderer in a hacky way
+    const menu = Select.defaultProps.menuRenderer(params);
+
+    return <SimpleBar>{menu}</SimpleBar>;
+};
 
 ReactDOM.render(
     <section>
@@ -45,6 +53,17 @@ ReactDOM.render(
                     <div className={"box"}>4</div>
                     <div className={"box"}>5</div>
                 </div>
+            </div>
+        </section>
+        <section>
+            <div className="col">
+                <h2>React-Select</h2>
+                <Select
+                    menuRenderer={menuRenderer}
+                    options={[...Array(50)].map((x, i) => ({ value: i, label: i }))}
+                />
+            </div>
+            <div className="col">
             </div>
         </section>
     </section>,
