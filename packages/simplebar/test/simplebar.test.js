@@ -22,4 +22,9 @@ describe('Load', () => {
     await page.waitForSelector(trackSelector, { visible: true });
     await page.waitForSelector(`${trackSelector} .simplebar-scrollbar`, { hidden: true });
   });
+
+  it('should display SimpleBar right to left', async () => {
+    const demo = await expect(page).toMatchElement('[data-simplebar-direction="rtl"]');
+    // await expect(demo).toMatchElement('.simplebar-scrollbar.visible');
+  });
 });

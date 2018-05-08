@@ -26,11 +26,11 @@ export default [
       format: 'umd'
     },
     plugins: [
+      babel({
+        exclude: ['/**/node_modules/**']
+      }),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
-      babel({
-        exclude: ['node_modules/**']
-      }),
       uglify(),
       license(banner)
     ]
@@ -50,6 +50,9 @@ export default [
       format: 'es' 
     },
     plugins: [
+      babel({
+        exclude: ['/**/node_modules/**']
+      }),
       license(banner)
     ]
   }

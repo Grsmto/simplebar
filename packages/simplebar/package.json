@@ -1,0 +1,23 @@
+{
+  "version": "2.6.1",
+  "name": "simplebar",
+  "title": "SimpleBar.js",
+  "description": "Scrollbars, simpler.",
+  "files": [
+    "dist"
+  ],
+  "author": "Adrien Denat from a fork by Jonathan Nicol",
+  "repository": "grsmto/simplebar",
+  "main": "dist/simplebar.umd.js",
+  "module": "dist/simplebar.esm.js",
+  "homepage": "https://grsmto.github.io/simplebar/",
+  "bugs": "https://github.com/grsmto/simplebar/issues",
+  "license": "MIT",
+  "dependencies": {
+    "core-js": "^2.5.3",
+    "lodash.debounce": "^4.0.8",
+    "object-assign": "^4.1.1",
+    "resize-observer-polyfill": "^1.5.0",
+    "scrollbarwidth": "^0.1.3"
+  }
+}

@@ -47,7 +47,8 @@ export default class SimpleBar {
       },
       scrollbarMinSize: 25,
       scrollbarMaxSize: 0,
-      direction: 'ltr'
+      direction: 'ltr',
+      timeout: 1000
     };
   }
 
@@ -114,7 +115,19 @@ export default class SimpleBar {
       const option = attribute.name.match(/data-simplebar-(.+)/);
       if (option) {
         const key = option[1].replace(/\W+(.)/g, (x, chr) => chr.toUpperCase());
-        acc[key] = attribute.value ? JSON.parse(attribute.value) : true;
+        switch (attribute.value) {
+          case 'true':
+            acc[key] = true;
+            break;
+          case 'false':
+            acc[key] = false;
+            break;
+          case undefined:
+            acc[key] = true;
+            break;
+          default:
+            acc[key] = attribute.value;
+        }
       }
       return acc;
     }, {});
@@ -356,11 +369,21 @@ export default class SimpleBar {
 
   toggleTrackVisibility(axis = 'y') {
     let track = axis === 'y' ? this.trackY : this.trackX;
+    let scrollbar = axis === 'y' ? this.scrollbarY : this.scrollbarX;
 
     if (this.isVisible[axis] || this.options.forceVisible) {
       track.style.visibility = 'visible';
     } else {
       track.style.visibility = 'hidden';
+    }
+
+    // Even if forceVisible is enabled, scrollbar itself should be hidden
+    if (this.options.forceVisible) {
+      if (this.isVisible[axis]) {
+        scrollbar.style.visibility = 'visible';
+      } else {
+        scrollbar.style.visibility = 'hidden';
+      }
     }
   }
 
@@ -433,7 +456,7 @@ export default class SimpleBar {
       window.clearTimeout(this.flashTimeout);
     }
 
-    this.flashTimeout = window.setTimeout(this.hideScrollbar.bind(this), 1000);
+    this.flashTimeout = window.setTimeout(this.hideScrollbar.bind(this), this.options.timeout);
   }
 
   /**
