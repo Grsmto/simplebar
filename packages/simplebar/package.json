@@ -13,11 +13,28 @@
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
   "dependencies": {
     "core-js": "^2.5.3",
     "lodash.debounce": "^4.0.8",
     "object-assign": "^4.1.1",
     "resize-observer-polyfill": "^1.5.0",
     "scrollbarwidth": "^0.1.3"
+  },
+  "jest": {
+    "preset": "jest-puppeteer",
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ]
   }
 }

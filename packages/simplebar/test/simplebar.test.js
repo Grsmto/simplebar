@@ -1,6 +1,8 @@
+import jestPuppeteerConfig from '../jest-puppeteer.config';
+
 describe('Load', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:8080/demo/');
+    await page.goto(`http://localhost:${jestPuppeteerConfig.server.port}/demo/`);
   });
 
   it('should render demo page', async () => {

@@ -4,10 +4,10 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "webpack-dev-server --inline",
-    "build": "cd packages/simplebar && rollup -c",
+    "start": "cd packages/simplebar && yarn start",
+    "build": "cd packages/simplebar && yarn run build",
     "build:react": "cd packages/simplebar-react && rollup -c",
-    "dev": "cd packages/simplebar && rollup -c -w",
+    "dev": "cd packages/simplebar && yarn run dev",
     "test": "cd packages/simplebar && jest",
     "precommit": "lint-staged && npm run test"
   },
@@ -47,20 +47,9 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions"
+    "not ie 11",
+    "not op_mini all"
   ],
-  "jest": {
-    "preset": "jest-puppeteer",
-    "transform": {
-      "^.+\\.js?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
-    "moduleFileExtensions": [
-      "js"
-    ]
-  },
   "lint-staged": {
     "src/*.{js,jsx,json}": [
       "prettier-eslint --single-quote --write",
