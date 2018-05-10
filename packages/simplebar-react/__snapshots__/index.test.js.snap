@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with options 1`] = `
+<div
+  data-simplebar={true}
+  data-simplebar-auto-hide="false"
+>
+  <div
+    className="simplebar-scroll-content"
+  >
+    <div
+      className="simplebar-content"
+    >
+      <p>
+        Some content
+      </p>
+      <p>
+        Some content
+      </p>
+      <p>
+        Some content
+      </p>
+      <p>
+        Some content
+      </p>
+      <p>
+        Some content
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders without crashing 1`] = `
+<div
+  data-simplebar={true}
+>
+  <div
+    className="simplebar-scroll-content"
+  >
+    <div
+      className="simplebar-content"
+    >
+      <p>
+        Some content
+      </p>
+      <p>
+        Some content
+      </p>
+      <p>
+        Some content
+      </p>
+      <p>
+        Some content
+      </p>
+      <p>
+        Some content
+      </p>
+    </div>
+  </div>
+</div>
+`;

@@ -8,6 +8,15 @@
     ],
     "@babel/preset-react"
   ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env"
+        ]
+      ]
+    }
+  },
   "plugins": [
     "transform-react-remove-prop-types"
   ]

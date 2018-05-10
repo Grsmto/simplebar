@@ -9,7 +9,7 @@ function menuRenderer(params) {
     const menu = Select.defaultProps.menuRenderer(params);
 
     return <SimpleBar>{menu}</SimpleBar>;
-};
+}
 
 ReactDOM.render(
     <section>
