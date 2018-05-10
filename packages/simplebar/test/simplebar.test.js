@@ -1,33 +1,26 @@
-import jestPuppeteerConfig from '../jest-puppeteer.config';
+import SimpleBar from 'simplebar';
 
-describe('Load', () => {
-  beforeAll(async () => {
-    await page.goto(`http://localhost:${jestPuppeteerConfig.server.port}/demo/`);
-  });
+beforeEach(() => {
+  jest.resetModules();
 
-  it('should render demo page', async () => {
-    await expect(page).toMatch('Simplebar demo page');
-  });
+  // Set up our document body
+  document.body.innerHTML = '<div id="simplebar"></div>';
+});
 
-  it('should render SimpleBar on data-simplebar elements', async () => {
-    await expect(page).toMatchElement('[data-simplebar] .simplebar-content');
-  });
+test('should call constructor', () => {
+  const SimpleBar = require('../src/simplebar').default;
+  jest.mock('../src/simplebar');
 
-  it('should not auto hide the scrollbar', async () => {
-    const demo = await expect(page).toMatchElement('[data-simplebar-auto-hide="false"]');
-    await expect(demo).toMatchElement('.simplebar-scrollbar.visible');
-  });
-  
-  it('should force scrollbar track to be visible but scrollbar to be hidden', async () => {
-    const trackSelector = '[data-simplebar-force-visible] .simplebar-track.vertical';
-    
-    await page.waitForSelector(trackSelector, { visible: true });
-    await page.waitForSelector(`${trackSelector} .simplebar-scrollbar`, { hidden: true });
-  });
+  new SimpleBar(document.getElementById('simplebar'));
 
-  it('should display SimpleBar right to left', async () => {
-    await expect(page).toMatchElement('[data-simplebar-direction="rtl"]');
-    const options = await page.$eval('[data-simplebar-direction="rtl"]', el => el.SimpleBar.options);
-    await expect(options.direction).toEqual('rtl');
-  });
+  expect(SimpleBar).toHaveBeenCalledTimes(1);
+});
+
+test('should return right scroll element', () => {
+  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+  const scrollElementY = simpleBar.getScrollElement();
+  const scrollElementX = simpleBar.getScrollElement('x');
+
+  expect(scrollElementY).toBe(simpleBar.scrollContentEl);
+  expect(scrollElementX).toBe(simpleBar.contentEl);
 });

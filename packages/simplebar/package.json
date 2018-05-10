@@ -16,7 +16,9 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "test": "jest -c jest-unit.config.js",
+    "test:e2e": "jest -c jest-e2e.config.js"
   },
   "dependencies": {
     "core-js": "^2.5.3",
@@ -27,17 +29,5 @@
   },
   "devDependencies": {
     "react-select": "^1.2.1"
-  },
-  "jest": {
-    "preset": "jest-puppeteer",
-    "transform": {
-      "^.+\\.js?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
-    "moduleFileExtensions": [
-      "js"
-    ]
   }
 }
