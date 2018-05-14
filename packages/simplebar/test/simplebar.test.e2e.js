@@ -2,7 +2,7 @@ import jestPuppeteerConfig from '../jest-puppeteer.config';
 
 describe('Load', () => {
   beforeAll(async () => {
-    await page.goto(`http://localhost:${jestPuppeteerConfig.server.port}/demo/`);
+    await page.goto(`http://localhost:${jestPuppeteerConfig.server.port}/examples.html`);
   });
 
   it('should render demo page', async () => {

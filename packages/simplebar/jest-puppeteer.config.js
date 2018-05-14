@@ -3,7 +3,7 @@ module.exports = {
         headless: process.env.CI === 'true',
     },
     server: {
-        command: 'webpack-dev-server --inline --port 8091',
+        command: 'webpack-dev-server --port 8091 --mode=development',
         port: 8091
     }
 }
