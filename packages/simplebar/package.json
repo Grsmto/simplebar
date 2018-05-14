@@ -21,9 +21,7 @@
     "test:e2e": "jest -c jest-e2e.config.js"
   },
   "dependencies": {
-    "core-js": "^2.5.3",
     "lodash.debounce": "^4.0.8",
-    "object-assign": "^4.1.1",
     "resize-observer-polyfill": "^1.5.0",
     "scrollbarwidth": "^0.1.3"
   },

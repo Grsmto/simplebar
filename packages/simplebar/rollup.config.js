@@ -44,7 +44,7 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/simplebar.js',
-    external: [...Object.keys(pkg.dependencies), 'core-js/fn/array/from'],
+    external: Object.keys(pkg.dependencies),
     output: { 
       file: pkg.module, 
       format: 'es' 
