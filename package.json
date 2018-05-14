@@ -8,8 +8,8 @@
     "build": "cd packages/simplebar && yarn run build",
     "build:react": "cd packages/simplebar-react && rollup -c",
     "dev": "cd packages/simplebar && yarn run dev",
-    "test": "cd packages/simplebar && jest",
-    "precommit": "lint-staged && npm run test"
+    "test": "cd packages/simplebar && yarn run test",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.46",
