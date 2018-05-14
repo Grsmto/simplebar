@@ -1,5 +1,11 @@
 language: node_js
 
+before_install:
+  - npm i -g lerna
+
+install:
+  - lerna bootstrap
+
 deploy:
   provider: pages
   skip-cleanup: true
