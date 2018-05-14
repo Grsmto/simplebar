@@ -4,6 +4,8 @@ import Select from 'react-select';
 import SimpleBar from 'simplebar-react';
 import 'simplebar';
 
+import 'simplebar/src/simplebar.css';
+
 function menuRenderer(params) {
     // use default renderer in a hacky way
     const menu = Select.defaultProps.menuRenderer(params);

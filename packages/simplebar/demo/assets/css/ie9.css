@@ -1,0 +1,50 @@
+/*
+	Fractal by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/* Spotlight */
+
+	.spotlight .image {
+		width: 25%;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.spotlight .content {
+		width: 65%;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.spotlight:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	.spotlight:nth-child(2n) .image {
+		margin: 0 3em 0 0;
+	}
+
+	.spotlight:nth-child(2n) .content {
+		text-align: left;
+	}
+
+/* Header */
+
+	#header {
+		height: auto;
+		text-align: center;
+	}
+
+		#header .content {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		#header .image {
+			display: inline-block;
+			vertical-align: middle;
+		}

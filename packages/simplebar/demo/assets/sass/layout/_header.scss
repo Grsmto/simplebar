@@ -1,0 +1,205 @@
+@import '../libs/vars';
+@import '../libs/functions';
+@import '../libs/mixins';
+
+///
+/// Fractal by HTML5 UP
+/// html5up.net | @n33co
+/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+///
+
+/* Header */
+
+	#header {
+		@include color(accent1);
+		@include padding(4.5em, 0);
+		@include vendor('align-items', 'center');
+		@include vendor('display', 'flex');
+		@include vendor('justify-content', 'center');
+		background-image: url('images/overlay.png'), url('images/pattern-size1.svg');
+		background-position: top left, center center;
+		background-attachment: fixed, fixed;
+		background-size: auto, cover;
+		height: 100vh;
+		min-height: 35em;
+
+		h1 {
+			font-size: 3.25em;
+			font-weight: _font(weight-bold);
+			margin-bottom: _size(element-margin) * 0.25;
+		}
+
+		p {
+			font-size: 1.5em;
+			line-height: 1.35em;
+
+			br {
+				display: inline;
+			}
+		}
+
+		.content {
+			@include vendor('transition', ('opacity 0.5s ease', 'transform 1s ease'));
+			@include vendor('transform', 'translateX(0)');
+			opacity: 1;
+			text-align: right;
+			margin: (_size(element-margin) * -1.75) (_size(element-margin) * 2) 0 0;
+
+			> :last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		.image {
+			@include vendor('transition', ('opacity 1s ease', 'transform 1s ease'));
+			@include vendor('transform', 'translateY(0)');
+			opacity: 1;
+
+			img {
+				@include vendor('transition', 'opacity 0.75s ease');
+				@include vendor('transition-delay', '0.75s');
+				opacity: 1;
+			}
+		}
+
+		// Large.
+			@include breakpoint(large) {
+				background-image: url('images/overlay.png'), url('images/pattern-size2.svg');
+			}
+
+		// Medium.
+			@include breakpoint(medium) {
+				height: auto;
+				min-height: 0;
+
+				.content {
+					margin: (_size(element-margin) * -1) (_size(element-margin) * 2) 0 0;
+				}
+
+				// Portrait.
+					@include orientation(portrait) {
+						@include padding(6em, 3em);
+						@include vendor('flex-direction', 'column-reverse');
+
+						.content {
+							display: block;
+							width: 100%;
+							text-align: center;
+							margin: 0 0 _size(element-margin) 0;
+						}
+
+						.image {
+							overflow: hidden;
+						}
+					}
+
+			}
+
+		// Small.
+			@include breakpoint(small) {
+				background-image: url('images/overlay.png'), url('images/pattern-size3.svg');
+
+				h1 {
+					font-size: 2em;
+				}
+
+				p {
+					font-size: 1em;
+					line-height: inherit;
+				}
+
+				// Landscape.
+					@include orientation(landscape) {
+						@include padding(2em, 2em);
+
+						.content {
+							margin: 0 _size(element-margin) _size(element-margin) 0;
+						}
+
+						.image {
+							font-size: 0.8em;
+							width: 15em;
+							max-width: 20vw;
+
+							.inner, &:before, &:after {
+								font-size: 0.8em;
+							}
+						}
+					}
+
+				// Portrait.
+					@include orientation(portrait) {
+						@include padding(3em, 1.5em);
+
+						.image {
+							font-size: 0.6em;
+							max-width: 60vw;
+						}
+					}
+
+			}
+
+		// XSmall.
+			@include breakpoint(xsmall) {
+
+				// Landscape.
+					@include orientation(landscape) {
+						@include padding(2em, 1.5em);
+
+						.image {
+							font-size: 0.7em;
+						}
+
+						.actions {
+							font-size: 0.8em;
+						}
+					}
+
+				// Portrait.
+					@include orientation(portrait) {
+						@include padding(2em, 1em);
+					}
+
+			}
+
+		// Mobile.
+			body.is-mobile & {
+				background-attachment: scroll, scroll;
+			}
+
+		// Loading.
+			body.is-loading & {
+				.content {
+					@include vendor('transform', 'translateX(2em)');
+					opacity: 0;
+				}
+
+				.image {
+					@include vendor('transform', 'translateY(4em)');
+					opacity: 0;
+
+					img {
+						opacity: 0;
+					}
+				}
+
+				// Medium.
+					@include breakpoint(medium) {
+
+						// Portrait.
+							@include orientation(portrait) {
+								.content {
+									@include vendor('transform', 'none');
+									opacity: 1;
+								}
+
+								.image {
+									@include vendor('transform', 'translateY(2em)');
+								}
+							}
+
+					}
+
+			}
+
+	}
