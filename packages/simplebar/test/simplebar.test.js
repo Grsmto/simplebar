@@ -1,4 +1,4 @@
-import SimpleBar from 'simplebar';
+import SimpleBar from '../src/simplebar';
 
 beforeEach(() => {
   jest.resetModules();
