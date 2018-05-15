@@ -4,11 +4,8 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "cd packages/simplebar && yarn start",
-    "build": "cd packages/simplebar && yarn run build",
-    "build:react": "cd packages/simplebar-react && rollup -c",
-    "dev": "cd packages/simplebar && yarn run dev",
-    "test": "cd packages/simplebar && yarn run test",
+    "build": "lerna run build",
+    "test": "lerna run test",
     "precommit": "lint-staged"
   },
   "devDependencies": {

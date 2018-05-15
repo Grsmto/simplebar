@@ -13,6 +13,7 @@
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
   "scripts": {
+    "build": "rollup -c",
     "test": "jest"
   },
   "dependencies": {
