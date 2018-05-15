@@ -7,7 +7,7 @@
   ],
   "author": "Adrien Denat",
   "repository": "grsmto/simplebar",
-  "main": "dist/simplebar-react.umd.js",
+  "main": "dist/simplebar-react.js",
   "module": "dist/simplebar-react.esm.js",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "homepage": "https://grsmto.github.io/simplebar/",
