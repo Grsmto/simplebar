@@ -225,16 +225,16 @@ export default class SimpleBar {
   initListeners() {
     // Event listeners
     if (this.options.autoHide) {
-      this.el.addEventListener('mouseenter', this.onMouseEnter.bind(this));
+      this.el.addEventListener('mouseenter', this.onMouseEnter);
     }
 
     this.el.addEventListener('mousedown', this.onMouseDown);
 
-    this.contentEl.addEventListener('scroll', this.onScrollX.bind(this));
-    this.scrollContentEl.addEventListener('scroll', this.onScrollY.bind(this));
+    this.contentEl.addEventListener('scroll', this.onScrollX);
+    this.scrollContentEl.addEventListener('scroll', this.onScrollY);
 
     // Browser zoom triggers a window resize
-    window.addEventListener('resize', this.onWindowResize.bind(this));
+    window.addEventListener('resize', this.onWindowResize);
 
     // MutationObserver is IE11+
     if (typeof MutationObserver !== 'undefined') {
@@ -404,12 +404,12 @@ export default class SimpleBar {
   /**
    * On scroll event handling
    */
-  onScrollX() {
+  onScrollX = () => {
     this.showScrollbar('x');
     this.positionScrollbar('x');
   }
 
-  onScrollY() {
+  scrollY = () => {
     this.showScrollbar('y');
     this.positionScrollbar('y');
   }
@@ -417,12 +417,12 @@ export default class SimpleBar {
   /**
    * On mouseenter event handling
    */
-  onMouseEnter() {
+  onMouseEnter = () => {
     this.showScrollbar('x');
     this.showScrollbar('y');
   }
 
-  onWindowResize() {
+  onWindowResize = () => {
     this.hideNativeScrollbar();
   }
 
@@ -451,13 +451,13 @@ export default class SimpleBar {
       window.clearTimeout(this.flashTimeout);
     }
 
-    this.flashTimeout = window.setTimeout(this.hideScrollbar.bind(this), this.options.timeout);
+    this.flashTimeout = window.setTimeout(this.hideScrollbars, this.options.timeout);
   }
 
   /**
    * Hide Scrollbar
    */
-  hideScrollbar() {
+  hideScrollbars = () => {
     this.scrollbarX.classList.remove('visible');
     this.scrollbarY.classList.remove('visible');
 
