@@ -355,9 +355,9 @@ export default class SimpleBar {
 
     if (this.isVisible[axis] || this.options.forceVisible) {
       if (axis === 'x') {
-        scrollbar.style.left = `${handleOffset}px`;
+        scrollbar.style.transform = `translate3d(${handleOffset}px, 0, 0)`;
       } else {
-        scrollbar.style.top = `${handleOffset}px`;
+        scrollbar.style.transform = `translate3d(0, ${handleOffset}px, 0)`;
       }
     }
   }
