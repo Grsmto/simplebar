@@ -228,8 +228,7 @@ export default class SimpleBar {
       this.el.addEventListener('mouseenter', this.onMouseEnter.bind(this));
     }
 
-    this.scrollbarY.addEventListener('mousedown', this.onDragY.bind(this));
-    this.scrollbarX.addEventListener('mousedown', this.onDragX.bind(this));
+    this.el.addEventListener('mousedown', this.onMouseDown);
 
     this.contentEl.addEventListener('scroll', this.onScrollX.bind(this));
     this.scrollContentEl.addEventListener('scroll', this.onScrollY.bind(this));
@@ -467,12 +466,16 @@ export default class SimpleBar {
     }
   }
 
-  onDragX(e) {
-    this.onDrag(e, 'x');
+    window.clearTimeout(this.flashTimeout);
   }
 
-  onDragY(e) {
-    this.onDrag(e, 'y');
+  onMouseDown = (e) => {
+    const bbox = this.scrollbarY.getBoundingClientRect();
+
+    if (e.pageX >= bbox.x && e.clientX <= bbox.x + bbox.width && e.clientY >= bbox.y && e.clientY <= bbox.y + bbox.height) {
+      e.preventDefault();
+      this.onDrag(e, 'y');
+    }
   }
 
   /**
@@ -499,7 +502,7 @@ export default class SimpleBar {
   /**
    * Drag scrollbar handle
    */
-  drag(e) {
+  drag = (e) => {
     let eventOffset, track, scrollEl;
 
     e.preventDefault();
@@ -533,7 +536,7 @@ export default class SimpleBar {
   /**
    * End scroll handle drag
    */
-  onEndDrag() {
+  onEndDrag = () => {
     document.removeEventListener('mousemove', this.drag);
     document.removeEventListener('mouseup', this.onEndDrag);
   }
@@ -557,9 +560,6 @@ export default class SimpleBar {
     if (this.options.autoHide) {
       this.el.removeEventListener('mouseenter', this.onMouseEnter);
     }
-
-    this.scrollbarX.removeEventListener('mousedown', this.onDragX);
-    this.scrollbarY.removeEventListener('mousedown', this.onDragY);
 
     this.scrollContentEl.removeEventListener('scroll', this.onScrollY);
     this.contentEl.removeEventListener('scroll', this.onScrollX);

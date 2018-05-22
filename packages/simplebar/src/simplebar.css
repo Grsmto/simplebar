@@ -31,6 +31,7 @@
     right: 0;
     bottom: 0;
     width: 11px;
+    pointer-events: none;
 }
 
 .simplebar-scrollbar {
