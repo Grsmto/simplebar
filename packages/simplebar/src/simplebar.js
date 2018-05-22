@@ -9,7 +9,8 @@ export default class SimpleBar {
     this.contentEl;
     this.scrollContentEl;
     this.dragOffset = { x: 0, y: 0 };
-    this.isVisible = { x: true, y: true };
+    this.isEnabled = { x: true, y: true };
+    this.isVisible = { x: false, y: false };
     this.scrollOffsetAttr = { x: 'scrollLeft', y: 'scrollTop' };
     this.sizeAttr = { x: 'offsetWidth', y: 'offsetHeight' };
     this.scrollSizeAttr = { x: 'scrollWidth', y: 'scrollHeight' };
@@ -275,9 +276,9 @@ export default class SimpleBar {
     this.trackXSize = this.trackX[this.sizeAttr['x']];
     this.trackYSize = this.trackY[this.sizeAttr['y']];
 
-    // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
-    this.isVisible['x'] = this.trackXSize < this.contentSizeX;
-    this.isVisible['y'] = this.trackYSize < this.contentSizeY;
+    // Set isEnabled to false if scrollbar is not necessary (content is shorter than wrapper)
+    this.isEnabled['x'] = this.trackXSize < this.contentSizeX;
+    this.isEnabled['y'] = this.trackYSize < this.contentSizeY;
 
     this.resizeScrollbar('x');
     this.resizeScrollbar('y');
@@ -294,7 +295,7 @@ export default class SimpleBar {
     let contentSize;
     let trackSize;
 
-    if (!this.isVisible[axis] && !this.options.forceVisible) {
+    if (!this.isEnabled[axis] && !this.options.forceVisible) {
       return;
     }
 
@@ -353,7 +354,7 @@ export default class SimpleBar {
     let scrollPourcent = scrollOffset / (contentSize - trackSize);
     let handleOffset = ~~((trackSize - this.handleSize) * scrollPourcent);
 
-    if (this.isVisible[axis] || this.options.forceVisible) {
+    if (this.isEnabled[axis] || this.options.forceVisible) {
       if (axis === 'x') {
         scrollbar.style.transform = `translate3d(${handleOffset}px, 0, 0)`;
       } else {
@@ -366,7 +367,7 @@ export default class SimpleBar {
     let track = axis === 'y' ? this.trackY : this.trackX;
     let scrollbar = axis === 'y' ? this.scrollbarY : this.scrollbarX;
 
-    if (this.isVisible[axis] || this.options.forceVisible) {
+    if (this.isEnabled[axis] || this.options.forceVisible) {
       track.style.visibility = 'visible';
     } else {
       track.style.visibility = 'hidden';
@@ -374,7 +375,7 @@ export default class SimpleBar {
 
     // Even if forceVisible is enabled, scrollbar itself should be hidden
     if (this.options.forceVisible) {
-      if (this.isVisible[axis]) {
+      if (this.isEnabled[axis]) {
         scrollbar.style.visibility = 'visible';
       } else {
         scrollbar.style.visibility = 'hidden';
@@ -440,6 +441,11 @@ export default class SimpleBar {
   showScrollbar(axis = 'y') {
     let scrollbar;
 
+    // Scrollbar already visible
+    if (this.isVisible[axis]) {
+      return;
+    }
+
     if (axis === 'x') {
       scrollbar = this.scrollbarX;
     } else {
@@ -447,16 +453,13 @@ export default class SimpleBar {
       scrollbar = this.scrollbarY;
     }
 
-    if (this.isVisible[axis]) {
+    if (this.isEnabled[axis]) {
       scrollbar.classList.add('visible');
+      this.isVisible[axis] = true;
     }
 
     if (!this.options.autoHide) {
       return;
-    }
-
-    if (this.flashTimeout) {
-      window.clearTimeout(this.flashTimeout);
     }
 
     this.flashTimeout = window.setTimeout(this.hideScrollbars, this.options.timeout);
@@ -469,10 +472,8 @@ export default class SimpleBar {
     this.scrollbarX.classList.remove('visible');
     this.scrollbarY.classList.remove('visible');
 
-    if (this.flashTimeout) {
-      window.clearTimeout(this.flashTimeout);
-    }
-  }
+    this.isVisible.x = false;
+    this.isVisible.y = false;
 
     window.clearTimeout(this.flashTimeout);
   }
