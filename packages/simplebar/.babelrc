@@ -8,6 +8,9 @@
       }
     ]
   ],
+  "plugins": [
+    "transform-class-properties"
+  ],
   "env": {
     "test": {
       "presets": [

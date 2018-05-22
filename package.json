@@ -16,6 +16,7 @@
     "babel-eslint": "8",
     "babel-jest": "^22.4.3",
     "babel-loader": "^8.0.0-beta.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
