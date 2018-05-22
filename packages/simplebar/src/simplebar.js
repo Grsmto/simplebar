@@ -405,6 +405,14 @@ export default class SimpleBar {
    * On scroll event handling
    */
   onScrollX = () => {
+    window.requestAnimationFrame(this.scrollX);
+  }
+
+  onScrollY = () => {
+    window.requestAnimationFrame(this.scrollY);
+  }
+
+  scrollX = () => {
     this.showScrollbar('x');
     this.positionScrollbar('x');
   }
