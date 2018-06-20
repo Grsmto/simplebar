@@ -376,6 +376,7 @@ export default class SimpleBar {
             }
         } else {
             track.style.visibility = 'hidden';
+            scrollbar.style.visibility = 'hidden';
         }
     }
 
