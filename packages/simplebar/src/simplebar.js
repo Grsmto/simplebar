@@ -6,6 +6,7 @@ export default class SimpleBar {
   constructor(element, options) {
     this.el = element;
     this.flashTimeout;
+    this.repeatInterval;
     this.contentEl;
     this.scrollContentEl;
     this.dragOffset = { x: 0, y: 0 };
@@ -280,6 +281,9 @@ export default class SimpleBar {
     this.isEnabled['x'] = this.trackXSize < this.contentSizeX;
     this.isEnabled['y'] = this.trackYSize < this.contentSizeY;
 
+    this.positionScrollbar('x');
+    this.positionScrollbar('y');
+    
     this.resizeScrollbar('x');
     this.resizeScrollbar('y');
 
@@ -479,22 +483,42 @@ export default class SimpleBar {
   }
 
   onMouseDown = (e) => {
-    const bbox = this.scrollbarY.getBoundingClientRect();
-
-    if (e.pageX >= bbox.x && e.clientX <= bbox.x + bbox.width && e.clientY >= bbox.y && e.clientY <= bbox.y + bbox.height) {
+    const bboxY = this.scrollbarY.getBoundingClientRect();
+    const bboxX = this.scrollbarX.getBoundingClientRect();
+    
+    if (e.clientX >= bboxY.x && e.clientX <= bboxY.x + bboxY.width) {
       e.preventDefault();
-      this.onDrag(e, 'y');
+
+      this.currentAxis = 'y';
+
+      // On scrollbar
+      if (e.clientY >= bboxY.y && e.clientY <= bboxY.y + bboxY.height) {
+        this.onDrag(e, 'y');
+      } else { // On track
+        this.onClickOnTrack(e, 'y', bboxY);
+      }
     }
+
+    if (e.clientX >= bboxX.x && e.clientX <= bboxX.x + bboxX.width) {
+      e.preventDefault();
+
+      this.currentAxis = 'x';
+
+      // On scrollbar
+      if (e.clientY >= bboxX.y && e.clientY <= bboxX.y + bboxX.height) {
+        this.onDrag(e, 'x');
+      } else { // On track
+        this.onClickOnTrack(e, 'x', bboxX);
+      }
+    }
+
+    document.addEventListener('mouseup', this.onMouseUp);
   }
 
   /**
    * on scrollbar handle drag
    */
   onDrag(e, axis = 'y') {
-    // Preventing the event's default action stops text being
-    // selectable during the drag.
-    e.preventDefault();
-
     const scrollbar = axis === 'y' ? this.scrollbarY : this.scrollbarX;
 
     // Measure how far the user's mouse is from the top of the scrollbar drag handle.
@@ -502,7 +526,6 @@ export default class SimpleBar {
 
     this.dragOffset[axis] =
       eventOffset - scrollbar.getBoundingClientRect()[this.offsetAttr[axis]];
-    this.currentAxis = axis;
 
     document.addEventListener('mousemove', this.drag);
     document.addEventListener('mouseup', this.onEndDrag);
@@ -513,8 +536,6 @@ export default class SimpleBar {
    */
   drag = (e) => {
     let eventOffset, track, scrollEl;
-
-    e.preventDefault();
 
     if (this.currentAxis === 'y') {
       eventOffset = e.pageY;
@@ -542,12 +563,45 @@ export default class SimpleBar {
     scrollEl[this.scrollOffsetAttr[this.currentAxis]] = scrollPos;
   }
 
+  onClickOnTrack(e, axis = 'y', bbox) {
+    if (axis === 'y') {
+      // If increment
+      if (e.clientY > bbox.y + bbox.height) {
+        this.incrementScroll();
+        this.repeatInterval = window.setInterval(this.incrementScroll, 500);
+      } else {
+        // decrement
+        this.decrementScroll();
+        this.repeatInterval = window.setInterval(this.decrementScroll, 500);
+      }
+    }
+
+    this.positionScrollbar(axis);
+  }
+
+  incrementScroll = () => {
+    if (this.currentAxis === 'y') {
+      this.scrollContentEl[this.scrollOffsetAttr[this.currentAxis]] += this.trackY.getBoundingClientRect().height;
+    }
+  }
+
+  decrementScroll = () => {
+    if (this.currentAxis === 'y') {
+      this.scrollContentEl[this.scrollOffsetAttr[this.currentAxis]] -= this.trackY.getBoundingClientRect().height;
+    }
+  }
+
   /**
    * End scroll handle drag
    */
   onEndDrag = () => {
     document.removeEventListener('mousemove', this.drag);
     document.removeEventListener('mouseup', this.onEndDrag);
+  }
+
+  onMouseUp = () => {
+    window.clearInterval(this.repeatInterval);
+    document.removeEventListener('mouseup', this.onMouseUp);
   }
 
   /**
