@@ -29,7 +29,7 @@ describe('Load', () => {
     const el = await expect(page).toMatchElement('[data-simplebar-direction="rtl"]');
     const scrollbarEl = await expect(el).toMatchElement('.simplebar-track.horizontal .simplebar-scrollbar');
     const options = await page.$eval('[data-simplebar-direction="rtl"]', el => el.SimpleBar.options);
-    const left = await page.evaluate(el => el.offsetLeft, scrollbarEl);
+    const transformStyle = await page.evaluate(el => el.style.transform, scrollbarEl);
   
     // const styles = await scrollbarEl.getProperty('style');
     // const left = await styles.getProperty('left');
@@ -38,6 +38,6 @@ describe('Load', () => {
     const scrollbarElBoundingBox = await scrollbarEl.boundingBox();
 
     expect(options.direction).toEqual('rtl');
-    expect(elBoundingBox.width - scrollbarElBoundingBox.width).toEqual(left);
+    expect(transformStyle).toEqual(`translate3d(${ elBoundingBox.width - scrollbarElBoundingBox.width}px, 0px, 0px)`);
   });
 });
