@@ -67,6 +67,18 @@ ReactDOM.render(
                 />
             </div>
             <div className="col">
+                <h2>Horizontal</h2>
+                <div
+                    className={"demo4"}
+                    style={{ width: '200px' }}
+                    data-simplebar
+                >
+                    <div className={"box"}>1</div>
+                    <div className={"box"}>2</div>
+                    <div className={"box"}>3</div>
+                    <div className={"box"}>4</div>
+                    <div className={"box"}>5</div>
+                </div>
             </div>
         </section>
     </section>,
