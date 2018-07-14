@@ -406,21 +406,29 @@ export default class SimpleBar {
    * On scroll event handling
    */
   onScrollX = () => {
-    window.requestAnimationFrame(this.scrollX);
+    if (!this.scrollXTicking) {
+      window.requestAnimationFrame(this.scrollX);
+      this.scrollXTicking = true;
+    }
   }
 
   onScrollY = () => {
-    window.requestAnimationFrame(this.scrollY);
+    if (!this.scrollYTicking) {
+      window.requestAnimationFrame(this.scrollY);
+      this.scrollYTicking = true;
+    }
   }
 
   scrollX = () => {
     this.showScrollbar('x');
     this.positionScrollbar('x');
+    this.scrollXTicking = false;
   }
 
   scrollY = () => {
     this.showScrollbar('y');
     this.positionScrollbar('y');
+    this.scrollYTicking = false;
   }
 
   /**
