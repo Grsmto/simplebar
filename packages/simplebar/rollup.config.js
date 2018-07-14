@@ -47,7 +47,8 @@ export default [
     external: Object.keys(pkg.dependencies),
     output: { 
       file: pkg.module, 
-      format: 'es' 
+      format: 'es',
+      sourcemap: true
     },
     plugins: [
       babel({
