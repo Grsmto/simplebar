@@ -1,12 +1,33 @@
 {
+    "parser": "babel-eslint",
     "env": {
         "browser": true,
         "node": true,
-        "es6": true,
-        "jest": true
+        "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "parserOptions": {
-        "sourceType": "module"
-    }
+        "sourceType": "module",
+        "ecmaVersion": 2018
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.test?(.*).js"
+            ],
+            "env": {
+                "jest": true,
+                "jest/globals": true
+            },
+            "globals": {
+                "page": true
+            },
+            "plugins": [
+                "jest"
+            ]
+        }
+    ]
 }

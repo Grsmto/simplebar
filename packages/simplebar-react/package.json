@@ -1,0 +1,41 @@
+{
+  "name": "simplebar-react",
+  "version": "0.0.0",
+  "description": "React component for SimpleBar",
+  "files": [
+    "dist"
+  ],
+  "author": "Adrien Denat",
+  "repository": "grsmto/simplebar",
+  "main": "dist/simplebar-react.js",
+  "module": "dist/simplebar-react.esm.js",
+  "bugs": "https://github.com/grsmto/simplebar/issues",
+  "homepage": "https://grsmto.github.io/simplebar/",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.1",
+    "simplebar": "^2.6.1"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
+    "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
+  },
+  "devDependencies": {
+    "react-test-renderer": "^16.3.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ]
+  }
+}

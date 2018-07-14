@@ -1,0 +1,20 @@
+language: node_js
+
+before_install:
+  - npm i -g lerna
+
+install:
+  - lerna bootstrap
+
+script:
+  - yarn build
+  - yarn test
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  on:
+    branch: gh-pages
+  local-dir: packages/simplebar/demo

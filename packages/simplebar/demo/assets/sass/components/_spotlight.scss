@@ -1,0 +1,85 @@
+@import '../libs/vars';
+@import '../libs/functions';
+@import '../libs/mixins';
+
+///
+/// Fractal by HTML5 UP
+/// html5up.net | @n33co
+/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+///
+
+/* Spotlight */
+
+	.spotlight {
+		@include vendor('display', 'flex');
+		@include vendor('align-items', 'center');
+		margin: 0 0 _size(element-margin) 0;
+
+		.image {
+			width: 30%;
+			border-radius: 100%;
+			margin: 0 (_size(element-margin) * 1.5) 0 0;
+			display: block;
+
+			img {
+				display: block;
+				border-radius: 100%;
+				width: 100%;
+			}
+		}
+
+		.content {
+			width: 70%;
+
+			> :last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		&:nth-child(2n) {
+			@include vendor('flex-direction', 'row-reverse');
+
+			.image {
+				margin: 0 0 0 (_size(element-margin) * 1.5);
+			}
+
+			.content {
+				text-align: right;
+			}
+		}
+
+		// Small.
+			@include breakpoint(small) {
+
+				// Landscape.
+					@include orientation(landscape) {
+						.image {
+							margin: 0 _size(element-margin) 0 0;
+						}
+
+						&:nth-child(2n) {
+							.image {
+								margin: 0 0 0 _size(element-margin);
+							}
+						}
+					}
+
+				// Portrait.
+					@include orientation(portrait) {
+						@include vendor('flex-direction', 'column !important');
+
+						.image {
+							width: 100%;
+							max-width: 60%;
+							margin: 0 0 _size(element-margin) 0 !important;
+						}
+
+						.content {
+							width: 100%;
+							text-align: center !important;
+						}
+					}
+
+			}
+
+	}

@@ -1,0 +1,47 @@
+@import '../libs/vars';
+@import '../libs/functions';
+@import '../libs/mixins';
+
+///
+/// Fractal by HTML5 UP
+/// html5up.net | @n33co
+/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+///
+
+/* Footer */
+
+	#footer {
+		@include color-typography(accent3);
+		@include padding(4.5em, 0);
+		color: _palette(accent3, fg-light);
+		text-align: center;
+
+		a {
+			color: inherit;
+		}
+
+		.copyright {
+			font-size: 0.8em;
+		}
+
+		// Medium.
+			@include breakpoint(medium) {
+				@include padding(4em, 4em);
+			}
+
+		// Small.
+			@include breakpoint(small) {
+
+				// Landscape.
+					@include orientation(landscape) {
+						@include padding(3em, 3em);
+					}
+
+				// Portrait.
+					@include orientation(portrait) {
+						@include padding(3em, 1.5em);
+					}
+
+			}
+
+	}
