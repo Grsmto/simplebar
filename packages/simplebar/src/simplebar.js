@@ -283,6 +283,9 @@ export default class SimpleBar {
     this.resizeScrollbar('x');
     this.resizeScrollbar('y');
 
+    this.positionScrollbar('x');
+    this.positionScrollbar('y');
+
     this.toggleTrackVisibility('x');
     this.toggleTrackVisibility('y');
   }
