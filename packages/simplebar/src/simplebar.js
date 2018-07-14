@@ -1,5 +1,5 @@
 import scrollbarWidth from 'scrollbarwidth';
-import debounce from 'lodash.debounce';
+import throttle from 'lodash.throttle';
 import ResizeObserver from 'resize-observer-polyfill';
 
 export default class SimpleBar {
@@ -25,9 +25,7 @@ export default class SimpleBar {
     this.classNames = this.options.classNames;
     this.offsetSize = 20;
 
-    this.recalculate = debounce(this.recalculate.bind(this), 1000, {
-      leading: true
-    });
+    this.recalculate = throttle(this.recalculate.bind(this), 1000);
 
     this.init();
   }
