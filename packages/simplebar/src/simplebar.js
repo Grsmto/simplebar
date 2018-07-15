@@ -1,6 +1,7 @@
 import scrollbarWidth from 'scrollbarwidth';
 import throttle from 'lodash.throttle';
 import ResizeObserver from 'resize-observer-polyfill';
+import canUseDOM from 'can-use-dom';
 
 export default class SimpleBar {
   constructor(element, options) {
@@ -97,7 +98,7 @@ export default class SimpleBar {
       (document.readyState !== 'loading' && !document.documentElement.doScroll)
     ) {
       // Handle it asynchronously to allow scripts the opportunity to delay init
-      window.setTimeout(this.initDOMLoadedElements.bind(this));
+      window.setTimeout(this.initDOMLoadedElements);
     } else {
       document.addEventListener('DOMContentLoaded', this.initDOMLoadedElements);
       window.addEventListener('load', this.initDOMLoadedElements);
@@ -151,11 +152,14 @@ export default class SimpleBar {
 
     this.initDOM();
 
-    // Calculate content size
-    this.hideNativeScrollbar();
-    this.render();
-
-    this.initListeners();
+    // We stop here on server-side
+    if (canUseDOM) {
+      // Calculate content size
+      this.hideNativeScrollbar();
+      this.render();
+  
+      this.initListeners();
+    }
   }
 
   initDOM() {
@@ -607,5 +611,8 @@ export default class SimpleBar {
 
 /**
  * HTML API
+ * Called only in a browser env.
  */
-SimpleBar.initHtmlApi();
+if (canUseDOM) {
+  SimpleBar.initHtmlApi();
+}

@@ -24,6 +24,7 @@
     "test:e2e": "jest -c jest-e2e.config.js"
   },
   "dependencies": {
+    "can-use-dom": "^0.1.0",
     "lodash.throttle": "^4.1.1",
     "resize-observer-polyfill": "^1.5.0",
     "scrollbarwidth": "^0.1.3"
