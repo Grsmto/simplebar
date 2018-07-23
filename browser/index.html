@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>SimpleBar demo</title>
-    <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/demo.css" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="../../src/simplebar.css" />
+  <link rel="stylesheet" href="css/demo.css" />
 	<noscript>
 		<style>
 			/**
@@ -20,14 +20,14 @@
 				overflow: auto;
 			}
 		</style>
-	</noscript>
+  </noscript>
 </head>
 <body>
     <h1>SimpleBar demo</h1>
     <section>
         <div class="col demo1-col">
-          <h2>X and Y scroller</h2>
-          <div class="demo1" data-simplebar data-simplebar-autohide="false" style="text-align: right;">
+          <h2>AutoHide: false</h2>
+          <div class="demo1" data-simplebar data-simplebar-auto-hide="false">
             <p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p>
           </div>
           <a class="btn add-more" href="#">Add content</a>
@@ -35,8 +35,8 @@
           <a class="btn toggle-height" href="#">Toggle height</a>
         </div>
         <div class="col demo2-col">
-          <h2>X and Y scroller (force-enabled)</h2>
-          <div class="demo1" data-simplebar data-simplebar-force-enabled="true" data-simplebar-autohide="false" style="text-align: right;">
+          <h2>Default</h2>
+          <div class="demo1" data-simplebar>
             <p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p>
           </div>
           <a class="btn add-more" href="#">Add content</a>
@@ -48,7 +48,7 @@
     <section>
         <div class="col demo3-col">
           <h2>Y scroller no-height</h2>
-          <div class="demo3" data-simplebar data-simplebar-autohide="false">
+          <div class="demo3" data-simplebar data-simplebar-auto-hide="false">
             <p class="odd">Some content</p>
             <p>Some more content</p>
             <p class="odd">Some content</p>
@@ -92,8 +92,8 @@
           </div>
         </div>
         <div class="col demo2-col">
-          <h2>X and Y scroller (force-enabled)</h2>
-          <div class="demo1" data-simplebar style="text-align: right;">
+          <h2>Embedded</h2>
+          <div class="demo1" data-simplebar>
             <div class="demo1-internal" data-simplebar>
               <p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p><p class="odd">Some content</p><p>Some more content</p>
             </div>
@@ -108,11 +108,7 @@
     <!-- JavaScript -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="vendor/jquery-1.10.2.min.js"><\/script>')</script>
-    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
-    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
-
-    <script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
+    <script src="../../dist/simplebar.umd.js"></script>
 
     <script>
 	    // Initialize scrollers.
@@ -154,25 +150,5 @@
           }
         });
       </script>
-      <script type="text/babel">
-        ReactDOM.render(
-          <div className={"demo4"} data-simplebar>
-            <div className={"box"}>1</div>
-            <div className={"box"}>2</div>
-            <div className={"box"}>3</div>
-            <div className={"box"}>4</div>
-            <div className={"box"}>5</div>
-          </div>,
-          document.getElementById('demo4')
-        );
-
-        var demo5 = new SimpleBar(document.getElementById('demo5'));
-
-        //setTimeout(function() {
-        //    demo5.unMount();
-        //}, 2000);
-
-        //SimpleBar.removeObserver();
-    </script>
 </body>
 </html>

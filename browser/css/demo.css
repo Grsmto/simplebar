@@ -15,10 +15,6 @@ body {
   margin: 20px;
 }
 
-section {
-
-}
-
 section:after {
   content: "";
   display: table;
@@ -133,4 +129,5 @@ a:visited {
 
 .demo5 {
   height: 200px;
+  direction: rtl;
 }
