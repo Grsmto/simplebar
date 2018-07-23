@@ -16,5 +16,5 @@ deploy:
   github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
   keep-history: true
   on:
-    branch: gh-pages
+    branch: master
   local-dir: packages/simplebar/demo
