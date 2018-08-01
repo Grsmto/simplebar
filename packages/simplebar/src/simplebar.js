@@ -27,6 +27,7 @@ export default class SimpleBar {
     this.offsetSize = 20;
 
     this.recalculate = throttle(this.recalculate.bind(this), 1000);
+    this.onMouseMove = throttle(this.onMouseMove.bind(this), 100);
 
     this.init();
   }
@@ -232,6 +233,7 @@ export default class SimpleBar {
     }
 
     this.el.addEventListener('mousedown', this.onMouseDown);
+    this.el.addEventListener('mousemove', this.onMouseMove);
 
     this.contentEl.addEventListener('scroll', this.onScrollX);
     this.scrollContentEl.addEventListener('scroll', this.onScrollY);
@@ -436,12 +438,20 @@ export default class SimpleBar {
     this.scrollYTicking = false;
   }
 
-  /**
-   * On mouseenter event handling
-   */
   onMouseEnter = () => {
     this.showScrollbar('x');
     this.showScrollbar('y');
+  }
+
+  onMouseMove = (e) => {
+    const bbox = this.trackY.getBoundingClientRect();
+
+    this.mouseX = e.clientX;
+    this.mouseY = e.clientY;
+
+    if (this.mouseX >= bbox.x && this.mouseX <= bbox.x + bbox.width && this.mouseY >= bbox.y && this.mouseY <= bbox.y + bbox.height) {
+      this.showScrollbar('y');
+    }
   }
 
   onWindowResize = () => {
@@ -475,26 +485,32 @@ export default class SimpleBar {
       return;
     }
 
-    this.flashTimeout = window.setTimeout(this.hideScrollbars, this.options.timeout);
+    window.clearInterval(this.flashTimeout);
+    this.flashTimeout = window.setInterval(this.hideScrollbars, this.options.timeout);
   }
 
   /**
    * Hide Scrollbar
    */
   hideScrollbars = () => {
-    this.scrollbarX.classList.remove('visible');
-    this.scrollbarY.classList.remove('visible');
+    const bboxY = this.trackY.getBoundingClientRect();
+    const bboxX = this.trackX.getBoundingClientRect();
 
-    this.isVisible.x = false;
-    this.isVisible.y = false;
+    if (!this.isWithinBounds(bboxY)) {
+      this.scrollbarY.classList.remove('visible');
+      this.isVisible.y = false;
+    }
 
-    window.clearTimeout(this.flashTimeout);
+    if (!this.isWithinBounds(bboxX)) {
+      this.scrollbarX.classList.remove('visible');
+      this.isVisible.x = false;
+    }
   }
 
   onMouseDown = (e) => {
     const bbox = this.scrollbarY.getBoundingClientRect();
 
-    if (e.pageX >= bbox.x && e.clientX <= bbox.x + bbox.width && e.clientY >= bbox.y && e.clientY <= bbox.y + bbox.height) {
+    if (this.mouseX >= bbox.x && this.mouseX <= bbox.x + bbox.width && this.mouseY >= bbox.y && this.mouseY <= bbox.y + bbox.height) {
       e.preventDefault();
       this.onDrag(e, 'y');
     }
@@ -606,6 +622,13 @@ export default class SimpleBar {
     if (el === this.el) return true;
 
     return this.isChildNode(el.parentNode);
+  }
+
+  /**
+   * Check if mouse is within bounds
+   */
+  isWithinBounds(bbox) {
+    return this.mouseX >= bbox.x && this.mouseX <= bbox.x + bbox.width && this.mouseY >= bbox.y && this.mouseY <= bbox.y + bbox.height;
   }
 }
 
