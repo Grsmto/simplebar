@@ -67,13 +67,13 @@ You can start SimpleBar mannually if you need to:
 
     new SimpleBar(document.getElementById('myElement'))
 or
-    Array.from(document.querySelectorAll('.myElements')).forEach(el => new SimpleBar)
+    `Array.from(document.querySelectorAll('.myElements')).forEach(el => new SimpleBar)`
 
 If you want to use jQuery:
  
     new SimpleBar($('#myElement')[0])
 or
-    $('.myElements').each(element, new SimpleBar);
+    `$('.myElements').each(element, new SimpleBar)`
 
 
 ### Options
