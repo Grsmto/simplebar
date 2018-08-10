@@ -66,10 +66,15 @@ If you are experiencing issues when setting up SimpleBar it is most likely becau
 You can start SimpleBar mannually if you need to:
 
     new SimpleBar(document.getElementById('myElement'))
+or
+    Array.from(document.querySelectorAll('.myElements')).forEach(el => new SimpleBar)
 
 If you want to use jQuery:
  
     new SimpleBar($('#myElement')[0])
+or
+    $('.myElements').each(element, new SimpleBar);
+
 
 ### Options
 
