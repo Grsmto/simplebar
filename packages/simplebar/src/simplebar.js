@@ -444,13 +444,18 @@ export default class SimpleBar {
   }
 
   onMouseMove = (e) => {
-    const bbox = this.trackY.getBoundingClientRect();
+    const bboxY = this.trackY.getBoundingClientRect();
+    const bboxX = this.trackX.getBoundingClientRect();
 
     this.mouseX = e.clientX;
     this.mouseY = e.clientY;
 
-    if (this.mouseX >= bbox.x && this.mouseX <= bbox.x + bbox.width && this.mouseY >= bbox.y && this.mouseY <= bbox.y + bbox.height) {
+    if (this.isWithinBounds(bboxY)) {
       this.showScrollbar('y');
+    }
+
+    if (this.isWithinBounds(bboxX)) {
+      this.showScrollbar('x');
     }
   }
 
@@ -508,11 +513,17 @@ export default class SimpleBar {
   }
 
   onMouseDown = (e) => {
-    const bbox = this.scrollbarY.getBoundingClientRect();
+    const bboxY = this.scrollbarY.getBoundingClientRect();
+    const bboxX = this.scrollbarX.getBoundingClientRect();
 
-    if (this.mouseX >= bbox.x && this.mouseX <= bbox.x + bbox.width && this.mouseY >= bbox.y && this.mouseY <= bbox.y + bbox.height) {
+    if (this.isWithinBounds(bboxY)) {
       e.preventDefault();
       this.onDrag(e, 'y');
+    }
+
+    if (this.isWithinBounds(bboxX)) {
+      e.preventDefault();
+      this.onDrag(e, 'x');
     }
   }
 
