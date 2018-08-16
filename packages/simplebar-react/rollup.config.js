@@ -17,10 +17,9 @@ const banner = {
 };
 const globals = {
   'prop-types': 'PropTypes',
-  'react-dom': 'ReactDOM',
   'react': 'React'
 };
-const external = Object.keys(globals);
+const external = [...Object.keys(pkg.dependencies), 'react'];
 
 export default [
   {
