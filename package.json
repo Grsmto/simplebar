@@ -26,7 +26,7 @@
     "jest": "^22.4.2",
     "jest-cli": "^22.4.2",
     "jest-puppeteer": "^2.3.0",
-    "lerna": "^2.11.0",
+    "lerna": "^3.0.6",
     "lint-staged": "^7.0.4",
     "prettier": "^1.11.1",
     "prettier-eslint": "^8.8.1",
