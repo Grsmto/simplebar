@@ -20,8 +20,11 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            cwd: __dirname
-          }
+            presets: [
+              ["@babel/preset-env", { "modules": false }],
+              "@babel/preset-react"
+            ]
+          },
         }
       },
       {
