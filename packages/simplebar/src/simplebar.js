@@ -639,7 +639,7 @@ export default class SimpleBar {
    * Check if mouse is within bounds
    */
   isWithinBounds(bbox) {
-    return this.mouseX >= bbox.x && this.mouseX <= bbox.x + bbox.width && this.mouseY >= bbox.y && this.mouseY <= bbox.y + bbox.height;
+    return this.mouseX >= bbox.left && this.mouseX <= bbox.left + bbox.width && this.mouseY >= bbox.top && this.mouseY <= bbox.top + bbox.height;
   }
 }
 
