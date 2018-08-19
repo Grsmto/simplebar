@@ -29,7 +29,6 @@
     "scrollbarwidth": "^0.1.3"
   },
   "devDependencies": {
-    "babel-plugin-transform-object-assign": "^6.22.0",
     "css-loader": "^0.28.11",
     "minify": "^3.0.5",
     "react-select": "^1.2.1",
