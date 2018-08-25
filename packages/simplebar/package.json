@@ -20,7 +20,8 @@
     "dev": "rollup -c -w",
     "test": "yarn run test:unit && yarn run test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
-    "test:e2e": "jest -c jest-e2e.config.js"
+    "test:e2e": "jest -c jest-e2e.config.js",
+    "prepublishOnly": "yarn run build"
   },
   "dependencies": {
     "can-use-dom": "^0.1.0",

@@ -14,7 +14,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "yarn run build"
   },
   "dependencies": {
     "prop-types": "^15.6.1",
