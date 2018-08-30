@@ -16,6 +16,7 @@ export default class SimpleBar {
     this.sizeAttr = { x: 'offsetWidth', y: 'offsetHeight' };
     this.scrollSizeAttr = { x: 'scrollWidth', y: 'scrollHeight' };
     this.offsetAttr = { x: 'left', y: 'top' };
+    this.handleSize = { x: 0, y: 0 };
     this.globalObserver;
     this.mutationObserver;
     this.resizeObserver;
@@ -320,22 +321,22 @@ export default class SimpleBar {
     let scrollbarRatio = trackSize / contentSize;
 
     // Calculate new height/position of drag handle.
-    this.handleSize = Math.max(
+    this.handleSize[axis] = Math.max(
       ~~(scrollbarRatio * trackSize),
       this.options.scrollbarMinSize
     );
 
     if (this.options.scrollbarMaxSize) {
-      this.handleSize = Math.min(
-        this.handleSize,
+      this.handleSize[axis] = Math.min(
+        this.handleSize[axis],
         this.options.scrollbarMaxSize
       );
     }
 
     if (axis === 'x') {
-      scrollbar.style.width = `${this.handleSize}px`;
+      scrollbar.style.width = `${this.handleSize[axis]}px`;
     } else {
-      scrollbar.style.height = `${this.handleSize}px`;
+      scrollbar.style.height = `${this.handleSize[axis]}px`;
     }
   }
 
@@ -359,7 +360,7 @@ export default class SimpleBar {
     }
 
     let scrollPourcent = scrollOffset / (contentSize - trackSize);
-    let handleOffset = ~~((trackSize - this.handleSize) * scrollPourcent);
+    let handleOffset = ~~((trackSize - this.handleSize[axis]) * scrollPourcent);
 
     if (this.isEnabled[axis] || this.options.forceVisible) {
       if (axis === 'x') {
