@@ -1,6 +1,8 @@
 language: node_js
 
 before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.2
+  - export PATH="$HOME/.yarn/bin:$PATH"
   - npm i -g lerna
 
 install:
@@ -16,5 +18,5 @@ deploy:
   github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
   keep-history: true
   on:
-    branch: gh-pages
+    branch: master
   local-dir: packages/simplebar/demo

@@ -35,6 +35,23 @@ export default [
       license(banner)
     ]
   },
+  // browser-friendly, non-minified UMD build
+  {
+    input: 'src/simplebar.js',
+    output: {
+      name: 'SimpleBar',
+      file: 'dist/simplebar.js',
+      format: 'umd'
+    },
+    plugins: [
+      babel({
+        exclude: ['/**/node_modules/**']
+      }),
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
+      license(banner)
+    ]
+  },
 
   // CommonJS (for Node) and ES module (for bundlers) build.
   // (We could have three entries in the configuration array

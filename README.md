@@ -1,5 +1,8 @@
 # SimpleBar [![npm package][npm-badge]][npm] ![size-badge]
 
+:warning: SimpleBar v3 is here! Check out [the beta version](https://github.com/Grsmto/simplebar/releases/tag/simplebar%403.0.0-beta.0). `npm install simplebar@3.0.0-beta.0`.
+If you're using React, you should use our [React version](https://github.com/Grsmto/simplebar/releases/tag/simplebar-react%400.0.1-beta.0)! `npm install simplebar-react@0.0.1-beta.0`.
+
 SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
@@ -10,7 +13,8 @@ SimpleBar is meant to be as easy to use as possible and lightweight. If you want
 **- Via npm**
 `npm install simplebar --save`
 
-Then don't forget to import both css and js in your project.
+**- Via Yarn**
+`yarn add simplebar`
 
 **- Via `<script>` tag**
 ```
@@ -22,19 +26,21 @@ Then don't forget to import both css and js in your project.
 ```
 note: you can replace `@latest` to the latest version (ex `@2.4.3`), if you want to lock to a specific version
 
-**- For Ruby On Rails**
-
-To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem. 
 
 ### Usage
 
-If you are using a module loader you first need to load SimpleBar:
-`import 'SimpleBar';` or `import SimpleBar from 'SimpleBar';`
+If you are using a module loader (like Webpack) you first need to load SimpleBar:
+```
+import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+import 'simplebar/dist/simplebar.css';
+```
 
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 ```
 <div data-simplebar></div>
 ```
+
+**Don't forget to import both css and js in your project!**
 
 ### :warning: Warning!
 SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often affect badly the user experience (slower scroll performances compare to native body scroll, no native scroll behaviours like click on track, etc.). Do it at your own risk!
@@ -60,10 +66,19 @@ If you are experiencing issues when setting up SimpleBar it is most likely becau
 You can start SimpleBar mannually if you need to:
 
     new SimpleBar(document.getElementById('myElement'))
+    
+or
+
+    Array.from(document.querySelectorAll('.myElements')).forEach(el => new SimpleBar)
 
 If you want to use jQuery:
  
     new SimpleBar($('#myElement')[0])
+    
+or
+
+    $('.myElements').each(element, new SimpleBar)
+
 
 ### Options
 
@@ -193,10 +208,11 @@ Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made t
 
 Website: http://html5up.net/
 
-### Additional contributors
+### Community plugins
 
-Yoh Suzuki: wrapContent option
+**Ruby On Rails**
+To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem. 
 
 [npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/simplebar
-[size-badge]: http://img.badgesize.io/Grsmto/simplebar/master/dist/simplebar.js?compression=gzip&&style=flat-square
+[size-badge]: http://img.badgesize.io/Grsmto/simplebar/master/packages/simplebar/src/simplebar.js?compression=gzip&&style=flat-square

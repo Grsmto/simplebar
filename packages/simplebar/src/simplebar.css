@@ -10,9 +10,18 @@
     display: flex;
 }
 
+[data-simplebar] .simplebar-scroll-content,
+[data-simplebar] .simplebar-content {
+    overflow: hidden;
+}
+
+[data-simplebar="init"] .simplebar-scroll-content,
+[data-simplebar="init"] .simplebar-content {
+    overflow: scroll;
+}
+
 .simplebar-scroll-content {
     overflow-x: hidden!important;
-    overflow-y: scroll;
     min-width: 100%!important;
     max-height: inherit!important;
     box-sizing: content-box!important;
@@ -20,7 +29,6 @@
 
 .simplebar-content {
     overflow-y: hidden!important;
-    overflow-x: scroll;
     box-sizing: border-box!important;
     min-height: 100%!important;
 }
@@ -52,7 +60,6 @@
     transition: opacity 0.2s linear;
 }
 
-.simplebar-track:hover .simplebar-scrollbar:before,
 .simplebar-track .simplebar-scrollbar.visible:before {
     /* When hovered, remove all transitions from drag handle */
     opacity: 0.5;

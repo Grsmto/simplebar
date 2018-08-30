@@ -1,6 +1,6 @@
 {
   "name": "simplebar-react",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.3",
   "description": "React component for SimpleBar",
   "files": [
     "dist"
@@ -14,11 +14,12 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "yarn run build"
   },
   "dependencies": {
     "prop-types": "^15.6.1",
-    "simplebar": "^2.6.1"
+    "simplebar": "^3.0.0-beta.4"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
