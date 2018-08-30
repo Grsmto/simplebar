@@ -8,24 +8,40 @@ export default class SimpleBar {
     this.el = element;
     this.flashTimeout;
     this.contentEl;
-    this.scrollContentEl;
-    this.dragOffset = { x: 0, y: 0 };
-    this.isEnabled = { x: true, y: true };
-    this.isVisible = { x: false, y: false };
-    this.scrollOffsetAttr = { x: 'scrollLeft', y: 'scrollTop' };
-    this.sizeAttr = { x: 'offsetWidth', y: 'offsetHeight' };
-    this.scrollSizeAttr = { x: 'scrollWidth', y: 'scrollHeight' };
-    this.offsetAttr = { x: 'left', y: 'top' };
-    this.handleSize = { x: 0, y: 0 };
+    this.scrollerEl;
+    this.maskEl;
     this.globalObserver;
     this.mutationObserver;
     this.resizeObserver;
-    this.currentAxis;
     this.scrollbarWidth;
     this.options = Object.assign({}, SimpleBar.defaultOptions, options);
     this.isRtl = this.options.direction === 'rtl';
     this.classNames = this.options.classNames;
     this.offsetSize = 20;
+    this.axis = {
+      x: {
+        scrollOffsetAttr: 'scrollLeft',
+        sizeAttr: 'offsetWidth',
+        scrollSizeAttr: 'scrollWidth',
+        offsetAttr: 'left',
+        dragOffset: 0,
+        isEnabled: true,
+        isVisible: false,
+        track: {},
+        scrollbar: {}
+      },
+      y: {
+        scrollOffsetAttr: 'scrollTop',
+        sizeAttr: 'offsetHeight',
+        scrollSizeAttr: 'scrollHeight',
+        offsetAttr: 'top',
+        dragOffset: 0,
+        isEnabled: true,
+        isVisible: false,
+        track: {},
+        scrollbar: {}
+      }
+    };
 
     this.recalculate = throttle(this.recalculate.bind(this), 1000);
     this.onMouseMove = throttle(this.onMouseMove.bind(this), 100);
@@ -39,7 +55,9 @@ export default class SimpleBar {
       forceVisible: false,
       classNames: {
         content: 'simplebar-content',
-        scrollContent: 'simplebar-scroll-content',
+        scroller: 'simplebar-scroller',
+        mask: 'simplebar-mask',
+        placeholder: 'simplebar-placeholder',
         scrollbar: 'simplebar-scrollbar',
         track: 'simplebar-track'
       },
@@ -172,29 +190,35 @@ export default class SimpleBar {
       ).length
     ) {
       // assume that element has his DOM already initiated
-      this.trackX = this.el.querySelector(
+      this.contentEl = this.el.querySelector(`.${this.classNames.content}`);
+      this.scrollerEl = this.el.querySelector(`.${this.classNames.scroller}`);
+      this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
+      this.placeholderEl = this.el.querySelector(`.${this.classNames.placeholder}`);
+      this.axis.x.track.el = this.el.querySelector(
         `.${this.classNames.track}.horizontal`
       );
-      this.trackY = this.el.querySelector(`.${this.classNames.track}.vertical`);
-      this.scrollContentEl = this.el.querySelector(
-        `.${this.classNames.scrollContent}`
-      );
-      this.contentEl = this.el.querySelector(`.${this.classNames.content}`);
+      this.axis.y.track.el = this.el.querySelector(`.${this.classNames.track}.vertical`);
     } else {
       // Prepare DOM
-      this.scrollContentEl = document.createElement('div');
       this.contentEl = document.createElement('div');
+      this.scrollerEl = document.createElement('div');
+      this.maskEl = document.createElement('div');
+      this.placeholderEl = document.createElement('div');
 
-      this.scrollContentEl.classList.add(this.classNames.scrollContent);
       this.contentEl.classList.add(this.classNames.content);
+      this.scrollerEl.classList.add(this.classNames.scroller);
+      this.maskEl.classList.add(this.classNames.mask);
+      this.placeholderEl.classList.add(this.classNames.placeholder);
 
       while (this.el.firstChild) this.contentEl.appendChild(this.el.firstChild);
 
-      this.scrollContentEl.appendChild(this.contentEl);
-      this.el.appendChild(this.scrollContentEl);
+      this.scrollerEl.appendChild(this.contentEl);
+      this.maskEl.appendChild(this.scrollerEl);
+      this.el.appendChild(this.maskEl);
+      this.el.appendChild(this.placeholderEl);
     }
 
-    if (!this.trackX || !this.trackY) {
+    if (!this.axis.x.track.el || !this.axis.y.track.el) {
       const track = document.createElement('div');
       const scrollbar = document.createElement('div');
 
@@ -207,20 +231,20 @@ export default class SimpleBar {
 
       track.appendChild(scrollbar);
 
-      this.trackX = track.cloneNode(true);
-      this.trackX.classList.add('horizontal');
+      this.axis.x.track.el = track.cloneNode(true);
+      this.axis.x.track.el.classList.add('horizontal');
 
-      this.trackY = track.cloneNode(true);
-      this.trackY.classList.add('vertical');
+      this.axis.y.track.el = track.cloneNode(true);
+      this.axis.y.track.el.classList.add('vertical');
 
-      this.el.insertBefore(this.trackX, this.el.firstChild);
-      this.el.insertBefore(this.trackY, this.el.firstChild);
+      this.el.appendChild(this.axis.x.track.el);
+      this.el.appendChild(this.axis.y.track.el);
     }
 
-    this.scrollbarX = this.trackX.querySelector(
+    this.axis.x.scrollbar.el = this.axis.x.track.el.querySelector(
       `.${this.classNames.scrollbar}`
     );
-    this.scrollbarY = this.trackY.querySelector(
+    this.axis.y.scrollbar.el = this.axis.y.track.el.querySelector(
       `.${this.classNames.scrollbar}`
     );
 
@@ -236,8 +260,7 @@ export default class SimpleBar {
     this.el.addEventListener('mousedown', this.onMouseDown);
     this.el.addEventListener('mousemove', this.onMouseMove);
 
-    this.contentEl.addEventListener('scroll', this.onScrollX);
-    this.scrollContentEl.addEventListener('scroll', this.onScrollY);
+    this.scrollerEl.addEventListener('scroll', this.onScroll);
 
     // Browser zoom triggers a window resize
     window.addEventListener('resize', this.onWindowResize);
@@ -274,108 +297,78 @@ export default class SimpleBar {
   }
 
   render() {
-    this.contentSizeX = this.contentEl[this.scrollSizeAttr['x']];
-    this.contentSizeY =
-      this.contentEl[this.scrollSizeAttr['y']] -
-      (this.scrollbarWidth || this.offsetSize);
-    this.trackXSize = this.trackX[this.sizeAttr['x']];
-    this.trackYSize = this.trackY[this.sizeAttr['y']];
+    this.axis.x.track.cachedBoundingRect = this.axis.x.track.el.getBoundingClientRect();
+    this.axis.y.track.cachedBoundingRect = this.axis.y.track.el.getBoundingClientRect();
 
-    // Set isEnabled to false if scrollbar is not necessary (content is shorter than wrapper)
-    this.isEnabled['x'] = this.trackXSize < this.contentSizeX;
-    this.isEnabled['y'] = this.trackYSize < this.contentSizeY;
+    // // Set isEnabled to false if scrollbar is not necessary (content is shorter than scroller)
+    this.axis.x.isEnabled = this.axis.x.track.cachedBoundingRect.width < this.contentEl.scrollWidth;
+    this.axis.y.isEnabled = this.axis.y.track.cachedBoundingRect.height < this.contentEl.scrollHeight;
 
-    this.resizeScrollbar('x');
-    this.resizeScrollbar('y');
+    this.axis.x.scrollbar.size = this.getScrollbarSize('x');
+    this.axis.y.scrollbar.size = this.getScrollbarSize('y');
+
+    this.axis.x.scrollbar.el.style.width = `${this.axis.x.scrollbar.size}px`;
+    this.axis.y.scrollbar.el.style.height = `${this.axis.y.scrollbar.size}px`;
 
     this.positionScrollbar('x');
     this.positionScrollbar('y');
 
     this.toggleTrackVisibility('x');
     this.toggleTrackVisibility('y');
+
+    this.placeholderEl.style.width = `${this.contentEl.scrollWidth}px`;
+    this.placeholderEl.style.height = `${this.contentEl.scrollHeight}px`;
   }
 
   /**
-   * Resize scrollbar
+   * Calculate scrollbar size
    */
-  resizeScrollbar(axis = 'y') {
-    let scrollbar;
-    let contentSize;
-    let trackSize;
-
-    if (!this.isEnabled[axis] && !this.options.forceVisible) {
+  getScrollbarSize(axis = 'y') {
+    const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
+    const trackSize = this.axis[axis].track.cachedBoundingRect.width;
+    let scrollbarSize;
+    
+    if (!this.axis[axis].isEnabled && !this.options.forceVisible) {
       return;
     }
-
-    if (axis === 'x') {
-      scrollbar = this.scrollbarX;
-      contentSize = this.contentSizeX;
-      trackSize = this.trackXSize;
-    } else {
-      // 'y'
-      scrollbar = this.scrollbarY;
-      contentSize = this.contentSizeY;
-      trackSize = this.trackYSize;
-    }
-
+    
     let scrollbarRatio = trackSize / contentSize;
-
+    
     // Calculate new height/position of drag handle.
-    this.handleSize[axis] = Math.max(
+    scrollbarSize = Math.max(
       ~~(scrollbarRatio * trackSize),
       this.options.scrollbarMinSize
     );
-
+    
     if (this.options.scrollbarMaxSize) {
-      this.handleSize[axis] = Math.min(
-        this.handleSize[axis],
+      scrollbarSize = Math.min(
+        scrollbarSize,
         this.options.scrollbarMaxSize
       );
     }
 
-    if (axis === 'x') {
-      scrollbar.style.width = `${this.handleSize[axis]}px`;
-    } else {
-      scrollbar.style.height = `${this.handleSize[axis]}px`;
-    }
+    return scrollbarSize;
   }
 
   positionScrollbar(axis = 'y') {
-    let scrollbar;
-    let scrollOffset;
-    let contentSize;
-    let trackSize;
-
-    if (axis === 'x') {
-      scrollbar = this.scrollbarX;
-      scrollOffset = this.contentEl[this.scrollOffsetAttr[axis]]; // Either scrollTop() or scrollLeft().
-      contentSize = this.contentSizeX;
-      trackSize = this.trackXSize;
-    } else {
-      // 'y'
-      scrollbar = this.scrollbarY;
-      scrollOffset = this.scrollContentEl[this.scrollOffsetAttr[axis]]; // Either scrollTop() or scrollLeft().
-      contentSize = this.contentSizeY;
-      trackSize = this.trackYSize;
-    }
+    const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
+    const trackSize = this.axis[axis].track.cachedBoundingRect.width;
+    const scrollOffset = this.scrollerEl[this.axis[axis].scrollOffsetAttr];
+    const scrollbar = this.axis[axis].scrollbar;
 
     let scrollPourcent = scrollOffset / (contentSize - trackSize);
-    let handleOffset = ~~((trackSize - this.handleSize[axis]) * scrollPourcent);
+    let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
 
-    if (this.isEnabled[axis] || this.options.forceVisible) {
-      if (axis === 'x') {
-        scrollbar.style.transform = `translate3d(${handleOffset}px, 0, 0)`;
-      } else {
-        scrollbar.style.transform = `translate3d(0, ${handleOffset}px, 0)`;
-      }
+    if (this.axis[axis].isEnabled || this.options.forceVisible) {
+      scrollbar.el.style.transform = axis === 'x' ? `translate3d(${handleOffset}px, 0, 0)` : `translate3d(0, ${handleOffset}px, 0)`;
     }
   }
 
   toggleTrackVisibility(axis = 'y') {
-    let track = axis === 'y' ? this.trackY : this.trackX;
-    let scrollbar = axis === 'y' ? this.scrollbarY : this.scrollbarX;
+    const track = this.axis[axis].track.el;
+    const scrollbar = this.axis[axis].scrollbar.el;
 
-    if (this.isEnabled[axis] || this.options.forceVisible) {
+    if (this.axis[axis].isEnabled || this.options.forceVisible) {
       track.style.visibility = 'visible';
     } else {
       track.style.visibility = 'hidden';
@@ -383,7 +376,7 @@ export default class SimpleBar {
 
     // Even if forceVisible is enabled, scrollbar itself should be hidden
     if (this.options.forceVisible) {
-      if (this.isEnabled[axis]) {
+      if (this.axis[axis].isEnabled) {
         scrollbar.style.visibility = 'visible';
       } else {
         scrollbar.style.visibility = 'hidden';
@@ -395,32 +388,19 @@ export default class SimpleBar {
     // Recalculate scrollbarWidth in case it's a zoom
     this.scrollbarWidth = scrollbarWidth();
 
-    this.scrollContentEl.style[
-      this.isRtl ? 'paddingLeft' : 'paddingRight'
-    ] = `${this.scrollbarWidth || this.offsetSize}px`;
-    this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth * 2 ||
-      this.offsetSize}px`;
-    this.contentEl.style.paddingBottom = `${this.scrollbarWidth ||
-      this.offsetSize}px`;
-
-    if (this.scrollbarWidth !== 0) {
-      this.contentEl.style[this.isRtl ? 'marginLeft' : 'marginRight'] = `-${
-        this.scrollbarWidth
-      }px`;
-    }
+    this.scrollerEl.style[this.isRtl ? 'left' : 'right'] = `-${this.scrollbarWidth || this.offsetSize}px`;
+    this.scrollerEl.style.bottom = `-${this.scrollbarWidth || this.offsetSize}px`;
   }
 
   /**
    * On scroll event handling
    */
-  onScrollX = () => {
+  onScroll = () => {
     if (!this.scrollXTicking) {
       window.requestAnimationFrame(this.scrollX);
       this.scrollXTicking = true;
     }
-  }
 
-  onScrollY = () => {
     if (!this.scrollYTicking) {
       window.requestAnimationFrame(this.scrollY);
       this.scrollYTicking = true;
@@ -445,8 +425,8 @@ export default class SimpleBar {
   }
 
   onMouseMove = (e) => {
-    const bboxY = this.trackY.getBoundingClientRect();
-    const bboxX = this.trackX.getBoundingClientRect();
+    const bboxY = this.axis.y.track.cachedBoundingRect;
+    const bboxX = this.axis.x.track.cachedBoundingRect;
 
     this.mouseX = e.clientX;
     this.mouseY = e.clientY;
@@ -468,82 +448,75 @@ export default class SimpleBar {
    * Show scrollbar
    */
   showScrollbar(axis = 'y') {
-    let scrollbar;
+    let scrollbar = this.axis[axis].scrollbar.el;
 
     // Scrollbar already visible
-    if (this.isVisible[axis]) {
+    if (this.axis[axis].isVisible) {
       return;
     }
 
-    if (axis === 'x') {
-      scrollbar = this.scrollbarX;
-    } else {
-      // 'y'
-      scrollbar = this.scrollbarY;
-    }
-
-    if (this.isEnabled[axis]) {
+    if (this.axis[axis].isEnabled) {
       scrollbar.classList.add('visible');
-      this.isVisible[axis] = true;
+      this.axis[axis].isVisible = true;
     }
 
     if (!this.options.autoHide) {
       return;
     }
 
-    window.clearInterval(this.flashTimeout);
-    this.flashTimeout = window.setInterval(this.hideScrollbars, this.options.timeout);
+    // window.clearInterval(this.flashTimeout);
+    // this.flashTimeout = window.setInterval(this.hideScrollbars, this.options.timeout);
   }
 
   /**
    * Hide Scrollbar
    */
   hideScrollbars = () => {
-    const bboxY = this.trackY.getBoundingClientRect();
-    const bboxX = this.trackX.getBoundingClientRect();
+    const bboxY = this.axis.y.track.cachedBoundingRect;
+    const bboxX = this.axis.x.track.cachedBoundingRect;
 
     if (!this.isWithinBounds(bboxY)) {
-      this.scrollbarY.classList.remove('visible');
-      this.isVisible.y = false;
+      this.axis.y.scrollbar.el.classList.remove('visible');
+      this.axis.y.isVisible = false;
     }
 
     if (!this.isWithinBounds(bboxX)) {
-      this.scrollbarX.classList.remove('visible');
-      this.isVisible.x = false;
+      this.axis.x.scrollbar.el.classList.remove('visible');
+      this.axis.x.isVisible = false;
     }
   }
 
   onMouseDown = (e) => {
-    const bboxY = this.scrollbarY.getBoundingClientRect();
-    const bboxX = this.scrollbarX.getBoundingClientRect();
+    const bboxY = this.axis.y.track.cachedBoundingRect;
+    const bboxX = this.axis.x.track.cachedBoundingRect;
 
     if (this.isWithinBounds(bboxY)) {
-      e.preventDefault();
-      this.onDrag(e, 'y');
+      this.onDragStart(e, 'y');
     }
 
     if (this.isWithinBounds(bboxX)) {
-      e.preventDefault();
-      this.onDrag(e, 'x');
+      this.onDragStart(e, 'x');
     }
   }
 
   /**
-   * on scrollbar handle drag
+   * on scrollbar handle drag movement starts
    */
-  onDrag(e, axis = 'y') {
+  onDragStart(e, axis = 'y') {
     // Preventing the event's default action stops text being
     // selectable during the drag.
     e.preventDefault();
+    // Prevent event leaking
+    e.stopPropagation();
 
-    const scrollbar = axis === 'y' ? this.scrollbarY : this.scrollbarX;
+    const scrollbar = this.axis[axis].scrollbar.el;
 
     // Measure how far the user's mouse is from the top of the scrollbar drag handle.
     const eventOffset = axis === 'y' ? e.pageY : e.pageX;
 
-    this.dragOffset[axis] =
-      eventOffset - scrollbar.getBoundingClientRect()[this.offsetAttr[axis]];
-    this.currentAxis = axis;
+    this.axis[axis].dragOffset =
+      eventOffset - scrollbar.getBoundingClientRect()[this.axis[axis].offsetAttr];
+    this.draggedAxis = axis;
 
     document.addEventListener('mousemove', this.drag);
     document.addEventListener('mouseup', this.onEndDrag);
@@ -553,34 +526,32 @@ export default class SimpleBar {
    * Drag scrollbar handle
    */
   drag = (e) => {
-    let eventOffset, track, scrollEl;
+    let eventOffset, track;
 
     e.preventDefault();
 
+    track = this.axis[this.draggedAxis].track;
+
     if (this.currentAxis === 'y') {
       eventOffset = e.pageY;
-      track = this.trackY;
-      scrollEl = this.scrollContentEl;
     } else {
       eventOffset = e.pageX;
-      track = this.trackX;
-      scrollEl = this.contentEl;
     }
 
     // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
     let dragPos =
       eventOffset -
-      track.getBoundingClientRect()[this.offsetAttr[this.currentAxis]] -
-      this.dragOffset[this.currentAxis];
+      track.cachedBoundingRect[this.axis[this.draggedAxis].offsetAttr] -
+      this.axis[this.draggedAxis].dragOffset;
 
     // Convert the mouse position into a percentage of the scrollbar height/width.
-    let dragPerc = dragPos / track[this.sizeAttr[this.currentAxis]];
+    let dragPerc = dragPos / track.cachedBoundingRect.width;
 
     // Scroll the content by the same percentage.
     let scrollPos =
-      dragPerc * this.contentEl[this.scrollSizeAttr[this.currentAxis]];
+      dragPerc * this.contentEl[this.axis[this.draggedAxis].scrollSizeAttr];
 
-    scrollEl[this.scrollOffsetAttr[this.currentAxis]] = scrollPos;
+    this.scrollerEl[this.axis[this.draggedAxis].scrollOffsetAttr] = scrollPos;
   }
 
   /**
@@ -611,8 +582,7 @@ export default class SimpleBar {
       this.el.removeEventListener('mouseenter', this.onMouseEnter);
     }
 
-    this.scrollContentEl.removeEventListener('scroll', this.onScrollY);
-    this.contentEl.removeEventListener('scroll', this.onScrollX);
+    this.scrollerEl.removeEventListener('scroll', this.onScroll);
 
     this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
