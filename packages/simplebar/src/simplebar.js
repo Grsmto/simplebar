@@ -15,13 +15,13 @@ export default class SimpleBar {
     this.resizeObserver;
     this.scrollbarWidth;
     this.options = Object.assign({}, SimpleBar.defaultOptions, options);
-    this.isRtl = this.options.direction === 'rtl';
+    this.isRtl;
     this.classNames = this.options.classNames;
     this.offsetSize = 20;
     this.axis = {
       x: {
         scrollOffsetAttr: 'scrollLeft',
-        sizeAttr: 'offsetWidth',
+        sizeAttr: 'width',
         scrollSizeAttr: 'scrollWidth',
         offsetAttr: 'left',
         dragOffset: 0,
@@ -32,7 +32,7 @@ export default class SimpleBar {
       },
       y: {
         scrollOffsetAttr: 'scrollTop',
-        sizeAttr: 'offsetHeight',
+        sizeAttr: 'height',
         scrollSizeAttr: 'scrollHeight',
         offsetAttr: 'top',
         dragOffset: 0,
@@ -59,11 +59,12 @@ export default class SimpleBar {
         mask: 'simplebar-mask',
         placeholder: 'simplebar-placeholder',
         scrollbar: 'simplebar-scrollbar',
-        track: 'simplebar-track'
+        track: 'simplebar-track',
+        sizeAutoObserverWrapperEl: 'simplebar-size-auto-observer-wrapper',
+        sizeAutoObserverEl: 'simplebar-size-auto-observer'
       },
       scrollbarMinSize: 25,
       scrollbarMaxSize: 0,
-      direction: 'ltr',
       timeout: 1000
     };
   }
@@ -174,7 +175,9 @@ export default class SimpleBar {
 
     // We stop here on server-side
     if (canUseDOM) {
-      // Calculate content size
+      // Recalculate scrollbarWidth in case it's a zoom
+      this.scrollbarWidth = scrollbarWidth();
+      
       this.hideNativeScrollbar();
       this.render();
   
@@ -204,16 +207,22 @@ export default class SimpleBar {
       this.scrollerEl = document.createElement('div');
       this.maskEl = document.createElement('div');
       this.placeholderEl = document.createElement('div');
+      this.sizeAutoObserverWrapperEl = document.createElement('div');
+      this.sizeAutoObserverEl = document.createElement('div');
 
       this.contentEl.classList.add(this.classNames.content);
       this.scrollerEl.classList.add(this.classNames.scroller);
       this.maskEl.classList.add(this.classNames.mask);
       this.placeholderEl.classList.add(this.classNames.placeholder);
-
+      this.sizeAutoObserverWrapperEl.classList.add(this.classNames.sizeAutoObserverWrapperEl);
+      this.sizeAutoObserverEl.classList.add(this.classNames.sizeAutoObserverEl);
+      
       while (this.el.firstChild) this.contentEl.appendChild(this.el.firstChild);
-
+      
       this.scrollerEl.appendChild(this.contentEl);
       this.maskEl.appendChild(this.scrollerEl);
+      this.sizeAutoObserverWrapperEl.appendChild(this.sizeAutoObserverEl);
+      this.el.appendChild(this.sizeAutoObserverWrapperEl);
       this.el.appendChild(this.maskEl);
       this.el.appendChild(this.placeholderEl);
     }
@@ -260,7 +269,7 @@ export default class SimpleBar {
     this.el.addEventListener('mousedown', this.onMouseDown);
     this.el.addEventListener('mousemove', this.onMouseMove);
 
-    this.scrollerEl.addEventListener('scroll', this.onScroll);
+    this.contentEl.addEventListener('scroll', this.onScroll);
 
     // Browser zoom triggers a window resize
     window.addEventListener('resize', this.onWindowResize);
@@ -270,7 +279,7 @@ export default class SimpleBar {
       // create an observer instance
       this.mutationObserver = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
-          if (this.isChildNode(mutation.target) || mutation.addedNodes.length) {
+          if (mutation.target !== this.isChildNode(mutation.target) || mutation.addedNodes.length) {
             this.recalculate();
           }
         });
@@ -297,12 +306,25 @@ export default class SimpleBar {
   }
 
   render() {
-    this.axis.x.track.cachedBoundingRect = this.axis.x.track.el.getBoundingClientRect();
-    this.axis.y.track.cachedBoundingRect = this.axis.y.track.el.getBoundingClientRect();
+    const isSizeAuto = this.sizeAutoObserverEl.offsetHeight === 0;
 
-    // // Set isEnabled to false if scrollbar is not necessary (content is shorter than scroller)
-    this.axis.x.isEnabled = this.axis.x.track.cachedBoundingRect.width < this.contentEl.scrollWidth;
-    this.axis.y.isEnabled = this.axis.y.track.cachedBoundingRect.height < this.contentEl.scrollHeight;
+    this.elStyles = window.getComputedStyle(this.el);
+
+    this.isRtl = this.elStyles.direction === 'rtl';
+
+    this.contentEl.style.padding = `${this.elStyles.paddingTop} ${this.elStyles.paddingRight} ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
+    this.contentEl.style.height = isSizeAuto ? 'auto' : '100%';
+
+    this.placeholderEl.style.width = `${this.contentEl.scrollWidth}px`;
+    this.placeholderEl.style.height = `${this.contentEl.scrollHeight}px`;
+    this.placeholderEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
+
+    this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
+    this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
+
+    // Set isEnabled to false if scrollbar is not necessary (content is shorter than scroller)
+    this.axis.x.isEnabled = this.contentEl.scrollWidth > Math.ceil(this.axis.x.track.rect.width);
+    this.axis.y.isEnabled = this.contentEl.scrollHeight > Math.ceil(this.axis.y.track.rect.height);
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
@@ -315,9 +337,6 @@ export default class SimpleBar {
 
     this.toggleTrackVisibility('x');
     this.toggleTrackVisibility('y');
-
-    this.placeholderEl.style.width = `${this.contentEl.scrollWidth}px`;
-    this.placeholderEl.style.height = `${this.contentEl.scrollHeight}px`;
   }
 
   /**
@@ -325,7 +344,7 @@ export default class SimpleBar {
    */
   getScrollbarSize(axis = 'y') {
     const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
-    const trackSize = this.axis[axis].track.cachedBoundingRect.width;
+    const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
     let scrollbarSize;
     
     if (!this.axis[axis].isEnabled && !this.options.forceVisible) {
@@ -352,8 +371,8 @@ export default class SimpleBar {
 
   positionScrollbar(axis = 'y') {
     const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
-    const trackSize = this.axis[axis].track.cachedBoundingRect.width;
-    const scrollOffset = this.scrollerEl[this.axis[axis].scrollOffsetAttr];
+    const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
+    const scrollOffset = this.contentEl[this.axis[axis].scrollOffsetAttr];
     const scrollbar = this.axis[axis].scrollbar;
 
     let scrollPourcent = scrollOffset / (contentSize - trackSize);
@@ -385,9 +404,6 @@ export default class SimpleBar {
   }
 
   hideNativeScrollbar() {
-    // Recalculate scrollbarWidth in case it's a zoom
-    this.scrollbarWidth = scrollbarWidth();
-
     this.scrollerEl.style[this.isRtl ? 'left' : 'right'] = `-${this.scrollbarWidth || this.offsetSize}px`;
     this.scrollerEl.style.bottom = `-${this.scrollbarWidth || this.offsetSize}px`;
   }
@@ -425,8 +441,8 @@ export default class SimpleBar {
   }
 
   onMouseMove = (e) => {
-    const bboxY = this.axis.y.track.cachedBoundingRect;
-    const bboxX = this.axis.x.track.cachedBoundingRect;
+    const bboxY = this.axis.y.track.rect;
+    const bboxX = this.axis.x.track.rect;
 
     this.mouseX = e.clientX;
     this.mouseY = e.clientY;
@@ -441,6 +457,9 @@ export default class SimpleBar {
   }
 
   onWindowResize = () => {
+    // Recalculate scrollbarWidth in case it's a zoom
+    this.scrollbarWidth = scrollbarWidth();
+
     this.hideNativeScrollbar();
   }
 
@@ -472,8 +491,8 @@ export default class SimpleBar {
    * Hide Scrollbar
    */
   hideScrollbars = () => {
-    const bboxY = this.axis.y.track.cachedBoundingRect;
-    const bboxX = this.axis.x.track.cachedBoundingRect;
+    const bboxY = this.axis.y.track.rect;
+    const bboxX = this.axis.x.track.rect;
 
     if (!this.isWithinBounds(bboxY)) {
       this.axis.y.scrollbar.el.classList.remove('visible');
@@ -487,8 +506,8 @@ export default class SimpleBar {
   }
 
   onMouseDown = (e) => {
-    const bboxY = this.axis.y.track.cachedBoundingRect;
-    const bboxX = this.axis.x.track.cachedBoundingRect;
+    const bboxY = this.axis.y.track.rect;
+    const bboxX = this.axis.x.track.rect;
 
     if (this.isWithinBounds(bboxY)) {
       this.onDragStart(e, 'y');
@@ -541,11 +560,11 @@ export default class SimpleBar {
     // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
     let dragPos =
       eventOffset -
-      track.cachedBoundingRect[this.axis[this.draggedAxis].offsetAttr] -
+      track.rect[this.axis[this.draggedAxis].offsetAttr] -
       this.axis[this.draggedAxis].dragOffset;
 
     // Convert the mouse position into a percentage of the scrollbar height/width.
-    let dragPerc = dragPos / track.cachedBoundingRect.width;
+    let dragPerc = dragPos / track.rect.width;
 
     // Scroll the content by the same percentage.
     let scrollPos =
@@ -582,7 +601,7 @@ export default class SimpleBar {
       this.el.removeEventListener('mouseenter', this.onMouseEnter);
     }
 
-    this.scrollerEl.removeEventListener('scroll', this.onScroll);
+    this.contentEl.removeEventListener('scroll', this.onScroll);
 
     this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
