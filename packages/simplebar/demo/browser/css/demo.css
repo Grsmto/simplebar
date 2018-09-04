@@ -36,16 +36,9 @@ h2 {
 p {
   margin: 1em 0;
 }
-a,
-a:visited {
-  color: #000;
-  }
-  a.active,
-  a:hover {
-    color: #666;
-    }
-.tse-content {
-  background-color: #DDD;
+.box {
+  background: #666;
+  color: #fff;
 }
 .col {
   float: left;
@@ -100,17 +93,18 @@ a:visited {
   height: 300px;
 }
 .demo4 {
+  background: grey;
   width: 100%;
   margin: 10px 0;
+  padding: 10px;
   white-space: nowrap;
+  overflow: auto;
   }
     .demo4 .box {
       display: inline-block;
-      margin-right: 10px;
+      /* margin-right: 10px; */
       width: 100px;
       height: 100px;
-      background: #666;
-      color: #fff;
       text-align: center;
       line-height: 100px;
       font-size: 24px;
@@ -129,5 +123,22 @@ a:visited {
 
 .demo5 {
   height: 200px;
+  height: 60px;
   direction: rtl;
+}
+
+.demo-both-axis {
+  overflow: auto;
+  width: 200px;
+  height: 200px;
+}
+
+.demo-both-axis .box {
+  width: 600px;
+  height: 600px;
+}
+
+.demo-both-axis--padding {
+  background: #2f2f2f;
+  padding: 40px;
 }
