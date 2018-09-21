@@ -5,6 +5,11 @@
     justify-content: flex-start;
     align-content: flex-start;
     align-items: flex-start;
+    overflow: hidden !important;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
 }
 
 .simplebar-mask {
@@ -56,7 +61,7 @@
     pointer-events: none;
 }
 
-.simplebar-size-auto-observer-wrapper {
+.simplebar-height-auto-observer-wrapper {
     box-sizing: inherit !important;
     height: 100%;
     width: inherit;
@@ -74,7 +79,7 @@
     flex-basis: 0;
 }
 
-.simplebar-size-auto-observer {
+.simplebar-height-auto-observer {
     box-sizing: inherit;
     display: block;
     opacity: 0;
@@ -155,4 +160,15 @@
 [data-simplebar-direction="rtl"] .simplebar-track.vertical {
     right: auto;
     left: 0;
+}
+
+.hs-dummy-scrollbar-size {
+    direction: rtl;
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    height: 500px;
+    width: 500px;
+    overflow-y: hidden;
+    overflow-x: scroll;
 }
