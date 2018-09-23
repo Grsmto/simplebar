@@ -6,6 +6,8 @@ import SimpleBar from 'simplebar-react';
 import 'react-select/dist/react-select.css';
 import 'simplebar/src/simplebar.css';
 
+import './browser/css/demo.css';
+
 function menuRenderer(params) {
     // use default renderer in a hacky way
     const menu = Select.defaultProps.menuRenderer(params);
@@ -16,14 +18,17 @@ function menuRenderer(params) {
 class Playground extends React.PureComponent {
     state = {
         height: '100%',
-        width: '100%'
+        width: '100%',
+        direction: 'ltr'
     }
 
     render() {
         return (
-            <Fragment>
-                {this.props.children(this.state)}
-                <div>
+            <div className="playground">
+                <div className="playground__content">
+                    {this.props.children(this.state)}
+                </div>
+                <div className="playground__tools">
                     <label>Width:</label>
                     <Select
                         onChange={(option) => this.setState({ width: option.value })}
@@ -45,12 +50,23 @@ class Playground extends React.PureComponent {
                         value={this.state.height}
                     />
                 </div>
-            </Fragment>
+                <div>
+                    <label>Direction:</label>
+                    <Select
+                        onChange={(option) => this.setState({ direction: option.value })}
+                        options={[
+                            { value: 'ltr', label: 'LTR' },
+                            { value: 'rtl', label: 'RTL' }
+                        ]}
+                        value={this.state.direction}
+                    />
+                </div>
+            </div>
         );
     }
 }
     
-    ReactDOM.render(
+ReactDOM.render(
     <section>
         <h1>Simplebar demo page</h1>
         <section>
@@ -107,7 +123,7 @@ class Playground extends React.PureComponent {
             <div className="col">
                 <h2>Horizontal</h2>
                 <Playground>
-                    {({ height, width }) => (
+                    {({ height, width, direction }) => (
                         <div 
                             style={{
                                 width: '200px',
@@ -117,7 +133,7 @@ class Playground extends React.PureComponent {
                             <div
                                 data-simplebar
                                 className="demo4"
-                                style={{ height, width }}
+                                style={{ height, width, direction }}
                             >
                                 <div className="box">1</div>
                                 <div className="box">2</div>

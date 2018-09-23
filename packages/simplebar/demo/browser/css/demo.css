@@ -9,6 +9,10 @@
 /* General page styles
 *****************************************************************/
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -141,4 +145,21 @@ p {
 .demo-both-axis--padding {
   background: #2f2f2f;
   padding: 40px;
+}
+
+.height-100 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: red;
+}
+
+.playground {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.playground__content {
+  grid-column-start: span 2;
 }
