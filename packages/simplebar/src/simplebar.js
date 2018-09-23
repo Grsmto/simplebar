@@ -586,7 +586,7 @@ export default class SimpleBar {
 
     track = this.axis[this.draggedAxis].track;
 
-    if (this.currentAxis === 'y') {
+    if (this.draggedAxis === 'y') {
       eventOffset = e.pageY;
     } else {
       eventOffset = e.pageX;
@@ -597,21 +597,22 @@ export default class SimpleBar {
       eventOffset -
       track.rect[this.axis[this.draggedAxis].offsetAttr] -
       this.axis[this.draggedAxis].dragOffset;
-
     // Convert the mouse position into a percentage of the scrollbar height/width.
-    let dragPerc = dragPos / track.rect.width;
+    let dragPerc = dragPos / track.rect[this.axis[this.draggedAxis].sizeAttr];
 
     // Scroll the content by the same percentage.
     let scrollPos =
       dragPerc * this.contentEl[this.axis[this.draggedAxis].scrollSizeAttr];
-
-    this.scrollerEl[this.axis[this.draggedAxis].scrollOffsetAttr] = scrollPos;
+    this.contentEl[this.axis[this.draggedAxis].scrollOffsetAttr] = scrollPos;
   }
 
   /**
    * End scroll handle drag
    */
-  onEndDrag = () => {
+  onEndDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     document.removeEventListener('mousemove', this.drag);
     document.removeEventListener('mouseup', this.onEndDrag);
   }
