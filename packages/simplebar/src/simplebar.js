@@ -570,19 +570,12 @@ export default class SimpleBar {
    * on scrollbar handle drag movement starts
    */
   onDragStart(e, axis = 'y') {
-    // Preventing the event's default action stops text being
-    // selectable during the drag.
-    e.preventDefault();
-    // Prevent event leaking
-    e.stopPropagation();
-
     const scrollbar = this.axis[axis].scrollbar.el;
 
     // Measure how far the user's mouse is from the top of the scrollbar drag handle.
     const eventOffset = axis === 'y' ? e.pageY : e.pageX;
-
     this.axis[axis].dragOffset =
-      eventOffset - scrollbar.getBoundingClientRect()[this.axis[axis].offsetAttr];
+    eventOffset - scrollbar.getBoundingClientRect()[this.axis[axis].offsetAttr];
     this.draggedAxis = axis;
 
     document.addEventListener('mousemove', this.drag);
@@ -596,6 +589,7 @@ export default class SimpleBar {
     let eventOffset, track;
 
     e.preventDefault();
+    e.stopPropagation();
 
     track = this.axis[this.draggedAxis].track;
 
