@@ -299,7 +299,9 @@ export default class SimpleBar {
       this.el.addEventListener('mouseenter', this.onMouseEnter);
     }
 
-    this.el.addEventListener('mousedown', this.onMouseDown);
+    ['mousedown', 'click', 'dblclick', 'touchstart', 'touchend', 'touchmove'].forEach((e) => {
+      this.el.addEventListener(e, this.onPointerEvent);
+    });
     this.el.addEventListener('mousemove', this.onMouseMove);
 
     this.contentEl.addEventListener('scroll', this.onScroll);
@@ -476,17 +478,14 @@ export default class SimpleBar {
   }
 
   onMouseMove = (e) => {
-    const bboxY = this.axis.y.track.rect;
-    const bboxX = this.axis.x.track.rect;
-
     this.mouseX = e.clientX;
     this.mouseY = e.clientY;
 
-    if (this.isWithinBounds(bboxY)) {
+    if (this.isWithinBounds(this.axis.y.track.rect)) {
       this.showScrollbar('y');
     }
 
-    if (this.isWithinBounds(bboxX)) {
+    if (this.isWithinBounds(this.axis.x.track.rect)) {
       this.showScrollbar('x');
     }
   }
@@ -526,30 +525,44 @@ export default class SimpleBar {
    * Hide Scrollbar
    */
   hideScrollbars = () => {
-    const bboxY = this.axis.y.track.rect;
-    const bboxX = this.axis.x.track.rect;
+    this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
+    this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
-    if (!this.isWithinBounds(bboxY)) {
+    if (!this.isWithinBounds(this.axis.y.track.rect)) {
       this.axis.y.scrollbar.el.classList.remove('visible');
       this.axis.y.isVisible = false;
     }
 
-    if (!this.isWithinBounds(bboxX)) {
+    if (!this.isWithinBounds(this.axis.x.track.rect)) {
       this.axis.x.scrollbar.el.classList.remove('visible');
       this.axis.x.isVisible = false;
     }
   }
 
-  onMouseDown = (e) => {
-    const bboxY = this.axis.y.track.rect;
-    const bboxX = this.axis.x.track.rect;
+  onPointerEvent = (e) => {
+    this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
+    this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
-    if (this.isWithinBounds(bboxY)) {
-      this.onDragStart(e, 'y');
-    }
+    const isWithinBoundsY = this.isWithinBounds(this.axis.y.track.rect);
+    const isWithinBoundsX = isWithinBoundsY ? false : this.isWithinBounds(this.axis.x.track.rect);
 
-    if (this.isWithinBounds(bboxX)) {
-      this.onDragStart(e, 'x');
+    // If any pointer event is called on the scrollbar
+    if (isWithinBoundsY || isWithinBoundsX) {
+      // Preventing the event's default action stops text being
+      // selectable during the drag.
+      e.preventDefault();
+      // Prevent event leaking
+      e.stopPropagation();
+
+      if (e.type === 'mousedown') {
+        if (isWithinBoundsY) {
+          this.onDragStart(e, 'y');
+        }
+
+        if (isWithinBoundsX) {
+          this.onDragStart(e, 'x');
+        }
+      }
     }
   }
 
