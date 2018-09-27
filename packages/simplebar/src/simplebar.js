@@ -1,5 +1,6 @@
 import scrollbarWidth from 'scrollbarwidth';
 import throttle from 'lodash.throttle';
+import debounce from 'lodash.debounce';
 import ResizeObserver from 'resize-observer-polyfill';
 import canUseDOM from 'can-use-dom';
 
@@ -45,7 +46,8 @@ export default class SimpleBar {
 
     this.recalculate = throttle(this.recalculate.bind(this), 1000);
     this.onMouseMove = throttle(this.onMouseMove.bind(this), 100);
-
+    this.hideScrollbars = debounce(this.hideScrollbars.bind(this), this.options.timeout);
+    
     this.init();
   }
 
@@ -303,6 +305,7 @@ export default class SimpleBar {
       this.el.addEventListener(e, this.onPointerEvent);
     });
     this.el.addEventListener('mousemove', this.onMouseMove);
+    this.el.addEventListener('mouseleave', this.onMouseLeave);
 
     this.contentEl.addEventListener('scroll', this.onScroll);
 
@@ -490,6 +493,13 @@ export default class SimpleBar {
     }
   }
 
+  onMouseLeave = () => {
+    this.onMouseMove.cancel();
+
+    this.mouseX = -1;
+    this.mouseY = -1;
+  }
+
   onWindowResize = () => {
     // Recalculate scrollbarWidth in case it's a zoom
     this.scrollbarWidth = scrollbarWidth();
@@ -502,6 +512,8 @@ export default class SimpleBar {
    */
   showScrollbar(axis = 'y') {
     let scrollbar = this.axis[axis].scrollbar.el;
+
+    this.hideScrollbars();
 
     // Scrollbar already visible
     if (this.axis[axis].isVisible) {
@@ -516,9 +528,6 @@ export default class SimpleBar {
     if (!this.options.autoHide) {
       return;
     }
-
-    // window.clearInterval(this.flashTimeout);
-    // this.flashTimeout = window.setInterval(this.hideScrollbars, this.options.timeout);
   }
 
   /**
@@ -527,7 +536,7 @@ export default class SimpleBar {
   hideScrollbars = () => {
     this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
-
+  
     if (!this.isWithinBounds(this.axis.y.track.rect)) {
       this.axis.y.scrollbar.el.classList.remove('visible');
       this.axis.y.isVisible = false;
