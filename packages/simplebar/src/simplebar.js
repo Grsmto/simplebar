@@ -15,10 +15,10 @@ export default class SimpleBar {
     this.mutationObserver;
     this.resizeObserver;
     this.scrollbarWidth;
+    this.minScrollbarWidth = 20;
     this.options = Object.assign({}, SimpleBar.defaultOptions, options);
     this.isRtl;
     this.classNames = this.options.classNames;
-    this.offsetSize = 20;
     this.axis = {
       x: {
         scrollOffsetAttr: 'scrollLeft',
@@ -211,7 +211,7 @@ export default class SimpleBar {
     if (canUseDOM) {
       // Recalculate scrollbarWidth in case it's a zoom
       this.scrollbarWidth = scrollbarWidth();
-      
+
       this.render();
   
       this.initListeners();
@@ -361,8 +361,8 @@ export default class SimpleBar {
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
     // Set isEnabled to false if scrollbar is not necessary (content is shorter than scroller)
-    this.axis.x.isEnabled = this.contentEl.scrollWidth > Math.ceil(this.axis.x.track.rect.width);
-    this.axis.y.isEnabled = this.contentEl.scrollHeight > Math.ceil(this.axis.y.track.rect.height);
+    this.axis.x.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollWidth : this.contentEl.scrollWidth - this.minScrollbarWidth) > Math.ceil(this.axis.x.track.rect.width);
+    this.axis.y.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollWidth : this.contentEl.scrollHeight - this.minScrollbarWidth) > Math.ceil(this.axis.y.track.rect.height);
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
@@ -383,22 +383,22 @@ export default class SimpleBar {
    * Calculate scrollbar size
    */
   getScrollbarSize(axis = 'y') {
-    const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
+    const contentSize = this.scrollbarWidth ? this.contentEl[this.axis[axis].scrollSizeAttr] : this.contentEl[this.axis[axis].scrollSizeAttr] - this.minScrollbarWidth;
     const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
     let scrollbarSize;
-    
+
     if (!this.axis[axis].isEnabled && !this.options.forceVisible) {
       return;
     }
-    
+
     let scrollbarRatio = trackSize / contentSize;
-    
+
     // Calculate new height/position of drag handle.
     scrollbarSize = Math.max(
       ~~(scrollbarRatio * trackSize),
       this.options.scrollbarMinSize
     );
-    
+
     if (this.options.scrollbarMaxSize) {
       scrollbarSize = Math.min(
         scrollbarSize,
@@ -410,13 +410,13 @@ export default class SimpleBar {
   }
 
   positionScrollbar(axis = 'y') {
-    const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
+    const contentSize = this.scrollbarWidth ? this.contentEl[this.axis[axis].scrollSizeAttr] : this.contentEl[this.axis[axis].scrollSizeAttr] - this.minScrollbarWidth;
     const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
     let scrollOffset = this.contentEl[this.axis[axis].scrollOffsetAttr];
     const scrollbar = this.axis[axis].scrollbar;
     let scrollPourcent = scrollOffset / (contentSize - trackSize);
     let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
-    handleOffset = this.isRtlScrollingInverted ? handleOffset + (trackSize - scrollbar.size) : handleOffset;
+    handleOffset = this.isRtl && this.isRtlScrollingInverted ? handleOffset + (trackSize - scrollbar.size) : handleOffset;
 
     if (this.axis[axis].isEnabled || this.options.forceVisible) {
       scrollbar.el.style.transform = axis === 'x' ? `translate3d(${handleOffset}px, 0, 0)` : `translate3d(0, ${handleOffset}px, 0)`;
@@ -444,8 +444,14 @@ export default class SimpleBar {
   }
 
   hideNativeScrollbar() {
-    this.scrollerEl.style[this.isRtl ? 'left' : 'right'] = `-${this.scrollbarWidth || this.offsetSize}px`;
-    this.scrollerEl.style.bottom = `-${this.scrollbarWidth || this.offsetSize}px`;
+    this.scrollerEl.style[this.isRtl ? 'left' : 'right'] = `-${this.scrollbarWidth || this.minScrollbarWidth}px`;
+    this.scrollerEl.style.bottom = `-${this.scrollbarWidth || this.minScrollbarWidth}px`;
+
+    // If floating scrollbar
+    if (!this.scrollbarWidth) {
+      this.contentEl.style[this.isRtl ? 'paddingLeft' : 'paddingRight'] = `${this.minScrollbarWidth}px`;
+      this.contentEl.style.paddingBottom = `${this.minScrollbarWidth}px`;
+    }
   }
 
   /**
