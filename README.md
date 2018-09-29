@@ -50,6 +50,10 @@ SimpleBar is meant to improve the experience of **internal web pages scroll**: l
 ### Troubleshoot
 If you are experiencing issues when setting up SimpleBar it is most likely because your styles are clashing with SimpleBar ones. Make sure the element you are setting SimpleBar on does not override any SimpleBar css properties! We recommend to not style at all that element and use an inner element instead.
 
+### Sponsors
+Thanks to BrowserStack for sponsoring open source projects and letting us test SimpleBar for free.
+<a href="https://www.browserstack.com" target="_blank"><img src="https://user-images.githubusercontent.com/15015324/45184727-368fbf80-b1fe-11e8-8827-08dbc80b0fb1.png" width="200"></a>
+
 ---
 
 1. [Documentation](#1-documentation)
