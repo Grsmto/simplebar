@@ -44,10 +44,9 @@ export default class SimpleBar {
       }
     };
 
-    this.recalculate = throttle(this.recalculate.bind(this), 1000);
-    this.onMouseMove = throttle(this.onMouseMove.bind(this), 100);
+    this.recalculate = throttle(this.recalculate.bind(this), 64);
+    this.onMouseMove = throttle(this.onMouseMove.bind(this), 64);
     this.hideScrollbars = debounce(this.hideScrollbars.bind(this), this.options.timeout);
-    
     this.onWindowResize = debounce(this.onWindowResize.bind(this), 64, { leading: true });
 
     this.init();
