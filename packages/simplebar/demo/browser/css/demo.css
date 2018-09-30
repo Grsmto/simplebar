@@ -1,7 +1,7 @@
 /**
  * SimpleBar demo.
  * Author: Adrien Grsmto
- * 
+ *
  * These styles are not required for SimpleBar
  * to function. They are used only for styling the demo.
  */
@@ -108,14 +108,14 @@ p {
       display: inline-block;
       /* margin-right: 10px; */
       width: 100px;
-      height: 100px;
+      height: 150px;
       text-align: center;
-      line-height: 100px;
+      line-height: 150px;
       font-size: 24px;
       }
 .demo-raw {
   margin: 10px 0;
-  width: 250px; 
+  width: 250px;
   height: 300px;
   overflow: auto;
 }
@@ -152,6 +152,13 @@ p {
   height: 100%;
   width: 100%;
   background: red;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  background: red;
+  margin: 0;
 }
 
 .playground {
