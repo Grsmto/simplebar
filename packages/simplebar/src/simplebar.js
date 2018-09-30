@@ -213,8 +213,8 @@ export default class SimpleBar {
       // Recalculate scrollbarWidth in case it's a zoom
       this.scrollbarWidth = scrollbarWidth();
 
-      this.render();
-  
+      this.recalculate();
+
       this.initListeners();
     }
   }
@@ -252,9 +252,9 @@ export default class SimpleBar {
       this.placeholderEl.classList.add(this.classNames.placeholder);
       this.heightAutoObserverWrapperEl.classList.add(this.classNames.heightAutoObserverWrapperEl);
       this.heightAutoObserverEl.classList.add(this.classNames.heightAutoObserverEl);
-      
+
       while (this.el.firstChild) this.contentEl.appendChild(this.el.firstChild);
-      
+
       this.scrollerEl.appendChild(this.contentEl);
       this.maskEl.appendChild(this.scrollerEl);
       this.heightAutoObserverWrapperEl.appendChild(this.heightAutoObserverEl);
@@ -337,14 +337,7 @@ export default class SimpleBar {
     this.resizeObserver.observe(this.el);
   }
 
-  /**
-   * Recalculate scrollbar
-   */
   recalculate() {
-    this.render();
-  }
-
-  render() {
     const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
 
     this.elStyles = window.getComputedStyle(this.el);
@@ -543,7 +536,7 @@ export default class SimpleBar {
   hideScrollbars = () => {
     this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
-  
+
     if (!this.isWithinBounds(this.axis.y.track.rect)) {
       this.axis.y.scrollbar.el.classList.remove('visible');
       this.axis.y.isVisible = false;
