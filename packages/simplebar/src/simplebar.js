@@ -443,8 +443,9 @@ export default class SimpleBar {
 
     // If floating scrollbar
     if (!this.scrollbarWidth) {
-      this.contentEl.style[this.isRtl ? 'paddingLeft' : 'paddingRight'] = `${this.minScrollbarWidth}px`;
-      this.contentEl.style.paddingBottom = `${this.minScrollbarWidth}px`;
+      const paddingDirection = [this.isRtl ? 'paddingLeft' : 'paddingRight'];
+      this.contentEl.style[paddingDirection] = `calc(${this.elStyles[paddingDirection]} + ${this.minScrollbarWidth}px)`;
+      this.contentEl.style.paddingBottom = `calc(${this.elStyles.paddingBottom} + ${this.minScrollbarWidth}px)`;
     }
   }
 
