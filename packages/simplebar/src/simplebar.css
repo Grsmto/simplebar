@@ -86,8 +86,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 100%;
+    height: 1000%;
+    width: 1000%;
+    min-height: 1px;
+    min-width: 1px;
     overflow: hidden;
     pointer-events: none;
     z-index: -1;

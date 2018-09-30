@@ -344,7 +344,7 @@ export default class SimpleBar {
   }
 
   render() {
-    const isHeightAuto = this.heightAutoObserverEl.offsetHeight === 0;
+    const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
 
     this.elStyles = window.getComputedStyle(this.el);
 
