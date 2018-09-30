@@ -363,7 +363,7 @@ export default class SimpleBar {
 
     // Set isEnabled to false if scrollbar is not necessary (content is shorter than scroller)
     this.axis.x.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollWidth : this.contentEl.scrollWidth - this.minScrollbarWidth) > Math.ceil(this.axis.x.track.rect.width);
-    this.axis.y.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollWidth : this.contentEl.scrollHeight - this.minScrollbarWidth) > Math.ceil(this.axis.y.track.rect.height);
+    this.axis.y.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollHeight : this.contentEl.scrollHeight - this.minScrollbarWidth) > Math.ceil(this.axis.y.track.rect.height);
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
