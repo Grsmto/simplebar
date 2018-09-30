@@ -48,6 +48,8 @@ export default class SimpleBar {
     this.onMouseMove = throttle(this.onMouseMove.bind(this), 100);
     this.hideScrollbars = debounce(this.hideScrollbars.bind(this), this.options.timeout);
     
+    this.onWindowResize = debounce(this.onWindowResize.bind(this), 64, { leading: true });
+
     this.init();
   }
 
@@ -660,6 +662,7 @@ export default class SimpleBar {
     }
 
     this.contentEl.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onWindowResize);
 
     this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
