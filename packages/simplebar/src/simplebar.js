@@ -1,6 +1,7 @@
 import scrollbarWidth from 'scrollbarwidth';
 import throttle from 'lodash.throttle';
 import debounce from 'lodash.debounce';
+import memoize from 'lodash.memoize';
 import ResizeObserver from 'resize-observer-polyfill';
 import canUseDOM from 'can-use-dom';
 
@@ -49,48 +50,50 @@ export default class SimpleBar {
     this.hideScrollbars = debounce(this.hideScrollbars.bind(this), this.options.timeout);
     this.onWindowResize = debounce(this.onWindowResize.bind(this), 64, { leading: true });
 
+    SimpleBar.getRtlHelpers = memoize(SimpleBar.getRtlHelpers);
+
     this.init();
   }
 
   /**
    * Static properties
    */
-  get isRtlScrollingInverted() {
-    if (typeof SimpleBar.isRtlScrollingInverted === 'undefined') {
-      const dummyDiv = document.createElement('div');
-      dummyDiv.innerHTML = '<div class="hs-dummy-scrollbar-size"><div style="height: 200%; width: 200%; margin: 10px 0;"></div></div>';
-      const scrollbarDummyEl = dummyDiv.firstElementChild;
-      document.body.appendChild(scrollbarDummyEl);
-      const dummyContainerChild = scrollbarDummyEl.firstElementChild;
-      scrollbarDummyEl.scrollLeft = 0;
-      const dummyContainerChildOffset = SimpleBar.getOffset(dummyContainerChild);
-      scrollbarDummyEl.scrollLeft = 999;
-      const dummyContainerScrollOffsetAfterScroll = SimpleBar.getOffset(dummyContainerChild);
+  static getRtlHelpers() {
+    const dummyDiv = document.createElement('div');
+    dummyDiv.innerHTML = '<div class="hs-dummy-scrollbar-size"><div style="height: 200%; width: 200%; margin: 10px 0;"></div></div>';
+    const scrollbarDummyEl = dummyDiv.firstElementChild;
+    document.body.appendChild(scrollbarDummyEl);
+    const dummyContainerChild = scrollbarDummyEl.firstElementChild;
+    scrollbarDummyEl.scrollLeft = 0;
+    const dummyContainerOffset = SimpleBar.getOffset(scrollbarDummyEl);
+    const dummyContainerChildOffset = SimpleBar.getOffset(dummyContainerChild);
+    scrollbarDummyEl.scrollLeft = 999;
+    const dummyContainerScrollOffsetAfterScroll = SimpleBar.getOffset(dummyContainerChild);
 
-      SimpleBar.isRtlScrollingInverted = dummyContainerChildOffset.left - dummyContainerScrollOffsetAfterScroll.left === 0;
-    }
-
-    return SimpleBar.isRtlScrollingInverted;
+    return {
+      // determines if the scrolling is responding with negative values
+      isRtlScrollingInverted: dummyContainerOffset.left !== dummyContainerChildOffset.left && dummyContainerChildOffset.left - dummyContainerScrollOffsetAfterScroll.left !== 0,
+      // determines if the origin scrollbar position is inverted or not (positioned on left or right)
+      isRtlScrollbarInverted: dummyContainerOffset.left !== dummyContainerChildOffset.left
+    };
   }
 
-  static get defaultOptions() {
-    return {
-      autoHide: true,
-      forceVisible: false,
-      classNames: {
-        content: 'simplebar-content',
-        scroller: 'simplebar-scroller',
-        mask: 'simplebar-mask',
-        placeholder: 'simplebar-placeholder',
-        scrollbar: 'simplebar-scrollbar',
-        track: 'simplebar-track',
-        heightAutoObserverWrapperEl: 'simplebar-height-auto-observer-wrapper',
-        heightAutoObserverEl: 'simplebar-height-auto-observer'
-      },
-      scrollbarMinSize: 25,
-      scrollbarMaxSize: 0,
-      timeout: 1000
-    };
+  static defaultOptions = {
+    autoHide: true,
+    forceVisible: false,
+    classNames: {
+      content: 'simplebar-content',
+      scroller: 'simplebar-scroller',
+      mask: 'simplebar-mask',
+      placeholder: 'simplebar-placeholder',
+      scrollbar: 'simplebar-scrollbar',
+      track: 'simplebar-track',
+      heightAutoObserverWrapperEl: 'simplebar-height-auto-observer-wrapper',
+      heightAutoObserverEl: 'simplebar-height-auto-observer'
+    },
+    scrollbarMinSize: 25,
+    scrollbarMaxSize: 0,
+    timeout: 1000
   }
 
   static initHtmlApi() {
@@ -406,11 +409,16 @@ export default class SimpleBar {
   positionScrollbar(axis = 'y') {
     const contentSize = this.scrollbarWidth ? this.contentEl[this.axis[axis].scrollSizeAttr] : this.contentEl[this.axis[axis].scrollSizeAttr] - this.minScrollbarWidth;
     const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
-    let scrollOffset = this.contentEl[this.axis[axis].scrollOffsetAttr];
     const scrollbar = this.axis[axis].scrollbar;
+    let scrollOffset = this.contentEl[this.axis[axis].scrollOffsetAttr];
+    scrollOffset = this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollingInverted ? -scrollOffset : scrollOffset;
     let scrollPourcent = scrollOffset / (contentSize - trackSize);
     let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
-    handleOffset = this.isRtl && this.isRtlScrollingInverted ? handleOffset + (trackSize - scrollbar.size) : handleOffset;
+
+    handleOffset = this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollbarInverted
+      ? handleOffset + (trackSize - scrollbar.size)
+      : handleOffset
+    ;
 
     if (this.axis[axis].isEnabled || this.options.forceVisible) {
       scrollbar.el.style.transform = axis === 'x' ? `translate3d(${handleOffset}px, 0, 0)` : `translate3d(0, ${handleOffset}px, 0)`;
