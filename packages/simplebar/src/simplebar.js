@@ -202,12 +202,10 @@ export default class SimpleBar {
 
   static getOffset(el) {
     const rect = el.getBoundingClientRect();
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
     return {
-      top: rect.top + scrollTop,
-      left: rect.left + scrollLeft
+      top: rect.top + (window.pageYOffset || document.documentElement.scrollTop),
+      left: rect.left + (window.pageXOffset || document.documentElement.scrollLeft)
     };
   }
 
@@ -601,7 +599,7 @@ export default class SimpleBar {
     // Measure how far the user's mouse is from the top of the scrollbar drag handle.
     const eventOffset = axis === 'y' ? e.pageY : e.pageX;
     this.axis[axis].dragOffset =
-    eventOffset - scrollbar.getBoundingClientRect()[this.axis[axis].offsetAttr];
+      eventOffset - scrollbar.getBoundingClientRect()[this.axis[axis].offsetAttr];
     this.draggedAxis = axis;
 
     document.addEventListener('mousemove', this.drag);
