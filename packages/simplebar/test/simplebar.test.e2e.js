@@ -17,27 +17,27 @@ describe('Load', () => {
     const demo = await expect(page).toMatchElement('[data-simplebar-auto-hide="false"]');
     await expect(demo).toMatchElement('.simplebar-scrollbar.visible');
   });
-  
+
   it('should force scrollbar track to be visible but scrollbar to be hidden', async () => {
     const trackSelector = '[data-simplebar-force-visible] .simplebar-track.vertical';
-    
+
     await page.waitForSelector(trackSelector, { visible: true });
     await page.waitForSelector(`${trackSelector} .simplebar-scrollbar`, { hidden: true });
   });
 
   it('should display SimpleBar in "rtl" mode', async () => {
-    const el = await expect(page).toMatchElement('[data-simplebar-direction="rtl"]');
+    const el = await expect(page).toMatchElement('.demo-rtl');
     const scrollbarEl = await expect(el).toMatchElement('.simplebar-track.horizontal .simplebar-scrollbar');
-    const options = await page.$eval('[data-simplebar-direction="rtl"]', el => el.SimpleBar.options);
+    const isRtl = await page.$eval('.demo-rtl', el => el.SimpleBar.isRtl);
     const transformStyle = await page.evaluate(el => el.style.transform, scrollbarEl);
-  
+
     // const styles = await scrollbarEl.getProperty('style');
     // const left = await styles.getProperty('left');
     // const stylesToJson = await left.jsonValue();
     const elBoundingBox = await el.boundingBox();
     const scrollbarElBoundingBox = await scrollbarEl.boundingBox();
 
-    expect(options.direction).toEqual('rtl');
+    expect(isRtl).toBeTruthy();
     expect(transformStyle).toEqual(`translate3d(${ elBoundingBox.width - scrollbarElBoundingBox.width}px, 0px, 0px)`);
   });
 });
