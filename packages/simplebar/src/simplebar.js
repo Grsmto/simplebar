@@ -58,6 +58,12 @@ export default class SimpleBar {
   /**
    * Static properties
    */
+
+  /**
+   * Helper to fix browsers inconsistency on RTL:
+   *  - Firefox inverts the scrollbar initial position
+   *  - IE11 inverts both scrollbar position and scrolling offset
+   */
   static getRtlHelpers() {
     const dummyDiv = document.createElement('div');
     dummyDiv.innerHTML = '<div class="hs-dummy-scrollbar-size"><div style="height: 200%; width: 200%; margin: 10px 0;"></div></div>';
@@ -410,12 +416,14 @@ export default class SimpleBar {
     const contentSize = this.scrollbarWidth ? this.contentEl[this.axis[axis].scrollSizeAttr] : this.contentEl[this.axis[axis].scrollSizeAttr] - this.minScrollbarWidth;
     const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
     const scrollbar = this.axis[axis].scrollbar;
-    let scrollOffset = this.contentEl[this.axis[axis].scrollOffsetAttr];
-    scrollOffset = this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollingInverted ? -scrollOffset : scrollOffset;
-    let scrollPourcent = scrollOffset / (contentSize - trackSize);
-    let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
 
-    handleOffset = this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollbarInverted
+    let scrollOffset = this.contentEl[this.axis[axis].scrollOffsetAttr];
+    scrollOffset = axis === 'x' && this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollingInverted ? -scrollOffset : scrollOffset;
+
+    let scrollPourcent = scrollOffset / (contentSize - trackSize);
+
+    let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
+    handleOffset = axis === 'x' && this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollbarInverted
       ? handleOffset + (trackSize - scrollbar.size)
       : handleOffset
     ;
