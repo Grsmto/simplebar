@@ -33,6 +33,7 @@
   "devDependencies": {
     "css-loader": "^0.28.11",
     "minify": "^3.0.5",
+    "promise": "^8.0.2",
     "react-select": "^1.2.1",
     "style-loader": "^0.21.0"
   }

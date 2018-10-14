@@ -1,5 +1,4 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 import Select from 'react-select';
 import ReactSimpleBar from 'simplebar-react';
 import SimpleBar from 'simplebar';
@@ -10,6 +9,14 @@ import 'react-select/dist/react-select.css';
 import 'simplebar/src/simplebar.css';
 
 import './browser/css/demo.css';
+
+if (typeof Promise === 'undefined') {
+  // Rejection tracking prevents a common issue where React gets into an
+  // inconsistent state due to an error, but it gets swallowed by a Promise,
+  // and the user has no idea what causes React's erratic future behavior.
+  require('promise/lib/rejection-tracking').enable();
+  window.Promise = require('promise/lib/es6-extensions.js');
+}
 
 function menuRenderer(params) {
   // use default renderer in a hacky way
@@ -169,5 +176,4 @@ class Demo extends React.Component {
   }
 }
 
-// export default hot(module)(Demo);
 export default Demo;
