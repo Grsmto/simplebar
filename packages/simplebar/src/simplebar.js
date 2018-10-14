@@ -612,6 +612,8 @@ export default class SimpleBar {
    * Drag scrollbar handle
    */
   drag = (e) => {
+    const trackSize = track.rect[this.axis[this.draggedAxis].sizeAttr];
+    const scrollbar = this.axis[this.draggedAxis].scrollbar;
     let eventOffset, track;
 
     e.preventDefault();
@@ -636,6 +638,13 @@ export default class SimpleBar {
     // Scroll the content by the same percentage.
     let scrollPos =
       dragPerc * this.contentEl[this.axis[this.draggedAxis].scrollSizeAttr];
+
+    // Fix browsers inconsistency on RTL
+    if (this.draggedAxis === 'x') {
+      scrollPos = this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollbarInverted ? scrollPos - (trackSize + scrollbar.size) : scrollPos;
+      scrollPos = this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollingInverted ? -scrollPos : scrollPos;
+    }
+
     this.contentEl[this.axis[this.draggedAxis].scrollOffsetAttr] = scrollPos;
   }
 
