@@ -41,7 +41,10 @@ export default class SimpleBar {
         content: 'simplebar-content',
         scrollContent: 'simplebar-scroll-content',
         scrollbar: 'simplebar-scrollbar',
-        track: 'simplebar-track'
+        track: 'simplebar-track',
+        visible: 'visible',
+        horizontal: 'horizontal',
+        vertical: 'vertical'
       },
       scrollbarMinSize: 25,
       scrollbarMaxSize: 0,
@@ -173,9 +176,9 @@ export default class SimpleBar {
     ) {
       // assume that element has his DOM already initiated
       this.trackX = this.el.querySelector(
-        `.${this.classNames.track}.horizontal`
+        `.${this.classNames.track}.${this.classNames.horizontal}`
       );
-      this.trackY = this.el.querySelector(`.${this.classNames.track}.vertical`);
+      this.trackY = this.el.querySelector(`.${this.classNames.track}.${this.classNames.vertical}`);
       this.scrollContentEl = this.el.querySelector(
         `.${this.classNames.scrollContent}`
       );
@@ -202,16 +205,16 @@ export default class SimpleBar {
       scrollbar.classList.add(this.classNames.scrollbar);
 
       if (!this.options.autoHide) {
-        scrollbar.classList.add('visible');
+        scrollbar.classList.add(this.classNames.visible);
       }
 
       track.appendChild(scrollbar);
 
       this.trackX = track.cloneNode(true);
-      this.trackX.classList.add('horizontal');
+      this.trackX.classList.add(this.classNames.horizontal);
 
       this.trackY = track.cloneNode(true);
-      this.trackY.classList.add('vertical');
+      this.trackY.classList.add(this.classNames.vertical);
 
       this.el.insertBefore(this.trackX, this.el.firstChild);
       this.el.insertBefore(this.trackY, this.el.firstChild);
@@ -483,7 +486,7 @@ export default class SimpleBar {
     }
 
     if (this.isEnabled[axis]) {
-      scrollbar.classList.add('visible');
+      scrollbar.classList.add(this.classNames.visible);
       this.isVisible[axis] = true;
     }
 
@@ -503,12 +506,12 @@ export default class SimpleBar {
     const bboxX = this.trackX.getBoundingClientRect();
 
     if (!this.isWithinBounds(bboxY)) {
-      this.scrollbarY.classList.remove('visible');
+      this.scrollbarY.classList.remove(this.classNames.visible);
       this.isVisible.y = false;
     }
 
     if (!this.isWithinBounds(bboxX)) {
-      this.scrollbarX.classList.remove('visible');
+      this.scrollbarX.classList.remove(this.classNames.visible);
       this.isVisible.x = false;
     }
   }
