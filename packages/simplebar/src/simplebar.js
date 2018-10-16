@@ -410,6 +410,7 @@ export default class SimpleBar {
       this.contentEl.style[this.isRtl ? 'marginLeft' : 'marginRight'] = `-${
         this.scrollbarWidth
       }px`;
+      this.trackY.classList.add(this.isRtl ? "rtl" : "");
     }
   }
 
