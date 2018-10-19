@@ -43,16 +43,16 @@ Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 **Don't forget to import both css and js in your project!**
 
 ### :warning: Warning!
-SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often affect badly the user experience (slower scroll performances compare to native body scroll, no native scroll behaviours like click on track, etc.). Do it at your own risk!
-SimpleBar is meant to improve the experience of **internal web pages scroll**: like a chat box or a small scrolling area.
-**Please read the [caveats](#5-caveats) section first to know the limitations!**
+SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often badly affect the user experience (slower scroll performance compared to the native body scroll, no native scroll behaviours like click on track, etc.). Do it at your own risk! SimpleBar is meant to improve the experience of **internal web page scrolling**; such as a chat box or a small scrolling area. **Please read the [caveats](#5-caveats) section first to be aware of the limitations!**
 
-### Troubleshoot
-If you are experiencing issues when setting up SimpleBar it is most likely because your styles are clashing with SimpleBar ones. Make sure the element you are setting SimpleBar on does not override any SimpleBar css properties! We recommend to not style at all that element and use an inner element instead.
+### Troubleshooting
+If you are experiencing issues when setting up SimpleBar, it is most likely because your styles are clashing with SimpleBar ones. Make sure the element you are setting SimpleBar on does not override any SimpleBar css properties! We recommend to not style that element at all and use an inner element instead.
 
 ### Sponsors
 Thanks to BrowserStack for sponsoring open source projects and letting us test SimpleBar for free.
-<a href="https://www.browserstack.com" target="_blank"><img src="https://user-images.githubusercontent.com/15015324/45184727-368fbf80-b1fe-11e8-8827-08dbc80b0fb1.png" width="200"></a>
+<a href="https://www.browserstack.com" target="_blank">
+    <img src="https://user-images.githubusercontent.com/15015324/45184727-368fbf80-b1fe-11e8-8827-08dbc80b0fb1.png" width="200">
+</a>
 
 ---
 
@@ -67,7 +67,7 @@ Thanks to BrowserStack for sponsoring open source projects and letting us test S
 ## 1. Documentation
 
 ### Other usages
-You can start SimpleBar mannually if you need to:
+You can start SimpleBar manually if you need to:
 
     new SimpleBar(document.getElementById('myElement'))
     
@@ -108,21 +108,21 @@ By default SimpleBar automatically hides the scrollbar if the user is not scroll
     new SimpleBar(document.getElementById('myElement'), { autoHide: false });
 
 
-Default value is `true`
+Default value is `true`.
 
 You can also control the animation via CSS as it's a simple CSS opacity transition.
 
 #### scrollbarMinSize
 Define the minimum scrollbar size in pixels.
 
-Default value is `10`
+Default value is `10`.
 
 #### classNames
 
 It is possible to change the default class names that SimpleBar uses. To get your own styles to work refer to `simplebar.css` to get an idea how to setup your css.
 
 - `content` represents the wrapper for the content being scrolled.
-- `scrollContent` represents the container containing elements being scrolled.
+- `scrollContent` represents the container containing the elements being scrolled.
 - `scrollbar` defines the style of the scrollbar with which the user can interact to scroll the content.
 - `track` styles the area surrounding the `scrollbar`.
 
@@ -137,30 +137,29 @@ classNames: {
 ```
 
 ### Notifying the plugin of content changes
-#### Note: you shouldn't need to use these functions as SimpleBar is taking care of that automatically. This is for advanced usage only.
-
-If you later dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
+#### Note: you shouldn't need to use these functions as SimpleBar takes care of that automatically. This is for advanced usage only.
 
     var el = new SimpleBar(document.getElementById('myElement'));
     el.recalculate()
+If later on you dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 
 ### Trigger programmatical scrolling
-If you want to access to original scroll element, you can retrieve it via a getter :
 
     var el = new SimpleBar(document.getElementById('myElement'));
     el.getScrollElement()
+If you want to access to the original scroll element, you can retrieve it via a getter:
 
 ### Subscribe to `scroll` event
-You can subscribe to the `scroll` event just like you do with native scrolling element :
     
     var el = new SimpleBar(document.getElementById('myElement'));
     el.getScrollElement().addEventListener('scroll', function(...));
+You can subscribe to the `scroll` event, just like you do with native scrolling elements:
 
-### Add content dynamically (ajax)
-You can retrieve the element containing datas like this :
     
     var el = new SimpleBar(document.getElementById('myElement'));
     el.getContentElement();
+### Add content dynamically (Ajax)
+You can retrieve the element containing data like this:
 
 ### Disable Mutation Observer
     SimpleBar.removeObserver();
@@ -179,7 +178,7 @@ SimpleBar hides the browser's default scrollbars, which obviously is undesirable
 
 ## 2. Browsers support
 
-Simplebar has been tested on the following browsers: Chrome, Firefox, Safari, Edge, IE11.
+SimpleBar has been tested on the following browsers: Chrome, Firefox, Safari, Edge, IE11.
 
 Notice: IE10 doesn't support `MutationObserver` so you will still need to instantiate SimpleBar manually and call `recalculate()` as needed (or you can just use a polyfill for `MutationObserver`).
 
@@ -192,8 +191,8 @@ http://grsmto.github.io/simplebar/
 
 ## 4. How it works
 
-SimpleBar does only one thing : replace the browser's default scrollbars with a custom CSS-styled scrollbar without losing performance. Unlike most of others plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...You keep the awesomeness of native scrolling...with a custom scrollbar!
-Design your scrollbar like you want, with CSS, on all browsers.
+SimpleBar only does one thing: replace the browser's default scrollbars with a custom CSS-styled scrollbar without sacrificing performance. Unlike most other plugins, SimpleBar doesn't mimic scroll behaviour with Javascript, which typically causes jank and strange scrolling behaviour. You keep the awesomeness of native scrolling… with a custom scrollbar!
+Design your scrollbar how you like, with CSS, across all browsers.
 
 For the most part SimpleBar uses the browser's native scrolling functionality, but replaces the conventional scrollbar with a custom CSS-styled scrollbar. The plugin listens for scroll events and redraws the custom scrollbar accordingly.
 
