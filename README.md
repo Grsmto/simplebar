@@ -36,7 +36,7 @@ import 'simplebar/dist/simplebar.css';
 ```
 
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
-```
+```html
 <div data-simplebar></div>
 ```
 
@@ -144,28 +144,28 @@ classNames: {
 
 If later on you dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 ```js
-var el = new SimpleBar(document.getElementById('myElement'));
+const el = new SimpleBar(document.getElementById('myElement'));
 el.recalculate();
 ```
 
 ### Trigger programmatical scrolling
 If you want to access to the original scroll element, you can retrieve it via a getter:
 ```js
-var el = new SimpleBar(document.getElementById('myElement'));
+const el = new SimpleBar(document.getElementById('myElement'));
 el.getScrollElement();
 ```
 
 ### Subscribe to `scroll` event
 You can subscribe to the `scroll` event, just like you do with native scrolling elements:
 ```js
-var el = new SimpleBar(document.getElementById('myElement'));
+const el = new SimpleBar(document.getElementById('myElement'));
 el.getScrollElement().addEventListener('scroll', function(...));
 ```
 
 ### Add content dynamically (Ajax)
 You can retrieve the element containing data like this:
 ```js
-var el = new SimpleBar(document.getElementById('myElement'));
+const el = new SimpleBar(document.getElementById('myElement'));
 el.getContentElement();
 ```
 
