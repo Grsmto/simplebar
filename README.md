@@ -17,7 +17,7 @@ SimpleBar is meant to be as easy to use as possible and lightweight. If you want
 `yarn add simplebar`
 
 **- Via `<script>` tag**
-```
+```html
 <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
 <script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
 <!-- or -->
@@ -30,7 +30,7 @@ note: you can replace `@latest` to the latest version (ex `@2.4.3`), if you want
 ### Usage
 
 If you are using a module loader (like Webpack) you first need to load SimpleBar:
-```
+```js
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
 ```
@@ -68,30 +68,33 @@ Thanks to BrowserStack for sponsoring open source projects and letting us test S
 
 ### Other usages
 You can start SimpleBar manually if you need to:
+```js
+new SimpleBar(document.getElementById('myElement'));
+```
 
-    new SimpleBar(document.getElementById('myElement'))
-    
 or
-
-    Array.from(document.querySelectorAll('.myElements')).forEach(el => new SimpleBar)
+```js
+Array.from(document.querySelectorAll('.myElements')).forEach(el => new SimpleBar);
+```
 
 If you want to use jQuery:
- 
-    new SimpleBar($('#myElement')[0])
-    
+ ```js
+new SimpleBar($('#myElement')[0]);
+```
+
 or
-
-    $('.myElements').each(element, new SimpleBar)
-
+```js
+$('.myElements').each(element, new SimpleBar);
+```
 
 ### Options
 
 Options can be applied to the plugin during initialization:
-```javascript
+```js
 new SimpleBar(document.getElementById('myElement'), {
     option1: value1,
     option2: value2
-})
+});
 ```
 
 or using data-attributes:
@@ -104,9 +107,9 @@ Available options are:
 #### autoHide
 
 By default SimpleBar automatically hides the scrollbar if the user is not scrolling (it emulates Mac OSX Lion's scrollbar). You can make the scrollbar always visible by setting the `autoHide` option to `false`:
-
-    new SimpleBar(document.getElementById('myElement'), { autoHide: false });
-
+```js
+new SimpleBar(document.getElementById('myElement'), { autoHide: false });
+```
 
 Default value is `true`.
 
@@ -126,7 +129,7 @@ It is possible to change the default class names that SimpleBar uses. To get you
 - `scrollbar` defines the style of the scrollbar with which the user can interact to scroll the content.
 - `track` styles the area surrounding the `scrollbar`.
 
-```javascript
+```js
 classNames: {
   // defaults
   content: 'simplebar-content',
@@ -139,42 +142,51 @@ classNames: {
 ### Notifying the plugin of content changes
 #### Note: you shouldn't need to use these functions as SimpleBar takes care of that automatically. This is for advanced usage only.
 
-    var el = new SimpleBar(document.getElementById('myElement'));
-    el.recalculate()
 If later on you dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
+```js
+var el = new SimpleBar(document.getElementById('myElement'));
+el.recalculate();
+```
 
 ### Trigger programmatical scrolling
-
-    var el = new SimpleBar(document.getElementById('myElement'));
-    el.getScrollElement()
 If you want to access to the original scroll element, you can retrieve it via a getter:
+```js
+var el = new SimpleBar(document.getElementById('myElement'));
+el.getScrollElement();
+```
 
 ### Subscribe to `scroll` event
-    
-    var el = new SimpleBar(document.getElementById('myElement'));
-    el.getScrollElement().addEventListener('scroll', function(...));
 You can subscribe to the `scroll` event, just like you do with native scrolling elements:
+```js
+var el = new SimpleBar(document.getElementById('myElement'));
+el.getScrollElement().addEventListener('scroll', function(...));
+```
 
-    
-    var el = new SimpleBar(document.getElementById('myElement'));
-    el.getContentElement();
 ### Add content dynamically (Ajax)
 You can retrieve the element containing data like this:
+```js
+var el = new SimpleBar(document.getElementById('myElement'));
+el.getContentElement();
+```
 
 ### Disable Mutation Observer
-    SimpleBar.removeObserver();
+```js
+SimpleBar.removeObserver();
+```
 
 ### Non-JS fallback
 
 SimpleBar hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:
 
-    <noscript>
-      <style>
-        [data-simplebar] {
-          overflow: auto;
-        }
-      </style>
-    </noscript>
+```html
+<noscript>
+    <style>
+    [data-simplebar] {
+        overflow: auto;
+    }
+    </style>
+</noscript>
+```
 
 ## 2. Browsers support
 
@@ -199,7 +211,7 @@ For the most part SimpleBar uses the browser's native scrolling functionality, b
 Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
 ## 5. Caveats
-- SimpleBar can't be used on the body, textarea or iframe elements. If you are looking to support textarea, I suggest taking a look at [OverLayScrollbars](https://kingsora.github.io/OverlayScrollbars)
+- SimpleBar can't be used on the `<body>`, `<textarea>` or `<iframe>` elements. If you are looking to support `textarea`, I suggest taking a look at [OverLayScrollbars](https://kingsora.github.io/OverlayScrollbars).
 
 ## 6. Changelog
 
