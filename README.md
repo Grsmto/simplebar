@@ -3,7 +3,7 @@
 :warning: SimpleBar v3 is here! Check out [the beta version](https://github.com/Grsmto/simplebar/releases/tag/simplebar%403.0.0-beta.0). `npm install simplebar@3.0.0-beta.0`.
 If you're using React, you should use our [React version](https://github.com/Grsmto/simplebar/releases/tag/simplebar-react%400.0.1-beta.0)! `npm install simplebar-react@0.0.1-beta.0`.
 
-SimpleBar is a plugin that tries to solve a long time problem : how to get custom scrollbars for your web-app?
+SimpleBar is a plugin that tries to solve a long time problem: how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
 SimpleBar is meant to be as easy to use as possible and lightweight. If you want something more advanced I recommend https://github.com/noraesae/perfect-scrollbar
