@@ -16,11 +16,9 @@ test('should call constructor', () => {
   expect(SimpleBar).toHaveBeenCalledTimes(1);
 });
 
-test('should return right scroll element', () => {
+test('should return the scroll element', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
-  const scrollElementY = simpleBar.getScrollElement();
-  const scrollElementX = simpleBar.getScrollElement('x');
+  const scrollElement = simpleBar.getScrollElement();
 
-  expect(scrollElementY).toBe(simpleBar.scrollContentEl);
-  expect(scrollElementX).toBe(simpleBar.contentEl);
+  expect(scrollElement).toBe(simpleBar.contentEl);
 });
