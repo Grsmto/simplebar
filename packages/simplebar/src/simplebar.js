@@ -54,6 +54,9 @@ export default class SimpleBar {
 
     SimpleBar.getRtlHelpers = memoize(SimpleBar.getRtlHelpers);
 
+    // getContentElement is deprecated
+    this.getContentElement = this.getScrollElement;
+
     this.init();
   }
 
@@ -624,14 +627,13 @@ export default class SimpleBar {
    * Drag scrollbar handle
    */
   drag = (e) => {
+    let eventOffset;
+    let track = this.axis[this.draggedAxis].track;
     const trackSize = track.rect[this.axis[this.draggedAxis].sizeAttr];
     const scrollbar = this.axis[this.draggedAxis].scrollbar;
-    let eventOffset, track;
 
     e.preventDefault();
     e.stopPropagation();
-
-    track = this.axis[this.draggedAxis].track;
 
     if (this.draggedAxis === 'y') {
       eventOffset = e.pageY;
@@ -674,14 +676,7 @@ export default class SimpleBar {
   /**
    * Getter for original scrolling element
    */
-  getScrollElement(axis = 'y') {
-    return axis === 'y' ? this.scrollContentEl : this.contentEl;
-  }
-
-  /**
-   * Getter for content element
-   */
-  getContentElement() {
+  getScrollElement() {
     return this.contentEl;
   }
 
