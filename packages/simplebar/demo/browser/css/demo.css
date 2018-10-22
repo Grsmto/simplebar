@@ -137,14 +137,22 @@ p {
   height: 200px;
 }
 
-.demo-both-axis .box {
-  width: 600px;
-  height: 600px;
-}
-
 .demo-both-axis--padding {
   background: #2f2f2f;
   padding: 40px;
+}
+
+.demo-y-axis {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 200px;
+  height: 200px;
+}
+
+.demo-both-axis .box,
+.demo-y-axis .box {
+  width: 600px;
+  height: 600px;
 }
 
 .height-100 {

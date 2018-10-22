@@ -129,7 +129,7 @@ class Demo extends React.Component {
               <div className="col">
                   <h2>Horizontal native</h2>
                   <div
-                      className={"demo4"}
+                      className="demo4"
                       style={{ width: '200px' }}
                   >
                       <div className="box">1</div>
@@ -144,7 +144,7 @@ class Demo extends React.Component {
               <div className="col">
                   <h2>Both axis</h2>
                   <div
-                      className={"demo-both-axis"}
+                      className="demo-both-axis"
                       data-simplebar
                   >
                       <div className="box">1</div>
@@ -153,7 +153,7 @@ class Demo extends React.Component {
               <div className="col">
                   <h2>Both axis + padding</h2>
                   <div
-                      className={"demo-both-axis demo-both-axis--padding"}
+                      className="demo-both-axis demo-both-axis--padding"
                       data-simplebar
                   >
                       <div className="box">1</div>
@@ -164,10 +164,19 @@ class Demo extends React.Component {
               <div className="col">
                   <h2>Both axis + padding native</h2>
                   <div
-                      className={"demo-both-axis demo-both-axis--padding"}
+                      className="demo-both-axis demo-both-axis--padding"
                   >
                       <div className="box">1</div>
                   </div>
+              </div>
+              <div className="col">
+                <h2>Y axis only</h2>
+                <div
+                  className="demo-y-axis"
+                  data-simplebar
+                >
+                  <div className="box">1</div>
+                </div>
               </div>
           </section>
       </section>
