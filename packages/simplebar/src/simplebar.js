@@ -26,6 +26,7 @@ export default class SimpleBar {
         sizeAttr: 'width',
         scrollSizeAttr: 'scrollWidth',
         offsetAttr: 'left',
+        overflowAttr: 'overflowX',
         dragOffset: 0,
         isEnabled: true,
         isVisible: false,
@@ -37,6 +38,7 @@ export default class SimpleBar {
         sizeAttr: 'height',
         scrollSizeAttr: 'scrollHeight',
         offsetAttr: 'top',
+        overflowAttr: 'overflowY',
         dragOffset: 0,
         isEnabled: true,
         isVisible: false,
@@ -91,6 +93,7 @@ export default class SimpleBar {
       content: 'simplebar-content',
       scroller: 'simplebar-scroller',
       mask: 'simplebar-mask',
+      wrapper: 'simplebar-wrapper',
       placeholder: 'simplebar-placeholder',
       scrollbar: 'simplebar-scrollbar',
       track: 'simplebar-track',
@@ -246,6 +249,7 @@ export default class SimpleBar {
       this.axis.y.track.el = this.el.querySelector(`.${this.classNames.track}.vertical`);
     } else {
       // Prepare DOM
+      this.wrapperEl = document.createElement('div');
       this.contentEl = document.createElement('div');
       this.scrollerEl = document.createElement('div');
       this.maskEl = document.createElement('div');
@@ -253,6 +257,7 @@ export default class SimpleBar {
       this.heightAutoObserverWrapperEl = document.createElement('div');
       this.heightAutoObserverEl = document.createElement('div');
 
+      this.wrapperEl.classList.add(this.classNames.wrapper);
       this.contentEl.classList.add(this.classNames.content);
       this.scrollerEl.classList.add(this.classNames.scroller);
       this.maskEl.classList.add(this.classNames.mask);
@@ -265,9 +270,10 @@ export default class SimpleBar {
       this.scrollerEl.appendChild(this.contentEl);
       this.maskEl.appendChild(this.scrollerEl);
       this.heightAutoObserverWrapperEl.appendChild(this.heightAutoObserverEl);
-      this.el.appendChild(this.heightAutoObserverWrapperEl);
-      this.el.appendChild(this.maskEl);
-      this.el.appendChild(this.placeholderEl);
+      this.wrapperEl.appendChild(this.heightAutoObserverWrapperEl);
+      this.wrapperEl.appendChild(this.maskEl);
+      this.wrapperEl.appendChild(this.placeholderEl);
+      this.el.appendChild(this.wrapperEl);
     }
 
     if (!this.axis.x.track.el || !this.axis.y.track.el) {
@@ -361,9 +367,14 @@ export default class SimpleBar {
     this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
-    // Set isEnabled to false if scrollbar is not necessary (content is shorter than scroller)
+    // Set isEnabled to false if scrollbar is not necessary (content is shorter than offset)
     this.axis.x.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollWidth : this.contentEl.scrollWidth - this.minScrollbarWidth) > Math.ceil(this.axis.x.track.rect.width);
     this.axis.y.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollHeight : this.contentEl.scrollHeight - this.minScrollbarWidth) > Math.ceil(this.axis.y.track.rect.height);
+
+    // TODO this requires host to set overflow explicitely cause [data-simplebar] applies overflow: hidden...
+    // Set isEnabled to false if user explicitely set hidden overflow
+    this.axis.x.isEnabled = this.elStyles.overflowX === 'hidden' ? false : this.axis.x.isEnabled;
+    this.axis.y.isEnabled = this.elStyles.overflowY === 'hidden' ? false : this.axis.y.isEnabled;
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
@@ -437,8 +448,10 @@ export default class SimpleBar {
 
     if (this.axis[axis].isEnabled || this.options.forceVisible) {
       track.style.visibility = 'visible';
+      this.contentEl.style[this.axis[axis].overflowAttr] = 'scroll';
     } else {
       track.style.visibility = 'hidden';
+      this.contentEl.style[this.axis[axis].overflowAttr] = 'hidden';
     }
 
     // Even if forceVisible is enabled, scrollbar itself should be hidden
@@ -452,8 +465,9 @@ export default class SimpleBar {
   }
 
   hideNativeScrollbar() {
-    this.scrollerEl.style[this.isRtl ? 'left' : 'right'] = `-${this.scrollbarWidth || this.minScrollbarWidth}px`;
-    this.scrollerEl.style.bottom = `-${this.scrollbarWidth || this.minScrollbarWidth}px`;
+    this.offsetEl.style[this.isRtl ? 'left' : 'right'] = this.axis.y.isEnabled || this.options.forceVisible ?
+      `-${this.scrollbarWidth || this.minScrollbarWidth}px` : 0;
+    this.offsetEl.style.bottom = this.axis.x.isEnabled || this.options.forceVisible ? `-${this.scrollbarWidth || this.minScrollbarWidth}px` : 0;
 
     // If floating scrollbar
     if (!this.scrollbarWidth) {

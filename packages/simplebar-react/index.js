@@ -5,17 +5,19 @@ import 'simplebar';
 export default function SimpleBar({ children, ...options }) {
   return (
     <div data-simplebar {...options}>
-      <div className="simplebar-height-auto-observer-wrapper">
-        <div className="simplebar-height-auto-observer"></div>
-      </div>
-      <div className="simplebar-mask">
-        <div className="simplebar-scroller">
-          <div className="simplebar-content">
-            {children}
+      <div className="simplebar-wrapper">
+        <div className="simplebar-height-auto-observer-wrapper">
+          <div className="simplebar-height-auto-observer"></div>
+        </div>
+        <div className="simplebar-mask">
+          <div className="simplebar-offset">
+            <div className="simplebar-content">
+              {children}
+            </div>
           </div>
         </div>
+        <div className="simplebar-placeholder" />
       </div>
-      <div className="simplebar-placeholder" />
       <div className="simplebar-track horizontal">
         <div className="simplebar-scrollbar" />
       </div>
