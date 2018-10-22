@@ -6,7 +6,8 @@
   "scripts": {
     "build": "lerna run build",
     "test": "lerna run test",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",

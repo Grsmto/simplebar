@@ -18,10 +18,9 @@
     "start": "webpack-dev-server --mode=development",
     "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && minify dist/simplebar.css > dist/simplebar.min.css && webpack --mode=production",
     "dev": "rollup -c -w",
-    "test": "yarn run test:unit && yarn run test:e2e",
+    "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
-    "test:e2e": "jest -c jest-e2e.config.js",
-    "prepublishOnly": "yarn run build"
+    "test:e2e": "jest -c jest-e2e.config.js"
   },
   "dependencies": {
     "can-use-dom": "^0.1.0",
