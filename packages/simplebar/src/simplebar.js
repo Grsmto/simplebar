@@ -10,7 +10,7 @@ export default class SimpleBar {
     this.el = element;
     this.flashTimeout;
     this.contentEl;
-    this.scrollerEl;
+    this.offsetEl;
     this.maskEl;
     this.globalObserver;
     this.mutationObserver;
@@ -91,7 +91,7 @@ export default class SimpleBar {
     forceVisible: false,
     classNames: {
       content: 'simplebar-content',
-      scroller: 'simplebar-scroller',
+      offset: 'simplebar-offset',
       mask: 'simplebar-mask',
       wrapper: 'simplebar-wrapper',
       placeholder: 'simplebar-placeholder',
@@ -233,12 +233,12 @@ export default class SimpleBar {
     // make sure this element doesn't have the elements yet
     if (
       Array.from(this.el.children).filter(child =>
-        child.classList.contains(this.classNames.mask)
+        child.classList.contains(this.classNames.wrapper)
       ).length
     ) {
       // assume that element has his DOM already initiated
       this.contentEl = this.el.querySelector(`.${this.classNames.content}`);
-      this.scrollerEl = this.el.querySelector(`.${this.classNames.scroller}`);
+      this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
       this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
       this.placeholderEl = this.el.querySelector(`.${this.classNames.placeholder}`);
       this.heightAutoObserverWrapperEl = this.el.querySelector(`.${this.classNames.heightAutoObserverWrapperEl}`);
@@ -251,7 +251,7 @@ export default class SimpleBar {
       // Prepare DOM
       this.wrapperEl = document.createElement('div');
       this.contentEl = document.createElement('div');
-      this.scrollerEl = document.createElement('div');
+      this.offsetEl = document.createElement('div');
       this.maskEl = document.createElement('div');
       this.placeholderEl = document.createElement('div');
       this.heightAutoObserverWrapperEl = document.createElement('div');
@@ -259,7 +259,7 @@ export default class SimpleBar {
 
       this.wrapperEl.classList.add(this.classNames.wrapper);
       this.contentEl.classList.add(this.classNames.content);
-      this.scrollerEl.classList.add(this.classNames.scroller);
+      this.offsetEl.classList.add(this.classNames.offset);
       this.maskEl.classList.add(this.classNames.mask);
       this.placeholderEl.classList.add(this.classNames.placeholder);
       this.heightAutoObserverWrapperEl.classList.add(this.classNames.heightAutoObserverWrapperEl);
@@ -267,8 +267,8 @@ export default class SimpleBar {
 
       while (this.el.firstChild) this.contentEl.appendChild(this.el.firstChild);
 
-      this.scrollerEl.appendChild(this.contentEl);
-      this.maskEl.appendChild(this.scrollerEl);
+      this.offsetEl.appendChild(this.contentEl);
+      this.maskEl.appendChild(this.offsetEl);
       this.heightAutoObserverWrapperEl.appendChild(this.heightAutoObserverEl);
       this.wrapperEl.appendChild(this.heightAutoObserverWrapperEl);
       this.wrapperEl.appendChild(this.maskEl);

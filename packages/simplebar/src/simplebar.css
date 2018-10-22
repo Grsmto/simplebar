@@ -34,7 +34,7 @@
     z-index: 0;
 }
 
-.simplebar-scroller {
+.simplebar-offset {
     direction: inherit !important;
     box-sizing: inherit !important;
     resize: none !important;
