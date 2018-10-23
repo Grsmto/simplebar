@@ -11,7 +11,7 @@ export default function SimpleBar({ children, ...options }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 SimpleBar.propTypes = {
