@@ -1,0 +1,73 @@
+{
+  "name": "simplebar-vue",
+  "version": "0.0.1",
+  "description": "Vue component for SimpleBar",
+  "files": [
+    "dist"
+  ],
+  "author": "Piers Olenski",
+  "repository": "grsmto/simplebar",
+  "main": "dist/simplebar-vue.js",
+  "module": "dist/simplebar-vue.esm.js",
+  "bugs": "https://github.com/grsmto/simplebar/issues",
+  "homepage": "https://grsmto.github.io/simplebar/",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "vue-cli-service test:unit",
+    "prepublishOnly": "yarn run build"
+  },
+  "dependencies": {
+    "simplebar": "3.1.0-beta.2",
+    "vue": "^2.5.17"
+  },
+  "peerDependencies": {
+    "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "rollup-plugin-vue": "^4.3.2",
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-plugin-unit-jest": "^3.0.5",
+    "@vue/cli-plugin-eslint": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.0.1",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ],
+    "testURL": "http://localhost/"
+  }
+}
