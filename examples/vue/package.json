@@ -10,7 +10,7 @@
   "dependencies": {
     "babel-preset-vue": "^2.0.2",
     "vue": "^2.5.17",
-    "simplebar": "latest"
+    "simplebar-vue": "latest"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",
