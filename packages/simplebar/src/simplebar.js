@@ -243,6 +243,7 @@ export default class SimpleBar {
       ).length
     ) {
       // assume that element has his DOM already initiated
+      this.wrapperEl = this.el.querySelector(`.${this.classNames.wrapper}`);
       this.contentEl = this.el.querySelector(`.${this.classNames.content}`);
       this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
       this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
@@ -366,7 +367,8 @@ export default class SimpleBar {
 
     this.placeholderEl.style.width = `${this.contentEl.scrollWidth}px`;
     this.placeholderEl.style.height = `${this.contentEl.scrollHeight}px`;
-    this.placeholderEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
+
+    this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
 
     this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
