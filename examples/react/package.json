@@ -5,8 +5,8 @@
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4",
-    "simplebar": "^3.0.0-beta.1"
+    "react-scripts": "latest",
+    "simplebar": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
