@@ -25,7 +25,7 @@ export default function SimpleBar({ children, ...options }) {
         <div className="simplebar-scrollbar" />
       </div>
     </div>
-  )
+  );
 }
 
 SimpleBar.propTypes = {

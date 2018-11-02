@@ -101,7 +101,10 @@ export default class SimpleBar {
       scrollbar: 'simplebar-scrollbar',
       track: 'simplebar-track',
       heightAutoObserverWrapperEl: 'simplebar-height-auto-observer-wrapper',
-      heightAutoObserverEl: 'simplebar-height-auto-observer'
+      heightAutoObserverEl: 'simplebar-height-auto-observer',
+      visible: 'visible',
+      horizontal: 'horizontal',
+      vertical: 'vertical'
     },
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
@@ -246,10 +249,8 @@ export default class SimpleBar {
       this.placeholderEl = this.el.querySelector(`.${this.classNames.placeholder}`);
       this.heightAutoObserverWrapperEl = this.el.querySelector(`.${this.classNames.heightAutoObserverWrapperEl}`);
       this.heightAutoObserverEl = this.el.querySelector(`.${this.classNames.heightAutoObserverEl}`);
-      this.axis.x.track.el = this.el.querySelector(
-        `.${this.classNames.track}.horizontal`
-      );
-      this.axis.y.track.el = this.el.querySelector(`.${this.classNames.track}.vertical`);
+      this.axis.x.track.el = this.el.querySelector(`.${this.classNames.track}.${this.classNames.horizontal}`);
+      this.axis.y.track.el = this.el.querySelector(`.${this.classNames.track}.${this.classNames.vertical}`);
     } else {
       // Prepare DOM
       this.wrapperEl = document.createElement('div');
@@ -287,16 +288,16 @@ export default class SimpleBar {
       scrollbar.classList.add(this.classNames.scrollbar);
 
       if (!this.options.autoHide) {
-        scrollbar.classList.add('visible');
+        scrollbar.classList.add(this.classNames.visible);
       }
 
       track.appendChild(scrollbar);
 
       this.axis.x.track.el = track.cloneNode(true);
-      this.axis.x.track.el.classList.add('horizontal');
+      this.axis.x.track.el.classList.add(this.classNames.horizontal);
 
       this.axis.y.track.el = track.cloneNode(true);
-      this.axis.y.track.el.classList.add('vertical');
+      this.axis.y.track.el.classList.add(this.classNames.vertical);
 
       this.el.appendChild(this.axis.x.track.el);
       this.el.appendChild(this.axis.y.track.el);
@@ -553,7 +554,7 @@ export default class SimpleBar {
     }
 
     if (this.axis[axis].isEnabled) {
-      scrollbar.classList.add('visible');
+      scrollbar.classList.add(this.classNames.visible);
       this.axis[axis].isVisible = true;
     }
 
