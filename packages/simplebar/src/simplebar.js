@@ -430,18 +430,15 @@ export default class SimpleBar {
   positionScrollbar(axis = 'y') {
     const contentSize = this.scrollbarWidth ? this.contentEl[this.axis[axis].scrollSizeAttr] : this.contentEl[this.axis[axis].scrollSizeAttr] - this.minScrollbarWidth;
     const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
+    const hostSize = parseInt(this.elStyles[this.axis[axis].sizeAttr], 10);
     const scrollbar = this.axis[axis].scrollbar;
 
     let scrollOffset = this.contentEl[this.axis[axis].scrollOffsetAttr];
     scrollOffset = axis === 'x' && this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollingInverted ? -scrollOffset : scrollOffset;
-
-    let scrollPourcent = scrollOffset / (contentSize - trackSize);
+    let scrollPourcent = scrollOffset / (contentSize - hostSize);
 
     let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
-    handleOffset = axis === 'x' && this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollbarInverted
-      ? handleOffset + (trackSize - scrollbar.size)
-      : handleOffset
-    ;
+    handleOffset = axis === "x" && this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollbarInverted ? handleOffset + (trackSize - scrollbar.size) : handleOffset;
 
     if (this.axis[axis].isEnabled || this.options.forceVisible) {
       scrollbar.el.style.transform = axis === 'x' ? `translate3d(${handleOffset}px, 0, 0)` : `translate3d(0, ${handleOffset}px, 0)`;
