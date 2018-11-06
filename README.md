@@ -1,7 +1,6 @@
 # SimpleBar [![npm package][npm-badge]][npm] ![size-badge]
 
 :warning: SimpleBar v3 is here! Check out [the beta version](https://github.com/Grsmto/simplebar/releases/tag/simplebar%403.0.0-beta.0). `npm install simplebar@3.0.0-beta.0`.
-If you're using React, you should use our [React version](https://github.com/Grsmto/simplebar/releases/tag/simplebar-react%400.0.1-beta.0)! `npm install simplebar-react@0.0.1-beta.0`.
 
 SimpleBar is a plugin that tries to solve a long time problem: how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
@@ -9,6 +8,11 @@ SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **nativ
 SimpleBar is meant to be as easy to use as possible and lightweight. If you want something more advanced I recommend https://github.com/noraesae/perfect-scrollbar
 
 ### Installation
+
+**- Choose your SimpleBar** 
+- **For React** `yarn add simplebar-react`
+- **For Vue** `yarn add simplebar-vue`
+- **For others** `yarn add simplebar`
 
 **- Via npm**
 `npm install simplebar --save`
@@ -28,6 +32,8 @@ note: you can replace `@latest` to the latest version (ex `@2.4.3`), if you want
 
 
 ### Usage
+
+Check out the [React](https://github.com/Grsmto/simplebar/blob/master/examples/react/src/App.js) and [Vue](https://github.com/Grsmto/simplebar/blob/master/examples/vue/src/App.vue) examples.
 
 If you are using a module loader (like Webpack) you first need to load SimpleBar:
 ```js
@@ -212,6 +218,7 @@ Key to this technique is hiding the native browser scrollbar. The scrollable ele
 
 ## 5. Caveats
 - SimpleBar can't be used on the `<body>`, `<textarea>` or `<iframe>` elements. If you are looking to support `textarea`, I suggest taking a look at [OverLayScrollbars](https://kingsora.github.io/OverlayScrollbars).
+- SimpleBar doesn't currently support `overflow: visible`. Which means any children of your scrolling div will be clipped (like with `overflow: hidden`).
 
 ## 6. Changelog
 
