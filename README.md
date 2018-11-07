@@ -1,11 +1,11 @@
 # SimpleBar [![npm package][npm-badge]][npm] ![size-badge]
 
-:warning: SimpleBar v3 is here! Check out [the beta version](https://github.com/Grsmto/simplebar/releases/tag/simplebar%403.0.0-beta.0). `npm install simplebar@3.0.0-beta.0`.
+:warning: SimpleBar v3 is here! Check out [the changelog].
 
 SimpleBar is a plugin that tries to solve a long time problem: how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
-SimpleBar is meant to be as easy to use as possible and lightweight. If you want something more advanced I recommend https://github.com/noraesae/perfect-scrollbar
+SimpleBar is meant to be as easy to use as possible and lightweight. If you want something more advanced I recommend [KingSora](https://github.com/KingSora) 's [Overlay Scrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 ### Installation
 
@@ -226,7 +226,8 @@ See changelog here : https://github.com/Grsmto/simplebar/releases
 
 ## 7. Credits
 
-Most of the credit goes to [Jonathan Nicol](http://www.f6design.com/) who made the original plugin called [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
+- [KingSora](https://github.com/KingSora) for multiple features and inspirations (`height: auto` detection, RTL mode cross browser support and more) with [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
+- [Jonathan Nicol](http://www.f6design.com/) for original idea with [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
 
 Website: http://html5up.net/
 
