@@ -571,12 +571,12 @@ export default class SimpleBar {
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
     if (!this.isWithinBounds(this.axis.y.track.rect)) {
-      this.axis.y.scrollbar.el.classList.remove('visible');
+      this.axis.y.scrollbar.el.classList.remove(this.classNames.visible);
       this.axis.y.isVisible = false;
     }
 
     if (!this.isWithinBounds(this.axis.x.track.rect)) {
-      this.axis.x.scrollbar.el.classList.remove('visible');
+      this.axis.x.scrollbar.el.classList.remove(this.classNames.visible);
       this.axis.x.isVisible = false;
     }
   }
