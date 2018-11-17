@@ -575,8 +575,8 @@ export default class SimpleBar {
   }
 
   onPointerEvent = (e) => {
-    this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
-    this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
+    this.axis.x.scrollbar.rect = this.axis.x.scrollbar.el.getBoundingClientRect();
+    this.axis.y.scrollbar.rect = this.axis.y.scrollbar.el.getBoundingClientRect();
 
     const isWithinBoundsY = this.isWithinBounds(this.axis.y.track.rect);
     const isWithinBoundsX = isWithinBoundsY ? false : this.isWithinBounds(this.axis.x.track.rect);
