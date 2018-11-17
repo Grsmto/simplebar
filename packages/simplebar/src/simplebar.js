@@ -546,20 +546,13 @@ export default class SimpleBar {
   showScrollbar(axis = 'y') {
     let scrollbar = this.axis[axis].scrollbar.el;
 
-    this.hideScrollbars();
-
-    // Scrollbar already visible
-    if (this.axis[axis].isVisible) {
-      return;
-    }
-
-    if (this.axis[axis].isEnabled) {
+    if (!this.axis[axis].isVisible && this.axis[axis].isEnabled) {
       scrollbar.classList.add(this.classNames.visible);
       this.axis[axis].isVisible = true;
     }
 
-    if (!this.options.autoHide) {
-      return;
+    if (this.options.autoHide) {
+      this.hideScrollbars();
     }
   }
 
