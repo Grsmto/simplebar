@@ -23,12 +23,12 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-jest": "^21.15.1",
     "eslint-plugin-react": "^7.7.0",
-    "husky": "^0.14.3",
+    "husky": "^1.1.4",
     "jest": "^23.5.0",
     "jest-cli": "^23.5.0",
     "jest-puppeteer": "^3.3.1",
     "lerna": "^3.1.1",
-    "lint-staged": "^7.0.4",
+    "lint-staged": "^8.0.5",
     "prettier": "^1.11.1",
     "prettier-eslint": "^8.8.1",
     "prettier-eslint-cli": "^4.7.1",
@@ -49,6 +49,11 @@
     "> 0.25%",
     "not op_mini all"
   ],
+  "husky": {
+    "hooks": {
+     "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "src/*.{js,jsx,json}": [
       "prettier-eslint --single-quote --write",
