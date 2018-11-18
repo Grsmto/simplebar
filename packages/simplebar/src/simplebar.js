@@ -28,8 +28,9 @@ export default class SimpleBar {
         offsetAttr: 'left',
         overflowAttr: 'overflowX',
         dragOffset: 0,
-        isEnabled: true,
+        isOverflowing: true,
         isVisible: false,
+        forceVisible: false,
         track: {},
         scrollbar: {}
       },
@@ -40,8 +41,9 @@ export default class SimpleBar {
         offsetAttr: 'top',
         overflowAttr: 'overflowY',
         dragOffset: 0,
-        isEnabled: true,
+        isOverflowing: true,
         isVisible: false,
+        forceVisible: false,
         track: {},
         scrollbar: {}
       }
@@ -383,8 +385,8 @@ export default class SimpleBar {
     this.axis.x.isOverflowing = this.elStyles.overflowX === 'hidden' ? false : this.axis.x.isOverflowing;
     this.axis.y.isOverflowing = this.elStyles.overflowY === 'hidden' ? false : this.axis.y.isOverflowing;
 
-    this.axis.x.forceVisible = this.elStyles.overflowX === 'scroll';
-    this.axis.y.forceVisible = this.elStyles.overflowY === 'scroll';
+    this.axis.x.forceVisible = this.elStyles.overflowX === 'scroll' || this.options.forceVisible;
+    this.axis.y.forceVisible = this.elStyles.overflowY === 'scroll' || this.options.forceVisible;
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
