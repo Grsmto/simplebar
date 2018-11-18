@@ -613,8 +613,15 @@ export default class SimpleBar {
   }
 
   onPointerEvent = (e) => {
-    const isWithinBoundsY = this.isWithinBounds(this.axis.y.scrollbar.rect);
-    const isWithinBoundsX = isWithinBoundsY ? false : this.isWithinBounds(this.axis.x.scrollbar.rect);
+    let isWithinBoundsY, isWithinBoundsX;
+
+    if (this.axis.x.isOverflowing || this.axis.x.forceVisible) {
+      isWithinBoundsX = this.isWithinBounds(this.axis.x.scrollbar.rect);
+    }
+
+    if (this.axis.y.isOverflowing || this.axis.y.forceVisible) {
+      isWithinBoundsY = this.isWithinBounds(this.axis.y.scrollbar.rect);
+    }
 
     // If any pointer event is called on the scrollbar
     if (isWithinBoundsY || isWithinBoundsX) {
