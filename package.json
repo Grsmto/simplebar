@@ -6,7 +6,6 @@
   "scripts": {
     "build": "lerna run build",
     "test": "lerna run test",
-    "precommit": "lint-staged",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
