@@ -430,7 +430,7 @@ export default class SimpleBar {
   }
 
   positionScrollbar(axis = 'y') {
-    const contentSize = this.scrollbarWidth ? this.contentEl[this.axis[axis].scrollSizeAttr] : this.contentEl[this.axis[axis].scrollSizeAttr] - this.minScrollbarWidth;
+    const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
     const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
     const hostSize = parseInt(this.elStyles[this.axis[axis].sizeAttr], 10);
     const scrollbar = this.axis[axis].scrollbar;
@@ -477,8 +477,8 @@ export default class SimpleBar {
     // If floating scrollbar
     if (!this.scrollbarWidth) {
       const paddingDirection = [this.isRtl ? 'paddingLeft' : 'paddingRight'];
-      this.contentEl.style[paddingDirection] = `calc(${this.elStyles[paddingDirection]} + ${this.minScrollbarWidth}px)`;
-      this.contentEl.style.paddingBottom = `calc(${this.elStyles.paddingBottom} + ${this.minScrollbarWidth}px)`;
+      this.contentEl.style[paddingDirection] = this.axis.y.isOverflowing || this.axis.y.forceVisible ? `calc(${this.elStyles[paddingDirection]} + ${this.minScrollbarWidth}px)` : this.elStyles[paddingDirection];
+      this.contentEl.style.paddingBottom = this.axis.x.isOverflowing || this.axis.x.forceVisible ? `calc(${this.elStyles.paddingBottom} + ${this.minScrollbarWidth}px)` : this.elStyles.paddingBottom;
     }
   }
 
