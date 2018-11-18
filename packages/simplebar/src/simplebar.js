@@ -375,14 +375,16 @@ export default class SimpleBar {
     this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
-    // Set isEnabled to false if scrollbar is not necessary (content is shorter than offset)
-    this.axis.x.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollWidth : this.contentEl.scrollWidth - this.minScrollbarWidth) > Math.ceil(this.axis.x.track.rect.width);
-    this.axis.y.isEnabled = (this.scrollbarWidth ? this.contentEl.scrollHeight : this.contentEl.scrollHeight - this.minScrollbarWidth) > Math.ceil(this.axis.y.track.rect.height);
+    // Set isOverflowing to false if scrollbar is not necessary (content is shorter than offset)
+    this.axis.x.isOverflowing = (this.scrollbarWidth ? this.contentEl.scrollWidth : this.contentEl.scrollWidth - this.minScrollbarWidth) > Math.ceil(this.axis.x.track.rect.width);
+    this.axis.y.isOverflowing = (this.scrollbarWidth ? this.contentEl.scrollHeight : this.contentEl.scrollHeight - this.minScrollbarWidth) > Math.ceil(this.axis.y.track.rect.height);
 
-    // TODO this requires host to set overflow explicitely cause [data-simplebar] applies overflow: hidden...
-    // Set isEnabled to false if user explicitely set hidden overflow
-    this.axis.x.isEnabled = this.elStyles.overflowX === 'hidden' ? false : this.axis.x.isEnabled;
-    this.axis.y.isEnabled = this.elStyles.overflowY === 'hidden' ? false : this.axis.y.isEnabled;
+    // Set isOverflowing to false if user explicitely set hidden overflow
+    this.axis.x.isOverflowing = this.elStyles.overflowX === 'hidden' ? false : this.axis.x.isOverflowing;
+    this.axis.y.isOverflowing = this.elStyles.overflowY === 'hidden' ? false : this.axis.y.isOverflowing;
+
+    this.axis.x.forceVisible = this.elStyles.overflowX === 'scroll';
+    this.axis.y.forceVisible = this.elStyles.overflowY === 'scroll';
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
@@ -407,7 +409,7 @@ export default class SimpleBar {
     const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
     let scrollbarSize;
 
-    if (!this.axis[axis].isEnabled && !this.options.forceVisible) {
+    if (!this.axis[axis].isOverflowing) {
       return;
     }
 
@@ -442,37 +444,33 @@ export default class SimpleBar {
     let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
     handleOffset = axis === "x" && this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollbarInverted ? handleOffset + (trackSize - scrollbar.size) : handleOffset;
 
-    if (this.axis[axis].isEnabled || this.options.forceVisible) {
-      scrollbar.el.style.transform = axis === 'x' ? `translate3d(${handleOffset}px, 0, 0)` : `translate3d(0, ${handleOffset}px, 0)`;
-    }
+    scrollbar.el.style.transform = axis === 'x' ? `translate3d(${handleOffset}px, 0, 0)` : `translate3d(0, ${handleOffset}px, 0)`;
   }
 
   toggleTrackVisibility(axis = 'y') {
     const track = this.axis[axis].track.el;
     const scrollbar = this.axis[axis].scrollbar.el;
 
-    if (this.axis[axis].isEnabled || this.options.forceVisible) {
-      track.style.visibility = 'visible';
-      this.contentEl.style[this.axis[axis].overflowAttr] = 'scroll';
+    if (this.axis[axis].isOverflowing || this.axis[axis].forceVisible) {
+      track.style.visibility = "visible";
+      this.contentEl.style[this.axis[axis].overflowAttr] = "scroll";
     } else {
-      track.style.visibility = 'hidden';
-      this.contentEl.style[this.axis[axis].overflowAttr] = 'hidden';
+      track.style.visibility = "hidden";
+      this.contentEl.style[this.axis[axis].overflowAttr] = "hidden";
     }
 
     // Even if forceVisible is enabled, scrollbar itself should be hidden
-    if (this.options.forceVisible) {
-      if (this.axis[axis].isEnabled) {
-        scrollbar.style.visibility = 'visible';
-      } else {
-        scrollbar.style.visibility = 'hidden';
-      }
+    if (this.axis[axis].isOverflowing) {
+      scrollbar.style.visibility = "visible";
+    } else {
+      scrollbar.style.visibility = "hidden";
     }
   }
 
   hideNativeScrollbar() {
-    this.offsetEl.style[this.isRtl ? 'left' : 'right'] = this.axis.y.isEnabled || this.options.forceVisible ?
+    this.offsetEl.style[this.isRtl ? 'left' : 'right'] = this.axis.y.isOverflowing || this.axis.y.forceVisible ?
       `-${this.scrollbarWidth || this.minScrollbarWidth}px` : 0;
-    this.offsetEl.style.bottom = this.axis.x.isEnabled || this.options.forceVisible ? `-${this.scrollbarWidth || this.minScrollbarWidth}px` : 0;
+    this.offsetEl.style.bottom = this.axis.x.isOverflowing || this.axis.x.forceVisible ? `-${this.scrollbarWidth || this.minScrollbarWidth}px` : 0;
 
     // If floating scrollbar
     if (!this.scrollbarWidth) {
@@ -498,14 +496,20 @@ export default class SimpleBar {
   }
 
   scrollX = () => {
-    this.showScrollbar('x');
-    this.positionScrollbar('x');
+    if (this.axis.x.isOverflowing) {
+      this.showScrollbar('x');
+      this.positionScrollbar('x');
+    }
+
     this.scrollXTicking = false;
   }
 
   scrollY = () => {
-    this.showScrollbar('y');
-    this.positionScrollbar('y');
+    if (this.axis.y.isOverflowing) {
+      this.showScrollbar('y');
+      this.positionScrollbar('y');
+    }
+
     this.scrollYTicking = false;
   }
 
@@ -580,7 +584,7 @@ export default class SimpleBar {
   showScrollbar(axis = 'y') {
     let scrollbar = this.axis[axis].scrollbar.el;
 
-    if (!this.axis[axis].isVisible && this.axis[axis].isEnabled) {
+    if (!this.axis[axis].isVisible) {
       scrollbar.classList.add(this.classNames.visible);
       this.axis[axis].isVisible = true;
     }
@@ -609,11 +613,8 @@ export default class SimpleBar {
   }
 
   onPointerEvent = (e) => {
-    this.axis.x.scrollbar.rect = this.axis.x.scrollbar.el.getBoundingClientRect();
-    this.axis.y.scrollbar.rect = this.axis.y.scrollbar.el.getBoundingClientRect();
-
-    const isWithinBoundsY = this.isWithinBounds(this.axis.y.track.rect);
-    const isWithinBoundsX = isWithinBoundsY ? false : this.isWithinBounds(this.axis.x.track.rect);
+    const isWithinBoundsY = this.isWithinBounds(this.axis.y.scrollbar.rect);
+    const isWithinBoundsX = isWithinBoundsY ? false : this.isWithinBounds(this.axis.x.scrollbar.rect);
 
     // If any pointer event is called on the scrollbar
     if (isWithinBoundsY || isWithinBoundsX) {
