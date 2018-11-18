@@ -17,9 +17,9 @@ export default class SimpleBar {
     this.resizeObserver;
     this.scrollbarWidth;
     this.minScrollbarWidth = 20;
-    this.options = Object.assign({}, SimpleBar.defaultOptions, options);
+    this.options = { ...SimpleBar.defaultOptions, ...options };
+    this.classNames = { ...SimpleBar.defaultOptions.classNames, ...this.options.classNames };
     this.isRtl;
-    this.classNames = this.options.classNames;
     this.axis = {
       x: {
         scrollOffsetAttr: 'scrollLeft',

@@ -27,7 +27,10 @@ function menuRenderer(params) {
 
 class Demo extends React.Component {
   componentDidMount() {
-      // new SimpleBar(document.getElementById('manual-instantiation'));
+    new SimpleBar(document.getElementById('manual-instantiation'));
+    new SimpleBar(document.getElementById('with-classnames'), {
+      classNames: { vertical: 'my-custom-class' }
+    });
   }
 
   render() {
@@ -179,6 +182,22 @@ class Demo extends React.Component {
                 </div>
               </div>
           </section>
+        <section>
+          <div className="col">
+            <h2>With custom classnames</h2>
+            <div
+              id="with-classnames"
+              className="demo4"
+              style={{ width: '200px' }}
+            >
+              <div className="box">1</div>
+              <div className="box">2</div>
+              <div className="box">3</div>
+              <div className="box">4</div>
+              <div className="box">5</div>
+            </div>
+          </div>
+        </section>
       </section>
     );
   }
