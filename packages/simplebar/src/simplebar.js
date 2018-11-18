@@ -105,7 +105,8 @@ export default class SimpleBar {
       heightAutoObserverEl: 'simplebar-height-auto-observer',
       visible: 'visible',
       horizontal: 'horizontal',
-      vertical: 'vertical'
+      vertical: 'vertical',
+      hover: 'simplebar-hover'
     },
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
@@ -517,20 +518,53 @@ export default class SimpleBar {
     this.mouseX = e.clientX;
     this.mouseY = e.clientY;
 
-    if (this.isWithinBounds(this.axis.y.track.rect)) {
-      this.showScrollbar('y');
+    if (this.axis.x.isOverflowing || this.axis.x.forceVisible) {
+      this.onMouseMoveForAxis('x');
     }
 
-    if (this.isWithinBounds(this.axis.x.track.rect)) {
-      this.showScrollbar('x');
+    if (this.axis.y.isOverflowing || this.axis.y.forceVisible) {
+      this.onMouseMoveForAxis('y');
+    }
+  }
+
+  onMouseMoveForAxis(axis = 'y') {
+    this.axis[axis].track.rect = this.axis[axis].track.el.getBoundingClientRect();
+    this.axis[axis].scrollbar.rect = this.axis[axis].scrollbar.el.getBoundingClientRect();
+
+    const isWithinScrollbarBoundsX = this.isWithinBounds(this.axis[axis].scrollbar.rect);
+
+    if (isWithinScrollbarBoundsX) {
+      this.axis[axis].scrollbar.el.classList.add(this.classNames.hover);
+    } else {
+      this.axis[axis].scrollbar.el.classList.remove(this.classNames.hover);
+    }
+
+    if (this.isWithinBounds(this.axis[axis].track.rect)) {
+      this.showScrollbar(axis);
+      this.axis[axis].track.el.classList.add(this.classNames.hover);
+    } else {
+      this.axis[axis].track.el.classList.remove(this.classNames.hover);
     }
   }
 
   onMouseLeave = () => {
     this.onMouseMove.cancel();
 
+    if (this.axis.x.isOverflowing || this.axis.x.forceVisible) {
+      this.onMouseLeaveForAxis('x');
+    }
+
+    if (this.axis.y.isOverflowing || this.axis.y.forceVisible) {
+      this.onMouseLeaveForAxis('y');
+    }
+
     this.mouseX = -1;
     this.mouseY = -1;
+  }
+
+  onMouseLeaveForAxis(axis = 'y') {
+    this.axis[axis].track.el.classList.remove(this.classNames.hover);
+    this.axis[axis].scrollbar.el.classList.remove(this.classNames.hover);
   }
 
   onWindowResize = () => {
