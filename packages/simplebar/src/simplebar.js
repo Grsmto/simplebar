@@ -439,10 +439,8 @@ export default class SimpleBar {
     this.axis.y.isOverflowing =
       this.elStyles.overflowY === 'hidden' ? false : this.axis.y.isOverflowing;
 
-    this.axis.x.forceVisible =
-      this.elStyles.overflowX === 'scroll' || this.options.forceVisible;
-    this.axis.y.forceVisible =
-      this.elStyles.overflowY === 'scroll' || this.options.forceVisible;
+    this.axis.x.forceVisible = this.options.forceVisible === "x" || this.options.forceVisible === true;
+    this.axis.y.forceVisible = this.options.forceVisible === "y" || this.options.forceVisible === true;
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
