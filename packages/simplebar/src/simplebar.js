@@ -819,7 +819,7 @@ export default class SimpleBar {
     this.contentEl.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onWindowResize);
 
-    this.mutationObserver.disconnect();
+    this.mutationObserver && this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
   }
 
