@@ -52,7 +52,7 @@ Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often badly affect the user experience (slower scroll performance compared to the native body scroll, no native scroll behaviours like click on track, etc.). Do it at your own risk! SimpleBar is meant to improve the experience of **internal web page scrolling**; such as a chat box or a small scrolling area. **Please read the [caveats](#5-caveats) section first to be aware of the limitations!**
 
 ### Troubleshooting
-If you are experiencing issues when setting up SimpleBar, it is most likely because your styles are clashing with SimpleBar ones. Make sure the element you are setting SimpleBar on does not override any SimpleBar css properties! We recommend to not style that element at all and use an inner element instead.
+If you are experiencing issues when setting up SimpleBar, it is most likely because your styles are clashing with SimpleBar ones. Make sure the element you are setting SimpleBar on does not override any SimpleBar css properties! **We recommend to not style that element at all and use an inner element instead.**
 
 ### Sponsors
 Thanks to BrowserStack for sponsoring open source projects and letting us test SimpleBar for free.
@@ -144,6 +144,16 @@ classNames: {
   track: 'simplebar-track'
 }
 ```
+
+#### forceVisible
+You can force the track to be visible (same behaviour as `overflow: scroll`) using the `forceVisible` option:
+```
+forceVisible: true|'x'|'y' (default to `false`)
+```
+By default, SimpleBar behave like `overflow: auto`.
+
+### Apply scroll vertically only
+Simply define in css `overflow-x: hidden` on your element.
 
 ### Notifying the plugin of content changes
 #### Note: you shouldn't need to use these functions as SimpleBar takes care of that automatically. This is for advanced usage only.
