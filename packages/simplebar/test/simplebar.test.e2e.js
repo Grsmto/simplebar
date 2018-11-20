@@ -15,11 +15,11 @@ describe('Load', () => {
 
   it('should not auto hide the scrollbar', async () => {
     const demo = await expect(page).toMatchElement('[data-simplebar-auto-hide="false"]');
-    await expect(demo).toMatchElement('.simplebar-scrollbar.visible');
+    await expect(demo).toMatchElement('.simplebar-scrollbar.simplebar-visible');
   });
 
   it('should force scrollbar track to be visible but scrollbar to be hidden', async () => {
-    const trackSelector = '[data-simplebar-force-visible] .simplebar-track.vertical';
+    const trackSelector = '[data-simplebar-force-visible] .simplebar-track.simplebar-vertical';
 
     await page.waitForSelector(trackSelector, { visible: true });
     await page.waitForSelector(`${trackSelector} .simplebar-scrollbar`, { hidden: true });
@@ -27,13 +27,9 @@ describe('Load', () => {
 
   it('should display SimpleBar in "rtl" mode', async () => {
     const el = await expect(page).toMatchElement('.demo-rtl');
-    const scrollbarEl = await expect(el).toMatchElement('.simplebar-track.horizontal .simplebar-scrollbar');
+    const scrollbarEl = await expect(el).toMatchElement(".simplebar-track.simplebar-horizontal .simplebar-scrollbar");
     const isRtl = await page.$eval('.demo-rtl', el => el.SimpleBar.isRtl);
     const transformStyle = await page.evaluate(el => el.style.transform, scrollbarEl);
-
-    // const styles = await scrollbarEl.getProperty('style');
-    // const left = await styles.getProperty('left');
-    // const stylesToJson = await left.jsonValue();
     const elBoundingBox = await el.boundingBox();
     const scrollbarElBoundingBox = await scrollbarEl.boundingBox();
 
