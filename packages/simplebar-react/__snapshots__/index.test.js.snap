@@ -6,27 +6,59 @@ exports[`renders with options 1`] = `
   data-simplebar-auto-hide="false"
 >
   <div
-    className="simplebar-scroll-content"
+    className="simplebar-wrapper"
   >
     <div
-      className="simplebar-content"
+      className="simplebar-height-auto-observer-wrapper"
     >
-      <p>
-        Some content
-      </p>
-      <p>
-        Some content
-      </p>
-      <p>
-        Some content
-      </p>
-      <p>
-        Some content
-      </p>
-      <p>
-        Some content
-      </p>
+      <div
+        className="simplebar-height-auto-observer"
+      />
     </div>
+    <div
+      className="simplebar-mask"
+    >
+      <div
+        className="simplebar-offset"
+      >
+        <div
+          className="simplebar-content"
+        >
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="simplebar-placeholder"
+    />
+  </div>
+  <div
+    className="simplebar-track simplebar-horizontal"
+  >
+    <div
+      className="simplebar-scrollbar"
+    />
+  </div>
+  <div
+    className="simplebar-track simplebar-vertical"
+  >
+    <div
+      className="simplebar-scrollbar"
+    />
   </div>
 </div>
 `;
@@ -36,27 +68,59 @@ exports[`renders without crashing 1`] = `
   data-simplebar={true}
 >
   <div
-    className="simplebar-scroll-content"
+    className="simplebar-wrapper"
   >
     <div
-      className="simplebar-content"
+      className="simplebar-height-auto-observer-wrapper"
     >
-      <p>
-        Some content
-      </p>
-      <p>
-        Some content
-      </p>
-      <p>
-        Some content
-      </p>
-      <p>
-        Some content
-      </p>
-      <p>
-        Some content
-      </p>
+      <div
+        className="simplebar-height-auto-observer"
+      />
     </div>
+    <div
+      className="simplebar-mask"
+    >
+      <div
+        className="simplebar-offset"
+      >
+        <div
+          className="simplebar-content"
+        >
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="simplebar-placeholder"
+    />
+  </div>
+  <div
+    className="simplebar-track simplebar-horizontal"
+  >
+    <div
+      className="simplebar-scrollbar"
+    />
+  </div>
+  <div
+    className="simplebar-track simplebar-vertical"
+  >
+    <div
+      className="simplebar-scrollbar"
+    />
   </div>
 </div>
 `;
