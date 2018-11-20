@@ -128,34 +128,34 @@
     transition: opacity 0.2s linear;
 }
 
-.simplebar-track .simplebar-scrollbar.visible:before {
+.simplebar-track .simplebar-scrollbar.simplebar-visible:before {
     /* When hovered, remove all transitions from drag handle */
     opacity: 0.5;
-    transition: opacity 0 linear;
+    transition: opacity 0s linear;
 }
 
-.simplebar-track.vertical {
+.simplebar-track.simplebar-vertical {
     top: 0;
     width: 11px;
 }
 
-.simplebar-track.vertical .simplebar-scrollbar:before {
+.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
     top: 2px;
     bottom: 2px;
 }
 
-.simplebar-track.horizontal {
+.simplebar-track.simplebar-horizontal {
     left: 0;
     height: 11px;
 }
 
-.simplebar-track.horizontal .simplebar-scrollbar:before {
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
     height: 100%;
     left: 2px;
     right: 2px;
 }
 
-.horizontal.simplebar-track .simplebar-scrollbar {
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar {
     right: auto;
     left: 0;
     top: 2px;
@@ -166,7 +166,7 @@
 }
 
 /* Rtl support */
-[data-simplebar-direction="rtl"] .simplebar-track.vertical {
+[data-simplebar-direction="rtl"] .simplebar-track.simplebar-vertical {
     right: auto;
     left: 0;
 }

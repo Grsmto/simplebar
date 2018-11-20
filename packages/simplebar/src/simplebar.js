@@ -118,9 +118,9 @@ export default class SimpleBar {
       track: 'simplebar-track',
       heightAutoObserverWrapperEl: 'simplebar-height-auto-observer-wrapper',
       heightAutoObserverEl: 'simplebar-height-auto-observer',
-      visible: 'visible',
-      horizontal: 'horizontal',
-      vertical: 'vertical',
+      visible: 'simplebar-visible',
+      horizontal: 'simplebar-horizontal',
+      vertical: 'simplebar-vertical',
       hover: 'simplebar-hover'
     },
     scrollbarMinSize: 25,
