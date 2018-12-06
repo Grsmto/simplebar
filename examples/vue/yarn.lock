@@ -6637,13 +6637,20 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-simplebar@latest:
-  version "3.1.0-beta.2"
-  resolved "https://registry.yarnpkg.com/simplebar/-/simplebar-3.1.0-beta.2.tgz#9418a6be394e39f269d96ce2356c0aed1597fa9b"
-  integrity sha512-hgmsvgmEe1a0bJYYkcyjj5c91XpRgxdqk1MS6AreFWDe5Ctb7mJqnA0PvgcyUD93NKp6jNSWnfxhva4WqE664w==
+simplebar-vue@latest:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/simplebar-vue/-/simplebar-vue-0.1.0.tgz#cce293e8bd96fe79f843ecb1f032a3586cd4bfc9"
+  integrity sha512-RtabDCzWAYWb1rdVhCvGma2mp+5b8O0WjDRh3Ha+zMoFZIMfyy52y8xUjpumiU/5Wu3pha/DQQqwtwJie2GcNQ==
+  dependencies:
+    simplebar "3.0.0-beta.5"
+    vue "^2.5.17"
+
+simplebar@3.0.0-beta.5:
+  version "3.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/simplebar/-/simplebar-3.0.0-beta.5.tgz#31cd3344863a88ce2a2371f3c9b7bb7a8ea19b45"
+  integrity sha512-uJjZiSHnQbRRxE+t+UO5NH5Vpynd2yHN//XUkN6LQUPv+tyWwfykMgpd2Zh2nOjxEcmGKumN+aZv/i0NspXQ5Q==
   dependencies:
     can-use-dom "^0.1.0"
-    lodash.debounce "^4.0.8"
     lodash.throttle "^4.1.1"
     resize-observer-polyfill "^1.5.0"
     scrollbarwidth "^0.1.3"

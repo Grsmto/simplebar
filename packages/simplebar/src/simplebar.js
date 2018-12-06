@@ -701,6 +701,8 @@ export default class SimpleBar {
 
   onPointerEvent = e => {
     let isWithinBoundsY, isWithinBoundsX;
+    this.axis.x.scrollbar.rect = this.axis.x.scrollbar.el.getBoundingClientRect();
+    this.axis.y.scrollbar.rect = this.axis.y.scrollbar.el.getBoundingClientRect();
 
     if (this.axis.x.isOverflowing || this.axis.x.forceVisible) {
       isWithinBoundsX = this.isWithinBounds(this.axis.x.scrollbar.rect);
