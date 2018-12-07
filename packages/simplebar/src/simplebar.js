@@ -379,7 +379,8 @@ export default class SimpleBar {
           if (
             mutation.target === this.el ||
             !this.isChildNode(mutation.target) ||
-            mutation.addedNodes.length
+            mutation.addedNodes.length ||
+            mutation.removedNodes.length
           ) {
             this.recalculate();
           }
