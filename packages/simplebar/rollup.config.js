@@ -2,15 +2,15 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import license from 'rollup-plugin-license';
-import uglify from 'rollup-plugin-uglify';
+import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
-const banner = {
+const licence = {
   banner: `
         ${pkg.title || pkg.name} - v${pkg.version}
         ${pkg.description}
         ${pkg.homepage}
-        
+
         Made by ${pkg.author}
         Under ${pkg.license} License
       `
@@ -32,7 +32,7 @@ export default [
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
       uglify(),
-      license(banner)
+      license(licence)
     ]
   },
   // browser-friendly, non-minified UMD build
@@ -49,7 +49,7 @@ export default [
       }),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
-      license(banner)
+      license(licence)
     ]
   },
 
@@ -57,13 +57,13 @@ export default [
   // (We could have three entries in the configuration array
   // instead of two, but it's quicker to generate multiple
   // builds from a single configuration where possible, using
-  // an array for the `output` option, where we can specify 
+  // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
   {
     input: 'src/simplebar.js',
     external: Object.keys(pkg.dependencies),
-    output: { 
-      file: pkg.module, 
+    output: {
+      file: pkg.module,
       format: 'es',
       sourcemap: true
     },
@@ -71,7 +71,7 @@ export default [
       babel({
         exclude: ['/**/node_modules/**']
       }),
-      license(banner)
+      license(licence)
     ]
   }
 ];
