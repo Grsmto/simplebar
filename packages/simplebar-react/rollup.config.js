@@ -2,7 +2,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import license from 'rollup-plugin-license';
-import uglify from 'rollup-plugin-uglify';
+import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
 const banner = {
@@ -10,7 +10,7 @@ const banner = {
         ${pkg.name} - v${pkg.version}
         ${pkg.description}
         ${pkg.homepage}
-        
+
         Made by ${pkg.author}
         Under ${pkg.license} License
       `
@@ -32,7 +32,9 @@ export default [
     },
     external: external,
     plugins: [
-      babel(),
+      babel({
+        exclude: ['/**/node_modules/**']
+      }),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
       uglify(),
@@ -43,11 +45,13 @@ export default [
     input: 'index.js',
     external: external,
     output: {
-      file: pkg.module, 
-      format: 'es' 
+      file: pkg.module,
+      format: 'es'
     },
     plugins: [
-      babel(),
+      babel({
+        exclude: ['/**/node_modules/**']
+      }),
       license(banner)
     ]
   }

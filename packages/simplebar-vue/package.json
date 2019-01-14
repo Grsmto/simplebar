@@ -18,22 +18,21 @@
     "prepublishOnly": "yarn run build"
   },
   "dependencies": {
-    "simplebar": "^3.1.2",
-    "vue": "^2.5.17"
+    "simplebar": "^3.1.2"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.5",
-    "@vue/cli-plugin-eslint": "^3.0.5",
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-plugin-unit-jest": "^3.0.5",
-    "@vue/cli-service": "^3.0.5",
+    "@vue/cli-service": "^3.3.0",
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
-    "rollup-plugin-vue": "^4.3.2",
-    "vue-template-compiler": "^2.5.17"
+    "rollup-plugin-vue": "4.3.2",
+    "vue-template-compiler": "^2.5.22"
   },
   "eslintConfig": {
     "root": true,
