@@ -819,11 +819,31 @@ export default class SimpleBar {
       this.el.removeEventListener('mouseenter', this.onMouseEnter);
     }
 
+    [
+      'mousedown',
+      'click',
+      'dblclick',
+      'touchstart',
+      'touchend',
+      'touchmove'
+    ].forEach(e => {
+      this.el.removeEventListener(e, this.onPointerEvent);
+    });
+
+    this.el.removeEventListener('mousemove', this.onMouseMove);
+    this.el.removeEventListener('mouseleave', this.onMouseLeave);
+
     this.contentEl.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onWindowResize);
 
     this.mutationObserver && this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
+
+    // Cancel all debounced functions
+    this.recalculate.cancel();
+    this.onMouseMove.cancel();
+    this.hideScrollbars.cancel();
+    this.onWindowResize.cancel();
   }
 
   /**
