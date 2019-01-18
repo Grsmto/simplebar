@@ -241,11 +241,11 @@ export default class SimpleBar {
     // Save a reference to the instance, so we know this DOM node has already been instancied
     this.el.SimpleBar = this;
 
-    this.initDOM();
 
     // We stop here on server-side
     if (canUseDOM) {
-      // Recalculate scrollbarWidth in case it's a zoom
+      this.initDOM();
+
       this.scrollbarWidth = scrollbarWidth();
 
       this.recalculate();
