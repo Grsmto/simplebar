@@ -26,3 +26,15 @@ test('renders with options', () => {
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+test('renders with scrollableNodeProps', () => {
+  const component = renderer.create(
+    <SimpleBar scrollableNodeProps={{ className: 'test', 'data-test': "test" }} data-simplebar-auto-hide="false">
+      {[...Array(5)].map((x, i) =>
+        <p key={i}>Some content</p>
+      )}
+    </SimpleBar>
+  );
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
