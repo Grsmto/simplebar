@@ -110,6 +110,10 @@
     pointer-events: none;
 }
 
+[data-simplebar].simplebar-dragging .simplebar-track {
+  pointer-events: all;
+}
+
 .simplebar-scrollbar {
     position: absolute;
     right: 2px;

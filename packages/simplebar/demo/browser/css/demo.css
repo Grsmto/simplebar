@@ -83,6 +83,9 @@ p {
     padding: 10px;
     min-width: 230px;
     }
+    .demo1 p.odd:hover {
+      background: #666;
+    }
     .demo1 p.odd {
       background: #f0f0f0;
       }
@@ -147,6 +150,10 @@ p {
   overflow-x: hidden;
   width: 200px;
   height: 200px;
+}
+
+.demo-y-axis.simplebar-dragging .simplebar-scrollbar:before {
+  background-color: red;
 }
 
 .demo-both-axis .box,

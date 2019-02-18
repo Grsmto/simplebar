@@ -36,4 +36,17 @@ describe('Load', () => {
     expect(isRtl).toBeTruthy();
     expect(transformStyle).toEqual(`translate3d(${ elBoundingBox.width - scrollbarElBoundingBox.width}px, 0px, 0px)`);
   });
+
+  it('should add class "dragging" when dragging', async () => {
+    const el = await expect(page).toMatchElement('#demo2');
+
+    await page.click('#demo2 .simplebar-track.simplebar-vertical .simplebar-scrollbar');
+    await page.mouse.down();
+
+    const isDragging = await page.evaluate(el => el.classList.contains('simplebar-dragging'), el);
+
+    expect(isDragging).toBeTruthy();
+  }, 999999);
 });
+
+// await jestPuppeteer.debug();

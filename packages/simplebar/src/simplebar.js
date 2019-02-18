@@ -121,7 +121,8 @@ export default class SimpleBar {
       visible: 'simplebar-visible',
       horizontal: 'simplebar-horizontal',
       vertical: 'simplebar-vertical',
-      hover: 'simplebar-hover'
+      hover: 'simplebar-hover',
+      dragging: 'simplebar-dragging',
     },
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
@@ -746,6 +747,8 @@ export default class SimpleBar {
       scrollbar.getBoundingClientRect()[this.axis[axis].offsetAttr];
     this.draggedAxis = axis;
 
+    this.el.classList.add(this.classNames.dragging);
+
     document.addEventListener('mousemove', this.drag);
     document.addEventListener('mouseup', this.onEndDrag);
   }
@@ -801,6 +804,8 @@ export default class SimpleBar {
   onEndDrag = e => {
     e.preventDefault();
     e.stopPropagation();
+
+    this.el.classList.remove(this.classNames.dragging);
 
     document.removeEventListener('mousemove', this.drag);
     document.removeEventListener('mouseup', this.onEndDrag);
