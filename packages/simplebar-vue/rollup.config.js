@@ -2,7 +2,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import license from 'rollup-plugin-license';
 import babel from 'rollup-plugin-babel';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import vue from 'rollup-plugin-vue';
 import pkg from './package.json';
 
@@ -21,11 +21,11 @@ const external = [...Object.keys(pkg.dependencies), 'vue'];
 
 export default [
   {
-    input: "index.js",
+    input: 'index.js',
     output: {
-      name: "SimpleBar",
+      name: 'SimpleBar',
       file: pkg.main,
-      format: "umd"
+      format: 'umd'
     },
     external: external,
     plugins: [
@@ -36,16 +36,16 @@ export default [
         runtimeHelpers: true,
         extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue']
       }),
-      uglify(),
+      terser(),
       license(banner)
     ]
   },
   {
-    input: "index.js",
+    input: 'index.js',
     external: external,
     output: {
       file: pkg.module,
-      format: "esm"
+      format: 'esm'
     },
     plugins: [
       vue(),
