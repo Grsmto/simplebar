@@ -61,7 +61,13 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/simplebar.js',
-    external: Object.keys(pkg.dependencies),
+    external: id => {
+      if (Object.keys(pkg.dependencies).find(dep => id === dep) || id.match(/(core-js).+/)) {
+        return true;
+      }
+
+      return false;
+    },
     output: {
       file: pkg.module,
       format: 'es',
