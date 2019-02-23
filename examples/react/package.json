@@ -6,7 +6,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "latest",
-    "simplebar": "latest"
+    "simplebar-react": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
