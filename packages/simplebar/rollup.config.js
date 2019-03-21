@@ -2,7 +2,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import license from 'rollup-plugin-license';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 const licence = {
@@ -31,7 +31,7 @@ export default [
       }),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
-      uglify(),
+      terser(),
       license(licence)
     ]
   },
@@ -61,7 +61,13 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/simplebar.js',
-    external: Object.keys(pkg.dependencies),
+    external: id => {
+      if (Object.keys(pkg.dependencies).find(dep => id === dep) || id.match(/(core-js).+/)) {
+        return true;
+      }
+
+      return false;
+    },
     output: {
       file: pkg.module,
       format: 'es',
