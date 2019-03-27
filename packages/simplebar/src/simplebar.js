@@ -322,10 +322,6 @@ export default class SimpleBar {
       track.classList.add(this.classNames.track);
       scrollbar.classList.add(this.classNames.scrollbar);
 
-      if (!this.options.autoHide) {
-        scrollbar.classList.add(this.classNames.visible);
-      }
-
       track.appendChild(scrollbar);
 
       this.axis.x.track.el = track.cloneNode(true);
@@ -344,6 +340,11 @@ export default class SimpleBar {
     this.axis.y.scrollbar.el = this.axis.y.track.el.querySelector(
       `.${this.classNames.scrollbar}`
     );
+
+    if (!this.options.autoHide) {
+      this.axis.x.scrollbar.el.classList.add(this.classNames.visible);
+      this.axis.y.scrollbar.el.classList.add(this.classNames.visible);
+    }
 
     this.el.setAttribute('data-simplebar', 'init');
   }
