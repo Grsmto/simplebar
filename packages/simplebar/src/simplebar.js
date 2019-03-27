@@ -379,8 +379,8 @@ export default class SimpleBar {
       this.mutationObserver = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
           if (
-            mutation.target === this.el ||
-            !this.isChildNode(mutation.target) ||
+            mutation.target === this.contentEl ||
+            this.isChildNode(mutation.target) ||
             mutation.addedNodes.length ||
             mutation.removedNodes.length
           ) {
@@ -389,8 +389,7 @@ export default class SimpleBar {
         });
       });
 
-      // pass in the target node, as well as the observer options
-      this.mutationObserver.observe(this.el, {
+      this.mutationObserver.observe(this.contentEl, {
         attributes: true,
         childList: true,
         characterData: true,
