@@ -227,7 +227,7 @@ For the most part SimpleBar uses the browser's native scrolling functionality, b
 Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
 ## 5. Caveats
-- SimpleBar can't be used on the `<body>`, `<textarea>` or `<iframe>` elements. If you are looking to support `textarea`, I suggest taking a look at [OverLayScrollbars](https://kingsora.github.io/OverlayScrollbars).
+- SimpleBar can't be used on the `<body>`, `<textarea>`, `<table>` or `<iframe>` elements. If you are looking to support these, I suggest taking a look at [OverLayScrollbars](https://kingsora.github.io/OverlayScrollbars).
 - SimpleBar doesn't currently support `overflow: visible`. Which means any children of your scrolling div will be clipped (like with `overflow: hidden`).
 
 ## 6. Changelog
