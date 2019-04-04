@@ -85,6 +85,7 @@ p {
     }
     .demo1 p.odd:hover {
       background: #666;
+      height: 100px;
     }
     .demo1 p.odd {
       background: #f0f0f0;
