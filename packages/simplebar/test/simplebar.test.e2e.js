@@ -47,6 +47,18 @@ describe('Load', () => {
 
     expect(isDragging).toBeTruthy();
   }, 999999);
+
+  it('should recalculate scrollbar size when content size changes', async () => {
+    const el = await expect(page).toMatchElement('#demo2');
+    const scrollbarEl = await expect(el).toMatchElement('.simplebar-track.simplebar-vertical .simplebar-scrollbar');
+    const scrollbarHeight = await page.evaluate(el => parseInt(el.style.height), scrollbarEl);
+
+    await page.hover('#demo2 p');
+
+    const scrollbarHeightAfterHover = await page.evaluate(el => parseInt(el.style.height), scrollbarEl);
+
+    expect(scrollbarHeightAfterHover).toBeLessThan(scrollbarHeight);
+  });
 });
 
 // await jestPuppeteer.debug();
