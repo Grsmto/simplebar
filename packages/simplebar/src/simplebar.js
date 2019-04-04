@@ -9,6 +9,7 @@ export default class SimpleBar {
   constructor(element, options) {
     this.el = element;
     this.flashTimeout;
+    this.resizeWrapperEl;
     this.contentEl;
     this.offsetEl;
     this.maskEl;
@@ -109,6 +110,7 @@ export default class SimpleBar {
     autoHide: true,
     forceVisible: false,
     classNames: {
+      resizeWrapper: 'simplebar-resize-wrapper',
       content: 'simplebar-content',
       offset: 'simplebar-offset',
       mask: 'simplebar-mask',
@@ -267,6 +269,9 @@ export default class SimpleBar {
       this.contentEl = this.el.querySelector(`.${this.classNames.content}`);
       this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
       this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
+      this.resizeWrapperEl = this.el.querySelector(
+        `.${this.classNames.resizeWrapper}`
+      );
       this.placeholderEl = this.el.querySelector(
         `.${this.classNames.placeholder}`
       );
@@ -288,6 +293,7 @@ export default class SimpleBar {
       this.contentEl = document.createElement('div');
       this.offsetEl = document.createElement('div');
       this.maskEl = document.createElement('div');
+      this.resizeWrapperEl = document.createElement('div');
       this.placeholderEl = document.createElement('div');
       this.heightAutoObserverWrapperEl = document.createElement('div');
       this.heightAutoObserverEl = document.createElement('div');
@@ -296,6 +302,7 @@ export default class SimpleBar {
       this.contentEl.classList.add(this.classNames.content);
       this.offsetEl.classList.add(this.classNames.offset);
       this.maskEl.classList.add(this.classNames.mask);
+      this.resizeWrapperEl.classList.add(this.classNames.resizeWrapper);
       this.placeholderEl.classList.add(this.classNames.placeholder);
       this.heightAutoObserverWrapperEl.classList.add(
         this.classNames.heightAutoObserverWrapperEl
@@ -304,8 +311,11 @@ export default class SimpleBar {
         this.classNames.heightAutoObserverEl
       );
 
-      while (this.el.firstChild) this.contentEl.appendChild(this.el.firstChild);
+      while (this.el.firstChild) {
+        this.resizeWrapperEl.appendChild(this.el.firstChild);
+      }
 
+      this.contentEl.appendChild(this.resizeWrapperEl);
       this.offsetEl.appendChild(this.contentEl);
       this.maskEl.appendChild(this.offsetEl);
       this.heightAutoObserverWrapperEl.appendChild(this.heightAutoObserverEl);
@@ -399,6 +409,7 @@ export default class SimpleBar {
 
     this.resizeObserver = new ResizeObserver(this.recalculate);
     this.resizeObserver.observe(this.el);
+    this.resizeObserver.observe(this.resizeWrapperEl);
   }
 
   recalculate() {
