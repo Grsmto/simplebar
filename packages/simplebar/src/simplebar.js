@@ -407,7 +407,11 @@ export default class SimpleBar {
       });
     }
 
-    this.resizeObserver = new ResizeObserver(this.recalculate);
+    this.resizeObserver = new ResizeObserver(() => {
+      window.requestAnimationFrame(() => {
+        this.recalculate();
+      });
+    });
     this.resizeObserver.observe(this.el);
     this.resizeObserver.observe(this.resizeWrapperEl);
   }
