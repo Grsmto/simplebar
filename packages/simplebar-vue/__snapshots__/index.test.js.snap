@@ -8,7 +8,9 @@ exports[`simplebar renders with options 1`] = `
     </div>
     <div class="simplebar-mask">
       <div class="simplebar-offset">
-        <div class="simplebar-content"></div>
+        <div class="simplebar-content">
+          <div class="simplebar-resize-wrapper"></div>
+        </div>
       </div>
     </div>
     <div class="simplebar-placeholder"></div>
@@ -30,7 +32,9 @@ exports[`simplebar renders without crashing 1`] = `
     </div>
     <div class="simplebar-mask">
       <div class="simplebar-offset">
-        <div class="simplebar-content"></div>
+        <div class="simplebar-content">
+          <div class="simplebar-resize-wrapper"></div>
+        </div>
       </div>
     </div>
     <div class="simplebar-placeholder"></div>

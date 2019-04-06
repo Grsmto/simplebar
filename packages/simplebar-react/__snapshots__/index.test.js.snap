@@ -22,23 +22,27 @@ exports[`renders with options 1`] = `
         className="simplebar-offset"
       >
         <div
-          className="simplebar-content"
+          className="simplebar-resize-wrapper"
         >
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
+          <div
+            className="simplebar-content"
+          >
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -63,7 +67,6 @@ exports[`renders with options 1`] = `
 </div>
 `;
 
-
 exports[`renders with scrollableNodeProps 1`] = `
 <div
   data-simplebar={true}
@@ -86,24 +89,28 @@ exports[`renders with scrollableNodeProps 1`] = `
         className="simplebar-offset"
       >
         <div
-          className="simplebar-content test"
-          data-test="test"
+          className="simplebar-resize-wrapper"
         >
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
+          <div
+            className="simplebar-content test"
+            data-test="test"
+          >
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -149,23 +156,27 @@ exports[`renders without crashing 1`] = `
         className="simplebar-offset"
       >
         <div
-          className="simplebar-content"
+          className="simplebar-resize-wrapper"
         >
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
-          <p>
-            Some content
-          </p>
+          <div
+            className="simplebar-content"
+          >
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+          </div>
         </div>
       </div>
     </div>
