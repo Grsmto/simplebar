@@ -10,8 +10,8 @@ export default function SimpleBar({ children, scrollableNodeProps, ...options })
         </div>
         <div className="simplebar-mask">
           <div className="simplebar-offset">
-            <div className="simplebar-resize-wrapper">
-              <div {...scrollableNodeProps} className={`simplebar-content${scrollableNodeProps && scrollableNodeProps.className ? ` ${scrollableNodeProps.className}` : ''}`}>{children}</div>
+            <div {...scrollableNodeProps} className={`simplebar-content${scrollableNodeProps && scrollableNodeProps.className ? ` ${scrollableNodeProps.className}` : ''}`}>
+              <div className="simplebar-resize-wrapper">{children}</div>
             </div>
           </div>
         </div>
