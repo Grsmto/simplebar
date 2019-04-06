@@ -9,7 +9,9 @@
         <div class="simplebar-mask">
           <div class="simplebar-offset">
             <div class="simplebar-content">
-              <slot></slot>
+              <div class="simplebar-resize-wrapper">
+                <slot></slot>
+              </div>
             </div>
           </div>
         </div>
