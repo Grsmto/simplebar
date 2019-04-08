@@ -186,3 +186,31 @@ p {
 .playground__content {
   grid-column-start: span 2;
 }
+
+.demo-flex {
+  display: flex;
+  width: 100%;
+}
+
+.demo-flex > div {
+  height: 300px;
+}
+
+.demo-flex > div .content {
+  height: 600px;
+}
+
+.demo-flex .left {
+  width: 200px;
+  background: #c5e0f7;
+}
+
+.demo-flex .center {
+  flex: 1;
+}
+
+.demo-flex .right {
+  width: 200px;
+  transition: width 0.3s;
+  background: #ffcfcf;
+}

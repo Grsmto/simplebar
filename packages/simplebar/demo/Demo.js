@@ -34,162 +34,39 @@ class Demo extends React.Component {
   }
 
   render() {
-    return (
-      <section>
-          <h1>Simplebar demo page</h1>
-          <section>
-              <div className="col">
-                  <h2>Default</h2>
-                  <div id="demo1" className="demo1" data-simplebar>
-                      <h3 className="sticky">Sticky header</h3>
-                      {[...Array(50)].map((x, i) =>
-                          <p key={i} className="odd">Some content</p>
-                      )}
-                  </div>
-              </div>
-              <div className="col">
-                  <h2>autoHide false</h2>
-                  <div id="demo2" className="demo1" data-simplebar data-simplebar-auto-hide="false">
-                      {[...Array(10)].map((x, i) =>
-                          <p key={i} className="odd">Some content</p>
-                      )}
-                  </div>
-              </div>
-          </section>
-          <section>
-              <div className="col">
-                  <h2>forceVisible true</h2>
-                  <div id="demo3" className="demo1" data-simplebar data-simplebar-force-visible>
-                      {[...Array(5)].map((x, i) =>
-                          <p key={i} className="odd">Some content</p>
-                      )}
-                  </div>
-              </div>
-              <div className="col">
-                  <h2>direction RTL</h2>
-                  <div
-                      className={"demo4 demo-rtl"}
-                      style={{ width: '200px', direction: 'rtl' }}
-                      data-simplebar
-                  >
-                      <div className="box">1</div>
-                      <div className="box">2</div>
-                      <div className="box">3</div>
-                      <div className="box">4</div>
-                      <div className="box">5</div>
-                  </div>
-              </div>
-          </section>
-          <section>
-              <div className="col">
-                  <h2>React-Select</h2>
-                  <Select
-                      menuRenderer={menuRenderer}
-                      options={[...Array(50)].map((x, i) => ({ value: i, label: i }))}
-                  />
-              </div>
-              <div className="col">
-                  <h2>Horizontal</h2>
-                  <Playground>
-                      {({ height, width, direction }) => (
-                          <div
-                              style={{
-                                  width: '200px',
-                                  height: '200px'
-                              }}
-                          >
-                              <div
-                                  data-simplebar
-                                  className="demo4"
-                                  style={{ height, width, direction }}
-                              >
-                                  <div className="box">1</div>
-                                  <div className="box">2</div>
-                                  <div className="box">3</div>
-                                  <div className="box">4</div>
-                                  <div className="box">5</div>
-                              </div>
-                          </div>
-                      )}
-                  </Playground>
-              </div>
-          </section>
-          <section>
-              <div className="col">
-                  <h2>Manual instantiation</h2>
-                  <div
-                      id="manual-instantiation"
-                      className="demo4"
-                      style={{ width: '200px' }}
-                  >
-                      <div className="box">1</div>
-                      <div className="box">2</div>
-                      <div className="box">3</div>
-                      <div className="box">4</div>
-                      <div className="box">5</div>
-                  </div>
-              </div>
-              <div className="col">
-                  <h2>Horizontal native</h2>
-                  <div
-                      className="demo4"
-                      style={{ width: '200px' }}
-                  >
-                      <div className="box">1</div>
-                      <div className="box">2</div>
-                      <div className="box">3</div>
-                      <div className="box">4</div>
-                      <div className="box">5</div>
-                  </div>
-              </div>
-          </section>
-          <section>
-              <div className="col">
-                  <h2>Both axis</h2>
-                  <div
-                      className="demo-both-axis"
-                      data-simplebar
-                  >
-                      <div className="box">1</div>
-                  </div>
-              </div>
-              <div className="col">
-                  <h2>Both axis + padding</h2>
-                  <div
-                      className="demo-both-axis demo-both-axis--padding"
-                      data-simplebar
-                  >
-                      <div className="box">1</div>
-                  </div>
-              </div>
-          </section>
-          <section>
-              <div className="col">
-                  <h2>Both axis + padding native</h2>
-                  <div
-                      className="demo-both-axis demo-both-axis--padding"
-                  >
-                      <div className="box">1</div>
-                  </div>
-              </div>
-              <div className="col">
-                <h2>Y axis only</h2>
-                <div
-                  className="demo-y-axis"
-                  data-simplebar
-                >
-                  <div className="box">1</div>
-                </div>
-              </div>
-          </section>
+    return <section>
+        <h1>Simplebar demo page</h1>
         <section>
           <div className="col">
-            <h2>With custom classnames</h2>
-            <div
-              id="with-classnames"
-              className="demo4"
-              style={{ width: '200px' }}
-            >
+            <h2>Default</h2>
+            <div id="demo1" className="demo1" data-simplebar>
+              <h3 className="sticky">Sticky header</h3>
+              {[...Array(50)].map((x, i) => <p key={i} className="odd">
+                  Some content
+                </p>)}
+            </div>
+          </div>
+          <div className="col">
+            <h2>autoHide false</h2>
+            <div id="demo2" className="demo1" data-simplebar data-simplebar-auto-hide="false">
+              {[...Array(10)].map((x, i) => <p key={i} className="odd">
+                  Some content
+                </p>)}
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="col">
+            <h2>forceVisible true</h2>
+            <div id="demo3" className="demo1" data-simplebar data-simplebar-force-visible>
+              {[...Array(5)].map((x, i) => <p key={i} className="odd">
+                  Some content
+                </p>)}
+            </div>
+          </div>
+          <div className="col">
+            <h2>direction RTL</h2>
+            <div className={'demo4 demo-rtl'} style={{ width: '200px', direction: 'rtl' }} data-simplebar>
               <div className="box">1</div>
               <div className="box">2</div>
               <div className="box">3</div>
@@ -198,8 +75,103 @@ class Demo extends React.Component {
             </div>
           </div>
         </section>
-      </section>
-    );
+        <section>
+          <div className="col">
+            <h2>React-Select</h2>
+            <Select menuRenderer={menuRenderer} options={[...Array(50)].map(
+                (x, i) => ({ value: i, label: i })
+              )} />
+          </div>
+          <div className="col">
+            <h2>Horizontal</h2>
+            <Playground width height direction>
+              {({ height, width, direction }) => <div style={{ width: '200px', height: '200px' }}>
+                  <div data-simplebar className="demo4" style={{ height, width, direction }}>
+                    <div className="box">1</div>
+                    <div className="box">2</div>
+                    <div className="box">3</div>
+                    <div className="box">4</div>
+                    <div className="box">5</div>
+                  </div>
+                </div>}
+            </Playground>
+          </div>
+        </section>
+        <section>
+          <div className="col">
+            <h2>Manual instantiation</h2>
+            <div id="manual-instantiation" className="demo4" style={{ width: '200px' }}>
+              <div className="box">1</div>
+              <div className="box">2</div>
+              <div className="box">3</div>
+              <div className="box">4</div>
+              <div className="box">5</div>
+            </div>
+          </div>
+          <div className="col">
+            <h2>Horizontal native</h2>
+            <div className="demo4" style={{ width: '200px' }}>
+              <div className="box">1</div>
+              <div className="box">2</div>
+              <div className="box">3</div>
+              <div className="box">4</div>
+              <div className="box">5</div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="col">
+            <h2>Both axis</h2>
+            <div className="demo-both-axis" data-simplebar>
+              <div className="box">1</div>
+            </div>
+          </div>
+          <div className="col">
+            <h2>Both axis + padding</h2>
+            <div className="demo-both-axis demo-both-axis--padding" data-simplebar>
+              <div className="box">1</div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="col">
+            <h2>Both axis + padding native</h2>
+            <div className="demo-both-axis demo-both-axis--padding">
+              <div className="box">1</div>
+            </div>
+          </div>
+          <div className="col">
+            <h2>Y axis only</h2>
+            <div className="demo-y-axis" data-simplebar>
+              <div className="box">1</div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="col">
+            <h2>With custom classnames</h2>
+            <div id="with-classnames" className="demo4" style={{ width: '200px' }}>
+              <div className="box">1</div>
+              <div className="box">2</div>
+              <div className="box">3</div>
+              <div className="box">4</div>
+              <div className="box">5</div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Flex layout</h2>
+          <Playground width>
+            {({ width }) =>
+              <div className="demo-flex">
+                <div className="left" data-simplebar><div className="content" /></div>
+                <div className="center" data-simplebar><div className="content" /></div>
+                <div className="right" data-simplebar style={{ width }}><div className="content" /></div>
+              </div>
+            }
+          </Playground>
+        </section>
+      </section>;
   }
 }
 
