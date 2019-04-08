@@ -244,7 +244,6 @@ export default class SimpleBar {
     // Save a reference to the instance, so we know this DOM node has already been instancied
     this.el.SimpleBar = this;
 
-
     // We stop here on server-side
     if (canUseDOM) {
       this.initDOM();
@@ -415,6 +414,7 @@ export default class SimpleBar {
 
   recalculate() {
     const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
+    const isWidthAuto = this.heightAutoObserverEl.offsetWidth <= 1;
 
     this.elStyles = window.getComputedStyle(this.el);
 
@@ -425,7 +425,9 @@ export default class SimpleBar {
     } ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
     this.contentEl.style.height = isHeightAuto ? 'auto' : '100%';
 
-    this.placeholderEl.style.width = `${this.contentEl.scrollWidth}px`;
+    this.placeholderEl.style.width = isWidthAuto
+      ? `${this.contentEl.scrollWidth}px`
+      : 'auto';
     this.placeholderEl.style.height = `${this.contentEl.scrollHeight}px`;
 
     this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${
