@@ -399,6 +399,7 @@ export default class SimpleBar {
         });
       });
 
+      this.mutationObserver.observe(this.el, { attributes: true });
       this.mutationObserver.observe(this.contentEl, {
         attributes: true,
         childList: true,
