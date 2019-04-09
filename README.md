@@ -81,7 +81,7 @@ new SimpleBar(document.getElementById('myElement'));
 
 or
 ```js
-Array.from(document.querySelectorAll('.myElements')).forEach(el => new SimpleBar);
+Array.prototype.forEach.call(document.querySelectorAll('.myElements'), el => new SimpleBar);
 ```
 
 If you want to use jQuery:
