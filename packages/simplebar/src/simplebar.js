@@ -438,7 +438,7 @@ export default class SimpleBar {
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
     // Set isOverflowing to false if scrollbar is not necessary (content is shorter than offset)
-    this.axis.x.isOverflowing =
+    /*this.axis.x.isOverflowing =
       (this.scrollbarWidth
         ? this.contentEl.scrollWidth
         : this.contentEl.scrollWidth - this.minScrollbarWidth) >
@@ -448,7 +448,9 @@ export default class SimpleBar {
         ? this.contentEl.scrollHeight
         : this.contentEl.scrollHeight - this.minScrollbarWidth) >
       Math.ceil(this.axis.y.track.rect.height);
-
+    */
+    this.axis.x.isOverflowing = this.contentEl > this.contentEl.clientHeight;
+    this.axis.y.isOverflowing = this.contentEl.scrollHeight > this.contentEl.clientHeight; // Set isOverflowing to false if user explicitely set hidden overflow
     // Set isOverflowing to false if user explicitely set hidden overflow
     this.axis.x.isOverflowing =
       this.elStyles.overflowX === 'hidden' ? false : this.axis.x.isOverflowing;
