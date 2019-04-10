@@ -6,7 +6,9 @@
   "scripts": {
     "build": "lerna run build",
     "test": "lerna run test",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "start": "lerna exec --scope=simplebar yarn start",
+    "dev": "lerna exec --scope=simplebar yarn dev"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
