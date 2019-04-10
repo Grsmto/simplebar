@@ -8,25 +8,27 @@ describe('Load', () => {
   });
 
   beforeEach(async () => {
+    await page.reload();
     await page.mouse.move(0, 0);
+    await page.click('body', { delay: 64 }); // wait for SimpleBar to init
   });
 
-  it('should render demo page', async () => {
+  test('should render demo page', async () => {
     await expect(page).toMatch('Simplebar demo page');
   });
 
-  it('should render SimpleBar on data-simplebar elements', async () => {
+  test('should render SimpleBar on data-simplebar elements', async () => {
     await expect(page).toMatchElement('[data-simplebar] .simplebar-content');
   });
 
-  it('should not auto hide the scrollbar', async () => {
+  test('should not auto hide the scrollbar', async () => {
     const demo = await expect(page).toMatchElement(
       '[data-simplebar-auto-hide="false"]'
     );
     await expect(demo).toMatchElement('.simplebar-scrollbar.simplebar-visible');
   });
 
-  it('should force scrollbar track to be visible but scrollbar to be hidden', async () => {
+  test('should force scrollbar track to be visible but scrollbar to be hidden', async () => {
     const trackSelector =
       '[data-simplebar-force-visible] .simplebar-track.simplebar-vertical';
 
@@ -36,7 +38,7 @@ describe('Load', () => {
     });
   });
 
-  it('should display SimpleBar in "rtl" mode', async () => {
+  test('should display SimpleBar in "rtl" mode', async () => {
     const el = await expect(page).toMatchElement('.demo-rtl');
     const scrollbarEl = await expect(el).toMatchElement(
       '.simplebar-track.simplebar-horizontal .simplebar-scrollbar'
@@ -56,7 +58,7 @@ describe('Load', () => {
     );
   });
 
-  it('should add class "dragging" when dragging', async () => {
+  test('should add class "dragging" when dragging', async () => {
     const el = await expect(page).toMatchElement('#demo2');
 
     await page.click(
@@ -72,24 +74,27 @@ describe('Load', () => {
     expect(isDragging).toBeTruthy();
   });
 
-  it('should recalculate scrollbar size when content size changes', async () => {
+  test('should recalculate scrollbar size when content size changes', async () => {
     const el = await expect(page).toMatchElement('#demo2');
     const scrollbarEl = await expect(el).toMatchElement(
       '.simplebar-track.simplebar-vertical .simplebar-scrollbar'
     );
+
     const scrollbarHeight = await page.evaluate(
       el => parseInt(el.style.height),
       scrollbarEl
     );
 
+    // await jestPuppeteer.debug();
+
     await page.hover('#demo2 p');
+    await page.click('#demo2 p', { delay: 1000 }); // wait for Simplebar to recalculate
 
     const scrollbarHeightAfterHover = await page.evaluate(
       el => parseInt(el.style.height),
       scrollbarEl
     );
 
-    // await jestPuppeteer.debug();
     expect(scrollbarHeightAfterHover).toBeLessThan(scrollbarHeight);
   });
   // }, 999999);
