@@ -7,6 +7,10 @@ describe('Load', () => {
     );
   });
 
+  beforeEach(async () => {
+    await page.mouse.move(0, 0);
+  });
+
   it('should render demo page', async () => {
     await expect(page).toMatch('Simplebar demo page');
   });
@@ -66,7 +70,7 @@ describe('Load', () => {
     );
 
     expect(isDragging).toBeTruthy();
-  }, 999999);
+  });
 
   it('should recalculate scrollbar size when content size changes', async () => {
     const el = await expect(page).toMatchElement('#demo2');
@@ -85,8 +89,8 @@ describe('Load', () => {
       scrollbarEl
     );
 
+    // await jestPuppeteer.debug();
     expect(scrollbarHeightAfterHover).toBeLessThan(scrollbarHeight);
-  }, 999999);
+  });
+  // }, 999999);
 });
-
-// await jestPuppeteer.debug();
