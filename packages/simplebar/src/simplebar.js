@@ -166,7 +166,10 @@ export default class SimpleBar {
 
           Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
             if (removedNode.nodeType === 1) {
-              if (removedNode.hasAttribute('data-simplebar')) {
+              if (
+                removedNode.dataset.simplebar &&
+                removedNode.dataset.simplebar !== 'init'
+              ) {
                 removedNode.SimpleBar && removedNode.SimpleBar.unMount();
               } else {
                 Array.prototype.forEach.call(
