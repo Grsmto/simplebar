@@ -19,7 +19,10 @@ export default class SimpleBar {
     this.scrollbarWidth;
     this.minScrollbarWidth = 20;
     this.options = { ...SimpleBar.defaultOptions, ...options };
-    this.classNames = { ...SimpleBar.defaultOptions.classNames, ...this.options.classNames };
+    this.classNames = {
+      ...SimpleBar.defaultOptions.classNames,
+      ...this.options.classNames
+    };
     this.isRtl;
     this.axis = {
       x: {
@@ -49,6 +52,11 @@ export default class SimpleBar {
         scrollbar: {}
       }
     };
+
+    // Don't re-instantiate over an existing one
+    if (this.el.SimpleBar) {
+      return;
+    }
 
     this.recalculate = throttle(this.recalculate.bind(this), 64);
     this.onMouseMove = throttle(this.onMouseMove.bind(this), 64);
@@ -124,7 +132,7 @@ export default class SimpleBar {
       horizontal: 'simplebar-horizontal',
       vertical: 'simplebar-vertical',
       hover: 'simplebar-hover',
-      dragging: 'simplebar-dragging',
+      dragging: 'simplebar-dragging'
     },
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
@@ -141,7 +149,7 @@ export default class SimpleBar {
         mutations.forEach(mutation => {
           Array.prototype.forEach.call(mutation.addedNodes, addedNode => {
             if (addedNode.nodeType === 1) {
-              if (addedNode.hasAttribute('data-simplebar')) {
+              if (addedNode.dataset.simplebar) {
                 !addedNode.SimpleBar &&
                   new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
               } else {
@@ -466,8 +474,10 @@ export default class SimpleBar {
     this.axis.y.isOverflowing =
       this.elStyles.overflowY === 'hidden' ? false : this.axis.y.isOverflowing;
 
-    this.axis.x.forceVisible = this.options.forceVisible === "x" || this.options.forceVisible === true;
-    this.axis.y.forceVisible = this.options.forceVisible === "y" || this.options.forceVisible === true;
+    this.axis.x.forceVisible =
+      this.options.forceVisible === 'x' || this.options.forceVisible === true;
+    this.axis.y.forceVisible =
+      this.options.forceVisible === 'y' || this.options.forceVisible === true;
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
