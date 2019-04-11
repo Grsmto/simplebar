@@ -139,32 +139,34 @@ export default class SimpleBar {
       // Mutation observer to observe dynamically added elements
       this.globalObserver = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
-          Array.from(mutation.addedNodes).forEach(addedNode => {
+          Array.prototype.forEach.call(mutation.addedNodes, addedNode => {
             if (addedNode.nodeType === 1) {
               if (addedNode.hasAttribute('data-simplebar')) {
                 !addedNode.SimpleBar &&
                   new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
               } else {
-                Array.from(
-                  addedNode.querySelectorAll('[data-simplebar]')
-                ).forEach(el => {
-                  !el.SimpleBar &&
-                    new SimpleBar(el, SimpleBar.getElOptions(el));
-                });
+                Array.prototype.forEach.call(
+                  addedNode.querySelectorAll('[data-simplebar]'),
+                  el => {
+                    !el.SimpleBar &&
+                      new SimpleBar(el, SimpleBar.getElOptions(el));
+                  }
+                );
               }
             }
           });
 
-          Array.from(mutation.removedNodes).forEach(removedNode => {
+          Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
             if (removedNode.nodeType === 1) {
               if (removedNode.hasAttribute('data-simplebar')) {
                 removedNode.SimpleBar && removedNode.SimpleBar.unMount();
               } else {
-                Array.from(
-                  removedNode.querySelectorAll('[data-simplebar]')
-                ).forEach(el => {
-                  el.SimpleBar && el.SimpleBar.unMount();
-                });
+                Array.prototype.forEach.call(
+                  removedNode.querySelectorAll('[data-simplebar]'),
+                  el => {
+                    el.SimpleBar && el.SimpleBar.unMount();
+                  }
+                );
               }
             }
           });
@@ -190,26 +192,32 @@ export default class SimpleBar {
 
   // Helper function to retrieve options from element attributes
   static getElOptions(el) {
-    const options = Array.from(el.attributes).reduce((acc, attribute) => {
-      const option = attribute.name.match(/data-simplebar-(.+)/);
-      if (option) {
-        const key = option[1].replace(/\W+(.)/g, (x, chr) => chr.toUpperCase());
-        switch (attribute.value) {
-          case 'true':
-            acc[key] = true;
-            break;
-          case 'false':
-            acc[key] = false;
-            break;
-          case undefined:
-            acc[key] = true;
-            break;
-          default:
-            acc[key] = attribute.value;
+    const options = Array.prototype.reduce.call(
+      el.attributes,
+      (acc, attribute) => {
+        const option = attribute.name.match(/data-simplebar-(.+)/);
+        if (option) {
+          const key = option[1].replace(/\W+(.)/g, (x, chr) =>
+            chr.toUpperCase()
+          );
+          switch (attribute.value) {
+            case 'true':
+              acc[key] = true;
+              break;
+            case 'false':
+              acc[key] = false;
+              break;
+            case undefined:
+              acc[key] = true;
+              break;
+            default:
+              acc[key] = attribute.value;
+          }
         }
-      }
-      return acc;
-    }, {});
+        return acc;
+      },
+      {}
+    );
     return options;
   }
 
@@ -224,9 +232,12 @@ export default class SimpleBar {
     );
     window.removeEventListener('load', this.initDOMLoadedElements);
 
-    Array.from(document.querySelectorAll('[data-simplebar]')).forEach(el => {
-      if (!el.SimpleBar) new SimpleBar(el, SimpleBar.getElOptions(el));
-    });
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-simplebar]'),
+      el => {
+        if (!el.SimpleBar) new SimpleBar(el, SimpleBar.getElOptions(el));
+      }
+    );
   }
 
   static getOffset(el) {
@@ -259,7 +270,7 @@ export default class SimpleBar {
   initDOM() {
     // make sure this element doesn't have the elements yet
     if (
-      Array.from(this.el.children).filter(child =>
+      Array.prototype.filter.call(this.el.children, child =>
         child.classList.contains(this.classNames.wrapper)
       ).length
     ) {
