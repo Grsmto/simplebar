@@ -422,11 +422,6 @@ export default class SimpleBar {
     } ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
     this.contentEl.style.height = isHeightAuto ? 'auto' : '100%';
 
-    this.placeholderEl.style.width = isWidthAuto
-      ? `${this.resizeWrapperEl.clientWidth}px`
-      : 'auto';
-    this.placeholderEl.style.height = `${this.resizeWrapperEl.clientHeight}px`;
-
     this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${
       this.elStyles.paddingRight
     } -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
@@ -471,6 +466,13 @@ export default class SimpleBar {
     this.toggleTrackVisibility('y');
 
     this.hideNativeScrollbar();
+
+    // Determine placeholder size
+    this.placeholderEl.style.width = isWidthAuto
+      ? `${this.resizeWrapperEl.clientWidth}px`
+      : 'auto';
+
+    this.placeholderEl.style.height = `${this.resizeWrapperEl.clientHeight}px`;
   }
 
   /**
