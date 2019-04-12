@@ -224,6 +224,24 @@ class Demo extends React.Component {
             </div>
           </div>
         </section>
+        <section>
+          <h2>Flex layout</h2>
+          <Playground width>
+            {({ width }) => (
+              <div className="demo-flex">
+                <div className="left" data-simplebar>
+                  <div className="content" />
+                </div>
+                <div className="center" data-simplebar>
+                  <div className="content" />
+                </div>
+                <div className="right" data-simplebar style={{ width }}>
+                  <div className="content" />
+                </div>
+              </div>
+            )}
+          </Playground>
+        </section>
       </section>
     );
   }
