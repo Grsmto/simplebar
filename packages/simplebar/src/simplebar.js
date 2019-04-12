@@ -569,9 +569,9 @@ export default class SimpleBar {
 
     // Even if forceVisible is enabled, scrollbar itself should be hidden
     if (this.axis[axis].isOverflowing) {
-      scrollbar.style.visibility = 'visible';
+      scrollbar.style.display = 'block';
     } else {
-      scrollbar.style.visibility = 'hidden';
+      scrollbar.style.display = 'none';
     }
   }
 
