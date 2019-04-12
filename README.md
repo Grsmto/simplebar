@@ -211,9 +211,9 @@ SimpleBar has been tested on the following browsers: Chrome, Firefox, Safari, Ed
 
 Notice: IE10 doesn't support `MutationObserver` so you will still need to instantiate SimpleBar manually and call `recalculate()` as needed (or you can just use a polyfill for `MutationObserver`).
 
-If you want to support IE9 or apply SimpleBar on an SVG element on IE11, you will need a [polyfill for `classList`](https://github.com/eligrey/classList.js/blob/master/classList.js).
+If you want to apply SimpleBar on an SVG element on IE11, you will need a [polyfill for `classList`](https://github.com/eligrey/classList.js/blob/master/classList.js).
 
-Or you can use SimpleBar v1.
+IE9 is not supported anymore (because we use `translate3d` to position the scrollbar) so please use SimpleBar v1 if you really need it.
 
 ## 3. Demo
 http://grsmto.github.io/simplebar/
