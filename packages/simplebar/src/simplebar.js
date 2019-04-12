@@ -439,12 +439,13 @@ export default class SimpleBar {
       (this.scrollbarWidth
         ? this.contentEl.scrollWidth
         : this.contentEl.scrollWidth - this.minScrollbarWidth) >
-      Math.ceil(this.axis.x.track.rect.width);
+      this.contentEl.clientWidth;
+
     this.axis.y.isOverflowing =
       (this.scrollbarWidth
         ? this.contentEl.scrollHeight
         : this.contentEl.scrollHeight - this.minScrollbarWidth) >
-      Math.ceil(this.axis.y.track.rect.height);
+      this.contentEl.clientHeight;
 
     // Set isOverflowing to false if user explicitely set hidden overflow
     this.axis.x.isOverflowing =
