@@ -404,31 +404,6 @@ export default class SimpleBar {
     // Browser zoom triggers a window resize
     window.addEventListener('resize', this.onWindowResize);
 
-    // MutationObserver is IE11+
-    if (typeof MutationObserver !== 'undefined') {
-      // create an observer instance
-      this.mutationObserver = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-          if (
-            mutation.target === this.contentEl ||
-            this.isChildNode(mutation.target) ||
-            mutation.addedNodes.length ||
-            mutation.removedNodes.length
-          ) {
-            this.recalculate();
-          }
-        });
-      });
-
-      this.mutationObserver.observe(this.el, { attributes: true });
-      this.mutationObserver.observe(this.contentEl, {
-        attributes: true,
-        childList: true,
-        characterData: true,
-        subtree: true
-      });
-    }
-
     this.resizeObserver = new ResizeObserver(this.recalculate);
     this.resizeObserver.observe(this.el);
     this.resizeObserver.observe(this.resizeWrapperEl);
