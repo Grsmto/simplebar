@@ -61,6 +61,10 @@
     max-height: 100%; /* Needed for vertical scroll to trigger */
 }
 
+.simplebar-resize-wrapper {
+    overflow: hidden;
+}
+
 .simplebar-placeholder {
     max-height: 100%;
     max-width: 100%;
