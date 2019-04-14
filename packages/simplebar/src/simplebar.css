@@ -108,6 +108,7 @@
     right: 0;
     bottom: 0;
     pointer-events: none;
+    overflow: hidden;
 }
 
 [data-simplebar].simplebar-dragging .simplebar-track {
