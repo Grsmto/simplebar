@@ -61,8 +61,10 @@
     max-height: 100%; /* Needed for vertical scroll to trigger */
 }
 
-.simplebar-resize-wrapper {
-    overflow: hidden;
+.simplebar-resize-wrapper:before,
+.simplebar-resize-wrapper:after {
+    content: " ";
+    display: table;
 }
 
 .simplebar-placeholder {
