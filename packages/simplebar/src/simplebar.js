@@ -414,8 +414,11 @@ export default class SimpleBar {
     const isWidthAuto = this.heightAutoObserverEl.offsetWidth <= 1;
 
     this.elStyles = window.getComputedStyle(this.el);
-
     this.isRtl = this.elStyles.direction === 'rtl';
+
+    this.resizeWrapperEl.style.padding = `${this.elStyles.paddingTop} ${
+      this.elStyles.paddingRight
+    } ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
 
     this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${
       this.elStyles.paddingRight
@@ -428,10 +431,6 @@ export default class SimpleBar {
       ? `${this.resizeWrapperEl.clientWidth}px`
       : 'auto';
     this.placeholderEl.style.height = `${this.resizeWrapperEl.scrollHeight}px`;
-
-    this.resizeWrapperEl.style.padding = `${this.elStyles.paddingTop} ${
-      this.elStyles.paddingRight
-    } ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
 
     // Set isOverflowing to false if scrollbar is not necessary (content is shorter than offset)
     this.axis.x.isOverflowing =
