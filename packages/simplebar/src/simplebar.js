@@ -560,11 +560,13 @@ export default class SimpleBar {
     if (!this.scrollbarWidth) {
       const paddingDirection = [this.isRtl ? 'paddingLeft' : 'paddingRight'];
       this.contentEl.style[paddingDirection] =
-        (this.axis.y.isOverflowing || this.axis.y.forceVisible) &&
-        `${this.minScrollbarWidth}px`;
+        this.axis.y.isOverflowing || this.axis.y.forceVisible
+          ? `${this.minScrollbarWidth}px`
+          : 0;
       this.contentEl.style.paddingBottom =
-        (this.axis.x.isOverflowing || this.axis.x.forceVisible) &&
-        `${this.minScrollbarWidth}px`;
+        this.axis.x.isOverflowing || this.axis.x.forceVisible
+          ? `${this.minScrollbarWidth}px`
+          : 0;
     }
   }
 
