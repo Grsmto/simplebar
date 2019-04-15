@@ -214,3 +214,7 @@ p {
   transition: width 0.3s;
   background: #ffcfcf;
 }
+
+.demo-height-auto .inner {
+  margin-bottom: 2em;
+}

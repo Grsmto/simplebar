@@ -242,6 +242,20 @@ class Demo extends React.Component {
             )}
           </Playground>
         </section>
+        <section>
+          <div className="col">
+            <h2>forceVisible true</h2>
+            <div className="demo-height-auto" data-simplebar>
+              <div className="inner">
+                {[...Array(5)].map((x, i) => (
+                  <p key={i} className="odd">
+                    Some content
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </section>
     );
   }
