@@ -48,7 +48,7 @@
     -webkit-overflow-scrolling: touch;
 }
 
-.simplebar-content {
+.simplebar-content-wrapper {
     direction: inherit;
     box-sizing: border-box !important;
     position: relative;
@@ -61,8 +61,8 @@
     max-height: 100%; /* Needed for vertical scroll to trigger */
 }
 
-.simplebar-resize-wrapper:before,
-.simplebar-resize-wrapper:after {
+.simplebar-content:before,
+.simplebar-content:after {
     content: " ";
     display: table;
 }

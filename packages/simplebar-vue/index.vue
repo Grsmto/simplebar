@@ -8,8 +8,8 @@
         </div>
         <div class="simplebar-mask">
           <div class="simplebar-offset">
-            <div class="simplebar-content">
-              <div class="simplebar-resize-wrapper">
+            <div class="simplebar-content-wrapper">
+              <div class="simplebar-content">
                 <slot></slot>
               </div>
             </div>
