@@ -70,8 +70,8 @@ export default class SimpleBar {
 
     SimpleBar.getRtlHelpers = memoize(SimpleBar.getRtlHelpers);
 
-    // getContentWrapperElement is deprecated
-    this.getContentWrapperElement = this.getScrollElement;
+    // getContentElement is deprecated
+    this.getContentElement = this.getScrollElement;
 
     this.init();
   }
@@ -825,7 +825,7 @@ export default class SimpleBar {
    * Getter for original scrolling element
    */
   getScrollElement() {
-    return this.contentWrapperEl;
+    return this.contentEl;
   }
 
   removeListeners() {
