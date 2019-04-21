@@ -215,6 +215,11 @@ p {
   background: #ffcfcf;
 }
 
+.demo-height-auto {
+  width: 25vw;
+}
+
 .demo-height-auto .inner {
   margin-bottom: 2em;
+  width: 25vw;
 }
