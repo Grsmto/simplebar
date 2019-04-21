@@ -56,7 +56,7 @@
     height: 100%; /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
     width: auto;
     visibility: visible;
-    overflow: scroll; /* Scroll on this element otherwise element can't have a padding applied properly */
+    overflow: auto; /* Scroll on this element otherwise element can't have a padding applied properly */
     max-width: 100%; /* Not required for horizontal scroll to trigger */
     max-height: 100%; /* Needed for vertical scroll to trigger */
 }

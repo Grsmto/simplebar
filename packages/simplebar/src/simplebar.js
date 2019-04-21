@@ -444,15 +444,15 @@ export default class SimpleBar {
     this.axis.y.isOverflowing =
       this.elStyles.overflowY === 'hidden' ? false : this.axis.y.isOverflowing;
 
-    this.hideNativeScrollbar();
-
-    this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
-    this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
-
     this.axis.x.forceVisible =
       this.options.forceVisible === 'x' || this.options.forceVisible === true;
     this.axis.y.forceVisible =
       this.options.forceVisible === 'y' || this.options.forceVisible === true;
+
+    this.hideNativeScrollbar();
+
+    this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
+    this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
