@@ -149,7 +149,7 @@ export default class SimpleBar {
         mutations.forEach(mutation => {
           Array.prototype.forEach.call(mutation.addedNodes, addedNode => {
             if (addedNode.nodeType === 1) {
-              if (addedNode.dataset.simplebar) {
+              if (addedNode.hasAttribute('data-simplebar')) {
                 !addedNode.SimpleBar &&
                   new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
               } else {
@@ -166,10 +166,7 @@ export default class SimpleBar {
 
           Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
             if (removedNode.nodeType === 1) {
-              if (
-                removedNode.dataset.simplebar &&
-                removedNode.dataset.simplebar !== 'init'
-              ) {
+              if (removedNode.hasAttribute('data-simplebar')) {
                 removedNode.SimpleBar && removedNode.SimpleBar.unMount();
               } else {
                 Array.prototype.forEach.call(
