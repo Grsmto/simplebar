@@ -16,11 +16,18 @@ test('should call constructor', () => {
   expect(SimpleBar).toHaveBeenCalledTimes(1);
 });
 
+test('should return the content element', () => {
+  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+  const contentElement = simpleBar.getContentElement();
+
+  expect(contentElement).toBe(simpleBar.contentEl);
+});
+
 test('should return the scroll element', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
   const scrollElement = simpleBar.getScrollElement();
 
-  expect(scrollElement).toBe(simpleBar.contentEl);
+  expect(scrollElement).toBe(simpleBar.contentWrapperEl);
 });
 
 test("should unmount SimpleBar", () => {
