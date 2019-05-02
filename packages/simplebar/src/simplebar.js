@@ -750,8 +750,8 @@ export default class SimpleBar {
 
     this.el.classList.add(this.classNames.dragging);
 
-    document.addEventListener('mousemove', this.drag);
-    document.addEventListener('mouseup', this.onEndDrag);
+    document.addEventListener('mousemove', this.drag, true);
+    document.addEventListener('mouseup', this.onEndDrag, true);
   }
 
   /**
@@ -811,8 +811,8 @@ export default class SimpleBar {
 
     this.el.classList.remove(this.classNames.dragging);
 
-    document.removeEventListener('mousemove', this.drag);
-    document.removeEventListener('mouseup', this.onEndDrag);
+    document.removeEventListener('mousemove', this.drag, true);
+    document.removeEventListener('mouseup', this.onEndDrag, true);
   };
 
   /**
