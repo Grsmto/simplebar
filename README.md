@@ -161,29 +161,29 @@ Simply define in css `overflow-x: hidden` on your element.
 
 If later on you dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
 ```js
-const el = new SimpleBar(document.getElementById('myElement'));
-el.recalculate();
+const simpleBar = new SimpleBar(document.getElementById('myElement'));
+simpleBar.recalculate();
 ```
 
 ### Trigger programmatical scrolling
 If you want to access to the original scroll element, you can retrieve it via a getter:
 ```js
-const el = new SimpleBar(document.getElementById('myElement'));
-el.getScrollElement();
+const simpleBar = new SimpleBar(document.getElementById('myElement'));
+simpleBar.getScrollElement();
 ```
 
 ### Subscribe to `scroll` event
 You can subscribe to the `scroll` event, just like you do with native scrolling elements:
 ```js
-const el = new SimpleBar(document.getElementById('myElement'));
-el.getScrollElement().addEventListener('scroll', function(...));
+const simpleBar = new SimpleBar(document.getElementById('myElement'));
+simpleBar.getScrollElement().addEventListener('scroll', function(...));
 ```
 
 ### Add content dynamically
 You can retrieve the element containing data like this:
 ```js
-const el = new SimpleBar(document.getElementById('myElement'));
-el.getContentElement();
+const simpleBar = new SimpleBar(document.getElementById('myElement'));
+simpleBar.getContentElement();
 ```
 
 ### Disable Mutation Observer
