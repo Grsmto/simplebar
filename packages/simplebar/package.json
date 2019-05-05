@@ -4,7 +4,8 @@
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "author": "Adrien Denat from a fork by Jonathan Nicol",
   "repository": "grsmto/simplebar",
