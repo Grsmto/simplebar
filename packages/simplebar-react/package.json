@@ -15,7 +15,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "jest"
+    "test": "jest",
+    "version": "yarn build"
   },
   "dependencies": {
     "prop-types": "^15.6.1",

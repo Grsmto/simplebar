@@ -14,7 +14,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "version": "yarn build"
   },
   "dependencies": {
     "simplebar": "^4.0.0-alpha.8"
