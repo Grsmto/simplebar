@@ -6,7 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "test": "yarn build && lerna run test",
-    "postversion": "lerna run build",
+    "prepublishOnly": "yarn build",
     "release": "yarn test && lerna publish",
     "start": "lerna exec --scope=simplebar yarn start",
     "dev": "lerna exec --scope=simplebar yarn dev"
