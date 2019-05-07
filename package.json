@@ -5,9 +5,9 @@
   ],
   "scripts": {
     "build": "lerna run build",
-    "test": "lerna run test",
+    "test": "yarn build && lerna run test",
     "postversion": "lerna run build",
-    "release": "lerna run test && lerna publish",
+    "release": "yarn test && lerna publish",
     "start": "lerna exec --scope=simplebar yarn start",
     "dev": "lerna exec --scope=simplebar yarn dev"
   },
