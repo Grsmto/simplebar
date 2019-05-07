@@ -1,0 +1,14 @@
+{
+  "functionalSuites": "**/*.test.func.js",
+  "serverPort": 8091,
+  "capabilities": {
+    "browserstack.local": true,
+    "fixSessionCapabilities": false
+  },
+  "environments": [{ "browser": "Chrome" }],
+  "tunnel": "browserstack",
+  "tunnelOptions": {
+    "username": "adriengrsmto",
+    "accessKey": "3NvAvwHEzKjRQPJDG9LG"
+  }
+}

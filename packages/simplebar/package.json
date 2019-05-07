@@ -21,7 +21,7 @@
     "dev": "rollup -c -w",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
-    "test:e2e": "jest -c jest-e2e.config.js"
+    "test:e2e": "yarn start --port 8091 & intern"
   },
   "dependencies": {
     "can-use-dom": "^0.1.0",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
+    "intern": "^4.4.2",
     "minify": "^3.0.5",
     "promise": "^8.0.2",
     "react-select": "^1.2.1",
