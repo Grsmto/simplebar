@@ -52,6 +52,7 @@ export default class SimpleBar {
         scrollbar: {}
       }
     };
+    this.removePreventClickId = null;
 
     // Don't re-instantiate over an existing one
     if (this.el.SimpleBar) {
@@ -752,6 +753,13 @@ export default class SimpleBar {
 
     document.addEventListener('mousemove', this.drag, true);
     document.addEventListener('mouseup', this.onEndDrag, true);
+    if (this.removePreventClickId === null) {
+      document.addEventListener('click', this.preventClick, true);
+      document.addEventListener('dblclick', this.preventClick, true);
+    } else {
+      window.clearTimeout(this.removePreventClickId);
+      this.removePreventClickId = null;
+    }
   }
 
   /**
@@ -813,6 +821,21 @@ export default class SimpleBar {
 
     document.removeEventListener('mousemove', this.drag, true);
     document.removeEventListener('mouseup', this.onEndDrag, true);
+    this.removePreventClickId = window.setTimeout(() => {
+      // Remove these asynchronously so we still suppress click events
+      // generated simultaneously with mouseup.
+      document.removeEventListener('click', this.preventClick, true);
+      document.removeEventListener('dblclick', this.preventClick, true);
+      this.removePreventClickId = null;
+    });
+  };
+
+  /**
+   * Handler to ignore click events during drag
+   */
+  preventClick = e => {
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   /**
