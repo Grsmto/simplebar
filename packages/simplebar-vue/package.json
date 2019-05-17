@@ -6,7 +6,11 @@
     "dist"
   ],
   "author": "Piers Olenski",
-  "repository": "grsmto/simplebar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grsmto/simplebar.git",
+    "directory": "packages/simplebar-vue"
+  },
   "main": "dist/simplebar-vue.js",
   "module": "dist/simplebar-vue.esm.js",
   "bugs": "https://github.com/grsmto/simplebar/issues",
