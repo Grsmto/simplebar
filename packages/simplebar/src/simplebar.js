@@ -55,7 +55,7 @@ export default class SimpleBar {
     this.removePreventClickId = null;
 
     // Don't re-instantiate over an existing one
-    if (this.el.SimpleBar) {
+    if (SimpleBar.instances.has(this.el)) {
       return;
     }
 
@@ -148,13 +148,13 @@ export default class SimpleBar {
           Array.prototype.forEach.call(mutation.addedNodes, addedNode => {
             if (addedNode.nodeType === 1) {
               if (addedNode.hasAttribute('data-simplebar')) {
-                !addedNode.SimpleBar &&
+                !SimpleBar.instances.has(addedNode) &&
                   new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
               } else {
                 Array.prototype.forEach.call(
                   addedNode.querySelectorAll('[data-simplebar]'),
                   el => {
-                    !el.SimpleBar &&
+                    !SimpleBar.instances.has(el) &&
                       new SimpleBar(el, SimpleBar.getElOptions(el));
                   }
                 );
@@ -165,12 +165,14 @@ export default class SimpleBar {
           Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
             if (removedNode.nodeType === 1) {
               if (removedNode.hasAttribute('data-simplebar')) {
-                removedNode.SimpleBar && removedNode.SimpleBar.unMount();
+                SimpleBar.instances.has(removedNode) &&
+                  SimpleBar.instances.get(removedNode).unMount();
               } else {
                 Array.prototype.forEach.call(
                   removedNode.querySelectorAll('[data-simplebar]'),
                   el => {
-                    el.SimpleBar && el.SimpleBar.unMount();
+                    SimpleBar.instances.has(el) &&
+                      SimpleBar.instances.get(el).unMount();
                   }
                 );
               }
@@ -241,7 +243,8 @@ export default class SimpleBar {
     Array.prototype.forEach.call(
       document.querySelectorAll('[data-simplebar]'),
       el => {
-        if (!el.SimpleBar) new SimpleBar(el, SimpleBar.getElOptions(el));
+        if (!SimpleBar.instances.has(el))
+          new SimpleBar(el, SimpleBar.getElOptions(el));
       }
     );
   }
@@ -257,9 +260,11 @@ export default class SimpleBar {
     };
   }
 
+  static instances = new WeakMap();
+
   init() {
     // Save a reference to the instance, so we know this DOM node has already been instancied
-    this.el.SimpleBar = this;
+    SimpleBar.instances.set(this.el, this);
 
     // We stop here on server-side
     if (canUseDOM) {
@@ -890,7 +895,7 @@ export default class SimpleBar {
    */
   unMount() {
     this.removeListeners();
-    this.el.SimpleBar = null;
+    SimpleBar.instances.delete(this.el);
   }
 
   /**
