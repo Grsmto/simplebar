@@ -1,12 +1,16 @@
 {
   "name": "simplebar-vue",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.10",
   "description": "Vue component for SimpleBar",
   "files": [
     "dist"
   ],
   "author": "Piers Olenski",
-  "repository": "grsmto/simplebar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grsmto/simplebar.git",
+    "directory": "packages/simplebar-vue"
+  },
   "main": "dist/simplebar-vue.js",
   "module": "dist/simplebar-vue.esm.js",
   "bugs": "https://github.com/grsmto/simplebar/issues",
@@ -15,10 +19,10 @@
   "scripts": {
     "build": "rollup -c",
     "test": "vue-cli-service test:unit",
-    "prepublishOnly": "yarn run build"
+    "version": "yarn build"
   },
   "dependencies": {
-    "simplebar": "^4.0.0-alpha.7"
+    "simplebar": "^4.0.0-alpha.9"
   },
   "peerDependencies": {
     "vue": "^2.5.17"

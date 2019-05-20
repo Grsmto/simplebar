@@ -1,12 +1,16 @@
 {
   "name": "simplebar-react",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.9",
   "description": "React component for SimpleBar",
   "files": [
     "dist"
   ],
   "author": "Adrien Denat",
-  "repository": "grsmto/simplebar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grsmto/simplebar.git",
+    "directory": "packages/simplebar-react"
+  },
   "main": "dist/simplebar-react.js",
   "module": "dist/simplebar-react.esm.js",
   "bugs": "https://github.com/grsmto/simplebar/issues",
@@ -15,11 +19,12 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "jest"
+    "test": "jest",
+    "version": "yarn build"
   },
   "dependencies": {
     "prop-types": "^15.6.1",
-    "simplebar": "^4.0.0-alpha.7"
+    "simplebar": "^4.0.0-alpha.9"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
