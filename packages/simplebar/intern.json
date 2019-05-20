@@ -8,7 +8,6 @@
   "environments": [{ "browser": "Chrome" }],
   "tunnel": "browserstack",
   "tunnelOptions": {
-    "username": "adriengrsmto",
-    "accessKey": "3NvAvwHEzKjRQPJDG9LG"
+    "username": "adriengrsmto"
   }
 }
