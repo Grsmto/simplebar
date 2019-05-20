@@ -1,11 +1,10 @@
 import React from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import ReactSimpleBar from 'simplebar-react';
 import SimpleBar from 'simplebar';
 
 import Playground from 'simplebar/demo/Playground';
 
-import 'react-select/dist/react-select.css';
 import 'simplebar/src/simplebar.css';
 
 import './browser/css/demo.css';
@@ -18,11 +17,15 @@ if (typeof Promise === 'undefined') {
   window.Promise = require('promise/lib/es6-extensions.js');
 }
 
-function menuRenderer(params) {
-  // use default renderer in a hacky way
-  const menu = Select.defaultProps.menuRenderer(params);
-
-  return <ReactSimpleBar>{menu}</ReactSimpleBar>;
+function MenuList({ children, ...otherProps }) {
+  console.log(otherProps);
+  return (
+    <ReactSimpleBar style={{ maxHeight: 300 }}>
+      <components.MenuList {...otherProps} maxHeight="none">
+        {children}
+      </components.MenuList>
+    </ReactSimpleBar>
+  );
 }
 
 class Demo extends React.Component {
@@ -106,7 +109,9 @@ class Demo extends React.Component {
           <div className="col">
             <h2>React-Select</h2>
             <Select
-              menuRenderer={menuRenderer}
+              components={{
+                MenuList
+              }}
               options={[...Array(50)].map((x, i) => ({
                 value: i,
                 label: i
