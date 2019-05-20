@@ -18,7 +18,6 @@ if (typeof Promise === 'undefined') {
 }
 
 function MenuList({ children, ...otherProps }) {
-  console.log(otherProps);
   return (
     <ReactSimpleBar style={{ maxHeight: 300 }}>
       <components.MenuList {...otherProps} maxHeight="none">
