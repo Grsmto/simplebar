@@ -1,32 +1,51 @@
-import React from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import 'simplebar';
+import SimpleBarJS from 'simplebar';
 
 export default function SimpleBar({
   children,
+  className,
   scrollableNodeProps,
   ...options
 }) {
+  const elRef = useRef();
+  const scrollableNodeRef = useRef();
+  const contentNodeRef = useRef();
+
+  useEffect(() => {
+    new SimpleBarJS(elRef.current, {
+      ...options,
+      ...(scrollableNodeRef.current && {
+        scrollableNode: scrollableNodeRef.current
+      }),
+      ...(contentNodeRef.current && {
+        contentNode: contentNodeRef.current
+      })
+    });
+  });
+
   return (
-    <div data-simplebar {...options}>
+    <div ref={elRef} className={className}>
       <div className="simplebar-wrapper">
         <div className="simplebar-height-auto-observer-wrapper">
           <div className="simplebar-height-auto-observer" />
         </div>
         <div className="simplebar-mask">
           <div className="simplebar-offset">
-            <div className="simplebar-content-wrapper">
+            {typeof children === 'function' ? (
+              children({ scrollableNodeRef, contentNodeRef })
+            ) : (
               <div
                 {...scrollableNodeProps}
-                className={`simplebar-content${
+                className={`simplebar-content-wrapper${
                   scrollableNodeProps && scrollableNodeProps.className
                     ? ` ${scrollableNodeProps.className}`
                     : ''
                 }`}
               >
-                {children}
+                <div className="simplebar-content">{children}</div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         <div className="simplebar-placeholder" />
@@ -42,5 +61,5 @@ export default function SimpleBar({
 }
 
 SimpleBar.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 };

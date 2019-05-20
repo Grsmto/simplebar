@@ -1,11 +1,11 @@
 import React from 'react';
 import Select from 'react-select';
+import { FixedSizeList as List } from 'react-window';
 import ReactSimpleBar from 'simplebar-react';
 import SimpleBar from 'simplebar';
 
 import Playground from 'simplebar/demo/Playground';
 
-import 'react-select/dist/react-select.css';
 import 'simplebar/src/simplebar.css';
 
 import './browser/css/demo.css';
@@ -254,6 +254,22 @@ class Demo extends React.Component {
                 ))}
               </div>
             </div>
+          </div>
+          <div className="col">
+            <h2>SimpleBar-React + React-Window</h2>
+            <ReactSimpleBar className="demo1">
+              {({ scrollableNodeRef, contentNodeRef }) => (
+                <List
+                  height={300}
+                  itemCount={1000}
+                  itemSize={35}
+                  outerRef={scrollableNodeRef}
+                  innerRef={contentNodeRef}
+                >
+                  {({ index, style }) => <div style={style}>Row {index}</div>}
+                </List>
+              )}
+            </ReactSimpleBar>
           </div>
         </section>
       </section>

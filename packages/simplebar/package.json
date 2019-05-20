@@ -42,7 +42,8 @@
     "intern": "^4.4.2",
     "minify": "^3.0.5",
     "promise": "^8.0.2",
-    "react-select": "^1.2.1",
+    "react-select": "^2.4.3",
+    "react-window": "^1.8.1",
     "style-loader": "^0.21.0"
   }
 }

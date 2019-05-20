@@ -287,12 +287,15 @@ export default class SimpleBar {
     ) {
       // assume that element has his DOM already initiated
       this.wrapperEl = this.el.querySelector(`.${this.classNames.wrapper}`);
-      this.contentWrapperEl = this.el.querySelector(
-        `.${this.classNames.contentWrapper}`
-      );
+      this.contentWrapperEl =
+        this.options.scrollableNode ||
+        this.el.querySelector(`.${this.classNames.contentWrapper}`);
+      this.contentEl =
+        this.options.contentNode ||
+        this.el.querySelector(`.${this.classNames.contentEl}`);
       this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
       this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
-      this.contentEl = this.el.querySelector(`.${this.classNames.contentEl}`);
+
       this.placeholderEl = this.el.querySelector(
         `.${this.classNames.placeholder}`
       );
