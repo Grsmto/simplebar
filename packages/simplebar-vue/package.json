@@ -22,19 +22,20 @@
     "version": "yarn build"
   },
   "dependencies": {
-    "core-js": "^2.5.7",
+    "core-js": "^3.0.1",
     "simplebar": "^4.0.0"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@vue/babel-preset-app": "^4.0.0-alpha.1",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-unit-jest": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
     "@vue/test-utils": "^1.0.0-beta.29",
-    "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
     "rollup-plugin-vue": "4.3.2",
     "vue": "^2.5.22",
