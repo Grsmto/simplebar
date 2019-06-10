@@ -22,6 +22,7 @@
     "version": "yarn build"
   },
   "dependencies": {
+    "core-js": "^2.5.7",
     "simplebar": "^4.0.0"
   },
   "peerDependencies": {
