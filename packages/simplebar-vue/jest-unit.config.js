@@ -4,5 +4,6 @@ module.exports = {
     '^.+\\.vue$': 'vue-jest'
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
-  moduleFileExtensions: ['js']
+  moduleFileExtensions: ['js'],
+  snapshotSerializers: ['jest-serializer-vue']
 };

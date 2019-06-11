@@ -1,110 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`simplebar renders with options 1`] = `
-<div
-  data-simplebar=""
-  data-simplebar-auto-hide="false"
->
-  <div
-    class="simplebar-wrapper"
-  >
-    <div
-      class="simplebar-height-auto-observer-wrapper"
-    >
-      <div
-        class="simplebar-height-auto-observer"
-      />
+<div data-simplebar="" data-simplebar-auto-hide="false">
+  <div class="simplebar-wrapper">
+    <div class="simplebar-height-auto-observer-wrapper">
+      <div class="simplebar-height-auto-observer"></div>
     </div>
-     
-    <div
-      class="simplebar-mask"
-    >
-      <div
-        class="simplebar-offset"
-      >
-        <div
-          class="simplebar-content-wrapper"
-        >
-          <div
-            class="simplebar-content"
-          />
+    <div class="simplebar-mask">
+      <div class="simplebar-offset">
+        <div class="simplebar-content-wrapper">
+          <div class="simplebar-content"></div>
         </div>
       </div>
     </div>
-     
-    <div
-      class="simplebar-placeholder"
-    />
+    <div class="simplebar-placeholder"></div>
   </div>
-   
-  <div
-    class="simplebar-track simplebar-horizontal"
-  >
-    <div
-      class="simplebar-scrollbar"
-    />
+  <div class="simplebar-track simplebar-horizontal">
+    <div class="simplebar-scrollbar"></div>
   </div>
-   
-  <div
-    class="simplebar-track simplebar-vertical"
-  >
-    <div
-      class="simplebar-scrollbar"
-    />
+  <div class="simplebar-track simplebar-vertical">
+    <div class="simplebar-scrollbar"></div>
   </div>
 </div>
 `;
 
 exports[`simplebar renders without crashing 1`] = `
-<div
-  data-simplebar=""
->
-  <div
-    class="simplebar-wrapper"
-  >
-    <div
-      class="simplebar-height-auto-observer-wrapper"
-    >
-      <div
-        class="simplebar-height-auto-observer"
-      />
+<div data-simplebar="">
+  <div class="simplebar-wrapper">
+    <div class="simplebar-height-auto-observer-wrapper">
+      <div class="simplebar-height-auto-observer"></div>
     </div>
-     
-    <div
-      class="simplebar-mask"
-    >
-      <div
-        class="simplebar-offset"
-      >
-        <div
-          class="simplebar-content-wrapper"
-        >
-          <div
-            class="simplebar-content"
-          />
+    <div class="simplebar-mask">
+      <div class="simplebar-offset">
+        <div class="simplebar-content-wrapper">
+          <div class="simplebar-content"></div>
         </div>
       </div>
     </div>
-     
-    <div
-      class="simplebar-placeholder"
-    />
+    <div class="simplebar-placeholder"></div>
   </div>
-   
-  <div
-    class="simplebar-track simplebar-horizontal"
-  >
-    <div
-      class="simplebar-scrollbar"
-    />
+  <div class="simplebar-track simplebar-horizontal">
+    <div class="simplebar-scrollbar"></div>
   </div>
-   
-  <div
-    class="simplebar-track simplebar-vertical"
-  >
-    <div
-      class="simplebar-scrollbar"
-    />
+  <div class="simplebar-track simplebar-vertical">
+    <div class="simplebar-scrollbar"></div>
   </div>
 </div>
 `;

@@ -4,13 +4,13 @@ import simplebar from './index.vue';
 describe('simplebar', () => {
   it('renders without crashing', () => {
     const wrapper = shallowMount(simplebar);
-    expect(wrapper.element).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with options', () => {
     const wrapper = shallowMount(simplebar, {
       propsData: { 'data-simplebar-auto-hide': 'false' }
     });
-    expect(wrapper.element).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });
