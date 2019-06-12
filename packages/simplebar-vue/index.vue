@@ -1,6 +1,6 @@
 <template>
   <div
-    data-simplebar
+    ref="element"
   >
     <div class="simplebar-wrapper">
         <div class="simplebar-height-auto-observer-wrapper">
@@ -27,8 +27,24 @@
 </template>
 
 <script>
-import 'simplebar';
+import SimpleBar from 'simplebar';
+
 export default {
-  name: 'simplebar-vue'
+  name: 'simplebar-vue',
+  props: {
+    options: {
+      type: Object,
+      required: false
+    }
+  },
+  data () {
+    return {
+      instance: null
+    }
+  },
+  mounted () {
+    const options = this.options || SimpleBar.getElOptions(this.$refs.element)
+    this.instance = new SimpleBar(this.$refs.element, options)
+  }
 }
 </script>
