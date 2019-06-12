@@ -13,4 +13,13 @@ describe('simplebar', () => {
     });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders with default slot', () => {
+    const wrapper = shallowMount(simplebar, {
+      slots: {
+        default: '<div class="inner-content" />'
+      }
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
 });
