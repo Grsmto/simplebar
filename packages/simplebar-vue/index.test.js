@@ -1,8 +1,7 @@
-import { shallowMount } from '@vue/test-utils'
-import simplebar from './index.vue'
+import { shallowMount } from '@vue/test-utils';
+import simplebar from './index.vue';
 
 describe('simplebar', () => {
-
   it('renders without crashing', () => {
     const wrapper = shallowMount(simplebar);
     expect(wrapper).toMatchSnapshot();
@@ -14,5 +13,4 @@ describe('simplebar', () => {
     });
     expect(wrapper).toMatchSnapshot();
   });
-
 });
