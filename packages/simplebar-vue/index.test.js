@@ -61,15 +61,4 @@ describe('simplebar', () => {
     });
     expect(wrapper.vm.SimpleBar.options.autoHide).toEqual(false);
   });
-
-  it('works with options as prop', () => {
-    const wrapper = shallowMount(simplebar, {
-      propsData: {
-        options: {
-          autoHide: false
-        }
-      }
-    });
-    expect(wrapper.vm.SimpleBar.options.autoHide).toEqual(false);
-  });
 });

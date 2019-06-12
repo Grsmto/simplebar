@@ -31,19 +31,13 @@ import SimpleBar from 'simplebar';
 
 export default {
   name: 'simplebar-vue',
-  props: {
-    options: {
-      type: Object,
-      required: false
-    }
-  },
   data () {
     return {
       instance: null
     }
   },
   mounted () {
-    const options = this.options || SimpleBar.getElOptions(this.$refs.element)
+    const options = SimpleBar.getElOptions(this.$refs.element)
     this.instance = new SimpleBar(this.$refs.element, options)
   },
   methods: {
