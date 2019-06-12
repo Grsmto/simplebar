@@ -31,29 +31,19 @@ import SimpleBar from 'simplebar';
 
 export default {
   name: 'simplebar-vue',
-  data () {
-    return {
-      instance: null
-    }
-  },
   mounted () {
     const options = SimpleBar.getElOptions(this.$refs.element)
-    this.instance = new SimpleBar(this.$refs.element, options)
+    this.SimpleBar = new SimpleBar(this.$refs.element, options)
   },
   methods: {
     getScrollElement () {
-      return this.instance.getScrollElement()
+      return this.SimpleBar.getScrollElement()
     },
     getContentElement () {
-      return this.instance.getContentElement()
+      return this.SimpleBar.getContentElement()
     },
     recalculate () {
-      return this.instance.recalculate()
-    }
-  },
-  computed: {
-    SimpleBar () {
-      return this.instance
+      return this.SimpleBar.recalculate()
     }
   }
 }
