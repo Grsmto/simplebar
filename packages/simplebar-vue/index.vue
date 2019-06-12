@@ -45,6 +45,22 @@ export default {
   mounted () {
     const options = this.options || SimpleBar.getElOptions(this.$refs.element)
     this.instance = new SimpleBar(this.$refs.element, options)
+  },
+  methods: {
+    getScrollElement () {
+      return this.instance.getScrollElement()
+    },
+    getContentElement () {
+      return this.instance.getContentElement()
+    },
+    recalculate () {
+      return this.instance.recalculate()
+    }
+  },
+  computed: {
+    SimpleBar () {
+      return this.instance
+    }
   }
 }
 </script>
