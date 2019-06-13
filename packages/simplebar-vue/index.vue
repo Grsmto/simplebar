@@ -1,6 +1,6 @@
 <template>
   <div
-    data-simplebar
+    ref="element"
   >
     <div class="simplebar-wrapper">
         <div class="simplebar-height-auto-observer-wrapper">
@@ -8,8 +8,8 @@
         </div>
         <div class="simplebar-mask">
           <div class="simplebar-offset">
-            <div class="simplebar-content-wrapper">
-              <div class="simplebar-content">
+            <div class="simplebar-content-wrapper" ref="scrollElement">
+              <div class="simplebar-content" ref="contentElement">
                 <slot></slot>
               </div>
             </div>
@@ -27,8 +27,21 @@
 </template>
 
 <script>
-import 'simplebar';
+import SimpleBar from 'simplebar';
+
 export default {
-  name: 'simplebar-vue'
+  name: 'simplebar-vue',
+  mounted () {
+    const options = SimpleBar.getElOptions(this.$refs.element);
+    this.SimpleBar = new SimpleBar(this.$refs.element, options);
+  },
+  computed: {
+    scrollElement () {
+      return this.$refs.scrollElement;
+    },
+    contentElement () {
+      return this.$refs.contentElement;
+    }
+  }
 }
 </script>
