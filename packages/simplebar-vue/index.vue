@@ -8,8 +8,8 @@
         </div>
         <div class="simplebar-mask">
           <div class="simplebar-offset">
-            <div class="simplebar-content-wrapper">
-              <div class="simplebar-content">
+            <div class="simplebar-content-wrapper" ref="scrollElement">
+              <div class="simplebar-content" ref="contentElement">
                 <slot></slot>
               </div>
             </div>
@@ -32,18 +32,15 @@ import SimpleBar from 'simplebar';
 export default {
   name: 'simplebar-vue',
   mounted () {
-    const options = SimpleBar.getElOptions(this.$refs.element)
-    this.SimpleBar = new SimpleBar(this.$refs.element, options)
+    const options = SimpleBar.getElOptions(this.$refs.element);
+    this.SimpleBar = new SimpleBar(this.$refs.element, options);
   },
-  methods: {
-    getScrollElement () {
-      return this.SimpleBar.getScrollElement()
+  computed: {
+    scrollElement () {
+      return this.$refs.scrollElement;
     },
-    getContentElement () {
-      return this.SimpleBar.getContentElement()
-    },
-    recalculate () {
-      return this.SimpleBar.recalculate()
+    contentElement () {
+      return this.$refs.contentElement;
     }
   }
 }

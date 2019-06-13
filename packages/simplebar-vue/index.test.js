@@ -29,30 +29,20 @@ describe('simplebar', () => {
     expect(wrapper.vm.SimpleBar).toBeDefined();
   });
 
-  it('can access getScrollElement method', () => {
+  it('can access scrollElement property', () => {
     const wrapper = shallowMount(simplebar);
-    const scrollElement = wrapper.vm.getScrollElement();
+    const scrollElement = wrapper.vm.scrollElement;
 
     expect(scrollElement).toEqual(
       wrapper.find('.simplebar-content-wrapper').element
     );
   });
 
-  it('can access getContentElement method', () => {
+  it('can access contentElement property', () => {
     const wrapper = shallowMount(simplebar);
-    const scrollElement = wrapper.vm.getContentElement();
+    const scrollElement = wrapper.vm.contentElement;
 
     expect(scrollElement).toEqual(wrapper.find('.simplebar-content').element);
-  });
-
-  it('can access recalculate method', () => {
-    const wrapper = shallowMount(simplebar);
-
-    const recalculateMock = jest.fn();
-    wrapper.vm.SimpleBar.recalculate = recalculateMock;
-    wrapper.vm.recalculate();
-
-    expect(recalculateMock).toBeCalled();
   });
 
   it('works with options as attribute', () => {
