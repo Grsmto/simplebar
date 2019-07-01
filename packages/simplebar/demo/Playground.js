@@ -1,6 +1,23 @@
 import React from 'react';
 import Select from 'react-select';
 
+const widthOptions = [
+  { value: 'auto', label: 'auto' },
+  { value: '100%', label: '100%' },
+  { value: '100px', label: '100px' }
+];
+
+const heightOptions = [
+  { value: 'auto', label: 'auto' },
+  { value: '100%', label: '100%' },
+  { value: '100px', label: '100px' }
+];
+
+const directionOptions = [
+  { value: 'ltr', label: 'LTR' },
+  { value: 'rtl', label: 'RTL' }
+];
+
 export default class Playground extends React.PureComponent {
   state = {
     height: '100%',
@@ -25,12 +42,10 @@ export default class Playground extends React.PureComponent {
                   width: option.value
                 })
               }
-              options={[
-                { value: 'auto', label: 'auto' },
-                { value: '100%', label: '100%' },
-                { value: '100px', label: '100px' }
-              ]}
-              value={this.state.width}
+              options={widthOptions}
+              value={widthOptions.find(
+                option => option.value === this.state.width
+              )}
             />
           </div>
         )}
@@ -43,12 +58,10 @@ export default class Playground extends React.PureComponent {
                   height: option.value
                 })
               }
-              options={[
-                { value: 'auto', label: 'auto' },
-                { value: '100%', label: '100%' },
-                { value: '100px', label: '100px' }
-              ]}
-              value={this.state.height}
+              options={heightOptions}
+              value={heightOptions.find(
+                option => option.value === this.state.height
+              )}
             />
           </div>
         )}
@@ -61,11 +74,10 @@ export default class Playground extends React.PureComponent {
                   direction: option.value
                 })
               }
-              options={[
-                { value: 'ltr', label: 'LTR' },
-                { value: 'rtl', label: 'RTL' }
-              ]}
-              value={this.state.direction}
+              options={directionOptions}
+              value={directionOptions.find(
+                option => option.value === this.state.direction
+              )}
             />
           </div>
         )}
