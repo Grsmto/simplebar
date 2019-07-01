@@ -1,9 +1,9 @@
-import scrollbarWidth from 'scrollbarwidth';
 import throttle from 'lodash.throttle';
 import debounce from 'lodash.debounce';
 import memoize from 'lodash.memoize';
 import ResizeObserver from 'resize-observer-polyfill';
 import canUseDOM from 'can-use-dom';
+import scrollbarWidth from './scrollbar-width';
 
 export default class SimpleBar {
   constructor(element, options) {
