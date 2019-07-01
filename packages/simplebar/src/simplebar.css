@@ -71,21 +71,21 @@
 }
 
 .simplebar-height-auto-observer-wrapper {
-    box-sizing: inherit !important;
-    height: 100%;
-    width: inherit;
-    max-width: 1px;
-    position: relative;
-    float: left;
-    max-height: 1px;
-    overflow: hidden;
-    z-index: -1;
-    padding: 0;
-    margin: 0;
-    pointer-events: none;
-    flex-grow: inherit;
-    flex-shrink: 0;
-    flex-basis: 0;
+  box-sizing: inherit !important;
+  height: 100%;
+  width: 100%;
+  max-width: 1px;
+  position: relative;
+  float: left;
+  max-height: 1px;
+  overflow: hidden;
+  z-index: -1;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  flex-grow: inherit;
+  flex-shrink: 0;
+  flex-basis: 0;
 }
 
 .simplebar-height-auto-observer {
