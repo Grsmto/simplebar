@@ -15,14 +15,14 @@ export default function SimpleBar({
         </div>
         <div className="simplebar-mask">
           <div className="simplebar-offset">
-            <div className="simplebar-content-wrapper">
+            <div {...scrollableNodeProps}
+                 className={`simplebar-content-wrapper${
+                   scrollableNodeProps && scrollableNodeProps.className
+                     ? ` ${scrollableNodeProps.className}`
+                     : ''
+                   }`}>
               <div
-                {...scrollableNodeProps}
-                className={`simplebar-content${
-                  scrollableNodeProps && scrollableNodeProps.className
-                    ? ` ${scrollableNodeProps.className}`
-                    : ''
-                }`}
+                className="simplebar-content"
               >
                 {children}
               </div>
