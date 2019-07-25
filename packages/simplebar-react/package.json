@@ -13,6 +13,7 @@
   },
   "main": "dist/simplebar-react.js",
   "module": "dist/simplebar-react.esm.js",
+  "types": "dist/simplebar-react.d.ts",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
@@ -31,7 +32,8 @@
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.3.2"
+    "react-test-renderer": "^16.3.2",
+    "rollup-plugin-copy": "^3.0.0"
   },
   "jest": {
     "transform": {
