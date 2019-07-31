@@ -297,10 +297,10 @@ export default class SimpleBar {
       this.heightAutoObserverEl = this.el.querySelector(
         `.${this.classNames.heightAutoObserverEl}`
       );
-      this.axis.x.track.el = this.el.querySelector(
+      this.axis.x.track.el = this.findChild(this.el,
         `.${this.classNames.track}.${this.classNames.horizontal}`
       );
-      this.axis.y.track.el = this.el.querySelector(
+      this.axis.y.track.el = this.findChild(this.el,
         `.${this.classNames.track}.${this.classNames.vertical}`
       );
     } else {
@@ -913,6 +913,15 @@ export default class SimpleBar {
       this.mouseY >= bbox.top &&
       this.mouseY <= bbox.top + bbox.height
     );
+  }
+
+  /**
+   * Find element children matches query
+   */
+  findChild(el, query) {
+    const matches = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
+	
+    return Array.prototype.filter.call(el.children, child => matches.call(child, query))[0];
   }
 }
 
