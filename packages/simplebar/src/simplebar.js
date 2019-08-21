@@ -866,7 +866,7 @@ export default class SimpleBar {
       'touchend',
       'touchmove'
     ].forEach(e => {
-      this.el.removeEventListener(e, this.onPointerEvent);
+      this.el.removeEventListener(e, this.onPointerEvent, true);
     });
 
     this.el.removeEventListener('mousemove', this.onMouseMove);
