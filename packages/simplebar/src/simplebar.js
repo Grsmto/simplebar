@@ -389,7 +389,10 @@ export default class SimpleBar {
       'touchend',
       'touchmove'
     ].forEach(e => {
-      this.el.addEventListener(e, this.onPointerEvent, { capture: true, passive: true });
+      this.el.addEventListener(e, this.onPointerEvent, {
+        capture: true,
+        passive: true
+      });
     });
     this.el.addEventListener('mousemove', this.onMouseMove);
     this.el.addEventListener('mouseleave', this.onMouseLeave);
@@ -866,7 +869,10 @@ export default class SimpleBar {
       'touchend',
       'touchmove'
     ].forEach(e => {
-      this.el.removeEventListener(e, this.onPointerEvent, true);
+      this.el.removeEventListener(e, this.onPointerEvent, {
+        capture: true,
+        passive: true
+      });
     });
 
     this.el.removeEventListener('mousemove', this.onMouseMove);
