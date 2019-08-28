@@ -95,6 +95,7 @@ class Demo extends React.Component {
               className={'demo4 demo-rtl'}
               style={{ width: '200px', direction: 'rtl' }}
               data-simplebar
+              data-simplebar-direction="rtl"
             >
               <div className="box">1</div>
               <div className="box">2</div>
