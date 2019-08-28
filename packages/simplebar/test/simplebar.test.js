@@ -4,7 +4,8 @@ beforeEach(() => {
   jest.resetModules();
 
   // Set up our document body
-  document.body.innerHTML = '<div id="simplebar" data-simplebar-auto-hide="true"></div>';
+  document.body.innerHTML =
+    '<div id="simplebar" data-simplebar-auto-hide="true"></div>';
 });
 
 test('should call constructor', () => {
@@ -30,29 +31,29 @@ test('should return the scroll element', () => {
   expect(scrollElement).toBe(simpleBar.contentWrapperEl);
 });
 
-test("should unmount SimpleBar", () => {
-  const simpleBar = new SimpleBar(document.getElementById("simplebar"));
+test('should unmount SimpleBar', () => {
+  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
   simpleBar.unMount();
 
   expect(simpleBar.el.SimpleBar).toBeNull();
 });
 
-test("should return the element options", () => {
+test('should return the element options', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
   expect(SimpleBar.getElOptions(simpleBar.el)).toEqual({ autoHide: true });
 });
 
-test("should know if element is a child node", () => {
-  const simpleBar = new SimpleBar(document.getElementById("simplebar"));
+test('should know if element is a child node', () => {
+  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
   expect(simpleBar.isChildNode(simpleBar.contentEl)).toBeTruthy();
   expect(simpleBar.isChildNode(document.body)).toBeFalsy();
 });
 
-test("mouse should be within bounds", () => {
-  const simpleBar = new SimpleBar(document.getElementById("simplebar"));
+test('mouse should be within bounds', () => {
+  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
   simpleBar.mouseX = 20;
   simpleBar.mouseY = 20;
@@ -65,8 +66,29 @@ test("mouse should be within bounds", () => {
     top: 10,
     width: 100,
     x: 10,
-    y: 10,
+    y: 10
   });
 
   expect(isWithinBounds).toBeTruthy();
+});
+
+test('onPointerEvent listener should be unsubscribed on unmount', () => {
+  const element = document.getElementById('simplebar');
+  const init = SimpleBar.prototype.init;
+
+  SimpleBar.prototype.init = () => {};
+
+  const simpleBar = new SimpleBar(element);
+
+  simpleBar.init = init;
+
+  jest.spyOn(simpleBar, 'onPointerEvent');
+
+  simpleBar.init();
+
+  simpleBar.unMount();
+
+  element.dispatchEvent(new MouseEvent('mousedown'));
+
+  expect(simpleBar.onPointerEvent).not.toHaveBeenCalled();
 });
