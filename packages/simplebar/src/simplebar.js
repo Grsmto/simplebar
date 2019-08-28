@@ -429,9 +429,9 @@ export default class SimpleBar {
 
     // Set isOverflowing to false if scrollbar is not necessary (content is shorter than offset)
     this.axis.x.isOverflowing =
-      this.contentWrapperEl.scrollWidth > this.contentWrapperEl.clientWidth;
+      this.contentWrapperEl.scrollWidth > this.contentWrapperEl.offsetWidth;
     this.axis.y.isOverflowing =
-      this.contentWrapperEl.scrollHeight > this.contentWrapperEl.clientHeight;
+      this.contentWrapperEl.scrollHeight > this.contentWrapperEl.offsetHeight;
 
     // Set isOverflowing to false if user explicitely set hidden overflow
     this.axis.x.isOverflowing =
