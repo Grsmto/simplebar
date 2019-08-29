@@ -29,6 +29,7 @@ export default class SimpleBar {
         scrollOffsetAttr: 'scrollLeft',
         sizeAttr: 'width',
         scrollSizeAttr: 'scrollWidth',
+        offsetSizeAttr: 'offsetWidth',
         offsetAttr: 'left',
         overflowAttr: 'overflowX',
         dragOffset: 0,
@@ -42,6 +43,7 @@ export default class SimpleBar {
         scrollOffsetAttr: 'scrollTop',
         sizeAttr: 'height',
         scrollSizeAttr: 'scrollHeight',
+        offsetSizeAttr: 'offsetHeight',
         offsetAttr: 'top',
         overflowAttr: 'overflowY',
         dragOffset: 0,
@@ -430,11 +432,10 @@ export default class SimpleBar {
       : 'auto';
     this.placeholderEl.style.height = `${this.contentEl.scrollHeight}px`;
 
-    // Set isOverflowing to false if scrollbar is not necessary (content is shorter than offset)
     this.axis.x.isOverflowing =
-      this.contentWrapperEl.scrollWidth > this.contentWrapperEl.offsetWidth;
+      this.contentEl.scrollWidth > this.contentEl.offsetWidth;
     this.axis.y.isOverflowing =
-      this.contentWrapperEl.scrollHeight > this.contentWrapperEl.offsetHeight;
+      this.contentEl.scrollHeight > this.contentWrapperEl.offsetHeight;
 
     // Set isOverflowing to false if user explicitely set hidden overflow
     this.axis.x.isOverflowing =
@@ -448,6 +449,21 @@ export default class SimpleBar {
       this.options.forceVisible === 'y' || this.options.forceVisible === true;
 
     this.hideNativeScrollbar();
+
+    // Set isOverflowing to false if scrollbar is not necessary (content is shorter than offset)
+    let offsetForXScrollbar = this.axis.x.isOverflowing
+      ? this.scrollbarWidth
+      : 0;
+    let offsetForYScrollbar = this.axis.y.isOverflowing
+      ? this.scrollbarWidth
+      : 0;
+
+    this.axis.x.isOverflowing =
+      this.contentEl.scrollWidth >
+      this.contentWrapperEl.offsetWidth - offsetForYScrollbar;
+    this.axis.y.isOverflowing =
+      this.contentEl.scrollHeight >
+      this.contentWrapperEl.offsetHeight - offsetForXScrollbar;
 
     this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
     this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
@@ -469,11 +485,8 @@ export default class SimpleBar {
    * Calculate scrollbar size
    */
   getScrollbarSize(axis = 'y') {
-    const contentSize = this.scrollbarWidth
-      ? this.contentWrapperEl[this.axis[axis].scrollSizeAttr]
-      : this.contentWrapperEl[this.axis[axis].scrollSizeAttr] -
-        this.minScrollbarWidth;
-    const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
+    const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
+    const trackSize = this.axis[axis].track.el[this.axis[axis].offsetSizeAttr];
     let scrollbarSize;
 
     if (!this.axis[axis].isOverflowing) {
@@ -497,7 +510,7 @@ export default class SimpleBar {
 
   positionScrollbar(axis = 'y') {
     const contentSize = this.contentWrapperEl[this.axis[axis].scrollSizeAttr];
-    const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
+    const trackSize = this.axis[axis].track.el[this.axis[axis].offsetSizeAttr];
     const hostSize = parseInt(this.elStyles[this.axis[axis].sizeAttr], 10);
     const scrollbar = this.axis[axis].scrollbar;
 
@@ -547,25 +560,12 @@ export default class SimpleBar {
   hideNativeScrollbar() {
     this.offsetEl.style[this.isRtl ? 'left' : 'right'] =
       this.axis.y.isOverflowing || this.axis.y.forceVisible
-        ? `-${this.scrollbarWidth || this.minScrollbarWidth}px`
+        ? `-${this.scrollbarWidth}px`
         : 0;
     this.offsetEl.style.bottom =
       this.axis.x.isOverflowing || this.axis.x.forceVisible
-        ? `-${this.scrollbarWidth || this.minScrollbarWidth}px`
+        ? `-${this.scrollbarWidth}px`
         : 0;
-
-    // If floating scrollbar
-    if (!this.scrollbarWidth) {
-      const paddingDirection = [this.isRtl ? 'paddingLeft' : 'paddingRight'];
-      this.contentWrapperEl.style[paddingDirection] =
-        this.axis.y.isOverflowing || this.axis.y.forceVisible
-          ? `${this.minScrollbarWidth}px`
-          : 0;
-      this.contentWrapperEl.style.paddingBottom =
-        this.axis.x.isOverflowing || this.axis.x.forceVisible
-          ? `${this.minScrollbarWidth}px`
-          : 0;
-    }
   }
 
   /**
