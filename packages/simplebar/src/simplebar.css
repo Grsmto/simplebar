@@ -115,6 +115,8 @@
 
 [data-simplebar].simplebar-dragging .simplebar-content {
   pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 [data-simplebar].simplebar-dragging .simplebar-track {
