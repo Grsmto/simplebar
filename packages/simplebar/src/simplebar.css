@@ -113,6 +113,10 @@
   overflow: hidden;
 }
 
+[data-simplebar].simplebar-dragging .simplebar-content {
+  pointer-events: none;
+}
+
 [data-simplebar].simplebar-dragging .simplebar-track {
   pointer-events: all;
 }
