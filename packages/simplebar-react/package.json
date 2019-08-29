@@ -4,7 +4,7 @@
   "description": "React component for SimpleBar",
   "files": [
     "dist",
-    "README.md"
+    "../../README.md"
   ],
   "author": "Adrien Denat",
   "repository": {

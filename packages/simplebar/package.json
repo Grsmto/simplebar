@@ -6,7 +6,7 @@
   "files": [
     "dist",
     "src",
-    "README.md"
+    "../../README.md"
   ],
   "author": "Adrien Denat from a fork by Jonathan Nicol",
   "repository": {

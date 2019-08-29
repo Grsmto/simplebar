@@ -4,7 +4,7 @@
   "description": "Vue component for SimpleBar",
   "files": [
     "dist",
-    "README.md"
+    "../../README.md"
   ],
   "author": "Piers Olenski",
   "repository": {
