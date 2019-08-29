@@ -404,7 +404,15 @@ export default class SimpleBar {
     // Browser zoom triggers a window resize
     window.addEventListener('resize', this.onWindowResize);
 
-    this.resizeObserver = new ResizeObserver(this.recalculate);
+    // Hack for https://github.com/WICG/ResizeObserver/issues/38
+    let ignoredCallbacks = 0;
+
+    this.resizeObserver = new ResizeObserver(() => {
+      if (ignoredCallbacks < 2) return;
+      this.recalculate();
+      ignoredCallbacks++;
+    });
+
     this.resizeObserver.observe(this.el);
     this.resizeObserver.observe(this.contentEl);
   }
