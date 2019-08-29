@@ -5,7 +5,8 @@
   "description": "Scrollbars, simpler.",
   "files": [
     "dist",
-    "src"
+    "src",
+    "README.md"
   ],
   "author": "Adrien Denat from a fork by Jonathan Nicol",
   "repository": {
