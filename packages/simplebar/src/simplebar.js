@@ -919,9 +919,7 @@ export default class SimpleBar {
    * Find element children matches query
    */
   findChild(el, query) {
-    const matches = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
-	
-    return Array.prototype.filter.call(el.children, child => matches.call(child, query))[0];
+    return Array.prototype.filter.call(el.children, child => child.matches(query))[0];
   }
 }
 
