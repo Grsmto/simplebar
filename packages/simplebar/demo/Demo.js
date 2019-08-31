@@ -52,7 +52,9 @@ class Demo extends React.Component {
               <h3 className="sticky">Sticky header</h3>
               {[...Array(50)].map((x, i) => (
                 <p key={i} className="odd">
-                  Some content
+                  Some content Some content Some content Some content Some
+                  content Some content
+                  <button>click</button>
                 </p>
               ))}
             </div>

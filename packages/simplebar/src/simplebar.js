@@ -381,19 +381,17 @@ export default class SimpleBar {
       this.el.addEventListener('mouseenter', this.onMouseEnter);
     }
 
-    [
-      'mousedown',
-      'click',
-      'dblclick',
-      'touchstart',
-      'touchend',
-      'touchmove'
-    ].forEach(e => {
+    ['mousedown', 'click', 'dblclick'].forEach(e => {
+      this.el.addEventListener(e, this.onPointerEvent, true);
+    });
+
+    ['touchstart', 'touchend', 'touchmove'].forEach(e => {
       this.el.addEventListener(e, this.onPointerEvent, {
         capture: true,
         passive: true
       });
     });
+
     this.el.addEventListener('mousemove', this.onMouseMove);
     this.el.addEventListener('mouseleave', this.onMouseLeave);
 
@@ -861,14 +859,11 @@ export default class SimpleBar {
       this.el.removeEventListener('mouseenter', this.onMouseEnter);
     }
 
-    [
-      'mousedown',
-      'click',
-      'dblclick',
-      'touchstart',
-      'touchend',
-      'touchmove'
-    ].forEach(e => {
+    ['mousedown', 'click', 'dblclick'].forEach(e => {
+      this.el.removeEventListener(e, this.onPointerEvent, true);
+    });
+
+    ['touchstart', 'touchend', 'touchmove'].forEach(e => {
       this.el.removeEventListener(e, this.onPointerEvent, {
         capture: true,
         passive: true

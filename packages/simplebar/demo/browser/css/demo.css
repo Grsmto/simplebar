@@ -20,7 +20,7 @@ body {
 }
 
 section:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -62,40 +62,45 @@ p {
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  }
-  .btn:hover {
-    background: #666;
-    color: #fff;
-    }
-  .btn:visited {
-    color: #fff;
-    }
+}
+.btn:hover {
+  background: #666;
+  color: #fff;
+}
+.btn:visited {
+  color: #fff;
+}
 
 /* Scrollable elements
 *****************************************************************/
-.demo1, .demo3 {
+.demo1,
+.demo3 {
   margin: 10px 0;
   width: 100%;
   height: 300px;
 }
-  .demo1 p {
-    margin: 0;
-    padding: 10px;
-    min-width: 230px;
-    }
-    .demo1 p.odd:hover {
-      background: #666;
-      height: 100px;
-    }
-    .demo1 p.odd {
-      background: #f0f0f0;
-      }
-  .demo1.width {
-    width: 230px;
-  }
-  .demo1.height {
-    height: 200px;
-  }
+.demo1 p {
+  margin: 0;
+  padding: 10px;
+  min-width: 230px;
+}
+.demo1 p.odd:hover {
+  background: #666;
+  height: 100px;
+}
+.demo1 p.odd {
+  background: #f0f0f0;
+}
+.demo1.width {
+  width: 230px;
+}
+.demo1.height {
+  height: 200px;
+}
+#demo1 p {
+  text-align: right;
+  padding: 0;
+}
 .demo1-internal {
   width: 50%;
   height: 300px;
@@ -107,16 +112,16 @@ p {
   padding: 10px;
   white-space: nowrap;
   overflow: auto;
-  }
-    .demo4 .box {
-      display: inline-block;
-      /* margin-right: 10px; */
-      width: 100px;
-      height: 150px;
-      text-align: center;
-      line-height: 150px;
-      font-size: 24px;
-      }
+}
+.demo4 .box {
+  display: inline-block;
+  /* margin-right: 10px; */
+  width: 100px;
+  height: 150px;
+  text-align: center;
+  line-height: 150px;
+  font-size: 24px;
+}
 .demo-raw {
   margin: 10px 0;
   width: 250px;
