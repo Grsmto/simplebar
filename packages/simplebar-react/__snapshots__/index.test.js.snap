@@ -89,11 +89,11 @@ exports[`renders with scrollableNodeProps 1`] = `
         className="simplebar-offset"
       >
         <div
-          className="simplebar-content-wrapper"
+          className="simplebar-content-wrapper test"
+          data-test="test"
         >
           <div
-            className="simplebar-content test"
-            data-test="test"
+            className="simplebar-content"
           >
             <p>
               Some content

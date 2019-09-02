@@ -50,7 +50,9 @@ class Demo extends React.Component {
               <h3 className="sticky">Sticky header</h3>
               {[...Array(50)].map((x, i) => (
                 <p key={i} className="odd">
-                  Some content
+                  Some content Some content Some content Some content Some
+                  content Some content
+                  <button>click</button>
                 </p>
               ))}
             </div>
@@ -93,6 +95,7 @@ class Demo extends React.Component {
               className={'demo4 demo-rtl'}
               style={{ width: '200px', direction: 'rtl' }}
               data-simplebar
+              data-simplebar-direction="rtl"
             >
               <div className="box">1</div>
               <div className="box">2</div>

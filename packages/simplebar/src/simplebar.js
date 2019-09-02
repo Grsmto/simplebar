@@ -1,9 +1,9 @@
-import scrollbarWidth from 'scrollbarwidth';
 import throttle from 'lodash.throttle';
 import debounce from 'lodash.debounce';
 import memoize from 'lodash.memoize';
 import ResizeObserver from 'resize-observer-polyfill';
 import canUseDOM from 'can-use-dom';
+import scrollbarWidth from './scrollbar-width';
 
 export default class SimpleBar {
   constructor(element, options) {
@@ -389,16 +389,17 @@ export default class SimpleBar {
       this.el.addEventListener('mouseenter', this.onMouseEnter);
     }
 
-    [
-      'mousedown',
-      'click',
-      'dblclick',
-      'touchstart',
-      'touchend',
-      'touchmove'
-    ].forEach(e => {
+    ['mousedown', 'click', 'dblclick'].forEach(e => {
       this.el.addEventListener(e, this.onPointerEvent, true);
     });
+
+    ['touchstart', 'touchend', 'touchmove'].forEach(e => {
+      this.el.addEventListener(e, this.onPointerEvent, {
+        capture: true,
+        passive: true
+      });
+    });
+
     this.el.addEventListener('mousemove', this.onMouseMove);
     this.el.addEventListener('mouseleave', this.onMouseLeave);
 
@@ -866,15 +867,15 @@ export default class SimpleBar {
       this.el.removeEventListener('mouseenter', this.onMouseEnter);
     }
 
-    [
-      'mousedown',
-      'click',
-      'dblclick',
-      'touchstart',
-      'touchend',
-      'touchmove'
-    ].forEach(e => {
-      this.el.removeEventListener(e, this.onPointerEvent);
+    ['mousedown', 'click', 'dblclick'].forEach(e => {
+      this.el.removeEventListener(e, this.onPointerEvent, true);
+    });
+
+    ['touchstart', 'touchend', 'touchmove'].forEach(e => {
+      this.el.removeEventListener(e, this.onPointerEvent, {
+        capture: true,
+        passive: true
+      });
     });
 
     this.el.removeEventListener('mousemove', this.onMouseMove);

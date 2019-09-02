@@ -8,7 +8,7 @@ Before you ask a question, please make sure you've:
 
 ## ✨ Feature Requests
 
-SimpleBar's mission statement is to keep things simple, however if you have a suggestion that falls within this approach that hasn't already been proposed, we'd love to hear it!
+SimpleBar's mission statement is to keep things simple and stick to the native scroll behaviour as much as possible. However if you have a suggestion that falls within this approach that hasn't already been proposed, we'd love to hear it!
 
 ## 🐛 Bugs
 

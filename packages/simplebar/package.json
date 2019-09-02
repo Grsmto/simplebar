@@ -1,11 +1,12 @@
 {
-  "version": "4.0.0-alpha.9",
+  "version": "4.2.1",
   "name": "simplebar",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
   "files": [
     "dist",
-    "src"
+    "src",
+    "../../README.md"
   ],
   "author": "Adrien Denat from a fork by Jonathan Nicol",
   "repository": {
@@ -34,8 +35,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.memoize": "^4.1.2",
     "lodash.throttle": "^4.1.1",
-    "resize-observer-polyfill": "^1.5.1",
-    "scrollbarwidth": "^0.1.3"
+    "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
     "css-loader": "^0.28.11",

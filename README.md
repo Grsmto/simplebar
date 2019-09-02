@@ -1,6 +1,6 @@
 # SimpleBar [![npm package][npm-badge]][npm] ![size-badge]
 
-:warning: SimpleBar v4 is here! Check out [the changelog](https://github.com/Grsmto/simplebar/releases).
+:warning: SimpleBar v4 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/releases) before updating.
 
 SimpleBar is a plugin that tries to solve a long time problem: how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
@@ -9,7 +9,8 @@ SimpleBar is meant to be as easy to use as possible and lightweight. If you want
 
 ### Installation
 
-**- Choose your SimpleBar** 
+**- Choose your SimpleBar**
+
 - **For React** `yarn add simplebar-react`
 - **For Vue** `yarn add simplebar-vue`
 - **For others** `yarn add simplebar`
@@ -21,28 +22,37 @@ SimpleBar is meant to be as easy to use as possible and lightweight. If you want
 `yarn add simplebar`
 
 **- Via `<script>` tag**
+
 ```html
-<link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/simplebar@latest/dist/simplebar.css"
+/>
 <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 <!-- or -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"
+/>
 <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
 ```
+
 note: you should replace `@latest` to the latest version (ex `@2.4.3`), if you want to lock to a specific version.
 You can find the full list of modules available [there](https://unpkg.com/simplebar@latest/dist/).
-
 
 ### Usage
 
 Check out the [React](https://github.com/Grsmto/simplebar/blob/master/examples/react/src/App.js) and [Vue](https://github.com/Grsmto/simplebar/blob/master/examples/vue/src/App.vue) examples.
 
 If you are using a module loader (like Webpack) you first need to load SimpleBar:
+
 ```js
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
 ```
 
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
+
 ```html
 <div data-simplebar></div>
 ```
@@ -50,15 +60,18 @@ Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 **Don't forget to import both css and js in your project!**
 
 ### :warning: Warning!
+
 SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often badly affect the user experience (slower scroll performance compared to the native body scroll, no native scroll behaviours like click on track, etc.). Do it at your own risk! SimpleBar is meant to improve the experience of **internal web page scrolling**; such as a chat box or a small scrolling area. **Please read the [caveats](#5-caveats) section first to be aware of the limitations!**
 
 ### Troubleshooting
+
 If you are experiencing issues when setting up SimpleBar, it is most likely because your styles are clashing with SimpleBar ones. Make sure the element you are setting SimpleBar on does not override any SimpleBar css properties! **We recommend to not style that element at all and use an inner element instead.**
 
 ### Sponsors
+
 Thanks to BrowserStack for sponsoring open source projects and letting us test SimpleBar for free.
 <a href="https://www.browserstack.com" target="_blank">
-    <img src="https://user-images.githubusercontent.com/15015324/45184727-368fbf80-b1fe-11e8-8827-08dbc80b0fb1.png" width="200">
+<img src="https://user-images.githubusercontent.com/15015324/45184727-368fbf80-b1fe-11e8-8827-08dbc80b0fb1.png" width="200">
 </a>
 
 ---
@@ -68,45 +81,55 @@ Thanks to BrowserStack for sponsoring open source projects and letting us test S
 3. [Demo](#3-demo)
 4. [How it works](#4-how-it-works)
 5. [Caveats](#5-caveats)
-5. [Changelog](#6-changelog)
-6. [Credits](#7-credits)
+6. [Changelog](#6-changelog)
+7. [Credits](#7-credits)
 
 ## 1. Documentation
 
 ### Other usages
+
 You can start SimpleBar manually if you need to:
+
 ```js
 new SimpleBar(document.getElementById('myElement'));
 ```
 
 or
+
 ```js
-Array.prototype.forEach.call(document.querySelectorAll('.myElements'), el => new SimpleBar);
+Array.prototype.forEach.call(
+  document.querySelectorAll('.myElements'),
+  el => new SimpleBar()
+);
 ```
 
 If you want to use jQuery:
- ```js
+
+```js
 new SimpleBar($('#myElement')[0]);
 ```
 
 or
+
 ```js
-$('.myElements').each(element, new SimpleBar);
+$('.myElements').each(element, new SimpleBar());
 ```
 
 ### Options
 
 Options can be applied to the plugin during initialization:
+
 ```js
 new SimpleBar(document.getElementById('myElement'), {
-    option1: value1,
-    option2: value2
+  option1: value1,
+  option2: value2
 });
 ```
 
 or using data-attributes:
+
 ```html
-<div data-simplebar data-simplebar-auto-hide="false">
+<div data-simplebar data-simplebar-auto-hide="false"></div>
 ```
 
 Available options are:
@@ -114,6 +137,7 @@ Available options are:
 #### autoHide
 
 By default SimpleBar automatically hides the scrollbar if the user is not scrolling (it emulates Mac OSX Lion's scrollbar). You can make the scrollbar always visible by setting the `autoHide` option to `false`:
+
 ```js
 new SimpleBar(document.getElementById('myElement'), { autoHide: false });
 ```
@@ -123,6 +147,7 @@ Default value is `true`.
 You can also control the animation via CSS as it's a simple CSS opacity transition.
 
 #### scrollbarMinSize
+
 Define the minimum scrollbar size in pixels.
 
 Default value is `10`.
@@ -147,46 +172,69 @@ classNames: {
 ```
 
 #### forceVisible
+
 You can force the track to be visible (same behaviour as `overflow: scroll`) using the `forceVisible` option:
+
 ```
 forceVisible: true|'x'|'y' (default to `false`)
 ```
+
 By default, SimpleBar behave like `overflow: auto`.
 
+#### direction (RTL support)
+
+You can activate RTL support by passing the `direction` option:
+
+```
+direction: 'rtl' (default to `ltr`)
+```
+
+You will need both `data-simplebar-direction='rtl'` and a css rule with `direction: rtl`.
+
 ### Apply scroll vertically only
+
 Simply define in css `overflow-x: hidden` on your element.
 
 ### Notifying the plugin of content changes
+
 #### Note: you shouldn't need to use these functions as SimpleBar takes care of that automatically. This is for advanced usage only.
 
 If later on you dynamically modify your content, for instance changing its height or width, or adding or removing content, you should recalculate the scrollbars like so:
+
 ```js
 const simpleBar = new SimpleBar(document.getElementById('myElement'));
 simpleBar.recalculate();
 ```
 
 ### Trigger programmatical scrolling
+
 If you want to access to the original scroll element, you can retrieve it via a getter:
+
 ```js
 const simpleBar = new SimpleBar(document.getElementById('myElement'));
 simpleBar.getScrollElement();
 ```
 
 ### Subscribe to `scroll` event
+
 You can subscribe to the `scroll` event, just like you do with native scrolling elements:
+
 ```js
 const simpleBar = new SimpleBar(document.getElementById('myElement'));
 simpleBar.getScrollElement().addEventListener('scroll', function(...));
 ```
 
 ### Add content dynamically
+
 You can retrieve the element containing data like this:
+
 ```js
 const simpleBar = new SimpleBar(document.getElementById('myElement'));
 simpleBar.getContentElement();
 ```
 
 ### Disable Mutation Observer
+
 ```js
 SimpleBar.removeObserver();
 ```
@@ -197,11 +245,11 @@ SimpleBar hides the browser's default scrollbars, which obviously is undesirable
 
 ```html
 <noscript>
-    <style>
+  <style>
     [data-simplebar] {
-        overflow: auto;
+      overflow: auto;
     }
-    </style>
+  </style>
 </noscript>
 ```
 
@@ -216,6 +264,7 @@ If you want to apply SimpleBar on an SVG element on IE11, you will need a [polyf
 IE9 is not supported anymore (because we use `translate3d` to position the scrollbar) so please use SimpleBar v1 if you really need it.
 
 ## 3. Demo
+
 http://grsmto.github.io/simplebar/
 
 ## 4. How it works
@@ -228,6 +277,7 @@ For the most part SimpleBar uses the browser's native scrolling functionality, b
 Key to this technique is hiding the native browser scrollbar. The scrollable element is made slightly wider/taller than its containing element, effectively hiding the scrollbar from view.
 
 ## 5. Caveats
+
 - SimpleBar can't be used on the `<body>`, `<textarea>`, `<table>` or `<iframe>` elements. If you are looking to support these, I suggest taking a look at [OverLayScrollbars](https://kingsora.github.io/OverlayScrollbars).
 - SimpleBar doesn't currently support `overflow: visible`. Which means any children of your scrolling div will be clipped (like with `overflow: hidden`).
 
@@ -245,7 +295,7 @@ Website: http://html5up.net/
 ### Community plugins
 
 **Ruby On Rails**
-To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem. 
+To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem.
 
 [npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/simplebar
