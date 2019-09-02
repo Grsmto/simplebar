@@ -36,7 +36,7 @@ test('should unmount SimpleBar', () => {
 
   simpleBar.unMount();
 
-  expect(simpleBar.el.SimpleBar).toBeNull();
+  expect(SimpleBar.instances.get(simpleBar.el)).toBeUndefined();
 });
 
 test('should return the element options', () => {
