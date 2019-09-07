@@ -1,0 +1,9 @@
+{
+  "name": "simplebar-angular",
+  "version": "0.0.4",
+  "peerDependencies": {
+    "@angular/common": "^8.1.3",
+    "@angular/core": "^8.1.3",
+    "simplebar": "^4.3.0-alpha.0"
+  }
+}
