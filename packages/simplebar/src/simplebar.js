@@ -771,6 +771,13 @@ export default class SimpleBar {
     let track = this.axis[this.draggedAxis].track;
     const trackSize = track.rect[this.axis[this.draggedAxis].sizeAttr];
     const scrollbar = this.axis[this.draggedAxis].scrollbar;
+    const contentSize = this.contentWrapperEl[
+      this.axis[this.draggedAxis].scrollSizeAttr
+    ];
+    const hostSize = parseInt(
+      this.elStyles[this.axis[this.draggedAxis].sizeAttr],
+      10
+    );
 
     e.preventDefault();
     e.stopPropagation();
@@ -787,12 +794,10 @@ export default class SimpleBar {
       track.rect[this.axis[this.draggedAxis].offsetAttr] -
       this.axis[this.draggedAxis].dragOffset;
     // Convert the mouse position into a percentage of the scrollbar height/width.
-    let dragPerc = dragPos / track.rect[this.axis[this.draggedAxis].sizeAttr];
+    let dragPerc = dragPos / (trackSize - scrollbar.size);
 
     // Scroll the content by the same percentage.
-    let scrollPos =
-      dragPerc *
-      this.contentWrapperEl[this.axis[this.draggedAxis].scrollSizeAttr];
+    let scrollPos = dragPerc * (contentSize - hostSize);
 
     // Fix browsers inconsistency on RTL
     if (this.draggedAxis === 'x') {
