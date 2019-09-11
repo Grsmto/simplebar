@@ -1,4 +1,7 @@
 import jestPuppeteerConfig from '../jest-puppeteer.config';
+import { setDefaultOptions } from 'expect-puppeteer';
+
+setDefaultOptions({ timeout: 30000 });
 
 describe('Load', () => {
   beforeAll(async () => {
