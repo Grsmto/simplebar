@@ -97,5 +97,5 @@ describe('Load', () => {
 
     expect(scrollbarHeightAfterHover).toBeLessThan(scrollbarHeight);
   });
-  // }, 999999);
-});
+}, 999999);
+// });
