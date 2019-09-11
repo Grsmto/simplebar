@@ -1,5 +1,5 @@
 module.exports = {
-  setupFilesAfterEnv: ['./jest.setup.js'],
+  setupTestFrameworkScriptFile: './jest.setup.js',
   preset: 'jest-puppeteer',
   testRegex: '^.+\\.test\\.e2e\\.js$',
   transform: {
