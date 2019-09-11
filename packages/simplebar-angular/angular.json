@@ -1,0 +1,161 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "simplebar-angular": {
+      "projectType": "library",
+      "root": "projects/simplebar-angular",
+      "sourceRoot": "projects/simplebar-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/simplebar-angular/tsconfig.lib.json",
+            "project": "projects/simplebar-angular/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/simplebar-angular/src/test.ts",
+            "tsConfig": "projects/simplebar-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/simplebar-angular/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/simplebar-angular/tsconfig.lib.json",
+              "projects/simplebar-angular/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "simplebar-tester": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/simplebar-tester",
+      "sourceRoot": "projects/simplebar-tester/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/simplebar-tester",
+            "index": "projects/simplebar-tester/src/index.html",
+            "main": "projects/simplebar-tester/src/main.ts",
+            "polyfills": "projects/simplebar-tester/src/polyfills.ts",
+            "tsConfig": "projects/simplebar-tester/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/simplebar-tester/src/favicon.ico",
+              "projects/simplebar-tester/src/assets"
+            ],
+            "styles": [
+              "projects/simplebar-tester/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/simplebar-tester/src/environments/environment.ts",
+                  "with": "projects/simplebar-tester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "simplebar-tester:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "simplebar-tester:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "simplebar-tester:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/simplebar-tester/src/test.ts",
+            "polyfills": "projects/simplebar-tester/src/polyfills.ts",
+            "tsConfig": "projects/simplebar-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/simplebar-tester/karma.conf.js",
+            "assets": [
+              "projects/simplebar-tester/src/favicon.ico",
+              "projects/simplebar-tester/src/assets"
+            ],
+            "styles": [
+              "projects/simplebar-tester/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/simplebar-tester/tsconfig.app.json",
+              "projects/simplebar-tester/tsconfig.spec.json",
+              "projects/simplebar-tester/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/simplebar-tester/e2e/protractor.conf.js",
+            "devServerTarget": "simplebar-tester:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "simplebar-tester:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "simplebar-angular",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
+}
