@@ -1,5 +1,5 @@
 import jestPuppeteerConfig from '../jest-puppeteer.config';
-import expectPuppeteer from 'expect-puppeteer';
+import expect from 'expect-puppeteer';
 
 describe('Load', () => {
   beforeAll(async () => {
@@ -15,22 +15,18 @@ describe('Load', () => {
   });
 
   test('should render demo page', async () => {
-    await expectPuppeteer(page).toMatch('Simplebar demo page');
+    await expect(page).toMatch('Simplebar demo page');
   });
 
   test('should render SimpleBar on data-simplebar elements', async () => {
-    await expectPuppeteer(page).toMatchElement(
-      '[data-simplebar] .simplebar-content'
-    );
+    await expect(page).toMatchElement('[data-simplebar] .simplebar-content');
   });
 
   test('should not auto hide the scrollbar', async () => {
     const demo = await expect(page).toMatchElement(
       '[data-simplebar-auto-hide="false"]'
     );
-    await expectPuppeteer(demo).toMatchElement(
-      '.simplebar-scrollbar.simplebar-visible'
-    );
+    await expect(demo).toMatchElement('.simplebar-scrollbar.simplebar-visible');
   });
 
   test('should force scrollbar track to be visible but scrollbar to be hidden', async () => {
@@ -44,8 +40,8 @@ describe('Load', () => {
   });
 
   test('should display SimpleBar in "rtl" mode', async () => {
-    const el = await expectPuppeteer(page).toMatchElement('.demo-rtl');
-    const scrollbarEl = await expectPuppeteer(el).toMatchElement(
+    const el = await expect(page).toMatchElement('.demo-rtl');
+    const scrollbarEl = await expect(el).toMatchElement(
       '.simplebar-track.simplebar-horizontal .simplebar-scrollbar'
     );
     const isRtl = await page.$eval('.demo-rtl', el => el.SimpleBar.isRtl);
@@ -64,7 +60,7 @@ describe('Load', () => {
   });
 
   test('should add class "dragging" when dragging', async () => {
-    const el = await expectPuppeteer(page).toMatchElement('#demo2');
+    const el = await expect(page).toMatchElement('#demo2');
 
     await page.click(
       '#demo2 .simplebar-track.simplebar-vertical .simplebar-scrollbar'
@@ -80,8 +76,8 @@ describe('Load', () => {
   });
 
   test('should recalculate scrollbar size when content size changes', async () => {
-    const el = await expectPuppeteer(page).toMatchElement('#demo2');
-    const scrollbarEl = await expectPuppeteer(el).toMatchElement(
+    const el = await expect(page).toMatchElement('#demo2');
+    const scrollbarEl = await expect(el).toMatchElement(
       '.simplebar-track.simplebar-vertical .simplebar-scrollbar'
     );
 
