@@ -1,5 +1,4 @@
 import jestPuppeteerConfig from '../jest-puppeteer.config';
-import expect from 'expect-puppeteer';
 
 describe('Load', () => {
   beforeAll(async () => {
