@@ -15,18 +15,18 @@ describe('Load', () => {
 
   test('should render demo page', async () => {
     await expect(page).toMatch('Simplebar demo page');
-  });
+  }, 20000);
 
   test('should render SimpleBar on data-simplebar elements', async () => {
     await expect(page).toMatchElement('[data-simplebar] .simplebar-content');
-  });
+  }, 20000);
 
   test('should not auto hide the scrollbar', async () => {
     const demo = await expect(page).toMatchElement(
       '[data-simplebar-auto-hide="false"]'
     );
     await expect(demo).toMatchElement('.simplebar-scrollbar.simplebar-visible');
-  });
+  }, 20000);
 
   test('should force scrollbar track to be visible but scrollbar to be hidden', async () => {
     const trackSelector =
@@ -36,7 +36,7 @@ describe('Load', () => {
     await page.waitForSelector(`${trackSelector} .simplebar-scrollbar`, {
       hidden: true
     });
-  });
+  }, 20000);
 
   test('should display SimpleBar in "rtl" mode', async () => {
     const el = await expect(page).toMatchElement('.demo-rtl');
@@ -56,7 +56,7 @@ describe('Load', () => {
       `translate3d(${elBoundingBox.width -
         scrollbarElBoundingBox.width}px, 0px, 0px)`
     );
-  });
+  }, 20000);
 
   test('should add class "dragging" when dragging', async () => {
     const el = await expect(page).toMatchElement('#demo2');
@@ -72,7 +72,7 @@ describe('Load', () => {
     );
 
     expect(isDragging).toBeTruthy();
-  });
+  }, 20000);
 
   test('should recalculate scrollbar size when content size changes', async () => {
     const el = await expect(page).toMatchElement('#demo2');
@@ -96,6 +96,6 @@ describe('Load', () => {
     );
 
     expect(scrollbarHeightAfterHover).toBeLessThan(scrollbarHeight);
-  });
-}, 999999);
-// });
+  }, 20000);
+  //}, 999999);
+});
