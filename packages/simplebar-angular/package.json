@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
+    "test": "ng test",
     "e2e": "ng e2e"
   },
   "keywords": [
