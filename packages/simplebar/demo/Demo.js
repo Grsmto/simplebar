@@ -18,12 +18,11 @@ if (typeof Promise === 'undefined') {
   window.Promise = require('promise/lib/es6-extensions.js');
 }
 
-function menuRenderer(params) {
-  // use default renderer in a hacky way
-  const menu = Select.defaultProps.menuRenderer(params);
-
-  return <ReactSimpleBar>{menu}</ReactSimpleBar>;
-}
+const renderScrollbar = props => {
+  return (
+    <ReactSimpleBar style={{ maxHeight: 300 }}>{props.children}</ReactSimpleBar>
+  );
+};
 
 class Demo extends React.Component {
   componentDidMount() {
@@ -109,7 +108,7 @@ class Demo extends React.Component {
           <div className="col">
             <h2>React-Select</h2>
             <Select
-              menuRenderer={menuRenderer}
+              components={{ MenuList: renderScrollbar }}
               options={[...Array(50)].map((x, i) => ({
                 value: i,
                 label: i

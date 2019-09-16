@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import SimpleBarJS from 'simplebar';
 
 export default function SimpleBar({
   children,
   className,
+  style,
   scrollableNodeProps,
   ...options
 }) {
@@ -25,7 +26,7 @@ export default function SimpleBar({
   });
 
   return (
-    <div ref={elRef} className={className}>
+    <div ref={elRef} className={className} style={style}>
       <div className="simplebar-wrapper">
         <div className="simplebar-height-auto-observer-wrapper">
           <div className="simplebar-height-auto-observer" />
@@ -61,5 +62,8 @@ export default function SimpleBar({
 }
 
 SimpleBar.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  className: PropTypes.string,
+  style: PropTypes.object,
+  scrollableNodeProps: PropTypes.object
 };
