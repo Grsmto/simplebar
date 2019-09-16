@@ -1,6 +1,6 @@
 # SimpleBar [![npm package][npm-badge]][npm] ![size-badge]
 
-:warning: SimpleBar v4 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/releases) before updating.
+:warning: SimpleBar v4.3 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/releases) before updating.
 
 SimpleBar is a plugin that tries to solve a long time problem: how to get custom scrollbars for your web-app?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
@@ -237,6 +237,12 @@ simpleBar.getContentElement();
 
 ```js
 SimpleBar.removeObserver();
+```
+
+### Retrieve SimpleBar instance from data-simplebar nodes
+
+```js
+SimpleBar.instances.get(document.querySelector('[data-simplebar]']))
 ```
 
 ### Non-JS fallback
