@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { FixedSizeList as List } from 'react-window';
-import ReactSimpleBar from 'simplebar-react';
+import SimpleBarReact from 'simplebar-react';
 import SimpleBar from 'simplebar';
 
 import Playground from 'simplebar/demo/Playground';
@@ -20,7 +20,7 @@ if (typeof Promise === 'undefined') {
 
 const renderScrollbar = props => {
   return (
-    <ReactSimpleBar style={{ maxHeight: 300 }}>{props.children}</ReactSimpleBar>
+    <SimpleBarReact style={{ maxHeight: 300 }}>{props.children}</SimpleBarReact>
   );
 };
 
@@ -259,7 +259,7 @@ class Demo extends React.Component {
           </div>
           <div className="col">
             <h2>SimpleBar-React + React-Window</h2>
-            <ReactSimpleBar className="demo1">
+            <SimpleBarReact className="demo1">
               {({ scrollableNodeRef, contentNodeRef }) => (
                 <List
                   height={300}
@@ -271,7 +271,7 @@ class Demo extends React.Component {
                   {({ index, style }) => <div style={style}>Row {index}</div>}
                 </List>
               )}
-            </ReactSimpleBar>
+            </SimpleBarReact>
           </div>
         </section>
       </section>
