@@ -15,8 +15,14 @@ script:
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  github-token: $GITHUB_TOKEN # Set in travis-ci.org dashboard, marked secure
   keep-history: true
   on:
     branch: master
   local-dir: packages/simplebar/demo
+
+addons:
+  browserstack:
+    username: 'adriengrsmto'
+    access_key:
+      secure: 'D75arx7W8WEGPIDHbWNrvttP3kbT5u8w+QXXYAP/DNH3012BoThNLmIB9U8YAxOccrC0ZISQq8d73/aX70A0S97IJpFQv9wwIS540JwawKSJc23OeKNsImobeNdK0k2al8JvKonIaPJzexKTNHwV7OYxzFxIotGrIQsImjC38Pw='
