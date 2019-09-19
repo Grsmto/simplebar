@@ -61,5 +61,8 @@
       "prettier-eslint --write",
       "git add"
     ]
+  },
+  "dependencies": {
+    "eslint-config-react-app": "^5.0.2"
   }
 }
