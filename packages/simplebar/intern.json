@@ -3,11 +3,14 @@
   "serverPort": 8091,
   "capabilities": {
     "browserstack.local": true,
-    "fixSessionCapabilities": false
+    "fixSessionCapabilities": false,
+    "project": "simplebar"
   },
-  "environments": [{ "browser": "Chrome" }],
-  "tunnel": "browserstack",
-  "tunnelOptions": {
-    "username": "adriengrsmto"
-  }
+  "environments": [
+    { "browser": "Chrome" },
+    { "browser": "Firefox" },
+    { "browser": "Safari" },
+    { "browser": "IE" }
+  ],
+  "tunnel": "browserstack"
 }
