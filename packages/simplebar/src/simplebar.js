@@ -273,7 +273,10 @@ export default class SimpleBar {
       }
 
       if (this.options.lazyInitialization) {
-        window.setTimeout(measureAndListen, 0)
+        this.lazyTimeout = window.setTimeout(() => {
+          this.lazyTimeout = null;
+          measureAndListen();
+        }, 0);
       } else {
         measureAndListen();
       }
@@ -904,7 +907,12 @@ export default class SimpleBar {
    * UnMount mutation observer and delete SimpleBar instance from DOM element
    */
   unMount() {
-    this.removeListeners();
+    if(this.lazyTimeout) {
+      window.clearTimeout(this.lazyTimeout);
+    } else {
+      this.removeListeners();
+    }
+  
     this.el.SimpleBar = null;
   }
 
