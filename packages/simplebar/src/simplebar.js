@@ -8,22 +8,12 @@ import scrollbarWidth from './scrollbar-width';
 export default class SimpleBar {
   constructor(element, options) {
     this.el = element;
-    this.flashTimeout;
-    this.contentEl;
-    this.contentWrapperEl;
-    this.offsetEl;
-    this.maskEl;
-    this.globalObserver;
-    this.mutationObserver;
-    this.resizeObserver;
-    this.scrollbarWidth;
     this.minScrollbarWidth = 20;
     this.options = { ...SimpleBar.defaultOptions, ...options };
     this.classNames = {
       ...SimpleBar.defaultOptions.classNames,
       ...this.options.classNames
     };
-    this.isRtl;
     this.axis = {
       x: {
         scrollOffsetAttr: 'scrollLeft',
