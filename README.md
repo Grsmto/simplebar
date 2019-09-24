@@ -181,6 +181,12 @@ forceVisible: true|'x'|'y' (default to `false`)
 
 By default, SimpleBar behave like `overflow: auto`.
 
+#### lazyInitialization
+
+You can opt to have the necessary measurements and listeners added on the next tick, in order to optimize the display of the scrollable content.
+
+By default, this option is set to false.
+
 #### direction (RTL support)
 
 You can activate RTL support by passing the `direction` option:
