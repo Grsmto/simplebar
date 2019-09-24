@@ -1,22 +1,27 @@
+const scrollbarWidth = null;
 export default function scrollbarWidth() {
-  if (typeof document === 'undefined') {
-    return 0;
+  if (scrollbarWidth == null) {
+    if (typeof document === 'undefined') {
+      scrollbarWidth = 0;
+      return scrollbarWidth;
+    }
+
+    const body = document.body;
+    const box = document.createElement('div');
+    const boxStyle = box.style;
+
+    boxStyle.position = 'fixed';
+    boxStyle.left = 0;
+    boxStyle.visibility = 'hidden';
+    boxStyle.overflowY = 'scroll';
+
+    body.appendChild(box);
+
+    const width = box.getBoundingClientRect().right;
+
+    body.removeChild(box);
+
+    scrollbarWidth = width;;
   }
-
-  const body = document.body;
-  const box = document.createElement('div');
-  const boxStyle = box.style;
-
-  boxStyle.position = 'fixed';
-  boxStyle.left = 0;
-  boxStyle.visibility = 'hidden';
-  boxStyle.overflowY = 'scroll';
-
-  body.appendChild(box);
-
-  const width = box.getBoundingClientRect().right;
-
-  body.removeChild(box);
-
-  return width;
+  return scrollbarWidth;
 }
