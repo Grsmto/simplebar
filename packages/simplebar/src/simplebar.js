@@ -424,13 +424,9 @@ export default class SimpleBar {
     this.elStyles = window.getComputedStyle(this.el);
     this.isRtl = this.elStyles.direction === 'rtl';
 
-    this.contentEl.style.padding = `${this.elStyles.paddingTop} ${
-      this.elStyles.paddingRight
-    } ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
+    this.contentEl.style.padding = `${this.elStyles.paddingTop} ${this.elStyles.paddingRight} ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
 
-    this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${
-      this.elStyles.paddingRight
-    } -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
+    this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
 
     this.contentWrapperEl.style.height = isHeightAuto ? 'auto' : '100%';
 
@@ -472,9 +468,6 @@ export default class SimpleBar {
     this.axis.y.isOverflowing =
       this.contentEl.scrollHeight >
       this.contentWrapperEl.offsetHeight - offsetForXScrollbar;
-
-    this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
-    this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
