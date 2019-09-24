@@ -12,10 +12,7 @@ import TwitchUrl from "../images/users/twitch.svg"
 import StorybookUrl from "../images/users/storybook.svg"
 import ZulipUrl from "../images/users/zulip.svg"
 
-const IndexPage = ({ data }) => {
-  const { markdownRemark } = data
-  const { html } = markdownRemark
-
+const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
@@ -34,9 +31,7 @@ const IndexPage = ({ data }) => {
         </a>
       </p>
 
-      <SimpleBar sx={{ maxHeight: 300 }}>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-      </SimpleBar>
+      <SimpleBar sx={{ maxHeight: 300 }}>test</SimpleBar>
 
       <h3>Who is using it?</h3>
       <List
