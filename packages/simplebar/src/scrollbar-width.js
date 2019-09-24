@@ -5,6 +5,7 @@ export default function scrollbarWidth() {
 
   const body = document.body;
   const box = document.createElement('div');
+  box.classList.add('simplebar-hide-scrollbar');
   const boxStyle = box.style;
 
   boxStyle.position = 'fixed';

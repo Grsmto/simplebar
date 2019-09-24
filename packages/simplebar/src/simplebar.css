@@ -55,6 +55,11 @@
   overflow: auto; /* Scroll on this element otherwise element can't have a padding applied properly */
   max-width: 100%; /* Not required for horizontal scroll to trigger */
   max-height: 100%; /* Needed for vertical scroll to trigger */
+  scrollbar-width: none;
+}
+
+.simplebar-content-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .simplebar-content:before,
@@ -193,4 +198,12 @@
   width: 500px;
   overflow-y: hidden;
   overflow-x: scroll;
+}
+
+.simplebar-hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.simplebar-hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
