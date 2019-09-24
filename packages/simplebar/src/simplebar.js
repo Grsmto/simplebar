@@ -305,10 +305,12 @@ export default class SimpleBar {
       this.heightAutoObserverEl = this.el.querySelector(
         `.${this.classNames.heightAutoObserverEl}`
       );
-      this.axis.x.track.el = this.el.querySelector(
+      this.axis.x.track.el = this.findChild(
+        this.el,
         `.${this.classNames.track}.${this.classNames.horizontal}`
       );
-      this.axis.y.track.el = this.el.querySelector(
+      this.axis.y.track.el = this.findChild(
+        this.el,
         `.${this.classNames.track}.${this.classNames.vertical}`
       );
     } else {
@@ -420,13 +422,9 @@ export default class SimpleBar {
     this.elStyles = window.getComputedStyle(this.el);
     this.isRtl = this.elStyles.direction === 'rtl';
 
-    this.contentEl.style.padding = `${this.elStyles.paddingTop} ${
-      this.elStyles.paddingRight
-    } ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
+    this.contentEl.style.padding = `${this.elStyles.paddingTop} ${this.elStyles.paddingRight} ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
 
-    this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${
-      this.elStyles.paddingRight
-    } -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
+    this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
 
     this.contentWrapperEl.style.height = isHeightAuto ? 'auto' : '100%';
 
@@ -779,6 +777,13 @@ export default class SimpleBar {
     let track = this.axis[this.draggedAxis].track;
     const trackSize = track.rect[this.axis[this.draggedAxis].sizeAttr];
     const scrollbar = this.axis[this.draggedAxis].scrollbar;
+    const contentSize = this.contentWrapperEl[
+      this.axis[this.draggedAxis].scrollSizeAttr
+    ];
+    const hostSize = parseInt(
+      this.elStyles[this.axis[this.draggedAxis].sizeAttr],
+      10
+    );
 
     e.preventDefault();
     e.stopPropagation();
@@ -795,12 +800,10 @@ export default class SimpleBar {
       track.rect[this.axis[this.draggedAxis].offsetAttr] -
       this.axis[this.draggedAxis].dragOffset;
     // Convert the mouse position into a percentage of the scrollbar height/width.
-    let dragPerc = dragPos / track.rect[this.axis[this.draggedAxis].sizeAttr];
+    let dragPerc = dragPos / (trackSize - scrollbar.size);
 
     // Scroll the content by the same percentage.
-    let scrollPos =
-      dragPerc *
-      this.contentWrapperEl[this.axis[this.draggedAxis].scrollSizeAttr];
+    let scrollPos = dragPerc * (contentSize - hostSize);
 
     // Fix browsers inconsistency on RTL
     if (this.draggedAxis === 'x') {
@@ -922,6 +925,20 @@ export default class SimpleBar {
       this.mouseY >= bbox.top &&
       this.mouseY <= bbox.top + bbox.height
     );
+  }
+
+  /**
+   * Find element children matches query
+   */
+  findChild(el, query) {
+    const matches =
+      el.matches ||
+      el.webkitMatchesSelector ||
+      el.mozMatchesSelector ||
+      el.msMatchesSelector;
+    return Array.prototype.filter.call(el.children, child =>
+      matches.call(child, query)
+    )[0];
   }
 }
 
