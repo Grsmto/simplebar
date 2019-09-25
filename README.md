@@ -44,6 +44,8 @@ You can find the full list of modules available [there](https://unpkg.com/simple
 
 Check out the [React](https://github.com/Grsmto/simplebar/blob/master/examples/react/src/App.js) and [Vue](https://github.com/Grsmto/simplebar/blob/master/examples/vue/src/App.vue) examples.
 
+If you are using Gatsby, please see #345.
+
 If you are using a module loader (like Webpack) you first need to load SimpleBar:
 
 ```js
