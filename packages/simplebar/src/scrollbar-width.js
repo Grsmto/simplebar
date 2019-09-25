@@ -1,22 +1,36 @@
-export default function scrollbarWidth() {
-  if (typeof document === 'undefined') {
-    return 0;
+let scrollbarWidth = null;
+let devicePixelRatio = null;
+
+window.addEventListener('resize', () => {
+  if (devicePixelRatio !== window.devicePixelRatio) {
+    devicePixelRatio = window.devicePixelRatio;
+    scrollbarWidth = null;
   }
+});
 
-  const body = document.body;
-  const box = document.createElement('div');
-  const boxStyle = box.style;
+export default function scrollbarWidth() {
+  if (scrollbarWidth == null) {
+    if (typeof document === 'undefined') {
+      scrollbarWidth = 0;
+      return scrollbarWidth;
+    }
 
-  boxStyle.position = 'fixed';
-  boxStyle.left = 0;
-  boxStyle.visibility = 'hidden';
-  boxStyle.overflowY = 'scroll';
+    const body = document.body;
+    const box = document.createElement('div');
+    const boxStyle = box.style;
 
-  body.appendChild(box);
+    boxStyle.position = 'fixed';
+    boxStyle.left = 0;
+    boxStyle.visibility = 'hidden';
+    boxStyle.overflowY = 'scroll';
 
-  const width = box.getBoundingClientRect().right;
+    body.appendChild(box);
 
-  body.removeChild(box);
+    const width = box.getBoundingClientRect().right;
 
-  return width;
+    body.removeChild(box);
+
+    scrollbarWidth = width;
+  }
+  return scrollbarWidth;
 }
