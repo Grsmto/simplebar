@@ -104,8 +104,8 @@ export default class SimpleBar {
       isRtlScrollingInverted:
         dummyContainerOffset.left !== dummyContainerChildOffset.left &&
         dummyContainerChildOffset.left -
-        dummyContainerScrollOffsetAfterScroll.left !==
-        0,
+          dummyContainerScrollOffsetAfterScroll.left !==
+          0,
       // determines if the origin scrollbar position is inverted or not (positioned on left or right)
       isRtlScrollbarInverted:
         dummyContainerOffset.left !== dummyContainerChildOffset.left
@@ -266,13 +266,17 @@ export default class SimpleBar {
     if (canUseDOM) {
       this.initDOM();
 
-      function measureAndListen() {
+      const measureAndListen = () => {
         this.scrollbarWidth = scrollbarWidth();
         this.recalculate();
         this.initListeners();
-      }
+      };
 
       if (this.options.lazyInitialization) {
+        // If we are lazily initializing, then hide the native scrollbars now
+        // Otherwise there might be some flashing
+        this.hideNativeScrollbar();
+
         if (window.requestIdleCallback) {
           // In browsers that support it, wait for idle.
           this.lazyTimeout = window.requestIdleCallback(() => {
@@ -434,11 +438,11 @@ export default class SimpleBar {
 
     this.contentEl.style.padding = `${this.elStyles.paddingTop} ${
       this.elStyles.paddingRight
-      } ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
+    } ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
 
     this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${
       this.elStyles.paddingRight
-      } -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
+    } -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
 
     this.contentWrapperEl.style.height = isHeightAuto ? 'auto' : '100%';
 
@@ -490,7 +494,7 @@ export default class SimpleBar {
     const contentSize = this.scrollbarWidth
       ? this.contentWrapperEl[this.axis[axis].scrollSizeAttr]
       : this.contentWrapperEl[this.axis[axis].scrollSizeAttr] -
-      this.minScrollbarWidth;
+        this.minScrollbarWidth;
     const trackSize = this.axis[axis].track.rect[this.axis[axis].sizeAttr];
     let scrollbarSize;
 
@@ -522,8 +526,8 @@ export default class SimpleBar {
     let scrollOffset = this.contentWrapperEl[this.axis[axis].scrollOffsetAttr];
     scrollOffset =
       axis === 'x' &&
-        this.isRtl &&
-        SimpleBar.getRtlHelpers().isRtlScrollingInverted
+      this.isRtl &&
+      SimpleBar.getRtlHelpers().isRtlScrollingInverted
         ? -scrollOffset
         : scrollOffset;
     let scrollPourcent = scrollOffset / (contentSize - hostSize);
@@ -531,8 +535,8 @@ export default class SimpleBar {
     let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
     handleOffset =
       axis === 'x' &&
-        this.isRtl &&
-        SimpleBar.getRtlHelpers().isRtlScrollbarInverted
+      this.isRtl &&
+      SimpleBar.getRtlHelpers().isRtlScrollbarInverted
         ? handleOffset + (trackSize - scrollbar.size)
         : handleOffset;
 
@@ -916,11 +920,7 @@ export default class SimpleBar {
    */
   unMount() {
     if (this.lazyTimeout) {
-      if (window.cancelIdleCallback) {
-        window.cancelIdleCallback(this.lazyTimeout);
-      } else {
-        window.clearTimeout(this.lazyTimeout);
-      }
+      window.clearTimeout(this.lazyTimeout);
     } else {
       this.removeListeners();
     }
