@@ -1,18 +1,18 @@
-let scrollbarWidth = null;
-let devicePixelRatio = null;
+let cachedScrollbarWidth = null;
+let cachedDevicePixelRatio = null;
 
 window.addEventListener('resize', () => {
-  if (devicePixelRatio !== window.devicePixelRatio) {
-    devicePixelRatio = window.devicePixelRatio;
-    scrollbarWidth = null;
+  if (cachedDevicePixelRatio !== window.devicePixelRatio) {
+    cachedDevicePixelRatio = window.devicePixelRatio;
+    cachedScrollbarWidth = null;
   }
 });
 
 export default function scrollbarWidth() {
-  if (scrollbarWidth == null) {
+  if (cachedScrollbarWidth == null) {
     if (typeof document === 'undefined') {
-      scrollbarWidth = 0;
-      return scrollbarWidth;
+      cachedScrollbarWidth = 0;
+      return cachedScrollbarWidth;
     }
 
     const body = document.body;
@@ -30,7 +30,7 @@ export default function scrollbarWidth() {
 
     body.removeChild(box);
 
-    scrollbarWidth = width;
+    cachedScrollbarWidth = width;
   }
-  return scrollbarWidth;
+  return cachedScrollbarWidth;
 }
