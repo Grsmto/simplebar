@@ -742,13 +742,12 @@ export default class SimpleBar {
    * on scrollbar handle drag movement starts
    */
   onDragStart(e, axis = 'y') {
-    const scrollbar = this.axis[axis].scrollbar.el;
+    const scrollbar = this.axis[axis].scrollbar;
 
     // Measure how far the user's mouse is from the top of the scrollbar drag handle.
     const eventOffset = axis === 'y' ? e.pageY : e.pageX;
     this.axis[axis].dragOffset =
-      eventOffset -
-      scrollbar.getBoundingClientRect()[this.axis[axis].offsetAttr];
+      eventOffset - scrollbar.rect[this.axis[axis].offsetAttr];
     this.draggedAxis = axis;
 
     this.el.classList.add(this.classNames.dragging);
