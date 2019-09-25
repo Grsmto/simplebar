@@ -20,7 +20,8 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest -c jest-unit.config.js",
-    "version": "yarn build"
+    "version": "yarn build",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "core-js": "^3.0.1",
@@ -38,6 +39,12 @@
     "vue": "^2.5.22",
     "vue-jest": "^3.0.4",
     "vue-template-compiler": "^2.5.22"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "root": true,

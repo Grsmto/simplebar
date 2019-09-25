@@ -27,7 +27,8 @@
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
     "test:e2e": "yarn start --port 8091 && env-cmd intern",
-    "version": "yarn build"
+    "version": "yarn build",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "can-use-dom": "^0.1.0",
@@ -45,5 +46,11 @@
     "react-select": "^2.4.3",
     "react-window": "^1.8.1",
     "style-loader": "^0.21.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   }
 }

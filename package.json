@@ -56,13 +56,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lerna run --concurrency 1 --stream precommit"
     }
-  },
-  "lint-staged": {
-    "*.{js,jsx,json}": [
-      "prettier-eslint --write",
-      "git add"
-    ]
   }
 }

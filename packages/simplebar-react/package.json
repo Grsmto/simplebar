@@ -22,7 +22,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "jest",
-    "version": "yarn build"
+    "version": "yarn build",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "prop-types": "^15.6.1",
@@ -35,6 +36,12 @@
   "devDependencies": {
     "react-test-renderer": "^16.3.2",
     "rollup-plugin-copy": "^3.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   },
   "jest": {
     "transform": {
