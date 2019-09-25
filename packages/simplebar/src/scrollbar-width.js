@@ -1,4 +1,13 @@
-const scrollbarWidth = null;
+let scrollbarWidth = null;
+let devicePixelRatio = null;
+
+window.addEventListener('resize', () => {
+  if (devicePixelRatio !== window.devicePixelRatio) {
+    devicePixelRatio = window.devicePixelRatio;
+    scrollbarWidth = null;
+  }
+});
+
 export default function scrollbarWidth() {
   if (scrollbarWidth == null) {
     if (typeof document === 'undefined') {
@@ -21,7 +30,7 @@ export default function scrollbarWidth() {
 
     body.removeChild(box);
 
-    scrollbarWidth = width;;
+    scrollbarWidth = width;
   }
   return scrollbarWidth;
 }
