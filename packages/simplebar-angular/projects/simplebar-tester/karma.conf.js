@@ -24,10 +24,16 @@ module.exports = function(config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
+    autoWatch: false,
     browsers: ['Chrome'],
     singleRun: true,
     restartOnFileChange: true,
     failOnEmptyTestSuite: false
   });
+
+  if (process.env.TRAVIS) {
+    config.browsers = ['HeadlessChrome'];
+    config.singleRun = true;
+    config.browserDisconnectTimeout = 10000;
+  }
 };

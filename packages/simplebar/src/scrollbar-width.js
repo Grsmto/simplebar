@@ -1,23 +1,37 @@
-export default function scrollbarWidth() {
-  if (typeof document === 'undefined') {
-    return 0;
+let cachedScrollbarWidth = null;
+let cachedDevicePixelRatio = null;
+
+window.addEventListener('resize', () => {
+  if (cachedDevicePixelRatio !== window.devicePixelRatio) {
+    cachedDevicePixelRatio = window.devicePixelRatio;
+    cachedScrollbarWidth = null;
   }
+});
 
-  const body = document.body;
-  const box = document.createElement('div');
-  box.classList.add('simplebar-hide-scrollbar');
-  const boxStyle = box.style;
+export default function scrollbarWidth() {
+  if (cachedScrollbarWidth == null) {
+    if (typeof document === 'undefined') {
+      cachedScrollbarWidth = 0;
+      return cachedScrollbarWidth;
+    }
 
-  boxStyle.position = 'fixed';
-  boxStyle.left = 0;
-  boxStyle.visibility = 'hidden';
-  boxStyle.overflowY = 'scroll';
+    const body = document.body;
+    const box = document.createElement('div');
+    box.classList.add('simplebar-hide-scrollbar');
+    const boxStyle = box.style;
 
-  body.appendChild(box);
+    boxStyle.position = 'fixed';
+    boxStyle.left = 0;
+    boxStyle.visibility = 'hidden';
+    boxStyle.overflowY = 'scroll';
 
-  const width = box.getBoundingClientRect().right;
+    body.appendChild(box);
 
-  body.removeChild(box);
+    const width = box.getBoundingClientRect().right;
 
-  return width;
+    body.removeChild(box);
+
+    cachedScrollbarWidth = width;
+  }
+  return cachedScrollbarWidth;
 }
