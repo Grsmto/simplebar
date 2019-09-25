@@ -5,20 +5,19 @@
       {
         "modules": false,
         "useBuiltIns": "usage",
-        "corejs": 3,
+        "corejs": 2,
         "debug": true,
         "loose": true
       }
     ]
   ],
-  "plugins": [
-    "transform-class-properties"
-  ],
+  "plugins": ["transform-class-properties"],
   "env": {
     "test": {
       "presets": [
         [
-          "@babel/preset-env", {
+          "@babel/preset-env",
+          {
             "targets": {
               "node": "current"
             }
