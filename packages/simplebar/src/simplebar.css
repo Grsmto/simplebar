@@ -201,6 +201,10 @@
 }
 
 .simplebar-hide-scrollbar {
+  position: fixed;
+  left: 0;
+  visibility: hidden;
+  overflow-y: scroll;
   scrollbar-width: none;
 }
 

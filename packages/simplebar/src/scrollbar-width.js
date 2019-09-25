@@ -17,13 +17,8 @@ export default function scrollbarWidth() {
 
     const body = document.body;
     const box = document.createElement('div');
-    box.classList.add('simplebar-hide-scrollbar');
-    const boxStyle = box.style;
 
-    boxStyle.position = 'fixed';
-    boxStyle.left = 0;
-    boxStyle.visibility = 'hidden';
-    boxStyle.overflowY = 'scroll';
+    box.classList.add('simplebar-hide-scrollbar');
 
     body.appendChild(box);
 
