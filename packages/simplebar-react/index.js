@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import SimpleBarJS from 'simplebar';
+import SimpleBarJS from 'simplebar/dist/simplebar-core';
 
 export default function SimpleBar({
   children,
