@@ -19,7 +19,7 @@ const licence = {
 export default [
   // browser-friendly UMD build
   {
-    input: 'src/simplebar.js',
+    input: 'src/index.js',
     output: {
       name: 'SimpleBar',
       file: pkg.main,
@@ -37,7 +37,7 @@ export default [
   },
   // browser-friendly, non-minified UMD build
   {
-    input: 'src/simplebar.js',
+    input: 'src/index.js',
     output: {
       name: 'SimpleBar',
       file: 'dist/simplebar.js',
@@ -60,9 +60,12 @@ export default [
   // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
   {
-    input: 'src/simplebar.js',
+    input: 'src/index.js',
     external: id => {
-      if (Object.keys(pkg.dependencies).find(dep => id === dep) || id.match(/(core-js).+/)) {
+      if (
+        Object.keys(pkg.dependencies).find(dep => id === dep) ||
+        id.match(/(core-js).+/)
+      ) {
         return true;
       }
 
@@ -70,6 +73,30 @@ export default [
     },
     output: {
       file: pkg.module,
+      format: 'es',
+      sourcemap: true
+    },
+    plugins: [
+      babel({
+        exclude: ['/**/node_modules/**']
+      }),
+      license(licence)
+    ]
+  },
+  {
+    input: 'src/simplebar.js',
+    external: id => {
+      if (
+        Object.keys(pkg.dependencies).find(dep => id === dep) ||
+        id.match(/(core-js).+/)
+      ) {
+        return true;
+      }
+
+      return false;
+    },
+    output: {
+      file: 'dist/simplebar-core.js',
       format: 'es',
       sourcemap: true
     },
