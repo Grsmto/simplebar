@@ -9,8 +9,12 @@ window.addEventListener('resize', () => {
 });
 
 export default function scrollbarWidth() {
-  if (cachedScrollbarWidth == null) {
-    if (typeof document === 'undefined') {
+  if (cachedScrollbarWidth === null) {
+    if (
+      typeof document === 'undefined' ||
+      /AppleWebKit/.test(navigator.userAgent) ||
+      'scrollbarWidth' in document.documentElement.style
+    ) {
       cachedScrollbarWidth = 0;
       return cachedScrollbarWidth;
     }
@@ -28,5 +32,6 @@ export default function scrollbarWidth() {
 
     cachedScrollbarWidth = width;
   }
+
   return cachedScrollbarWidth;
 }
