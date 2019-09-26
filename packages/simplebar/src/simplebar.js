@@ -173,6 +173,7 @@ export default class SimpleBar {
       this.contentEl =
         this.options.contentNode ||
         this.el.querySelector(`.${this.classNames.contentEl}`);
+
       this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
       this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
 
@@ -304,34 +305,45 @@ export default class SimpleBar {
   }
 
   recalculate() {
-    const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
-    const isWidthAuto = this.heightAutoObserverEl.offsetWidth <= 1;
-
     this.elStyles = window.getComputedStyle(this.el);
     this.isRtl = this.elStyles.direction === 'rtl';
 
-    this.contentEl.style.padding = `${this.elStyles.paddingTop} ${this.elStyles.paddingRight} ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
+    const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
+    const isWidthAuto = this.heightAutoObserverEl.offsetWidth <= 1;
 
+    const contentElOffsetWidth = this.contentEl.offsetWidth;
+    const contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
+    const contentWrapperElOffsetWidth = this.contentWrapperEl.offsetWidth;
+
+    const elOverflowX = this.elStyles.overflowX;
+    const elOverflowY = this.elStyles.overflowY;
+
+    this.axis.x.scrollbar.size = this.getScrollbarSize('x');
+    this.axis.y.scrollbar.size = this.getScrollbarSize('y');
+
+    this.contentEl.style.padding = `${this.elStyles.paddingTop} ${this.elStyles.paddingRight} ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
     this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
+
+    const contentElScrollHeight = this.contentEl.scrollHeight;
+    const contentElScrollWidth = this.contentEl.scrollWidth;
 
     this.contentWrapperEl.style.height = isHeightAuto ? 'auto' : '100%';
 
     // Determine placeholder size
     this.placeholderEl.style.width = isWidthAuto
-      ? `${this.contentEl.offsetWidth}px`
+      ? `${contentElOffsetWidth}px`
       : 'auto';
-    this.placeholderEl.style.height = `${this.contentEl.scrollHeight}px`;
+    this.placeholderEl.style.height = `${contentElScrollHeight}px`;
 
-    this.axis.x.isOverflowing =
-      this.contentEl.scrollWidth > this.contentEl.offsetWidth;
+    this.axis.x.isOverflowing = contentElScrollWidth > contentElOffsetWidth;
     this.axis.y.isOverflowing =
-      this.contentEl.scrollHeight > this.contentWrapperEl.offsetHeight;
+      contentElScrollHeight > contentWrapperElOffsetHeight;
 
     // Set isOverflowing to false if user explicitely set hidden overflow
     this.axis.x.isOverflowing =
-      this.elStyles.overflowX === 'hidden' ? false : this.axis.x.isOverflowing;
+      elOverflowX === 'hidden' ? false : this.axis.x.isOverflowing;
     this.axis.y.isOverflowing =
-      this.elStyles.overflowY === 'hidden' ? false : this.axis.y.isOverflowing;
+      elOverflowY === 'hidden' ? false : this.axis.y.isOverflowing;
 
     this.axis.x.forceVisible =
       this.options.forceVisible === 'x' || this.options.forceVisible === true;
@@ -349,14 +361,10 @@ export default class SimpleBar {
       : 0;
 
     this.axis.x.isOverflowing =
-      this.contentEl.scrollWidth >
-      this.contentWrapperEl.offsetWidth - offsetForYScrollbar;
+      contentElScrollWidth > contentWrapperElOffsetWidth - offsetForYScrollbar;
     this.axis.y.isOverflowing =
-      this.contentEl.scrollHeight >
-      this.contentWrapperEl.offsetHeight - offsetForXScrollbar;
-
-    this.axis.x.scrollbar.size = this.getScrollbarSize('x');
-    this.axis.y.scrollbar.size = this.getScrollbarSize('y');
+      contentElScrollHeight >
+      contentWrapperElOffsetHeight - offsetForXScrollbar;
 
     this.axis.x.scrollbar.el.style.width = `${this.axis.x.scrollbar.size}px`;
     this.axis.y.scrollbar.el.style.height = `${this.axis.y.scrollbar.size}px`;
