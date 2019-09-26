@@ -267,6 +267,7 @@ class Demo extends React.Component {
                   itemSize={35}
                   outerRef={scrollableNodeRef}
                   innerRef={contentNodeRef}
+                  className="simplebar-content-wrapper"
                 >
                   {({ index, style }) => <div style={style}>Row {index}</div>}
                 </List>
