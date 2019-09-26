@@ -19,7 +19,7 @@
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && cp simplebar-react.d.ts dist/simplebar-react.d.t",
     "dev": "rollup -c -w",
     "test": "jest",
     "version": "yarn build",
@@ -34,8 +34,7 @@
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.3.2",
-    "rollup-plugin-copy": "^3.0.0"
+    "react-test-renderer": "^16.3.2"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [

@@ -1,7 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import copy from 'rollup-plugin-copy';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
@@ -38,9 +37,6 @@ export default [
       }),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
-      copy({
-        targets: [{ src: 'simplebar-react.d.ts', dest: 'dist' }]
-      }),
       terser(),
       license(banner)
     ]
