@@ -36,7 +36,7 @@ SimpleBar.initDOMLoadedElements = function() {
   window.removeEventListener('load', this.initDOMLoadedElements);
 
   Array.prototype.forEach.call(
-    document.querySelectorAll('[data-simplebar]'),
+    document.querySelectorAll('[data-simplebar]:not([data-simplebar="init"])'),
     el => {
       if (!SimpleBar.instances.has(el))
         new SimpleBar(el, SimpleBar.getElOptions(el));
@@ -63,7 +63,9 @@ SimpleBar.initHtmlApi = function() {
                 new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
             } else {
               Array.prototype.forEach.call(
-                addedNode.querySelectorAll('[data-simplebar]'),
+                addedNode.querySelectorAll(
+                  '[data-simplebar]:not([data-simplebar="init"])'
+                ),
                 el => {
                   !SimpleBar.instances.has(el) &&
                     new SimpleBar(el, SimpleBar.getElOptions(el));
@@ -80,7 +82,9 @@ SimpleBar.initHtmlApi = function() {
                 SimpleBar.instances.get(removedNode).unMount();
             } else {
               Array.prototype.forEach.call(
-                removedNode.querySelectorAll('[data-simplebar]'),
+                removedNode.querySelectorAll(
+                  '[data-simplebar]:not([data-simplebar="init"])'
+                ),
                 el => {
                   SimpleBar.instances.has(el) &&
                     SimpleBar.instances.get(el).unMount();
