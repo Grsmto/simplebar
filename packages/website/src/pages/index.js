@@ -3,7 +3,7 @@ import { jsx } from "theme-ui"
 import { graphql } from "gatsby"
 import SimpleBar from "simplebar-react"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
 import List from "../components/List"
 
@@ -16,11 +16,11 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <img src={LogoUrl} />
-      <h2>
+      <img src={LogoUrl} width={450} />
+      <h1 sx={{ fontSize: 24 }}>
         Custom scrollbars made simple, lightweight, easy to use and
         cross-browser.
-      </h2>
+      </h1>
       <p>
         <a
           href="https://github.com/Grsmto/simplebar"
@@ -31,13 +31,18 @@ const IndexPage = () => {
         </a>
       </p>
 
-      <SimpleBar sx={{ maxHeight: 300 }}>test</SimpleBar>
+      <SimpleBar sx={{ maxHeight: 300, flexGrow: 1, background: "#F5F5F5" }}>
+        test
+      </SimpleBar>
 
       <h3>Who is using it?</h3>
       <List
         sx={{
           display: "flex",
           justifyContent: "center",
+          "li + li": {
+            ml: 5,
+          },
         }}
       >
         <li>

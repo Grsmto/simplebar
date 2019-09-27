@@ -2524,6 +2524,11 @@
     jszip "~3.1.5"
     tslib "~1.9.3"
 
+"@theme-ui/preset-base@^0.2.40":
+  version "0.2.40"
+  resolved "https://registry.yarnpkg.com/@theme-ui/preset-base/-/preset-base-0.2.40.tgz#642b019afe911d600b7fa56bb49794f4ce0b112a"
+  integrity sha512-OgBCmblN9mK+nAwi9VddQKYVtIGrCaZb1q6skeDo4KEkka0v1fr5+SozcZ72rarVzfajCptCUKTm0P7NzJj3DA==
+
 "@types/babel-types@*":
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/@types/babel-types/-/babel-types-7.0.7.tgz#667eb1640e8039436028055737d2b9986ee336e3"
@@ -17846,6 +17851,26 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
+simplebar-react@^1.2.3-corejs2:
+  version "1.2.3-corejs2"
+  resolved "https://registry.yarnpkg.com/simplebar-react/-/simplebar-react-1.2.3-corejs2.tgz#b64abe15729b3497133e1466173d8056bd3a24c0"
+  integrity sha512-sXVQx4f7sXoUAdyZR6wcrkvfGEC76Flxbqf6tiGOdcd7vicsh9Fk/oNM5JzHTL3XXbjB62m9aZ5glUIcuBB2mg==
+  dependencies:
+    prop-types "^15.6.1"
+    simplebar "^4.2.3-corejs2"
+
+simplebar@^4.2.3-corejs2:
+  version "4.2.3-corejs2"
+  resolved "https://registry.yarnpkg.com/simplebar/-/simplebar-4.2.3-corejs2.tgz#c9e85fbdac05a319d3b30fb057e669cc04240033"
+  integrity sha512-ABPPW6gec5vidNRQg3Ng99rjO8jLOOlyd1kzmsH8JqzXhbTSNH7+sMGWdeoA0ezFFPCfS9fYLnlLRPXNbb/BSw==
+  dependencies:
+    can-use-dom "^0.1.0"
+    core-js "^2.6.9"
+    lodash.debounce "^4.0.8"
+    lodash.memoize "^4.1.2"
+    lodash.throttle "^4.1.1"
+    resize-observer-polyfill "^1.5.1"
+
 sisteransi@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.3.tgz#98168d62b79e3a5e758e27ae63c4a053d748f4eb"
@@ -20201,7 +20226,7 @@ webpack-dev-server@3.7.2:
     webpack-log "^2.0.0"
     yargs "12.0.5"
 
-webpack-dev-server@^3.1.1, webpack-dev-server@^3.8.1:
+webpack-dev-server@^3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.8.1.tgz#485b64c4aadc23f601e72114b40c1b1fea31d9f1"
   integrity sha512-9F5DnfFA9bsrhpUCAfQic/AXBVHvq+3gQS+x6Zj0yc1fVVE0erKh2MV4IV12TBewuTrYeeTIRwCH9qLMvdNvTw==
