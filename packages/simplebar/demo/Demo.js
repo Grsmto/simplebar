@@ -36,6 +36,17 @@ class Demo extends React.Component {
         autoHide: false
       });
     }
+
+    const perfEls = document.querySelectorAll('.demo-perf');
+    const start = performance.now();
+
+    Array.prototype.forEach.call(perfEls, (el, i) => {
+      new SimpleBar(el);
+
+      if (i + 1 === perfEls.length) {
+        console.log(performance.now() - start);
+      }
+    });
   }
 
   render() {
@@ -273,6 +284,20 @@ class Demo extends React.Component {
                 </List>
               )}
             </SimpleBarReact>
+          </div>
+        </section>
+        <section>
+          <div className="col">
+            <h2>Performance test</h2>
+            {[...Array(10)].map((x, i) => (
+              <div key={i} className="demo-perf">
+                {[...Array(5)].map((x, i) => (
+                  <p key={i} className="odd">
+                    Some content
+                  </p>
+                ))}
+              </div>
+            ))}
           </div>
         </section>
       </section>
