@@ -312,7 +312,7 @@ export default class SimpleBar {
     const isWidthAuto = this.heightAutoObserverEl.offsetWidth <= 1;
 
     const contentElOffsetWidth = this.contentEl.offsetWidth;
-    const contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
+
     const contentWrapperElOffsetWidth = this.contentWrapperEl.offsetWidth;
 
     const elOverflowX = this.elStyles.overflowX;
@@ -339,6 +339,8 @@ export default class SimpleBar {
     this.axis.y.isOverflowing =
       contentElScrollHeight > contentWrapperElOffsetHeight;
 
+    const contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
+
     // Set isOverflowing to false if user explicitely set hidden overflow
     this.axis.x.isOverflowing =
       elOverflowX === 'hidden' ? false : this.axis.x.isOverflowing;
@@ -361,10 +363,12 @@ export default class SimpleBar {
       : 0;
 
     this.axis.x.isOverflowing =
+      this.axis.x.isOverflowing &&
       contentElScrollWidth > contentWrapperElOffsetWidth - offsetForYScrollbar;
     this.axis.y.isOverflowing =
+      this.axis.y.isOverflowing &&
       contentElScrollHeight >
-      contentWrapperElOffsetHeight - offsetForXScrollbar;
+        contentWrapperElOffsetHeight - offsetForXScrollbar;
 
     this.axis.x.scrollbar.el.style.width = `${this.axis.x.scrollbar.size}px`;
     this.axis.y.scrollbar.el.style.height = `${this.axis.y.scrollbar.size}px`;
