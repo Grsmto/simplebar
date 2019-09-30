@@ -335,11 +335,11 @@ export default class SimpleBar {
       : 'auto';
     this.placeholderEl.style.height = `${contentElScrollHeight}px`;
 
+    const contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
+
     this.axis.x.isOverflowing = contentElScrollWidth > contentElOffsetWidth;
     this.axis.y.isOverflowing =
       contentElScrollHeight > contentWrapperElOffsetHeight;
-
-    const contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
 
     // Set isOverflowing to false if user explicitely set hidden overflow
     this.axis.x.isOverflowing =
