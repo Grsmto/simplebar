@@ -270,7 +270,11 @@ class Demo extends React.Component {
           </div>
           <div className="col">
             <h2>SimpleBar-React + React-Window</h2>
-            <SimpleBarReact className="demo1">
+            <SimpleBarReact
+              className="demo1"
+              autoHide={false}
+              data-simplebar-force-visible="x"
+            >
               {({ scrollableNodeRef, contentNodeRef }) => (
                 <List
                   height={300}

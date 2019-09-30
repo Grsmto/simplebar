@@ -1,35 +1,7 @@
 import canUseDOM from 'can-use-dom';
 
 import SimpleBar from './simplebar';
-
-// Helper function to retrieve options from element attributes
-SimpleBar.getElOptions = function(el) {
-  const options = Array.prototype.reduce.call(
-    el.attributes,
-    (acc, attribute) => {
-      const option = attribute.name.match(/data-simplebar-(.+)/);
-      if (option) {
-        const key = option[1].replace(/\W+(.)/g, (x, chr) => chr.toUpperCase());
-        switch (attribute.value) {
-          case 'true':
-            acc[key] = true;
-            break;
-          case 'false':
-            acc[key] = false;
-            break;
-          case undefined:
-            acc[key] = true;
-            break;
-          default:
-            acc[key] = attribute.value;
-        }
-      }
-      return acc;
-    },
-    {}
-  );
-  return options;
-};
+import { getOptions } from './helpers';
 
 SimpleBar.initDOMLoadedElements = function() {
   document.removeEventListener('DOMContentLoaded', this.initDOMLoadedElements);
@@ -39,7 +11,7 @@ SimpleBar.initDOMLoadedElements = function() {
     document.querySelectorAll('[data-simplebar]:not([data-simplebar="init"])'),
     el => {
       if (!SimpleBar.instances.has(el))
-        new SimpleBar(el, SimpleBar.getElOptions(el));
+        new SimpleBar(el, getOptions(el.attributes));
     }
   );
 };
@@ -60,7 +32,7 @@ SimpleBar.initHtmlApi = function() {
           if (addedNode.nodeType === 1) {
             if (addedNode.hasAttribute('data-simplebar')) {
               !SimpleBar.instances.has(addedNode) &&
-                new SimpleBar(addedNode, SimpleBar.getElOptions(addedNode));
+                new SimpleBar(addedNode, getOptions(addedNode.attributes));
             } else {
               Array.prototype.forEach.call(
                 addedNode.querySelectorAll(
@@ -68,7 +40,7 @@ SimpleBar.initHtmlApi = function() {
                 ),
                 el => {
                   !SimpleBar.instances.has(el) &&
-                    new SimpleBar(el, SimpleBar.getElOptions(el));
+                    new SimpleBar(el, getOptions(el.attributes));
                 }
               );
             }
@@ -126,3 +98,5 @@ if (canUseDOM) {
 }
 
 export default SimpleBar;
+
+export * from './helpers';
