@@ -77,7 +77,11 @@ SimpleBar.initHtmlApi = function() {
 
         Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
           if (removedNode.nodeType === 1) {
-            if (removedNode.hasAttribute('data-simplebar')) {
+            if (
+              removedNode.hasAttribute(
+                '[data-simplebar]:not([data-simplebar="init"])'
+              )
+            ) {
               SimpleBar.instances.has(removedNode) &&
                 SimpleBar.instances.get(removedNode).unMount();
             } else {
