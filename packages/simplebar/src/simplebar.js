@@ -303,6 +303,7 @@ export default class SimpleBar {
     this.resizeObserver.observe(this.el);
     this.resizeObserver.observe(this.contentEl);
 
+    // This is required to detect horizontal scroll. Vertical scroll only needs the resizeObserver.
     this.mutationObserver = new MutationObserver(this.recalculate);
 
     this.mutationObserver.observe(this.contentEl, {
@@ -392,13 +393,13 @@ export default class SimpleBar {
    * Calculate scrollbar size
    */
   getScrollbarSize(axis = 'y') {
+    if (!this.axis[axis].isOverflowing) {
+      return 0;
+    }
+
     const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
     const trackSize = this.axis[axis].track.el[this.axis[axis].offsetSizeAttr];
     let scrollbarSize;
-
-    if (!this.axis[axis].isOverflowing) {
-      return;
-    }
 
     let scrollbarRatio = trackSize / contentSize;
 
@@ -416,6 +417,10 @@ export default class SimpleBar {
   }
 
   positionScrollbar(axis = 'y') {
+    if (!this.axis[axis].isOverflowing) {
+      return;
+    }
+
     const contentSize = this.contentWrapperEl[this.axis[axis].scrollSizeAttr];
     const trackSize = this.axis[axis].track.el[this.axis[axis].offsetSizeAttr];
     const hostSize = parseInt(this.elStyles[this.axis[axis].sizeAttr], 10);
