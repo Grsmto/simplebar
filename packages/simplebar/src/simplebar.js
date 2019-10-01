@@ -326,9 +326,6 @@ export default class SimpleBar {
     const elOverflowX = this.elStyles.overflowX;
     const elOverflowY = this.elStyles.overflowY;
 
-    this.axis.x.scrollbar.size = this.getScrollbarSize('x');
-    this.axis.y.scrollbar.size = this.getScrollbarSize('y');
-
     this.contentEl.style.padding = `${this.elStyles.paddingTop} ${this.elStyles.paddingRight} ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
     this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
 
@@ -377,6 +374,9 @@ export default class SimpleBar {
       this.axis.y.isOverflowing &&
       contentElScrollHeight >
         contentWrapperElOffsetHeight - offsetForXScrollbar;
+
+    this.axis.x.scrollbar.size = this.getScrollbarSize('x');
+    this.axis.y.scrollbar.size = this.getScrollbarSize('y');
 
     this.axis.x.scrollbar.el.style.width = `${this.axis.x.scrollbar.size}px`;
     this.axis.y.scrollbar.el.style.height = `${this.axis.y.scrollbar.size}px`;
