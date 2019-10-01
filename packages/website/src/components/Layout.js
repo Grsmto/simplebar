@@ -2,13 +2,17 @@
 import { jsx, ThemeProvider } from "theme-ui"
 import PropTypes from "prop-types"
 import { Global } from "@emotion/core"
+import { useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 
 import theme from "../theme"
 
 import "modern-normalize/modern-normalize.css"
 import "typeface-nunito"
-console.log(theme)
+
 const Layout = ({ children }) => {
+  const { browserstackImage } = useStaticQuery(query)
+
   return (
     <ThemeProvider theme={theme}>
       <Global
@@ -30,7 +34,6 @@ const Layout = ({ children }) => {
           },
           a: {
             textDecoration: "none",
-            textTransform: "uppercase",
             color: theme.colors.primary,
             "&:hover": {
               textDecoration: "underline",
@@ -40,6 +43,7 @@ const Layout = ({ children }) => {
             transition: "all 150ms",
           },
           img: {
+            display: "block",
             maxWidth: "100%",
           },
           "h1, h2, h3": {
@@ -48,10 +52,20 @@ const Layout = ({ children }) => {
           h3: {
             fontSize: theme.fontSizes[5],
           },
-          ".simplebar-track .simplebar-scrollbar:before": {
-            opacity: 1,
+          ".simplebar-scrollbar:before": {
             backgroundImage:
               "linear-gradient(-131deg, #E7B02B 0%, #C13E51 100%)",
+          },
+          ".simplebar-track .simplebar-scrollbar.simplebar-visible::before": {
+            opacity: 1,
+            top: 6,
+            bottom: 6,
+          },
+          ".simplebar-track.simplebar-vertical": {
+            width: "21px",
+          },
+          ".simplebar-scrollbar": {
+            marginRight: 2,
           },
         })}
       />
@@ -59,26 +73,46 @@ const Layout = ({ children }) => {
         sx={{
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
           margin: `0 auto`,
           maxWidth: 960,
-          padding: 4,
+          padding: [3, 4],
           height: "100vh",
         }}
       >
-        <main
+        {children}
+        <footer
           sx={{
             display: "flex",
-            flexDirection: "column",
-            flexGrow: 1,
+            flexDirection: ["column", "row"],
             alignItems: "center",
-            height: "100%",
+            mt: "auto",
+            fontSize: [0, 2],
           }}
         >
-          {children}
-        </main>
-        <footer sx={{ mt: "auto" }}>
           Released under the MIT License Copyright © {new Date().getFullYear()}{" "}
-          Adrien Denat Sponsored by <a href="https://www.gatsbyjs.org"></a>
+          Adrien Denat{" "}
+          <span
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              ml: [0, "auto"],
+            }}
+          >
+            Sponsored by{" "}
+            <a
+              href="https://www.browserstack.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ ml: 2 }}
+            >
+              <Img
+                style={{ display: "block" }}
+                fixed={browserstackImage.childImageSharp.fixed}
+                width={120}
+              />
+            </a>
+          </span>
         </footer>
       </div>
     </ThemeProvider>
@@ -90,3 +124,15 @@ Layout.propTypes = {
 }
 
 export default Layout
+
+const query = graphql`
+  {
+    browserstackImage: file(relativePath: { eq: "browserstack.png" }) {
+      childImageSharp {
+        fixed(width: 120) {
+          ...GatsbyImageSharpFixed_noBase64
+        }
+      }
+    }
+  }
+`

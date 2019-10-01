@@ -1,8 +1,11 @@
 /** @jsx jsx */
 import { jsx, Styled } from "theme-ui"
+import { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import SimpleBar from "simplebar-react"
 import "simplebar/dist/simplebar.min.css"
+import { FiGithub } from "react-icons/fi"
+import { MdStar } from "react-icons/md"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
@@ -13,34 +16,80 @@ import TwitchUrl from "../images/users/twitch.svg"
 import StorybookUrl from "../images/users/storybook.svg"
 import ZulipUrl from "../images/users/zulip.svg"
 
+const verticalCenter = {
+  display: "inline-flex",
+  alignItems: "center",
+}
+
+function useGitHubStars() {
+  const [stars, setStars] = useState(null)
+  useEffect(() => {
+    fetch("https://api.github.com/repos/grsmto/simplebar")
+      .then(result => result.json())
+      .then(response => setStars(response.stargazers_count))
+  }, [])
+  return stars
+}
+
 const IndexPage = ({ data }) => {
   const {
     markdownRemark: { html },
   } = data
+  const stars = useGitHubStars()
+
   return (
     <Layout>
       <SEO title="Home" />
-      <img src={LogoUrl} width={450} />
-      <h1 sx={{ fontSize: 24 }}>
+      <div>
+        <div sx={{ height: 0, paddingBottom: "20%" }}>
+          <img
+            sx={{ flex: "0 0 auto", height: "auto" }}
+            src={LogoUrl}
+            width={560}
+            height={110}
+          />
+        </div>
+      </div>
+      <h1
+        sx={{
+          fontSize: 24,
+          mt: 4,
+          mb: 0,
+          maxWidth: "540px",
+          textAlign: "center",
+        }}
+      >
         Custom scrollbars made simple, lightweight, easy to use and
         cross-browser.
       </h1>
-      <p>
+      <div sx={{ ...verticalCenter, mt: 3 }}>
         <a
           href="https://github.com/Grsmto/simplebar"
-          target="_blank"
-          rel="noopener noreferrer"
+          sx={{
+            ...verticalCenter,
+            mr: 4,
+          }}
         >
+          <FiGithub sx={{ mr: 2 }} />
           View Simplebar on Github
         </a>
-      </p>
+        <a
+          href="https://github.com/grsmto/simplebar/stargazers"
+          sx={{ ...verticalCenter, minWidth: "4em" }}
+        >
+          <MdStar sx={{ mr: 1, mt: "-1px", fontSize: "1.2em" }} />
+          {stars}
+        </a>
+      </div>
 
       <SimpleBar
         sx={{
           flexGrow: 1,
           background: "#F5F5F5",
           width: "100%",
-          p: 4,
+          height: "100%",
+          p: [3, 5],
+          mt: 4,
           overflow: "auto",
         }}
         data-simplebar-auto-hide="false"
@@ -48,13 +97,15 @@ const IndexPage = ({ data }) => {
         <Styled.root dangerouslySetInnerHTML={{ __html: html }} />
       </SimpleBar>
 
-      <h3>Who is using it?</h3>
+      <h3 sx={{ mt: 4 }}>Who is using it?</h3>
       <List
         sx={{
           display: "flex",
           justifyContent: "center",
+          alignItems: "center",
+          mb: [4, 5],
           "li + li": {
-            ml: 5,
+            ml: [4, 5],
           },
         }}
       >

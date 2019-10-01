@@ -6,6 +6,7 @@ const List = ({ children, ...otherProps }) => (
     {...otherProps}
     sx={{
       listStyle: "none",
+      p: 0,
     }}
   >
     {children}

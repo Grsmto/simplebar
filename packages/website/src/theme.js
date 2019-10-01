@@ -19,7 +19,7 @@ const theme = {
     0: "1rem", // 10px
     1: "1.2rem", // 12px
     2: "1.4rem", // 14px
-    3: "1.7rem", // 17px
+    3: "1.6rem", // 16px
     4: "1.9rem", // 19px
     5: "2.3rem", // 23px
     6: "2.8rem", // 28px
@@ -33,10 +33,21 @@ const theme = {
       h1: {
         display: "none",
       },
+      h3: {
+        mt: 4,
+      },
+      h4: {
+        mt: 4,
+        mb: 0,
+        fontSize: 4,
+      },
+      "p:first-of-type": {
+        mt: 0,
+      },
     },
   },
 }
 
-theme.fontSizes.body = theme.fontSizes[2]
+theme.fontSizes.body = theme.fontSizes[3]
 
 export default theme
