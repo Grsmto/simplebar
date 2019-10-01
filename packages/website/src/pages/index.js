@@ -5,7 +5,7 @@ import SimpleBar from "simplebar-react"
 import "simplebar/dist/simplebar.min.css"
 
 import Layout from "../components/Layout"
-import SEO from "../components/seo"
+import SEO from "../components/SEO"
 import List from "../components/List"
 
 import LogoUrl from "../images/logo.svg"
