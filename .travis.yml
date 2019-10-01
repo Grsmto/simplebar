@@ -19,7 +19,7 @@ deploy:
   keep-history: true
   on:
     branch: master
-  local-dir: packages/simplebar/demo
+  local-dir: packages/website/public
 
 addons:
   browserstack:
