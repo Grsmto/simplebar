@@ -295,9 +295,9 @@ export default class SimpleBar {
     let ignoredCallbacks = 0;
 
     this.resizeObserver = new ResizeObserver(() => {
-      if (ignoredCallbacks < 2) return;
-      this.recalculate();
       ignoredCallbacks++;
+      if (ignoredCallbacks === 1) return;
+      this.recalculate();
     });
 
     this.resizeObserver.observe(this.el);
