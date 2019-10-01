@@ -1,7 +1,8 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
+import { jsx, Styled } from "theme-ui"
 import { graphql } from "gatsby"
 import SimpleBar from "simplebar-react"
+import "simplebar/dist/simplebar.min.css"
 
 import Layout from "../components/Layout"
 import SEO from "../components/seo"
@@ -12,7 +13,10 @@ import TwitchUrl from "../images/users/twitch.svg"
 import StorybookUrl from "../images/users/storybook.svg"
 import ZulipUrl from "../images/users/zulip.svg"
 
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
+  const {
+    markdownRemark: { html },
+  } = data
   return (
     <Layout>
       <SEO title="Home" />
@@ -31,8 +35,17 @@ const IndexPage = () => {
         </a>
       </p>
 
-      <SimpleBar sx={{ maxHeight: 300, flexGrow: 1, background: "#F5F5F5" }}>
-        test
+      <SimpleBar
+        sx={{
+          flexGrow: 1,
+          background: "#F5F5F5",
+          width: "100%",
+          p: 4,
+          overflow: "auto",
+        }}
+        data-simplebar-auto-hide="false"
+      >
+        <Styled.root dangerouslySetInnerHTML={{ __html: html }} />
       </SimpleBar>
 
       <h3>Who is using it?</h3>

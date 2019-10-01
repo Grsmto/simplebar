@@ -28,6 +28,13 @@ const theme = {
     9: "7rem", // 70px
     10: "9rem", // 90px
   },
+  styles: {
+    root: {
+      h1: {
+        display: "none",
+      },
+    },
+  },
 }
 
 theme.fontSizes.body = theme.fontSizes[2]

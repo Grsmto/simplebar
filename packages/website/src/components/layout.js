@@ -48,6 +48,9 @@ const Layout = ({ children }) => {
           h3: {
             fontSize: theme.fontSizes[5],
           },
+          ".simplebar-wrapper": {
+            height: "100%",
+          },
         })}
       />
       <div
@@ -57,7 +60,7 @@ const Layout = ({ children }) => {
           margin: `0 auto`,
           maxWidth: 960,
           padding: 4,
-          minHeight: "100vh",
+          height: "100vh",
         }}
       >
         <main
@@ -66,6 +69,7 @@ const Layout = ({ children }) => {
             flexDirection: "column",
             flexGrow: 1,
             alignItems: "center",
+            height: "100%",
           }}
         >
           {children}
