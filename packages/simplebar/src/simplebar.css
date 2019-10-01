@@ -146,7 +146,7 @@
   transition: opacity 0.2s linear;
 }
 
-.simplebar-track .simplebar-scrollbar.simplebar-visible:before {
+.simplebar-scrollbar.simplebar-visible:before {
   /* When hovered, remove all transitions from drag handle */
   opacity: 0.5;
   transition: opacity 0s linear;
