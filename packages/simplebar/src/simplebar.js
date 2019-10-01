@@ -302,6 +302,14 @@ export default class SimpleBar {
 
     this.resizeObserver.observe(this.el);
     this.resizeObserver.observe(this.contentEl);
+
+    this.mutationObserver = new MutationObserver(this.recalculate);
+
+    this.mutationObserver.observe(this.contentEl, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
   }
 
   recalculate() {
@@ -781,7 +789,7 @@ export default class SimpleBar {
     this.contentWrapperEl.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onWindowResize);
 
-    this.mutationObserver && this.mutationObserver.disconnect();
+    this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
 
     // Cancel all debounced functions
