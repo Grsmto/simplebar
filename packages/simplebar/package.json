@@ -26,7 +26,7 @@
     "dev": "rollup -c -w",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
-    "test:e2e": "concurrently \"yarn start --port 8091\" \"intern\" --kill-others --success first",
+    "test:e2e": "concurrently \"yarn start --port 8020\" \"intern\" --kill-others --success first",
     "version": "yarn build",
     "precommit": "lint-staged"
   },

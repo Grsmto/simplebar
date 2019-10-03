@@ -1,6 +1,6 @@
 {
   "functionalSuites": "**/*.test.func.js",
-  "serverPort": 8091,
+  "serverPort": 8020,
   "capabilities": {
     "browserstack.local": true,
     "fixSessionCapabilities": false,
