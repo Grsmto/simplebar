@@ -5,6 +5,6 @@ describe('app', () => {
   it('should render the test page', async test => {
     const { remote } = test;
     // Load the page
-    await remote.get('http://localhost:8091/examples.html');
+    await remote.get('demo/examples.html');
   });
 });
