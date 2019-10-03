@@ -32,7 +32,7 @@ import SimpleBar from 'simplebar';
 export default {
   name: 'simplebar-vue',
   mounted () {
-    const options = SimpleBar.getElOptions(this.$refs.element);
+    const options = SimpleBar.getOptions(this.$refs.element.attributes);
     this.SimpleBar = new SimpleBar(this.$refs.element, options);
   },
   computed: {

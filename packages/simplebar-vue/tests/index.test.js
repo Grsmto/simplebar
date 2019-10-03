@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import simplebar from './index.vue';
+import simplebar from '../index.vue';
 
 describe('simplebar', () => {
   it('renders without crashing', () => {
@@ -25,7 +25,6 @@ describe('simplebar', () => {
 
   it('can access SimpleBar instance', () => {
     const wrapper = shallowMount(simplebar);
-
     expect(wrapper.vm.SimpleBar).toBeDefined();
   });
 

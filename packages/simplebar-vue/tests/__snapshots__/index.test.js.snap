@@ -8,7 +8,7 @@ exports[`simplebar renders with default slot 1`] = `
     </div>
     <div class="simplebar-mask">
       <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-        <div class="simplebar-content-wrapper" style="height: auto; padding-right: 0px; padding-bottom: 0px; overflow-x: hidden; overflow-y: hidden;">
+        <div class="simplebar-content-wrapper" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
           <div class="simplebar-content">
             <div class="inner-content"></div>
           </div>
@@ -18,10 +18,10 @@ exports[`simplebar renders with default slot 1`] = `
     <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
   </div>
   <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-    <div class="simplebar-scrollbar" style="transform: translate3d(0px, 0, 0); display: none;"></div>
+    <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
   </div>
   <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
-    <div class="simplebar-scrollbar" style="transform: translate3d(0, 0px, 0); display: none;"></div>
+    <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
   </div>
 </div>
 `;
@@ -34,7 +34,7 @@ exports[`simplebar renders with options 1`] = `
     </div>
     <div class="simplebar-mask">
       <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-        <div class="simplebar-content-wrapper" style="height: auto; padding-right: 0px; padding-bottom: 0px; overflow-x: hidden; overflow-y: hidden;">
+        <div class="simplebar-content-wrapper" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
           <div class="simplebar-content"></div>
         </div>
       </div>
@@ -42,10 +42,10 @@ exports[`simplebar renders with options 1`] = `
     <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
   </div>
   <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-    <div class="simplebar-scrollbar simplebar-visible" style="transform: translate3d(0px, 0, 0); display: none;"></div>
+    <div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div>
   </div>
   <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
-    <div class="simplebar-scrollbar simplebar-visible" style="transform: translate3d(0, 0px, 0); display: none;"></div>
+    <div class="simplebar-scrollbar simplebar-visible" style="height: 0px; display: none;"></div>
   </div>
 </div>
 `;
@@ -58,7 +58,7 @@ exports[`simplebar renders without crashing 1`] = `
     </div>
     <div class="simplebar-mask">
       <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-        <div class="simplebar-content-wrapper" style="height: auto; padding-right: 0px; padding-bottom: 0px; overflow-x: hidden; overflow-y: hidden;">
+        <div class="simplebar-content-wrapper" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
           <div class="simplebar-content"></div>
         </div>
       </div>
@@ -66,10 +66,10 @@ exports[`simplebar renders without crashing 1`] = `
     <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
   </div>
   <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-    <div class="simplebar-scrollbar" style="transform: translate3d(0px, 0, 0); display: none;"></div>
+    <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
   </div>
   <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
-    <div class="simplebar-scrollbar" style="transform: translate3d(0, 0px, 0); display: none;"></div>
+    <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
   </div>
 </div>
 `;
