@@ -96,7 +96,7 @@ export default [
       return false;
     },
     output: {
-      file: 'dist/simplebar-core.js',
+      file: 'dist/simplebar-core.esm.js',
       format: 'es',
       sourcemap: true
     },

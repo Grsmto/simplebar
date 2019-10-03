@@ -1,4 +1,4 @@
-import SimpleBar from '../src/simplebar';
+import SimpleBar, { getOptions } from '../src';
 
 beforeEach(() => {
   jest.resetModules();
@@ -42,14 +42,9 @@ test('should unmount SimpleBar', () => {
 test('should return the element options', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
-  expect(SimpleBar.getElOptions(simpleBar.el)).toEqual({ autoHide: true });
-});
-
-test('should know if element is a child node', () => {
-  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
-
-  expect(simpleBar.isChildNode(simpleBar.contentEl)).toBeTruthy();
-  expect(simpleBar.isChildNode(document.body)).toBeFalsy();
+  expect(getOptions(simpleBar.el.attributes)).toEqual({
+    autoHide: true
+  });
 });
 
 test('mouse should be within bounds', () => {
