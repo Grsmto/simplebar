@@ -1,4 +1,4 @@
-import SimpleBar, { getOptions } from '../src';
+import SimpleBar from '../src';
 
 beforeEach(() => {
   jest.resetModules();
@@ -42,7 +42,7 @@ test('should unmount SimpleBar', () => {
 test('should return the element options', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
-  expect(getOptions(simpleBar.el.attributes)).toEqual({
+  expect(SimpleBar.getOptions(simpleBar.el.attributes)).toEqual({
     autoHide: true
   });
 });

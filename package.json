@@ -5,8 +5,8 @@
   ],
   "scripts": {
     "build": "lerna run build",
-    "test": "yarn build && lerna run test",
-    "release": "yarn test && lerna publish",
+    "test": "lerna run test",
+    "release": "yarn build && yarn test && lerna publish",
     "start": "lerna exec --scope=simplebar yarn start",
     "dev": "lerna exec --scope=simplebar yarn dev"
   },
@@ -20,6 +20,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "concurrently": "^4.1.2",
     "env-cmd": "^10.0.1",
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
