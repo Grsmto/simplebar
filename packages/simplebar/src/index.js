@@ -89,6 +89,8 @@ SimpleBar.initHtmlApi = function() {
   }
 };
 
+SimpleBar.getOptions = getOptions;
+
 /**
  * HTML API
  * Called only in a browser env.
@@ -98,5 +100,3 @@ if (canUseDOM) {
 }
 
 export default SimpleBar;
-
-export * from './helpers';

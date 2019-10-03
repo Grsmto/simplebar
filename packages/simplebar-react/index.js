@@ -1,7 +1,38 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import SimpleBarJS from 'simplebar/dist/simplebar-core';
-import { getOptions } from 'simplebar';
+import SimpleBarJS from 'simplebar/dist/simplebar-core.esm';
+
+/* Deprecated
+ * Hardcore this here until we can safely deprecated it.
+ * Helper function to retrieve options from element attributes
+ */
+const getOptions = function(obj) {
+  const options = Array.prototype.reduce.call(
+    obj,
+    (acc, attribute) => {
+      const option = attribute.name.match(/data-simplebar-(.+)/);
+      if (option) {
+        const key = option[1].replace(/\W+(.)/g, (x, chr) => chr.toUpperCase());
+        switch (attribute.value) {
+          case 'true':
+            acc[key] = true;
+            break;
+          case 'false':
+            acc[key] = false;
+            break;
+          case undefined:
+            acc[key] = true;
+            break;
+          default:
+            acc[key] = attribute.value;
+        }
+      }
+      return acc;
+    },
+    {}
+  );
+  return options;
+};
 
 export default function SimpleBar({
   children,
@@ -10,7 +41,7 @@ export default function SimpleBar({
   scrollableNodeProps,
   ...otherProps
 }) {
-  const elRef = useRef();
+  const elRef = useRef('lol');
   const scrollableNodeRef = useRef();
   const contentNodeRef = useRef();
   let options = {};
@@ -18,7 +49,7 @@ export default function SimpleBar({
   let deprecatedOptions = [];
 
   Object.keys(otherProps).forEach(key => {
-    if (SimpleBarJS.defaultOptions[key]) {
+    if (Object.prototype.hasOwnProperty.call(SimpleBarJS.defaultOptions, key)) {
       options[key] = otherProps[key];
     } else if (key.match(/data-simplebar-(.+)/)) {
       deprecatedOptions.push({
@@ -37,16 +68,18 @@ export default function SimpleBar({
   }
 
   useEffect(() => {
-    new SimpleBarJS(elRef.current, {
-      ...getOptions(deprecatedOptions),
-      ...options,
-      ...(scrollableNodeRef.current && {
-        scrollableNode: scrollableNodeRef.current
-      }),
-      ...(contentNodeRef.current && {
-        contentNode: contentNodeRef.current
-      })
-    });
+    if (elRef.current) {
+      new SimpleBarJS(elRef.current, {
+        ...getOptions(deprecatedOptions),
+        ...options,
+        ...(scrollableNodeRef.current && {
+          scrollableNode: scrollableNodeRef.current
+        }),
+        ...(contentNodeRef.current && {
+          contentNode: contentNodeRef.current
+        })
+      });
+    }
   });
 
   return (

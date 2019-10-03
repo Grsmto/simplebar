@@ -17,7 +17,8 @@ const banner = {
 };
 const globals = {
   'prop-types': 'PropTypes',
-  react: 'React'
+  react: 'React',
+  simplebar: 'SimpleBar'
 };
 const external = [...Object.keys(pkg.dependencies), 'react'];
 
