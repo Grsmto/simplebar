@@ -34,23 +34,13 @@
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.3.2"
+    "@testing-library/jest-dom": "^4.1.0",
+    "@testing-library/react": "^9.2.0"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [
       "prettier-eslint --write",
       "git add"
-    ]
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.js?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
-    "moduleFileExtensions": [
-      "js"
     ]
   }
 }
