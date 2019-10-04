@@ -1,5 +1,14 @@
-# SimpleBar [![npm package][npm-badge]][npm] ![size-badge]![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=amtTU2pEa1FjNmpabTBCbUh2b3FpbFZQaXhNd1Q3bEg0L1dlSzd2SGN2Zz0tLWpjK1ZwWWRNWnVGQWI4OXphWGRISEE9PQ==--39b14340be576db5bd01b020627cd17414003bfb%)](https://automate.browserstack.com/public-build/amtTU2pEa1FjNmpabTBCbUh2b3FpbFZQaXhNd1Q3bEg0L1dlSzd2SGN2Zz0tLWpjK1ZwWWRNWnVGQWI4OXphWGRISEE9PQ==--39b14340be576db5bd01b020627cd17414003bfb%)
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/527559/66231995-3cd0c380-e6be-11e9-8782-c50c834aac93.png" width="570" height="112" alt="SimpleBar" />
+</p>
+<br/>
+<p align="center" style="margin: 40px;">
+  <a href="https://npmjs.org/package/simplebar"><img alt="NPM version" src="https://img.shields.io/npm/v/simplebar.svg?style=flat-square" /></a>
+  <a href="https://npmjs.org/package/simplebar"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/simplebar.svg?style=flat-square"></a>
+  <a href="https://travis-ci.org/grsmto/simplebar"><img alt="Build Status" src="https://img.shields.io/travis/grsmto/simplebar/master.svg?style=flat-square" /></a>
+  <a href="https://automate.browserstack.com/public-build/amtTU2pEa1FjNmpabTBCbUh2b3FpbFZQaXhNd1Q3bEg0L1dlSzd2SGN2Zz0tLWpjK1ZwWWRNWnVGQWI4OXphWGRISEE9PQ==--39b14340be576db5bd01b020627cd17414003bfb%"><img src='https://automate.browserstack.com/badge.svg?badge_key=amtTU2pEa1FjNmpabTBCbUh2b3FpbFZQaXhNd1Q3bEg0L1dlSzd2SGN2Zz0tLWpjK1ZwWWRNWnVGQWI4OXphWGRISEE9PQ==--39b14340be576db5bd01b020627cd17414003bfb%'/></a>
+</p>
+<br/>
 SimpleBar does only one thing: replace the browser's default scrollbar with a custom CSS-styled one without losing performances.
 Unlike some popular plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...
 You keep the awesomeness of native scrolling...with a custom scrollbar!
