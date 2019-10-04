@@ -5,3 +5,5 @@ dist
 yarn-error.log
 .next
 .env
+bundle.js
+bundle.js.map
