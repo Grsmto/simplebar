@@ -36,12 +36,10 @@ const getOptions = function(obj) {
 
 export default function SimpleBar({
   children,
-  className,
-  style,
-  scrollableNodeProps,
+  scrollableNodeProps = {},
   ...otherProps
 }) {
-  const elRef = useRef('lol');
+  const elRef = useRef();
   const scrollableNodeRef = scrollableNodeProps.ref || useRef();
   const contentNodeRef = useRef();
   let options = {};
@@ -83,7 +81,7 @@ export default function SimpleBar({
   });
 
   return (
-    <div ref={elRef} className={className} style={style} {...rest}>
+    <div ref={elRef} {...rest}>
       <div className="simplebar-wrapper">
         <div className="simplebar-height-auto-observer-wrapper">
           <div className="simplebar-height-auto-observer" />
@@ -96,7 +94,7 @@ export default function SimpleBar({
               <div
                 {...scrollableNodeProps}
                 className={`simplebar-content-wrapper${
-                  scrollableNodeProps && scrollableNodeProps.className
+                  scrollableNodeProps.className
                     ? ` ${scrollableNodeProps.className}`
                     : ''
                 }`}
@@ -120,7 +118,5 @@ export default function SimpleBar({
 
 SimpleBar.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  className: PropTypes.string,
-  style: PropTypes.object,
   scrollableNodeProps: PropTypes.object
 };
