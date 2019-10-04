@@ -25,6 +25,8 @@ const renderScrollbar = props => {
 };
 
 class Demo extends React.Component {
+  scrollableElRef = React.createRef();
+
   componentDidMount() {
     new SimpleBar(document.getElementById('manual-instantiation'));
     new SimpleBar(document.getElementById('with-classnames'), {
@@ -47,6 +49,10 @@ class Demo extends React.Component {
         console.log(performance.now() - start);
       }
     });
+
+    // this.scrollableElRef.current.addEventListener('scroll', e =>
+    //   console.log(e)
+    // );
   }
 
   render() {
@@ -274,6 +280,7 @@ class Demo extends React.Component {
               className="demo1"
               autoHide={false}
               data-simplebar-force-visible="x"
+              scrollableNodeProps={{ ref: this.scrollableElRef }}
             >
               {({ scrollableNodeRef, contentNodeRef }) => (
                 <List

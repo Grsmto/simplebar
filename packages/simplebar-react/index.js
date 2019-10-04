@@ -42,7 +42,7 @@ export default function SimpleBar({
   ...otherProps
 }) {
   const elRef = useRef('lol');
-  const scrollableNodeRef = useRef();
+  const scrollableNodeRef = scrollableNodeProps.ref || useRef();
   const contentNodeRef = useRef();
   let options = {};
   let rest = {};
