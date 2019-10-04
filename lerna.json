@@ -3,5 +3,10 @@
   "version": "independent",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "ignoreChanges": ["**/demo/**", "**/*.md"]
+  "ignoreChanges": ["**/demo/**", "**/*.md"],
+  "command": {
+    "release": {
+      "ignore": ["website", "simplebar-angular"]
+    }
+  }
 }
