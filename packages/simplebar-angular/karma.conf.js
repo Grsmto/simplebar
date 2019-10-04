@@ -16,7 +16,7 @@ module.exports = function(config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, '../../coverage/simplebar-tester'),
+      dir: require('path').join(__dirname, '../../coverage/simplebar-angular'),
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     },
@@ -25,7 +25,17 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['Chrome'],
+    browsers: ['HeadlessChrome'],
+    customLaunchers: {
+      ChromeNoSandBox: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      },
+      HeadlessChrome: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--headless']
+      }
+    },
     singleRun: true,
     restartOnFileChange: true,
     failOnEmptyTestSuite: false

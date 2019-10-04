@@ -6,5 +6,6 @@
     "umdModuleIds": {
       "simplebar": "SimpleBar"
     }
-  }
+  },
+  "whitelistedNonPeerDependencies": ["simplebar"]
 }

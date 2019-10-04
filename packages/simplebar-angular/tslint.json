@@ -51,6 +51,8 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "directive-selector": [true, "attribute", "ngx", "camelCase"],
+    "component-selector": [true, "element", "ngx", "kebab-case"]
   }
 }
