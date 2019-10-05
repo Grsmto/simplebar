@@ -1,4 +1,4 @@
-# SimpleBar [![npm package][npm-badge]][npm] ![size-badge]![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=amtTU2pEa1FjNmpabTBCbUh2b3FpbFZQaXhNd1Q3bEg0L1dlSzd2SGN2Zz0tLWpjK1ZwWWRNWnVGQWI4OXphWGRISEE9PQ==--39b14340be576db5bd01b020627cd17414003bfb%)](https://automate.browserstack.com/public-build/amtTU2pEa1FjNmpabTBCbUh2b3FpbFZQaXhNd1Q3bEg0L1dlSzd2SGN2Zz0tLWpjK1ZwWWRNWnVGQWI4OXphWGRISEE9PQ==--39b14340be576db5bd01b020627cd17414003bfb%)
+# SimpleBar [![npm package][npm-badge]][npm] ![size-badge]
 
 :warning: SimpleBar v4.3 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/releases) before updating.
 
@@ -8,12 +8,6 @@ SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **nativ
 SimpleBar is meant to be as easy to use as possible and lightweight. If you want something more advanced I recommend [KingSora](https://github.com/KingSora) 's [Overlay Scrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 ### Installation
-
-**- Choose your SimpleBar**
-
-- **For React** `yarn add simplebar-react`
-- **For Vue** `yarn add simplebar-vue`
-- **For others** `yarn add simplebar`
 
 **- Via npm**
 `npm install simplebar --save`
