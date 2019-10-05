@@ -1,8 +1,8 @@
-<p align="center">
+<p hidden align="center">
   <img src="https://user-images.githubusercontent.com/527559/66231995-3cd0c380-e6be-11e9-8782-c50c834aac93.png" width="570" height="112" alt="SimpleBar" />
 </p>
-<br/>
-<p align="center" style="margin: 40px;">
+<br hidden />
+<p hidden align="center">
   <a href="https://npmjs.org/package/simplebar"><img alt="NPM version" src="https://img.shields.io/npm/v/simplebar.svg?style=flat-square" /></a>
   <a href="https://npmjs.org/package/simplebar"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/simplebar.svg?style=flat-square"></a>
   <a href="https://travis-ci.org/grsmto/simplebar"><img alt="Build Status" src="https://img.shields.io/travis/grsmto/simplebar/master.svg?style=flat-square" /></a>
