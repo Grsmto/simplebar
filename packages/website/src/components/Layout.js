@@ -91,10 +91,11 @@ const Layout = ({ children }) => {
             alignItems: "center",
             mt: "auto",
             fontSize: [0, 2],
+            width: "100%",
           }}
         >
           Released under the MIT License Copyright © {new Date().getFullYear()}{" "}
-          Adrien Denat{" "}
+          Adrien Denat
           <span
             sx={{
               display: "inline-flex",
