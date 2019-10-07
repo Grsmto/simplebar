@@ -2,6 +2,7 @@ language: node_js
 
 before_install:
   - npm i -g lerna
+  - npm i -g gatsby-cli
 
 install:
   - lerna bootstrap
@@ -11,13 +12,11 @@ script:
   - yarn test
 
 deploy:
-  provider: pages
+  provider: script
+  script: cd packages/website/ && yarn deploy
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
   on:
     branch: master
-  local-dir: packages/website/public
 
 addons:
   browserstack:
