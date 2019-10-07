@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/simplebar",
   siteMetadata: {
     title: `SimpleBar · Custom scrollbars made simple.`,
     description: `SimpleBar does only one thing: replace the browser's default scrollbar with a custom CSS-styled one without losing performances. For React, Vue, Angular or VanillaJS!`,

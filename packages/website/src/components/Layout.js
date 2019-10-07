@@ -67,6 +67,9 @@ const Layout = ({ children }) => {
           ".simplebar-scrollbar": {
             marginRight: 2,
           },
+          ".simplebar-content-wrapper": {
+            overflow: "hidden",
+          },
         })}
       />
       <div

@@ -88,9 +88,12 @@ const IndexPage = ({ data }) => {
           background: "#F5F5F5",
           width: "100%",
           height: "100%",
-          p: [3, 5],
           mt: 4,
           overflow: "auto",
+          p: [3, 5],
+          ".simplebar-content": {
+            p: [3, 5],
+          },
         }}
         data-simplebar-auto-hide="false"
       >
