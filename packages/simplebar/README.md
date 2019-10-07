@@ -55,6 +55,23 @@ Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 
 **Don't forget to import both css and js in your project!**
 
+### Noscript support
+
+To make sure your elements are scrollable when JavaScript is disabled, it's important to include this snippet in your `<head>` to reset scrolling:
+
+```js
+<noscript>
+  <style>
+    /**
+    * Reinstate scrolling for non-JS clients
+    */
+    .simplebar-content-wrapper {
+      overflow: auto;
+    }
+  </style>
+</noscript>
+```
+
 ### :warning: Warning!
 
 SimpleBar is **not intended to be used on the `body` element!** I don't recommend wrapping your entire web page inside a custom scroll as it will often badly affect the user experience (slower scroll performance compared to the native body scroll, no native scroll behaviours like click on track, etc.). Do it at your own risk! SimpleBar is meant to improve the experience of **internal web page scrolling**; such as a chat box or a small scrolling area. **Please read the [caveats](#5-caveats) section first to be aware of the limitations!**
