@@ -40,7 +40,7 @@ export default function SimpleBar({
   ...otherProps
 }) {
   const elRef = useRef();
-  const scrollableNodeRef = scrollableNodeProps.ref || useRef();
+  const scrollableNodeRef = useRef();
   const contentNodeRef = useRef();
   let options = {};
   let rest = {};
@@ -66,11 +66,13 @@ export default function SimpleBar({
   }
 
   useEffect(() => {
+    const scrollableNodeRef = scrollableNodeProps.ref || scrollableNodeRef;
+
     if (elRef.current) {
       new SimpleBarJS(elRef.current, {
         ...getOptions(deprecatedOptions),
         ...options,
-        ...(scrollableNodeRef.current && {
+        ...(scrollableNodeRef && {
           scrollableNode: scrollableNodeRef.current
         }),
         ...(contentNodeRef.current && {
