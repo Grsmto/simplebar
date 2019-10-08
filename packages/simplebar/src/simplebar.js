@@ -619,20 +619,21 @@ export default class SimpleBar {
   };
 
   onPointerEvent = e => {
-    let isWithinBoundsY, isWithinBoundsX;
-    this.axis.x.scrollbar.rect = this.axis.x.scrollbar.el.getBoundingClientRect();
-    this.axis.y.scrollbar.rect = this.axis.y.scrollbar.el.getBoundingClientRect();
+    let isWithinTrackXBounds, isWithinTrackYBounds;
+
+    this.axis.x.track.rect = this.axis.x.track.el.getBoundingClientRect();
+    this.axis.y.track.rect = this.axis.y.track.el.getBoundingClientRect();
 
     if (this.axis.x.isOverflowing || this.axis.x.forceVisible) {
-      isWithinBoundsX = this.isWithinBounds(this.axis.x.scrollbar.rect);
+      isWithinTrackXBounds = this.isWithinBounds(this.axis.x.track.rect);
     }
 
     if (this.axis.y.isOverflowing || this.axis.y.forceVisible) {
-      isWithinBoundsY = this.isWithinBounds(this.axis.y.scrollbar.rect);
+      isWithinTrackYBounds = this.isWithinBounds(this.axis.y.track.rect);
     }
 
     // If any pointer event is called on the scrollbar
-    if (isWithinBoundsY || isWithinBoundsX) {
+    if (isWithinTrackXBounds || isWithinTrackYBounds) {
       // Preventing the event's default action stops text being
       // selectable during the drag.
       e.preventDefault();
@@ -640,12 +641,24 @@ export default class SimpleBar {
       e.stopPropagation();
 
       if (e.type === 'mousedown') {
-        if (isWithinBoundsY) {
-          this.onDragStart(e, 'y');
+        if (isWithinTrackXBounds) {
+          this.axis.x.scrollbar.rect = this.axis.x.scrollbar.el.getBoundingClientRect();
+
+          if (this.isWithinBounds(this.axis.x.scrollbar.rect)) {
+            this.onDragStart(e, 'x');
+          } else {
+            this.onTrackClick(e, 'x');
+          }
         }
 
-        if (isWithinBoundsX) {
-          this.onDragStart(e, 'x');
+        if (isWithinTrackYBounds) {
+          this.axis.y.scrollbar.rect = this.axis.y.scrollbar.el.getBoundingClientRect();
+
+          if (this.isWithinBounds(this.axis.y.scrollbar.rect)) {
+            this.onDragStart(e, 'y');
+          } else {
+            this.onTrackClick(e, 'y');
+          }
         }
       }
     }
@@ -681,7 +694,7 @@ export default class SimpleBar {
    */
   drag = e => {
     let eventOffset;
-    let track = this.axis[this.draggedAxis].track;
+    const track = this.axis[this.draggedAxis].track;
     const trackSize = track.rect[this.axis[this.draggedAxis].sizeAttr];
     const scrollbar = this.axis[this.draggedAxis].scrollbar;
     const contentSize = this.contentWrapperEl[
@@ -756,6 +769,45 @@ export default class SimpleBar {
     e.preventDefault();
     e.stopPropagation();
   };
+
+  onTrackClick(e, axis = 'y') {
+    this.axis[axis].scrollbar.rect = this.axis[
+      axis
+    ].scrollbar.el.getBoundingClientRect();
+    const scrollbar = this.axis[axis].scrollbar;
+    const scrollbarOffset = scrollbar.rect[this.axis[axis].offsetAttr];
+    const hostSize = parseInt(this.elStyles[this.axis[axis].sizeAttr], 10);
+    let scrolled = this.contentWrapperEl[this.axis[axis].scrollOffsetAttr];
+    const t =
+      axis === 'y'
+        ? this.mouseY - scrollbarOffset
+        : this.mouseX - scrollbarOffset;
+    const dir = t < 0 ? -1 : 1;
+    const scrollSize = dir === -1 ? scrolled - hostSize : scrolled + hostSize;
+    const speed = 40;
+
+    const scrollTo = () => {
+      if (dir === -1) {
+        if (scrolled > scrollSize) {
+          scrolled -= speed;
+          this.contentWrapperEl.scrollTo({
+            [this.axis[axis].offsetAttr]: scrolled
+          });
+          window.requestAnimationFrame(scrollTo);
+        }
+      } else {
+        if (scrolled < scrollSize) {
+          scrolled += speed;
+          this.contentWrapperEl.scrollTo({
+            [this.axis[axis].offsetAttr]: scrolled
+          });
+          window.requestAnimationFrame(scrollTo);
+        }
+      }
+    };
+
+    scrollTo();
+  }
 
   /**
    * Getter for content element
