@@ -10,7 +10,7 @@ import theme from "../theme"
 import "modern-normalize/modern-normalize.css"
 import "typeface-nunito"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...otherProps }) => {
   const { browserstackImage } = useStaticQuery(query)
 
   return (
@@ -82,6 +82,7 @@ const Layout = ({ children }) => {
           padding: [3, 4],
           height: "100vh",
         }}
+        {...otherProps}
       >
         {children}
         <footer
