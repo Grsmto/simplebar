@@ -30,33 +30,33 @@ const renderScrollbar = props => {
 const ExamplePage = () => {
   const scrollableElRef = useRef()
 
-  // useEffect(() => {
-  //   new SimpleBar(document.getElementById("manual-instantiation"))
-  //   new SimpleBar(document.getElementById("with-classnames"), {
-  //     classNames: { vertical: "my-custom-class" },
-  //   })
+  useEffect(() => {
+    new SimpleBar(document.getElementById("manual-instantiation"))
+    new SimpleBar(document.getElementById("with-classnames"), {
+      classNames: { vertical: "my-custom-class" },
+    })
 
-  //   for (let scrollArea of document.getElementsByClassName("demo-nested")) {
-  //     new SimpleBar(scrollArea, {
-  //       autoHide: false,
-  //     })
-  //   }
+    for (let scrollArea of document.getElementsByClassName("demo-nested")) {
+      new SimpleBar(scrollArea, {
+        autoHide: false,
+      })
+    }
 
-  //   const perfEls = document.querySelectorAll(".demo-perf")
-  //   const start = performance.now()
+    const perfEls = document.querySelectorAll(".demo-perf")
+    const start = performance.now()
 
-  //   Array.prototype.forEach.call(perfEls, (el, i) => {
-  //     new SimpleBar(el)
+    Array.prototype.forEach.call(perfEls, (el, i) => {
+      new SimpleBar(el)
 
-  //     if (i + 1 === perfEls.length) {
-  //       console.log(performance.now() - start)
-  //     }
-  //   })
+      if (i + 1 === perfEls.length) {
+        console.log(performance.now() - start)
+      }
+    })
 
-  //   // this.scrollableElRef.current.addEventListener('scroll', e =>
-  //   //   console.log(e)
-  //   // );
-  // }, [])
+    // this.scrollableElRef.current.addEventListener('scroll', e =>
+    //   console.log(e)
+    // );
+  }, [])
 
   return (
     <Layout>
@@ -237,13 +237,13 @@ const ExamplePage = () => {
             <h2>Nested</h2>
             <div className="demo-nested demo1">
               <div className="demo-nested demo1" style={{ height: "200px" }}>
-                {[...Array(50)].map((x, i) => (
+                {[...Array(10)].map((x, i) => (
                   <p key={i} className="odd">
                     Some content
                   </p>
                 ))}
               </div>
-              {[...Array(50)].map((x, i) => (
+              {[...Array(30)].map((x, i) => (
                 <p key={i} className="odd">
                   Some content
                 </p>
