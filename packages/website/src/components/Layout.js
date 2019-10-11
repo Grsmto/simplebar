@@ -58,14 +58,23 @@ const Layout = ({ children, ...otherProps }) => {
           },
           ".simplebar-track .simplebar-scrollbar.simplebar-visible::before": {
             opacity: 1,
-            top: 6,
-            bottom: 6,
+          },
+          ".simplebar-track.simplebar-vertical .simplebar-scrollbar::before": {
+            top: 10,
+            bottom: 10,
+          },
+          ".simplebar-track.simplebar-horizontal .simplebar-scrollbar::before": {
+            left: 10,
+            right: 10,
           },
           ".simplebar-track.simplebar-vertical": {
             width: "21px",
           },
-          ".simplebar-scrollbar": {
+          ".simplebar-vertical .simplebar-scrollbar": {
             marginRight: 2,
+          },
+          ".simplebar-horizontal": {
+            height: "11px",
           },
           ".simplebar-content-wrapper": {
             overflow: "hidden",

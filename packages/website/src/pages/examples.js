@@ -30,33 +30,33 @@ const renderScrollbar = props => {
 const ExamplePage = () => {
   const scrollableElRef = useRef()
 
-  useEffect(() => {
-    new SimpleBar(document.getElementById("manual-instantiation"))
-    new SimpleBar(document.getElementById("with-classnames"), {
-      classNames: { vertical: "my-custom-class" },
-    })
+  // useEffect(() => {
+  //   new SimpleBar(document.getElementById("manual-instantiation"))
+  //   new SimpleBar(document.getElementById("with-classnames"), {
+  //     classNames: { vertical: "my-custom-class" },
+  //   })
 
-    for (let scrollArea of document.getElementsByClassName("demo-nested")) {
-      new SimpleBar(scrollArea, {
-        autoHide: false,
-      })
-    }
+  //   for (let scrollArea of document.getElementsByClassName("demo-nested")) {
+  //     new SimpleBar(scrollArea, {
+  //       autoHide: false,
+  //     })
+  //   }
 
-    const perfEls = document.querySelectorAll(".demo-perf")
-    const start = performance.now()
+  //   const perfEls = document.querySelectorAll(".demo-perf")
+  //   const start = performance.now()
 
-    Array.prototype.forEach.call(perfEls, (el, i) => {
-      new SimpleBar(el)
+  //   Array.prototype.forEach.call(perfEls, (el, i) => {
+  //     new SimpleBar(el)
 
-      if (i + 1 === perfEls.length) {
-        console.log(performance.now() - start)
-      }
-    })
+  //     if (i + 1 === perfEls.length) {
+  //       console.log(performance.now() - start)
+  //     }
+  //   })
 
-    // this.scrollableElRef.current.addEventListener('scroll', e =>
-    //   console.log(e)
-    // );
-  }, [])
+  //   // this.scrollableElRef.current.addEventListener('scroll', e =>
+  //   //   console.log(e)
+  //   // );
+  // }, [])
 
   return (
     <Layout>
@@ -77,23 +77,22 @@ const ExamplePage = () => {
         <section>
           <div className="col">
             <h2>Default</h2>
-            <div id="demo1" className="demo1" data-simplebar>
+            <SimpleBarReact id="demo1" className="demo1">
               <h3 className="sticky">Sticky header</h3>
-              {[...Array(50)].map((x, i) => (
+              {[...Array(30)].map((x, i) => (
                 <p key={i} className="odd">
                   Some content Some content Some content Some content Some
                   content Some content
                   <button>click</button>
                 </p>
               ))}
-            </div>
+            </SimpleBarReact>
           </div>
           <div className="col">
             <h2>autoHide false</h2>
-            <div
+            <SimpleBarReact
               id="demo2"
               className="demo1"
-              data-simplebar
               data-simplebar-auto-hide="false"
             >
               {[...Array(10)].map((x, i) => (
@@ -101,16 +100,15 @@ const ExamplePage = () => {
                   Some content
                 </p>
               ))}
-            </div>
+            </SimpleBarReact>
           </div>
         </section>
         <section>
           <div className="col">
             <h2>forceVisible true</h2>
-            <div
+            <SimpleBarReact
               id="demo3"
               className="demo1"
-              data-simplebar
               data-simplebar-force-visible
             >
               {[...Array(5)].map((x, i) => (
@@ -118,14 +116,13 @@ const ExamplePage = () => {
                   Some content
                 </p>
               ))}
-            </div>
+            </SimpleBarReact>
           </div>
           <div className="col">
             <h2>direction RTL</h2>
-            <div
+            <SimpleBarReact
               className={"demo4 demo-rtl"}
               style={{ width: "200px", direction: "rtl" }}
-              data-simplebar
               data-simplebar-direction="rtl"
             >
               <div className="box">1</div>
@@ -133,7 +130,7 @@ const ExamplePage = () => {
               <div className="box">3</div>
               <div className="box">4</div>
               <div className="box">5</div>
-            </div>
+            </SimpleBarReact>
           </div>
         </section>
         <section>
@@ -152,8 +149,7 @@ const ExamplePage = () => {
             <Playground width height direction>
               {({ height, width, direction }) => (
                 <div style={{ width: "200px", height: "200px" }}>
-                  <div
-                    data-simplebar
+                  <SimpleBarReact
                     className="demo4"
                     style={{ height, width, direction }}
                   >
@@ -162,7 +158,7 @@ const ExamplePage = () => {
                     <div className="box">3</div>
                     <div className="box">4</div>
                     <div className="box">5</div>
-                  </div>
+                  </SimpleBarReact>
                 </div>
               )}
             </Playground>
@@ -203,12 +199,9 @@ const ExamplePage = () => {
           </div>
           <div className="col">
             <h2>Both axis + padding</h2>
-            <div
-              className="demo-both-axis demo-both-axis--padding"
-              data-simplebar
-            >
+            <SimpleBarReact className="demo-both-axis demo-both-axis--padding">
               <div className="box">1</div>
-            </div>
+            </SimpleBarReact>
           </div>
         </section>
         <section>
