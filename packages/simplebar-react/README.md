@@ -74,6 +74,10 @@ You can pass props to the underlying scrollable `div` element. This is useful fo
 
 ```js
 const scrollableNodeRef = React.createRef();
+
+<SimpleBar scrollableNodeProps={{ ref: scrollableNodeRef }}>
+  // your content
+</SimpleBar>
 ```
 
 ### Accessing refs
