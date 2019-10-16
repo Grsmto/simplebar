@@ -80,6 +80,24 @@ const scrollableNodeRef = React.createRef();
 </SimpleBar>
 ```
 
+### Accessing SimpleBar instance
+
+You can pass a ref to the SimpleBar element: 
+
+```js
+const ref = useRef();
+
+useEffect(() => {
+  ref.current.recalculate();
+  console.log(ref.current.el); // <- the root element you applied SimpleBar on
+})
+
+<SimpleBar ref={ref}>
+  // your content
+</SimpleBar>
+```
+
+
 ### Accessing refs
 
 For advanced usage, you can access refs of the scrollable and content nodes by using a render prop pattern:
