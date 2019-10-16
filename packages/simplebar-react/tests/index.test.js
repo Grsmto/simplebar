@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, waitForElement } from '@testing-library/react';
-
 import SimpleBar from '../dist/simplebar-react';
 
 test('renders without crashing', () => {
@@ -55,8 +54,41 @@ test('renders with scrollableNodeProps', async () => {
       ))}
     </SimpleBar>
   );
+
   await waitForElement(() =>
     // getByTestId throws an error if it cannot find an element
     getByTestId('scrollable-node-props')
   );
+});
+
+test('renders with ref', async () => {
+  const ref = React.createRef();
+
+  render(
+    <SimpleBar ref={ref}>
+      {[...Array(5)].map((x, i) => (
+        <p key={i}>Some content</p>
+      ))}
+    </SimpleBar>
+  );
+
+  expect(ref.current).toBeDefined();
+});
+
+test('works on unmount', async () => {
+  const ref = React.createRef();
+
+  const { unmount } = render(
+    <SimpleBar ref={ref}>
+      {[...Array(5)].map((x, i) => (
+        <p key={i}>Some content</p>
+      ))}
+    </SimpleBar>
+  );
+
+  jest.spyOn(ref.current, 'unMount');
+
+  unmount();
+
+  expect(ref.current.unMount).toHaveBeenCalled();
 });
