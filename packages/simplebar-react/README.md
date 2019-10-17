@@ -3,8 +3,8 @@
 </p>
 <br/>
 <p align="center" style="margin: 40px;">
-  <a href="https://npmjs.org/package/simplebar-react"><img alt="NPM version" src="https://img.shields.io/npm/v/simplebar.svg?style=flat-square" /></a>
-  <a href="https://npmjs.org/package/simplebar-react"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/simplebar.svg?style=flat-square"></a>
+  <a href="https://npmjs.org/package/simplebar-react"><img alt="NPM version" src="https://img.shields.io/npm/v/simplebar-react.svg?style=flat-square" /></a>
+  <a href="https://npmjs.org/package/simplebar-react"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/simplebar-react.svg?style=flat-square"></a>
   <a href="https://travis-ci.org/grsmto/simplebar"><img alt="Build Status" src="https://img.shields.io/travis/grsmto/simplebar/master.svg?style=flat-square" /></a>
   <a href="https://automate.browserstack.com/public-build/amtTU2pEa1FjNmpabTBCbUh2b3FpbFZQaXhNd1Q3bEg0L1dlSzd2SGN2Zz0tLWpjK1ZwWWRNWnVGQWI4OXphWGRISEE9PQ==--39b14340be576db5bd01b020627cd17414003bfb%"><img src='https://automate.browserstack.com/badge.svg?badge_key=amtTU2pEa1FjNmpabTBCbUh2b3FpbFZQaXhNd1Q3bEg0L1dlSzd2SGN2Zz0tLWpjK1ZwWWRNWnVGQWI4OXphWGRISEE9PQ==--39b14340be576db5bd01b020627cd17414003bfb%'/></a>
 </p>
