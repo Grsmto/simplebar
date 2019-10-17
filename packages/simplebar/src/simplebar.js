@@ -150,7 +150,7 @@ export default class SimpleBar {
     if (canUseDOM) {
       this.initDOM();
 
-      this.scrollbarWidth = scrollbarWidth();
+      this.scrollbarWidth = this.getScrollbarWidth();
 
       this.recalculate();
 
@@ -579,7 +579,7 @@ export default class SimpleBar {
 
   onWindowResize = () => {
     // Recalculate scrollbarWidth in case it's a zoom
-    this.scrollbarWidth = scrollbarWidth();
+    this.scrollbarWidth = this.getScrollbarWidth();
 
     this.hideNativeScrollbar();
   };
@@ -821,6 +821,19 @@ export default class SimpleBar {
    */
   getScrollElement() {
     return this.contentWrapperEl;
+  }
+
+  getScrollbarWidth() {
+    // Detect Chrome/Firefox and do not calculate
+    if (
+      getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar').display ===
+        'none' ||
+      'scrollbarWidth' in document.documentElement.style
+    ) {
+      return 0;
+    } else {
+      return scrollbarWidth();
+    }
   }
 
   removeListeners() {

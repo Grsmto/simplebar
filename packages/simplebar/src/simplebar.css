@@ -57,7 +57,8 @@
   scrollbar-width: none;
 }
 
-.simplebar-content-wrapper::-webkit-scrollbar {
+.simplebar-content-wrapper::-webkit-scrollbar,
+.simplebar-hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
@@ -205,8 +206,4 @@
   visibility: hidden;
   overflow-y: scroll;
   scrollbar-width: none;
-}
-
-.simplebar-hide-scrollbar::-webkit-scrollbar {
-  display: none;
 }
