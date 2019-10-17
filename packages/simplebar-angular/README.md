@@ -12,16 +12,17 @@
 
 # SimplebarAngular
 
-## Installation
+### Installation
 
-```
-npm i simplebar
-npm i simplebar-angular
-```
+**- Via npm**
+`npm install simplebar-angular --save`
 
-## Usage
+**- Via Yarn**
+`yarn add simplebar-angular`
 
-### Import module
+### Usage
+
+#### Import module
 
 ```js
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,33 +39,14 @@ import { AppComponent } from './app.component';
 export class AppModule {}
 ```
 
-### Use component
+#### Use component
 
 ```js
-<div class="container">
-  <ngx-simplebar [options]="options">
-    <div *ngFor="let number of numbers">ngx-simplebar</div>
-  </ngx-simplebar>
-</div>
-
+<ngx-simplebar [options]="options">
+  <div *ngFor="let number of numbers">ngx-simplebar</div>
+</ngx-simplebar>
 ```
 
-```css
-.container {
-  border-radius: 6px;
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 1px dashed;
-  margin: auto;
-}
+### Options
 
-ngx-simplebar {
-  width: 200px;
-  height: 200px;
-}
-```
+Find the list of available options on [the core documentation](https://github.com/Grsmto/simplebar/blob/master/packages/simplebar/README.md#options).
