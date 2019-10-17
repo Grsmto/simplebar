@@ -8,8 +8,6 @@ import Playground from 'simplebar/demo/Playground';
 
 import 'simplebar/src/simplebar.css';
 
-import './browser/css/demo.css';
-
 if (typeof Promise === 'undefined') {
   // Rejection tracking prevents a common issue where React gets into an
   // inconsistent state due to an error, but it gets swallowed by a Promise,
