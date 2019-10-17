@@ -9,7 +9,7 @@ assignees: ''
 
 ## 💬 Questions and Help
 
-xstyled project is young, but please before asking your question:
+Please before asking your question:
 
 - Read carefully the README of the project
 - Search if your answer has already been answered in old issues
