@@ -1,6 +1,6 @@
 {
   "name": "simplebar-angular",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,7 +15,7 @@
     "simplebar"
   ],
   "dependencies": {
-    "simplebar": "^5.0.0"
+    "simplebar": "^5.0.1"
   },
   "peerDependencies": {
     "@angular/common": "^8.1.3",
