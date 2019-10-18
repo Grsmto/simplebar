@@ -1,6 +1,11 @@
 {
   "name": "simplebar-angular",
   "version": "1.0.1",
+  "description": "Angular component for SimpleBar",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
