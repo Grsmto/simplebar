@@ -1,6 +1,6 @@
 {
   "name": "simplebar-react",
-  "version": "2.0.2",
+  "version": "2.0.2-corejs2",
   "description": "React component for SimpleBar",
   "files": [
     "dist",

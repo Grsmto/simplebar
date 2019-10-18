@@ -1,6 +1,6 @@
 {
   "name": "simplebar-angular",
-  "version": "1.0.8",
+  "version": "1.0.8-corejs2",
   "description": "Angular component for SimpleBar",
   "scripts": {
     "ng": "ng",
