@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.1.1",
     "@angular/router": "~8.1.1",
     "rxjs": "~6.4.0",
-    "simplebar-angular": "1.0.1",
+    "simplebar-angular": "1.0.8",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
