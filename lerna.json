@@ -3,10 +3,5 @@
   "version": "independent",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "ignoreChanges": ["**/demo/**", "**/*.md"],
-  "command": {
-    "release": {
-      "ignore": ["website"]
-    }
-  }
+  "ignoreChanges": ["**/demo/**", "**/*.md"]
 }
