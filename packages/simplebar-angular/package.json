@@ -1,10 +1,7 @@
 {
   "name": "simplebar-angular",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Angular component for SimpleBar",
-  "files": [
-    "dist/simplebar-angular"
-  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,6 +9,9 @@
     "lint": "ng lint",
     "test": "ng test",
     "e2e": "ng e2e"
+  },
+  "publishConfig": {
+    "directory": "dist"
   },
   "keywords": [
     "simplebar-angular",
