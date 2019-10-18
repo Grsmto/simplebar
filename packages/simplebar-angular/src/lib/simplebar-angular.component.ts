@@ -4,7 +4,8 @@ import {
   Input,
   AfterViewInit,
   ElementRef,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
 
 import SimpleBar from 'simplebar';
@@ -12,7 +13,11 @@ import SimpleBar from 'simplebar';
 @Component({
   selector: 'ngx-simplebar',
   templateUrl: './simplebar-angular.component.html',
-  styleUrls: ['./simplebar-angular.component.scss']
+  styleUrls: [
+    '../../../simplebar/src/simplebar.css',
+    './simplebar-angular.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class SimplebarAngularComponent implements OnInit, AfterViewInit {
   @Input() options: Options;
