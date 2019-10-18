@@ -6,7 +6,7 @@
   "ignoreChanges": ["**/demo/**", "**/*.md"],
   "command": {
     "release": {
-      "ignore": ["website", "simplebar-angular"]
+      "ignore": ["website"]
     }
   }
 }
