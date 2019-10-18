@@ -27,7 +27,7 @@
     "simplebar"
   ],
   "dependencies": {
-    "simplebar": "^5.0.2"
+    "simplebar": "^5.0.2-corejs2"
   },
   "peerDependencies": {
     "@angular/common": "^8.1.3",
