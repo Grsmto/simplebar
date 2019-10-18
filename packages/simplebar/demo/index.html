@@ -1,130 +1,29 @@
-<!DOCTYPE HTML>
-<!--
-	Fractal by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>SimpleBar - Custom scrollbars made simple</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.min.css" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-	</head>
-	<body id="top">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SimpleBar demo</title>
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/demo.css" />
+    <noscript>
+      <style>
+        /**
+			* Reinstate scrolling for non-JS clients
+			*
+			* You coud do this in a regular stylesheet, but be aware that
+			* even in JS-enabled clients the browser scrollbars may be visible
+			* briefly until JS kicks in. This is especially noticeable in IE.
+			* Wrapping these rules in a noscript tag ensures that never happens.
+			*/
+        [data-simplebar] {
+          overflow: auto;
+        }
+      </style>
+    </noscript>
+  </head>
 
-		<!-- Header -->
-			<header id="header">
-				<div class="content">
-					<h1>SimpleBar</h1>
-					<p>Custom scrollbars made simple, lightweight,<br /> easy to use and cross-browser.</p>
-					<ul class="actions">
-						<li><a href="https://github.com/Grsmto/simplebar/releases/latest" class="button special icon fa-download">Download</a></li>
-            <li><a href="https://github.com/Grsmto/simplebar" class="button icon fa-github">GitHub</a></li>
-						<li><a href="#one" class="button icon fa-chevron-down scrolly">Learn More</a></li>
-					</ul>
-				</div>
-				<div class="image">
-					<div class="inner">
-						<div class="demo1" data-simplebar>
-						  <h2>Scroll me!</h2>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Scroll me!</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Scroll me!</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-						  <p class="odd">Some content</p>
-						  <p>Some more content</p>
-              hey!
-						</div>
-					</div>
-				</div>
-			</header>
-
-		<!-- One -->
-			<section id="one" class="wrapper style2 special">
-				<header class="major">
-					<h2>SimpleBar is a plugin that tries to solve a long time problem: <br/>how to get custom scrollbars for your web-app?</h2>
-				</header>
-				<p>SimpleBar does only one thing: replace the browser's default scrollbars with a custom CSS-styled scrollbar without losing performance.<br/> Unlike some popular plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...<br/>You keep the awesomeness of native scrolling...with a custom scrollbar!</p>
-			</section>
-
-		<!-- Two -->
-			<section id="two" class="wrapper">
-				<div class="inner alt">
-					<section class="spotlight">
-						<div class="image"><img src="assets/images/pic01.jpg" alt="" /></div>
-						<div class="content">
-							<h3>Design it as you want</h3>
-							<p>SimpleBar uses pure CSS to style the scrollbar. You can easily customize it as you want! Or even have multiple style on the same page...or just keep the default style ("mac OSX" scrollbar style).</p>
-						</div>
-					</section>
-					<section class="spotlight">
-						<div class="image"><img src="assets/images/pic02.jpg" alt="" /></div>
-						<div class="content">
-							<h3>Lightweight and performant</h3>
-							<p>Only 5kb minified. SimpleBar doesn't use Javascript to handle scrolling. You keep the performances/behaviours of the native scroll.</p>
-						</div>
-					</section>
-					<section class="spotlight">
-						<div class="image"><img src="assets/images/pic03.jpg" alt="" /></div>
-						<div class="content">
-							<h3>Supported everywhere</h3>
-							<p>SimpleBar support every modern browser and IE9+.<br /> It disables itself on mobile and device with "floating" scrollbars (macbook trackpad for example). But you can still force it if you want!</p>
-						</div>
-					</section>
-				</div>
-			</section>
-
-		<!-- Three -->
-			<section id="three" class="wrapper style2 special">
-				<header class="major">
-					<h2>SimpleBar</h2>
-				</header>
-				<ul class="actions">
-					<li><a href="https://github.com/Grsmto/simplebar/releases/latest" class="button special icon fa-download">Download</a></li>
-					<li><a href="http://grsmto.github.io/simplebar/examples" class="button">Demos</a></li>
-          <li><a href="https://github.com/Grsmto/simplebar" class="button icon fa-github">GitHub</a></li>
-				</ul>
-			</section>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<p class="copyright">Credits: <a href="http://html5up.net">HTML5 UP</a></p>
-			</footer>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-
-	</body>
+  <body>
+    <div id="root"></div>
+    <script src="./bundle.js"></script>
+  </body>
 </html>

@@ -1,12 +1,12 @@
 {
-  "version": "4.2.3-corejs2",
+  "version": "5.0.2",
   "name": "simplebar",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
   "files": [
     "dist",
     "src",
-    "../../README.md"
+    "README.md"
   ],
   "author": "Adrien Denat from a fork by Jonathan Nicol",
   "repository": {
@@ -26,8 +26,9 @@
     "dev": "rollup -c -w",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
-    "test:e2e": "jest --runInBand -c jest-e2e.config.js",
-    "version": "yarn build"
+    "test:e2e": "env-cmd intern",
+    "version": "yarn build",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "can-use-dom": "^0.1.0",
@@ -39,9 +40,17 @@
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
+    "intern": "^4.4.2",
     "minify": "^3.0.5",
     "promise": "^8.0.2",
     "react-select": "^2.4.3",
+    "react-window": "^1.8.1",
     "style-loader": "^0.21.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   }
 }

@@ -1,13 +1,12 @@
 import React from 'react';
-import Select, { components } from 'react-select';
-import ReactSimpleBar from 'simplebar-react';
+import Select from 'react-select';
+import { FixedSizeList as List } from 'react-window';
+import SimpleBarReact from 'simplebar-react';
 import SimpleBar from 'simplebar';
 
 import Playground from 'simplebar/demo/Playground';
 
 import 'simplebar/src/simplebar.css';
-
-import './browser/css/demo.css';
 
 if (typeof Promise === 'undefined') {
   // Rejection tracking prevents a common issue where React gets into an
@@ -17,17 +16,15 @@ if (typeof Promise === 'undefined') {
   window.Promise = require('promise/lib/es6-extensions.js');
 }
 
-function MenuList({ children, ...otherProps }) {
+const renderScrollbar = props => {
   return (
-    <ReactSimpleBar style={{ maxHeight: 300 }}>
-      <components.MenuList {...otherProps} maxHeight="none">
-        {children}
-      </components.MenuList>
-    </ReactSimpleBar>
+    <SimpleBarReact style={{ maxHeight: 300 }}>{props.children}</SimpleBarReact>
   );
-}
+};
 
 class Demo extends React.Component {
+  scrollableElRef = React.createRef();
+
   componentDidMount() {
     new SimpleBar(document.getElementById('manual-instantiation'));
     new SimpleBar(document.getElementById('with-classnames'), {
@@ -39,6 +36,21 @@ class Demo extends React.Component {
         autoHide: false
       });
     }
+
+    const perfEls = document.querySelectorAll('.demo-perf');
+    const start = performance.now();
+
+    Array.prototype.forEach.call(perfEls, (el, i) => {
+      new SimpleBar(el);
+
+      if (i + 1 === perfEls.length) {
+        console.log(performance.now() - start);
+      }
+    });
+
+    // this.scrollableElRef.current.addEventListener('scroll', e =>
+    //   console.log(e)
+    // );
   }
 
   render() {
@@ -111,9 +123,7 @@ class Demo extends React.Component {
           <div className="col">
             <h2>React-Select</h2>
             <Select
-              components={{
-                MenuList
-              }}
+              components={{ MenuList: renderScrollbar }}
               options={[...Array(50)].map((x, i) => ({
                 value: i,
                 label: i
@@ -261,6 +271,42 @@ class Demo extends React.Component {
                 ))}
               </div>
             </div>
+          </div>
+          <div className="col">
+            <h2>SimpleBar-React + React-Window</h2>
+            <SimpleBarReact
+              className="demo1"
+              autoHide={false}
+              data-simplebar-force-visible="x"
+              scrollableNodeProps={{ ref: this.scrollableElRef }}
+            >
+              {({ scrollableNodeRef, contentNodeRef }) => (
+                <List
+                  height={300}
+                  itemCount={1000}
+                  itemSize={35}
+                  outerRef={scrollableNodeRef}
+                  innerRef={contentNodeRef}
+                  className="simplebar-content-wrapper"
+                >
+                  {({ index, style }) => <div style={style}>Row {index}</div>}
+                </List>
+              )}
+            </SimpleBarReact>
+          </div>
+        </section>
+        <section>
+          <div className="col">
+            <h2>Performance test</h2>
+            {[...Array(10)].map((x, i) => (
+              <div key={i} className="demo-perf">
+                {[...Array(5)].map((x, i) => (
+                  <p key={i} className="odd">
+                    Some content
+                  </p>
+                ))}
+              </div>
+            ))}
           </div>
         </section>
       </section>

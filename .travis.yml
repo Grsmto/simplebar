@@ -1,9 +1,8 @@
 language: node_js
 
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.2
-  - export PATH="$HOME/.yarn/bin:$PATH"
   - npm i -g lerna
+  - npm i -g gatsby-cli
 
 install:
   - lerna bootstrap
@@ -13,10 +12,14 @@ script:
   - yarn test
 
 deploy:
-  provider: pages
+  provider: script
+  script: cd packages/website/ && yarn deploy
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
   on:
     branch: master
-  local-dir: packages/simplebar/demo
+
+addons:
+  browserstack:
+    username: 'adriengrsmto'
+    access_key:
+      secure: 'D75arx7W8WEGPIDHbWNrvttP3kbT5u8w+QXXYAP/DNH3012BoThNLmIB9U8YAxOccrC0ZISQq8d73/aX70A0S97IJpFQv9wwIS540JwawKSJc23OeKNsImobeNdK0k2al8JvKonIaPJzexKTNHwV7OYxzFxIotGrIQsImjC38Pw='

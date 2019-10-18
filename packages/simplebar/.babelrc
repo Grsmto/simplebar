@@ -5,8 +5,7 @@
       {
         "modules": false,
         "useBuiltIns": "usage",
-        "corejs": 2,
-        "debug": true,
+        "corejs": 3,
         "loose": true
       }
     ]

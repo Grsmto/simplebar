@@ -1,10 +1,10 @@
 {
   "name": "simplebar-vue",
-  "version": "1.2.3-corejs2",
+  "version": "1.3.2",
   "description": "Vue component for SimpleBar",
   "files": [
     "dist",
-    "../../README.md"
+    "README.md"
   ],
   "author": "Piers Olenski",
   "repository": {
@@ -20,11 +20,12 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest -c jest-unit.config.js",
-    "version": "yarn build"
+    "version": "yarn build",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "core-js": "^3.0.1",
-    "simplebar": "^4.2.3-corejs2"
+    "simplebar": "^5.0.2"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
@@ -38,6 +39,12 @@
     "vue": "^2.5.22",
     "vue-jest": "^3.0.4",
     "vue-template-compiler": "^2.5.22"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "root": true,
