@@ -8,10 +8,18 @@
     "build": "ng build",
     "lint": "ng lint",
     "test": "ng test",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "version": "yarn build",
+    "precommit": "lint-staged"
   },
   "publishConfig": {
     "directory": "dist"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   },
   "keywords": [
     "simplebar-angular",
