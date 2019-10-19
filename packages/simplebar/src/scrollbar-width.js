@@ -1,12 +1,14 @@
 let cachedScrollbarWidth = null;
 let cachedDevicePixelRatio = null;
 
-window.addEventListener('resize', () => {
-  if (cachedDevicePixelRatio !== window.devicePixelRatio) {
-    cachedDevicePixelRatio = window.devicePixelRatio;
-    cachedScrollbarWidth = null;
-  }
-});
+if (typeof window !== 'undefined') {
+  window.addEventListener('resize', () => {
+    if (cachedDevicePixelRatio !== window.devicePixelRatio) {
+      cachedDevicePixelRatio = window.devicePixelRatio;
+      cachedScrollbarWidth = null;
+    }
+  });
+}
 
 export default function scrollbarWidth() {
   if (cachedScrollbarWidth === null) {
