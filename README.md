@@ -53,5 +53,3 @@ See changelog here : https://github.com/Grsmto/simplebar/releases
 - [KingSora](https://github.com/KingSora) for multiple features and inspirations (`height: auto` detection, RTL mode cross browser support and more) with [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 - [Jonathan Nicol](http://www.f6design.com/) for original idea with [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
 - [Cassio Bittencourt](https://cassiobittencourt.com/) for the logo design.
-
-Website: http://html5up.net/
