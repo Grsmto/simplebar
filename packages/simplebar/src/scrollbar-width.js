@@ -1,12 +1,16 @@
+import canUseDOM from 'can-use-dom';
+
 let cachedScrollbarWidth = null;
 let cachedDevicePixelRatio = null;
 
-window.addEventListener('resize', () => {
-  if (cachedDevicePixelRatio !== window.devicePixelRatio) {
-    cachedDevicePixelRatio = window.devicePixelRatio;
-    cachedScrollbarWidth = null;
-  }
-});
+if (canUseDOM) {
+  window.addEventListener('resize', () => {
+    if (cachedDevicePixelRatio !== window.devicePixelRatio) {
+      cachedDevicePixelRatio = window.devicePixelRatio;
+      cachedScrollbarWidth = null;
+    }
+  });
+}
 
 export default function scrollbarWidth() {
   if (cachedScrollbarWidth === null) {

@@ -1,5 +1,5 @@
 {
-  "version": "5.0.2-corejs2",
+  "version": "5.0.3",
   "name": "simplebar",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "can-use-dom": "^0.1.0",
-    "core-js": "^2.6.9",
+    "core-js": "^3.0.1",
     "lodash.debounce": "^4.0.8",
     "lodash.memoize": "^4.1.2",
     "lodash.throttle": "^4.1.1",
