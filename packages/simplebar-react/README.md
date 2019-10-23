@@ -33,7 +33,9 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
 const App = () => (
-  <SimpleBar style={{ maxHeight: 300 }}>// your content</SimpleBar>
+  <SimpleBar style={{ maxHeight: 300 }}>
+    // your content
+  </SimpleBar>
 );
 ```
 
