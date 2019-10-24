@@ -42,3 +42,14 @@ If you are using a framework, SimpleBar also supports the most popular ones: Vue
 ### Demo
 
 You can check our [demo page](http://grsmto.github.io/simplebar/examples) (which is also the one we use for automated tests).
+
+
+### Changelog
+
+See changelog here : https://github.com/Grsmto/simplebar/releases
+
+### Credits
+
+- [KingSora](https://github.com/KingSora) for multiple features and inspirations (`height: auto` detection, RTL mode cross browser support and more) with [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
+- [Jonathan Nicol](http://www.f6design.com/) for original idea with [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
+- [Cassio Bittencourt](https://cassiobittencourt.com/) for the logo design.

@@ -302,17 +302,6 @@ Key to this technique is hiding the native browser scrollbar. The scrollable ele
 
 Please take a look at [this comparison table](https://kingsora.github.io/OverlayScrollbars/#!faq) to see what SimpleBar does compare to others.
 
-## 6. Changelog
-
-See changelog here : https://github.com/Grsmto/simplebar/releases
-
-## 7. Credits
-
-- [KingSora](https://github.com/KingSora) for multiple features and inspirations (`height: auto` detection, RTL mode cross browser support and more) with [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
-- [Jonathan Nicol](http://www.f6design.com/) for original idea with [Trackpad Scroll Emulator](https://github.com/jnicol/trackpad-scroll-emulator).
-
-Website: http://html5up.net/
-
 ### Community plugins
 
 **Ruby On Rails**
