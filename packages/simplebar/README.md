@@ -284,7 +284,7 @@ IE9 is not supported anymore (because we use `translate3d` to position the scrol
 
 ## 3. Demo
 
-http://grsmto.github.io/simplebar/
+https://grsmto.github.io/simplebar/
 
 ## 4. How it works
 

@@ -41,8 +41,7 @@ If you are using a framework, SimpleBar also supports the most popular ones: Vue
 
 ### Demo
 
-You can check our [demo page](http://grsmto.github.io/simplebar/examples) (which is also the one we use for automated tests).
-
+You can check our [demo page](https://grsmto.github.io/simplebar/examples) (which is also the one we use for automated tests).
 
 ### Changelog
 
