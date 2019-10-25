@@ -1,7 +1,6 @@
 import throttle from 'lodash.throttle';
 import debounce from 'lodash.debounce';
 import memoize from 'lodash.memoize';
-import ResizeObserver from 'resize-observer-polyfill';
 import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
 
