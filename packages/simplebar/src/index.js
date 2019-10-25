@@ -26,7 +26,7 @@ SimpleBar.initHtmlApi = function() {
   // MutationObserver is IE11+
   if (typeof MutationObserver !== 'undefined') {
     // Mutation observer to observe dynamically added elements
-    this.globalObserver = new MutationObserver(SimpleBar.handleMutation);
+    this.globalObserver = new MutationObserver(SimpleBar.handleMutations);
 
     this.globalObserver.observe(document, { childList: true, subtree: true });
   }
