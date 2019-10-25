@@ -1,5 +1,15 @@
 import SimpleBar from '../src';
 
+const mutationMock = [
+  {
+    removedNodes: [
+      {
+        nodeType: 1
+      }
+    ]
+  }
+];
+
 beforeEach(() => {
   jest.resetModules();
 
@@ -86,4 +96,17 @@ test('onPointerEvent listener should be unsubscribed on unmount', () => {
   element.dispatchEvent(new MouseEvent('mousedown'));
 
   expect(simpleBar.onPointerEvent).not.toHaveBeenCalled();
+});
+
+test('unmount on node removed from DOM', () => {
+  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+
+  SimpleBar.handleMutations([
+    {
+      addedNodes: [],
+      removedNodes: [simpleBar.el]
+    }
+  ]);
+
+  expect(SimpleBar.instances.get(simpleBar.el)).toBeUndefined();
 });
