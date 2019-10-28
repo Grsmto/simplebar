@@ -94,6 +94,7 @@ const SimpleBar = React.forwardRef(
     return (
       <div ref={elRef} {...rest}>
         <div className="simplebar-wrapper">
+          <div className="simplebar-placeholder" />
           <div className="simplebar-height-auto-observer-wrapper">
             <div className="simplebar-height-auto-observer" />
           </div>
@@ -115,7 +116,6 @@ const SimpleBar = React.forwardRef(
               )}
             </div>
           </div>
-          <div className="simplebar-placeholder" />
         </div>
         <div className="simplebar-track simplebar-horizontal">
           <div className="simplebar-scrollbar" />
