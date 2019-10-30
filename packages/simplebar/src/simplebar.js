@@ -177,7 +177,8 @@ export default class SimpleBar {
       this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
       this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
 
-      this.placeholderEl = this.el.querySelector(
+      this.placeholderEl = this.findChild(
+        this.wrapperEl,
         `.${this.classNames.placeholder}`
       );
       this.heightAutoObserverWrapperEl = this.el.querySelector(
