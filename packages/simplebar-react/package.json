@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "prop-types": "^15.6.1",
-    "simplebar": "^5.0.3-corejs2"
+    "simplebar": "5.0.3-corejs2"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
