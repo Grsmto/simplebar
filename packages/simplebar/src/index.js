@@ -26,51 +26,7 @@ SimpleBar.initHtmlApi = function() {
   // MutationObserver is IE11+
   if (typeof MutationObserver !== 'undefined') {
     // Mutation observer to observe dynamically added elements
-    this.globalObserver = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
-        Array.prototype.forEach.call(mutation.addedNodes, addedNode => {
-          if (addedNode.nodeType === 1) {
-            if (addedNode.hasAttribute('data-simplebar')) {
-              !SimpleBar.instances.has(addedNode) &&
-                new SimpleBar(addedNode, getOptions(addedNode.attributes));
-            } else {
-              Array.prototype.forEach.call(
-                addedNode.querySelectorAll(
-                  '[data-simplebar]:not([data-simplebar="init"])'
-                ),
-                el => {
-                  !SimpleBar.instances.has(el) &&
-                    new SimpleBar(el, getOptions(el.attributes));
-                }
-              );
-            }
-          }
-        });
-
-        Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
-          if (removedNode.nodeType === 1) {
-            if (
-              removedNode.hasAttribute(
-                '[data-simplebar]:not([data-simplebar="init"])'
-              )
-            ) {
-              SimpleBar.instances.has(removedNode) &&
-                SimpleBar.instances.get(removedNode).unMount();
-            } else {
-              Array.prototype.forEach.call(
-                removedNode.querySelectorAll(
-                  '[data-simplebar]:not([data-simplebar="init"])'
-                ),
-                el => {
-                  SimpleBar.instances.has(el) &&
-                    SimpleBar.instances.get(el).unMount();
-                }
-              );
-            }
-          }
-        });
-      });
-    });
+    this.globalObserver = new MutationObserver(SimpleBar.handleMutations);
 
     this.globalObserver.observe(document, { childList: true, subtree: true });
   }
@@ -87,6 +43,46 @@ SimpleBar.initHtmlApi = function() {
     document.addEventListener('DOMContentLoaded', this.initDOMLoadedElements);
     window.addEventListener('load', this.initDOMLoadedElements);
   }
+};
+
+SimpleBar.handleMutations = mutations => {
+  mutations.forEach(mutation => {
+    Array.prototype.forEach.call(mutation.addedNodes, addedNode => {
+      if (addedNode.nodeType === 1) {
+        if (addedNode.hasAttribute('data-simplebar')) {
+          !SimpleBar.instances.has(addedNode) &&
+            new SimpleBar(addedNode, getOptions(addedNode.attributes));
+        } else {
+          Array.prototype.forEach.call(
+            addedNode.querySelectorAll(
+              '[data-simplebar]:not([data-simplebar="init"])'
+            ),
+            el => {
+              !SimpleBar.instances.has(el) &&
+                new SimpleBar(el, getOptions(el.attributes));
+            }
+          );
+        }
+      }
+    });
+
+    Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
+      if (removedNode.nodeType === 1) {
+        if (removedNode.hasAttribute('[data-simplebar="init"]')) {
+          SimpleBar.instances.has(removedNode) &&
+            SimpleBar.instances.get(removedNode).unMount();
+        } else {
+          Array.prototype.forEach.call(
+            removedNode.querySelectorAll('[data-simplebar="init"]'),
+            el => {
+              SimpleBar.instances.has(el) &&
+                SimpleBar.instances.get(el).unMount();
+            }
+          );
+        }
+      }
+    });
+  });
 };
 
 SimpleBar.getOptions = getOptions;

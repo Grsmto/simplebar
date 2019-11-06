@@ -5,3 +5,4 @@ dist
 yarn-error.log
 .next
 .env
+.idea
