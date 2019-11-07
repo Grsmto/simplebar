@@ -96,7 +96,8 @@ const IndexPage = ({ data }) => {
             p: [3, 5],
           },
         }}
-        data-simplebar-auto-hide="false"
+        autoHide={false}
+        scrollbarMinSize={30}
       >
         <Styled.root dangerouslySetInnerHTML={{ __html: html }} />
       </SimpleBar>
