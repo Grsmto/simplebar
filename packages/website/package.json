@@ -24,7 +24,7 @@
     "react-icons": "^3.7.0",
     "react-select": "^2.4.3",
     "react-window": "^1.8.1",
-    "simplebar-react": "2.0.6-corejs2",
+    "simplebar-react": "corejs2",
     "theme-ui": "^0.2.43",
     "typeface-nunito": "^0.0.72"
   },
