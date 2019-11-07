@@ -92,7 +92,7 @@ const SimpleBar = React.forwardRef(
     });
 
     return (
-      <div ref={elRef} {...rest}>
+      <div ref={elRef} data-simplebar {...rest}>
         <div className="simplebar-wrapper">
           <div className="simplebar-height-auto-observer-wrapper">
             <div className="simplebar-height-auto-observer" />
