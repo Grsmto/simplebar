@@ -825,14 +825,19 @@ export default class SimpleBar {
   }
 
   getScrollbarWidth() {
-    // Detect Chrome/Firefox and do not calculate
-    if (
-      getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar').display ===
-        'none' ||
-      'scrollbarWidth' in document.documentElement.style
-    ) {
-      return 0;
-    } else {
+    // Try/catch for FF 56 throwing on undefined computedStyles
+    try {
+      // Detect Chrome/Firefox and do not calculate
+      if (
+        getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar')
+          .display === 'none' ||
+        'scrollbarWidth' in document.documentElement.style
+      ) {
+        return 0;
+      } else {
+        return scrollbarWidth();
+      }
+    } catch (e) {
       return scrollbarWidth();
     }
   }
