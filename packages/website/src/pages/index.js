@@ -47,6 +47,7 @@ const IndexPage = ({ data }) => {
             src={LogoUrl}
             width={560}
             height={110}
+            alt="SimpleBar logo"
           />
         </div>
       </div>
@@ -113,13 +114,13 @@ const IndexPage = ({ data }) => {
         }}
       >
         <li>
-          <img src={TwitchUrl} />
+          <img src={TwitchUrl} alt="Twitch" />
         </li>
         <li>
-          <img src={StorybookUrl} />
+          <img src={StorybookUrl} alt="Storybook" />
         </li>
         <li>
-          <img src={ZulipUrl} />
+          <img src={ZulipUrl} alt="Zulip" />
         </li>
       </List>
     </Layout>
