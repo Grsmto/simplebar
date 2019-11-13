@@ -293,16 +293,19 @@ export default class SimpleBar {
     window.addEventListener('resize', this.onWindowResize);
 
     // Hack for https://github.com/WICG/ResizeObserver/issues/38
-    let ignoredCallbacks = 0;
+    let resizeObserverStarted = false;
 
     this.resizeObserver = new ResizeObserver(() => {
-      ignoredCallbacks++;
-      if (ignoredCallbacks === 1) return;
+      if (!resizeObserverStarted) return;
       this.recalculate();
     });
 
     this.resizeObserver.observe(this.el);
     this.resizeObserver.observe(this.contentEl);
+
+    window.requestAnimationFrame(() => {
+      resizeObserverStarted = true;
+    });
 
     // This is required to detect horizontal scroll. Vertical scroll only needs the resizeObserver.
     this.mutationObserver = new MutationObserver(this.recalculate);
