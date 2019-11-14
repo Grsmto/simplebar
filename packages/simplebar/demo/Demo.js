@@ -24,7 +24,7 @@ const renderScrollbar = props => {
 
 const Demo = () => {
   const [isHidden, setHidden] = React.useState(true);
-  const scrollableElRef = React.createRef();
+  // const scrollableElRef = React.createRef();
 
   const handleShowClick = React.useCallback(() => {
     setHidden(false);
@@ -282,7 +282,7 @@ const Demo = () => {
             className="demo1"
             autoHide={false}
             data-simplebar-force-visible="x"
-            scrollableNodeProps={{ ref: scrollableElRef }}
+            // scrollableNodeProps={{ ref: scrollableElRef }}
           >
             {({ scrollableNodeRef, contentNodeRef }) => (
               <List
@@ -324,6 +324,28 @@ const Demo = () => {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+      <section>
+        <div className="col">
+          <h2>SimpleBar-React + refs</h2>
+          <SimpleBarReact
+            className="demo1"
+            autoHide={false}
+            data-simplebar-force-visible="x"
+          >
+            {({ scrollableNodeRef, contentNodeRef }) => {
+              return (
+                <div ref={scrollableNodeRef}>
+                  <div ref={contentNodeRef}>
+                    {[...Array(50)].map((x, i) => (
+                      <p key={i}>Some content</p>
+                    ))}
+                  </div>
+                </div>
+              );
+            }}
+          </SimpleBarReact>
         </div>
       </section>
     </section>

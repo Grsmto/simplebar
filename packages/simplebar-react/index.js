@@ -37,8 +37,8 @@ const getOptions = function(obj) {
 const SimpleBar = React.forwardRef(
   ({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
     let instance;
-    const elRef = useRef({});
-    const scrollableNodeRef = useRef();
+    let scrollableNodeRef = useRef();
+    const elRef = useRef();
     const contentNodeRef = useRef();
     let options = {};
     let rest = {};
@@ -66,7 +66,7 @@ const SimpleBar = React.forwardRef(
     }
 
     useEffect(() => {
-      const scrollableNodeRef = scrollableNodeProps.ref || scrollableNodeRef;
+      scrollableNodeRef = scrollableNodeProps.ref || scrollableNodeRef;
 
       if (elRef.current) {
         instance = new SimpleBarJS(elRef.current, {
@@ -89,7 +89,7 @@ const SimpleBar = React.forwardRef(
         instance.unMount();
         instance = null;
       };
-    });
+    }, []);
 
     return (
       <div ref={elRef} data-simplebar {...rest}>
