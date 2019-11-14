@@ -6,3 +6,5 @@ yarn-error.log
 .next
 .env
 .idea
+yalc.lock
+.yalc
