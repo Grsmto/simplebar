@@ -1,4 +1,5 @@
 import canUseDOM from 'can-use-dom';
+import { getElementWindow, getElementDocument } from './helpers';
 
 let cachedScrollbarWidth = null;
 let cachedDevicePixelRatio = null;
@@ -12,15 +13,16 @@ if (canUseDOM) {
   });
 }
 
-export default function scrollbarWidth() {
+export default function scrollbarWidth(element) {
+  const elementDocument = getElementDocument(element);
   if (cachedScrollbarWidth === null) {
-    if (typeof document === 'undefined') {
+    if (typeof elementDocument === 'undefined') {
       cachedScrollbarWidth = 0;
       return cachedScrollbarWidth;
     }
 
-    const body = document.body;
-    const box = document.createElement('div');
+    const body = elementDocument.body;
+    const box = elementDocument.createElement('div');
 
     box.classList.add('simplebar-hide-scrollbar');
 
