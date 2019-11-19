@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import Select from 'react-select';
 import { FixedSizeList as List } from 'react-window';
 import SimpleBarReact from 'simplebar-react';
@@ -351,5 +352,61 @@ const Demo = () => {
     </section>
   );
 };
+
+class ScrollContainer extends React.Component {
+  componentDidMount() {
+    this.simpleBar = new SimpleBar(this.scrollElementRef, {
+      autoHide: false
+    });
+  }
+
+  render() {
+    return (
+      <div
+        ref={ref => {
+          if (ref && !this.scrollElementRef) {
+            this.scrollElementRef = ref;
+          }
+        }}
+        data-simplebar
+      >
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
+class IFrame extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ifameLoaded: false
+    };
+  }
+
+  render() {
+    return (
+      <iframe
+        ref={ref => {
+          if (ref && ref.contentWindow && !this.state.iframeLoaded) {
+            console.log('set ref');
+            console.log(ref.contentWindow.document.body);
+            this.contentRef = ref.contentWindow.document.body;
+            this.setState({
+              iframeLoaded: true
+            });
+          }
+        }}
+      >
+        {this.contentRef &&
+          this.state.iframeLoaded &&
+          createPortal(
+            React.Children.only(this.props.children),
+            this.contentRef
+          )}
+      </iframe>
+    );
+  }
+}
 
 export default Demo;
