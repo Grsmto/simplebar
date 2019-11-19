@@ -138,7 +138,7 @@ export default class SimpleBar {
     return {
       top:
         rect.top +
-        (elwindow.pageYOffset || elDocument.documentElement.scrollTop),
+        (elWindow.pageYOffset || elDocument.documentElement.scrollTop),
       left:
         rect.left +
         (elWindow.pageXOffset || elDocument.documentElement.scrollLeft)
@@ -301,7 +301,8 @@ export default class SimpleBar {
     // Hack for https://github.com/WICG/ResizeObserver/issues/38
     let ignoredCallbacks = 0;
 
-    this.resizeObserver = new elWindow.ResizeObserver(() => {
+    const resizeObserver = elWindow.ResizeObserver || ResizeObserver;
+    this.resizeObserver = new resizeObserver(() => {
       ignoredCallbacks++;
       if (ignoredCallbacks === 1) return;
       this.recalculate();

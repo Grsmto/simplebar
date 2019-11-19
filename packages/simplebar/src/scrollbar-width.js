@@ -1,5 +1,5 @@
 import canUseDOM from 'can-use-dom';
-import { getElementWindow, getElementDocument } from './helpers';
+import { getElementDocument } from './helpers';
 
 let cachedScrollbarWidth = null;
 let cachedDevicePixelRatio = null;
