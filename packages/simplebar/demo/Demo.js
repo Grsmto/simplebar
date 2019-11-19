@@ -380,7 +380,7 @@ class IFrame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ifameLoaded: false
+      iframeLoaded: false
     };
   }
 
@@ -389,8 +389,6 @@ class IFrame extends React.Component {
       <iframe
         ref={ref => {
           if (ref && ref.contentWindow && !this.state.iframeLoaded) {
-            console.log('set ref');
-            console.log(ref.contentWindow.document.body);
             this.contentRef = ref.contentWindow.document.body;
             this.setState({
               iframeLoaded: true
