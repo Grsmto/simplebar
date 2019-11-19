@@ -407,4 +407,58 @@ class IFrame extends React.Component {
   }
 }
 
+class ScrollContainer extends React.Component {
+  componentDidMount() {
+    this.simpleBar = new SimpleBar(this.scrollElementRef, {
+      autoHide: false
+    });
+  }
+
+  render() {
+    return (
+      <div
+        ref={ref => {
+          if (ref && !this.scrollElementRef) {
+            this.scrollElementRef = ref;
+          }
+        }}
+        data-simplebar
+      >
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
+class IFrame extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      iframeLoaded: false
+    };
+  }
+
+  render() {
+    return (
+      <iframe
+        ref={ref => {
+          if (ref && ref.contentWindow && !this.state.iframeLoaded) {
+            this.contentRef = ref.contentWindow.document.body;
+            this.setState({
+              iframeLoaded: true
+            });
+          }
+        }}
+      >
+        {this.contentRef &&
+          this.state.iframeLoaded &&
+          createPortal(
+            React.Children.only(this.props.children),
+            this.contentRef
+          )}
+      </iframe>
+    );
+  }
+}
+
 export default Demo;
