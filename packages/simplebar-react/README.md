@@ -65,7 +65,7 @@ Thanks to BrowserStack for sponsoring open source projects and letting us test S
 Find the list of available options on [the core documentation](https://github.com/Grsmto/simplebar/blob/master/packages/simplebar/README.md#options).
 
 ```js
-<SimpleBar forceVisible="y" autoHide="false">
+<SimpleBar forceVisible="y" autoHide={false}>
   // your content
 </SimpleBar>
 ```
