@@ -290,17 +290,19 @@ export default class SimpleBar {
     // Browser zoom triggers a window resize
     window.addEventListener('resize', this.onWindowResize);
 
-    // Hack for https://github.com/WICG/ResizeObserver/issues/38
-    let ignoredCallbacks = 0;
+    if (window.ResizeObserver) {
+      // Hack for https://github.com/WICG/ResizeObserver/issues/38
+      let ignoredCallbacks = 0;
 
-    this.resizeObserver = new ResizeObserver(() => {
-      ignoredCallbacks++;
-      if (ignoredCallbacks === 1) return;
-      this.recalculate();
-    });
+      this.resizeObserver = new ResizeObserver(() => {
+        ignoredCallbacks++;
+        if (ignoredCallbacks === 1) return;
+        this.recalculate();
+      });
 
-    this.resizeObserver.observe(this.el);
-    this.resizeObserver.observe(this.contentEl);
+      this.resizeObserver.observe(this.el);
+      this.resizeObserver.observe(this.contentEl);
+    }
 
     // This is required to detect horizontal scroll. Vertical scroll only needs the resizeObserver.
     this.mutationObserver = new MutationObserver(this.recalculate);
@@ -859,7 +861,10 @@ export default class SimpleBar {
     window.removeEventListener('resize', this.onWindowResize);
 
     this.mutationObserver.disconnect();
-    this.resizeObserver.disconnect();
+
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
 
     // Cancel all debounced functions
     this.recalculate.cancel();
