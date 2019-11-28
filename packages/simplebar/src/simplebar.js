@@ -830,11 +830,12 @@ export default class SimpleBar {
   getScrollbarWidth() {
     // Try/catch for FF 56 throwing on undefined computedStyles
     try {
-      // Detect Chrome/Firefox and do not calculate
+      // Detect browsers supporting CSS scrollbar styling and do not calculate
       if (
         getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar')
           .display === 'none' ||
-        'scrollbarWidth' in document.documentElement.style
+        'scrollbarWidth' in document.documentElement.style ||
+        '-ms-overflow-style' in document.documentElement.style
       ) {
         return 0;
       } else {
