@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
+import ReactDOM, { createPortal } from 'react-dom';
 import Select from 'react-select';
 import { FixedSizeList as List } from 'react-window';
 import SimpleBarReact from 'simplebar-react';
@@ -26,6 +26,7 @@ const renderScrollbar = props => {
 const Demo = () => {
   const [isHidden, setHidden] = React.useState(true);
   // const scrollableElRef = React.createRef();
+  const [showWindowPortal, setShowWindowPortal] = React.useState(false);
 
   const handleShowClick = React.useCallback(() => {
     setHidden(false);
@@ -349,115 +350,49 @@ const Demo = () => {
           </SimpleBarReact>
         </div>
       </section>
+      <section>
+        <div className="col">
+          <h2>Render into portal window</h2>
+          <button onClick={() => setShowWindowPortal(true)}>
+            Open the window
+          </button>
+          {showWindowPortal && (
+            <WindowPortal>
+              <SimpleBarReact
+                style={{ height: 300, width: 50, overflowY: 'scroll' }}
+              >
+                {[...Array(10)].map((x, i) => (
+                  <p key={i} className="odd">
+                    Some content
+                  </p>
+                ))}
+              </SimpleBarReact>
+            </WindowPortal>
+          )}
+        </div>
+      </section>
     </section>
   );
 };
 
-class ScrollContainer extends React.Component {
-  componentDidMount() {
-    this.simpleBar = new SimpleBar(this.scrollElementRef, {
-      autoHide: false
-    });
-  }
-
-  render() {
-    return (
-      <div
-        ref={ref => {
-          if (ref && !this.scrollElementRef) {
-            this.scrollElementRef = ref;
-          }
-        }}
-        data-simplebar
-      >
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
-class IFrame extends React.Component {
+class WindowPortal extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      iframeLoaded: false
-    };
+    this.containerEl = document.createElement('div');
+    this.externalWindow = null;
   }
 
   render() {
-    return (
-      <iframe
-        ref={ref => {
-          if (ref && ref.contentWindow && !this.state.iframeLoaded) {
-            this.contentRef = ref.contentWindow.document.body;
-            this.setState({
-              iframeLoaded: true
-            });
-          }
-        }}
-      >
-        {this.contentRef &&
-          this.state.iframeLoaded &&
-          createPortal(
-            React.Children.only(this.props.children),
-            this.contentRef
-          )}
-      </iframe>
-    );
+    return ReactDOM.createPortal(this.props.children, this.containerEl);
   }
-}
 
-class ScrollContainer extends React.Component {
   componentDidMount() {
-    this.simpleBar = new SimpleBar(this.scrollElementRef, {
-      autoHide: false
-    });
+    this.externalWindow = window.open();
+    this.externalWindow.document.body.appendChild(this.containerEl);
   }
 
-  render() {
-    return (
-      <div
-        ref={ref => {
-          if (ref && !this.scrollElementRef) {
-            this.scrollElementRef = ref;
-          }
-        }}
-        data-simplebar
-      >
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
-class IFrame extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      iframeLoaded: false
-    };
-  }
-
-  render() {
-    return (
-      <iframe
-        ref={ref => {
-          if (ref && ref.contentWindow && !this.state.iframeLoaded) {
-            this.contentRef = ref.contentWindow.document.body;
-            this.setState({
-              iframeLoaded: true
-            });
-          }
-        }}
-      >
-        {this.contentRef &&
-          this.state.iframeLoaded &&
-          createPortal(
-            React.Children.only(this.props.children),
-            this.contentRef
-          )}
-      </iframe>
-    );
+  componentWillUnmount() {
+    this.externalWindow.close();
   }
 }
 
