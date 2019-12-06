@@ -352,14 +352,13 @@ const Demo = () => {
       <section>
         <div className="col">
           <h2>Render into iframe</h2>
-          <IFrame>
+          <IFrame width="800" height="600">
             <ScrollContainer>
-              {[...Array(10)].map((x, i) => (
+              {[...Array(30)].map((x, i) => (
                 <p key={i}>Some content</p>
               ))}
             </ScrollContainer>
           </IFrame>
-          )}
         </div>
       </section>
     </section>
@@ -368,16 +367,13 @@ const Demo = () => {
 
 class ScrollContainer extends React.Component {
   componentDidMount() {
-    this.simpleBar = new SimpleBar(this.scrollElementRef, {
-      autoHide: false
-    });
+    this.simpleBar = new SimpleBar(this.scrollElementRef);
   }
 
   render() {
     return (
       <div
         style={{
-          width: 500,
           height: 300,
           overflowY: 'scroll'
         }}
@@ -405,9 +401,17 @@ class IFrame extends React.Component {
   render() {
     return (
       <iframe
+        height={this.props.height}
+        width={this.props.width}
         ref={ref => {
           if (ref && ref.contentWindow && !this.state.iframeLoaded) {
             this.contentRef = ref.contentWindow.document.body;
+            [
+              ...document.head.querySelectorAll('link'),
+              ...document.head.querySelectorAll('style')
+            ].forEach(tag => {
+              ref.contentWindow.document.head.innerHTML += tag.outerHTML;
+            });
             this.setState({
               iframeLoaded: true
             });
