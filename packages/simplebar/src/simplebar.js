@@ -203,14 +203,14 @@ export default class SimpleBar {
       );
     } else {
       // Prepare DOM
-      this.wrapperEl = elDocument.createElement('div');
-      this.contentWrapperEl = elDocument.createElement('div');
-      this.offsetEl = elDocument.createElement('div');
-      this.maskEl = elDocument.createElement('div');
-      this.contentEl = elDocument.createElement('div');
-      this.placeholderEl = elDocument.createElement('div');
-      this.heightAutoObserverWrapperEl = elDocument.createElement('div');
-      this.heightAutoObserverEl = elDocument.createElement('div');
+      this.wrapperEl = document.createElement('div');
+      this.contentWrapperEl = document.createElement('div');
+      this.offsetEl = document.createElement('div');
+      this.maskEl = document.createElement('div');
+      this.contentEl = document.createElement('div');
+      this.placeholderEl = document.createElement('div');
+      this.heightAutoObserverWrapperEl = document.createElement('div');
+      this.heightAutoObserverEl = document.createElement('div');
 
       this.wrapperEl.classList.add(this.classNames.wrapper);
       this.contentWrapperEl.classList.add(this.classNames.contentWrapper);
@@ -240,8 +240,8 @@ export default class SimpleBar {
     }
 
     if (!this.axis.x.track.el || !this.axis.y.track.el) {
-      const track = elDocument.createElement('div');
-      const scrollbar = elDocument.createElement('div');
+      const track = document.createElement('div');
+      const scrollbar = document.createElement('div');
 
       track.classList.add(this.classNames.track);
       scrollbar.classList.add(this.classNames.scrollbar);
@@ -843,14 +843,13 @@ export default class SimpleBar {
   }
 
   getScrollbarWidth() {
-    const elDocument = getElementDocument(this.el);
     // Try/catch for FF 56 throwing on undefined computedStyles
     try {
       // Detect Chrome/Firefox and do not calculate
       if (
         getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar')
           .display === 'none' ||
-        'scrollbarWidth' in elDocument.documentElement.style
+        'scrollbarWidth' in document.documentElement.style
       ) {
         return 0;
       } else {

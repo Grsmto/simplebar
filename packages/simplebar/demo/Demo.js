@@ -352,22 +352,14 @@ const Demo = () => {
       </section>
       <section>
         <div className="col">
-          <h2>Render into portal window</h2>
-          <button onClick={() => setShowWindowPortal(true)}>
-            Open the window
-          </button>
-          {showWindowPortal && (
-            <WindowPortal>
-              <SimpleBarReact
-                style={{ height: 300, width: 50, overflowY: 'scroll' }}
-              >
-                {[...Array(10)].map((x, i) => (
-                  <p key={i} className="odd">
-                    Some content
-                  </p>
-                ))}
-              </SimpleBarReact>
-            </WindowPortal>
+          <h2>Render into iframe</h2>
+          <IFrame>
+            <ScrollContainer>
+              {[...Array(10)].map((x, i) => (
+                <p key={i}>Some content</p>
+              ))}
+            </ScrollContainer>
+          </IFrame>
           )}
         </div>
       </section>
@@ -375,25 +367,61 @@ const Demo = () => {
   );
 };
 
-class WindowPortal extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.containerEl = document.createElement('div');
-    this.externalWindow = null;
+class ScrollContainer extends React.Component {
+  componentDidMount() {
+    this.simpleBar = new SimpleBar(this.scrollElementRef, {
+      autoHide: false
+    });
   }
 
   render() {
-    return ReactDOM.createPortal(this.props.children, this.containerEl);
-  }
-
-  componentDidMount() {
-    this.externalWindow = window.open();
-    this.externalWindow.document.body.appendChild(this.containerEl);
-  }
-
-  componentWillUnmount() {
-    this.externalWindow.close();
+    return (
+      <div
+        style={{
+          width: 500,
+          height: 300,
+          overflowY: 'scroll'
+        }}
+        ref={ref => {
+          if (ref && !this.scrollElementRef) {
+            this.scrollElementRef = ref;
+          }
+        }}
+        data-simplebar
+      >
+        {this.props.children}
+      </div>
+    );
   }
 }
 
-export default Demo;
+class IFrame extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      iframeLoaded: false
+    };
+  }
+
+  render() {
+    return (
+      <iframe
+        ref={ref => {
+          if (ref && ref.contentWindow && !this.state.iframeLoaded) {
+            this.contentRef = ref.contentWindow.document.body;
+            this.setState({
+              iframeLoaded: true
+            });
+          }
+        }}
+      >
+        {this.contentRef &&
+          this.state.iframeLoaded &&
+          createPortal(
+            React.Children.only(this.props.children),
+            this.contentRef
+          )}
+      </iframe>
+    );
+  }
+}
