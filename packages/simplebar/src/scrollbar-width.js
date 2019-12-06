@@ -14,7 +14,7 @@ if (canUseDOM) {
 
 export default function scrollbarWidth() {
   if (cachedScrollbarWidth === null) {
-    if (typeof elementDocument === 'undefined') {
+    if (typeof document === 'undefined') {
       cachedScrollbarWidth = 0;
       return cachedScrollbarWidth;
     }

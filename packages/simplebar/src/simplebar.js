@@ -466,7 +466,6 @@ export default class SimpleBar {
     const scrollbar = this.axis[axis].scrollbar.el;
 
     if (this.axis[axis].isOverflowing || this.axis[axis].forceVisible) {
-      console.log(`${axis} is overflowing!!`);
       track.style.visibility = 'visible';
       this.contentWrapperEl.style[this.axis[axis].overflowAttr] = 'scroll';
     } else {

@@ -26,7 +26,6 @@ const renderScrollbar = props => {
 const Demo = () => {
   const [isHidden, setHidden] = React.useState(true);
   // const scrollableElRef = React.createRef();
-  const [showWindowPortal, setShowWindowPortal] = React.useState(false);
 
   const handleShowClick = React.useCallback(() => {
     setHidden(false);
@@ -425,3 +424,5 @@ class IFrame extends React.Component {
     );
   }
 }
+
+export default Demo;
