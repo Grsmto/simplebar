@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM, { createPortal } from 'react-dom';
 import Select from 'react-select';
 import { FixedSizeList as List } from 'react-window';
 import SimpleBarReact from 'simplebar-react';
@@ -348,8 +349,84 @@ const Demo = () => {
           </SimpleBarReact>
         </div>
       </section>
+      <section>
+        <div className="col">
+          <h2>Render into iframe</h2>
+          <IFrame width="800" height="600">
+            <ScrollContainer>
+              {[...Array(30)].map((x, i) => (
+                <p key={i}>Some content</p>
+              ))}
+            </ScrollContainer>
+          </IFrame>
+        </div>
+      </section>
     </section>
   );
 };
+
+class ScrollContainer extends React.Component {
+  componentDidMount() {
+    this.simpleBar = new SimpleBar(this.scrollElementRef);
+  }
+
+  render() {
+    return (
+      <div
+        style={{
+          height: 300,
+          overflowY: 'scroll'
+        }}
+        ref={ref => {
+          if (ref && !this.scrollElementRef) {
+            this.scrollElementRef = ref;
+          }
+        }}
+        data-simplebar
+      >
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
+class IFrame extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      iframeLoaded: false
+    };
+  }
+
+  render() {
+    return (
+      <iframe
+        height={this.props.height}
+        width={this.props.width}
+        ref={ref => {
+          if (ref && ref.contentWindow && !this.state.iframeLoaded) {
+            this.contentRef = ref.contentWindow.document.body;
+            [
+              ...document.head.querySelectorAll('link'),
+              ...document.head.querySelectorAll('style')
+            ].forEach(tag => {
+              ref.contentWindow.document.head.innerHTML += tag.outerHTML;
+            });
+            this.setState({
+              iframeLoaded: true
+            });
+          }
+        }}
+      >
+        {this.contentRef &&
+          this.state.iframeLoaded &&
+          createPortal(
+            React.Children.only(this.props.children),
+            this.contentRef
+          )}
+      </iframe>
+    );
+  }
+}
 
 export default Demo;
