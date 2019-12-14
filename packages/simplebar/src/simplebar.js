@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 import memoize from 'lodash.memoize';
 import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
+import { getElementWindow, getElementDocument } from './helpers';
 
 export default class SimpleBar {
   constructor(element, options) {
@@ -106,6 +107,7 @@ export default class SimpleBar {
   static defaultOptions = {
     autoHide: true,
     forceVisible: false,
+    clickOnTrack: true,
     classNames: {
       contentEl: 'simplebar-content',
       contentWrapper: 'simplebar-content-wrapper',
@@ -130,12 +132,16 @@ export default class SimpleBar {
 
   static getOffset(el) {
     const rect = el.getBoundingClientRect();
+    const elDocument = getElementDocument(el);
+    const elWindow = getElementWindow(el);
 
     return {
       top:
-        rect.top + (window.pageYOffset || document.documentElement.scrollTop),
+        rect.top +
+        (elWindow.pageYOffset || elDocument.documentElement.scrollTop),
       left:
-        rect.left + (window.pageXOffset || document.documentElement.scrollLeft)
+        rect.left +
+        (elWindow.pageXOffset || elDocument.documentElement.scrollLeft)
     };
   }
 
@@ -158,6 +164,7 @@ export default class SimpleBar {
   }
 
   initDOM() {
+    const elDocument = getElementDocument(this.el);
     // make sure this element doesn't have the elements yet
     if (
       Array.prototype.filter.call(this.el.children, child =>
@@ -176,7 +183,8 @@ export default class SimpleBar {
       this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
       this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
 
-      this.placeholderEl = this.el.querySelector(
+      this.placeholderEl = this.findChild(
+        this.wrapperEl,
         `.${this.classNames.placeholder}`
       );
       this.heightAutoObserverWrapperEl = this.el.querySelector(
@@ -266,6 +274,7 @@ export default class SimpleBar {
   }
 
   initListeners() {
+    const elWindow = getElementWindow(this.el);
     // Event listeners
     if (this.options.autoHide) {
       this.el.addEventListener('mouseenter', this.onMouseEnter);
@@ -288,24 +297,27 @@ export default class SimpleBar {
     this.contentWrapperEl.addEventListener('scroll', this.onScroll);
 
     // Browser zoom triggers a window resize
-    window.addEventListener('resize', this.onWindowResize);
+    elWindow.addEventListener('resize', this.onWindowResize);
 
     if (window.ResizeObserver) {
       // Hack for https://github.com/WICG/ResizeObserver/issues/38
-      let ignoredCallbacks = 0;
-
-      this.resizeObserver = new ResizeObserver(() => {
-        ignoredCallbacks++;
-        if (ignoredCallbacks === 1) return;
+      let resizeObserverStarted = false;
+      const resizeObserver = elWindow.ResizeObserver || ResizeObserver;
+      this.resizeObserver = new resizeObserver(() => {
+        if (!resizeObserverStarted) return;
         this.recalculate();
       });
 
       this.resizeObserver.observe(this.el);
       this.resizeObserver.observe(this.contentEl);
+
+      elWindow.requestAnimationFrame(() => {
+        resizeObserverStarted = true;
+      });
     }
 
     // This is required to detect horizontal scroll. Vertical scroll only needs the resizeObserver.
-    this.mutationObserver = new MutationObserver(this.recalculate);
+    this.mutationObserver = new elWindow.MutationObserver(this.recalculate);
 
     this.mutationObserver.observe(this.contentEl, {
       childList: true,
@@ -315,7 +327,8 @@ export default class SimpleBar {
   }
 
   recalculate() {
-    this.elStyles = window.getComputedStyle(this.el);
+    const elWindow = getElementWindow(this.el);
+    this.elStyles = elWindow.getComputedStyle(this.el);
     this.isRtl = this.elStyles.direction === 'rtl';
 
     const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
@@ -485,13 +498,14 @@ export default class SimpleBar {
    * On scroll event handling
    */
   onScroll = () => {
+    const elWindow = getElementWindow(this.el);
     if (!this.scrollXTicking) {
-      window.requestAnimationFrame(this.scrollX);
+      elWindow.requestAnimationFrame(this.scrollX);
       this.scrollXTicking = true;
     }
 
     if (!this.scrollYTicking) {
-      window.requestAnimationFrame(this.scrollY);
+      elWindow.requestAnimationFrame(this.scrollY);
       this.scrollYTicking = true;
     }
   };
@@ -669,6 +683,8 @@ export default class SimpleBar {
    * on scrollbar handle drag movement starts
    */
   onDragStart(e, axis = 'y') {
+    const elDocument = getElementDocument(this.el);
+    const elWindow = getElementWindow(this.el);
     const scrollbar = this.axis[axis].scrollbar;
 
     // Measure how far the user's mouse is from the top of the scrollbar drag handle.
@@ -679,13 +695,13 @@ export default class SimpleBar {
 
     this.el.classList.add(this.classNames.dragging);
 
-    document.addEventListener('mousemove', this.drag, true);
-    document.addEventListener('mouseup', this.onEndDrag, true);
+    elDocument.addEventListener('mousemove', this.drag, true);
+    elDocument.addEventListener('mouseup', this.onEndDrag, true);
     if (this.removePreventClickId === null) {
-      document.addEventListener('click', this.preventClick, true);
-      document.addEventListener('dblclick', this.preventClick, true);
+      elDocument.addEventListener('click', this.preventClick, true);
+      elDocument.addEventListener('dblclick', this.preventClick, true);
     } else {
-      window.clearTimeout(this.removePreventClickId);
+      elWindow.clearTimeout(this.removePreventClickId);
       this.removePreventClickId = null;
     }
   }
@@ -747,18 +763,20 @@ export default class SimpleBar {
    * End scroll handle drag
    */
   onEndDrag = e => {
+    const elDocument = getElementDocument(this.el);
+    const elWindow = getElementWindow(this.el);
     e.preventDefault();
     e.stopPropagation();
 
     this.el.classList.remove(this.classNames.dragging);
 
-    document.removeEventListener('mousemove', this.drag, true);
-    document.removeEventListener('mouseup', this.onEndDrag, true);
-    this.removePreventClickId = window.setTimeout(() => {
+    elDocument.removeEventListener('mousemove', this.drag, true);
+    elDocument.removeEventListener('mouseup', this.onEndDrag, true);
+    this.removePreventClickId = elWindow.setTimeout(() => {
       // Remove these asynchronously so we still suppress click events
       // generated simultaneously with mouseup.
-      document.removeEventListener('click', this.preventClick, true);
-      document.removeEventListener('dblclick', this.preventClick, true);
+      elDocument.removeEventListener('click', this.preventClick, true);
+      elDocument.removeEventListener('dblclick', this.preventClick, true);
       this.removePreventClickId = null;
     });
   };
@@ -772,6 +790,9 @@ export default class SimpleBar {
   };
 
   onTrackClick(e, axis = 'y') {
+    if (!this.options.clickOnTrack) return;
+
+    const elWindow = getElementWindow(this.el);
     this.axis[axis].scrollbar.rect = this.axis[
       axis
     ].scrollbar.el.getBoundingClientRect();
@@ -794,7 +815,7 @@ export default class SimpleBar {
           this.contentWrapperEl.scrollTo({
             [this.axis[axis].offsetAttr]: scrolled
           });
-          window.requestAnimationFrame(scrollTo);
+          elWindow.requestAnimationFrame(scrollTo);
         }
       } else {
         if (scrolled < scrollSize) {
@@ -802,7 +823,7 @@ export default class SimpleBar {
           this.contentWrapperEl.scrollTo({
             [this.axis[axis].offsetAttr]: scrolled
           });
-          window.requestAnimationFrame(scrollTo);
+          elWindow.requestAnimationFrame(scrollTo);
         }
       }
     };
@@ -825,19 +846,26 @@ export default class SimpleBar {
   }
 
   getScrollbarWidth() {
-    // Detect Chrome/Firefox and do not calculate
-    if (
-      getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar').display ===
-        'none' ||
-      'scrollbarWidth' in document.documentElement.style
-    ) {
-      return 0;
-    } else {
+    // Try/catch for FF 56 throwing on undefined computedStyles
+    try {
+      // Detect browsers supporting CSS scrollbar styling and do not calculate
+      if (
+        getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar')
+          .display === 'none' ||
+        'scrollbarWidth' in document.documentElement.style ||
+        '-ms-overflow-style' in document.documentElement.style
+      ) {
+        return 0;
+      } else {
+        return scrollbarWidth();
+      }
+    } catch (e) {
       return scrollbarWidth();
     }
   }
 
   removeListeners() {
+    const elWindow = getElementWindow(this.el);
     // Event listeners
     if (this.options.autoHide) {
       this.el.removeEventListener('mouseenter', this.onMouseEnter);
@@ -858,7 +886,7 @@ export default class SimpleBar {
     this.el.removeEventListener('mouseleave', this.onMouseLeave);
 
     this.contentWrapperEl.removeEventListener('scroll', this.onScroll);
-    window.removeEventListener('resize', this.onWindowResize);
+    elWindow.removeEventListener('resize', this.onWindowResize);
 
     this.mutationObserver.disconnect();
 

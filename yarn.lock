@@ -18129,21 +18129,21 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-simplebar-react@^1.2.3-corejs2:
-  version "1.2.3-corejs2"
-  resolved "https://registry.yarnpkg.com/simplebar-react/-/simplebar-react-1.2.3-corejs2.tgz#b64abe15729b3497133e1466173d8056bd3a24c0"
-  integrity sha512-sXVQx4f7sXoUAdyZR6wcrkvfGEC76Flxbqf6tiGOdcd7vicsh9Fk/oNM5JzHTL3XXbjB62m9aZ5glUIcuBB2mg==
+simplebar-react@corejs2:
+  version "2.0.7-corejs2"
+  resolved "https://registry.yarnpkg.com/simplebar-react/-/simplebar-react-2.0.7-corejs2.tgz#e535c60ae1cdd01007969aff90492e65061be80f"
+  integrity sha512-D2pnzMpooimwAehEwR/JIadMIuS57FuWKIPAYtoQ/PTz0YCiVRYYTK9RPb+mA7vr0DwSREq+KvJMPv8gjNmvcw==
   dependencies:
     prop-types "^15.6.1"
-    simplebar "^4.2.3-corejs2"
+    simplebar "5.0.5-corejs2"
 
-simplebar@^4.2.3-corejs2:
-  version "4.2.3-corejs2"
-  resolved "https://registry.yarnpkg.com/simplebar/-/simplebar-4.2.3-corejs2.tgz#c9e85fbdac05a319d3b30fb057e669cc04240033"
-  integrity sha512-ABPPW6gec5vidNRQg3Ng99rjO8jLOOlyd1kzmsH8JqzXhbTSNH7+sMGWdeoA0ezFFPCfS9fYLnlLRPXNbb/BSw==
+simplebar@5.0.5-corejs2:
+  version "5.0.5-corejs2"
+  resolved "https://registry.yarnpkg.com/simplebar/-/simplebar-5.0.5-corejs2.tgz#347151e61d80613a0e88ae4201e8669271546f52"
+  integrity sha512-1BtJqAI24s3Af9nekpyP/JLyklVu/kY7m+LXuv4X/w8QCMIMh9CjkERPvH6GBK00owJ3XJObwjEueBw4MuI7yA==
   dependencies:
     can-use-dom "^0.1.0"
-    core-js "^2.6.9"
+    core-js "^3.0.1"
     lodash.debounce "^4.0.8"
     lodash.memoize "^4.1.2"
     lodash.throttle "^4.1.1"

@@ -228,3 +228,13 @@ p {
   margin-bottom: 2em;
   width: 25vw;
 }
+
+.demo-hidden {
+  height: 300px;
+}
+
+.demo-hidden p {
+  margin: 0;
+  padding: 10px;
+  min-width: 230px;
+}

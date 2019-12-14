@@ -33,7 +33,9 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
 const App = () => (
-  <SimpleBar style={{ maxHeight: 300 }}>// your content</SimpleBar>
+  <SimpleBar style={{ maxHeight: 300 }}>
+    // your content
+  </SimpleBar>
 );
 ```
 
@@ -63,7 +65,7 @@ Thanks to BrowserStack for sponsoring open source projects and letting us test S
 Find the list of available options on [the core documentation](https://github.com/Grsmto/simplebar/blob/master/packages/simplebar/README.md#options).
 
 ```js
-<SimpleBar forceVisible="y" autoHide="false">
+<SimpleBar forceVisible="y" autoHide={false}>
   // your content
 </SimpleBar>
 ```

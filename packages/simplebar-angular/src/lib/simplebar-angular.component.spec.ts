@@ -30,4 +30,9 @@ describe('SimplebarAngularComponent', () => {
   it('should define simplebar instance', () => {
     expect(component.SimpleBar).toBeDefined();
   });
+
+  it('should unmount', () => {
+    fixture.destroy();
+    expect(component.SimpleBar).toBeNull();
+  });
 });

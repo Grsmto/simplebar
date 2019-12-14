@@ -11,6 +11,8 @@ module.exports = {
     contentBase: './demo',
     port: 8090,
     inline: true
+    // host: "0.0.0.0",
+    // allowedHosts: ['.local']
   },
   module: {
     rules: [
@@ -21,10 +23,10 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ["@babel/preset-env", { "modules": false }],
-              "@babel/preset-react"
+              ['@babel/preset-env', { modules: false }],
+              '@babel/preset-react'
             ]
-          },
+          }
         }
       },
       {
@@ -32,5 +34,5 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
-  },
+  }
 };

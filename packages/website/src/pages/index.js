@@ -47,6 +47,7 @@ const IndexPage = ({ data }) => {
             src={LogoUrl}
             width={560}
             height={110}
+            alt="SimpleBar logo"
           />
         </div>
       </div>
@@ -95,7 +96,8 @@ const IndexPage = ({ data }) => {
             p: [3, 5],
           },
         }}
-        data-simplebar-auto-hide="false"
+        autoHide={false}
+        scrollbarMinSize={30}
       >
         <Styled.root dangerouslySetInnerHTML={{ __html: html }} />
       </SimpleBar>
@@ -113,13 +115,13 @@ const IndexPage = ({ data }) => {
         }}
       >
         <li>
-          <img src={TwitchUrl} />
+          <img src={TwitchUrl} alt="Twitch" />
         </li>
         <li>
-          <img src={StorybookUrl} />
+          <img src={StorybookUrl} alt="Storybook" />
         </li>
         <li>
-          <img src={ZulipUrl} />
+          <img src={ZulipUrl} alt="Zulip" />
         </li>
       </List>
     </Layout>

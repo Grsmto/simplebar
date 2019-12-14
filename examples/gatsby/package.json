@@ -17,7 +17,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
-    "simplebar": "^5.0.2-corejs2"
+    "simplebar-react": "corejs2"
   },
   "devDependencies": {
     "prettier": "^1.18.2"

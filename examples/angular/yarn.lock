@@ -380,6 +380,11 @@
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-3.0.16.tgz#50a4755f8e33edacd9c406729e9b930d2451902a"
   integrity sha512-lMC2G0ItF2xv4UCiwbJGbnJlIuUixHrioOhNGHSCsYCJ8l4t9hMCUimCytvFv7qy6AfSzRxhRHoGa+UqaqwyeA==
 
+"@types/simplebar@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@types/simplebar/-/simplebar-2.4.2.tgz#f45e3268b7153bfe8da50658a929be5cd098c4cb"
+  integrity sha512-omSnWgcQ5hGANK8MijABHDNtj7bM2GH80g8wVqeRmaePJ2lPN4RmbrVihEbYtnovW2aS51a0joITsb6+Q1HnnA==
+
 "@types/source-list-map@*":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
@@ -5916,18 +5921,16 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-simplebar-angular@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/simplebar-angular/-/simplebar-angular-1.0.8.tgz#3e82e6a509461fcfeaa3f626812021a5711a70f3"
-  integrity sha512-5//nP+OImQy3cbIXb5g9o/EZNtBsGqta29yZ0RbXC+osqTeg//nk21mOq6peL1OrEoRFh+IwhiHJ/0xwtRTYiw==
+"simplebar-angular@file:.yalc/simplebar-angular":
+  version "1.0.13-280ed6b7"
   dependencies:
-    simplebar "^5.0.2"
+    simplebar "^5.0.7"
     tslib "^1.9.0"
 
-simplebar@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/simplebar/-/simplebar-5.0.2.tgz#1d05e8533d4c15b610d3c9eb4062581e220f5afb"
-  integrity sha512-lBnvOf9DEBRRUjNfQtujb0ZkvA09CKg/MTNeUyywGSWsTWbggcPEcNFuiwF6Nevx0NQeHIFF+DHi/5zYuUwvJQ==
+simplebar@^5.0.7:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/simplebar/-/simplebar-5.0.7.tgz#9c35a944a7abff1a3c4b6bc5dfb53997dc9b14ed"
+  integrity sha512-Bp/s94+3hHBXkhi8VBkuXiNHePMGLDVjMwUEJckC3uIBwLUmJbYnT6jqoETal46l+zXbEklffLRr/TtsQwjw0A==
   dependencies:
     can-use-dom "^0.1.0"
     core-js "^3.0.1"

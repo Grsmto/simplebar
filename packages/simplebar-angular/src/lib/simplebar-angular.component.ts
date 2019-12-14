@@ -4,14 +4,15 @@ import {
   Input,
   AfterViewInit,
   ElementRef,
-  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 
-import SimpleBar from 'simplebar';
+import SimpleBar from 'simplebar/dist/simplebar-core.esm';
+import { Options } from 'simplebar';
 
 @Component({
   selector: 'ngx-simplebar',
+  host: { 'data-simplebar': 'init' },
   templateUrl: './simplebar-angular.component.html',
   styleUrls: [
     '../../../simplebar/src/simplebar.css',
@@ -20,26 +21,23 @@ import SimpleBar from 'simplebar';
   encapsulation: ViewEncapsulation.None
 })
 export class SimplebarAngularComponent implements OnInit, AfterViewInit {
-  @Input() options: Options;
+  @Input('options') options: Options;
 
-  @ViewChild('simplebar', { static: true }) simplebar: ElementRef;
-
+  elRef: ElementRef;
   SimpleBar: any;
 
-  constructor() {}
+  constructor(elRef: ElementRef) {
+    this.elRef = elRef;
+  }
 
   ngOnInit() {}
-  ngAfterViewInit(): void {
-    this.SimpleBar = new SimpleBar(
-      this.simplebar.nativeElement,
-      this.options ? this.options : {}
-    );
-  }
-}
 
-export interface Options {
-  autoHide?: boolean;
-  scrollbarMinSize?: number;
-  classNames?: {};
-  forceVisible?: any;
+  ngAfterViewInit(): void {
+    this.SimpleBar = new SimpleBar(this.elRef.nativeElement, this.options || {});
+  }
+
+  ngOnDestroy() {
+    this.SimpleBar.unMount();
+    this.SimpleBar = null;
+  }
 }
