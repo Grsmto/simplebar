@@ -108,6 +108,7 @@ export default class SimpleBar {
   static defaultOptions = {
     autoHide: true,
     forceVisible: false,
+    clickOnTrack: true,
     classNames: {
       contentEl: 'simplebar-content',
       contentWrapper: 'simplebar-content-wrapper',
@@ -788,6 +789,8 @@ export default class SimpleBar {
   };
 
   onTrackClick(e, axis = 'y') {
+    if (!this.options.clickOnTrack) return;
+
     const elWindow = getElementWindow(this.el);
     this.axis[axis].scrollbar.rect = this.axis[
       axis

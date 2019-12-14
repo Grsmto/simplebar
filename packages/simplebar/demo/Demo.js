@@ -77,12 +77,13 @@ const Demo = () => {
           </div>
         </div>
         <div className="col">
-          <h2>autoHide false</h2>
+          <h2>autoHide false, clickOnTrack false</h2>
           <div
             id="demo2"
             className="demo1"
             data-simplebar
             data-simplebar-auto-hide="false"
+            data-simplebar-click-on-track="false"
           >
             {[...Array(10)].map((x, i) => (
               <p key={i} className="odd">
