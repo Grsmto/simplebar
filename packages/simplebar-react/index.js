@@ -49,7 +49,7 @@ const SimpleBar = React.forwardRef(
         Object.prototype.hasOwnProperty.call(SimpleBarJS.defaultOptions, key)
       ) {
         options[key] = otherProps[key];
-      } else if (key.match(/data-simplebar-(.+)/)) {
+      } else if (key.match(/data-simplebar-(.+)/) && key !== 'data-simplebar-direction') {
         deprecatedOptions.push({
           name: key,
           value: otherProps[key]
