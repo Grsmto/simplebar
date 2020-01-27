@@ -204,6 +204,12 @@ direction: 'rtl' (default to `ltr`)
 
 You will need both `data-simplebar-direction='rtl'` and a css rule with `direction: rtl`.
 
+#### timeout
+
+Define the delay until the scrollbar hides. Has no effect if `autoHide` is `false`.
+
+Default value is `1000`.
+
 ### Apply scroll vertically only
 
 Simply define in css `overflow-x: hidden` on your element.
