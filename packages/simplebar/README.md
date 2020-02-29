@@ -326,6 +326,9 @@ Please take a look at [this comparison table](https://kingsora.github.io/Overlay
 **Ruby On Rails**
 To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem.
 
+**Ember.js**
+To use SimpleBar with the Ember.js framework, use the [ember-simplebars](https://github.com/fpauser/ember-simplebar) addon.
+
 [npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/simplebar
 [size-badge]: http://img.badgesize.io/Grsmto/simplebar/master/packages/simplebar/src/simplebar.js?compression=gzip&&style=flat-square
