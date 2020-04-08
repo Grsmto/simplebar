@@ -5,8 +5,12 @@ declare module 'simplebar-react' {
     scrollableNodeProps?: object;
     options?: object;
     autoHide?: boolean;
-    forceVisible?: string
+    forceVisible?: string;
+    direction?: string;
+    timeout?: number;
+    clickOnTrack?: boolean
+    scrollbarMinSize?: number;
+    scrollbarMaxSize?: number;
   }
-
   export default class SimpleBar extends React.Component<Props> {}
 }
