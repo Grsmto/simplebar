@@ -128,6 +128,17 @@ or
 $('.myElements').each(element, new SimpleBar());
 ```
 
+### Styling
+
+The default styling is applied with CSS. There is no "built-in" way to style the scrollbar, you just need to override the default CSS.
+
+Ex, to change the color of the scrollbar:
+```css
+.simplebar-scrollbar::before {
+  background-color: red;
+}
+```
+
 ### Options
 
 Options can be applied to the plugin during initialization:
