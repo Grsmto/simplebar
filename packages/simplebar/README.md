@@ -132,6 +132,17 @@ or
 $('.myElements').each(element, new SimpleBar());
 ```
 
+### Styling
+
+The default styling is applied with CSS. There is no "built-in" way to style the scrollbar, you just need to override the default CSS.
+
+Ex, to change the color of the scrollbar:
+```css
+.simplebar-scrollbar::before {
+  background-color: red;
+}
+```
+
 ### Options
 
 Options can be applied to the plugin during initialization:
@@ -208,6 +219,25 @@ direction: 'rtl' (default to `ltr`)
 
 You will need both `data-simplebar-direction='rtl'` and a css rule with `direction: rtl`.
 
+#### timeout
+
+Define the delay until the scrollbar hides. Has no effect if `autoHide` is `false`.
+
+Default value is `1000`.
+
+#### clickOnTrack
+
+Controls the click on track behaviour.
+
+Default to `true`.
+
+#### scrollbarMinSize / scrollbarMaxSize
+
+Controls the min and max size of the scrollbar in `px`.
+
+Default for `scrollbarMinSize` is `25`.
+Default for `scrollbarMaxSize` is `0` (no max size).
+
 ### Apply scroll vertically only
 
 Simply define in css `overflow-x: hidden` on your element.
@@ -250,7 +280,7 @@ const simpleBar = new SimpleBar(document.getElementById('myElement'));
 simpleBar.getContentElement();
 ```
 
-### Disable Mutation Observer
+### Disable Mutation Observer (core package only)
 
 ```js
 SimpleBar.removeObserver();
@@ -310,6 +340,9 @@ Please take a look at [this comparison table](https://kingsora.github.io/Overlay
 
 **Ruby On Rails**
 To include SimpleBar in the Ruby On Rails asset pipeline, use the [simplebar-rails](https://github.com/thutterer/simplebar-rails) gem.
+
+**Ember.js**
+To use SimpleBar with the Ember.js framework, use the [ember-simplebars](https://github.com/fpauser/ember-simplebar) addon.
 
 [npm-badge]: https://img.shields.io/npm/v/simplebar.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/simplebar
