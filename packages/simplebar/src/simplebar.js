@@ -1,6 +1,4 @@
-import throttle from 'lodash.throttle';
-import debounce from 'lodash.debounce';
-import memoize from 'lodash.memoize';
+import { throttle, debounce, memoize } from 'lodash-es';
 import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
 import { getElementWindow, getElementDocument } from './helpers';
