@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 declare module 'simplebar-react' {
   interface Props extends React.HTMLAttributes<HTMLElement> {
