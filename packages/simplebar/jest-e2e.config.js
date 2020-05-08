@@ -5,5 +5,8 @@ module.exports = {
     '^.+\\.js?$': 'babel-jest'
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
-  moduleFileExtensions: ['js']
+  moduleFileExtensions: ['js'],
+  moduleNameMapper: {
+    '^lodash-es$': 'lodash'
+  }
 };

@@ -4,5 +4,8 @@ module.exports = {
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
   moduleFileExtensions: ['js'],
-  setupFiles: ['<rootDir>/tests/testsSetup.js']
+  setupFiles: ['<rootDir>/tests/testsSetup.js'],
+  moduleNameMapper: {
+    '^lodash-es$': 'lodash'
+  }
 };
