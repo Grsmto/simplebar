@@ -162,7 +162,6 @@ export default class SimpleBar {
   }
 
   initDOM() {
-    const elDocument = getElementDocument(this.el);
     // make sure this element doesn't have the elements yet
     if (
       Array.prototype.filter.call(this.el.children, child =>
@@ -329,10 +328,11 @@ export default class SimpleBar {
     this.elStyles = elWindow.getComputedStyle(this.el);
     this.isRtl = this.elStyles.direction === 'rtl';
 
-    const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
-    const isWidthAuto = this.heightAutoObserverEl.offsetWidth <= 1;
-
     const contentElOffsetWidth = this.contentEl.offsetWidth;
+
+    const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
+    const isWidthAuto =
+      this.heightAutoObserverEl.offsetWidth <= 1 || contentElOffsetWidth > 0;
 
     const contentWrapperElOffsetWidth = this.contentWrapperEl.offsetWidth;
 
@@ -349,13 +349,14 @@ export default class SimpleBar {
 
     // Determine placeholder size
     this.placeholderEl.style.width = isWidthAuto
-      ? `${contentElOffsetWidth}px`
+      ? `${contentElOffsetWidth || contentElScrollWidth}px`
       : 'auto';
     this.placeholderEl.style.height = `${contentElScrollHeight}px`;
 
     const contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
 
-    this.axis.x.isOverflowing = contentElScrollWidth > contentElOffsetWidth;
+    this.axis.x.isOverflowing =
+      contentElOffsetWidth !== 0 && contentElScrollWidth > contentElOffsetWidth;
     this.axis.y.isOverflowing =
       contentElScrollHeight > contentWrapperElOffsetHeight;
 
