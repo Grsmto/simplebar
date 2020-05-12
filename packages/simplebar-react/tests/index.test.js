@@ -28,6 +28,16 @@ test('renders with options', () => {
   ).toBeVisible();
 });
 
+test('renders with custom classNames', () => {
+  const { container } = render(
+    <SimpleBar classNames={{ contentEl: 'test-content-el' }}>
+      <div>Content</div>
+    </SimpleBar>
+  );
+
+  expect(container.querySelector('.test-content-el')).toBeDefined();
+});
+
 test('works with deprecated options', () => {
   const { container } = render(
     <SimpleBar data-simplebar-force-visible="y">

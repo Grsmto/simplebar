@@ -34,8 +34,26 @@ const getOptions = function(obj) {
   return options;
 };
 
+export const DEFAULT_CLASS_NAMES = {
+  contentEl: 'simplebar-content',
+  contentWrapper: 'simplebar-content-wrapper',
+  offset: 'simplebar-offset',
+  mask: 'simplebar-mask',
+  wrapper: 'simplebar-wrapper',
+  placeholder: 'simplebar-placeholder',
+  scrollbar: 'simplebar-scrollbar',
+  track: 'simplebar-track',
+  heightAutoObserverWrapperEl: 'simplebar-height-auto-observer-wrapper',
+  heightAutoObserverEl: 'simplebar-height-auto-observer',
+  visible: 'simplebar-visible',
+  horizontal: 'simplebar-horizontal',
+  vertical: 'simplebar-vertical',
+  hover: 'simplebar-hover',
+  dragging: 'simplebar-dragging'
+};
+
 const SimpleBar = React.forwardRef(
-  ({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
+  ({ children, scrollableNodeProps = {}, classNames, ...otherProps }, ref) => {
     let instance;
     let scrollableNodeRef = useRef();
     const elRef = useRef();
@@ -43,6 +61,7 @@ const SimpleBar = React.forwardRef(
     let options = {};
     let rest = {};
     let deprecatedOptions = [];
+    const c = { ...DEFAULT_CLASS_NAMES, ...classNames };
 
     Object.keys(otherProps).forEach(key => {
       if (
@@ -80,7 +99,8 @@ const SimpleBar = React.forwardRef(
           }),
           ...(contentNodeRef.current && {
             contentNode: contentNodeRef.current
-          })
+          }),
+          classNames
         });
 
         if (ref) {
@@ -96,35 +116,35 @@ const SimpleBar = React.forwardRef(
 
     return (
       <div ref={elRef} data-simplebar {...rest}>
-        <div className="simplebar-wrapper">
-          <div className="simplebar-height-auto-observer-wrapper">
-            <div className="simplebar-height-auto-observer" />
+        <div className={c.wrapper}>
+          <div className={c.heightAutoObserverWrapperEl}>
+            <div className={c.heightAutoObserverEl} />
           </div>
-          <div className="simplebar-mask">
-            <div className="simplebar-offset">
+          <div className={c.mask}>
+            <div className={c.offset}>
               {typeof children === 'function' ? (
                 children({ scrollableNodeRef, contentNodeRef })
               ) : (
                 <div
                   {...scrollableNodeProps}
-                  className={`simplebar-content-wrapper${
+                  className={`${c.contentWrapper}${
                     scrollableNodeProps.className
                       ? ` ${scrollableNodeProps.className}`
                       : ''
                   }`}
                 >
-                  <div className="simplebar-content">{children}</div>
+                  <div className={c.contentEl}>{children}</div>
                 </div>
               )}
             </div>
           </div>
-          <div className="simplebar-placeholder" />
+          <div className={c.placeholder} />
         </div>
-        <div className="simplebar-track simplebar-horizontal">
-          <div className="simplebar-scrollbar" />
+        <div className={`${c.track} ${c.horizontal}`}>
+          <div className={c.scrollbar} />
         </div>
-        <div className="simplebar-track simplebar-vertical">
-          <div className="simplebar-scrollbar" />
+        <div className={`${c.track} ${c.vertical}`}>
+          <div className={c.scrollbar} />
         </div>
       </div>
     );
@@ -135,7 +155,24 @@ SimpleBar.displayName = 'SimpleBar';
 
 SimpleBar.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  scrollableNodeProps: PropTypes.object
+  scrollableNodeProps: PropTypes.object,
+  classNames: PropTypes.shape({
+    contentEl: PropTypes.string,
+    contentWrapper: PropTypes.string,
+    offset: PropTypes.string,
+    mask: PropTypes.string,
+    wrapper: PropTypes.string,
+    placeholder: PropTypes.string,
+    scrollbar: PropTypes.string,
+    track: PropTypes.string,
+    heightAutoObserverWrapperEl: PropTypes.string,
+    heightAutoObserverEl: PropTypes.string,
+    visible: PropTypes.string,
+    horizontal: PropTypes.string,
+    vertical: PropTypes.string,
+    hover: PropTypes.string,
+    dragging: PropTypes.string
+  })
 };
 
 export default SimpleBar;
