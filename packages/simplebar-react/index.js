@@ -34,7 +34,7 @@ const getOptions = function(obj) {
   return options;
 };
 
-export const DEFAULT_CLASS_NAMES = {
+const DEFAULT_CLASS_NAMES = {
   contentEl: 'simplebar-content',
   contentWrapper: 'simplebar-content-wrapper',
   offset: 'simplebar-offset',

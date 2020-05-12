@@ -86,7 +86,7 @@ const scrollableNodeRef = React.createRef();
 
 ### Accessing SimpleBar instance
 
-You can pass a ref to the SimpleBar element: 
+You can pass a ref to the SimpleBar element:
 
 ```js
 const ref = useRef();
@@ -111,5 +111,31 @@ For advanced usage, you can access refs of the scrollable and content nodes by u
     // Now you have access to scrollable and content nodes
     return <div></div>;
   }}
+</SimpleBar>
+```
+
+### Providing custom classNames
+
+Note that in this case you have to define this classes in the manner they are defined in `simplebar.css`.
+
+```js
+<SimpleBar classNames={{
+  contentEl: 'simplebar-content',
+  contentWrapper: 'simplebar-content-wrapper',
+  offset: 'simplebar-offset',
+  mask: 'simplebar-mask',
+  wrapper: 'simplebar-wrapper',
+  placeholder: 'simplebar-placeholder',
+  scrollbar: 'simplebar-scrollbar',
+  track: 'simplebar-track',
+  heightAutoObserverWrapperEl: 'simplebar-height-auto-observer-wrapper',
+  heightAutoObserverEl: 'simplebar-height-auto-observer',
+  visible: 'simplebar-visible',
+  horizontal: 'simplebar-horizontal',
+  vertical: 'simplebar-vertical',
+  hover: 'simplebar-hover',
+  dragging: 'simplebar-dragging'
+}}>
+  <div>Your content</div>
 </SimpleBar>
 ```
