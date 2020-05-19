@@ -282,6 +282,26 @@ SimpleBar.removeObserver();
 SimpleBar.instances.get(document.querySelector('[data-simplebar]']))
 ```
 
+### Unmount/destroy
+
+```js
+const simpleBar = new SimpleBar(document.getElementById('myElement'));
+
+simpleBar.unMount()
+```
+
+:warning: **Calling this function will not restore the default scrollbar!**
+
+A common usecase is to only want SimpleBar on desktop/wider screens, but instead of trying to mount/unmount the plugin based on screen size, you should instead simply never mount it in the first place.
+
+For example if you want it only on desktop you can first test for screen size using `matchMedia`:
+
+```js
+if (window.matchMedia('(minwidth: 600px)') {
+  new SimpleBar(..)
+}
+```
+
 ### Non-JS fallback
 
 SimpleBar hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:
