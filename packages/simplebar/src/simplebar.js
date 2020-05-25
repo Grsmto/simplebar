@@ -77,28 +77,36 @@ export default class SimpleBar {
   static getRtlHelpers() {
     const dummyDiv = document.createElement('div');
     dummyDiv.innerHTML =
-      '<div class="hs-dummy-scrollbar-size"><div style="height: 200%; width: 200%; margin: 10px 0;"></div></div>';
+      '<div class="simplebar-dummy-scrollbar-size"><div></div></div>';
+
     const scrollbarDummyEl = dummyDiv.firstElementChild;
+    const dummyChild = scrollbarDummyEl.firstElementChild;
+
     document.body.appendChild(scrollbarDummyEl);
-    const dummyContainerChild = scrollbarDummyEl.firstElementChild;
+
     scrollbarDummyEl.scrollLeft = 0;
+
     const dummyContainerOffset = SimpleBar.getOffset(scrollbarDummyEl);
-    const dummyContainerChildOffset = SimpleBar.getOffset(dummyContainerChild);
-    scrollbarDummyEl.scrollLeft = 999;
-    const dummyContainerScrollOffsetAfterScroll = SimpleBar.getOffset(
-      dummyContainerChild
+    const dummyChildOffset = SimpleBar.getOffset(dummyChild);
+
+    scrollbarDummyEl.scrollLeft = -999;
+    const dummyChildOffsetAfterScroll = SimpleBar.getOffset(dummyChild);
+
+    console.log(
+      'isScrollOriginAtZero: ',
+      dummyContainerOffset.left !== dummyChildOffset.left
+    );
+    console.log(
+      'isScrollingToNegative: ',
+      dummyChildOffset.left !== dummyChildOffsetAfterScroll.left
     );
 
     return {
       // determines if the scrolling is responding with negative values
-      isRtlScrollingInverted:
-        dummyContainerOffset.left !== dummyContainerChildOffset.left &&
-        dummyContainerChildOffset.left -
-          dummyContainerScrollOffsetAfterScroll.left !==
-          0,
+      isScrollOriginAtZero: dummyContainerOffset.left !== dummyChildOffset.left,
       // determines if the origin scrollbar position is inverted or not (positioned on left or right)
-      isRtlScrollbarInverted:
-        dummyContainerOffset.left !== dummyContainerChildOffset.left
+      isScrollingToNegative:
+        dummyChildOffset.left !== dummyChildOffsetAfterScroll.left
     };
   }
 
@@ -440,20 +448,20 @@ export default class SimpleBar {
     const scrollbar = this.axis[axis].scrollbar;
 
     let scrollOffset = this.contentWrapperEl[this.axis[axis].scrollOffsetAttr];
+
     scrollOffset =
       axis === 'x' &&
       this.isRtl &&
-      SimpleBar.getRtlHelpers().isRtlScrollingInverted
+      SimpleBar.getRtlHelpers().isScrollOriginAtZero
         ? -scrollOffset
         : scrollOffset;
     let scrollPourcent = scrollOffset / (contentSize - hostSize);
-
     let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
     handleOffset =
       axis === 'x' &&
       this.isRtl &&
-      SimpleBar.getRtlHelpers().isRtlScrollbarInverted
-        ? handleOffset + (trackSize - scrollbar.size)
+      SimpleBar.getRtlHelpers().isScrollingToNegative
+        ? -handleOffset + (trackSize - scrollbar.size)
         : handleOffset;
 
     scrollbar.el.style.transform =
@@ -740,16 +748,12 @@ export default class SimpleBar {
 
     // Scroll the content by the same percentage.
     let scrollPos = dragPerc * (contentSize - hostSize);
-
+    console.log(scrollPos);
     // Fix browsers inconsistency on RTL
     if (this.draggedAxis === 'x') {
       scrollPos =
-        this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollbarInverted
+        this.isRtl && SimpleBar.getRtlHelpers().isScrollOriginAtZero
           ? scrollPos - (trackSize + scrollbar.size)
-          : scrollPos;
-      scrollPos =
-        this.isRtl && SimpleBar.getRtlHelpers().isRtlScrollingInverted
-          ? -scrollPos
           : scrollPos;
     }
 

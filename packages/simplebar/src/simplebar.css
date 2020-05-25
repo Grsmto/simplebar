@@ -190,7 +190,7 @@
   left: 0;
 }
 
-.hs-dummy-scrollbar-size {
+.simplebar-dummy-scrollbar-size {
   direction: rtl;
   position: fixed;
   opacity: 0;
@@ -199,6 +199,13 @@
   width: 500px;
   overflow-y: hidden;
   overflow-x: scroll;
+  -ms-overflow-style: scrollbar !important;
+}
+
+.simplebar-dummy-scrollbar-size > div {
+  width: 200%;
+  height: 200%;
+  margin: 10px 0;
 }
 
 .simplebar-hide-scrollbar {
