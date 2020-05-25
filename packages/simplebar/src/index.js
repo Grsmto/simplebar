@@ -8,9 +8,12 @@ SimpleBar.initDOMLoadedElements = function() {
   window.removeEventListener('load', this.initDOMLoadedElements);
 
   Array.prototype.forEach.call(
-    document.querySelectorAll('[data-simplebar]:not([data-simplebar="init"])'),
+    document.querySelectorAll('[data-simplebar]'),
     el => {
-      if (!SimpleBar.instances.has(el))
+      if (
+        el.getAttribute('data-simplebar') !== 'init' &&
+        !SimpleBar.instances.has(el)
+      )
         new SimpleBar(el, getOptions(el.attributes));
     }
   );
@@ -54,11 +57,12 @@ SimpleBar.handleMutations = mutations => {
             new SimpleBar(addedNode, getOptions(addedNode.attributes));
         } else {
           Array.prototype.forEach.call(
-            addedNode.querySelectorAll(
-              '[data-simplebar]:not([data-simplebar="init"])'
-            ),
-            el => {
-              !SimpleBar.instances.has(el) &&
+            addedNode.querySelectorAll('[data-simplebar]'),
+            function(el) {
+              if (
+                el.getAttribute('data-simplebar') !== 'init' &&
+                !SimpleBar.instances.has(el)
+              )
                 new SimpleBar(el, getOptions(el.attributes));
             }
           );
