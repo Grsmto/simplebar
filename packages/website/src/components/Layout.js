@@ -76,9 +76,6 @@ const Layout = ({ children, ...otherProps }) => {
           ".simplebar-horizontal": {
             height: "11px",
           },
-          ".simplebar-content-wrapper": {
-            overflow: "hidden",
-          },
         })}
       />
       <div
