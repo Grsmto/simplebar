@@ -109,6 +109,7 @@ export default class SimpleBar {
     autoHide: true,
     forceVisible: false,
     clickOnTrack: true,
+    clickOnTrackSpeed: 40,
     classNames: {
       contentEl: 'simplebar-content',
       contentWrapper: 'simplebar-content-wrapper',
@@ -806,12 +807,11 @@ export default class SimpleBar {
         : this.mouseX - scrollbarOffset;
     const dir = t < 0 ? -1 : 1;
     const scrollSize = dir === -1 ? scrolled - hostSize : scrolled + hostSize;
-    const speed = 40;
 
     const scrollTo = () => {
       if (dir === -1) {
         if (scrolled > scrollSize) {
-          scrolled -= speed;
+          scrolled -= this.options.clickOnTrackSpeed;
           this.contentWrapperEl.scrollTo({
             [this.axis[axis].offsetAttr]: scrolled
           });
@@ -819,7 +819,7 @@ export default class SimpleBar {
         }
       } else {
         if (scrolled < scrollSize) {
-          scrolled += speed;
+          scrolled += this.options.clickOnTrackSpeed;
           this.contentWrapperEl.scrollTo({
             [this.axis[axis].offsetAttr]: scrolled
           });
