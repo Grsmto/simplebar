@@ -31,11 +31,11 @@ SimpleBar has been tested on the following browsers: Chrome, Firefox, Safari, Ed
 
 The easiest way to use SimpleBar is with the default dependency-free version: `npm install simplebar`.
 
-- [Core documention](https://github.com/Grsmto/simplebar/tree/master/packages/simplebar)
+- [Core documentation](https://github.com/Grsmto/simplebar/tree/master/packages/simplebar)
 
 If you are using a framework, SimpleBar also supports the most popular ones: Vue, Angular and React.
 
-- [React documention](https://github.com/Grsmto/simplebar/tree/master/packages/simplebar-react)
+- [React documentation](https://github.com/Grsmto/simplebar/tree/master/packages/simplebar-react)
 - [Angular documentation](https://github.com/Grsmto/simplebar/tree/master/packages/simplebar-angular)
 - [Vue documentation](https://github.com/Grsmto/simplebar/tree/master/packages/simplebar-vue)
 
