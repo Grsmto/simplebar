@@ -44,7 +44,7 @@ export default class SimpleBar {
       },
     };
     this.removePreventClickId = null;
-    this.scrollingTimeout = null;
+    this.isScrolling = false;
 
     // Don't re-instantiate over an existing one
     if (SimpleBar.instances.has(this.el)) {
@@ -60,6 +60,10 @@ export default class SimpleBar {
     this.onWindowResize = debounce(this.onWindowResize.bind(this), 64, {
       leading: true,
     });
+    this.onStopScrolling = debounce(
+      this.onStopScrolling.bind(this),
+      this.stopScrollDelay
+    );
 
     SimpleBar.getRtlHelpers = memoize(SimpleBar.getRtlHelpers);
 
@@ -513,12 +517,12 @@ export default class SimpleBar {
       this.scrollYTicking = true;
     }
 
-    this.el.classList.add(this.options.classNames.scrolling);
-    elWindow.clearTimeout(this.scrollingTimeout);
-    this.scrollingTimeout = elWindow.setTimeout(() => {
-      this.el.classList.remove(this.options.classNames.scrolling);
-      this.scrollingTimeout = null;
-    }, this.stopScrollDelay);
+    if (!this.isScrolling) {
+      this.isScrolling = true;
+      this.el.classList.add(this.classNames.scrolling);
+    }
+
+    this.onStopScrolling();
   };
 
   scrollX = () => {
@@ -537,6 +541,11 @@ export default class SimpleBar {
     }
 
     this.scrollYTicking = false;
+  };
+
+  onStopScrolling = () => {
+    this.el.classList.remove(this.classNames.scrolling);
+    this.isScrolling = false;
   };
 
   onMouseEnter = () => {
@@ -906,8 +915,7 @@ export default class SimpleBar {
     this.onMouseMove.cancel();
     this.hideScrollbars.cancel();
     this.onWindowResize.cancel();
-
-    elWindow.clearTimeout(this.scrollingTimeout);
+    this.onStopScrolling.cancel();
   }
 
   /**
