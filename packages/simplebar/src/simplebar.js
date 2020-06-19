@@ -132,7 +132,6 @@ export default class SimpleBar {
     },
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
-    timeout: 1000,
   };
 
   static getOffset(el) {
