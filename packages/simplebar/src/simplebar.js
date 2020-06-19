@@ -4,7 +4,7 @@ import scrollbarWidth from './scrollbar-width';
 import { getElementWindow, getElementDocument } from './helpers';
 
 export default class SimpleBar {
-  constructor(element, options) {
+  constructor(element, options = {}) {
     this.el = element;
     this.minScrollbarWidth = 20;
     this.stopScrollDelay = 175;
@@ -50,6 +50,11 @@ export default class SimpleBar {
     // Don't re-instantiate over an existing one
     if (SimpleBar.instances.has(this.el)) {
       return;
+    }
+    if (options.classNames) {
+      console.warn(
+        'simplebar: classNames option is deprecated. Please override the styles with CSS instead.'
+      );
     }
 
     if (options.autoHide) {
