@@ -17,7 +17,7 @@ if (typeof Promise === 'undefined') {
   window.Promise = require('promise/lib/es6-extensions.js');
 }
 
-const renderScrollbar = props => {
+const renderScrollbar = (props) => {
   return (
     <SimpleBarReact style={{ maxHeight: 300 }}>{props.children}</SimpleBarReact>
   );
@@ -34,12 +34,12 @@ const Demo = () => {
   React.useEffect(() => {
     new SimpleBar(document.getElementById('manual-instantiation'));
     new SimpleBar(document.getElementById('with-classnames'), {
-      classNames: { vertical: 'my-custom-class' }
+      classNames: { vertical: 'my-custom-class' },
     });
 
     for (let scrollArea of document.getElementsByClassName('demo-nested')) {
       new SimpleBar(scrollArea, {
-        autoHide: false
+        autoHide: false,
       });
     }
 
@@ -67,13 +67,15 @@ const Demo = () => {
           <h2>Default</h2>
           <div id="demo1" className="demo1" data-simplebar>
             <h3 className="sticky">Sticky header</h3>
-            {[...Array(50)].map((x, i) => (
-              <p key={i} className="odd">
-                Some content Some content Some content Some content Some content
-                Some content
-                <button>click</button>
-              </p>
-            ))}
+            {Array.from(Array(50)).map((x, i) => {
+              return (
+                <p key={i} className="odd">
+                  Some content Some content Some content Some content Some
+                  content Some content
+                  <button>click</button>
+                </p>
+              );
+            })}
           </div>
         </div>
         <div className="col">
@@ -85,7 +87,7 @@ const Demo = () => {
             data-simplebar-auto-hide="false"
             data-simplebar-click-on-track="false"
           >
-            {[...Array(10)].map((x, i) => (
+            {Array.from(Array(10)).map((x, i) => (
               <p key={i} className="odd">
                 Some content
               </p>
@@ -102,7 +104,7 @@ const Demo = () => {
             data-simplebar
             data-simplebar-force-visible
           >
-            {[...Array(5)].map((x, i) => (
+            {Array.from(Array(5)).map((x, i) => (
               <p key={i} className="odd">
                 Some content
               </p>
@@ -130,9 +132,9 @@ const Demo = () => {
           <h2>React-Select</h2>
           <Select
             components={{ MenuList: renderScrollbar }}
-            options={[...Array(50)].map((x, i) => ({
+            options={Array.from(Array(50)).map((x, i) => ({
               value: i,
-              label: i
+              label: i,
             }))}
           />
         </div>
@@ -233,13 +235,13 @@ const Demo = () => {
           <h2>Nested</h2>
           <div className="demo-nested demo1">
             <div className="demo-nested demo1" style={{ height: '200px' }}>
-              {[...Array(50)].map((x, i) => (
+              {Array.from(Array(50)).map((x, i) => (
                 <p key={i} className="odd">
                   Some content
                 </p>
               ))}
             </div>
-            {[...Array(50)].map((x, i) => (
+            {Array.from(Array(50)).map((x, i) => (
               <p key={i} className="odd">
                 Some content
               </p>
@@ -270,7 +272,7 @@ const Demo = () => {
           <h2>forceVisible true</h2>
           <div className="demo-height-auto" data-simplebar>
             <div className="inner">
-              {[...Array(5)].map((x, i) => (
+              {Array.from(Array(5)).map((x, i) => (
                 <p key={i} className="odd">
                   Some content
                 </p>
@@ -304,9 +306,9 @@ const Demo = () => {
       <section>
         <div className="col">
           <h2>Performance test</h2>
-          {[...Array(10)].map((x, i) => (
+          {Array.from(Array(10)).map((x, i) => (
             <div key={i} className="demo-perf">
-              {[...Array(5)].map((x, i) => (
+              {Array.from(Array(5)).map((x, i) => (
                 <p key={i} className="odd">
                   Some content
                 </p>
@@ -319,7 +321,7 @@ const Demo = () => {
           <button onClick={handleShowClick}>Show</button>
           <div hidden={isHidden}>
             <div id="demo2" className="demo-hidden" data-simplebar>
-              {[...Array(10)].map((x, i) => (
+              {Array.from(Array(10)).map((x, i) => (
                 <p key={i} className="odd">
                   Some content
                 </p>
@@ -340,7 +342,7 @@ const Demo = () => {
               return (
                 <div ref={scrollableNodeRef}>
                   <div ref={contentNodeRef}>
-                    {[...Array(50)].map((x, i) => (
+                    {Array.from(Array(50)).map((x, i) => (
                       <p key={i}>Some content</p>
                     ))}
                   </div>
@@ -355,7 +357,7 @@ const Demo = () => {
           <h2>Render into iframe</h2>
           <IFrame width="800" height="600">
             <ScrollContainer>
-              {[...Array(30)].map((x, i) => (
+              {Array.from(Array(30)).map((x, i) => (
                 <p key={i}>Some content</p>
               ))}
             </ScrollContainer>
@@ -376,9 +378,9 @@ class ScrollContainer extends React.Component {
       <div
         style={{
           height: 300,
-          overflowY: 'scroll'
+          overflowY: 'scroll',
         }}
-        ref={ref => {
+        ref={(ref) => {
           if (ref && !this.scrollElementRef) {
             this.scrollElementRef = ref;
           }
@@ -395,7 +397,7 @@ class IFrame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      iframeLoaded: false
+      iframeLoaded: false,
     };
   }
 
@@ -404,17 +406,17 @@ class IFrame extends React.Component {
       <iframe
         height={this.props.height}
         width={this.props.width}
-        ref={ref => {
+        ref={(ref) => {
           if (ref && ref.contentWindow && !this.state.iframeLoaded) {
             this.contentRef = ref.contentWindow.document.body;
             [
               ...document.head.querySelectorAll('link'),
-              ...document.head.querySelectorAll('style')
-            ].forEach(tag => {
+              ...document.head.querySelectorAll('style'),
+            ].forEach((tag) => {
               ref.contentWindow.document.head.innerHTML += tag.outerHTML;
             });
             this.setState({
-              iframeLoaded: true
+              iframeLoaded: true,
             });
           }
         }}
