@@ -167,9 +167,11 @@
   width: 11px;
 }
 
-.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
+.simplebar-scrollbar:before {
   top: 2px;
   bottom: 2px;
+  left: 2px;
+  right: 2px;
 }
 
 .simplebar-track.simplebar-horizontal {
@@ -177,17 +179,11 @@
   height: 11px;
 }
 
-.simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
-  height: 100%;
-  left: 2px;
-  right: 2px;
-}
-
 .simplebar-track.simplebar-horizontal .simplebar-scrollbar {
   right: auto;
   left: 0;
-  top: 2px;
-  height: 7px;
+  top: 0;
+  bottom: 0;
   min-height: 0;
   min-width: 10px;
   width: auto;
