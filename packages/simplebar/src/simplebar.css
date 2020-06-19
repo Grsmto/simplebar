@@ -148,6 +148,8 @@
 }
 
 .simplebar-scrolling .simplebar-scrollbar:before,
+.simplebar-hover .simplebar-scrollbar:before,
+.simplebar-mouse-entered .simplebar-scrollbar:before {
   opacity: 0.5;
   transition-delay: 0s;
   transition-duration: 0s;
