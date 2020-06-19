@@ -8,7 +8,8 @@
         "corejs": 3,
         "loose": true
       }
-    ]
+    ],
+    "@babel/preset-react"
   ],
   "plugins": ["transform-class-properties"],
   "env": {
