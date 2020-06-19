@@ -1,6 +1,6 @@
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import babel from 'rollup-plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import babel from '@rollup/plugin-babel';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
@@ -13,46 +13,10 @@ const licence = {
 
         Made by ${pkg.author}
         Under ${pkg.license} License
-      `
+      `,
 };
 
-export default [
-  // browser-friendly UMD build
-  {
-    input: 'src/index.js',
-    output: {
-      name: 'SimpleBar',
-      file: pkg.main,
-      format: 'umd'
-    },
-    plugins: [
-      babel({
-        exclude: ['/**/node_modules/**']
-      }),
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
-      terser(),
-      license(licence)
-    ]
-  },
-  // browser-friendly, non-minified UMD build
-  {
-    input: 'src/index.js',
-    output: {
-      name: 'SimpleBar',
-      file: 'dist/simplebar.js',
-      format: 'umd'
-    },
-    plugins: [
-      babel({
-        exclude: ['/**/node_modules/**']
-      }),
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
-      license(licence)
-    ]
-  },
-
+const builds = [
   // CommonJS (for Node) and ES module (for bundlers) build.
   // (We could have three entries in the configuration array
   // instead of two, but it's quicker to generate multiple
@@ -61,9 +25,9 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/index.js',
-    external: id => {
+    external: (id) => {
       if (
-        Object.keys(pkg.dependencies).find(dep => id === dep) ||
+        Object.keys(pkg.dependencies).find((dep) => id === dep) ||
         id.match(/(core-js).+/)
       ) {
         return true;
@@ -73,21 +37,23 @@ export default [
     },
     output: {
       file: pkg.module,
-      format: 'es',
-      sourcemap: true
+      format: 'esm',
+      sourcemap: true,
     },
     plugins: [
       babel({
-        exclude: ['/**/node_modules/**']
+        exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
-      license(licence)
-    ]
+      license(licence),
+    ],
   },
   {
     input: 'src/simplebar.js',
-    external: id => {
+    external: (id) => {
       if (
-        Object.keys(pkg.dependencies).find(dep => id === dep) ||
+        Object.keys(pkg.dependencies).find((dep) => id === dep) ||
         id.match(/(core-js).+/)
       ) {
         return true;
@@ -97,14 +63,62 @@ export default [
     },
     output: {
       file: 'dist/simplebar-core.esm.js',
-      format: 'es',
-      sourcemap: true
+      format: 'esm',
+      sourcemap: true,
     },
     plugins: [
       babel({
-        exclude: ['/**/node_modules/**']
+        exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
-      license(licence)
-    ]
-  }
+      license(licence),
+    ],
+  },
 ];
+console.log(process.env);
+if (process.env.BUILD !== 'development') {
+  // browser-friendly UMD build
+  builds.push({
+    input: 'src/index.js',
+    output: {
+      name: 'SimpleBar',
+      file: pkg.main,
+      format: 'umd',
+    },
+    plugins: [
+      babel({
+        exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: ['@babel/plugin-transform-runtime'],
+      }),
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
+      terser(),
+      license(licence),
+    ],
+  });
+
+  builds.push(
+    // browser-friendly, non-minified UMD build
+    {
+      input: 'src/index.js',
+      output: {
+        name: 'SimpleBar',
+        file: 'dist/simplebar.js',
+        format: 'umd',
+      },
+      plugins: [
+        babel({
+          exclude: ['/**/node_modules/**'],
+          babelHelpers: 'runtime',
+          plugins: ['@babel/plugin-transform-runtime'],
+        }),
+        resolve(), // so Rollup can find dependencies
+        commonjs(), // so Rollup can convert dependencies to an ES module
+        license(licence),
+      ],
+    }
+  );
+}
+export default builds;
