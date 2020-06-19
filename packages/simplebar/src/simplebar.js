@@ -45,10 +45,17 @@ export default class SimpleBar {
     };
     this.removePreventClickId = null;
     this.isScrolling = false;
+    this.isMouseEntering = false;
 
     // Don't re-instantiate over an existing one
     if (SimpleBar.instances.has(this.el)) {
       return;
+    }
+
+    if (options.autoHide) {
+      console.warn(
+        "simplebar: autoHide option is deprecated. Please use CSS instead: '.simplebar-scrollbar::before { opacity: 0.5 };'"
+      );
     }
 
     this.recalculate = throttle(this.recalculate, 64);
@@ -121,6 +128,7 @@ export default class SimpleBar {
       dragging: 'simplebar-dragging',
       scrolling: 'simplebar-scrolling',
       scrollable: 'simplebar-scrollable',
+      mouseEntered: 'simplebar-mouse-entered',
     },
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
@@ -272,9 +280,8 @@ export default class SimpleBar {
   initListeners() {
     const elWindow = getElementWindow(this.el);
     // Event listeners
-    if (this.options.autoHide) {
-      this.el.addEventListener('mouseenter', this.onMouseEnter);
-    }
+
+    this.el.addEventListener('mouseenter', this.onMouseEnter);
 
     ['mousedown', 'click', 'dblclick'].forEach((e) => {
       this.el.addEventListener(e, this.onPointerEvent, true);
@@ -468,11 +475,11 @@ export default class SimpleBar {
     if (this.axis[axis].isOverflowing || this.axis[axis].forceVisible) {
       track.style.visibility = 'visible';
       this.contentWrapperEl.style[this.axis[axis].overflowAttr] = 'scroll';
-      this.el.classList.add(`${this.options.classNames.scrollable}-${axis}`);
+      this.el.classList.add(`${this.classNames.scrollable}-${axis}`);
     } else {
       track.style.visibility = 'hidden';
       this.contentWrapperEl.style[this.axis[axis].overflowAttr] = 'hidden';
-      this.el.classList.remove(`${this.options.classNames.scrollable}-${axis}`);
+      this.el.classList.remove(`${this.classNames.scrollable}-${axis}`);
     }
 
     // Even if forceVisible is enabled, scrollbar itself should be hidden
@@ -540,8 +547,16 @@ export default class SimpleBar {
   };
 
   onMouseEnter = () => {
-    this.showScrollbar('x');
-    this.showScrollbar('y');
+    if (!this.isMouseEntering) {
+      this.el.classList.add(this.classNames.mouseEntered);
+      this.isMouseEntering = true;
+    }
+    this.onMouseEntered();
+  };
+
+  onMouseEntered = () => {
+    this.el.classList.remove(this.classNames.mouseEntered);
+    this.isMouseEntering = false;
   };
 
   onMouseMove = (e) => {
@@ -839,9 +854,7 @@ export default class SimpleBar {
   removeListeners() {
     const elWindow = getElementWindow(this.el);
     // Event listeners
-    if (this.options.autoHide) {
-      this.el.removeEventListener('mouseenter', this.onMouseEnter);
-    }
+    this.el.removeEventListener('mouseenter', this.onMouseEnter);
 
     ['mousedown', 'click', 'dblclick'].forEach((e) => {
       this.el.removeEventListener(e, this.onPointerEvent, true);
@@ -871,6 +884,7 @@ export default class SimpleBar {
     this.onMouseMove.cancel();
     this.onWindowResize.cancel();
     this.onStopScrolling.cancel();
+    this.onMouseEntered.cancel();
   }
 
   /**
