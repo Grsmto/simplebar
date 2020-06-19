@@ -92,15 +92,6 @@ export default class SimpleBar {
     scrollbarDummyEl.scrollLeft = -999;
     const dummyChildOffsetAfterScroll = SimpleBar.getOffset(dummyChild);
 
-    console.log(
-      'isScrollOriginAtZero: ',
-      dummyContainerOffset.left !== dummyChildOffset.left
-    );
-    console.log(
-      'isScrollingToNegative: ',
-      dummyChildOffset.left !== dummyChildOffsetAfterScroll.left
-    );
-
     return {
       // determines if the scrolling is responding with negative values
       isScrollOriginAtZero: dummyContainerOffset.left !== dummyChildOffset.left,
@@ -129,7 +120,8 @@ export default class SimpleBar {
       horizontal: 'simplebar-horizontal',
       vertical: 'simplebar-vertical',
       hover: 'simplebar-hover',
-      dragging: 'simplebar-dragging'
+      dragging: 'simplebar-dragging',
+      scrollable: 'simplebar-scrollable'
     },
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
@@ -477,9 +469,11 @@ export default class SimpleBar {
     if (this.axis[axis].isOverflowing || this.axis[axis].forceVisible) {
       track.style.visibility = 'visible';
       this.contentWrapperEl.style[this.axis[axis].overflowAttr] = 'scroll';
+      this.el.classList.add(`${this.options.classNames.scrollable}-${axis}`);
     } else {
       track.style.visibility = 'hidden';
       this.contentWrapperEl.style[this.axis[axis].overflowAttr] = 'hidden';
+      this.el.classList.remove(`${this.options.classNames.scrollable}-${axis}`);
     }
 
     // Even if forceVisible is enabled, scrollbar itself should be hidden
