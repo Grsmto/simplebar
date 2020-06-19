@@ -144,13 +144,20 @@
   left: 2px;
   right: 2px;
   opacity: 0;
-  transition: opacity 0.2s linear;
+  transition: opacity 0.2s 0.5s linear;
+}
+
+.simplebar-scrolling .simplebar-scrollbar:before,
+  opacity: 0.5;
+  transition-delay: 0s;
+  transition-duration: 0s;
 }
 
 .simplebar-scrollbar.simplebar-visible:before {
   /* When hovered, remove all transitions from drag handle */
   opacity: 0.5;
-  transition: opacity 0s linear;
+  transition-delay: 0s;
+  transition-duration: 0s;
 }
 
 .simplebar-track.simplebar-vertical {
