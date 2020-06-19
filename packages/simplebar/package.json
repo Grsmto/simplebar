@@ -42,7 +42,10 @@
     "promise": "^8.0.2",
     "react-select": "^2.4.3",
     "react-window": "^1.8.1",
-    "style-loader": "^0.21.0"
+    "style-loader": "^0.21.0",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [

@@ -35,7 +35,9 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.1.0",
-    "@testing-library/react": "^9.2.0"
+    "@testing-library/react": "^9.2.0",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-react": "^7.14.3"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [

@@ -16,9 +16,9 @@
     "@emotion/core": "^10.0.28",
     "@mdx-js/react": "^1.6.4",
     "@theme-ui/preset-base": "^0.2.40",
-    "gatsby": "^2.22.9",
-    "gatsby-image": "^2.4.5",
-    "modern-normalize": "^0.6.0",
+    "gatsby": "^2.23.4",
+    "gatsby-image": "^2.4.7",
+    "modern-normalize": "^0.5.0",
     "prop-types": "^15.7.2",
     "react-helmet": "^5.2.1",
     "react-icons": "^3.7.0",
@@ -30,14 +30,14 @@
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "babel-preset-gatsby": "^0.4.7",
-    "gatsby-plugin-manifest": "^2.4.9",
-    "gatsby-plugin-offline": "^3.2.7",
+    "babel-preset-gatsby": "^0.4.9",
+    "gatsby-plugin-manifest": "^2.2.17",
+    "gatsby-plugin-offline": "^3.0.7",
     "gatsby-plugin-react-helmet": "^3.1.7",
-    "gatsby-plugin-sharp": "^2.6.9",
+    "gatsby-plugin-sharp": "^2.6.11",
     "gatsby-source-filesystem": "^2.3.8",
     "gatsby-transformer-remark": "^2.8.13",
-    "gatsby-transformer-sharp": "^2.5.3",
+    "gatsby-transformer-sharp": "^2.5.5",
     "gh-pages": "^2.1.1"
   },
   "keywords": [

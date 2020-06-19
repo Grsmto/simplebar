@@ -22,13 +22,11 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "concurrently": "^4.1.2",
     "env-cmd": "^10.0.1",
-    "eslint": "^6.7.1",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.3.0",
-    "eslint-config-react-app": "^5.0.2",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.17.0",
-    "eslint-plugin-react": "^7.16.0",
     "husky": "^1.1.4",
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
@@ -47,10 +45,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-license": "^0.12.1",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.1.2",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "rollup-plugin-terser": "^5.1.2"
   },
   "browserslist": [
     "> 0.25%",
