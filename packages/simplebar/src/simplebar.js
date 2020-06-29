@@ -329,11 +329,9 @@ export default class SimpleBar {
     this.elStyles = elWindow.getComputedStyle(this.el);
     this.isRtl = this.elStyles.direction === 'rtl';
 
-    const contentElOffsetWidth = this.contentEl.offsetWidth;
-
     const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
-    const isWidthAuto =
-      this.heightAutoObserverEl.offsetWidth <= 1 || contentElOffsetWidth > 0;
+    const isWidthAuto = this.heightAutoObserverEl.offsetWidth <= 1;
+    const contentElOffsetWidth = this.contentEl.offsetWidth;
 
     const contentWrapperElOffsetWidth = this.contentWrapperEl.offsetWidth;
 
@@ -350,14 +348,13 @@ export default class SimpleBar {
 
     // Determine placeholder size
     this.placeholderEl.style.width = isWidthAuto
-      ? `${contentElOffsetWidth || contentElScrollWidth}px`
+      ? `${contentElOffsetWidth}px`
       : 'auto';
     this.placeholderEl.style.height = `${contentElScrollHeight}px`;
 
     const contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
 
-    this.axis.x.isOverflowing =
-      contentElOffsetWidth !== 0 && contentElScrollWidth > contentElOffsetWidth;
+    this.axis.x.isOverflowing = contentElScrollWidth > contentElOffsetWidth;
     this.axis.y.isOverflowing =
       contentElScrollHeight > contentWrapperElOffsetHeight;
 
