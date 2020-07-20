@@ -17,7 +17,20 @@ const banner = {
       `,
 };
 
-const external = [...Object.keys(pkg.dependencies), 'vue'];
+const globals = {
+  'simplebar-core': 'SimpleBar',
+};
+const external = (id) => {
+  if (
+    Object.keys(pkg.dependencies).find((dep) => id === dep) ||
+    id.match(/(core-js).+/) ||
+    id === 'vue'
+  ) {
+    return true;
+  }
+
+  return false;
+};
 
 export default [
   {
@@ -26,6 +39,7 @@ export default [
       name: 'SimpleBar',
       file: pkg.main,
       format: 'umd',
+      globals: globals,
     },
     external: external,
     plugins: [
@@ -33,8 +47,10 @@ export default [
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
       babel({
-        runtimeHelpers: true,
-        extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue'],
+        exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: ['@babel/plugin-transform-runtime'],
+        extensions: ['.js', '.vue'],
       }),
       terser(),
       license(banner),
@@ -46,12 +62,15 @@ export default [
     output: {
       file: pkg.module,
       format: 'esm',
+      globals: globals,
     },
     plugins: [
       vue(),
       babel({
-        runtimeHelpers: true,
-        extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue'],
+        exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
+        extensions: ['.js', '.vue'],
       }),
       license(banner),
     ],
