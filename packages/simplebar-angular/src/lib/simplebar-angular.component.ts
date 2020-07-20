@@ -7,7 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import SimpleBar from 'simplebar/dist/simplebar-core.esm';
+import SimpleBar from 'simplebar-core';
 import { Options } from 'simplebar';
 
 @Component({
@@ -33,7 +33,10 @@ export class SimplebarAngularComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    this.SimpleBar = new SimpleBar(this.elRef.nativeElement, this.options || {});
+    this.SimpleBar = new SimpleBar(
+      this.elRef.nativeElement,
+      this.options || {}
+    );
   }
 
   ngOnDestroy() {

@@ -1,11 +1,11 @@
 module.exports = {
   transform: {
-    '^.+\\.js?$': 'babel-jest'
+    '^.+\\.js?$': 'babel-jest',
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
   moduleFileExtensions: ['js'],
   setupFiles: ['<rootDir>/tests/testsSetup.js'],
   moduleNameMapper: {
-    '^lodash-es$': 'lodash'
-  }
+    '^lodash-es$': 'lodash',
+  },
 };

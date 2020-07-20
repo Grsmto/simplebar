@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import SimpleBarJS from 'simplebar/dist/simplebar-core.esm';
+import SimpleBarJS from 'simplebar-core';
 
 const SimpleBar = React.forwardRef(
   ({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
@@ -11,7 +11,7 @@ const SimpleBar = React.forwardRef(
     let options = {};
     let rest = {};
 
-    Object.keys(otherProps).forEach(key => {
+    Object.keys(otherProps).forEach((key) => {
       if (
         Object.prototype.hasOwnProperty.call(SimpleBarJS.defaultOptions, key)
       ) {
@@ -28,11 +28,11 @@ const SimpleBar = React.forwardRef(
         instance = new SimpleBarJS(elRef.current, {
           ...options,
           ...(scrollableNodeRef && {
-            scrollableNode: scrollableNodeRef.current
+            scrollableNode: scrollableNodeRef.current,
           }),
           ...(contentNodeRef.current && {
-            contentNode: contentNodeRef.current
-          })
+            contentNode: contentNodeRef.current,
+          }),
         });
 
         if (ref) {
@@ -87,7 +87,7 @@ SimpleBar.displayName = 'SimpleBar';
 
 SimpleBar.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  scrollableNodeProps: PropTypes.object
+  scrollableNodeProps: PropTypes.object,
 };
 
 export default SimpleBar;

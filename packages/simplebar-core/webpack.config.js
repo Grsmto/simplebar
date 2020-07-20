@@ -5,12 +5,12 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, './demo')
+    path: path.resolve(__dirname, './demo'),
   },
   devServer: {
     contentBase: './demo',
     port: 8090,
-    inline: true
+    inline: true,
     // host: "0.0.0.0",
     // allowedHosts: ['.local']
   },
@@ -20,13 +20,13 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
-  }
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 };

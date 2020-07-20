@@ -49,32 +49,6 @@ const builds = [
       license(licence),
     ],
   },
-  {
-    input: 'src/simplebar.js',
-    external: (id) => {
-      if (
-        Object.keys(pkg.dependencies).find((dep) => id === dep) ||
-        id.match(/(core-js).+/)
-      ) {
-        return true;
-      }
-
-      return false;
-    },
-    output: {
-      file: 'dist/simplebar-core.esm.js',
-      format: 'esm',
-      sourcemap: true,
-    },
-    plugins: [
-      babel({
-        exclude: ['/**/node_modules/**'],
-        babelHelpers: 'runtime',
-        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
-      }),
-      license(licence),
-    ],
-  },
 ];
 console.log(process.env);
 if (process.env.BUILD !== 'development') {

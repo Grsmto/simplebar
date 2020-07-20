@@ -34,7 +34,7 @@ describe('Load', () => {
 
     await page.waitForSelector(trackSelector, { visible: true });
     await page.waitForSelector(`${trackSelector} .simplebar-scrollbar`, {
-      hidden: true
+      hidden: true,
     });
   });
 
@@ -43,9 +43,9 @@ describe('Load', () => {
     const scrollbarEl = await expect(el).toMatchElement(
       '.simplebar-track.simplebar-horizontal .simplebar-scrollbar'
     );
-    const isRtl = await page.$eval('.demo-rtl', el => el.SimpleBar.isRtl);
+    const isRtl = await page.$eval('.demo-rtl', (el) => el.SimpleBar.isRtl);
     const transformStyle = await page.evaluate(
-      el => el.style.transform,
+      (el) => el.style.transform,
       scrollbarEl
     );
     const elBoundingBox = await el.boundingBox();
@@ -53,8 +53,9 @@ describe('Load', () => {
 
     expect(isRtl).toBeTruthy();
     expect(transformStyle).toEqual(
-      `translate3d(${elBoundingBox.width -
-        scrollbarElBoundingBox.width}px, 0px, 0px)`
+      `translate3d(${
+        elBoundingBox.width - scrollbarElBoundingBox.width
+      }px, 0px, 0px)`
     );
   });
 
@@ -67,7 +68,7 @@ describe('Load', () => {
     await page.mouse.down();
 
     const isDragging = await page.evaluate(
-      el => el.classList.contains('simplebar-dragging'),
+      (el) => el.classList.contains('simplebar-dragging'),
       el
     );
 
@@ -81,7 +82,7 @@ describe('Load', () => {
     );
 
     const scrollbarHeight = await page.evaluate(
-      el => parseInt(el.style.height),
+      (el) => parseInt(el.style.height),
       scrollbarEl
     );
 
@@ -91,7 +92,7 @@ describe('Load', () => {
     await page.click('#demo2 p', { delay: 1000 }); // wait for Simplebar to recalculate
 
     const scrollbarHeightAfterHover = await page.evaluate(
-      el => parseInt(el.style.height),
+      (el) => parseInt(el.style.height),
       scrollbarEl
     );
 

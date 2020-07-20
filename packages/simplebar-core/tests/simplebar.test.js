@@ -4,10 +4,10 @@ const mutationMock = [
   {
     removedNodes: [
       {
-        nodeType: 1
-      }
-    ]
-  }
+        nodeType: 1,
+      },
+    ],
+  },
 ];
 
 beforeEach(() => {
@@ -53,7 +53,7 @@ test('should return the element options', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
   expect(SimpleBar.getOptions(simpleBar.el.attributes)).toEqual({
-    autoHide: true
+    autoHide: true,
   });
 });
 
@@ -71,7 +71,7 @@ test('mouse should be within bounds', () => {
     top: 10,
     width: 100,
     x: 10,
-    y: 10
+    y: 10,
   });
 
   expect(isWithinBounds).toBeTruthy();
@@ -104,8 +104,8 @@ test('unmount on node removed from DOM', () => {
   SimpleBar.handleMutations([
     {
       addedNodes: [],
-      removedNodes: [simpleBar.el]
-    }
+      removedNodes: [simpleBar.el],
+    },
   ]);
 
   expect(SimpleBar.instances.get(simpleBar.el)).toBeUndefined();

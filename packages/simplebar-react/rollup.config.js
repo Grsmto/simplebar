@@ -13,12 +13,12 @@ const banner = {
 
         Made by ${pkg.author}
         Under ${pkg.license} License
-      `
+      `,
 };
 const globals = {
   'prop-types': 'PropTypes',
   react: 'React',
-  simplebar: 'SimpleBar'
+  'simplebar-core': 'SimpleBar',
 };
 const external = [...Object.keys(pkg.dependencies), 'react'];
 
@@ -29,31 +29,31 @@ export default [
       name: 'SimpleBar',
       file: pkg.main,
       format: 'umd',
-      globals: globals
+      globals: globals,
     },
     external: external,
     plugins: [
       babel({
-        exclude: ['/**/node_modules/**']
+        exclude: ['/**/node_modules/**'],
       }),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
       terser(),
-      license(banner)
-    ]
+      license(banner),
+    ],
   },
   {
     input: 'index.js',
     external: external,
     output: {
       file: pkg.module,
-      format: 'es'
+      format: 'es',
     },
     plugins: [
       babel({
-        exclude: ['/**/node_modules/**']
+        exclude: ['/**/node_modules/**'],
       }),
-      license(banner)
-    ]
-  }
+      license(banner),
+    ],
+  },
 ];

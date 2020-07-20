@@ -1,5 +1,5 @@
 // Helper function to retrieve options from element attributes
-export const getOptions = function(obj) {
+export const getOptions = function (obj) {
   const options = Array.prototype.reduce.call(
     obj,
     (acc, attribute) => {
@@ -26,21 +26,3 @@ export const getOptions = function(obj) {
   );
   return options;
 };
-
-export function getElementWindow(element) {
-  if (
-    !element ||
-    !element.ownerDocument ||
-    !element.ownerDocument.defaultView
-  ) {
-    return window;
-  }
-  return element.ownerDocument.defaultView;
-}
-
-export function getElementDocument(element) {
-  if (!element || !element.ownerDocument) {
-    return document;
-  }
-  return element.ownerDocument;
-}

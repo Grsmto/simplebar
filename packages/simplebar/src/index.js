@@ -1,15 +1,15 @@
 import canUseDOM from 'can-use-dom';
 
-import SimpleBar from './simplebar';
+import SimpleBar from 'simplebar-core';
 import { getOptions } from './helpers';
 
-SimpleBar.initDOMLoadedElements = function() {
+SimpleBar.initDOMLoadedElements = function () {
   document.removeEventListener('DOMContentLoaded', this.initDOMLoadedElements);
   window.removeEventListener('load', this.initDOMLoadedElements);
 
   Array.prototype.forEach.call(
     document.querySelectorAll('[data-simplebar]'),
-    el => {
+    (el) => {
       if (
         el.getAttribute('data-simplebar') !== 'init' &&
         !SimpleBar.instances.has(el)
@@ -19,11 +19,11 @@ SimpleBar.initDOMLoadedElements = function() {
   );
 };
 
-SimpleBar.removeObserver = function() {
+SimpleBar.removeObserver = function () {
   this.globalObserver.disconnect();
 };
 
-SimpleBar.initHtmlApi = function() {
+SimpleBar.initHtmlApi = function () {
   this.initDOMLoadedElements = this.initDOMLoadedElements.bind(this);
 
   // MutationObserver is IE11+
@@ -48,9 +48,9 @@ SimpleBar.initHtmlApi = function() {
   }
 };
 
-SimpleBar.handleMutations = mutations => {
-  mutations.forEach(mutation => {
-    Array.prototype.forEach.call(mutation.addedNodes, addedNode => {
+SimpleBar.handleMutations = (mutations) => {
+  mutations.forEach((mutation) => {
+    Array.prototype.forEach.call(mutation.addedNodes, (addedNode) => {
       if (addedNode.nodeType === 1) {
         if (addedNode.hasAttribute('data-simplebar')) {
           !SimpleBar.instances.has(addedNode) &&
@@ -58,7 +58,7 @@ SimpleBar.handleMutations = mutations => {
         } else {
           Array.prototype.forEach.call(
             addedNode.querySelectorAll('[data-simplebar]'),
-            function(el) {
+            function (el) {
               if (
                 el.getAttribute('data-simplebar') !== 'init' &&
                 !SimpleBar.instances.has(el)
@@ -70,7 +70,7 @@ SimpleBar.handleMutations = mutations => {
       }
     });
 
-    Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
+    Array.prototype.forEach.call(mutation.removedNodes, (removedNode) => {
       if (removedNode.nodeType === 1) {
         if (removedNode.hasAttribute('[data-simplebar="init"]')) {
           SimpleBar.instances.has(removedNode) &&
@@ -78,7 +78,7 @@ SimpleBar.handleMutations = mutations => {
         } else {
           Array.prototype.forEach.call(
             removedNode.querySelectorAll('[data-simplebar="init"]'),
-            el => {
+            (el) => {
               SimpleBar.instances.has(el) &&
                 SimpleBar.instances.get(el).unMount();
             }

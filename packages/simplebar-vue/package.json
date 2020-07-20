@@ -24,8 +24,8 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "core-js": "^3.0.1",
-    "simplebar": "^6.0.0-beta.1"
+    "core-js": "^3.6.5",
+    "simplebar-core": "^1.0.0"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
