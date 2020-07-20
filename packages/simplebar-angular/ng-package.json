@@ -3,8 +3,8 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "simplebar": "SimpleBar"
+      "simplebar-core": "SimpleBar"
     }
   },
-  "whitelistedNonPeerDependencies": ["simplebar"]
+  "whitelistedNonPeerDependencies": ["simplebar-core"]
 }

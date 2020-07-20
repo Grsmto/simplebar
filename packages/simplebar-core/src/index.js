@@ -59,7 +59,7 @@ export default class SimpleBar {
 
     if (options.autoHide) {
       console.warn(
-        "simplebar: autoHide option is deprecated. Please use CSS instead: '.simplebar-scrollbar::before { opacity: 0.5 };'"
+        "simplebar: autoHide option is deprecated. Please use CSS instead: '.simplebar-scrollbar::before { opacity: 0.5 };' for autoHide: false"
       );
     }
 

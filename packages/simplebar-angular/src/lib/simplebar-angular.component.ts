@@ -4,7 +4,7 @@ import {
   Input,
   AfterViewInit,
   ElementRef,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 
 import SimpleBar from 'simplebar-core';
@@ -15,10 +15,10 @@ import { Options } from 'simplebar';
   host: { 'data-simplebar': 'init' },
   templateUrl: './simplebar-angular.component.html',
   styleUrls: [
-    '../../../simplebar/src/simplebar.css',
-    './simplebar-angular.component.scss'
+    '../../../simplebar-core/src/simplebar.css',
+    './simplebar-angular.component.scss',
   ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class SimplebarAngularComponent implements OnInit, AfterViewInit {
   @Input('options') options: Options;

@@ -14,8 +14,8 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar-core"
   },
-  "main": "dist/simplebar.min.js",
-  "module": "dist/simplebar.esm.js",
+  "main": "dist/simplebar-core.esm.js",
+  "module": "dist/simplebar-core.esm.js",
   "style": "dist/simplebar.min.css",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
