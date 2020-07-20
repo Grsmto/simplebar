@@ -50,7 +50,7 @@ const builds = [
     ],
   },
 ];
-console.log(process.env);
+
 if (process.env.BUILD !== 'development') {
   // browser-friendly UMD build
   builds.push({

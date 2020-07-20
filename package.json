@@ -35,6 +35,7 @@
     "lerna": "^3.13.3",
     "lint-staged": "^8.1.5",
     "mutation-observer": "^1.0.3",
+    "minify": "^5.1.1",
     "prettier": "^2.0.5",
     "prettier-eslint": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",
