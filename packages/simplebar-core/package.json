@@ -14,7 +14,8 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar-core"
   },
-  "main": "dist/simplebar-core.esm.js",
+  "main": "dist/simplebar-core.js",
+  "module": "dist/simplebar-core.esm.js",
   "style": "dist/simplebar.min.css",
   "typings": "dist/simplebar-core.d.ts",
   "homepage": "https://grsmto.github.io/simplebar/",
@@ -22,7 +23,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "serve -s demo",
-    "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && cp simplebar-core.d.ts dist/simplebar-core.d.ts && minify dist/simplebar.css > dist/simplebar.min.css",
+    "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && cp simplebar-core.d.ts dist/simplebar-core.d.ts",
     "dev": "rollup -c -w --environment BUILD:development",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
