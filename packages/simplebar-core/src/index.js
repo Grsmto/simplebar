@@ -324,7 +324,9 @@ export default class SimpleBar {
     }
 
     // This is required to detect horizontal scroll. Vertical scroll only needs the resizeObserver.
-    this.mutationObserver = new elWindow.MutationObserver(this.recalculate);
+    this.mutationObserver = new elWindow.MutationObserver(
+      this.recalculate.bind(this)
+    );
 
     this.mutationObserver.observe(this.contentEl, {
       childList: true,
