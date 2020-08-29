@@ -1,14 +1,14 @@
 const path = require('path');
 
 module.exports = {
-  entry: './demo/index.js',
+  entry: './index.js',
   devtool: 'cheap-module-source-map',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, './demo'),
+    path: path.resolve(__dirname, './'),
   },
   devServer: {
-    contentBase: './demo',
+    contentBase: './',
     port: 8090,
     inline: true,
     // host: "0.0.0.0",

@@ -1,13 +1,13 @@
 import React from 'react';
-import ReactDOM, { createPortal } from 'react-dom';
+import { createPortal } from 'react-dom';
 import Select from 'react-select';
 import { FixedSizeList as List } from 'react-window';
 import SimpleBarReact from 'simplebar-react';
 import SimpleBar from 'simplebar';
 
-import Playground from 'simplebar/demo/Playground';
+import Playground from './Playground';
 
-import 'simplebar/src/simplebar.css';
+import 'simplebar/dist/simplebar.css';
 
 if (typeof Promise === 'undefined') {
   // Rejection tracking prevents a common issue where React gets into an
