@@ -15,14 +15,12 @@
     "directory": "packages/simplebar-core"
   },
   "main": "dist/simplebar-core.esm.js",
-  "module": "dist/simplebar-core.esm.js",
   "style": "dist/simplebar.min.css",
   "typings": "dist/simplebar-core.d.ts",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode=development",
     "serve": "serve -s demo",
     "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && cp simplebar-core.d.ts dist/simplebar-core.d.ts && minify dist/simplebar.css > dist/simplebar.min.css",
     "dev": "rollup -c -w --environment BUILD:development",
@@ -41,14 +39,7 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^0.28.11",
     "intern": "^4.4.2",
-    "promise": "^8.0.2",
-    "react-select": "^2.4.3",
-    "react-window": "^1.8.1",
-    "serve": "^11.3.2",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "promise": "^8.0.2"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [

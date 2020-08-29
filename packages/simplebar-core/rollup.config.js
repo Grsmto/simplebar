@@ -33,7 +33,7 @@ export default [
       return false;
     },
     output: {
-      file: pkg.module,
+      file: pkg.main,
       format: 'esm',
       sourcemap: true,
     },
