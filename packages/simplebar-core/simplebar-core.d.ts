@@ -2,7 +2,7 @@
 // TypeScript Version: 3.9
 
 export as namespace SimpleBar;
-export = SimpleBar;
+export default SimpleBar;
 
 declare class SimpleBar {
   static removeObserver(): void;
