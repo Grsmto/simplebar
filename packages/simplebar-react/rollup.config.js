@@ -20,21 +20,34 @@ const globals = {
   react: 'React',
   'simplebar-core': 'SimpleBar',
 };
-const external = [...Object.keys(pkg.dependencies), 'react'];
+const getExternals = (id) => {
+  if (
+    Object.keys(pkg.dependencies).find((dep) => id === dep) ||
+    Object.keys(pkg.peerDependencies).find((dep) => id === dep) ||
+    id.match(/(core-js).+/) ||
+    id.match(/(@babel).+/)
+  ) {
+    return true;
+  }
+
+  return false;
+};
 
 export default [
   {
     input: 'index.js',
+    external: getExternals,
     output: {
       name: 'SimpleBar',
       file: pkg.main,
       format: 'umd',
       globals: globals,
     },
-    external: external,
     plugins: [
       babel({
         exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: ['@babel/plugin-transform-runtime'],
       }),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
@@ -44,7 +57,7 @@ export default [
   },
   {
     input: 'index.js',
-    external: external,
+    external: getExternals,
     output: {
       file: pkg.module,
       format: 'es',
@@ -52,6 +65,8 @@ export default [
     plugins: [
       babel({
         exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
       license(banner),
     ],

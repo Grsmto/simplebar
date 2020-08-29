@@ -3,7 +3,10 @@
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "modules": false,
+        "useBuiltIns": "usage",
+        "corejs": 3,
+        "loose": true
       }
     ],
     "@babel/preset-react"
