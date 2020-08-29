@@ -805,20 +805,15 @@ export default class SimpleBar {
       if (dir === -1) {
         if (scrolled > scrollSize) {
           scrolled -= speed;
-          this.contentWrapperEl.scrollTo({
-            [this.axis[axis].offsetAttr]: scrolled,
-          });
-          elWindow.requestAnimationFrame(scrollTo);
         }
       } else {
         if (scrolled < scrollSize) {
           scrolled += speed;
-          this.contentWrapperEl.scrollTo({
-            [this.axis[axis].offsetAttr]: scrolled,
-          });
-          elWindow.requestAnimationFrame(scrollTo);
         }
       }
+
+      this.contentWrapperEl[this.axis[axis].scrollOffsetAttr] = scrolled;
+      elWindow.requestAnimationFrame(scrollTo);
     };
 
     scrollTo();
