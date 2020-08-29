@@ -2,6 +2,7 @@
 
 exports[`renders with options 1`] = `
 <div
+  class="simplebar-scrollable-y"
   data-simplebar="init"
 >
   <div

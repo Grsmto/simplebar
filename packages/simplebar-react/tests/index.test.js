@@ -28,25 +28,11 @@ test('renders with options', () => {
   ).toBeVisible();
 });
 
-test('works with deprecated options', () => {
-  const { container } = render(
-    <SimpleBar data-simplebar-force-visible="y">
-      {[...Array(5)].map((x, i) => (
-        <p key={i}>Some content</p>
-      ))}
-    </SimpleBar>
-  );
-
-  expect(
-    container.querySelector('.simplebar-track.simplebar-vertical')
-  ).toBeVisible();
-});
-
 test('renders with scrollableNodeProps', async () => {
   const { getByTestId } = render(
     <SimpleBar
       scrollableNodeProps={{
-        'data-testid': 'scrollable-node-props'
+        'data-testid': 'scrollable-node-props',
       }}
     >
       {[...Array(5)].map((x, i) => (
