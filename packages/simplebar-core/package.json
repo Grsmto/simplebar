@@ -18,6 +18,7 @@
   "module": "dist/simplebar-core.esm.js",
   "style": "dist/simplebar.min.css",
   "typings": "dist/simplebar-core.d.ts",
+  "sideEffects": false,
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "license": "MIT",
