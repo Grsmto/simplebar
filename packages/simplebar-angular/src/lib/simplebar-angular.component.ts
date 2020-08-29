@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 
 import SimpleBar from 'simplebar-core';
-import { Options } from 'simplebar';
 
 @Component({
   selector: 'ngx-simplebar',
@@ -21,7 +20,7 @@ import { Options } from 'simplebar';
   encapsulation: ViewEncapsulation.None,
 })
 export class SimplebarAngularComponent implements OnInit, AfterViewInit {
-  @Input('options') options: Options;
+  @Input('options') options: SimpleBar.Options;
 
   elRef: ElementRef;
   SimpleBar: any;

@@ -8,7 +8,7 @@ describe('SimplebarAngularComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SimplebarAngularComponent]
+      declarations: [SimplebarAngularComponent],
     }).compileComponents();
   }));
 
@@ -23,7 +23,7 @@ describe('SimplebarAngularComponent', () => {
   });
 
   it('should create with options', () => {
-    component.options = { autoHide: false };
+    component.options = { clickOnTrack: false };
     expect(component).toBeTruthy();
   });
 
