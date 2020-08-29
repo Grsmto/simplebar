@@ -2,9 +2,7 @@ import jestPuppeteerConfig from '../jest-puppeteer.config';
 
 describe('Load', () => {
   beforeAll(async () => {
-    await page.goto(
-      `http://localhost:${jestPuppeteerConfig.server.port}/examples.html`
-    );
+    await page.goto(`http://localhost:${jestPuppeteerConfig.server.port}`);
   });
 
   beforeEach(async () => {
@@ -43,7 +41,6 @@ describe('Load', () => {
     const scrollbarEl = await expect(el).toMatchElement(
       '.simplebar-track.simplebar-horizontal .simplebar-scrollbar'
     );
-    const isRtl = await page.$eval('.demo-rtl', (el) => el.SimpleBar.isRtl);
     const transformStyle = await page.evaluate(
       (el) => el.style.transform,
       scrollbarEl
@@ -51,7 +48,6 @@ describe('Load', () => {
     const elBoundingBox = await el.boundingBox();
     const scrollbarElBoundingBox = await scrollbarEl.boundingBox();
 
-    expect(isRtl).toBeTruthy();
     expect(transformStyle).toEqual(
       `translate3d(${
         elBoundingBox.width - scrollbarElBoundingBox.width
@@ -98,5 +94,5 @@ describe('Load', () => {
 
     expect(scrollbarHeightAfterHover).toBeLessThan(scrollbarHeight);
   });
-}, 999999);
-// });
+  // }, 999999);
+});
