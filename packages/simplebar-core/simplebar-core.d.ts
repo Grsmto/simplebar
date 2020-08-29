@@ -1,5 +1,5 @@
 // Project: https://github.com/Grsmto/simplebar, https://grsmto.github.io/simplebar
-// TypeScript Version: 2.1
+// TypeScript Version: 3.9
 
 export as namespace SimpleBar;
 export = SimpleBar;
