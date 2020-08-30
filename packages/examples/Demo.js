@@ -284,8 +284,7 @@ const Demo = () => {
           <h2>SimpleBar-React + React-Window</h2>
           <SimpleBarReact
             className="demo1"
-            autoHide={false}
-            data-simplebar-force-visible="x"
+            forceVisible="x"
             // scrollableNodeProps={{ ref: scrollableElRef }}
           >
             {({ scrollableNodeRef, contentNodeRef }) => (
@@ -333,11 +332,7 @@ const Demo = () => {
       <section>
         <div className="col">
           <h2>SimpleBar-React + refs</h2>
-          <SimpleBarReact
-            className="demo1"
-            autoHide={false}
-            data-simplebar-force-visible="x"
-          >
+          <SimpleBarReact className="demo1" autoHide={false} forceVisible="x">
             {({ scrollableNodeRef, contentNodeRef }) => {
               return (
                 <div ref={scrollableNodeRef}>
