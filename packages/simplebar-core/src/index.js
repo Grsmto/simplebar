@@ -919,3 +919,5 @@ export default class SimpleBar {
     )[0];
   }
 }
+
+SimpleBar.default = SimpleBar;
