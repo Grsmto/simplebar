@@ -72,7 +72,7 @@ SimpleBar.handleMutations = (mutations) => {
 
     Array.prototype.forEach.call(mutation.removedNodes, (removedNode) => {
       if (removedNode.nodeType === 1) {
-        if (removedNode.hasAttribute('[data-simplebar="init"]')) {
+        if (removedNode.hasAttribute('data-simplebar')) {
           SimpleBar.instances.has(removedNode) &&
             SimpleBar.instances.get(removedNode).unMount();
         } else {
