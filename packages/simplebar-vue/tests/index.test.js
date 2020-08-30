@@ -9,7 +9,7 @@ describe('simplebar', () => {
 
   it('renders with options', () => {
     const wrapper = shallowMount(simplebar, {
-      propsData: { 'data-simplebar-auto-hide': 'false' }
+      propsData: { 'data-simplebar-force-visible': 'true' },
     });
     expect(wrapper).toMatchSnapshot();
   });
@@ -17,8 +17,8 @@ describe('simplebar', () => {
   it('renders with default slot', () => {
     const wrapper = shallowMount(simplebar, {
       slots: {
-        default: '<div class="inner-content" />'
-      }
+        default: '<div class="inner-content" />',
+      },
     });
     expect(wrapper).toMatchSnapshot();
   });
@@ -46,8 +46,8 @@ describe('simplebar', () => {
 
   it('works with options as attribute', () => {
     const wrapper = shallowMount(simplebar, {
-      propsData: { 'data-simplebar-auto-hide': 'false' }
+      propsData: { 'data-simplebar-force-visible': 'true' },
     });
-    expect(wrapper.vm.SimpleBar.options.autoHide).toEqual(false);
+    expect(wrapper.vm.SimpleBar.options.forceVisible).toEqual(true);
   });
 });
