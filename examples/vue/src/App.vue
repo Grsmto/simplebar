@@ -1,5 +1,5 @@
 <template>
-  <simplebar class="test" data-simplebar-auto-hide="false">
+  <simplebar class="test" force-visible>
     <div v-for="n in 10" :key="n">Example content</div>
   </simplebar>
 </template>
@@ -11,9 +11,9 @@ import 'simplebar/dist/simplebar.min.css';
 export default {
   name: 'app',
   components: {
-    simplebar
-  }
-}
+    simplebar,
+  },
+};
 </script>
 
 <style>
