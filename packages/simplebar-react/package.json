@@ -20,7 +20,7 @@
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c && cp simplebar-react.d.ts dist/simplebar-react.d.ts",
+    "build": "rollup -c && cp simplebar-react.d.ts dist/simplebar-react.d.ts && minify ../simplebar-core/src/simplebar.css > dist/simplebar.min.css",
     "dev": "rollup -c -w",
     "test": "jest",
     "version": "yarn build",
