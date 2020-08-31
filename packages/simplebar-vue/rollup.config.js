@@ -43,9 +43,9 @@ export default [
     },
     external: external,
     plugins: [
-      vue(),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
+      vue(),
       babel({
         exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
