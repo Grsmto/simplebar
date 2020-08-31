@@ -1,6 +1,6 @@
 {
   "name": "simplebar-examples",
-  "version": "3.0.0-beta.3",
+  "version": "3.0.0",
   "private": true,
   "description": "Scrollbars, simpler.",
   "author": "Adrien Denat <oi@adriendenat.com>",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "simplebar": "^6.0.0-beta.3",
-    "simplebar-react": "^3.0.0-beta.3"
+    "simplebar-react": "^3.0.0-beta.4"
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
