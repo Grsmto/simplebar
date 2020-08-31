@@ -1,23 +1,30 @@
 <template>
-  <simplebar class="test" force-visible>
-    <div v-for="n in 10" :key="n">Example content</div>
-  </simplebar>
+  <div id="app">
+    <Simplebar class="test" force-visible>
+      <div v-for="n in 10" :key="n">Example content</div>
+    </Simplebar>
+  </div>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
-import 'simplebar/dist/simplebar.min.css';
+import Simplebar from 'simplebar-vue';
+// import 'simplebar-vue/dist/simplebar.min.css';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    simplebar,
+    Simplebar,
   },
 };
 </script>
 
 <style>
-.test {
-  height: 100px;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
