@@ -14,7 +14,9 @@
   },
   "main": "dist/simplebar-vue.js",
   "module": "dist/simplebar-vue.esm.js",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
