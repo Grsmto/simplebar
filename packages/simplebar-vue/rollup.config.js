@@ -62,7 +62,6 @@ export default [
     output: {
       file: pkg.module,
       format: 'esm',
-      globals: globals,
     },
     plugins: [
       vue(),
