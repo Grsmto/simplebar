@@ -1,6 +1,6 @@
 import canUseDOM from 'can-use-dom';
-
 import SimpleBar from 'simplebar-core';
+
 import { getOptions } from './helpers';
 
 SimpleBar.initDOMLoadedElements = function () {
@@ -90,6 +90,7 @@ SimpleBar.handleMutations = (mutations) => {
 };
 
 SimpleBar.getOptions = getOptions;
+SimpleBar.default = SimpleBar;
 
 /**
  * HTML API
