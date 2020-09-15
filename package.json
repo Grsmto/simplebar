@@ -6,7 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "test": "lerna run test",
-    "release": "yarn build && yarn test && lerna publish",
+    "release": "yarn build && yarn test && lerna publish --pre-dist-tag beta --preid beta",
     "start": "lerna exec --scope=simplebar yarn start",
     "dev": "lerna exec --scope=simplebar yarn dev"
   },
