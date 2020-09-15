@@ -30,12 +30,7 @@ const externals = (id) => {
 };
 
 const builds = [
-  // CommonJS (for Node) and ES module (for bundlers) build.
-  // (We could have three entries in the configuration array
-  // instead of two, but it's quicker to generate multiple
-  // builds from a single configuration where possible, using
-  // an array for the `output` option, where we can specify
-  // `file` and `format` for each target)
+  // ES module (for bundlers) build.
   {
     input: 'src/index.js',
     external: externals,
@@ -58,7 +53,7 @@ const builds = [
 ];
 
 if (process.env.BUILD !== 'development') {
-  // browser-friendly UMD build
+  // UMD build
   builds.push({
     input: 'src/index.js',
     external: externals,
@@ -78,23 +73,39 @@ if (process.env.BUILD !== 'development') {
         babelHelpers: 'runtime',
         plugins: ['@babel/plugin-transform-runtime'],
       }),
+      license(licence),
+    ],
+  });
+
+  // browser script tag build, minified
+  builds.push({
+    input: 'src/index.js',
+    output: {
+      name: 'SimpleBar',
+      file: 'dist/simplebar.min.js',
+      format: 'umd',
+    },
+    plugins: [
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
+      babel({
+        exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: ['@babel/plugin-transform-runtime'],
+      }),
       terser(),
       license(licence),
     ],
   });
 
   builds.push(
-    // browser-friendly, non-minified UMD build
+    // browser script tag build, non-minified
     {
       input: 'src/index.js',
-      external: externals,
       output: {
         name: 'SimpleBar',
         file: 'dist/simplebar.js',
         format: 'umd',
-        globals: {
-          'can-use-dom': 'canUseDOM',
-        },
       },
       plugins: [
         resolve(), // so Rollup can find dependencies
