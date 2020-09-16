@@ -283,16 +283,7 @@ export default class SimpleBar {
 
     this.el.addEventListener('mouseenter', this.onMouseEnter);
 
-    ['mousedown', 'click', 'dblclick'].forEach((e) => {
-      this.el.addEventListener(e, this.onPointerEvent, true);
-    });
-
-    ['touchstart', 'touchend', 'touchmove'].forEach((e) => {
-      this.el.addEventListener(e, this.onPointerEvent, {
-        capture: true,
-        passive: true,
-      });
-    });
+    this.el.addEventListener('pointerdown', this.onPointerEvent, true);
 
     this.el.addEventListener('mousemove', this.onMouseMove);
     this.el.addEventListener('mouseleave', this.onMouseLeave);
@@ -647,13 +638,10 @@ export default class SimpleBar {
 
     // If any pointer event is called on the scrollbar
     if (isWithinTrackXBounds || isWithinTrackYBounds) {
-      // Preventing the event's default action stops text being
-      // selectable during the drag.
-      e.preventDefault();
       // Prevent event leaking
       e.stopPropagation();
 
-      if (e.type === 'mousedown') {
+      if (e.type === 'pointerdown' && e.pointerType !== 'touch') {
         if (isWithinTrackXBounds) {
           this.axis.x.scrollbar.rect = this.axis.x.scrollbar.el.getBoundingClientRect();
 
@@ -786,6 +774,9 @@ export default class SimpleBar {
   onTrackClick(e, axis = 'y') {
     if (!this.options.clickOnTrack) return;
 
+    // Preventing the event's default to trigger click underneath
+    e.preventDefault();
+
     const elWindow = getElementWindow(this.el);
     this.axis[axis].scrollbar.rect = this.axis[
       axis
@@ -806,15 +797,16 @@ export default class SimpleBar {
       if (dir === -1) {
         if (scrolled > scrollSize) {
           scrolled -= speed;
+          this.contentWrapperEl[this.axis[axis].scrollOffsetAttr] = scrolled;
+          elWindow.requestAnimationFrame(scrollTo);
         }
       } else {
         if (scrolled < scrollSize) {
           scrolled += speed;
+          this.contentWrapperEl[this.axis[axis].scrollOffsetAttr] = scrolled;
+          elWindow.requestAnimationFrame(scrollTo);
         }
       }
-
-      this.contentWrapperEl[this.axis[axis].scrollOffsetAttr] = scrolled;
-      elWindow.requestAnimationFrame(scrollTo);
     };
 
     scrollTo();
@@ -858,16 +850,7 @@ export default class SimpleBar {
     // Event listeners
     this.el.removeEventListener('mouseenter', this.onMouseEnter);
 
-    ['mousedown', 'click', 'dblclick'].forEach((e) => {
-      this.el.removeEventListener(e, this.onPointerEvent, true);
-    });
-
-    ['touchstart', 'touchend', 'touchmove'].forEach((e) => {
-      this.el.removeEventListener(e, this.onPointerEvent, {
-        capture: true,
-        passive: true,
-      });
-    });
+    this.el.removeEventListener('pointerdown', this.onPointerEvent, true);
 
     this.el.removeEventListener('mousemove', this.onMouseMove);
     this.el.removeEventListener('mouseleave', this.onMouseLeave);
