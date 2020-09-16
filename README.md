@@ -51,6 +51,9 @@ Before using SimpleBar it's important to know its [limitations](https://github.c
 
 See changelog here : https://github.com/Grsmto/simplebar/releases
 
+## 👨‍💻 I'm available for hire! [Reach out to me!](https://www.adriendenat.com/about/)
+## 🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!
+
 ### Credits
 
 - [KingSora](https://github.com/KingSora) for multiple features and inspirations (`height: auto` detection, RTL mode cross browser support and more) with [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
