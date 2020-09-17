@@ -4,7 +4,6 @@ import SimpleBarJS from 'simplebar-core';
 
 const SimpleBar = React.forwardRef(
   ({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
-    let instance;
     let scrollableNodeRef = useRef();
     const elRef = useRef();
     const contentNodeRef = useRef();
@@ -22,7 +21,10 @@ const SimpleBar = React.forwardRef(
     });
 
     useEffect(() => {
-      scrollableNodeRef = scrollableNodeProps.ref || scrollableNodeRef;
+      let instance;
+      scrollableNodeRef.current = scrollableNodeProps.ref
+        ? scrollableNodeProps.ref.current
+        : scrollableNodeRef.current;
 
       if (elRef.current) {
         instance = new SimpleBarJS(elRef.current, {
