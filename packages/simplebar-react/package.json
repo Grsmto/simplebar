@@ -1,6 +1,6 @@
 {
   "name": "simplebar-react",
-  "version": "3.0.0-beta.5",
+  "version": "3.0.0-beta.6",
   "description": "React component for SimpleBar",
   "files": [
     "dist",
@@ -30,7 +30,7 @@
     "babel-runtime": "^6.26.0",
     "core-js": "^3.6.5",
     "prop-types": "^15.6.1",
-    "simplebar-core": "^1.0.2"
+    "simplebar-core": "^1.0.3"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
