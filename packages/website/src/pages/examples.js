@@ -10,7 +10,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import Playground from "../components/Playground"
 
-import "simplebar/src/simplebar.css"
+import "simplebar/dist/simplebar.min.css"
 import "../demo.css"
 
 if (typeof Promise === "undefined") {
@@ -21,7 +21,7 @@ if (typeof Promise === "undefined") {
   window.Promise = require("promise/lib/es6-extensions.js")
 }
 
-const renderScrollbar = props => {
+const renderScrollbar = (props) => {
   return (
     <SimpleBarReact style={{ maxHeight: 300 }}>{props.children}</SimpleBarReact>
   )
