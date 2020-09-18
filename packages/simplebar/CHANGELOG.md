@@ -12,3 +12,8 @@
   `.simplebar-mouse-entered`,
   `.simplebar-scrolling`,
   `.simplebar-scrollable`.
+- Scrollbar recalculations are now throttled with RAQ instead of Lodash's throttle function, which prevents stuttering on animations (#507)
+
+### Bug fixes
+
+- Prevent click on track to be triggered on touch events
