@@ -2866,6 +2866,11 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
+"@types/simplebar@^2.4.2":
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/@types/simplebar/-/simplebar-2.4.3.tgz#c2441bbade39bc42b2c68c7809c2515c84823a66"
+  integrity sha512-uTWhej+UY9+VQHHAIHAwJEVLr9zrqLpfKK0v1N3Vc6Sn91QPJjfOcM61L1PVDvYF3t2K0/9bRBDI21QysovqcQ==
+
 "@types/source-list-map@*":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
