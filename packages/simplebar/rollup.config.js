@@ -1,6 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
+import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
@@ -60,10 +60,15 @@ if (process.env.BUILD !== 'development') {
     output: {
       name: 'SimpleBar',
       file: pkg.main,
-      format: 'umd',
+      format: 'esm',
       globals: {
         'can-use-dom': 'canUseDOM',
       },
+      plugins: [
+        getBabelOutputPlugin({
+          presets: [['@babel/preset-env', { modules: 'umd' }]],
+        }),
+      ],
     },
     plugins: [
       resolve(), // so Rollup can find dependencies
@@ -71,7 +76,7 @@ if (process.env.BUILD !== 'development') {
       babel({
         exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
-        plugins: ['@babel/plugin-transform-runtime'],
+        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
       license(licence),
     ],

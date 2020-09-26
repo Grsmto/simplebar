@@ -1,19 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
-import license from 'rollup-plugin-license';
 import pkg from './package.json';
-
-const licence = {
-  banner: `
-        ${pkg.title || pkg.name} - v${pkg.version}
-        ${pkg.description}
-        ${pkg.homepage}
-
-        Made by ${pkg.author}
-        Under ${pkg.license} License
-      `,
-};
 
 export default [
   // CommonJS (for Node) and ES module (for bundlers) build.
@@ -33,7 +21,6 @@ export default [
         babelHelpers: 'runtime',
         plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
-      license(licence),
     ],
   },
   // CommonJS (for Node) and ES module (for bundlers) build.
@@ -60,7 +47,6 @@ export default [
         babelHelpers: 'runtime',
         plugins: ['@babel/plugin-transform-runtime'],
       }),
-      license(licence),
     ],
   },
 ];
