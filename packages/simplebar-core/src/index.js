@@ -855,10 +855,15 @@ export default class SimpleBar {
     this.el.removeEventListener('mousemove', this.onMouseMove);
     this.el.removeEventListener('mouseleave', this.onMouseLeave);
 
-    this.contentWrapperEl.removeEventListener('scroll', this.onScroll);
+    if (this.contentWrapperEl) {
+      this.contentWrapperEl.removeEventListener('scroll', this.onScroll);
+    }
+
     elWindow.removeEventListener('resize', this.onWindowResize);
 
-    this.mutationObserver.disconnect();
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect();
+    }
 
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
