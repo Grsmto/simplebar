@@ -1,47 +1,31 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
+import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
+import { getBanner, getExternals } from '../../rollup.config';
 import pkg from './package.json';
 
-const banner = {
-  banner: `
-        ${pkg.name} - v${pkg.version}
-        ${pkg.description}
-        ${pkg.homepage}
-
-        Made by ${pkg.author}
-        Under ${pkg.license} License
-      `,
-};
 const globals = {
   'prop-types': 'PropTypes',
   react: 'React',
   'simplebar-core': 'SimpleBar',
 };
-const getExternals = (id) => {
-  if (
-    Object.keys(pkg.dependencies).find((dep) => id === dep) ||
-    Object.keys(pkg.peerDependencies).find((dep) => id === dep) ||
-    id.match(/(core-js).+/) ||
-    id.match(/(@babel).+/)
-  ) {
-    return true;
-  }
-
-  return false;
-};
 
 export default [
   {
     input: 'index.js',
-    external: getExternals,
+    external: getExternals(pkg),
     output: {
       name: 'SimpleBar',
       file: pkg.main,
-      format: 'umd',
       globals: globals,
+      format: 'esm',
+      plugins: [
+        getBabelOutputPlugin({
+          presets: [['@babel/preset-env', { modules: 'umd' }]],
+        }),
+      ],
     },
     plugins: [
       babel({
@@ -52,15 +36,20 @@ export default [
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
       terser(),
-      license(banner),
+      license(getBanner(pkg)),
     ],
   },
   {
     input: 'index.js',
-    external: getExternals,
+    external: getExternals(pkg),
     output: {
       file: pkg.module,
-      format: 'es',
+      format: 'esm',
+      plugins: [
+        getBabelOutputPlugin({
+          presets: [['@babel/preset-env']],
+        }),
+      ],
     },
     plugins: [
       babel({
@@ -68,7 +57,9 @@ export default [
         babelHelpers: 'runtime',
         plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
-      license(banner),
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
+      license(getBanner(pkg)),
     ],
   },
 ];

@@ -3,51 +3,28 @@ import commonjs from '@rollup/plugin-commonjs';
 import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
+import { getBanner, getExternals } from '../../rollup.config';
 import pkg from './package.json';
-
-const licence = {
-  banner: `
-        ${pkg.title || pkg.name} - v${pkg.version}
-        ${pkg.description}
-        ${pkg.homepage}
-
-        Made by ${pkg.author}
-        Under ${pkg.license} License
-      `,
-};
-
-const externals = (id) => {
-  if (
-    Object.keys(pkg.dependencies).find(
-      (dep) => id === dep && id !== 'simplebar-core'
-    ) ||
-    id.match(/(core-js).+/)
-  ) {
-    return true;
-  }
-
-  return false;
-};
 
 const builds = [
   // ES module (for bundlers) build.
   {
     input: 'src/index.js',
-    external: externals,
+    external: getExternals(pkg),
     output: {
       file: pkg.module,
       format: 'esm',
       sourcemap: true,
     },
     plugins: [
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
       babel({
         exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
         plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
-      license(licence),
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
+      license(getBanner(pkg)),
     ],
   },
 ];
@@ -56,7 +33,7 @@ if (process.env.BUILD !== 'development') {
   // UMD build
   builds.push({
     input: 'src/index.js',
-    external: externals,
+    external: getExternals(pkg),
     output: {
       name: 'SimpleBar',
       file: pkg.main,
@@ -71,14 +48,14 @@ if (process.env.BUILD !== 'development') {
       ],
     },
     plugins: [
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
       babel({
         exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
         plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
-      license(licence),
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
+      license(getBanner(pkg)),
     ],
   });
 
@@ -88,18 +65,23 @@ if (process.env.BUILD !== 'development') {
     output: {
       name: 'SimpleBar',
       file: 'dist/simplebar.min.js',
-      format: 'umd',
+      format: 'esm',
+      plugins: [
+        getBabelOutputPlugin({
+          presets: [['@babel/preset-env', { modules: 'umd' }]],
+        }),
+      ],
     },
     plugins: [
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
       babel({
         exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
         plugins: ['@babel/plugin-transform-runtime'],
       }),
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
       terser(),
-      license(licence),
+      license(getBanner(pkg)),
     ],
   });
 
@@ -110,17 +92,22 @@ if (process.env.BUILD !== 'development') {
       output: {
         name: 'SimpleBar',
         file: 'dist/simplebar.js',
-        format: 'umd',
+        format: 'esm',
+        plugins: [
+          getBabelOutputPlugin({
+            presets: [['@babel/preset-env', { modules: 'umd' }]],
+          }),
+        ],
       },
       plugins: [
-        resolve(), // so Rollup can find dependencies
-        commonjs(), // so Rollup can convert dependencies to an ES module
         babel({
-          exclude: ['/**/node_modules/**'],
+          // exclude: ['/**/node_modules/**'],
           babelHelpers: 'runtime',
           plugins: ['@babel/plugin-transform-runtime'],
         }),
-        license(licence),
+        resolve(), // so Rollup can find dependencies
+        commonjs(), // so Rollup can convert dependencies to an ES module
+        license(getBanner(pkg)),
       ],
     }
   );

@@ -29,6 +29,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "core-js": "^3.6.5",
+    "lodash-es": "^4.17.15",
     "prop-types": "^15.6.1",
     "simplebar-core": "^1.0.3"
   },
