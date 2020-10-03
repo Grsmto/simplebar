@@ -40,5 +40,4 @@ Please complete the following template:
 | ---------------- | ---------- |
 | SimpleBar        |
 | Browser          |
-| npm/Yarn         |
 | Operating System |
