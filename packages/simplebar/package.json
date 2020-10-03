@@ -1,5 +1,5 @@
 {
-  "version": "6.0.0-beta.6",
+  "version": "6.0.0-beta.7",
   "name": "simplebar",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
@@ -32,7 +32,7 @@
     "can-use-dom": "^0.1.0",
     "core-js": "^3.6.5",
     "lodash-es": "^4.17.15",
-    "simplebar-core": "^1.0.3"
+    "simplebar-core": "^1.0.4"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.10.1",
