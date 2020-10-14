@@ -16,7 +16,7 @@ const Layout = ({ children, ...otherProps }) => {
   return (
     <ThemeProvider theme={theme}>
       <Global
-        styles={theme => ({
+        styles={(theme) => ({
           html: {
             WebkitFontSmoothing: "antialiased",
             MozOsxFontSmoothing: "grayscale",
@@ -68,7 +68,7 @@ const Layout = ({ children, ...otherProps }) => {
             right: 10,
           },
           ".simplebar-track.simplebar-vertical": {
-            width: "21px",
+            width: 13,
           },
           ".simplebar-vertical .simplebar-scrollbar": {
             marginRight: 2,

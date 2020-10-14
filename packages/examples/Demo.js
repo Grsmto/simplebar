@@ -140,14 +140,10 @@ const Demo = () => {
         </div>
         <div className="col">
           <h2>Horizontal</h2>
-          <Playground width height direction>
-            {({ height, width, direction }) => (
+          <Playground width height>
+            {({ height, width }) => (
               <div style={{ width: '200px', height: '200px' }}>
-                <div
-                  data-simplebar
-                  className="demo4"
-                  style={{ height, width, direction }}
-                >
+                <div data-simplebar className="demo4" style={{ height, width }}>
                   <div className="box">1</div>
                   <div className="box">2</div>
                   <div className="box">3</div>
