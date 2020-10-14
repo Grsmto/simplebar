@@ -4,7 +4,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run build",
+    "build": "lerna exec yarn build",
     "test": "lerna run test",
     "release": "yarn build && yarn test && lerna publish --pre-dist-tag beta --preid beta",
     "start": "lerna exec --scope=simplebar yarn start",
