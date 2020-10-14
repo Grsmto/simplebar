@@ -4,6 +4,7 @@ export const getExternals = (pkg) => (id) => {
       (dep) => id === dep && id !== 'simplebar-core'
     ) ||
     Object.keys(pkg.peerDependencies || {}).find((dep) => id === dep) ||
+    id.match(/(lodash-es).+/) ||
     id.match(/(core-js).+/) ||
     id.match(/(@babel).+/)
   ) {
@@ -23,3 +24,9 @@ export const getBanner = (pkg) => ({
         Under ${pkg.license} License
       `,
 });
+
+export const babelConfig = {
+  // rootMode: 'upward',
+  exclude: ['**/node_modules/**'],
+  babelHelpers: 'runtime',
+};

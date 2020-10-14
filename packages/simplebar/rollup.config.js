@@ -1,9 +1,9 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import babel from '@rollup/plugin-babel';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
-import { getBanner, getExternals } from '../../rollup.config';
+import { getBanner, getExternals, babelConfig } from '../../rollup.config';
 import pkg from './package.json';
 
 const builds = [
@@ -18,8 +18,7 @@ const builds = [
     },
     plugins: [
       babel({
-        exclude: ['/**/node_modules/**'],
-        babelHelpers: 'runtime',
+        ...babelConfig,
         plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
       resolve(), // so Rollup can find dependencies
@@ -37,24 +36,19 @@ if (process.env.BUILD !== 'development') {
     output: {
       name: 'SimpleBar',
       file: pkg.main,
-      format: 'esm',
+      format: 'umd',
       globals: {
         'can-use-dom': 'canUseDOM',
+        'lodash-es': '_',
       },
-      plugins: [
-        getBabelOutputPlugin({
-          presets: [['@babel/preset-env', { modules: 'umd' }]],
-        }),
-      ],
     },
     plugins: [
       babel({
-        exclude: ['/**/node_modules/**'],
-        babelHelpers: 'runtime',
-        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
+        ...babelConfig,
+        plugins: [['@babel/plugin-transform-runtime']],
       }),
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
+      resolve(),
+      commonjs(),
       license(getBanner(pkg)),
     ],
   });
@@ -64,22 +58,16 @@ if (process.env.BUILD !== 'development') {
     input: 'src/index.js',
     output: {
       name: 'SimpleBar',
-      file: 'dist/simplebar.min.js',
-      format: 'esm',
-      plugins: [
-        getBabelOutputPlugin({
-          presets: [['@babel/preset-env', { modules: 'umd' }]],
-        }),
-      ],
+      file: pkg.unpkg,
+      format: 'umd',
     },
     plugins: [
       babel({
-        exclude: ['/**/node_modules/**'],
-        babelHelpers: 'runtime',
+        ...babelConfig,
         plugins: ['@babel/plugin-transform-runtime'],
       }),
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
+      resolve(),
+      commonjs(),
       terser(),
       license(getBanner(pkg)),
     ],
@@ -92,21 +80,15 @@ if (process.env.BUILD !== 'development') {
       output: {
         name: 'SimpleBar',
         file: 'dist/simplebar.js',
-        format: 'esm',
-        plugins: [
-          getBabelOutputPlugin({
-            presets: [['@babel/preset-env', { modules: 'umd' }]],
-          }),
-        ],
+        format: 'umd',
       },
       plugins: [
         babel({
-          // exclude: ['/**/node_modules/**'],
-          babelHelpers: 'runtime',
+          ...babelConfig,
           plugins: ['@babel/plugin-transform-runtime'],
         }),
-        resolve(), // so Rollup can find dependencies
-        commonjs(), // so Rollup can convert dependencies to an ES module
+        resolve(),
+        commonjs(),
         license(getBanner(pkg)),
       ],
     }

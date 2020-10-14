@@ -16,6 +16,7 @@
   },
   "main": "dist/simplebar.umd.js",
   "module": "dist/simplebar.esm.js",
+  "unpkg": "dist/simplebar.min.js",
   "style": "dist/simplebar.min.css",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",

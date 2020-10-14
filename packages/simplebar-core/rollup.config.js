@@ -1,13 +1,14 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
+import { getExternals } from '../../rollup.config';
 import pkg from './package.json';
 
 export default [
   // CommonJS (for Node) and ES module (for bundlers) build.
   {
     input: 'src/index.js',
-    external: Object.keys(pkg.dependencies),
+    external: getExternals(pkg),
     output: [
       {
         file: pkg.module,
@@ -17,7 +18,6 @@ export default [
     ],
     plugins: [
       babel({
-        exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
         plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
@@ -26,7 +26,7 @@ export default [
   // CommonJS (for Node) and ES module (for bundlers) build.
   {
     input: 'src/index.js',
-    external: Object.keys(pkg.dependencies),
+    external: getExternals(pkg),
     output: [
       {
         name: 'SimpleBar',
@@ -43,7 +43,6 @@ export default [
       commonjs(), // so Rollup can convert dependencies to an ES module
       resolve(), // so Rollup can find dependencies
       babel({
-        exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
         plugins: ['@babel/plugin-transform-runtime'],
       }),
