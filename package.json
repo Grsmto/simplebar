@@ -31,7 +31,7 @@
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "jest-puppeteer": "^4.4.0",
-    "lerna": "^3.13.3",
+    "lerna": "^3.22.1",
     "lint-staged": "^8.1.5",
     "minify": "^5.1.1",
     "mutation-observer": "^1.0.3",
