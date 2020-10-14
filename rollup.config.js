@@ -1,8 +1,6 @@
 export const getExternals = (pkg) => (id) => {
   if (
-    Object.keys(pkg.dependencies).find(
-      (dep) => id === dep && id !== 'simplebar-core'
-    ) ||
+    Object.keys(pkg.dependencies).find((dep) => id === dep) ||
     Object.keys(pkg.peerDependencies || {}).find((dep) => id === dep) ||
     id.match(/(lodash-es).+/) ||
     id.match(/(core-js).+/) ||

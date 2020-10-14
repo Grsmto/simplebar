@@ -39,13 +39,13 @@ if (process.env.BUILD !== 'development') {
       format: 'umd',
       globals: {
         'can-use-dom': 'canUseDOM',
-        'lodash-es': '_',
+        'simplebar-core': 'SimpleBar',
       },
     },
     plugins: [
       babel({
         ...babelConfig,
-        plugins: [['@babel/plugin-transform-runtime']],
+        plugins: ['@babel/plugin-transform-runtime'],
       }),
       resolve(),
       commonjs(),
