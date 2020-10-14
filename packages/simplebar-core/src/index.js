@@ -1,4 +1,4 @@
-import { throttle, debounce, memoize } from 'lodash-es';
+import { throttle, debounce } from 'lodash-es';
 import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
 import { getElementWindow, getElementDocument } from './helpers';
@@ -85,8 +85,6 @@ export default class SimpleBar {
     this.onStopScrolling = debounce(this.onStopScrolling, this.stopScrollDelay);
     this.onMouseEntered = debounce(this.onMouseEntered, this.stopScrollDelay);
 
-    SimpleBar.getRtlHelpers = memoize(SimpleBar.getRtlHelpers);
-
     this.init();
   }
 
@@ -127,6 +125,25 @@ export default class SimpleBar {
     };
   }
 
+  static getScrollbarWidth() {
+    // Try/catch for FF 56 throwing on undefined computedStyles
+    try {
+      // Detect browsers supporting CSS scrollbar styling and do not calculate
+      if (
+        getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar')
+          .display === 'none' ||
+        'scrollbarWidth' in document.documentElement.style ||
+        '-ms-overflow-style' in document.documentElement.style
+      ) {
+        return 0;
+      } else {
+        return scrollbarWidth();
+      }
+    } catch (e) {
+      return scrollbarWidth();
+    }
+  }
+
   static defaultOptions = {
     autoHide: true,
     forceVisible: false,
@@ -160,7 +177,8 @@ export default class SimpleBar {
     if (canUseDOM) {
       this.initDOM();
 
-      this.scrollbarWidth = this.getScrollbarWidth();
+      this.rtlHelpers = SimpleBar.getRtlHelpers();
+      this.scrollbarWidth = SimpleBar.getScrollbarWidth();
 
       this.recalculate();
 
@@ -824,25 +842,6 @@ export default class SimpleBar {
    */
   getScrollElement() {
     return this.contentWrapperEl;
-  }
-
-  getScrollbarWidth() {
-    // Try/catch for FF 56 throwing on undefined computedStyles
-    try {
-      // Detect browsers supporting CSS scrollbar styling and do not calculate
-      if (
-        getComputedStyle(this.contentWrapperEl, '::-webkit-scrollbar')
-          .display === 'none' ||
-        'scrollbarWidth' in document.documentElement.style ||
-        '-ms-overflow-style' in document.documentElement.style
-      ) {
-        return 0;
-      } else {
-        return scrollbarWidth();
-      }
-    } catch (e) {
-      return scrollbarWidth();
-    }
   }
 
   removeListeners() {
