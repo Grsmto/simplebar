@@ -35,6 +35,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@babel/runtime": "^7.11.2",
     "can-use-dom": "^0.1.0",
     "lodash-es": "^4.17.15"
   },
