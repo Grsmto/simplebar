@@ -4,5 +4,29 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-// You can delete this file if you're not using it
-import "whatwg-fetch"
+export const onClientEntry = () => {
+  return new Promise((resolve, reject) => {
+    // Polyfill.io stuff
+    window.__polyfillio__ = () => {
+      resolve()
+    }
+
+    const features = []
+
+    if (!("fetch" in window)) {
+      features.push("fetch")
+    }
+
+    if (features.length) {
+      const s = document.createElement("script")
+      s.src = `https://cdn.polyfill.io/v3/polyfill.min.js?features=${features.join(
+        ","
+      )}&callback=__polyfillio__`
+      s.async = true
+      s.onerror = reject
+      document.head.appendChild(s)
+    } else {
+      resolve()
+    }
+  })
+}
