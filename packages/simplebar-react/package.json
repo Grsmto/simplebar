@@ -15,7 +15,9 @@
   "main": "dist/simplebar-react.js",
   "module": "dist/simplebar-react.esm.js",
   "types": "dist/simplebar-react.d.ts",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
