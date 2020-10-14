@@ -635,7 +635,7 @@ export default class SimpleBar {
 
   onWindowResize = () => {
     // Recalculate scrollbarWidth in case it's a zoom
-    this.scrollbarWidth = this.getScrollbarWidth();
+    this.scrollbarWidth = SimpleBar.getScrollbarWidth();
 
     this.hideNativeScrollbar();
   };
