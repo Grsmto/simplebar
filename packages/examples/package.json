@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode=development",
-    "build": "webpack-dev-server --mode=production",
+    "build": "webpack --mode=production",
     "serve": "serve -s demo",
     "precommit": "lint-staged"
   },
