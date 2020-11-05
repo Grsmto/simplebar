@@ -44,3 +44,20 @@ export function getElementDocument(element) {
   }
   return element.ownerDocument;
 }
+
+export const isEventPassiveSupport = (function() {
+  let supportsPassiveOption = false;
+
+  try {
+    const opts = Object.defineProperty({}, 'passive', {
+      get: function() {
+        supportsPassiveOption = true;
+      }
+    });
+    const noop = function() {};
+    window.addEventListener('testPassiveEventSupport', noop, opts);
+    window.removeEventListener('testPassiveEventSupport', noop, opts);
+  } catch (e) {}
+
+  return supportsPassiveOption;
+})();

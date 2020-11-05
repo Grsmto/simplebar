@@ -4,7 +4,11 @@ import memoize from 'lodash.memoize';
 import ResizeObserver from 'resize-observer-polyfill';
 import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
-import { getElementWindow, getElementDocument } from './helpers';
+import {
+  getElementWindow,
+  getElementDocument,
+  isEventPassiveSupport
+} from './helpers';
 
 export default class SimpleBar {
   constructor(element, options) {
@@ -295,7 +299,13 @@ export default class SimpleBar {
     this.el.addEventListener('mousemove', this.onMouseMove);
     this.el.addEventListener('mouseleave', this.onMouseLeave);
 
-    this.contentWrapperEl.addEventListener('scroll', this.onScroll);
+    if (isEventPassiveSupport) {
+      this.contentWrapperEl.addEventListener('scroll', this.onScroll, {
+        passive: true
+      });
+    } else {
+      this.contentWrapperEl.addEventListener('scroll', this.onScroll);
+    }
 
     // Browser zoom triggers a window resize
     elWindow.addEventListener('resize', this.onWindowResize);
@@ -883,7 +893,13 @@ export default class SimpleBar {
     this.el.removeEventListener('mouseleave', this.onMouseLeave);
 
     if (this.contentWrapperEl) {
-      this.contentWrapperEl.removeEventListener('scroll', this.onScroll);
+      if (isEventPassiveSupport) {
+        this.contentWrapperEl.removeEventListener('scroll', this.onScroll, {
+          passive: true
+        });
+      } else {
+        this.contentWrapperEl.removeEventListener('scroll', this.onScroll);
+      }
     }
 
     elWindow.removeEventListener('resize', this.onWindowResize);
