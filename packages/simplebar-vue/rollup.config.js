@@ -46,11 +46,6 @@ export default [
     output: {
       file: pkg.module,
       format: 'esm',
-      plugins: [
-        getBabelOutputPlugin({
-          presets: [['@babel/preset-env']],
-        }),
-      ],
     },
     plugins: [
       vue(),

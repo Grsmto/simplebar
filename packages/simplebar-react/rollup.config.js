@@ -21,11 +21,6 @@ export default [
       file: pkg.main,
       globals: globals,
       format: 'esm',
-      plugins: [
-        getBabelOutputPlugin({
-          presets: [['@babel/preset-env', { modules: 'umd' }]],
-        }),
-      ],
     },
     plugins: [
       babel({
@@ -45,11 +40,6 @@ export default [
     output: {
       file: pkg.module,
       format: 'esm',
-      plugins: [
-        getBabelOutputPlugin({
-          presets: [['@babel/preset-env']],
-        }),
-      ],
     },
     plugins: [
       babel({
