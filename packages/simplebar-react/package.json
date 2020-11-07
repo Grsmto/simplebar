@@ -1,6 +1,6 @@
 {
   "name": "simplebar-react",
-  "version": "3.0.0-beta.8",
+  "version": "3.0.0-beta.9",
   "description": "React component for SimpleBar",
   "files": [
     "dist",
@@ -33,7 +33,7 @@
     "core-js": "^3.6.5",
     "lodash-es": "^4.17.15",
     "prop-types": "^15.6.1",
-    "simplebar-core": "^1.0.5"
+    "simplebar-core": "^1.0.6"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
