@@ -15,10 +15,11 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production",
-    "serve": "serve -s demo",
+    "serve": "serve",
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "core-js": "^3.9.1",
     "simplebar": "^6.0.0-beta.9",
     "simplebar-react": "^3.0.0-beta.9"
   },
