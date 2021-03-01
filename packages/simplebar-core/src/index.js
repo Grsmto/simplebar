@@ -120,7 +120,7 @@ export default class SimpleBar {
     scrollbarDummyEl.scrollLeft = -999;
     const dummyChildOffsetAfterScroll = SimpleBar.getOffset(dummyChild);
 
-    scrollbarDummyEl.remove();
+    document.body.removeChild(scrollbarDummyEl);
 
     SimpleBar.rtlHelpers = {
       // determines if the scrolling is responding with negative values
