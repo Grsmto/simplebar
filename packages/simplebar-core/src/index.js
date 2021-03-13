@@ -544,6 +544,10 @@ export default class SimpleBar {
     if (!this.isScrolling) {
       this.isScrolling = true;
       this.el.classList.add(this.classNames.scrolling);
+      if (this.axis.x.isOverflowing)
+        this.axis.x.scrollbar.el.classList.add(this.classNames.visible);
+      if (this.axis.y.isOverflowing)
+        this.axis.y.scrollbar.el.classList.add(this.classNames.visible);
     }
 
     this.onStopScrolling();
@@ -567,12 +571,16 @@ export default class SimpleBar {
 
   onStopScrolling = () => {
     this.el.classList.remove(this.classNames.scrolling);
+    this.axis.x.scrollbar.el.classList.remove(this.classNames.visible);
+    this.axis.y.scrollbar.el.classList.remove(this.classNames.visible);
     this.isScrolling = false;
   };
 
   onMouseEnter = () => {
     if (!this.isMouseEntering) {
       this.el.classList.add(this.classNames.mouseEntered);
+      this.axis.x.scrollbar.el.classList.add(this.classNames.visible);
+      this.axis.y.scrollbar.el.classList.add(this.classNames.visible);
       this.isMouseEntering = true;
     }
     this.onMouseEntered();
@@ -580,6 +588,8 @@ export default class SimpleBar {
 
   onMouseEntered = () => {
     this.el.classList.remove(this.classNames.mouseEntered);
+    this.axis.x.scrollbar.el.classList.remove(this.classNames.visible);
+    this.axis.y.scrollbar.el.classList.remove(this.classNames.visible);
     this.isMouseEntering = false;
   };
 
@@ -610,14 +620,18 @@ export default class SimpleBar {
 
     if (isWithinScrollbarBoundsX) {
       this.axis[axis].scrollbar.el.classList.add(this.classNames.hover);
+      this.axis[axis].scrollbar.el.classList.add(this.classNames.visible);
     } else {
       this.axis[axis].scrollbar.el.classList.remove(this.classNames.hover);
+      this.axis[axis].scrollbar.el.classList.remove(this.classNames.visible);
     }
 
     if (this.isWithinBounds(this.axis[axis].track.rect)) {
       this.axis[axis].track.el.classList.add(this.classNames.hover);
+      this.axis[axis].track.el.classList.add(this.classNames.visible);
     } else {
       this.axis[axis].track.el.classList.remove(this.classNames.hover);
+      this.axis[axis].track.el.classList.remove(this.classNames.visible);
     }
   }
 
@@ -639,6 +653,7 @@ export default class SimpleBar {
   onMouseLeaveForAxis(axis = 'y') {
     this.axis[axis].track.el.classList.remove(this.classNames.hover);
     this.axis[axis].scrollbar.el.classList.remove(this.classNames.hover);
+    this.axis[axis].scrollbar.el.classList.remove(this.classNames.visible);
   }
 
   onWindowResize = () => {
