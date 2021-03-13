@@ -59,20 +59,6 @@ const Layout = ({ children, ...otherProps }) => {
           ".simplebar-track .simplebar-scrollbar.simplebar-visible::before": {
             opacity: 1,
           },
-          ".simplebar-track.simplebar-vertical .simplebar-scrollbar::before": {
-            top: 10,
-            bottom: 10,
-          },
-          ".simplebar-track.simplebar-horizontal .simplebar-scrollbar::before": {
-            left: 10,
-            right: 10,
-          },
-          ".simplebar-track.simplebar-vertical": {
-            width: 13,
-          },
-          ".simplebar-vertical .simplebar-scrollbar": {
-            marginRight: 2,
-          },
           ".simplebar-horizontal": {
             height: "11px",
           },
