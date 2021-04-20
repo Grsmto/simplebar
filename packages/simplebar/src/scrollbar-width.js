@@ -13,10 +13,10 @@ if (canUseDOM) {
   });
 }
 
-export default function scrollbarWidth() {
+export default function scrollbarWidth(el) {
   if (cachedScrollbarWidth === null) {
     
-    const document = getElementDocument();
+    const document = getElementDocument(el);
     
     if (typeof document === 'undefined') {
       cachedScrollbarWidth = 0;
