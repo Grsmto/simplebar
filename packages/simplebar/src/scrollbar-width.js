@@ -15,11 +15,13 @@ if (canUseDOM) {
 
 export default function scrollbarWidth() {
   if (cachedScrollbarWidth === null) {
+    
+    const document = getElementDocument();
+    
     if (typeof document === 'undefined') {
       cachedScrollbarWidth = 0;
       return cachedScrollbarWidth;
     }
-    const document = getElementDocument();
     const body = document.body;
     const box = document.createElement('div');
 
