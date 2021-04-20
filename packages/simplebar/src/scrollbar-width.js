@@ -1,4 +1,5 @@
 import canUseDOM from 'can-use-dom';
+import { getElementDocument } from "./helpers";
 
 let cachedScrollbarWidth = null;
 let cachedDevicePixelRatio = null;
@@ -12,13 +13,15 @@ if (canUseDOM) {
   });
 }
 
-export default function scrollbarWidth() {
+export default function scrollbarWidth(el) {
   if (cachedScrollbarWidth === null) {
+    
+    const document = getElementDocument(el);
+    
     if (typeof document === 'undefined') {
       cachedScrollbarWidth = 0;
       return cachedScrollbarWidth;
     }
-
     const body = document.body;
     const box = document.createElement('div');
 
