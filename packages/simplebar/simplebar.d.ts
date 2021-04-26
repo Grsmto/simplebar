@@ -20,9 +20,9 @@ declare namespace SimpleBar {
         dragging?: string;
     }
 
-    interface ClassNamesOptions extends KnownClassNamesOptions {
+    type ClassNamesOptions = KnownClassNamesOptions & {
         [className: string]: string;
-    }
+    };
 
     interface Options {
         autoHide?: boolean;
@@ -45,6 +45,7 @@ declare class SimpleBar {
     recalculate(): void;
     getScrollElement(): HTMLElement;
     getContentElement(): HTMLElement;
+    unMount(): void;
 
     el: HTMLElement;
 }
