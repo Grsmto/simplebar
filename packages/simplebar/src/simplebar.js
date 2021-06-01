@@ -382,11 +382,11 @@ export default class SimpleBar {
 
     this.axis.x.isOverflowing =
       this.axis.x.isOverflowing &&
-      contentElScrollWidth > contentWrapperElOffsetWidth - offsetForYScrollbar;
+      contentElScrollWidth > contentWrapperElOffsetWidth - offsetForXScrollbar;
     this.axis.y.isOverflowing =
       this.axis.y.isOverflowing &&
       contentElScrollHeight >
-        contentWrapperElOffsetHeight - offsetForXScrollbar;
+        contentWrapperElOffsetHeight - offsetForYScrollbar;
 
     this.axis.x.scrollbar.size = this.getScrollbarSize('x');
     this.axis.y.scrollbar.size = this.getScrollbarSize('y');
