@@ -16,6 +16,10 @@ const licence = {
       `
 };
 
+const globals = {
+  '@juggle/resize-observer': 'ResizeObserver'
+};
+
 export default [
   // browser-friendly UMD build
   {
@@ -23,7 +27,8 @@ export default [
     output: {
       name: 'SimpleBar',
       file: pkg.main,
-      format: 'umd'
+      format: 'umd',
+      globals
     },
     plugins: [
       babel({
@@ -41,7 +46,8 @@ export default [
     output: {
       name: 'SimpleBar',
       file: 'dist/simplebar.js',
-      format: 'umd'
+      format: 'umd',
+      globals
     },
     plugins: [
       babel({
