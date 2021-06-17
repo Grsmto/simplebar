@@ -31,7 +31,7 @@ SimpleBar is meant to be as easy to use as possible and lightweight. If you want
 <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
 ```
 
-note: you should replace `@latest` to the latest version (ex `@2.4.3`), if you want to lock to a specific version.
+note: you should replace `@latest` to the latest version (ex `@5.3.3`), if you want to lock to a specific version.
 You can find the full list of modules available [there](https://unpkg.com/simplebar@latest/dist/).
 
 ### Usage
