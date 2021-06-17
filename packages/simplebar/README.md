@@ -297,7 +297,7 @@ A common usecase is to only want SimpleBar on desktop/wider screens, but instead
 For example if you want it only on desktop you can first test for screen size using `matchMedia`:
 
 ```js
-if (window.matchMedia('(min-width: 600px)') {
+if (window.matchMedia('(min-width: 600px)').matches) {
   new SimpleBar(..)
 }
 ```
