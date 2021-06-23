@@ -52,7 +52,7 @@ export default class SimpleBar {
       return;
     }
 
-    this.recalculate = throttle(this.recalculate.bind(this), 64);
+    this.recalculate = throttle(this.recalculate.bind(this), this.options.recalculateThrottleWaitTime);
     this.onMouseMove = throttle(this.onMouseMove.bind(this), 64);
     this.hideScrollbars = debounce(
       this.hideScrollbars.bind(this),
@@ -127,6 +127,7 @@ export default class SimpleBar {
       hover: 'simplebar-hover',
       dragging: 'simplebar-dragging'
     },
+    recalculateThrottleWaitTime: 170,
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
     timeout: 1000
