@@ -31,6 +31,7 @@ declare namespace SimpleBar {
         direction?: 'rtl' | 'ltr';
         timeout?: number;
         clickOnTrack?: boolean;
+        recalculateThrottleWaitTime?: number;
         scrollbarMinSize?: number;
         scrollbarMaxSize?: number;
     }
