@@ -9,7 +9,11 @@
           <div
             class="simplebar-content-wrapper"
             ref="scrollElement"
-            @scroll="$listeners.scroll"
+            v-on="{
+              ...($listeners.scroll && {
+                scroll: $listeners.scroll,
+              })
+            }"
           >
             <div class="simplebar-content" ref="contentElement">
               <slot></slot>
