@@ -10,8 +10,8 @@
             class="simplebar-content-wrapper"
             ref="scrollElement"
             v-on="{
-              ...($listeners.scroll && {
-                scroll: $listeners.scroll,
+              ...($attrs.onScroll && {
+                scroll: $attrs.onScroll,
               })
             }"
           >

@@ -28,17 +28,16 @@
     "simplebar": "^5.3.4"
   },
   "peerDependencies": {
-    "vue": "^2.5.17"
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@vue/test-utils": "^1.0.0-beta.29",
-    "babel-jest": "^23.0.1",
+    "@vue/test-utils": "^2.0.0-0",
+    "babel-jest": "^24.0.1",
     "jest-serializer-vue": "^2.0.2",
-    "rollup-plugin-vue": "4.3.2",
-    "vue": "^2.5.22",
-    "vue-jest": "^3.0.4",
-    "vue-template-compiler": "^2.5.22"
+    "rollup-plugin-vue": "^6.0.0",
+    "vue": "^3.0.0",
+    "vue-jest": "^5.0.0-alpha.0"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [
