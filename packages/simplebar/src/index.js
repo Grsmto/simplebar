@@ -54,6 +54,7 @@ SimpleBar.handleMutations = mutations => {
       if (addedNode.nodeType === 1) {
         if (addedNode.hasAttribute('data-simplebar')) {
           !SimpleBar.instances.has(addedNode) &&
+            document.documentElement.contains(addedNode) &&
             new SimpleBar(addedNode, getOptions(addedNode.attributes));
         } else {
           Array.prototype.forEach.call(
@@ -61,7 +62,8 @@ SimpleBar.handleMutations = mutations => {
             function(el) {
               if (
                 el.getAttribute('data-simplebar') !== 'init' &&
-                !SimpleBar.instances.has(el)
+                !SimpleBar.instances.has(el) &&
+                document.documentElement.contains(el)
               )
                 new SimpleBar(el, getOptions(el.attributes));
             }
@@ -72,14 +74,16 @@ SimpleBar.handleMutations = mutations => {
 
     Array.prototype.forEach.call(mutation.removedNodes, removedNode => {
       if (removedNode.nodeType === 1) {
-        if (removedNode.hasAttribute('[data-simplebar="init"]')) {
+        if (removedNode.getAttribute('data-simplebar') === 'init') {
           SimpleBar.instances.has(removedNode) &&
+            !document.documentElement.contains(removedNode) &&
             SimpleBar.instances.get(removedNode).unMount();
         } else {
           Array.prototype.forEach.call(
             removedNode.querySelectorAll('[data-simplebar="init"]'),
             el => {
               SimpleBar.instances.has(el) &&
+                !document.documentElement.contains(el) &&
                 SimpleBar.instances.get(el).unMount();
             }
           );
