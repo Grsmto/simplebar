@@ -199,6 +199,14 @@ forceVisible: true|'x'|'y' (default to `false`)
 
 By default, SimpleBar behave like `overflow: auto`.
 
+### ariaLabel
+
+You can set custom aria-label attribute for users with screen reader using the `ariaLabel` option:
+
+```
+ariaLabel: 'Your label' (default to `scrollable content`)
+```
+
 #### direction (RTL support)
 
 You can activate RTL support by passing the `direction` option:
