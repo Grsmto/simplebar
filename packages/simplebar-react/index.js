@@ -35,7 +35,14 @@ const getOptions = function(obj) {
 };
 
 const SimpleBar = React.forwardRef(
-  ({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
+  ({ children, scrollableNodeProps = {}, tag = 'div', ...otherProps }, ref) => {
+    const RootTag = tag;
+    if (
+      typeof document === 'object' &&
+      document.createElement(RootTag) instanceof HTMLUnknownElement
+    ) {
+      throw new Error('Invalid tag name');
+    }
     let instance;
     let scrollableNodeRef = useRef();
     const elRef = useRef();
@@ -49,7 +56,10 @@ const SimpleBar = React.forwardRef(
         Object.prototype.hasOwnProperty.call(SimpleBarJS.defaultOptions, key)
       ) {
         options[key] = otherProps[key];
-      } else if (key.match(/data-simplebar-(.+)/) && key !== 'data-simplebar-direction') {
+      } else if (
+        key.match(/data-simplebar-(.+)/) &&
+        key !== 'data-simplebar-direction'
+      ) {
         deprecatedOptions.push({
           name: key,
           value: otherProps[key]
@@ -92,7 +102,7 @@ const SimpleBar = React.forwardRef(
     }, []);
 
     return (
-      <div ref={elRef} data-simplebar {...rest}>
+      <RootTag ref={elRef} data-simplebar {...rest}>
         <div className="simplebar-wrapper">
           <div className="simplebar-height-auto-observer-wrapper">
             <div className="simplebar-height-auto-observer" />
@@ -123,7 +133,7 @@ const SimpleBar = React.forwardRef(
         <div className="simplebar-track simplebar-vertical">
           <div className="simplebar-scrollbar" />
         </div>
-      </div>
+      </RootTag>
     );
   }
 );
@@ -132,7 +142,8 @@ SimpleBar.displayName = 'SimpleBar';
 
 SimpleBar.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  scrollableNodeProps: PropTypes.object
+  scrollableNodeProps: PropTypes.object,
+  tag: PropTypes.string
 };
 
 export default SimpleBar;
