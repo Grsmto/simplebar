@@ -37,12 +37,6 @@ const getOptions = function(obj) {
 const SimpleBar = React.forwardRef(
   ({ children, scrollableNodeProps = {}, tag = 'div', ...otherProps }, ref) => {
     const RootTag = tag;
-    if (
-      typeof document === 'object' &&
-      document.createElement(RootTag) instanceof HTMLUnknownElement
-    ) {
-      throw new Error('Invalid tag name');
-    }
     let instance;
     let scrollableNodeRef = useRef();
     const elRef = useRef();
