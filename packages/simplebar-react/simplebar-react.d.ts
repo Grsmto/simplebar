@@ -12,6 +12,7 @@ declare namespace SimpleBar {
 
     interface Props extends SimpleBarJS.Options, React.HTMLAttributes<HTMLElement> {
         scrollableNodeProps?: object;
+        tag?: string;
         children?: React.ReactNode | ((props: ChildrenProps) => React.ReactNode);
     }
 }
