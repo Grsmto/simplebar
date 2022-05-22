@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import SimpleBarJS from 'simplebar-core';
 
 const SimpleBar = React.forwardRef(
-  ({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
+  ({ children, scrollableNodeProps = {}, tag = 'div', ...otherProps }, ref) => {
+    const RootTag = tag;
     let scrollableNodeRef = useRef();
     const elRef = useRef();
     const contentNodeRef = useRef();
@@ -49,7 +50,7 @@ const SimpleBar = React.forwardRef(
     }, []);
 
     return (
-      <div ref={elRef} data-simplebar {...rest}>
+      <RootTag ref={elRef} data-simplebar {...rest}>
         <div className="simplebar-wrapper">
           <div className="simplebar-height-auto-observer-wrapper">
             <div className="simplebar-height-auto-observer" />
@@ -80,7 +81,7 @@ const SimpleBar = React.forwardRef(
         <div className="simplebar-track simplebar-vertical">
           <div className="simplebar-scrollbar" />
         </div>
-      </div>
+      </RootTag>
     );
   }
 );
@@ -90,6 +91,7 @@ SimpleBar.displayName = 'SimpleBar';
 SimpleBar.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   scrollableNodeProps: PropTypes.object,
+  tag: PropTypes.string,
 };
 
 export default SimpleBar;
