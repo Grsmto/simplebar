@@ -25,7 +25,7 @@
     "start": "webpack-dev-server --mode=development",
     "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && cp simplebar.d.ts dist/simplebar.d.ts && minify dist/simplebar.css > dist/simplebar.min.css && webpack --mode=production",
     "dev": "rollup -c -w",
-    "test": "yarn test:unit && yarn test:e2e",
+    "test": "yarn test:unit",
     "test:unit": "jest -c jest-unit.config.js",
     "test:e2e": "env-cmd intern",
     "version": "yarn build",
