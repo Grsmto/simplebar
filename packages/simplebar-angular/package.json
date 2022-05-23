@@ -1,6 +1,6 @@
 {
   "name": "simplebar-angular",
-  "version": "2.3.6",
+  "version": "2.4.0",
   "description": "Angular component for SimpleBar",
   "scripts": {
     "ng": "ng",
@@ -27,7 +27,7 @@
     "simplebar"
   ],
   "dependencies": {
-    "simplebar": "^5.3.6"
+    "simplebar": "^5.3.7"
   },
   "peerDependencies": {
     "@angular/common": "^13.3.9",
