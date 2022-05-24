@@ -15,10 +15,10 @@
 ### Installation
 
 **- Via npm**
-`npm install simplebar simplebar-react --save`
+`npm install simplebar-react --save`
 
 **- Via Yarn**
-`yarn add simplebar simplebar-react`
+`yarn add simplebar-react`
 
 If you are using Gatsby, please see [#345](https://github.com/Grsmto/simplebar/issues/345).
 
