@@ -30,7 +30,7 @@ If you are using a module loader (like Webpack) you first need to load SimpleBar
 
 ```js
 import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+import 'simplebar-react/dist/simplebar.min.css';
 
 const App = () => (
   <SimpleBar style={{ maxHeight: 300 }}>
