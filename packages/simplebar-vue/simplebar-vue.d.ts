@@ -85,8 +85,6 @@ declare module 'simplebar-vue' {
   { }, // Computed
   { // Methods
     recalculate (): void;
-    getContentElement (): HTMLDivElement;
-    getScrollElement (): HTMLDivElement;
   },
   { }, // Mixins
   { }, // Extends
