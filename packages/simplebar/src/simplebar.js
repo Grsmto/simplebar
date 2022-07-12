@@ -315,7 +315,10 @@ export default class SimpleBar {
     const resizeObserver = elWindow.ResizeObserver || ResizeObserver;
     this.resizeObserver = new resizeObserver(() => {
       if (!resizeObserverStarted) return;
-      this.recalculate();
+
+      elWindow.requestAnimationFrame(function () {
+        this.recalculate();
+      });
     });
 
     this.resizeObserver.observe(this.el);
