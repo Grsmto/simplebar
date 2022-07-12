@@ -312,12 +312,18 @@ export default class SimpleBar {
 
     // Hack for https://github.com/WICG/ResizeObserver/issues/38
     let resizeObserverStarted = false;
+    let resizeAnimationFrameId = null;
     const resizeObserver = elWindow.ResizeObserver || ResizeObserver;
     this.resizeObserver = new resizeObserver(() => {
       if (!resizeObserverStarted) return;
 
-      elWindow.requestAnimationFrame(function () {
+      if (resizeAnimationFrameId !== null) {
+        elWindow.cancelAnimationFrame(resizeAnimationFrameId);
+      }
+
+      resizeAnimationFrameId = elWindow.requestAnimationFrame(function () {
         this.recalculate();
+        resizeAnimationFrameId = null;
       });
     });
 
