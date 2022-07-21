@@ -10,14 +10,14 @@ declare namespace SimpleBar {
         contentNodeRef: React.MutableRefObject<SimpleBar>;
     }
 
-    interface Props extends SimpleBarJS.Options, React.HTMLAttributes<HTMLElement> {
+    interface Props extends SimpleBarJS.Options {
         scrollableNodeProps?: object;
         tag?: string;
         children?: React.ReactNode | ((props: ChildrenProps) => React.ReactNode);
     }
 }
 
-declare class SimpleBar extends React.Component<SimpleBar.Props> {
+declare class SimpleBar extends React.Component<SimpleBar.Props & React.HTMLAttributes<HTMLElement>> {
   static removeObserver(): void;
     static instances: Pick<WeakMap<HTMLElement, SimpleBar>, 'get' | 'has'>;
 
