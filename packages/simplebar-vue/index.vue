@@ -113,29 +113,23 @@ export default {
      */
     scrollbarMaxSize: Number
   },
-  data () {
-    return {
-      /** @type {SimpleBar} */
-      SimpleBar: undefined,
-      /** @type {HTMLDivElement} */
-      scrollElement: undefined,
-      /** @type {HTMLDivElement} */
-      contentElement: undefined
-    }
-  },
+  /**
+   * @returns {{ SimpleBar?: SimpleBar; scrollElement?: HTMLDivElement; contentElement?: HTMLDivElement }}
+   */
+  data() { return { }; },
   mounted () {
-    // @ts-ignore
-    const options = SimpleBar.getOptions(this.$el.attributes);
+    // @ts-ignore (`getOptions` needs to be added to the type definition file)
+    const options = SimpleBar.getOptions(this.$attrs);
 
     for(const [key, value] of Object.entries(this.$props))
       if(value != undefined && typeof value !== "function")
         options[key] = value;
 
-    // @ts-ignore
+    // @ts-ignore (unable to type cast `$el`)
     this.SimpleBar = new SimpleBar(this.$el, options);
-    // @ts-ignore
+    // @ts-ignore (unable to type cast `$refs`)
     this.scrollElement = this.$refs.scrollElement;
-    // @ts-ignore
+    // @ts-ignore (unable to type cast `$refs`)
     this.contentElement = this.$refs.contentElement;
   },
   methods: {
