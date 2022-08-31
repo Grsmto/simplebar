@@ -37,8 +37,8 @@
   position: absolute;
   top: 20;
   left: 20;
-  bottom: 0;
-  right: 0;
+  bottom: 20;
+  right: 20;
   padding: 0;
   margin: 0;
   -webkit-overflow-scrolling: touch;
