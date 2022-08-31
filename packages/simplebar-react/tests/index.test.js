@@ -92,3 +92,18 @@ test('works on unmount', async () => {
 
   expect(ref.current.unMount).toHaveBeenCalled();
 });
+
+test('when array is empty', () => {
+  const { container } = render(
+    <SimpleBar>
+      {[...Array()].map((x, i) => (
+        <p key={i}>Some content</p>
+      ))}
+    </SimpleBar>
+  );
+  expect(()=> {<SimpleBar>
+    {[...Array()].map((x, i) => (
+      <p key={i}>Some content</p>
+    ))}
+  </SimpleBar>}).toThrow(TypeError);
+});
