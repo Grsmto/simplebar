@@ -4,5 +4,4 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "ignoreChanges": ["**/demo/**", "**/*.md"]
-  
 }
