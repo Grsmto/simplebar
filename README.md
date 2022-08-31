@@ -19,7 +19,7 @@ SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **nativ
 
 SimpleBar uses pure CSS to style the scrollbar. You can easily customize it as you want! Or even have multiple style on the same page...or just keep the default style ("Mac OS" scrollbar style).
 
-#### Lightweight and performant
+#### Lightweight and performant!
 
 Only 6kb minified. SimpleBar doesn't use Javascript to handle scrolling. You keep the performances/behaviours of the native scroll.
 
