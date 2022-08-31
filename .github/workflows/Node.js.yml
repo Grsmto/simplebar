@@ -16,15 +16,16 @@ jobs:
 
 
     steps:
-    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: action-git-diff-suggestions
+      uses: getsentry/action-git-diff-suggestions@v1
+    - uses: actions/checkout@v3
     - run: npm install --force
     - run: npm run build --if-present
     - run: npm test
     
-    - name: action-git-diff-suggestions
-      uses: getsentry/action-git-diff-suggestions@v1
+   
