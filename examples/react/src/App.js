@@ -16,11 +16,14 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <SimpleBar style={{ height: '300px' }}>
+        <div class="bar-container">
+          <SimpleBar style={{ height: '320px' }}>
           {[...Array(50)].map((x, i) =>
-            <p key={i} className="odd">Some content</p>
+            <p key={i} className="odd">This side bar is perfect</p>
           )}
         </SimpleBar>
+        </div>
+        
       </div>
     );
   }
