@@ -22,13 +22,4 @@ jobs:
       uses: actions/setup-node@v2
     - run: npm install --force
     - run: npm run build --if-present
-    - name: Coveralls GitHub Action
-      # You may pin to the exact commit or the version.
-      # uses: coverallsapp/github-action@9ba913c152ae4be1327bfb9085dc806cedb44057
-      uses: coverallsapp/github-action@1.1.3
-      with:
-        # 
-        github-token: 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
-        # Path to lcov file
-        path-to-lcov: ./coverage/lcov.info
-      
+          
