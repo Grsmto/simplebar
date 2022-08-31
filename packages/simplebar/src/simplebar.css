@@ -2,8 +2,8 @@
   position: relative;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
+  justify-content: flex-end;
+  align-content: flex-end;
   align-items: flex-start;
 }
 
@@ -19,11 +19,11 @@
   direction: inherit;
   position: absolute;
   overflow: hidden;
-  padding: 0;
-  margin: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  padding: 20;
+  margin: 20;
+  left: 20;
+  top: 20;
+  bottom: 50;
   right: 0;
   width: auto !important;
   height: auto !important;
@@ -35,8 +35,8 @@
   box-sizing: inherit !important;
   resize: none !important;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 20;
+  left: 20;
   bottom: 0;
   right: 0;
   padding: 0;
@@ -52,7 +52,7 @@
   height: 100%; /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
   width: auto;
   max-width: 100%; /* Not required for horizontal scroll to trigger */
-  max-height: 100%; /* Needed for vertical scroll to trigger */
+  max-height: 80%; /* Needed for vertical scroll to trigger */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
