@@ -49,10 +49,10 @@
   box-sizing: border-box !important;
   position: relative;
   display: block;
-  height: 100%; /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
+  height: 100% !important; /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
   width: auto;
   max-width: 100%; /* Not required for horizontal scroll to trigger */
-  max-height: 80%; /* Needed for vertical scroll to trigger */
+  max-height: 80% !important; /* Needed for vertical scroll to trigger */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
