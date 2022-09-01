@@ -28,7 +28,6 @@ Only 6kb minified. SimpleBar doesn't use Javascript to handle scrolling. You kee
 SimpleBar has been tested on the following browsers: Chrome, Firefox, Safari, Edge, IE11.
 
 ### Getting started
-
 The easiest way to use SimpleBar is with the default dependency-free version: `npm install simplebar`.
 
 - [Core documentation](https://github.com/Grsmto/simplebar/tree/master/packages/simplebar)
