@@ -93,6 +93,7 @@ test('works on unmount', async () => {
   expect(ref.current.unMount).toHaveBeenCalled();
 });
 
+
 test('when array is empty', () => {
   const { container } = render(
     <SimpleBar>
