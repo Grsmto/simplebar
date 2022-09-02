@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import SimpleBar from 'simplebar-react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import 'simplebar/dist/simplebar.min.css';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  
   render() {
     return (
       <div className="App">
@@ -23,6 +26,13 @@ class App extends Component {
           )}
         </SimpleBar>
         </div>
+
+        const Tab = createBottomTabNavigator();
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Profile" component={Profile}/>
+          </Tab.Navigator>
+        </NavigationContainer>
         
       </div>
     );
