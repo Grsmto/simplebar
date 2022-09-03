@@ -31,5 +31,6 @@
 .TabNavigator {
   height: 100%;
   width: 100%;
+  color:rgb(34, 34, 34);
   background-color: darkgray;
 }
