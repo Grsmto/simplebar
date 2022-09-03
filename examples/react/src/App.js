@@ -30,7 +30,7 @@ class App extends Component {
         const Tab = createBottomTabNavigator();
         <NavigationContainer>
           <Tab.Navigator>
-            <Tab.Screen name="Profile" component={Profile}/>
+            <Tab.Screen className= "TabNavigator" style={screen} name="Profile" component={Profile}/>
           </Tab.Navigator>
         </NavigationContainer>
         

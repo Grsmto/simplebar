@@ -27,3 +27,9 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.TabNavigator {
+  height: 100%;
+  width: 100%;
+  background-color: darkgray;
+}
