@@ -5,7 +5,7 @@ before_install:
   - npm i -g gatsby-cli
 
 install:
-  - lerna bootstrap
+  - yarn
 
 script:
   - yarn build
@@ -14,7 +14,7 @@ script:
 deploy:
   provider: script
   script: cd packages/website/ && yarn deploy
-  skip-cleanup: true
+  skip_cleanup: true
   on:
     branch: master
 
