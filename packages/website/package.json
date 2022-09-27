@@ -2,7 +2,7 @@
   "name": "simplebar-website",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Adrien Denat <oi@adriendenat.com>",
   "scripts": {
     "build": "gatsby build",
