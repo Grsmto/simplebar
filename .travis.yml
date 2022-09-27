@@ -12,9 +12,11 @@ script:
   - yarn test
 
 deploy:
-  provider: script
-  script: cd packages/website/ && yarn deploy
+  provider: pages
   skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: packages/website/
   on:
     branch: master
 
