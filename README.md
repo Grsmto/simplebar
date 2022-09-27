@@ -52,7 +52,7 @@ Before using SimpleBar it's important to know its [limitations](https://github.c
 See changelog here : https://github.com/Grsmto/simplebar/releases
 
 #
-### 👨‍💻 I'm available for hire! [Reach out to me!](https://www.adriendenat.com/about/)
+### 👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)
 ### 🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!
 #
 
