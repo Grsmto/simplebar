@@ -38,7 +38,9 @@ const SimpleBar = React.forwardRef(
           }),
         });
 
-        if (ref) {
+        if (typeof ref === 'function') {
+          ref(instance);
+        } else if (ref) {
           ref.current = instance;
         }
       }
@@ -46,6 +48,9 @@ const SimpleBar = React.forwardRef(
       return () => {
         instance.unMount();
         instance = null;
+        if (typeof ref === 'function') {
+          ref(null);
+        }
       };
     }, []);
 
