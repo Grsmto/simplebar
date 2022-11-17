@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="element">
     <div class="simplebar-wrapper">
       <div class="simplebar-height-auto-observer-wrapper">
         <div class="simplebar-height-auto-observer" />
@@ -117,9 +117,10 @@ export default {
    * @returns {{ SimpleBar?: SimpleBar; scrollElement?: HTMLDivElement; contentElement?: HTMLDivElement }}
    */
   data() { return { }; },
+
   mounted () {
     // @ts-ignore (`getOptions` needs to be added to the type definition file)
-    const options = SimpleBar.getOptions(this.$attrs);
+    const options = SimpleBar.getOptions(this.$refs.element.attributes);
 
     for(const [key, value] of Object.entries(this.$props))
       if(value != undefined && typeof value !== "function")
