@@ -72,4 +72,14 @@ describe('simplebar', () => {
     });
     expect(wrapper.vm.SimpleBar.options.autoHide).toEqual(false);
   });
+
+  it('emits a scroll event', async () => {
+    const wrapper = shallowMount(simplebar);
+    const scrollElement = wrapper.find('.simplebar-content-wrapper');
+
+    expect(wrapper.emitted()).not.toHaveProperty('scroll');
+    await scrollElement.trigger('scroll');
+    expect(wrapper.emitted()).toHaveProperty('scroll');
+  });
+
 });

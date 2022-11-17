@@ -113,6 +113,10 @@ export default {
      */
     scrollbarMaxSize: Number
   },
+
+  // @ts-ignore
+  emits: ['scroll'],
+
   /**
    * @returns {{ SimpleBar?: SimpleBar; scrollElement?: HTMLDivElement; contentElement?: HTMLDivElement }}
    */
