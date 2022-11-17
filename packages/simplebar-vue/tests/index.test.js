@@ -82,4 +82,12 @@ describe('simplebar', () => {
     expect(wrapper.emitted()).toHaveProperty('scroll');
   });
 
+  it('destroys Simplebar instance when component is unmounted to prevent memory leaks', () => {
+    const wrapper = shallowMount(simplebar);
+    const instance = wrapper.vm.SimpleBar;
+    jest.spyOn(instance, 'unMount');
+
+    destroyWrapper(wrapper);
+    expect(instance.unMount).toHaveBeenCalledTimes(1);
+  });
 });

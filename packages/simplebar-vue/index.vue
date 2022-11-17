@@ -30,6 +30,7 @@
 <script>
 // @ts-check
 import SimpleBar from 'simplebar';
+import { lifecycleEventNames } from './utils.js'
 
 export default {
   name: 'simplebar-vue',
@@ -136,6 +137,12 @@ export default {
     this.scrollElement = this.$refs.scrollElement;
     // @ts-ignore (unable to type cast `$refs`)
     this.contentElement = this.$refs.contentElement;
+  },
+  [lifecycleEventNames.beforeUnmount]() {
+    // unMount is not present in types package https://github.com/Grsmto/simplebar/blob/6125d4ac0897c02a82432441aa3bae5e6c6ccb87/packages/simplebar/src/simplebar.js#L925
+    // @ts-ignore
+    this.SimpleBar?.unMount()
+    this.SimpleBar = null
   },
   methods: {
     recalculate () { this.SimpleBar?.recalculate(); }
