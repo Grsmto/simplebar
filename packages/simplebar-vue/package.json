@@ -20,13 +20,13 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c && cp simplebar-vue.d.ts dist/simplebar-vue.d.ts",
-    "test": "jest -c jest-unit.config.js",
+    "jest": "jest -c jest-unit.config.js",
     "version": "yarn build",
     "precommit": "lint-staged",
-    "test:2": "npm run use-vue:2 && npm run test",
-    "test:2.7": "npm run use-vue:2.7 && npm run test",
-    "test:3": "npm run use-vue:3 && npm run test",
-    "test:all": "npm run test:2 && npm run test:2.7 && npm run test:3",
+    "test:2": "npm run use-vue:2 && npm run jest",
+    "test:2.7": "npm run use-vue:2.7 && npm run jest",
+    "test:3": "npm run use-vue:3 && npm run jest",
+    "test": "npm run test:2 && npm run test:2.7 && npm run test:3",
     "use-vue:2": "node scripts/swap-vue.js 2 && vue-demi-switch 2",
     "use-vue:2.7": "node scripts/swap-vue.js 2.7 && vue-demi-switch 2.7",
     "use-vue:3": "node scripts/swap-vue.js 3 && vue-demi-switch 3"
