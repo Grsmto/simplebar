@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: './demo/index.js',
   devtool: 'cheap-module-source-map',
   output: {
@@ -8,9 +9,8 @@ module.exports = {
     path: path.resolve(__dirname, './demo')
   },
   devServer: {
-    contentBase: './demo',
-    port: 8090,
-    inline: true
+    static: './demo',
+    port: 8090
     // host: "0.0.0.0",
     // allowedHosts: ['.local']
   },

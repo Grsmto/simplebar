@@ -15,13 +15,15 @@ You keep the awesomeness of native scrolling...with a custom scrollbar!
 
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
+**⚠️ This library is only partially maintained at the moment. There is a [v6 in the work](https://github.com/Grsmto/simplebar/tree/next) but has not been released yet. However, I'm still reviewing and merging contributions actively! ⚠️**
+
 #### Design it as you want
 
 SimpleBar uses pure CSS to style the scrollbar. You can easily customize it as you want! Or even have multiple style on the same page...or just keep the default style ("Mac OS" scrollbar style).
 
 #### Lightweight and performant
 
-Only 6kb minified. SimpleBar doesn't use Javascript to handle scrolling. You keep the performances/behaviours of the native scroll.
+SimpleBar doesn't use Javascript to handle scrolling. You keep the performances/behaviours of the native scroll. There is [known issue](https://github.com/Grsmto/simplebar/issues/391) with bundle size but this should be solved in v6.
 
 #### Supported everywhere
 
@@ -52,7 +54,7 @@ Before using SimpleBar it's important to know its [limitations](https://github.c
 See changelog here : https://github.com/Grsmto/simplebar/releases
 
 #
-### 👨‍💻 I'm available for hire! [Reach out to me!](https://www.adriendenat.com/about/)
+### 👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)
 ### 🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!
 #
 

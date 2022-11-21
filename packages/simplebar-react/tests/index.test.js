@@ -46,7 +46,7 @@ test('renders with scrollableNodeProps', async () => {
   const { getByTestId } = render(
     <SimpleBar
       scrollableNodeProps={{
-        'data-testid': 'scrollable-node-props'
+        'data-testid': 'scrollable-node-props',
       }}
     >
       {[...Array(5)].map((x, i) => (
@@ -91,4 +91,22 @@ test('works on unmount', async () => {
   unmount();
 
   expect(ref.current.unMount).toHaveBeenCalled();
+});
+
+test('renders with ref callback', async () => {
+  const callback = jest.fn((node) => {
+    return node;
+  });
+
+  const { unmount } = render(
+    <SimpleBar ref={callback}>
+      {[...Array(5)].map((x, i) => (
+        <p key={i}>Some content</p>
+      ))}
+    </SimpleBar>
+  );
+
+  expect(callback).toHaveBeenCalled();
+  unmount();
+  expect(callback).toHaveBeenCalledWith(null);
 });

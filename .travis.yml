@@ -5,16 +5,18 @@ before_install:
   - npm i -g gatsby-cli
 
 install:
-  - lerna bootstrap
+  - yarn
 
 script:
   - yarn build
   - yarn test
 
 deploy:
-  provider: script
-  script: cd packages/website/ && yarn deploy
-  skip-cleanup: true
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: packages/website/
   on:
     branch: master
 
