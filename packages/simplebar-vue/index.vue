@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="element">
     <div class="simplebar-wrapper">
       <div class="simplebar-height-auto-observer-wrapper">
         <div class="simplebar-height-auto-observer" />
@@ -30,6 +30,7 @@
 <script>
 // @ts-check
 import SimpleBar from 'simplebar';
+import { lifecycleEventNames } from './utils.js'
 
 export default {
   name: 'simplebar-vue',
@@ -113,13 +114,18 @@ export default {
      */
     scrollbarMaxSize: Number
   },
+
+  // @ts-ignore
+  emits: ['scroll'],
+
   /**
    * @returns {{ SimpleBar?: SimpleBar; scrollElement?: HTMLDivElement; contentElement?: HTMLDivElement }}
    */
   data() { return { }; },
+
   mounted () {
     // @ts-ignore (`getOptions` needs to be added to the type definition file)
-    const options = SimpleBar.getOptions(this.$attrs);
+    const options = SimpleBar.getOptions(this.$refs.element.attributes);
 
     for(const [key, value] of Object.entries(this.$props))
       if(value != undefined && typeof value !== "function")
@@ -131,6 +137,12 @@ export default {
     this.scrollElement = this.$refs.scrollElement;
     // @ts-ignore (unable to type cast `$refs`)
     this.contentElement = this.$refs.contentElement;
+  },
+  [lifecycleEventNames.beforeUnmount]() {
+    // unMount is not present in types package https://github.com/Grsmto/simplebar/blob/6125d4ac0897c02a82432441aa3bae5e6c6ccb87/packages/simplebar/src/simplebar.js#L925
+    // @ts-ignore
+    this.SimpleBar?.unMount()
+    this.SimpleBar = null
   },
   methods: {
     recalculate () { this.SimpleBar?.recalculate(); }
