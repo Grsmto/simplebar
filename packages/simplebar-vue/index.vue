@@ -141,8 +141,8 @@ export default {
   [lifecycleEventNames.beforeUnmount]() {
     // unMount is not present in types package https://github.com/Grsmto/simplebar/blob/6125d4ac0897c02a82432441aa3bae5e6c6ccb87/packages/simplebar/src/simplebar.js#L925
     // @ts-ignore
-    this.SimpleBar?.unMount()
-    this.SimpleBar = null
+    this.SimpleBar?.unMount();
+    this.SimpleBar = undefined;
   },
   methods: {
     recalculate () { this.SimpleBar?.recalculate(); }
