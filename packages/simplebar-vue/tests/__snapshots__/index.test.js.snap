@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`simplebar renders with default slot 1`] = `
+exports[`simplebar snapshots renders with default slot 1`] = `
 <div data-simplebar="init">
   <div class="simplebar-wrapper">
     <div class="simplebar-height-auto-observer-wrapper">
@@ -8,7 +8,7 @@ exports[`simplebar renders with default slot 1`] = `
     </div>
     <div class="simplebar-mask">
       <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-        <div class="simplebar-content-wrapper" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
+        <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
           <div class="simplebar-content">
             <div class="inner-content"></div>
           </div>
@@ -26,15 +26,15 @@ exports[`simplebar renders with default slot 1`] = `
 </div>
 `;
 
-exports[`simplebar renders with options 1`] = `
-<div data-simplebar-force-visible="true" data-simplebar="init" class="simplebar-scrollable-x simplebar-scrollable-y">
+exports[`simplebar snapshots renders with options 1`] = `
+<div data-simplebar-auto-hide="false" data-simplebar="init">
   <div class="simplebar-wrapper">
     <div class="simplebar-height-auto-observer-wrapper">
       <div class="simplebar-height-auto-observer"></div>
     </div>
     <div class="simplebar-mask">
-      <div class="simplebar-offset" style="right: -0px; bottom: -0px;">
-        <div class="simplebar-content-wrapper" style="height: auto; overflow-x: scroll; overflow-y: scroll;">
+      <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+        <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
           <div class="simplebar-content"></div>
         </div>
       </div>
@@ -50,7 +50,7 @@ exports[`simplebar renders with options 1`] = `
 </div>
 `;
 
-exports[`simplebar renders without crashing 1`] = `
+exports[`simplebar snapshots renders without crashing 1`] = `
 <div data-simplebar="init">
   <div class="simplebar-wrapper">
     <div class="simplebar-height-auto-observer-wrapper">
@@ -58,7 +58,7 @@ exports[`simplebar renders without crashing 1`] = `
     </div>
     <div class="simplebar-mask">
       <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-        <div class="simplebar-content-wrapper" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
+        <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
           <div class="simplebar-content"></div>
         </div>
       </div>
