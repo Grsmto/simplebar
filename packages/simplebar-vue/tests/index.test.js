@@ -1,46 +1,31 @@
-import { shallowMount, destroyWrapper, isVue3 } from './test-utils';
+import { shallowMount } from '@vue/test-utils';
 import simplebar from '../index.vue';
-import SimpleBar from 'simplebar';
 
 describe('simplebar', () => {
-  describe('snapshots', () => {
-    /**
-     * jest-serializer-vue is not compatible with vue3 yet, so you
-     * cannot pass the wrapper object directly. Call .html() before
-     * @see {@link https://github.com/eddyerburgh/jest-serializer-vue/pull/56}
-     */
-    it('renders without crashing', () => {
-      const wrapper = shallowMount(simplebar);
-      expect(wrapper.html()).toMatchSnapshot();
+  it('renders without crashing', () => {
+    const wrapper = shallowMount(simplebar);
+    expect(wrapper).toMatchSnapshot();
+  });
 
-      destroyWrapper(wrapper);
+  it('renders with options', () => {
+    const wrapper = shallowMount(simplebar, {
+      propsData: { 'data-simplebar-auto-hide': 'false' }
     });
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    it('renders with options', () => {
-      const wrapper = shallowMount(simplebar, {
-        attrs: { 'data-simplebar-auto-hide': 'false' }
-      });
-      expect(wrapper.html()).toMatchSnapshot();
+  it('renders with default slot', () => {
+    const wrapper = shallowMount(simplebar, {
+      slots: {
+        default: '<div class="inner-content" />'
+      }
     });
-
-    it('renders with default slot', () => {
-      const wrapper = shallowMount(simplebar, {
-        slots: {
-          default: '<div class="inner-content" />'
-        }
-      });
-      expect(wrapper.html()).toMatchSnapshot();
-    });
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('can access SimpleBar instance', () => {
     const wrapper = shallowMount(simplebar);
-    expect(wrapper.vm.SimpleBar).toBeInstanceOf(SimpleBar);
-  });
-
-  it('can access root element ref property', () => {
-    const wrapper = shallowMount(simplebar);
-    expect(wrapper.element).toEqual(wrapper.vm.$refs.element);
+    expect(wrapper.vm.SimpleBar).toBeDefined();
   });
 
   it('can access scrollElement property', () => {
@@ -59,35 +44,10 @@ describe('simplebar', () => {
     expect(scrollElement).toEqual(wrapper.find('.simplebar-content').element);
   });
 
-  it('works with options as  data attributes', () => {
+  it('works with options as attribute', () => {
     const wrapper = shallowMount(simplebar, {
-      attrs: { 'data-simplebar-auto-hide': 'false' }
+      propsData: { 'data-simplebar-auto-hide': 'false' }
     });
     expect(wrapper.vm.SimpleBar.options.autoHide).toEqual(false);
-  });
-
-  it('works with options as props', () => {
-    const wrapper = shallowMount(simplebar, {
-      [isVue3 ? 'props' : 'propsData']: { autoHide: false }
-    });
-    expect(wrapper.vm.SimpleBar.options.autoHide).toEqual(false);
-  });
-
-  it('emits a scroll event', async () => {
-    const wrapper = shallowMount(simplebar);
-    const scrollElement = wrapper.find('.simplebar-content-wrapper');
-
-    expect(wrapper.emitted()).not.toHaveProperty('scroll');
-    await scrollElement.trigger('scroll');
-    expect(wrapper.emitted()).toHaveProperty('scroll');
-  });
-
-  it('destroys Simplebar instance when component is unmounted to prevent memory leaks', () => {
-    const wrapper = shallowMount(simplebar);
-    const instance = wrapper.vm.SimpleBar;
-    jest.spyOn(instance, 'unMount');
-
-    destroyWrapper(wrapper);
-    expect(instance.unMount).toHaveBeenCalledTimes(1);
   });
 });
