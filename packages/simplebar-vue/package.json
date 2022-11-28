@@ -33,7 +33,8 @@
   },
   "dependencies": {
     "core-js": "^3.0.1",
-    "simplebar": "^5.3.9"
+    "simplebar": "^5.3.9",
+    "vue-demi": "^0.13.11"
   },
   "peerDependencies": {
     "vue": "^3.0.0-0 || ^2.6.14"
@@ -49,7 +50,6 @@
     "jest-serializer-vue": "^2.0.2",
     "rollup-plugin-vue": "^6.0.0",
     "vue": "^3.2.45",
-    "vue-demi": "0.13.5",
     "vue-jest": "^5.0.0-alpha.0",
     "vue-jest2": "npm:vue-jest@4",
     "vue-template-compiler2.6": "npm:vue-template-compiler@2.6.14",
