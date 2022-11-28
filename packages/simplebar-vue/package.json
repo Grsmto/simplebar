@@ -1,6 +1,6 @@
 {
   "name": "simplebar-vue",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Vue component for SimpleBar",
   "files": [
     "dist",
