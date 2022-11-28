@@ -81,15 +81,14 @@ function useTemplateCompilerVersion(version) {
       version
     );
     if (version === 2.7 && fs.existsSync(vueTemplateCompiler2_7)) {
-      console.log('VAMOS');
       rename(vueTemplateCompiler2_7, vueTemplateCompiler);
       console.log(
-        'Renamed "vue-template-compliler2.7" to "vue-template-compliler"'
+        'Renamed "vue-template-compiler2.7" to "vue-template-compiler"'
       );
     } else {
       rename(vueTemplateCompiler2_6, vueTemplateCompiler);
       console.log(
-        'Renamed "vue-template-compliler2.6" to "vue-template-compliler"'
+        'Renamed "vue-template-compiler2.6" to "vue-template-compiler"'
       );
     }
   }
@@ -100,7 +99,7 @@ function useTemplateCompilerVersion(version) {
     rename(vueTemplateCompiler, vueTemplateCompiler2_7);
     rename(vueTemplateCompiler2_6, vueTemplateCompiler);
   } else {
-    console.log(`vue-template-compliler ${version} is already in use`);
+    console.log(`vue-template-compiler ${version} is already in use`);
   }
 }
 
