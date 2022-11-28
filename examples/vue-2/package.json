@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "babel-preset-vue": "^2.0.2",
-    "vue": "^2.5.17",
-    "simplebar-vue": "latest"
+    "simplebar-vue": "^1.7.0",
+    "vue": "^2.5.17"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",
