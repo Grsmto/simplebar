@@ -5077,13 +5077,12 @@ signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
-simplebar-vue@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/simplebar-vue/-/simplebar-vue-1.7.0.tgz#70586a7a2c39ff03f8fa1c688553eae1765935e3"
-  integrity sha512-u7fZx80Lvh8cYjR0PDOoUgONSDWnkZCNXt3YgsQmMwH/Vt5V8qbyJ26jRoCK9AGHxXOCxCMm4aMyQyAnMxHv8g==
+simplebar-vue@../../packages/simplebar-vue:
+  version "1.7.2"
   dependencies:
     core-js "^3.0.1"
     simplebar "^5.3.9"
+    vue-demi "^0.13.11"
 
 simplebar@^5.3.9:
   version "5.3.9"
@@ -5517,6 +5516,11 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
+
+vue-demi@^0.13.11:
+  version "0.13.11"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
+  integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
 
 vue-eslint-parser@^9.0.1:
   version "9.1.0"

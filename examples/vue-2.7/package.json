@@ -9,14 +9,14 @@
   },
   "dependencies": {
     "babel-preset-vue": "^2.0.2",
-    "simplebar-vue": "../../packages/simplebar-vue",
-    "vue": "^2.5.17"
+    "simplebar-vue": "file:../../packages/simplebar-vue",
+    "vue": "2.7.14"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",
     "@vue/cli-plugin-eslint": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "2.7.14"
   },
   "eslintConfig": {
     "root": true,
