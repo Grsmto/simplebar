@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "babel-preset-vue": "^2.0.2",
-    "simplebar-vue": "^1.7.0",
+    "simplebar-vue": "../../packages/simplebar-vue",
     "vue": "^3.2.45"
   },
   "devDependencies": {

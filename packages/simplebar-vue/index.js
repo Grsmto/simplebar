@@ -1,3 +1,3 @@
-import simplebar from './index.vue';
+import simplebar from './component.js';
 
 export default simplebar;
