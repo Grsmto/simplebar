@@ -4,7 +4,8 @@ import {
   Input,
   AfterViewInit,
   ElementRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  NgZone
 } from '@angular/core';
 
 import SimpleBar from 'simplebar/dist/simplebar-core.esm';
@@ -26,14 +27,16 @@ export class SimplebarAngularComponent implements OnInit, AfterViewInit {
   elRef: ElementRef;
   SimpleBar: any;
 
-  constructor(elRef: ElementRef) {
+  constructor(elRef: ElementRef, private zone: NgZone) {
     this.elRef = elRef;
   }
 
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    this.SimpleBar = new SimpleBar(this.elRef.nativeElement, this.options || {});
+    this.zone.runOutsideAngular(() => {
+      this.SimpleBar = new SimpleBar(this.elRef.nativeElement, this.options || {});
+    })
   }
 
   ngOnDestroy() {
