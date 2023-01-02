@@ -1,11 +1,14 @@
+import { createRequire } from 'node:module';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
 import vue from 'rollup-plugin-vue';
-import { getBanner, getExternals } from '../../rollup.config';
-import pkg from './package.json';
+import { getBanner, getExternals } from '../../rollup.config.mjs';
+
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 const globals = {
   'simplebar-core': 'SimpleBar',

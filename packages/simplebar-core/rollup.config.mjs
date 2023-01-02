@@ -1,8 +1,11 @@
+import { createRequire } from 'node:module';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
-import { getExternals, babelConfig } from '../../rollup.config';
-import pkg from './package.json';
+import { getExternals, babelConfig } from '../../rollup.config.js';
+
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 export default [
   // CommonJS (for Node) and ES module (for bundlers) build.
