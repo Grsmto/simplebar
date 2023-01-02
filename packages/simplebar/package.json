@@ -29,24 +29,14 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
     "can-use-dom": "^0.1.0",
     "simplebar-core": "^1.0.7"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.10.1",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^0.28.11",
     "intern": "^4.4.2",
     "minify": "^3.0.5",
-    "promise": "^8.0.2",
-    "react-select": "^2.4.3",
-    "react-window": "^1.8.1",
-    "serve": "^11.3.2",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "promise": "^8.0.2"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [
