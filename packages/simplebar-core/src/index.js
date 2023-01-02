@@ -185,6 +185,8 @@ export default class SimpleBar {
     if (canUseDOM) {
       this.initDOM();
 
+      this.setAccessibilityAttributes();
+
       this.rtlHelpers = SimpleBar.getRtlHelpers();
       this.scrollbarWidth = SimpleBar.getScrollbarWidth();
 
@@ -301,6 +303,14 @@ export default class SimpleBar {
     }
 
     this.el.setAttribute('data-simplebar', 'init');
+  }
+
+  setAccessibilityAttributes() {
+    const ariaLabel = this.options.ariaLabel || 'scrollable content';
+
+    this.contentWrapperEl.setAttribute('tabindex', '0');
+    this.contentWrapperEl.setAttribute('role', 'region');
+    this.contentWrapperEl.setAttribute('aria-label', ariaLabel);
   }
 
   initListeners() {
