@@ -1,10 +1,7 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "simplebar-core": "SimpleBar"
-    }
+    "entryFile": "src/public-api.ts"
   },
-  "whitelistedNonPeerDependencies": ["simplebar-core"]
+  "allowedNonPeerDependencies": ["simplebar-core"]
 }
