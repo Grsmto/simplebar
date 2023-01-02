@@ -23,7 +23,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c && minify ../simplebar-core/src/simplebar.css > dist/simplebar.min.css && cp simplebar-vue.d.ts dist/simplebar-vue.d.ts",
-    "jest": "jest -c jest-unit.config.js",
+    "jest": "jest -c jest-unit.config.js -u",
     "version": "yarn build",
     "precommit": "lint-staged",
     "test:2": "npm run use-vue:2 && npm run jest",
@@ -37,10 +37,11 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "lodash-es": "^4.17.15",
-    "simplebar-core": "^3.9.7"
+    "simplebar-core": "^3.9.7",
+    "vue-demi": "^0.13.11"
   },
   "peerDependencies": {
-    "vue": "^3.0.0-0 || ^2.6.14"
+    "vue": "^2.5.17"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -53,7 +54,6 @@
     "jest-serializer-vue": "^2.0.2",
     "rollup-plugin-vue": "^6.0.0",
     "vue": "^3.2.45",
-    "vue-demi": "0.13.5",
     "vue-jest": "^5.0.0-alpha.0",
     "vue-jest2": "npm:vue-jest@4",
     "vue-template-compiler2.6": "npm:vue-template-compiler@2.6.14",

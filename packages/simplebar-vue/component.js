@@ -1,36 +1,83 @@
-<template>
-  <div ref="element">
-    <div class="simplebar-wrapper">
-      <div class="simplebar-height-auto-observer-wrapper">
-        <div class="simplebar-height-auto-observer" />
-      </div>
-      <div class="simplebar-mask">
-        <div class="simplebar-offset">
-          <div
-            class="simplebar-content-wrapper"
-            ref="scrollElement"
-            @scroll="$emit('scroll', $event)"
-          >
-            <div class="simplebar-content" ref="contentElement">
-              <slot></slot>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="simplebar-placeholder" />
-    </div>
-    <div class="simplebar-track simplebar-horizontal">
-      <div class="simplebar-scrollbar" />
-    </div>
-    <div class="simplebar-track simplebar-vertical">
-      <div class="simplebar-scrollbar" />
-    </div>
-  </div>
-</template>
-<script>
 // @ts-check
-import SimpleBar from 'simplebar';
+import SimpleBarCore from 'simplebar';
 import { lifecycleEventNames } from './utils.js'
+import { h, isVue3 } from 'vue-demi'
+
+/**
+ * This is not as easy to read than a regular <template> block, but a
+ * render function is a necessary "evil" to avoid compiler output
+ * differences between vue2 and vue3, which would required a
+ * different cross-compatible implementation.
+ *
+ * IMPORTANT NOTES:
+ *  - options API is required to keep backwards compatibility to vue<@2.6.
+ *    only superior versions get compat with @vue/composition-api plugin.
+ *  - String template refs are required for compat @vue<2.7
+ *  - If refactoring to composition-api and thus dropping support to vue<@2.6
+ *    do note that returning a render function from setup() hook does not
+ *    in >=2.6.0 < 2.7.0 because the way @vue/composition-api handles
+ *    template refs.
+ *    {@link https://github.com/vuejs/composition-api#limitations}
+ *
+ * ALTERNATIVES:
+ *  - https://github.com/vueuse/vue-demi/issues/152
+ *  - https://github.com/vueuse/vue-demi/issues/153
+ *  - https://github.com/vueuse/vue-demi/issues/154
+ *  - {@link https://github.com/cloydlau/json-editor-vue/blob/3a6127d6587ef297f7ab60800cf78a8be5327cb7/src/Component.ts}
+ *
+ *
+ * @todo maybe using jsx in a next version would make this a bit more readable.
+ * but we need to ensure it compiles to a cross-compatible render function
+ * to avoid going back to the same place where we've been with the <template>
+ */
+function renderFn({ h, emit, slots }) {
+  const onScroll = (event) => emit('scroll', event)
+
+  return h('div', { ref: 'element' }, [
+    h(
+      'div',
+      { class: "simplebar-wrapper" },
+      [
+        h('div', { class: 'simplebar-height-auto-observer-wrapper' }, [
+          h('div', { class: 'simplebar-height-auto-observer' })
+        ]),
+        h('div', { class : 'simplebar-mask' }, [
+          h('div', { class: 'simplebar-offset' }, [
+            h(
+              'div',
+              {
+                ref: 'scrollElement',
+                class: 'simplebar-content-wrapper',
+                ...(isVue3
+                  ? { onScroll }
+                  : { on: { scroll: onScroll } }
+                )
+              },
+              [
+                h(
+                  'div',
+                  { class: 'simplebar-content', ref: 'contentElement' },
+                  slots.default?.()
+                )
+              ]
+            )
+          ])
+        ]),
+        h('div', { class: 'simplebar-placeholder'})
+      ]
+    ),
+    h(
+      'div',
+      { class: 'simplebar-track simplebar-horizontal' },
+      [h('div', { class: 'simplebar-scrollbar' } )]
+    ),
+    h(
+      'div',
+      { class: 'simplebar-track simplebar-vertical' },
+      [h('div', { class: 'simplebar-scrollbar' })]
+    )
+  ])
+}
 
 export default {
   name: 'simplebar-vue',
@@ -117,22 +164,21 @@ export default {
 
   // @ts-ignore
   emits: ['scroll'],
-
   /**
    * @returns {{ SimpleBar?: SimpleBar; scrollElement?: HTMLDivElement; contentElement?: HTMLDivElement }}
    */
   data() { return { }; },
 
-  mounted () {
+  mounted() {
     // @ts-ignore (`getOptions` needs to be added to the type definition file)
-    const options = SimpleBar.getOptions(this.$refs.element.attributes);
+    const options = SimpleBarCore.getOptions(this.$refs.element.attributes);
 
     for(const [key, value] of Object.entries(this.$props))
       if(value != undefined && typeof value !== "function")
         options[key] = value;
 
-    // @ts-ignore (unable to type cast `$el`)
-    this.SimpleBar = new SimpleBar(this.$el, options);
+    // @ts-ignore (unable to type cast `$refs`)
+    this.SimpleBar = new SimpleBarCore(this.$refs.element, options);
     // @ts-ignore (unable to type cast `$refs`)
     this.scrollElement = this.$refs.scrollElement;
     // @ts-ignore (unable to type cast `$refs`)
@@ -142,10 +188,24 @@ export default {
     // unMount is not present in types package https://github.com/Grsmto/simplebar/blob/6125d4ac0897c02a82432441aa3bae5e6c6ccb87/packages/simplebar/src/simplebar.js#L925
     // @ts-ignore
     this.SimpleBar?.unMount();
+    // @ts-ignore
     this.SimpleBar = undefined;
   },
   methods: {
-    recalculate () { this.SimpleBar?.recalculate(); }
+    recalculate () {
+      this.SimpleBar?.recalculate();
+    }
+  },
+  /**
+   * Note that createElement argument is only provided in <=vue@2.7.x,
+   * in other versions it's a context object that we do not use.
+   */
+  render(createElement) {
+    return renderFn({
+      h: typeof createElement === 'function' ? createElement : h,
+      // @ts-ignore
+      emit: (...args) => this.$emit(...args),
+      slots: isVue3 ? this.$slots : this.$scopedSlots
+    })
   }
 }
-</script>

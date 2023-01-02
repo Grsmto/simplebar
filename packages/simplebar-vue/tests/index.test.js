@@ -1,6 +1,7 @@
 import { shallowMount, destroyWrapper, isVue3 } from './test-utils';
-import simplebar from '../index.vue';
+import simplebar from '../component.js';
 import SimpleBar from 'simplebar';
+
 
 describe('simplebar', () => {
   describe('snapshots', () => {
@@ -12,7 +13,6 @@ describe('simplebar', () => {
     it('renders without crashing', () => {
       const wrapper = shallowMount(simplebar);
       expect(wrapper.html()).toMatchSnapshot();
-
       destroyWrapper(wrapper);
     });
 
@@ -83,9 +83,10 @@ describe('simplebar', () => {
   });
 
   it('destroys Simplebar instance when component is unmounted to prevent memory leaks', () => {
+    expect.assertions(1)
     const wrapper = shallowMount(simplebar);
     const instance = wrapper.vm.SimpleBar;
-    jest.spyOn(instance, 'unMount');
+    jest.spyOn(instance, 'unMount')
 
     destroyWrapper(wrapper);
     expect(instance.unMount).toHaveBeenCalledTimes(1);
