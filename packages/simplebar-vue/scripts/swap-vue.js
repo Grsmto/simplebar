@@ -5,17 +5,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const Vue2 = path.join(__dirname, '../../../node_modules/vue2');
 const Vue2_7 = path.join(__dirname, '../../../node_modules/vue2.7');
 const DefaultVue = path.join(__dirname, '../../../node_modules/vue');
 const Vue3 = path.join(__dirname, '../../../node_modules/vue3');
 const vueTemplateCompiler = path.join(
   __dirname,
   '../../../node_modules/vue-template-compiler'
-);
-const vueTemplateCompiler2_6 = path.join(
-  __dirname,
-  '../../../node_modules/vue-template-compiler2.6'
 );
 const vueTemplateCompiler2_7 = path.join(
   __dirname,
@@ -38,11 +33,6 @@ function useVueVersion(version) {
       rename(Vue2_7, DefaultVue);
       useTemplateCompilerVersion(2.7);
       console.log('Renamed "vue2.7" to "vue"');
-    } else {
-      console.log('ELSE');
-      rename(Vue2, DefaultVue);
-      useTemplateCompilerVersion(2);
-      console.log('Renamed "vue2" to "vue"');
     }
   }
 
@@ -53,10 +43,6 @@ function useVueVersion(version) {
     resetPackageNames();
     rename(Vue2_7, DefaultVue);
     useTemplateCompilerVersion(2.7);
-  } else if (version === 2 && fs.existsSync(Vue2)) {
-    resetPackageNames();
-    rename(Vue2, DefaultVue);
-    useTemplateCompilerVersion(2);
   } else {
     console.log(`Vue ${version} is already in use`);
   }
@@ -67,8 +53,6 @@ function resetPackageNames() {
     rename(DefaultVue, Vue3);
   } else if (!fs.existsSync(Vue2_7)) {
     rename(DefaultVue, Vue2_7);
-  } else if (!fs.existsSync(Vue2)) {
-    rename(DefaultVue, Vue2);
   } else {
     console.error('Unable to reset package names');
   }
@@ -81,26 +65,17 @@ function useTemplateCompilerVersion(version) {
       version
     );
     if (version === 2.7 && fs.existsSync(vueTemplateCompiler2_7)) {
-      console.log('VAMOS');
       rename(vueTemplateCompiler2_7, vueTemplateCompiler);
       console.log(
         'Renamed "vue-template-compliler2.7" to "vue-template-compliler"'
-      );
-    } else {
-      rename(vueTemplateCompiler2_6, vueTemplateCompiler);
-      console.log(
-        'Renamed "vue-template-compliler2.6" to "vue-template-compliler"'
       );
     }
   }
   if (version === 2.7 && fs.existsSync(vueTemplateCompiler2_7)) {
     rename(vueTemplateCompiler, vueTemplateCompiler2_6);
     rename(vueTemplateCompiler2_7, vueTemplateCompiler);
-  } else if (version === 2 && fs.existsSync(vueTemplateCompiler2_6)) {
-    rename(vueTemplateCompiler, vueTemplateCompiler2_7);
-    rename(vueTemplateCompiler2_6, vueTemplateCompiler);
   } else {
-    console.log(`vue-template-compliler ${version} is already in use`);
+    console.log(`vue-template-compiler ${version} is already in use`);
   }
 }
 
