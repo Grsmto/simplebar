@@ -4,7 +4,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
-import vue from 'rollup-plugin-vue';
 import { getBanner, getExternals } from '../../rollup.config.mjs';
 
 const require = createRequire(import.meta.url);
@@ -30,7 +29,6 @@ export default [
     },
     external: getExternals(pkg),
     plugins: [
-      vue(),
       babel({
         exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
@@ -51,7 +49,6 @@ export default [
       format: 'esm',
     },
     plugins: [
-      vue(),
       babel({
         exclude: ['/**/node_modules/**'],
         babelHelpers: 'runtime',
@@ -59,7 +56,6 @@ export default [
         extensions: ['.js', '.vue'],
       }),
       resolve(),
-      commonjs(),
       license(getBanner(pkg)),
     ],
   },

@@ -1,7 +1,7 @@
 // @ts-check
-import SimpleBarCore from 'simplebar';
-import { lifecycleEventNames } from './utils.js'
-import { h, isVue3 } from 'vue-demi'
+import SimpleBarCore, { getOptions } from 'simplebar-core';
+import { lifecycleEventNames } from './utils.js';
+import { h, isVue3 } from 'vue-demi';
 
 /**
  * This is not as easy to read than a regular <template> block, but a
@@ -31,52 +31,41 @@ import { h, isVue3 } from 'vue-demi'
  * to avoid going back to the same place where we've been with the <template>
  */
 function renderFn({ h, emit, slots }) {
-  const onScroll = (event) => emit('scroll', event)
+  const onScroll = (event) => emit('scroll', event);
 
   return h('div', { ref: 'element' }, [
-    h(
-      'div',
-      { class: "simplebar-wrapper" },
-      [
-        h('div', { class: 'simplebar-height-auto-observer-wrapper' }, [
-          h('div', { class: 'simplebar-height-auto-observer' })
+    h('div', { class: 'simplebar-wrapper' }, [
+      h('div', { class: 'simplebar-height-auto-observer-wrapper' }, [
+        h('div', { class: 'simplebar-height-auto-observer' }),
+      ]),
+      h('div', { class: 'simplebar-mask' }, [
+        h('div', { class: 'simplebar-offset' }, [
+          h(
+            'div',
+            {
+              ref: 'scrollElement',
+              class: 'simplebar-content-wrapper',
+              ...(isVue3 ? { onScroll } : { on: { scroll: onScroll } }),
+            },
+            [
+              h(
+                'div',
+                { class: 'simplebar-content', ref: 'contentElement' },
+                slots.default?.()
+              ),
+            ]
+          ),
         ]),
-        h('div', { class : 'simplebar-mask' }, [
-          h('div', { class: 'simplebar-offset' }, [
-            h(
-              'div',
-              {
-                ref: 'scrollElement',
-                class: 'simplebar-content-wrapper',
-                ...(isVue3
-                  ? { onScroll }
-                  : { on: { scroll: onScroll } }
-                )
-              },
-              [
-                h(
-                  'div',
-                  { class: 'simplebar-content', ref: 'contentElement' },
-                  slots.default?.()
-                )
-              ]
-            )
-          ])
-        ]),
-        h('div', { class: 'simplebar-placeholder'})
-      ]
-    ),
-    h(
-      'div',
-      { class: 'simplebar-track simplebar-horizontal' },
-      [h('div', { class: 'simplebar-scrollbar' } )]
-    ),
-    h(
-      'div',
-      { class: 'simplebar-track simplebar-vertical' },
-      [h('div', { class: 'simplebar-scrollbar' })]
-    )
-  ])
+      ]),
+      h('div', { class: 'simplebar-placeholder' }),
+    ]),
+    h('div', { class: 'simplebar-track simplebar-horizontal' }, [
+      h('div', { class: 'simplebar-scrollbar' }),
+    ]),
+    h('div', { class: 'simplebar-track simplebar-vertical' }, [
+      h('div', { class: 'simplebar-scrollbar' }),
+    ]),
+  ]);
 }
 
 export default {
@@ -119,8 +108,8 @@ export default {
      */
     forceVisible: {
       type: [Boolean, String],
-      validator: v => typeof v === 'boolean' || v === 'x' || v === 'y',
-      default: undefined
+      validator: (v) => typeof v === 'boolean' || v === 'x' || v === 'y',
+      default: undefined,
     },
 
     /**
@@ -134,7 +123,7 @@ export default {
      */
     direction: {
       type: String,
-      validator: v => v === 'ltr' || v === 'rtl'
+      validator: (v) => v === 'ltr' || v === 'rtl',
     },
 
     /**
@@ -159,7 +148,7 @@ export default {
      * Controls the max size of the scrollbar in `px`.
      * Default is `0` (no max size).
      */
-    scrollbarMaxSize: Number
+    scrollbarMaxSize: Number,
   },
 
   // @ts-ignore
@@ -167,14 +156,16 @@ export default {
   /**
    * @returns {{ SimpleBar?: SimpleBar; scrollElement?: HTMLDivElement; contentElement?: HTMLDivElement }}
    */
-  data() { return { }; },
+  data() {
+    return {};
+  },
 
   mounted() {
     // @ts-ignore (`getOptions` needs to be added to the type definition file)
-    const options = SimpleBarCore.getOptions(this.$refs.element.attributes);
+    const options = getOptions(this.$refs.element.attributes);
 
-    for(const [key, value] of Object.entries(this.$props))
-      if(value != undefined && typeof value !== "function")
+    for (const [key, value] of Object.entries(this.$props))
+      if (value != undefined && typeof value !== 'function')
         options[key] = value;
 
     // @ts-ignore (unable to type cast `$refs`)
@@ -192,9 +183,9 @@ export default {
     this.SimpleBar = undefined;
   },
   methods: {
-    recalculate () {
+    recalculate() {
       this.SimpleBar?.recalculate();
-    }
+    },
   },
   /**
    * Note that createElement argument is only provided in <=vue@2.7.x,
@@ -205,7 +196,7 @@ export default {
       h: typeof createElement === 'function' ? createElement : h,
       // @ts-ignore
       emit: (...args) => this.$emit(...args),
-      slots: isVue3 ? this.$slots : this.$scopedSlots
-    })
-  }
-}
+      slots: isVue3 ? this.$slots : this.$scopedSlots,
+    });
+  },
+};

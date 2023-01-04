@@ -10,7 +10,7 @@ const { config } = vtu;
 if (isVue3) {
   config.global.renderStubDefaultSlot = true;
 }
-
+console.log(vtu);
 module.exports = vtu;
 
 module.exports.destroyWrapper = function destroyWrapper(wrapper) {
