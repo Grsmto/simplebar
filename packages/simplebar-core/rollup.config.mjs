@@ -1,7 +1,6 @@
 import { createRequire } from 'node:module';
 import typescript from '@rollup/plugin-typescript';
 import license from 'rollup-plugin-license';
-import { terser } from 'rollup-plugin-terser';
 import { getExternals, getBanner } from '../../rollup.config.mjs';
 
 const require = createRequire(import.meta.url);
@@ -21,7 +20,6 @@ export default [
     ],
     plugins: [
       typescript({ tsconfig: '../../tsconfig.json' }),
-      terser(),
       license(getBanner(pkg)),
     ],
   },
@@ -39,6 +37,8 @@ export default [
         globals: {
           'can-use-dom': 'canUseDOM',
           'lodash-es': '_',
+          'lodash-es/debounce': '_.debounce',
+          'lodash-es/throttle': '_.throttle',
         },
         paths: {
           // Lodash-es won't work for UMD build, so we alias to lodash
@@ -48,7 +48,6 @@ export default [
     ],
     plugins: [
       typescript({ tsconfig: '../../tsconfig.json' }),
-      terser(),
       license(getBanner(pkg)),
     ],
   },
