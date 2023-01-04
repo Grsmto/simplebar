@@ -5,7 +5,6 @@
   "description": "Scrollbars, simpler.",
   "files": [
     "dist",
-    "src",
     "README.md"
   ],
   "author": "Adrien Denat from a fork by Jonathan Nicol",
@@ -14,10 +13,16 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar-core"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "style": "dist/simplebar.min.css",
-  "typings": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "style": "./dist/simplebar.min.css",
+  "typings": "./dist/index.d.ts",
   "sideEffects": [
     "*.css"
   ],

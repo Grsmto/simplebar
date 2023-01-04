@@ -21,7 +21,6 @@
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",
-    "@tsconfig/recommended": "^1.0.1",
     "@typescript-eslint/parser": "^5.48.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "10.1.0",

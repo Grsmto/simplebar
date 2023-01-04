@@ -1,3 +1,5 @@
+import { Options } from './SimpleBar';
+
 export function getElementWindow(element: Element) {
   if (
     !element ||
@@ -16,6 +18,8 @@ export function getElementDocument(element: Element) {
   return element.ownerDocument;
 }
 
+const initialObj: Partial<Options> = {};
+
 // Helper function to retrieve options from element attributes
 export const getOptions = function (obj: any) {
   const options = Array.prototype.reduce.call(
@@ -23,8 +27,9 @@ export const getOptions = function (obj: any) {
     (acc: any, attribute) => {
       const option = attribute.name.match(/data-simplebar-(.+)/);
       if (option) {
-        const key = option[1].replace(/\W+(.)/g, (x: any, chr: string) =>
-          chr.toUpperCase()
+        const key: keyof Options = option[1].replace(
+          /\W+(.)/g,
+          (x: any, chr: string) => chr.toUpperCase()
         );
         switch (attribute.value) {
           case 'true':
@@ -42,7 +47,7 @@ export const getOptions = function (obj: any) {
       }
       return acc;
     },
-    {}
+    initialObj
   );
-  return options;
+  return options as Partial<Options>;
 };

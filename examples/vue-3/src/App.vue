@@ -1,22 +1,15 @@
+<script setup>
+import Simplebar from 'simplebar-vue';
+// import 'simplebar-vue/dist/simplebar.min.css';
+</script>
+
 <template>
   <div id="app">
-    <Simplebar class="test" force-visible>
+    <Simplebar>
       <div v-for="n in 10" :key="n">Example content</div>
     </Simplebar>
   </div>
 </template>
-
-<script>
-import Simplebar from 'simplebar-vue';
-// import 'simplebar-vue/dist/simplebar.min.css';
-
-export default {
-  name: 'App',
-  components: {
-    Simplebar,
-  },
-};
-</script>
 
 <style>
 #app {
