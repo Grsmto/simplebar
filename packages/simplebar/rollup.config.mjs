@@ -1,15 +1,18 @@
+import { createRequire } from 'node:module';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
-import { getBanner, getExternals, babelConfig } from '../../rollup.config';
-import pkg from './package.json';
+import { getBanner, getExternals } from '../../rollup.config.mjs';
+
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 const builds = [
   // ES module (for bundlers) build.
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: getExternals(pkg),
     output: {
       file: pkg.module,
@@ -17,12 +20,7 @@ const builds = [
       sourcemap: true,
     },
     plugins: [
-      babel({
-        ...babelConfig,
-        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
-      }),
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
+      typescript({ tsconfig: '../../tsconfig.json' }),
       license(getBanner(pkg)),
     ],
   },
@@ -31,43 +29,41 @@ const builds = [
 if (process.env.BUILD !== 'development') {
   // UMD build
   builds.push({
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: getExternals(pkg),
     output: {
       name: 'SimpleBar',
       file: pkg.main,
       format: 'umd',
+      exports: 'named',
       globals: {
         'can-use-dom': 'canUseDOM',
         'simplebar-core': 'SimpleBar',
       },
     },
     plugins: [
-      babel({
-        ...babelConfig,
-        plugins: ['@babel/plugin-transform-runtime'],
-      }),
-      resolve(),
-      commonjs(),
+      typescript({ tsconfig: '../../tsconfig.json' }),
       license(getBanner(pkg)),
     ],
   });
 
   // browser script tag build, minified
   builds.push({
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: {
       name: 'SimpleBar',
       file: pkg.unpkg,
-      format: 'umd',
+      format: 'iife',
+      exports: 'named',
+      globals: {
+        'can-use-dom': 'canUseDOM',
+        'simplebar-core': 'SimpleBar',
+      },
     },
     plugins: [
-      babel({
-        ...babelConfig,
-        plugins: ['@babel/plugin-transform-runtime'],
-      }),
       resolve(),
       commonjs(),
+      typescript({ tsconfig: '../../tsconfig.json' }),
       terser(),
       license(getBanner(pkg)),
     ],
@@ -76,19 +72,21 @@ if (process.env.BUILD !== 'development') {
   builds.push(
     // browser script tag build, non-minified
     {
-      input: 'src/index.js',
+      input: 'src/index.ts',
       output: {
         name: 'SimpleBar',
         file: 'dist/simplebar.js',
-        format: 'umd',
+        format: 'iife',
+        exports: 'named',
+        globals: {
+          'can-use-dom': 'canUseDOM',
+          'simplebar-core': 'SimpleBar',
+        },
       },
       plugins: [
-        babel({
-          ...babelConfig,
-          plugins: ['@babel/plugin-transform-runtime'],
-        }),
         resolve(),
         commonjs(),
+        typescript({ tsconfig: '../../tsconfig.json' }),
         license(getBanner(pkg)),
       ],
     }
