@@ -24,7 +24,7 @@ export const getBanner = (pkg) => ({
 });
 
 export const babelConfig = {
-  // rootMode: 'upward',
+  extensions: ['.js', '.ts'],
   exclude: ['**/node_modules/**'],
   babelHelpers: 'runtime',
 };

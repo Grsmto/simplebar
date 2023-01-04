@@ -14,10 +14,10 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar-core"
   },
-  "main": "dist/simplebar-core.js",
-  "module": "dist/simplebar-core.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "style": "dist/simplebar.min.css",
-  "typings": "dist/simplebar-core.d.ts",
+  "typings": "dist/index.d.ts",
   "sideEffects": [
     "*.css"
   ],
@@ -26,7 +26,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "serve -s demo",
-    "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && cp simplebar-core.d.ts dist/simplebar-core.d.ts",
+    "build": "rollup -c && cp src/simplebar.css dist/simplebar.css",
     "dev": "rollup -c -w --environment BUILD:development",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
@@ -39,6 +39,8 @@
     "lodash-es": "^4.17.15"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
+    "can-use-dom": "^0.1.0",
     "intern": "^4.4.2",
     "promise": "^8.0.2"
   },

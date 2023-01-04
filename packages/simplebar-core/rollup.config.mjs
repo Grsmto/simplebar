@@ -2,15 +2,18 @@ import { createRequire } from 'node:module';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
-import { getExternals, babelConfig } from '../../rollup.config.js';
+import typescript from '@rollup/plugin-typescript';
+import { getExternals, babelConfig } from '../../rollup.config.mjs';
 
 const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
 
+const extensions = ['.js', '.ts'];
+
 export default [
-  // CommonJS (for Node) and ES module (for bundlers) build.
+  // ES module (for bundlers) build
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: getExternals(pkg),
     output: [
       {
@@ -20,15 +23,18 @@ export default [
       },
     ],
     plugins: [
+      resolve({ extensions }),
+      typescript({ tsconfig: '../../tsconfig.json', noForceEmit: true }),
       babel({
-        babelHelpers: 'runtime',
+        ...babelConfig,
+        include: ['src/**/*'],
         plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
       }),
     ],
   },
-  // CommonJS (for Node) and ES module (for bundlers) build.
+  // CommonJS (for Node)
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: getExternals(pkg),
     output: [
       {
@@ -36,6 +42,7 @@ export default [
         file: pkg.main,
         format: 'umd',
         sourcemap: true,
+        exports: 'named',
         globals: {
           'can-use-dom': 'canUseDOM',
           'lodash-es': '_',
@@ -47,11 +54,13 @@ export default [
       },
     ],
     plugins: [
+      resolve({ extensions }),
+      typescript({ tsconfig: '../../tsconfig.json', noForceEmit: true }),
       babel({
         ...babelConfig,
+        include: ['src/**/*'],
         plugins: ['@babel/plugin-transform-runtime'],
       }),
-      resolve(),
       commonjs(),
     ],
   },
