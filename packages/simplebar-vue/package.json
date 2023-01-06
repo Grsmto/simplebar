@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "lodash-es": "^4.17.15",
     "simplebar-core": "^1.0.7",
     "vue-demi": "^0.13.11"
   },

@@ -12,9 +12,9 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar-react"
   },
-  "main": "dist/simplebar-react.js",
-  "module": "dist/simplebar-react.esm.js",
-  "types": "dist/simplebar-react.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "sideEffects": [
     "*.css"
   ],
@@ -22,7 +22,7 @@
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c && cp simplebar-react.d.ts dist/simplebar-react.d.ts && minify ../simplebar-core/src/simplebar.css > dist/simplebar.min.css",
+    "build": "rollup -c && minify ../simplebar-core/src/simplebar.css > dist/simplebar.min.css",
     "dev": "rollup -c -w",
     "test": "jest",
     "version": "yarn build",
@@ -31,7 +31,6 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "core-js": "^3.6.5",
-    "lodash-es": "^4.17.15",
     "prop-types": "^15.6.1",
     "simplebar-core": "^1.0.7"
   },

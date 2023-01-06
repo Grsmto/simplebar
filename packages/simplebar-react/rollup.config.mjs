@@ -1,10 +1,12 @@
+import { createRequire } from 'node:module';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 import license from 'rollup-plugin-license';
-import { terser } from 'rollup-plugin-terser';
-import { getBanner, getExternals } from '../../rollup.config';
-import pkg from './package.json';
+import { getBanner, getExternals } from '../../rollup.config.mjs';
+
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 const globals = {
   'prop-types': 'PropTypes',
@@ -14,7 +16,7 @@ const globals = {
 
 export default [
   {
-    input: 'index.js',
+    input: 'index.tsx',
     external: getExternals(pkg),
     output: {
       name: 'SimpleBar',
@@ -23,32 +25,21 @@ export default [
       format: 'esm',
     },
     plugins: [
-      babel({
-        exclude: ['/**/node_modules/**'],
-        babelHelpers: 'runtime',
-        plugins: ['@babel/plugin-transform-runtime'],
-      }),
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
-      terser(),
+      typescript({ tsconfig: '../../tsconfig.json' }),
       license(getBanner(pkg)),
     ],
   },
   {
-    input: 'index.js',
+    input: 'index.tsx',
     external: getExternals(pkg),
     output: {
       file: pkg.module,
       format: 'esm',
     },
     plugins: [
-      babel({
-        exclude: ['/**/node_modules/**'],
-        babelHelpers: 'runtime',
-        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
-      }),
       resolve(), // so Rollup can find dependencies
       commonjs(), // so Rollup can convert dependencies to an ES module
+      typescript({ tsconfig: '../../tsconfig.json' }),
       license(getBanner(pkg)),
     ],
   },
