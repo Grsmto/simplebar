@@ -2,6 +2,7 @@ export const getExternals = (pkg) => (id) => {
   if (
     Object.keys(pkg.dependencies).find((dep) => id === dep) ||
     Object.keys(pkg.peerDependencies || {}).find((dep) => id === dep) ||
+    id.match(/(lodash).+/) ||
     id.match(/(lodash-es).+/) ||
     id.match(/(core-js).+/) ||
     id.match(/(@babel).+/)

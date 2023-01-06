@@ -36,9 +36,9 @@ export default [
         exports: 'named',
         globals: {
           'can-use-dom': 'canUseDOM',
-          'lodash-es': '_',
-          'lodash-es/debounce': '_.debounce',
-          'lodash-es/throttle': '_.throttle',
+          lodash: '_',
+          'lodash/debounce': '_.debounce',
+          'lodash/throttle': '_.throttle',
         },
         paths: {
           // Lodash-es won't work for UMD build, so we alias to lodash

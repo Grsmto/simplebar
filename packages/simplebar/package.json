@@ -14,14 +14,8 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar"
   },
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "main": "./dist/simplebar.cjs",
-  "module": "./dist/simplebar.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "unpkg": "./dist/simplebar.min.js",
   "style": "./dist/simplebar.min.css",
   "homepage": "https://grsmto.github.io/simplebar/",
