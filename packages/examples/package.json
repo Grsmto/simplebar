@@ -13,7 +13,7 @@
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode=development",
+    "start": "webpack serve --open --mode=development",
     "build": "webpack --mode=production",
     "serve": "serve",
     "precommit": "lint-staged"
@@ -24,15 +24,17 @@
     "simplebar-react": "^3.0.0-beta.10"
   },
   "devDependencies": {
+    "babel-loader": "^9.1.2",
     "css-loader": "^0.28.11",
     "promise": "^8.0.2",
     "react-select": "^2.4.3",
     "react-window": "^1.8.1",
-    "serve": "^11.3.2",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "serve": "^14.1.2",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [
