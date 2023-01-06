@@ -13,12 +13,6 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar-core"
   },
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "style": "./dist/simplebar.min.css",
