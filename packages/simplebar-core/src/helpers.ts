@@ -18,10 +18,10 @@ export function getElementDocument(element: Element) {
   return element.ownerDocument;
 }
 
-const initialObj: Partial<Options> = {};
-
 // Helper function to retrieve options from element attributes
 export const getOptions = function (obj: any) {
+  const initialObj: Partial<Options> = {};
+
   const options = Array.prototype.reduce.call(
     obj,
     (acc: any, attribute) => {
@@ -31,6 +31,7 @@ export const getOptions = function (obj: any) {
           /\W+(.)/g,
           (x: any, chr: string) => chr.toUpperCase()
         );
+
         switch (attribute.value) {
           case 'true':
             acc[key] = true;
