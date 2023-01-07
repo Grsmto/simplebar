@@ -395,11 +395,6 @@ export default class SimpleBar {
       `.${this.classNames.scrollbar}`
     );
 
-    if (this.axis.x.scrollbar.el)
-      this.axis.x.scrollbar.el.classList.add(this.classNames.visible);
-    if (this.axis.y.scrollbar.el)
-      this.axis.y.scrollbar.el.classList.add(this.classNames.visible);
-
     this.el.setAttribute('data-simplebar', 'init');
   }
 
@@ -636,13 +631,16 @@ export default class SimpleBar {
       this.contentWrapperEl.style[this.axis[axis].overflowAttr] = 'hidden';
       this.el.classList.remove(`${this.classNames.scrollable}-${axis}`);
     }
+  }
 
-    // Even if forceVisible is enabled, scrollbar itself should be hidden
-    if (this.axis[axis].isOverflowing) {
-      scrollbar.style.display = 'block';
-    } else {
-      scrollbar.style.display = 'none';
-    }
+  showScrollbar(axis: Axis = 'y') {
+    if (this.axis[axis].isOverflowing)
+      this.axis[axis].scrollbar.el?.classList.add(this.classNames.visible);
+  }
+
+  hideScrollbar(axis: Axis = 'y') {
+    if (this.axis[axis].isOverflowing)
+      this.axis[axis].scrollbar.el?.classList.remove(this.classNames.visible);
   }
 
   hideNativeScrollbar() {
@@ -677,10 +675,8 @@ export default class SimpleBar {
     if (!this.isScrolling) {
       this.isScrolling = true;
       this.el.classList.add(this.classNames.scrolling);
-      if (this.axis.x.isOverflowing)
-        this.axis.x.scrollbar.el?.classList.add(this.classNames.visible);
-      if (this.axis.y.isOverflowing)
-        this.axis.y.scrollbar.el?.classList.add(this.classNames.visible);
+      this.showScrollbar('x');
+      this.showScrollbar('y');
     }
 
     this.onStopScrolling();
@@ -704,16 +700,16 @@ export default class SimpleBar {
 
   _onStopScrolling = () => {
     this.el.classList.remove(this.classNames.scrolling);
-    this.axis.x.scrollbar.el?.classList.remove(this.classNames.visible);
-    this.axis.y.scrollbar.el?.classList.remove(this.classNames.visible);
+    this.hideScrollbar('x');
+    this.hideScrollbar('y');
     this.isScrolling = false;
   };
 
   onMouseEnter = () => {
     if (!this.isMouseEntering) {
       this.el.classList.add(this.classNames.mouseEntered);
-      this.axis.x.scrollbar.el?.classList.add(this.classNames.visible);
-      this.axis.y.scrollbar.el?.classList.add(this.classNames.visible);
+      this.showScrollbar('x');
+      this.showScrollbar('y');
       this.isMouseEntering = true;
     }
     this.onMouseEntered();
@@ -721,8 +717,8 @@ export default class SimpleBar {
 
   _onMouseEntered = () => {
     this.el.classList.remove(this.classNames.mouseEntered);
-    this.axis.x.scrollbar.el?.classList.remove(this.classNames.visible);
-    this.axis.y.scrollbar.el?.classList.remove(this.classNames.visible);
+    this.showScrollbar('x');
+    this.showScrollbar('y');
     this.isMouseEntering = false;
   };
 
@@ -752,18 +748,18 @@ export default class SimpleBar {
 
     if (isWithinScrollbarBoundsX) {
       currentAxis.scrollbar.el.classList.add(this.classNames.hover);
-      currentAxis.scrollbar.el.classList.add(this.classNames.visible);
+      this.showScrollbar(axis);
     } else {
       currentAxis.scrollbar.el.classList.remove(this.classNames.hover);
-      currentAxis.scrollbar.el.classList.remove(this.classNames.visible);
+      this.hideScrollbar(axis);
     }
 
     if (this.isWithinBounds(currentAxis.track.rect)) {
       currentAxis.track.el.classList.add(this.classNames.hover);
-      currentAxis.track.el.classList.add(this.classNames.visible);
+      this.showScrollbar(axis);
     } else {
       currentAxis.track.el.classList.remove(this.classNames.hover);
-      currentAxis.track.el.classList.remove(this.classNames.visible);
+      this.hideScrollbar(axis);
     }
   }
 
@@ -785,7 +781,7 @@ export default class SimpleBar {
   onMouseLeaveForAxis(axis: Axis = 'y') {
     this.axis[axis].track.el?.classList.remove(this.classNames.hover);
     this.axis[axis].scrollbar.el?.classList.remove(this.classNames.hover);
-    this.axis[axis].scrollbar.el?.classList.remove(this.classNames.visible);
+    this.hideScrollbar(axis);
   }
 
   _onWindowResize = () => {
