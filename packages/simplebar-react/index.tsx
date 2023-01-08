@@ -23,8 +23,8 @@ const SimpleBar = React.forwardRef(
     ref?: PolymorphicRef<T>
   ) => {
     const RootTag = tag || 'div';
-    let scrollableNodeRef = useRef<HTMLElement>();
     const elRef = useRef();
+    const scrollableNodeRef = useRef<HTMLElement>();
     const contentNodeRef = useRef<HTMLElement>();
     let options: any = {};
     let rest: any = {};
@@ -81,7 +81,18 @@ const SimpleBar = React.forwardRef(
           <div className="simplebar-mask">
             <div className="simplebar-offset">
               {typeof children === 'function' ? (
-                children({ scrollableNodeRef, contentNodeRef })
+                children({
+                  scrollableNodeRef,
+                  scrollableNodeProps: {
+                    className: 'simplebar-content-wrapper',
+                    ref: scrollableNodeRef,
+                  },
+                  contentNodeRef,
+                  contentNodeProps: {
+                    className: 'simplebar-content',
+                    ref: contentNodeRef,
+                  },
+                })
               ) : (
                 <div
                   {...scrollableNodeProps}

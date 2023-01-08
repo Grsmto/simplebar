@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, waitForElement } from '@testing-library/react';
-import SimpleBar from '../dist/simplebar-react';
+import { render, waitFor } from '@testing-library/react';
+import SimpleBar from '../';
 
 test('renders without crashing', () => {
   const { container } = render(
@@ -28,6 +28,23 @@ test('renders with options', () => {
   ).toBeVisible();
 });
 
+test('renders with object as option', () => {
+  const { container } = render(
+    <SimpleBar
+      classNames={{
+        wrapper: 'custom-class',
+      }}
+    >
+      {[...Array(5)].map((x, i) => (
+        <p key={i}>Some content</p>
+      ))}
+    </SimpleBar>
+  );
+  expect(container.firstChild).toMatchSnapshot();
+
+  expect(container.querySelector('.custom-class')).toBeVisible();
+});
+
 test('renders with scrollableNodeProps', async () => {
   const { getByTestId } = render(
     <SimpleBar
@@ -41,7 +58,7 @@ test('renders with scrollableNodeProps', async () => {
     </SimpleBar>
   );
 
-  await waitForElement(() =>
+  await waitFor(() =>
     // getByTestId throws an error if it cannot find an element
     getByTestId('scrollable-node-props')
   );

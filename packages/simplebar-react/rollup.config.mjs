@@ -9,9 +9,8 @@ const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
 
 const globals = {
-  'prop-types': 'PropTypes',
   react: 'React',
-  'simplebar-core': 'SimpleBar',
+  'simplebar-core': 'SimpleBarCore',
 };
 
 export default [
@@ -19,12 +18,15 @@ export default [
     input: 'index.tsx',
     external: getExternals(pkg),
     output: {
-      name: 'SimpleBar',
+      name: 'SimpleBarReact',
       file: pkg.main,
       globals: globals,
-      format: 'esm',
+      format: 'umd',
+      sourcemap: true,
     },
     plugins: [
+      resolve(), // so Rollup can find dependencies
+      commonjs(), // so Rollup can convert dependencies to an ES module
       typescript({ tsconfig: '../../tsconfig.json' }),
       license(getBanner(pkg)),
     ],
@@ -37,8 +39,6 @@ export default [
       format: 'esm',
     },
     plugins: [
-      resolve(), // so Rollup can find dependencies
-      commonjs(), // so Rollup can convert dependencies to an ES module
       typescript({ tsconfig: '../../tsconfig.json' }),
       license(getBanner(pkg)),
     ],

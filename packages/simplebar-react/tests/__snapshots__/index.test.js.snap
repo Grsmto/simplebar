@@ -1,5 +1,125 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders with object as option 1`] = `
+<div
+  data-simplebar="init"
+>
+  <div
+    class="custom-class"
+  >
+    <div
+      class="undefined"
+    >
+      <div
+        class="undefined"
+      />
+    </div>
+    <div
+      class="undefined"
+    >
+      <div
+        class="undefined"
+        style="right: 0px; bottom: 0px;"
+      >
+        <div
+          aria-label="scrollable content"
+          class="undefined"
+          role="region"
+          style="height: auto; overflow-x: hidden; overflow-y: hidden;"
+          tabindex="0"
+        >
+          <div
+            class="undefined"
+          >
+            <div
+              class="simplebar-wrapper"
+            >
+              <div
+                class="simplebar-height-auto-observer-wrapper"
+              >
+                <div
+                  class="simplebar-height-auto-observer"
+                />
+              </div>
+              <div
+                class="simplebar-mask"
+              >
+                <div
+                  class="simplebar-offset"
+                >
+                  <div
+                    class="simplebar-content-wrapper"
+                  >
+                    <div
+                      class="simplebar-content"
+                    >
+                      <p>
+                        Some content
+                      </p>
+                      <p>
+                        Some content
+                      </p>
+                      <p>
+                        Some content
+                      </p>
+                      <p>
+                        Some content
+                      </p>
+                      <p>
+                        Some content
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="simplebar-placeholder"
+              />
+            </div>
+            <div
+              class="simplebar-track simplebar-horizontal"
+            >
+              <div
+                class="simplebar-scrollbar"
+              />
+            </div>
+            <div
+              class="simplebar-track simplebar-vertical"
+            >
+              <div
+                class="simplebar-scrollbar"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="undefined"
+      style="width: 0px; height: 0px;"
+    />
+  </div>
+  <div
+    class="undefined"
+    style="visibility: hidden;"
+  >
+    <div
+      class="undefined"
+      style="width: 0px;"
+    />
+  </div>
+  <div
+    class="undefined"
+    style="visibility: hidden;"
+  >
+    <div
+      class="undefined"
+      style="height: 0px;"
+    />
+  </div>
+</div>
+`;
+
 exports[`renders with options 1`] = `
 <div
   class="simplebar-scrollable-y"
@@ -23,8 +143,11 @@ exports[`renders with options 1`] = `
         style="right: -0px; bottom: 0px;"
       >
         <div
+          aria-label="scrollable content"
           class="simplebar-content-wrapper"
+          role="region"
           style="height: auto; overflow-x: hidden; overflow-y: scroll;"
+          tabindex="0"
         >
           <div
             class="simplebar-content"
@@ -59,7 +182,7 @@ exports[`renders with options 1`] = `
   >
     <div
       class="simplebar-scrollbar"
-      style="width: 0px; display: none;"
+      style="width: 0px;"
     />
   </div>
   <div
@@ -68,7 +191,7 @@ exports[`renders with options 1`] = `
   >
     <div
       class="simplebar-scrollbar"
-      style="height: 0px; display: none;"
+      style="height: 0px;"
     />
   </div>
 </div>
@@ -96,8 +219,11 @@ exports[`renders without crashing 1`] = `
         style="right: 0px; bottom: 0px;"
       >
         <div
+          aria-label="scrollable content"
           class="simplebar-content-wrapper"
+          role="region"
           style="height: auto; overflow-x: hidden; overflow-y: hidden;"
+          tabindex="0"
         >
           <div
             class="simplebar-content"
@@ -132,7 +258,7 @@ exports[`renders without crashing 1`] = `
   >
     <div
       class="simplebar-scrollbar"
-      style="width: 0px; display: none;"
+      style="width: 0px;"
     />
   </div>
   <div
@@ -141,7 +267,7 @@ exports[`renders without crashing 1`] = `
   >
     <div
       class="simplebar-scrollbar"
-      style="height: 0px; display: none;"
+      style="height: 0px;"
     />
   </div>
 </div>

@@ -29,17 +29,14 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "core-js": "^3.6.5",
-    "prop-types": "^15.6.1",
     "simplebar-core": "^1.0.7"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^10.4.9",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "eslint-config-react-app": "^5.0.2",
     "eslint-plugin-react": "^7.14.3"
   },
