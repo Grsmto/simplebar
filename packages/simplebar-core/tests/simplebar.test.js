@@ -1,4 +1,4 @@
-import SimpleBar from '../src';
+import SimpleBar, { getOptions } from '../src';
 
 const mutationMock = [
   {
@@ -15,7 +15,7 @@ beforeEach(() => {
 
   // Set up our document body
   document.body.innerHTML =
-    '<div id="simplebar" data-simplebar-auto-hide="true"></div>';
+    '<div id="simplebar" data-simplebar-force-visible="true"></div>';
 });
 
 test('should call constructor', () => {
@@ -49,13 +49,26 @@ test('should unmount SimpleBar', () => {
   expect(SimpleBar.instances.get(simpleBar.el)).toBeUndefined();
 });
 
-// test('should return the element options', () => {
-//   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+test('should return the element options', () => {
+  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
-//   expect(SimpleBar.getOptions(simpleBar.el.attributes)).toEqual({
-//     autoHide: true,
-//   });
-// });
+  expect(getOptions(simpleBar.el.attributes)).toEqual({
+    forceVisible: true,
+  });
+});
+
+test('getOptions accepts objects', () => {
+  expect(
+    getOptions([
+      {
+        name: 'data-simplebar-class-names',
+        value: {
+          wrapper: 'custom-class',
+        },
+      },
+    ])
+  ).toEqual({ classNames: { wrapper: 'custom-class' } });
+});
 
 test('mouse should be within bounds', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import type { ElementType } from 'react';
-import SimpleBarJS from 'simplebar-core';
-import type { SimpleBarOptions } from 'simplebar-core';
+import SimpleBarCore from 'simplebar-core';
+import type { Options } from 'simplebar-core';
 
 export type PolymorphicRef<
   C extends React.ElementType
 > = React.ComponentPropsWithRef<C>['ref'];
 
-interface Props<T extends ElementType> extends SimpleBarOptions {
+interface Props<T extends ElementType> extends Options {
   children?: React.ReactNode;
   className?: string;
   scrollableNodeProps?: {
@@ -31,22 +31,22 @@ const SimpleBar = React.forwardRef(
 
     Object.keys(otherProps).forEach((key) => {
       if (
-        Object.prototype.hasOwnProperty.call(SimpleBarJS.defaultOptions, key)
+        Object.prototype.hasOwnProperty.call(SimpleBarCore.defaultOptions, key)
       ) {
-        options[key] = otherProps[key as keyof SimpleBarOptions];
+        options[key] = otherProps[key as keyof Options];
       } else {
-        rest[key] = otherProps[key as keyof SimpleBarOptions];
+        rest[key] = otherProps[key as keyof Options];
       }
     });
 
     useEffect(() => {
-      let instance: SimpleBarJS | null;
+      let instance: SimpleBarCore | null;
       scrollableNodeRef.current = scrollableNodeProps.ref
         ? scrollableNodeProps.ref.current
         : scrollableNodeRef.current;
 
       if (elRef.current) {
-        instance = new SimpleBarJS(elRef.current, {
+        instance = new SimpleBarCore(elRef.current, {
           ...options,
           ...(scrollableNodeRef.current && {
             scrollableNode: scrollableNodeRef.current,

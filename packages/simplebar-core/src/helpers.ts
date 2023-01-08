@@ -1,4 +1,4 @@
-import { Options } from './SimpleBar';
+import { Options } from './';
 
 export function getElementWindow(element: Element) {
   if (

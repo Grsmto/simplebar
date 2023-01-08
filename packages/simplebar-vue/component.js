@@ -1,5 +1,5 @@
 // @ts-check
-import SimpleBarCore, { getOptions } from 'simplebar-core';
+import SimpleBarCore from 'simplebar-core';
 import { lifecycleEventNames } from './utils.js';
 import { h, isVue3 } from 'vue-demi';
 
@@ -162,7 +162,7 @@ export default {
 
   mounted() {
     // @ts-ignore (`getOptions` needs to be added to the type definition file)
-    const options = getOptions(this.$refs.element.attributes);
+    const options = SimpleBarCore.getOptions(this.$refs.element.attributes);
 
     for (const [key, value] of Object.entries(this.$props))
       if (value != undefined && typeof value !== 'function')

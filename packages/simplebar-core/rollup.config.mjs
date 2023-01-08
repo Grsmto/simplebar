@@ -29,11 +29,10 @@ export default [
     external: getExternals(pkg),
     output: [
       {
-        name: 'SimpleBar',
+        name: 'SimpleBarCore',
         file: pkg.main,
         format: 'umd',
         sourcemap: true,
-        exports: 'named',
         globals: {
           'can-use-dom': 'canUseDOM',
           lodash: '_',
