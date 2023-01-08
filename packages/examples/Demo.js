@@ -330,10 +330,10 @@ const Demo = () => {
         <div className="col">
           <h2>SimpleBar-React + refs</h2>
           <SimpleBarReact className="demo1" autoHide={false} forceVisible="x">
-            {({ scrollableNodeRef, contentNodeRef }) => {
+            {({ scrollableNodeProps, contentNodeProps }) => {
               return (
-                <div ref={scrollableNodeRef}>
-                  <div ref={contentNodeRef}>
+                <div {...scrollableNodeProps}>
+                  <div {...contentNodeProps}>
                     {Array.from(Array(50)).map((x, i) => (
                       <p key={i}>Some content</p>
                     ))}
@@ -360,30 +360,30 @@ const Demo = () => {
   );
 };
 
-class ScrollContainer extends React.Component {
-  componentDidMount() {
-    this.simpleBar = new SimpleBar(this.scrollElementRef);
-  }
+const ScrollContainer = ({ children }) => {
+  const scrollElementRef = React.useRef();
 
-  render() {
-    return (
-      <div
-        style={{
-          height: 300,
-          overflowY: 'scroll',
-        }}
-        ref={(ref) => {
-          if (ref && !this.scrollElementRef) {
-            this.scrollElementRef = ref;
-          }
-        }}
-        data-simplebar
-      >
-        {this.props.children}
-      </div>
-    );
-  }
-}
+  React.useEffect(() => {
+    new SimpleBar(scrollElementRef.current);
+  }, []);
+
+  return (
+    <div
+      style={{
+        height: 300,
+        overflowY: 'scroll',
+      }}
+      ref={(ref) => {
+        if (ref && !scrollElementRef.current) {
+          scrollElementRef.current = ref;
+        }
+      }}
+      data-simplebar
+    >
+      {children}
+    </div>
+  );
+};
 
 class IFrame extends React.Component {
   constructor(props) {

@@ -1,5 +1,7 @@
 import canUseDOM from 'can-use-dom';
-import SimpleBarCore, { getOptions } from 'simplebar-core';
+import SimpleBarCore from 'simplebar-core';
+
+const { getOptions } = SimpleBarCore;
 
 export default class SimpleBar extends SimpleBarCore {
   static globalObserver: MutationObserver;
