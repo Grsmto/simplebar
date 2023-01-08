@@ -1,4 +1,4 @@
-import SimpleBar, { getOptions } from '../src';
+import SimpleBar from '../src';
 
 const mutationMock = [
   {
@@ -52,14 +52,14 @@ test('should unmount SimpleBar', () => {
 test('should return the element options', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
 
-  expect(getOptions(simpleBar.el.attributes)).toEqual({
+  expect(SimpleBar.getOptions(simpleBar.el.attributes)).toEqual({
     forceVisible: true,
   });
 });
 
 test('getOptions accepts objects', () => {
   expect(
-    getOptions([
+    SimpleBar.getOptions([
       {
         name: 'data-simplebar-class-names',
         value: {
