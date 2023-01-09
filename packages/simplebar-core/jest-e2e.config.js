@@ -9,4 +9,5 @@ module.exports = {
   moduleNameMapper: {
     '^lodash-es$': 'lodash',
   },
+  ...(process.env.CI === 'true' && { maxWorkers: 2, testTimeout: 15000 }),
 };

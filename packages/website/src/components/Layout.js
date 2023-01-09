@@ -2,8 +2,6 @@
 import { jsx, ThemeProvider } from "theme-ui"
 import PropTypes from "prop-types"
 import { Global } from "@emotion/core"
-import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
 
 import theme from "../theme"
 
@@ -11,8 +9,6 @@ import "modern-normalize/modern-normalize.css"
 import "typeface-nunito"
 
 const Layout = ({ children, ...otherProps }) => {
-  const { browserstackImage } = useStaticQuery(query)
-
   return (
     <ThemeProvider theme={theme}>
       <Global
@@ -106,9 +102,9 @@ const Layout = ({ children, ...otherProps }) => {
               rel="noopener noreferrer"
               sx={{ ml: 2 }}
             >
-              <Img
+              <img
                 style={{ display: "block" }}
-                fixed={browserstackImage.childImageSharp.fixed}
+                src="/browserstack.png"
                 width={120}
               />
             </a>
@@ -124,15 +120,3 @@ Layout.propTypes = {
 }
 
 export default Layout
-
-const query = graphql`
-  {
-    browserstackImage: file(relativePath: { eq: "browserstack.png" }) {
-      childImageSharp {
-        fixed(width: 120) {
-          ...GatsbyImageSharpFixed_noBase64
-        }
-      }
-    }
-  }
-`
