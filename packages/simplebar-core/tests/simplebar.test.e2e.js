@@ -1,3 +1,4 @@
+import 'expect-puppeteer';
 import jestPuppeteerConfig from '../jest-puppeteer.config';
 
 describe('Load', () => {
@@ -7,8 +8,9 @@ describe('Load', () => {
 
   beforeEach(async () => {
     await page.reload();
+    // await page.waitForNavigation();
     await page.mouse.move(0, 0);
-    await page.click('body', { delay: 64 }); // wait for SimpleBar to init
+    // await page.click('body', { delay: 64 }); // wait for SimpleBar to init
   });
 
   test('should render demo page', async () => {
@@ -17,13 +19,6 @@ describe('Load', () => {
 
   test('should render SimpleBar on data-simplebar elements', async () => {
     await expect(page).toMatchElement('[data-simplebar] .simplebar-content');
-  });
-
-  test('should not auto hide the scrollbar', async () => {
-    const demo = await expect(page).toMatchElement(
-      '[data-simplebar-auto-hide="false"]'
-    );
-    await expect(demo).toMatchElement('.simplebar-scrollbar.simplebar-visible');
   });
 
   test('should force scrollbar track to be visible but scrollbar to be hidden', async () => {

@@ -46,7 +46,7 @@
     "prettier": "^2.0.5",
     "prettier-eslint": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",
-    "puppeteer": "^19.4.1",
+    "puppeteer": "^16.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^3.9.1",

@@ -638,6 +638,13 @@ export default class SimpleBarCore {
       this.contentWrapperEl.style[this.axis[axis].overflowAttr] = 'hidden';
       this.el.classList.remove(`${this.classNames.scrollable}-${axis}`);
     }
+
+    // Even if forceVisible is enabled, scrollbar itself should be hidden
+    if (this.axis[axis].isOverflowing) {
+      scrollbar.style.display = 'block';
+    } else {
+      scrollbar.style.display = 'none';
+    }
   }
 
   showScrollbar(axis: Axis = 'y') {
