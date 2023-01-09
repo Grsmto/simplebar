@@ -105,7 +105,7 @@ exports[`renders with object as option 1`] = `
   >
     <div
       class="undefined"
-      style="width: 0px;"
+      style="width: 0px; display: none;"
     />
   </div>
   <div
@@ -114,7 +114,7 @@ exports[`renders with object as option 1`] = `
   >
     <div
       class="undefined"
-      style="height: 0px;"
+      style="height: 0px; display: none;"
     />
   </div>
 </div>
@@ -182,7 +182,7 @@ exports[`renders with options 1`] = `
   >
     <div
       class="simplebar-scrollbar"
-      style="width: 0px;"
+      style="width: 0px; display: none;"
     />
   </div>
   <div
@@ -191,7 +191,7 @@ exports[`renders with options 1`] = `
   >
     <div
       class="simplebar-scrollbar"
-      style="height: 0px;"
+      style="height: 0px; display: none;"
     />
   </div>
 </div>
@@ -258,7 +258,7 @@ exports[`renders without crashing 1`] = `
   >
     <div
       class="simplebar-scrollbar"
-      style="width: 0px;"
+      style="width: 0px; display: none;"
     />
   </div>
   <div
@@ -267,7 +267,7 @@ exports[`renders without crashing 1`] = `
   >
     <div
       class="simplebar-scrollbar"
-      style="height: 0px;"
+      style="height: 0px; display: none;"
     />
   </div>
 </div>
