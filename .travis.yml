@@ -3,7 +3,7 @@ cache: yarn
 
 before_install:
   - npm i -g lerna
-  - npm i -g gatsby-cli
+  - npm i -g gatsby-cli@2.19.3
 
 install:
   - yarn

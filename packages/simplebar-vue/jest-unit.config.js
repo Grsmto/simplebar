@@ -8,9 +8,13 @@ module.exports = {
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
   moduleFileExtensions: ['js', 'jsx', 'json', 'vue'],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
+  testEnvironment: 'jsdom',
   snapshotSerializers: ['jest-serializer-vue'],
   setupFiles: ['<rootDir>/tests/testsSetup.js'],
-  testURL: "http://localhost/"
+  testEnvironmentOptions: {
+    url: 'http://localhost/',
+    customExportConditions: ['node', 'node-addons'], // See https://github.com/vuejs/vue-jest/issues/479
+  },
 };
