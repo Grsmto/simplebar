@@ -24,7 +24,7 @@
     "simplebar-react": "^3.0.0-beta.10"
   },
   "devDependencies": {
-    "babel-loader": "^9.1.2",
+    "babel-loader": "^9.1.0",
     "css-loader": "^0.28.11",
     "promise": "^8.0.2",
     "react-select": "^2.4.3",
