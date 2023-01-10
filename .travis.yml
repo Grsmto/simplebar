@@ -20,6 +20,7 @@ deploy:
     branch: master
 
 addons:
+  chrome: stable
   browserstack:
     username: 'adriengrsmto'
     access_key:
