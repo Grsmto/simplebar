@@ -1050,7 +1050,7 @@ export default class SimpleBarCore {
   }
 
   /**
-   * UnMount mutation observer and delete SimpleBar instance from DOM element
+   * Remove all listeners from DOM nodes
    */
   unMount() {
     this.removeListeners();

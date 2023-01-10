@@ -1,15 +1,5 @@
 import SimpleBar from '../src';
 
-const mutationMock = [
-  {
-    removedNodes: [
-      {
-        nodeType: 1,
-      },
-    ],
-  },
-];
-
 beforeEach(() => {
   jest.resetModules();
 
@@ -43,10 +33,11 @@ test('should return the scroll element', () => {
 
 test('should unmount SimpleBar', () => {
   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+  const mock = jest.spyOn(simpleBar.mutationObserver, 'disconnect');
 
   simpleBar.unMount();
 
-  expect(SimpleBar.instances.get(simpleBar.el)).toBeUndefined();
+  expect(mock).toHaveBeenCalled();
 });
 
 test('should return the element options', () => {
@@ -110,19 +101,6 @@ test('onPointerEvent listener should be unsubscribed on unmount', () => {
 
   expect(simpleBar.onPointerEvent).not.toHaveBeenCalled();
 });
-
-// test('unmount on node removed from DOM', () => {
-//   const simpleBar = new SimpleBar(document.getElementById('simplebar'));
-
-//   SimpleBar.handleMutations([
-//     {
-//       addedNodes: [],
-//       removedNodes: [simpleBar.el],
-//     },
-//   ]);
-
-//   expect(SimpleBar.instances.get(simpleBar.el)).toBeUndefined();
-// });
 
 describe('nested SimpleBars with initiated DOM', () => {
   let parent;

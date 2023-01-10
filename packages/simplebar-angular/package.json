@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
-    "test": "ng test",
+    "test": "ng test --watch=false",
     "e2e": "ng e2e",
     "version": "yarn build",
     "precommit": "lint-staged"
