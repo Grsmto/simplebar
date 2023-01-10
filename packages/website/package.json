@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "babel-preset-gatsby": "^0.5.2",
-    "gatsby-plugin-manifest": "^2.2.17",
     "gatsby-plugin-offline": "^3.0.7",
     "gatsby-plugin-react-helmet": "^3.1.7",
     "gatsby-source-filesystem": "^2.11.1",

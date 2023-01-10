@@ -1,8 +1,11 @@
+const { defaults: tsjPreset } = require('ts-jest/presets');
+
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
+  preset: 'ts-jest',
   transform: {
+    ...tsjPreset.transform,
     '^.+\\.js?$': 'babel-jest',
   },
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
-  moduleFileExtensions: ['js'],
-  setupFiles: ['<rootDir>/tests/testsSetup.js'],
+  testEnvironment: 'jsdom',
 };
