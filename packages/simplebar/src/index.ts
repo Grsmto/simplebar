@@ -6,6 +6,15 @@ const { getOptions } = SimpleBarCore;
 export default class SimpleBar extends SimpleBarCore {
   static globalObserver: MutationObserver;
 
+  static instances = new WeakMap();
+
+  constructor(...args: ConstructorParameters<typeof SimpleBarCore>) {
+    super(...args);
+
+    // // Save a reference to the instance, so we know this DOM node has already been instancied
+    SimpleBar.instances.set(args[0], this);
+  }
+
   static initDOMLoadedElements() {
     document.removeEventListener(
       'DOMContentLoaded',
@@ -25,8 +34,13 @@ export default class SimpleBar extends SimpleBarCore {
     );
   }
 
-  removeObserver() {
+  static removeObserver() {
     SimpleBar.globalObserver?.disconnect();
+  }
+
+  unMount() {
+    SimpleBarCore.prototype.unMount.call(this);
+    SimpleBar.instances.delete(this.el);
   }
 
   static initHtmlApi() {
@@ -56,37 +70,43 @@ export default class SimpleBar extends SimpleBarCore {
 
   static handleMutations(mutations: MutationRecord[]) {
     mutations.forEach((mutation) => {
-      Array.prototype.forEach.call(mutation.addedNodes, (addedNode) => {
+      mutation.addedNodes.forEach((addedNode) => {
         if (addedNode.nodeType === 1) {
-          if (addedNode.hasAttribute('data-simplebar')) {
+          if ((addedNode as Element).hasAttribute('data-simplebar')) {
             !SimpleBar.instances.has(addedNode) &&
               document.documentElement.contains(addedNode) &&
-              new SimpleBar(addedNode, getOptions(addedNode.attributes));
+              new SimpleBar(
+                addedNode as HTMLElement,
+                getOptions((addedNode as Element).attributes)
+              );
           } else {
-            Array.prototype.forEach.call(
-              addedNode.querySelectorAll('[data-simplebar]'),
-              function (el) {
+            (addedNode as Element)
+              .querySelectorAll('[data-simplebar]')
+              .forEach((el) => {
                 if (
                   el.getAttribute('data-simplebar') !== 'init' &&
                   !SimpleBar.instances.has(el) &&
                   document.documentElement.contains(el)
                 )
-                  new SimpleBar(el, getOptions(el.attributes));
-              }
-            );
+                  new SimpleBar(el as HTMLElement, getOptions(el.attributes));
+              });
           }
         }
       });
 
-      Array.prototype.forEach.call(mutation.removedNodes, (removedNode) => {
+      mutation.removedNodes.forEach((removedNode) => {
         if (removedNode.nodeType === 1) {
-          if (removedNode.getAttribute('data-simplebar') === 'init') {
+          if (
+            (removedNode as Element).getAttribute('data-simplebar') === 'init'
+          ) {
             SimpleBar.instances.has(removedNode) &&
               !document.documentElement.contains(removedNode) &&
               SimpleBar.instances.get(removedNode).unMount();
           } else {
             Array.prototype.forEach.call(
-              removedNode.querySelectorAll('[data-simplebar="init"]'),
+              (removedNode as Element).querySelectorAll(
+                '[data-simplebar="init"]'
+              ),
               (el) => {
                 SimpleBar.instances.has(el) &&
                   !document.documentElement.contains(el) &&

@@ -174,11 +174,6 @@ export default class SimpleBarCore {
       );
     }
 
-    // Don't re-instantiate over an existing one
-    if (SimpleBarCore.instances.has(this.el)) {
-      return;
-    }
-
     if ('autoHide' in options) {
       console.warn(
         "simplebar: autoHide option is deprecated. Please use CSS instead: '.simplebar-scrollbar::before { opacity: 0.5 };' for autoHide: false"
@@ -280,12 +275,7 @@ export default class SimpleBarCore {
     };
   }
 
-  static instances = new WeakMap();
-
   init() {
-    // Save a reference to the instance, so we know this DOM node has already been instancied
-    SimpleBarCore.instances.set(this.el, this);
-
     // We stop here on server-side
     if (canUseDOM) {
       this.initDOM();
@@ -1064,7 +1054,6 @@ export default class SimpleBarCore {
    */
   unMount() {
     this.removeListeners();
-    SimpleBarCore.instances.delete(this.el);
   }
 
   /**
