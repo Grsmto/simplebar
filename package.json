@@ -42,7 +42,6 @@
     "lerna": "^3.22.1",
     "lint-staged": "^8.1.5",
     "minify": "^5.1.1",
-    "mutation-observer": "^1.0.3",
     "prettier": "^2.0.5",
     "prettier-eslint": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",

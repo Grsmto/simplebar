@@ -12,7 +12,6 @@ module.exports = {
   },
   testEnvironment: 'jsdom',
   snapshotSerializers: ['jest-serializer-vue'],
-  setupFiles: ['<rootDir>/tests/testsSetup.js'],
   testEnvironmentOptions: {
     url: 'http://localhost/',
     customExportConditions: ['node', 'node-addons'], // See https://github.com/vuejs/vue-jest/issues/479

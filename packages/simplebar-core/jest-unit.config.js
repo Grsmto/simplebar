@@ -8,5 +8,4 @@ module.exports = {
     '^.+\\.js?$': 'babel-jest',
   },
   testEnvironment: 'jsdom',
-  setupFiles: ['<rootDir>/tests/testsSetup.js'],
 };
