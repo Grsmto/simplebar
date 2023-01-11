@@ -2,7 +2,7 @@
   "name": "simplebar-website",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "author": "Adrien Denat <oi@adriendenat.com>",
   "scripts": {
     "build": "gatsby build",
@@ -23,8 +23,8 @@
     "react-icons": "^3.7.0",
     "react-select": "^2.4.3",
     "react-window": "^1.8.1",
-    "simplebar": "^6.0.0-beta.10",
-    "simplebar-react": "^3.0.0-beta.10",
+    "simplebar": "^6.0.0-beta.11",
+    "simplebar-react": "^3.0.0-beta.11",
     "theme-ui": "^0.3.1",
     "typeface-nunito": "^1.1.3",
     "whatwg-fetch": "^3.0.0"

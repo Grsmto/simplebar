@@ -1,6 +1,6 @@
 {
   "name": "simplebar-vue",
-  "version": "2.0.0-beta.10",
+  "version": "2.0.0-beta.11",
   "description": "Vue component for SimpleBar",
   "files": [
     "dist",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "simplebar-core": "^1.0.7",
+    "simplebar-core": "^1.0.8",
     "vue-demi": "^0.13.11"
   },
   "peerDependencies": {

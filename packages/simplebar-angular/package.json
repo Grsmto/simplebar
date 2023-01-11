@@ -1,6 +1,6 @@
 {
   "name": "simplebar-angular",
-  "version": "3.0.0-beta.10",
+  "version": "3.0.0-beta.11",
   "description": "Angular component for SimpleBar",
   "scripts": {
     "ng": "ng",
@@ -27,7 +27,7 @@
     "simplebar"
   ],
   "dependencies": {
-    "simplebar-core": "^1.0.7",
+    "simplebar-core": "^1.0.8",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
@@ -35,12 +35,12 @@
     "@angular/core": ">=8.1.3"
   },
   "devDependencies": {
-    "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0",
     "@angular-devkit/build-angular": "^15.0.0",
     "@angular/cli": "~15.0.0",
+    "@angular/common": "^15.0.0",
     "@angular/compiler": "^15.0.0",
     "@angular/compiler-cli": "^15.0.0",
+    "@angular/core": "^15.0.0",
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@types/jasmine": "~4.3.0",
