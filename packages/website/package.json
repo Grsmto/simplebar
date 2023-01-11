@@ -16,7 +16,7 @@
     "@emotion/core": "^10.0.28",
     "@mdx-js/react": "^1.6.4",
     "@theme-ui/preset-base": "^0.2.40",
-    "gatsby": "^2.32.13",
+    "gatsby": "^5.4.0",
     "modern-normalize": "^0.5.0",
     "prop-types": "^15.7.2",
     "react-helmet": "^5.2.1",
@@ -30,11 +30,9 @@
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "babel-preset-gatsby": "^0.5.2",
-    "gatsby-plugin-offline": "^3.0.7",
-    "gatsby-plugin-react-helmet": "^3.1.7",
-    "gatsby-source-filesystem": "^2.11.1",
-    "gatsby-transformer-remark": "^2.8.13",
+    "gatsby-plugin-react-helmet": "^6.4.0",
+    "gatsby-source-filesystem": "^5.4.0",
+    "gatsby-transformer-remark": "^6.4.0",
     "gh-pages": "^2.1.1"
   },
   "keywords": [
