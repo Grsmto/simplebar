@@ -11594,7 +11594,7 @@ g-status@^2.0.2:
     matcher "^1.0.0"
     simple-git "^1.85.0"
 
-gatsby-cli@^4.25.0:
+gatsby-cli@4.25.0, gatsby-cli@^4.25.0:
   version "4.25.0"
   resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-4.25.0.tgz#da76a6a61a97948c6ce07984b33c911554982f51"
   integrity sha512-CJ2PCsfFmn9Xqc/jg9MFMU1BG5oQGiej1TFFx8GhChJ+kGhi9ANnNM+qo1K4vOmoMnsT4SSGiPAFD10AWFqpAQ==
