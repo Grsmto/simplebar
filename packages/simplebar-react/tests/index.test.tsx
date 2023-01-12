@@ -1,14 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import { render, waitFor } from '@testing-library/react';
-import SimpleBar from '../';
+import SimpleBar from '../index';
+import SimpleBarCore from 'simplebar-core';
 
 test('renders without crashing', () => {
   const { container } = render(
-    <SimpleBar>
-      {[...Array(5)].map((x, i) => (
-        <p key={i}>Some content</p>
-      ))}
-    </SimpleBar>
+    <div>
+      <SimpleBar>
+        {[...Array(5)].map((_, i) => (
+          <p key={i}>Some content</p>
+        ))}
+      </SimpleBar>
+    </div>
   );
   expect(container.firstChild).toMatchSnapshot();
 });
@@ -65,24 +68,34 @@ test('renders with scrollableNodeProps', async () => {
 });
 
 test('renders with ref', async () => {
-  const ref = React.createRef();
+  const ref = React.createRef<SimpleBarCore | null>();
 
-  render(
-    <SimpleBar ref={ref}>
+  const { unmount } = render(
+    <SimpleBar
+      ref={(instance) => {
+        //
+      }}
+    >
       {[...Array(5)].map((x, i) => (
         <p key={i}>Some content</p>
       ))}
     </SimpleBar>
   );
 
-  expect(ref.current).toBeDefined();
+  if (!ref.current) return;
+
+  jest.spyOn(ref.current, 'unMount');
+
+  unmount();
+
+  expect(ref.current.unMount).toHaveBeenCalled();
 });
 
 test('works on unmount', async () => {
-  const ref = React.createRef();
+  const ref = React.createRef<any>();
 
   const { unmount } = render(
-    <SimpleBar ref={ref}>
+    <SimpleBar ref={ref} style={{ maxHeight: 300 }}>
       {[...Array(5)].map((x, i) => (
         <p key={i}>Some content</p>
       ))}
@@ -112,4 +125,22 @@ test('renders with ref callback', async () => {
   expect(callback).toHaveBeenCalled();
   unmount();
   expect(callback).toHaveBeenCalledWith(null);
+});
+
+test('renders with render function', async () => {
+  let ref1;
+  let ref2;
+
+  render(
+    <SimpleBar>
+      {({ scrollableNodeRef, contentNodeRef }) => {
+        ref1 = scrollableNodeRef;
+        ref2 = contentNodeRef;
+        return null;
+      }}
+    </SimpleBar>
+  );
+
+  expect(ref1).toBeDefined();
+  expect(ref2).toBeDefined();
 });

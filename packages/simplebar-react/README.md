@@ -20,8 +20,6 @@
 **- Via Yarn**
 `yarn add simplebar-react`
 
-If you are using Gatsby, please see [#345](https://github.com/Grsmto/simplebar/issues/345).
-
 ### Usage
 
 Check out the [Demo project](https://github.com/Grsmto/simplebar/blob/master/examples/react/src/App.js) or our live [Codesandbox example](https://codesandbox.io/s/simplebar-react-gwgyw).
@@ -33,9 +31,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 
 const App = () => (
-  <SimpleBar style={{ maxHeight: 300 }}>
-    // your content
-  </SimpleBar>
+  <SimpleBar style={{ maxHeight: 300 }}>// your content</SimpleBar>
 );
 ```
 
@@ -81,12 +77,12 @@ const scrollableNodeRef = React.createRef();
 
 <SimpleBar scrollableNodeProps={{ ref: scrollableNodeRef }}>
   // your content
-</SimpleBar>
+</SimpleBar>;
 ```
 
 ### Accessing SimpleBar instance
 
-You can pass a ref to the SimpleBar element: 
+You can pass a ref to the SimpleBar element:
 
 ```js
 const ref = useRef();
@@ -101,15 +97,30 @@ useEffect(() => {
 </SimpleBar>
 ```
 
-### Accessing refs
+### Usage with 3rd party libraries
 
-For advanced usage, you can access refs of the scrollable and content nodes by using a render prop pattern:
+For advanced usage, in some cases (like using react-window) you can forward the scrollable and content elements using a render prop pattern:
 
 ```js
 <SimpleBar>
   {({ scrollableNodeRef, contentNodeRef }) => {
     // Now you have access to scrollable and content nodes
     return <div></div>;
+  }}
+</SimpleBar>
+```
+
+If you define your own elements you should do:
+
+```js
+<SimpleBar>
+  {({ scrollableNodeProps, scrollableNodeProps }) => {
+    return (
+      <div {...scrollableNodeProps}>
+        outer/scrollable element
+        <div {...scrollableNodeProps} />inner element</div>
+      </div>
+    );
   }}
 </SimpleBar>
 ```

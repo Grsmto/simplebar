@@ -8,28 +8,28 @@ exports[`renders with object as option 1`] = `
     class="custom-class"
   >
     <div
-      class="undefined"
+      class="simplebar-height-auto-observer-wrapper"
     >
       <div
-        class="undefined"
+        class="simplebar-height-auto-observer"
       />
     </div>
     <div
-      class="undefined"
+      class="simplebar-mask"
     >
       <div
-        class="undefined"
+        class="simplebar-offset"
         style="right: 0px; bottom: 0px;"
       >
         <div
           aria-label="scrollable content"
-          class="undefined"
+          class="simplebar-content-wrapper"
           role="region"
           style="height: auto; overflow-x: hidden; overflow-y: hidden;"
           tabindex="0"
         >
           <div
-            class="undefined"
+            class="simplebar-content"
           >
             <div
               class="simplebar-wrapper"
@@ -95,25 +95,25 @@ exports[`renders with object as option 1`] = `
       </div>
     </div>
     <div
-      class="undefined"
+      class="simplebar-placeholder"
       style="width: 0px; height: 0px;"
     />
   </div>
   <div
-    class="undefined"
+    class="simplebar-track simplebar-horizontal"
     style="visibility: hidden;"
   >
     <div
-      class="undefined"
+      class="simplebar-scrollbar simplebar-visible"
       style="width: 0px; display: none;"
     />
   </div>
   <div
-    class="undefined"
+    class="simplebar-track simplebar-vertical"
     style="visibility: hidden;"
   >
     <div
-      class="undefined"
+      class="simplebar-scrollbar simplebar-visible"
       style="height: 0px; display: none;"
     />
   </div>
@@ -198,77 +198,79 @@ exports[`renders with options 1`] = `
 `;
 
 exports[`renders without crashing 1`] = `
-<div
-  data-simplebar="init"
->
+<div>
   <div
-    class="simplebar-wrapper"
+    data-simplebar="init"
   >
     <div
-      class="simplebar-height-auto-observer-wrapper"
+      class="simplebar-wrapper"
     >
       <div
-        class="simplebar-height-auto-observer"
-      />
-    </div>
-    <div
-      class="simplebar-mask"
-    >
-      <div
-        class="simplebar-offset"
-        style="right: 0px; bottom: 0px;"
+        class="simplebar-height-auto-observer-wrapper"
       >
         <div
-          aria-label="scrollable content"
-          class="simplebar-content-wrapper"
-          role="region"
-          style="height: auto; overflow-x: hidden; overflow-y: hidden;"
-          tabindex="0"
+          class="simplebar-height-auto-observer"
+        />
+      </div>
+      <div
+        class="simplebar-mask"
+      >
+        <div
+          class="simplebar-offset"
+          style="right: 0px; bottom: 0px;"
         >
           <div
-            class="simplebar-content"
+            aria-label="scrollable content"
+            class="simplebar-content-wrapper"
+            role="region"
+            style="height: auto; overflow-x: hidden; overflow-y: hidden;"
+            tabindex="0"
           >
-            <p>
-              Some content
-            </p>
-            <p>
-              Some content
-            </p>
-            <p>
-              Some content
-            </p>
-            <p>
-              Some content
-            </p>
-            <p>
-              Some content
-            </p>
+            <div
+              class="simplebar-content"
+            >
+              <p>
+                Some content
+              </p>
+              <p>
+                Some content
+              </p>
+              <p>
+                Some content
+              </p>
+              <p>
+                Some content
+              </p>
+              <p>
+                Some content
+              </p>
+            </div>
           </div>
         </div>
       </div>
+      <div
+        class="simplebar-placeholder"
+        style="width: 0px; height: 0px;"
+      />
     </div>
     <div
-      class="simplebar-placeholder"
-      style="width: 0px; height: 0px;"
-    />
-  </div>
-  <div
-    class="simplebar-track simplebar-horizontal"
-    style="visibility: hidden;"
-  >
+      class="simplebar-track simplebar-horizontal"
+      style="visibility: hidden;"
+    >
+      <div
+        class="simplebar-scrollbar"
+        style="width: 0px; display: none;"
+      />
+    </div>
     <div
-      class="simplebar-scrollbar"
-      style="width: 0px; display: none;"
-    />
-  </div>
-  <div
-    class="simplebar-track simplebar-vertical"
-    style="visibility: hidden;"
-  >
-    <div
-      class="simplebar-scrollbar"
-      style="height: 0px; display: none;"
-    />
+      class="simplebar-track simplebar-vertical"
+      style="visibility: hidden;"
+    >
+      <div
+        class="simplebar-scrollbar"
+        style="height: 0px; display: none;"
+      />
+    </div>
   </div>
 </div>
 `;

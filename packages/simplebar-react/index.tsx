@@ -1,45 +1,51 @@
-import React, { useEffect, useRef } from 'react';
-import type { ElementType } from 'react';
+import * as React from 'react';
+import type { ReactNode, MutableRefObject } from 'react';
 import SimpleBarCore from 'simplebar-core';
-import type { Options } from 'simplebar-core';
+import type { SimpleBarOptions } from 'simplebar-core';
 
-export type PolymorphicRef<
-  C extends React.ElementType
-> = React.ComponentPropsWithRef<C>['ref'];
+type RenderFunc = (props: {
+  scrollableNodeRef: MutableRefObject<HTMLElement | undefined>;
+  scrollableNodeProps: {
+    className: string;
+    ref: MutableRefObject<HTMLElement | undefined>;
+  };
+  contentNodeRef: MutableRefObject<HTMLElement | undefined>;
+  contentNodeProps: {
+    className: string;
+    ref: MutableRefObject<HTMLElement | undefined>;
+  };
+}) => ReactNode;
 
-interface Props<T extends ElementType> extends Options {
-  children?: React.ReactNode;
-  className?: string;
+export interface Props
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>,
+    SimpleBarOptions {
+  children?: ReactNode | RenderFunc;
   scrollableNodeProps?: {
     ref?: any;
     className?: string;
+    [key: string]: any;
   };
-  tag?: T;
 }
 
-const SimpleBar = React.forwardRef(
-  <T extends ElementType = 'div'>(
-    { children, scrollableNodeProps = {}, tag, ...otherProps }: Props<T>,
-    ref?: PolymorphicRef<T>
-  ) => {
-    const RootTag = tag || 'div';
-    const elRef = useRef();
-    const scrollableNodeRef = useRef<HTMLElement>();
-    const contentNodeRef = useRef<HTMLElement>();
-    let options: any = {};
-    let rest: any = {};
+const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
+  ({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
+    const elRef = React.useRef();
+    const scrollableNodeRef = React.useRef<HTMLElement>();
+    const contentNodeRef = React.useRef<HTMLElement>();
+    const options: any = {};
+    const rest: any = {};
 
     Object.keys(otherProps).forEach((key) => {
       if (
         Object.prototype.hasOwnProperty.call(SimpleBarCore.defaultOptions, key)
       ) {
-        options[key] = otherProps[key as keyof Options];
+        options[key] = otherProps[key as keyof SimpleBarOptions];
       } else {
-        rest[key] = otherProps[key as keyof Options];
+        rest[key] = otherProps[key as keyof SimpleBarOptions];
       }
     });
 
-    useEffect(() => {
+    React.useEffect(() => {
       let instance: SimpleBarCore | null;
       scrollableNodeRef.current = scrollableNodeProps.ref
         ? scrollableNodeProps.ref.current
@@ -73,7 +79,7 @@ const SimpleBar = React.forwardRef(
     }, []);
 
     return (
-      <RootTag ref={elRef} data-simplebar {...rest}>
+      <div ref={elRef} data-simplebar {...rest}>
         <div className="simplebar-wrapper">
           <div className="simplebar-height-auto-observer-wrapper">
             <div className="simplebar-height-auto-observer" />
@@ -115,7 +121,7 @@ const SimpleBar = React.forwardRef(
         <div className="simplebar-track simplebar-vertical">
           <div className="simplebar-scrollbar" />
         </div>
-      </RootTag>
+      </div>
     );
   }
 );
