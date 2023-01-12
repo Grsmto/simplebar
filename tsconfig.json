@@ -8,6 +8,5 @@
         "forceConsistentCasingInFileNames": true,
         "outDir": "dist",
         "declaration": true,
-        "jsx": "react"
     }
 }

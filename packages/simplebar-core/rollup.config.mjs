@@ -1,7 +1,7 @@
 import { createRequire } from 'node:module';
 import typescript from '@rollup/plugin-typescript';
 import license from 'rollup-plugin-license';
-import { getExternals, getBanner } from '../../rollup.config.mjs';
+import { getExternals, getBanner, tsConfig } from '../../rollup.config.mjs';
 
 const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
@@ -18,10 +18,7 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [
-      typescript({ tsconfig: '../../tsconfig.json' }),
-      license(getBanner(pkg)),
-    ],
+    plugins: [typescript(tsConfig), license(getBanner(pkg))],
   },
   // CommonJS (for Node)
   {
@@ -45,9 +42,6 @@ export default [
         },
       },
     ],
-    plugins: [
-      typescript({ tsconfig: '../../tsconfig.json' }),
-      license(getBanner(pkg)),
-    ],
+    plugins: [typescript(tsConfig), license(getBanner(pkg))],
   },
 ];

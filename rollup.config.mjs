@@ -29,3 +29,8 @@ export const babelConfig = {
   exclude: ['**/node_modules/**'],
   babelHelpers: 'runtime',
 };
+
+export const tsConfig = {
+  tsconfig: '../../tsconfig.json',
+  exclude: ['**/*.test.ts', '**/*.test.tsx'],
+};
