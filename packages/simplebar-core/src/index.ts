@@ -5,41 +5,40 @@ import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
 import { getElementWindow, getElementDocument, getOptions } from './helpers';
 
-export interface Options {
+interface Options {
   forceVisible: boolean | Axis;
   clickOnTrack: boolean;
   scrollbarMinSize: number;
   scrollbarMaxSize: number;
-  classNames: typeof ClassNames;
+  classNames: Partial<ClassNames>;
   ariaLabel: string;
   scrollableNode: HTMLElement | null;
   contentNode: HTMLElement | null;
-  /**
-   * @deprecated autoHide option is deprecated. Please use CSS instead: '.simplebar-scrollbar::before { opacity: 0.5 };' for autoHide: false
-   */
-  autoHide?: boolean;
+  autoHide: boolean;
 }
 
-const ClassNames = {
-  contentEl: 'simplebar-content',
-  contentWrapper: 'simplebar-content-wrapper',
-  offset: 'simplebar-offset',
-  mask: 'simplebar-mask',
-  wrapper: 'simplebar-wrapper',
-  placeholder: 'simplebar-placeholder',
-  scrollbar: 'simplebar-scrollbar',
-  track: 'simplebar-track',
-  heightAutoObserverWrapperEl: 'simplebar-height-auto-observer-wrapper',
-  heightAutoObserverEl: 'simplebar-height-auto-observer',
-  visible: 'simplebar-visible',
-  horizontal: 'simplebar-horizontal',
-  vertical: 'simplebar-vertical',
-  hover: 'simplebar-hover',
-  dragging: 'simplebar-dragging',
-  scrolling: 'simplebar-scrolling',
-  scrollable: 'simplebar-scrollable',
-  mouseEntered: 'simplebar-mouse-entered',
-} as const;
+export interface SimpleBarOptions extends Partial<Options> {}
+
+type ClassNames = {
+  contentEl: string;
+  contentWrapper: string;
+  offset: string;
+  mask: string;
+  wrapper: string;
+  placeholder: string;
+  scrollbar: string;
+  track: string;
+  heightAutoObserverWrapperEl: string;
+  heightAutoObserverEl: string;
+  visible: string;
+  horizontal: string;
+  vertical: string;
+  hover: string;
+  dragging: string;
+  scrolling: string;
+  scrollable: string;
+  mouseEntered: string;
+};
 
 type Axis = 'x' | 'y';
 type AxisProps = {
@@ -62,12 +61,12 @@ type RtlHelpers = {
   // determines if the origin scrollbar position is inverted or not (positioned on left or right)
   isScrollingToNegative: boolean;
 } | null;
-type DefaultOptions = Partial<Options> & typeof SimpleBarCore.defaultOptions;
+type DefaultOptions = Options & typeof SimpleBarCore.defaultOptions;
 
 export default class SimpleBarCore {
   el: HTMLElement;
   options: DefaultOptions;
-  classNames: typeof ClassNames;
+  classNames: ClassNames;
   axis: {
     x: AxisProps;
     y: AxisProps;
@@ -136,7 +135,10 @@ export default class SimpleBarCore {
   constructor(element: HTMLElement, options: Partial<Options> = {}) {
     this.el = element;
     this.options = { ...SimpleBarCore.defaultOptions, ...options };
-    this.classNames = this.options.classNames;
+    this.classNames = {
+      ...SimpleBarCore.defaultOptions.classNames,
+      ...options.classNames,
+    } as ClassNames;
     this.axis = {
       x: {
         scrollOffsetAttr: 'scrollLeft',

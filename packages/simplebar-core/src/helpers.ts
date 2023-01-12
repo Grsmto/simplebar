@@ -1,4 +1,4 @@
-import { Options } from './';
+import type { SimpleBarOptions } from './index';
 
 export function getElementWindow(element: Element) {
   if (
@@ -20,16 +20,16 @@ export function getElementDocument(element: Element) {
 
 // Helper function to retrieve options from element attributes
 export const getOptions = function (obj: any) {
-  const initialObj: Partial<Options> = {};
+  const initialObj: SimpleBarOptions = {};
 
   const options = Array.prototype.reduce.call(
     obj,
     (acc: any, attribute) => {
       const option = attribute.name.match(/data-simplebar-(.+)/);
       if (option) {
-        const key: keyof Options = option[1].replace(
+        const key: keyof SimpleBarOptions = option[1].replace(
           /\W+(.)/g,
-          (x: any, chr: string) => chr.toUpperCase()
+          (_: any, chr: string) => chr.toUpperCase()
         );
 
         switch (attribute.value) {
@@ -50,5 +50,5 @@ export const getOptions = function (obj: any) {
     },
     initialObj
   );
-  return options as Partial<Options>;
+  return options as SimpleBarOptions;
 };
