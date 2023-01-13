@@ -375,10 +375,10 @@ export default class SimpleBarCore {
       const scrollbar = document.createElement('div');
 
       track.classList.add(this.classNames.track);
-      scrollbar.classList.add(
-        this.classNames.scrollbar,
-        !this.options.autoHide ? this.classNames.visible : ''
-      );
+      scrollbar.classList.add(this.classNames.scrollbar);
+      if (!this.options.autoHide) {
+        scrollbar.classList.add(this.classNames.visible);
+      }
 
       track.appendChild(scrollbar);
 
