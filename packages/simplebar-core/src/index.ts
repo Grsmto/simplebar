@@ -184,12 +184,6 @@ export default class SimpleBarCore {
       );
     }
 
-    if ('autoHide' in options) {
-      console.warn(
-        "simplebar: autoHide option is deprecated. Please use CSS instead: '.simplebar-scrollbar::before { opacity: 0.5 };' for autoHide: false"
-      );
-    }
-
     this.onMouseMove = throttle(this._onMouseMove, 64);
     this.onWindowResize = debounce(this._onWindowResize, 64, { leading: true });
     this.onStopScrolling = debounce(
@@ -765,7 +759,8 @@ export default class SimpleBarCore {
     if (!currentAxis.track.el || !currentAxis.scrollbar.el) return;
 
     currentAxis.track.rect = currentAxis.track.el.getBoundingClientRect();
-    currentAxis.scrollbar.rect = currentAxis.scrollbar.el.getBoundingClientRect();
+    currentAxis.scrollbar.rect =
+      currentAxis.scrollbar.el.getBoundingClientRect();
 
     if (this.isWithinBounds(currentAxis.track.rect)) {
       this.showScrollbar(axis);
@@ -843,7 +838,8 @@ export default class SimpleBarCore {
 
       if (e.type === 'pointerdown' && e.pointerType !== 'touch') {
         if (isWithinTrackXBounds) {
-          this.axis.x.scrollbar.rect = this.axis.x.scrollbar.el.getBoundingClientRect();
+          this.axis.x.scrollbar.rect =
+            this.axis.x.scrollbar.el.getBoundingClientRect();
 
           if (this.isWithinBounds(this.axis.x.scrollbar.rect)) {
             this.onDragStart(e, 'x');
@@ -853,7 +849,8 @@ export default class SimpleBarCore {
         }
 
         if (isWithinTrackYBounds) {
-          this.axis.y.scrollbar.rect = this.axis.y.scrollbar.el.getBoundingClientRect();
+          this.axis.y.scrollbar.rect =
+            this.axis.y.scrollbar.el.getBoundingClientRect();
 
           if (this.isWithinBounds(this.axis.y.scrollbar.rect)) {
             this.onDragStart(e, 'y');
@@ -937,9 +934,8 @@ export default class SimpleBarCore {
           : scrollPos;
     }
 
-    this.contentWrapperEl[
-      this.axis[this.draggedAxis].scrollOffsetAttr
-    ] = scrollPos;
+    this.contentWrapperEl[this.axis[this.draggedAxis].scrollOffsetAttr] =
+      scrollPos;
   };
 
   /**
@@ -985,9 +981,8 @@ export default class SimpleBarCore {
     e.preventDefault();
 
     const elWindow = getElementWindow(this.el);
-    this.axis[
-      axis
-    ].scrollbar.rect = currentAxis.scrollbar.el.getBoundingClientRect();
+    this.axis[axis].scrollbar.rect =
+      currentAxis.scrollbar.el.getBoundingClientRect();
     const scrollbar = this.axis[axis].scrollbar;
     const scrollbarOffset = scrollbar.rect?.[this.axis[axis].offsetAttr] ?? 0;
     const hostSize = parseInt(
