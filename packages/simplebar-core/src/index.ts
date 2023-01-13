@@ -605,12 +605,18 @@ export default class SimpleBarCore {
       SimpleBarCore.getRtlHelpers()?.isScrollOriginAtZero
         ? -scrollOffset
         : scrollOffset;
-    let scrollPourcent = scrollOffset / (contentSize - hostSize);
+
+    if (axis === 'x' && this.isRtl) {
+      scrollOffset = SimpleBarCore.getRtlHelpers()?.isScrollingToNegative
+        ? scrollOffset
+        : -scrollOffset;
+    }
+
+    const scrollPourcent = scrollOffset / (contentSize - hostSize);
+
     let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
     handleOffset =
-      axis === 'x' &&
-      this.isRtl &&
-      SimpleBarCore.getRtlHelpers()?.isScrollingToNegative
+      axis === 'x' && this.isRtl
         ? -handleOffset + (trackSize - scrollbar.size)
         : handleOffset;
 
@@ -920,18 +926,22 @@ export default class SimpleBarCore {
       eventOffset -
       (track.rect?.[this.axis[this.draggedAxis].offsetAttr] ?? 0) -
       this.axis[this.draggedAxis].dragOffset;
+    dragPos = this.isRtl
+      ? (track.rect?.[this.axis[this.draggedAxis].sizeAttr] ?? 0) -
+        scrollbar.size -
+        dragPos
+      : dragPos;
     // Convert the mouse position into a percentage of the scrollbar height/width.
-    let dragPerc = dragPos / (trackSize - scrollbar.size);
+    const dragPerc = dragPos / (trackSize - scrollbar.size);
 
     // Scroll the content by the same percentage.
     let scrollPos = dragPerc * (contentSize - hostSize);
 
     // Fix browsers inconsistency on RTL
-    if (this.draggedAxis === 'x') {
-      scrollPos =
-        this.isRtl && SimpleBarCore.getRtlHelpers()?.isScrollOriginAtZero
-          ? scrollPos - (trackSize + scrollbar.size)
-          : scrollPos;
+    if (this.draggedAxis === 'x' && this.isRtl) {
+      scrollPos = SimpleBarCore.getRtlHelpers()?.isScrollingToNegative
+        ? -scrollPos
+        : scrollPos;
     }
 
     this.contentWrapperEl[this.axis[this.draggedAxis].scrollOffsetAttr] =
