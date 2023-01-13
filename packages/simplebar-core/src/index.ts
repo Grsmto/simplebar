@@ -342,7 +342,6 @@ export default class SimpleBarCore {
       this.placeholderEl = document.createElement('div');
       this.heightAutoObserverWrapperEl = document.createElement('div');
       this.heightAutoObserverEl = document.createElement('div');
-
       this.wrapperEl.classList.add(this.classNames.wrapper);
       this.contentWrapperEl.classList.add(this.classNames.contentWrapper);
       this.offsetEl.classList.add(this.classNames.offset);
@@ -518,14 +517,13 @@ export default class SimpleBarCore {
       this.options.forceVisible === 'x' || this.options.forceVisible === true;
     this.axis.y.forceVisible =
       this.options.forceVisible === 'y' || this.options.forceVisible === true;
-
     this.hideNativeScrollbar();
 
     // Set isOverflowing to false if scrollbar is not necessary (content is shorter than offset)
-    let offsetForXScrollbar = this.axis.x.isOverflowing
+    const offsetForXScrollbar = this.axis.x.isOverflowing
       ? this.scrollbarWidth
       : 0;
-    let offsetForYScrollbar = this.axis.y.isOverflowing
+    const offsetForYScrollbar = this.axis.y.isOverflowing
       ? this.scrollbarWidth
       : 0;
 
@@ -563,9 +561,9 @@ export default class SimpleBarCore {
     const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
     const trackSize =
       this.axis[axis].track.el?.[this.axis[axis].offsetSizeAttr] ?? 0;
+    const scrollbarRatio = trackSize / contentSize;
 
     let scrollbarSize;
-    let scrollbarRatio = trackSize / contentSize;
 
     // Calculate new height/position of drag handle.
     scrollbarSize = Math.max(
@@ -631,7 +629,6 @@ export default class SimpleBarCore {
     const scrollbar = this.axis[axis].scrollbar.el;
 
     if (!track || !scrollbar || !this.contentWrapperEl) return;
-
     if (this.axis[axis].isOverflowing || this.axis[axis].forceVisible) {
       track.style.visibility = 'visible';
       this.contentWrapperEl.style[this.axis[axis].overflowAttr] = 'scroll';
