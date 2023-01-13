@@ -59,11 +59,6 @@
   "resolutions": {
     "@types/react": "18.0.26"
   },
-  "browserslist": [
-    "> 0.25%",
-    "ie 11",
-    "not dead"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "lerna run --concurrency 1 --stream precommit"

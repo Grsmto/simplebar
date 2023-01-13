@@ -1,5 +1,9 @@
 {
-  "presets": [["@babel/preset-env"], "@babel/preset-react"],
+  "presets": [["@babel/preset-env", {
+    "debug": true,
+    "useBuiltIns": "entry",
+    "corejs": "3.27"
+  }], "@babel/preset-react"],
   "plugins": ["transform-class-properties"],
   "env": {
     "test": {

@@ -116,7 +116,7 @@ or
 ```js
 Array.prototype.forEach.call(
   document.querySelectorAll('.myElements'),
-  el => new SimpleBar()
+  (el) => new SimpleBar()
 );
 ```
 
@@ -137,6 +137,7 @@ $('.myElements').each(element, new SimpleBar());
 The default styling is applied with CSS. There is no "built-in" way to style the scrollbar, you just need to override the default CSS.
 
 Ex, to change the color of the scrollbar:
+
 ```css
 .simplebar-scrollbar::before {
   background-color: red;
@@ -150,7 +151,7 @@ Options can be applied to the plugin during initialization:
 ```js
 new SimpleBar(document.getElementById('myElement'), {
   option1: value1,
-  option2: value2
+  option2: value2,
 });
 ```
 
@@ -343,6 +344,12 @@ Key to this technique is hiding the native browser scrollbar. The scrollable ele
 - SimpleBar doesn't currently support `overflow: visible`. Which means any children of your scrolling div will be clipped (like with `overflow: hidden`).
 
 Please take a look at [this comparison table](https://kingsora.github.io/OverlayScrollbars/#!faq) to see what SimpleBar does compare to others.
+
+### IE11 Support
+
+SimpleBar can support IE11 if you use the right polyfills. See [our configuration](https://github.com/Grsmto/simplebar/tree/master/packages/examples/.babelrc) using `@babel/preset-env` to support IE11!
+
+Since IE11 does not support Resize Observer, some features won't work unless you polyfill it. For example, if the SimpleBar element is hidden (like a dropdown menu), you will need to manually call `recalculate()` for it to work.
 
 ### Community plugins
 

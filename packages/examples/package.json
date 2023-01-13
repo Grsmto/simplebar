@@ -19,11 +19,13 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "core-js": "^3.9.1",
+    "@babel/runtime": "^7.20.7",
+    "core-js": "^3.27.1",
     "simplebar": "^6.0.0-beta.11",
     "simplebar-react": "^3.0.0-beta.11"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.19.6",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "babel-loader": "^9.1.0",
     "css-loader": "^0.28.11",
@@ -43,5 +45,10 @@
       "prettier-eslint --write",
       "git add"
     ]
-  }
+  },
+  "browserslist": [
+    "> 0.25%",
+    "not dead",
+    "ie 11"
+  ]
 }
