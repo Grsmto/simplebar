@@ -139,7 +139,7 @@ export default class SimpleBarCore {
     },
     scrollableNode: null,
     contentNode: null,
-    autoHide: false,
+    autoHide: true,
   };
 
   constructor(element: HTMLElement, options: Partial<Options> = {}) {
