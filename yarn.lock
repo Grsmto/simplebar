@@ -3698,7 +3698,7 @@
   dependencies:
     esquery "^1.0.1"
 
-"@pmmmwh/react-refresh-webpack-plugin@^0.5.7":
+"@pmmmwh/react-refresh-webpack-plugin@^0.5.10", "@pmmmwh/react-refresh-webpack-plugin@^0.5.7":
   version "0.5.10"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.10.tgz#2eba163b8e7dbabb4ce3609ab5e32ab63dda3ef8"
   integrity sha512-j0Ya0hCFZPd4x40qLzbhGsh9TMtdb+CJQiso+WxLOPNasohq9cc5SNUcwsZaRH6++Xh91Xkm/xHCkuIiIu0LUA==
