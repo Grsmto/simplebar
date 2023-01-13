@@ -50,10 +50,19 @@ type AxisProps = {
   overflowAttr: 'overflowX' | 'overflowY';
   dragOffset: number;
   isOverflowing: boolean;
-  isVisible: boolean;
   forceVisible: boolean;
-  track: { size: any; el: HTMLElement | null; rect: DOMRect | null };
-  scrollbar: { size: any; el: HTMLElement | null; rect: DOMRect | null };
+  track: {
+    size: any;
+    el: HTMLElement | null;
+    rect: DOMRect | null;
+    isVisible: boolean;
+  };
+  scrollbar: {
+    size: any;
+    el: HTMLElement | null;
+    rect: DOMRect | null;
+    isVisible: boolean;
+  };
 };
 type RtlHelpers = {
   // determines if the scrolling is responding with negative values
@@ -130,6 +139,7 @@ export default class SimpleBarCore {
     },
     scrollableNode: null,
     contentNode: null,
+    autoHide: false,
   };
 
   constructor(element: HTMLElement, options: Partial<Options> = {}) {
@@ -149,10 +159,9 @@ export default class SimpleBarCore {
         overflowAttr: 'overflowX',
         dragOffset: 0,
         isOverflowing: true,
-        isVisible: false,
         forceVisible: false,
-        track: { size: null, el: null, rect: null },
-        scrollbar: { size: null, el: null, rect: null },
+        track: { size: null, el: null, rect: null, isVisible: false },
+        scrollbar: { size: null, el: null, rect: null, isVisible: false },
       },
       y: {
         scrollOffsetAttr: 'scrollTop',
@@ -163,10 +172,9 @@ export default class SimpleBarCore {
         overflowAttr: 'overflowY',
         dragOffset: 0,
         isOverflowing: true,
-        isVisible: false,
         forceVisible: false,
-        track: { size: null, el: null, rect: null },
-        scrollbar: { size: null, el: null, rect: null },
+        track: { size: null, el: null, rect: null, isVisible: false },
+        scrollbar: { size: null, el: null, rect: null, isVisible: false },
       },
     };
 
@@ -373,7 +381,10 @@ export default class SimpleBarCore {
       const scrollbar = document.createElement('div');
 
       track.classList.add(this.classNames.track);
-      scrollbar.classList.add(this.classNames.scrollbar);
+      scrollbar.classList.add(
+        this.classNames.scrollbar,
+        !this.options.autoHide ? this.classNames.visible : ''
+      );
 
       track.appendChild(scrollbar);
 
@@ -640,13 +651,17 @@ export default class SimpleBarCore {
   }
 
   showScrollbar(axis: Axis = 'y') {
-    if (this.axis[axis].isOverflowing)
+    if (this.axis[axis].isOverflowing && !this.axis[axis].scrollbar.isVisible) {
       this.axis[axis].scrollbar.el?.classList.add(this.classNames.visible);
+      this.axis[axis].scrollbar.isVisible = true;
+    }
   }
 
   hideScrollbar(axis: Axis = 'y') {
-    if (this.axis[axis].isOverflowing)
+    if (this.axis[axis].isOverflowing && this.axis[axis].scrollbar.isVisible) {
       this.axis[axis].scrollbar.el?.classList.remove(this.classNames.visible);
+      this.axis[axis].scrollbar.isVisible = false;
+    }
   }
 
   hideNativeScrollbar() {
@@ -706,8 +721,10 @@ export default class SimpleBarCore {
 
   _onStopScrolling = () => {
     this.el.classList.remove(this.classNames.scrolling);
-    this.hideScrollbar('x');
-    this.hideScrollbar('y');
+    if (this.options.autoHide) {
+      this.hideScrollbar('x');
+      this.hideScrollbar('y');
+    }
     this.isScrolling = false;
   };
 
@@ -723,8 +740,10 @@ export default class SimpleBarCore {
 
   _onMouseEntered = () => {
     this.el.classList.remove(this.classNames.mouseEntered);
-    this.showScrollbar('x');
-    this.showScrollbar('y');
+    if (this.options.autoHide) {
+      this.hideScrollbar('x');
+      this.hideScrollbar('y');
+    }
     this.isMouseEntering = false;
   };
 
@@ -748,24 +767,20 @@ export default class SimpleBarCore {
     currentAxis.track.rect = currentAxis.track.el.getBoundingClientRect();
     currentAxis.scrollbar.rect = currentAxis.scrollbar.el.getBoundingClientRect();
 
-    const isWithinScrollbarBoundsX = this.isWithinBounds(
-      currentAxis.scrollbar.rect
-    );
-
-    if (isWithinScrollbarBoundsX) {
-      currentAxis.scrollbar.el.classList.add(this.classNames.hover);
-      this.showScrollbar(axis);
-    } else {
-      currentAxis.scrollbar.el.classList.remove(this.classNames.hover);
-      this.hideScrollbar(axis);
-    }
-
     if (this.isWithinBounds(currentAxis.track.rect)) {
-      currentAxis.track.el.classList.add(this.classNames.hover);
       this.showScrollbar(axis);
+      currentAxis.track.el.classList.add(this.classNames.hover);
+
+      if (this.isWithinBounds(currentAxis.scrollbar.rect)) {
+        currentAxis.scrollbar.el.classList.add(this.classNames.hover);
+      } else {
+        currentAxis.scrollbar.el.classList.remove(this.classNames.hover);
+      }
     } else {
       currentAxis.track.el.classList.remove(this.classNames.hover);
-      this.hideScrollbar(axis);
+      if (this.options.autoHide) {
+        this.hideScrollbar(axis);
+      }
     }
   }
 
@@ -787,7 +802,9 @@ export default class SimpleBarCore {
   onMouseLeaveForAxis(axis: Axis = 'y') {
     this.axis[axis].track.el?.classList.remove(this.classNames.hover);
     this.axis[axis].scrollbar.el?.classList.remove(this.classNames.hover);
-    this.hideScrollbar(axis);
+    if (this.options.autoHide) {
+      this.hideScrollbar(axis);
+    }
   }
 
   _onWindowResize = () => {

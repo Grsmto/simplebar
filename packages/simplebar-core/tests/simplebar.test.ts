@@ -18,22 +18,28 @@ test('should call constructor', () => {
 });
 
 test('should return the content element', () => {
-  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+  const simpleBar = new SimpleBar(
+    document.getElementById('simplebar') as HTMLElement
+  );
   const contentElement = simpleBar.getContentElement();
 
   expect(contentElement).toBe(simpleBar.contentEl);
 });
 
 test('should return the scroll element', () => {
-  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+  const simpleBar = new SimpleBar(
+    document.getElementById('simplebar') as HTMLElement
+  );
   const scrollElement = simpleBar.getScrollElement();
 
   expect(scrollElement).toBe(simpleBar.contentWrapperEl);
 });
 
 test('should unmount SimpleBar', () => {
-  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
-  const mock = jest.spyOn(simpleBar.mutationObserver, 'disconnect');
+  const simpleBar = new SimpleBar(
+    document.getElementById('simplebar') as HTMLElement
+  );
+  const mock = jest.spyOn(simpleBar.mutationObserver as any, 'disconnect');
 
   simpleBar.unMount();
 
@@ -41,7 +47,9 @@ test('should unmount SimpleBar', () => {
 });
 
 test('should return the element options', () => {
-  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+  const simpleBar = new SimpleBar(
+    document.getElementById('simplebar') as HTMLElement
+  );
 
   expect(SimpleBar.getOptions(simpleBar.el.attributes)).toEqual({
     forceVisible: true,
@@ -62,7 +70,9 @@ test('getOptions accepts objects', () => {
 });
 
 test('mouse should be within bounds', () => {
-  const simpleBar = new SimpleBar(document.getElementById('simplebar'));
+  const simpleBar = new SimpleBar(
+    document.getElementById('simplebar') as HTMLElement
+  );
 
   simpleBar.mouseX = 20;
   simpleBar.mouseY = 20;
@@ -76,7 +86,7 @@ test('mouse should be within bounds', () => {
     width: 100,
     x: 10,
     y: 10,
-  });
+  } as DOMRect);
 
   expect(isWithinBounds).toBeTruthy();
 });
@@ -84,6 +94,8 @@ test('mouse should be within bounds', () => {
 test('onPointerEvent listener should be unsubscribed on unmount', () => {
   const element = document.getElementById('simplebar');
   const init = SimpleBar.prototype.init;
+
+  if (!element) return;
 
   SimpleBar.prototype.init = () => {};
 
@@ -103,16 +115,20 @@ test('onPointerEvent listener should be unsubscribed on unmount', () => {
 });
 
 describe('nested SimpleBars with initiated DOM', () => {
-  let parent;
-  let child;
+  let parent: SimpleBar;
+  let child: SimpleBar;
 
   beforeEach(() => {
     // Set up our document body
     document.body.innerHTML =
       '<div id="simplebar-parent"><div id="simplebar-child"></div></div>';
 
-    parent = new SimpleBar(document.getElementById('simplebar-parent'));
-    child = new SimpleBar(document.getElementById('simplebar-child'));
+    parent = new SimpleBar(
+      document.getElementById('simplebar-parent') as HTMLElement
+    );
+    child = new SimpleBar(
+      document.getElementById('simplebar-child') as HTMLElement
+    );
 
     parent.initDOM(); // trigger DOM selectors
   });

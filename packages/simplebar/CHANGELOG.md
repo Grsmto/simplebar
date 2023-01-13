@@ -2,10 +2,7 @@
 
 ### Major
 
-- `autoHide` option is now deprecated. Use CSS instead:
-  For `autoHide = false`: `.simplebar-scrollbar::before { opacity: 0.5 };`
-- `classNames` option is now deprecated. Use CSS instead to override/change styles.
-- `timeout` option is now deprecated. Use CSS instead.
+- `timeout` option is now deprecated. It is now only made with a CSS transition that you can override with CSS as you want.
 - `mutation-observer` polyfill is not shipped by default anymore.
 - New useful classes on host element:
   `.simplebar-hover`,
