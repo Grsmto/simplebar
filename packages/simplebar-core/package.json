@@ -29,7 +29,7 @@
     "dev": "rollup -c -w --environment BUILD:development",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
-    "test:e2e": "env-cmd jest -c jest-e2e.config.js --runInBand",
+    "test:e2e": "env-cmd --silent jest -c jest-e2e.config.js --runInBand",
     "version": "yarn build",
     "precommit": "lint-staged"
   },
