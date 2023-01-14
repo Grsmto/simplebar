@@ -1,6 +1,6 @@
 {
   "name": "simplebar-angular",
-  "version": "3.0.0-beta.11",
+  "version": "3.0.0-beta.12",
   "description": "Angular component for SimpleBar",
   "scripts": {
     "ng": "ng",
@@ -27,7 +27,7 @@
     "simplebar"
   ],
   "dependencies": {
-    "simplebar-core": "^1.0.8",
+    "simplebar-core": "^1.0.9",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {

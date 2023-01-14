@@ -1,6 +1,6 @@
 {
   "name": "simplebar-react",
-  "version": "3.0.0-beta.11",
+  "version": "3.0.0-beta.12",
   "description": "React component for SimpleBar",
   "files": [
     "dist",
@@ -29,7 +29,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "simplebar-core": "^1.0.8"
+    "simplebar-core": "^1.0.9"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
