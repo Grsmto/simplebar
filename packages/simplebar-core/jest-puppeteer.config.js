@@ -9,6 +9,7 @@ const caps = {
       ? `${process.env.TRAVIS_BRANCH}-${process.env.TRAVIS_COMMIT}`
       : 'local-tests',
   name: 'SimpleBar examples Puppeteer test', // The name of your test and build. See browserstack.com/docs/automate/puppeteer/organize tests for more details
+  'browserstack.localIdentifier': process.env.BROWSERSTACK_LOCAL_IDENTIFIER,
   'browserstack.username': process.env.BROWSERSTACK_USERNAME,
   'browserstack.accessKey': process.env.BROWSERSTACK_ACCESS_KEY,
   'browserstack.local': 'true',

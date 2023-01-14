@@ -14,7 +14,6 @@ script:
 deploy:
   provider: script
   script: cd packages/website/ && yarn deploy
-  skip_cleanup: true
   on:
     branch: master
 
@@ -23,4 +22,4 @@ addons:
   browserstack:
     username: 'adriengrsmto'
     access_key:
-      secure: 'D75arx7W8WEGPIDHbWNrvttP3kbT5u8w+QXXYAP/DNH3012BoThNLmIB9U8YAxOccrC0ZISQq8d73/aX70A0S97IJpFQv9wwIS540JwawKSJc23OeKNsImobeNdK0k2al8JvKonIaPJzexKTNHwV7OYxzFxIotGrIQsImjC38Pw='
+      secure: 'HUmCxQG5gsOak0EFqAHTlIBlPL2lLjbKTaYQ0rAEFMu0E4WknH5z1qqZdw9ntAo201u+Pk/jC+YmPqSF3TjpxE5vOqeVCU27YSoUhZid1iI43z7uquuiXXsBlsaQZ0o2PNDSRoWTJ9G5Dfn+YgOIyEnFYEucAIii+tLo2lZVhlY='
