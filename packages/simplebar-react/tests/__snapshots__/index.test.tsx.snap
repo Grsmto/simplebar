@@ -104,7 +104,7 @@ exports[`renders with object as option 1`] = `
     style="visibility: hidden;"
   >
     <div
-      class="simplebar-scrollbar simplebar-visible"
+      class="simplebar-scrollbar"
       style="width: 0px; display: none;"
     />
   </div>
@@ -113,7 +113,7 @@ exports[`renders with object as option 1`] = `
     style="visibility: hidden;"
   >
     <div
-      class="simplebar-scrollbar simplebar-visible"
+      class="simplebar-scrollbar"
       style="height: 0px; display: none;"
     />
   </div>

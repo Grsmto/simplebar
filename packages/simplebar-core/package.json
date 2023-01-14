@@ -39,9 +39,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "can-use-dom": "^0.1.0",
-    "intern": "^4.4.2",
-    "promise": "^8.0.2"
+    "intern": "^4.4.2"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [

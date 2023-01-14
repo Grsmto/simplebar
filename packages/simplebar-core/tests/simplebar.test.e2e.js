@@ -4,7 +4,8 @@ import jestPuppeteerConfig from '../jest-puppeteer.config';
 describe('Load', () => {
   beforeAll(async () => {
     await page.goto(`http://localhost:${jestPuppeteerConfig.server.port}`);
-  });
+    await page.waitForSelector('h1');
+  }, 10000);
 
   beforeEach(async () => {
     await page.reload();

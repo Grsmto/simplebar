@@ -9,6 +9,9 @@ module.exports = (env, argv) => {
     output: {
       filename: 'bundle.js',
     },
+    performance: {
+      hints: false,
+    },
     devServer: {
       port: 8090,
       hot: isDevelopment && true,
