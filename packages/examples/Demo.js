@@ -1,6 +1,5 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import 'core-js/stable';
 import Select from 'react-select';
 import { FixedSizeList as List } from 'react-window';
 import SimpleBarReact from 'simplebar-react';

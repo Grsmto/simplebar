@@ -1,6 +1,5 @@
 {
   "presets": [["@babel/preset-env", {
-    "debug": true,
     "useBuiltIns": "entry",
     "corejs": "3.27"
   }], "@babel/preset-react"],
