@@ -6,7 +6,7 @@
   <a href="https://npmjs.org/package/simplebar"><img alt="NPM version" src="https://img.shields.io/npm/v/simplebar.svg?style=flat-square" /></a>
   <a href="https://npmjs.org/package/simplebar"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/simplebar.svg?style=flat-square"></a>
   <a href="https://travis-ci.org/grsmto/simplebar"><img alt="Build Status" src="https://img.shields.io/travis/grsmto/simplebar/master.svg?style=flat-square" /></a>
-  <a href="https://automate.browserstack.com/public-build/ZndsKzdvTEhlWWEwaWNoTFNuOEExVE9LS0JZeVVUTHE0ZjhRYkxGZlZQUT0tLXplMGZKMk93d2dNT3JxcUJWRDNCWFE9PQ==--ed8a7f1e2a54f4c21247b43b3c5b9496aabe62c0%"><img src='https://automate.browserstack.com/badge.svg?badge_key=ZndsKzdvTEhlWWEwaWNoTFNuOEExVE9LS0JZeVVUTHE0ZjhRYkxGZlZQUT0tLXplMGZKMk93d2dNT3JxcUJWRDNCWFE9PQ==--ed8a7f1e2a54f4c21247b43b3c5b9496aabe62c0%'/></a>
+  <a href="https://automate.browserstack.com/public-build/MWQwN0Z5MWFaV2pab2ZqOWRCeHZydXhIaXFkcFJ4bGNLODZ5OUYzSVI1VT0tLXlzZU9UbnpwcUpjRTB3WWF2Y09raUE9PQ==--ff8cfcc667d79c5b9cee7012446c2bd4bf789abe%"><img src='https://automate.browserstack.com/badge.svg?badge_key=MWQwN0Z5MWFaV2pab2ZqOWRCeHZydXhIaXFkcFJ4bGNLODZ5OUYzSVI1VT0tLXlzZU9UbnpwcUpjRTB3WWF2Y09raUE9PQ==--ff8cfcc667d79c5b9cee7012446c2bd4bf789abe%'/></a>
 </p>
 <br hidden />
 SimpleBar does only one thing: replace the browser's default scrollbar with a custom CSS-styled one without losing performances.
