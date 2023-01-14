@@ -1,17 +1,38 @@
 import 'expect-puppeteer';
 import jestPuppeteerConfig from '../jest-puppeteer.config';
 
-describe('Load', () => {
+/**
+ * Mark test status on BrowserStack.
+ *
+ * @param {Page} page - Page object created by Puppeteer context.
+ * @param {String} status - Status string can be either passed|failed.
+ * @param {String} reason - Explanatory reason for the status marked.
+ * @return {Promise<String>} Stringified response from BrowserStack regarding the
+ * execution of the jsExecutor.
+ */
+function markTest(page, status, reason) {
+  return page.evaluate(
+    (_) => {},
+    `browserstack_executor: ${JSON.stringify({
+      action: 'setSessionStatus',
+      arguments: { status, reason },
+    })}`
+  );
+}
+
+try {
   beforeAll(async () => {
     await page.goto(`http://localhost:${jestPuppeteerConfig.server.port}`);
     await page.waitForSelector('h1');
-  }, 10000);
+  }, 20000);
 
   beforeEach(async () => {
     await page.reload();
-    // await page.waitForNavigation();
     await page.mouse.move(0, 0);
-    // await page.click('body', { delay: 64 }); // wait for SimpleBar to init
+  });
+
+  afterAll(async () => {
+    await markTest(page, 'passed', 'All test passed!');
   });
 
   test('should render demo page', async () => {
@@ -90,5 +111,6 @@ describe('Load', () => {
 
     expect(scrollbarHeightAfterHover).toBeLessThan(scrollbarHeight);
   });
-  // }, 999999);
-});
+} catch (err) {
+  markTest(page, 'failed', err.message);
+}

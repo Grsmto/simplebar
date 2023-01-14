@@ -29,7 +29,7 @@
     "dev": "rollup -c -w --environment BUILD:development",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
-    "test:e2e": "jest -c jest-e2e.config.js --runInBand",
+    "test:e2e": "env-cmd jest -c jest-e2e.config.js --runInBand",
     "version": "yarn build",
     "precommit": "lint-staged"
   },
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "intern": "^4.4.2"
+    "browserstack-local": "^1.5.1"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [
