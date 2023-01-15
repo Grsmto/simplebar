@@ -1,6 +1,6 @@
 {
   "name": "simplebar-react",
-  "version": "2.4.3",
+  "version": "3.0.0-beta.12",
   "description": "React component for SimpleBar",
   "files": [
     "dist",
@@ -12,30 +12,33 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar-react"
   },
-  "main": "dist/simplebar-react.js",
-  "module": "dist/simplebar-react.esm.js",
-  "types": "dist/simplebar-react.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "*.css"
+  ],
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c && cp simplebar-react.d.ts dist/simplebar-react.d.ts && cp ../simplebar/dist/simplebar.min.css dist/simplebar.min.css",
+    "build": "rollup -c && minify ../simplebar-core/src/simplebar.css > dist/simplebar.min.css",
     "dev": "rollup -c -w",
     "test": "jest",
     "version": "yarn build",
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "prop-types": "^15.6.1",
-    "simplebar": "^5.3.9"
+    "simplebar-core": "^1.0.9"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0 || ^18.0.0",
-    "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0 || ^18.0.0"
+    "react": ">=16.8.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^4.1.0",
-    "@testing-library/react": "^9.2.0"
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-react": "^7.14.3"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [

@@ -5,24 +5,23 @@ import {
   AfterViewInit,
   ElementRef,
   ViewEncapsulation,
-  NgZone
+  NgZone,
 } from '@angular/core';
 
-import SimpleBar from 'simplebar/dist/simplebar-core.esm';
-import { Options } from 'simplebar';
+import SimpleBar, { SimpleBarOptions } from 'simplebar-core';
 
 @Component({
   selector: 'ngx-simplebar',
   host: { 'data-simplebar': 'init' },
   templateUrl: './simplebar-angular.component.html',
   styleUrls: [
-    '../../../simplebar/src/simplebar.css',
-    './simplebar-angular.component.scss'
+    '../../../simplebar-core/src/simplebar.css',
+    './simplebar-angular.component.scss',
   ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class SimplebarAngularComponent implements OnInit, AfterViewInit {
-  @Input('options') options: Options;
+  @Input('options') options: Partial<SimpleBarOptions> = {};
 
   elRef: ElementRef;
   SimpleBar: any;
@@ -35,8 +34,11 @@ export class SimplebarAngularComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
-      this.SimpleBar = new SimpleBar(this.elRef.nativeElement, this.options || {});
-    })
+      this.SimpleBar = new SimpleBar(
+        this.elRef.nativeElement,
+        this.options || {}
+      );
+    });
   }
 
   ngOnDestroy() {

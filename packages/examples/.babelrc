@@ -1,0 +1,22 @@
+{
+  "presets": [["@babel/preset-env", {
+    "useBuiltIns": "entry",
+    "corejs": "3.27"
+  }], "@babel/preset-react"],
+  "plugins": ["transform-class-properties"],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ],
+        "@babel/preset-react"
+      ]
+    }
+  }
+}

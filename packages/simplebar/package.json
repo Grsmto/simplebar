@@ -1,5 +1,5 @@
 {
-  "version": "5.3.9",
+  "version": "6.0.0-beta.12",
   "name": "simplebar",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
@@ -14,39 +14,29 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar"
   },
-  "main": "dist/simplebar.min.js",
-  "module": "dist/simplebar.esm.js",
-  "types": "dist/simplebar.d.ts",
-  "style": "dist/simplebar.min.css",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "unpkg": "./dist/simplebar.min.js",
+  "style": "./dist/simplebar.min.css",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode=development",
-    "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && cp simplebar.d.ts dist/simplebar.d.ts && minify dist/simplebar.css > dist/simplebar.min.css && webpack --mode=production",
-    "dev": "rollup -c -w",
-    "test": "yarn test:unit",
-    "test:unit": "jest -c jest-unit.config.js",
-    "test:e2e": "env-cmd intern",
+    "build": "rollup -c && cp ../simplebar-core/src/simplebar.css dist/simplebar.css && minify dist/simplebar.css > dist/simplebar.min.css",
+    "dev": "rollup -c -w --environment BUILD:development",
+    "test": "jest -c jest-unit.config.js",
     "version": "yarn build",
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@juggle/resize-observer": "^3.3.1",
     "can-use-dom": "^0.1.0",
-    "core-js": "^3.0.1",
-    "lodash.debounce": "^4.0.8",
-    "lodash.memoize": "^4.1.2",
-    "lodash.throttle": "^4.1.1"
+    "simplebar-core": "^1.0.9"
   },
   "devDependencies": {
-    "css-loader": "^0.28.11",
+    "@babel/plugin-transform-runtime": "^7.19.6",
     "intern": "^4.4.2",
     "minify": "^3.0.5",
-    "promise": "^8.0.2",
-    "react-select": "^2.4.3",
-    "react-window": "^1.8.1",
-    "style-loader": "^0.21.0"
+    "promise": "^8.0.2"
   },
   "lint-staged": {
     "*.{js,jsx,json}": [

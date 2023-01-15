@@ -1,19 +1,23 @@
 # SimpleBar [![npm package][npm-badge]][npm] ![size-badge]
 
-:warning: SimpleBar v5 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/releases) before updating.
-
 SimpleBar is a plugin that tries to solve a long time problem: how to get custom scrollbars for your web-app while keeping a good user experience?
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
 SimpleBar is meant to be as easy to use as possible and lightweight. If you want something more advanced I recommend [KingSora](https://github.com/KingSora) 's [Overlay Scrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
+### [🐦 Follow me on Twitter!](https://twitter.com/adriendenat)
+
+### 👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)
+
+### 🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!
+
 ### Installation
 
 **- Via npm**
-`npm install simplebar --save`
+`npm install simplebar resize-observer-polyfill --save`
 
 **- Via Yarn**
-`yarn add simplebar`
+`yarn add simplebar resize-observer-polyfill`
 
 **- Via `<script>` tag**
 
@@ -31,21 +35,26 @@ SimpleBar is meant to be as easy to use as possible and lightweight. If you want
 <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
 ```
 
-note: you should replace `@latest` to the latest version (ex `@5.3.3`), if you want to lock to a specific version.
+note: you should replace `@latest` to the latest version (ex `@2.4.3`), if you want to lock to a specific version.
 You can find the full list of modules available [there](https://unpkg.com/simplebar@latest/dist/).
 
 ### Usage
 
 Check out the [React](https://github.com/Grsmto/simplebar/blob/master/examples/react/src/App.js) and [Vue](https://github.com/Grsmto/simplebar/blob/master/examples/vue/src/App.vue) examples.
 
-If you are using Gatsby, please see [#345](https://github.com/Grsmto/simplebar/issues/345).
-
 If you are using a module loader (like Webpack) you first need to load SimpleBar:
 
 ```js
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
+
+// You will need a ResizeObserver polyfill for browsers that don't support it! (iOS Safari, Edge, ...)
+import ResizeObserver from 'resize-observer-polyfill';
+window.ResizeObserver = ResizeObserver;
 ```
+
+You might also need other polyfills as SimpleBar comes with basic browser support only.
+You can use Babel `@babel/preset-env` to polyfill for you, see our [examples package](https://github.com/Grsmto/simplebar/blob/next/packages/examples/.babelrc#L2) or check out [polyfill.io](https://polyfill.io/).
 
 Set `data-simplebar` on the element you want your custom scrollbar. You're done.
 
@@ -112,7 +121,7 @@ or
 ```js
 Array.prototype.forEach.call(
   document.querySelectorAll('.myElements'),
-  el => new SimpleBar()
+  (el) => new SimpleBar()
 );
 ```
 
@@ -133,6 +142,7 @@ $('.myElements').each(element, new SimpleBar());
 The default styling is applied with CSS. There is no "built-in" way to style the scrollbar, you just need to override the default CSS.
 
 Ex, to change the color of the scrollbar:
+
 ```css
 .simplebar-scrollbar::before {
   background-color: red;
@@ -146,7 +156,7 @@ Options can be applied to the plugin during initialization:
 ```js
 new SimpleBar(document.getElementById('myElement'), {
   option1: value1,
-  option2: value2
+  option2: value2,
 });
 ```
 
@@ -169,6 +179,12 @@ new SimpleBar(document.getElementById('myElement'), { autoHide: false });
 Default value is `true`.
 
 You can also control the animation via CSS as it's a simple CSS opacity transition.
+
+#### scrollbarMinSize
+
+Define the minimum scrollbar size in pixels.
+
+Default value is `10`.
 
 #### classNames
 
@@ -198,14 +214,6 @@ forceVisible: true|'x'|'y' (default to `false`)
 ```
 
 By default, SimpleBar behave like `overflow: auto`.
-
-### ariaLabel
-
-You can set custom aria-label attribute for users with screen reader using the `ariaLabel` option:
-
-```
-ariaLabel: 'Your label' (default to `scrollable content`)
-```
 
 #### direction (RTL support)
 
@@ -290,26 +298,6 @@ SimpleBar.removeObserver();
 SimpleBar.instances.get(document.querySelector('[data-simplebar]']))
 ```
 
-### Unmount/destroy
-
-```js
-const simpleBar = new SimpleBar(document.getElementById('myElement'));
-
-simpleBar.unMount()
-```
-
-:warning: **Calling this function will not restore the default scrollbar!**
-
-A common usecase is to only want SimpleBar on desktop/wider screens, but instead of trying to mount/unmount the plugin based on screen size, you should instead simply never mount it in the first place.
-
-For example if you want it only on desktop you can first test for screen size using `matchMedia`:
-
-```js
-if (window.matchMedia('(min-width: 600px)').matches) {
-  new SimpleBar(..)
-}
-```
-
 ### Non-JS fallback
 
 SimpleBar hides the browser's default scrollbars, which obviously is undesirable if the user has JavaScript disabled. To restore the browser's scrollbars you can include the following `noscript` element in your document's `head`:
@@ -349,7 +337,7 @@ Key to this technique is hiding the native browser scrollbar. The scrollable ele
 
 ## 5. Caveats
 
-- SimpleBar can't be used on the `<body>`, `<textarea>`, `<table>` or `<select>` elements. `<iframe>` should be working (depends of your usecase). If you are looking to support these, I suggest taking a look at [OverLayScrollbars](https://kingsora.github.io/OverlayScrollbars).
+- SimpleBar can't be used on the `<body>`, `<textarea>`, `<table>` or `<iframe>` elements. If you are looking to support these, I suggest taking a look at [OverLayScrollbars](https://kingsora.github.io/OverlayScrollbars).
 - SimpleBar doesn't currently support `overflow: visible`. Which means any children of your scrolling div will be clipped (like with `overflow: hidden`).
 
 Please take a look at [this comparison table](https://kingsora.github.io/OverlayScrollbars/#!faq) to see what SimpleBar does compare to others.

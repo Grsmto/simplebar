@@ -1,8 +1,8 @@
 language: node_js
+cache: yarn
 
 before_install:
   - npm i -g lerna
-  - npm i -g gatsby-cli
 
 install:
   - yarn
@@ -12,16 +12,14 @@ script:
   - yarn test
 
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  local_dir: packages/website/
+  provider: script
+  script: cd packages/website/ && yarn deploy
   on:
     branch: master
 
 addons:
+  chrome: stable
   browserstack:
     username: 'adriengrsmto'
     access_key:
-      secure: 'D75arx7W8WEGPIDHbWNrvttP3kbT5u8w+QXXYAP/DNH3012BoThNLmIB9U8YAxOccrC0ZISQq8d73/aX70A0S97IJpFQv9wwIS540JwawKSJc23OeKNsImobeNdK0k2al8JvKonIaPJzexKTNHwV7OYxzFxIotGrIQsImjC38Pw='
+      secure: 'HUmCxQG5gsOak0EFqAHTlIBlPL2lLjbKTaYQ0rAEFMu0E4WknH5z1qqZdw9ntAo201u+Pk/jC+YmPqSF3TjpxE5vOqeVCU27YSoUhZid1iI43z7uquuiXXsBlsaQZ0o2PNDSRoWTJ9G5Dfn+YgOIyEnFYEucAIii+tLo2lZVhlY='

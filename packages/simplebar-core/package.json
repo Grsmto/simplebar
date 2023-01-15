@@ -1,0 +1,50 @@
+{
+  "version": "1.0.9",
+  "name": "simplebar-core",
+  "title": "SimpleBar.js",
+  "description": "Scrollbars, simpler.",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "author": "Adrien Denat from a fork by Jonathan Nicol",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grsmto/simplebar.git",
+    "directory": "packages/simplebar-core"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "style": "./dist/simplebar.min.css",
+  "typings": "./dist/index.d.ts",
+  "sideEffects": [
+    "*.css"
+  ],
+  "homepage": "https://grsmto.github.io/simplebar/",
+  "bugs": "https://github.com/grsmto/simplebar/issues",
+  "license": "MIT",
+  "scripts": {
+    "serve": "serve -s demo",
+    "build": "rollup -c && cp src/simplebar.css dist/simplebar.css",
+    "dev": "rollup -c -w --environment BUILD:development",
+    "test": "yarn test:unit && yarn test:e2e",
+    "test:unit": "jest -c jest-unit.config.js",
+    "test:e2e": "env-cmd --silent jest -c jest-e2e.config.js --runInBand",
+    "version": "yarn build",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "can-use-dom": "^0.1.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "browserstack-local": "^1.5.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
+  }
+}

@@ -12,7 +12,7 @@ const Layout = ({ children, ...otherProps }) => {
   return (
     <ThemeProvider theme={theme}>
       <Global
-        styles={theme => ({
+        styles={(theme) => ({
           html: {
             WebkitFontSmoothing: "antialiased",
             MozOsxFontSmoothing: "grayscale",
@@ -55,22 +55,11 @@ const Layout = ({ children, ...otherProps }) => {
           ".simplebar-track .simplebar-scrollbar.simplebar-visible::before": {
             opacity: 1,
           },
-          ".simplebar-track.simplebar-vertical .simplebar-scrollbar::before": {
-            top: 10,
-            bottom: 10,
-          },
-          ".simplebar-track.simplebar-horizontal .simplebar-scrollbar::before": {
-            left: 10,
-            right: 10,
-          },
-          ".simplebar-track.simplebar-vertical": {
-            width: "21px",
-          },
-          ".simplebar-vertical .simplebar-scrollbar": {
-            marginRight: 2,
-          },
           ".simplebar-horizontal": {
             height: "11px",
+          },
+          ".simplebar-content-wrapper": {
+            overflow: "hidden",
           },
         })}
       />
@@ -114,9 +103,8 @@ const Layout = ({ children, ...otherProps }) => {
               sx={{ ml: 2 }}
             >
               <img
-                src="./browserstack.png"
-                alt="Browserstack logo"
                 style={{ display: "block" }}
+                src="/browserstack.png"
                 width={120}
               />
             </a>

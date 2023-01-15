@@ -1,0 +1,12 @@
+{
+    "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
+    "compilerOptions": {
+        "target": "es3",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "dist",
+        "declaration": true,
+    }
+}

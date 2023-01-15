@@ -3,5 +3,5 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "allowedNonPeerDependencies": ["simplebar"]
+  "allowedNonPeerDependencies": ["simplebar-core"]
 }

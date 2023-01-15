@@ -1,0 +1,52 @@
+{
+  "name": "simplebar-examples",
+  "version": "3.0.8",
+  "private": true,
+  "description": "Scrollbars, simpler.",
+  "author": "Adrien Denat <oi@adriendenat.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grsmto/simplebar.git",
+    "directory": "packages/simplebar-core"
+  },
+  "homepage": "https://grsmto.github.io/simplebar/",
+  "bugs": "https://github.com/grsmto/simplebar/issues",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack serve --open --mode=development",
+    "build": "webpack --mode=production",
+    "serve": "serve",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.20.7",
+    "core-js": "^3.27.1",
+    "simplebar": "^6.0.0-beta.12",
+    "simplebar-react": "^3.0.0-beta.12"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^0.28.11",
+    "promise": "^8.0.2",
+    "react-refresh": "^0.14.0",
+    "react-select": "^2.4.3",
+    "react-window": "^1.8.1",
+    "serve": "^14.1.2",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}

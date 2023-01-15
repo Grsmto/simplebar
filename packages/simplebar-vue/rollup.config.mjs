@@ -1,0 +1,62 @@
+import { createRequire } from 'node:module';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import license from 'rollup-plugin-license';
+import { terser } from 'rollup-plugin-terser';
+import { getBanner, getExternals } from '../../rollup.config.mjs';
+
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
+
+const globals = {
+  'simplebar-core': 'SimpleBar',
+};
+
+export default [
+  {
+    input: 'index.js',
+    output: {
+      name: 'SimpleBar',
+      file: pkg.main,
+      globals: globals,
+      format: 'esm',
+      plugins: [
+        getBabelOutputPlugin({
+          presets: [['@babel/preset-env', { modules: 'umd' }]],
+        }),
+      ],
+    },
+    external: getExternals(pkg),
+    plugins: [
+      babel({
+        exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: ['@babel/plugin-transform-runtime'],
+        extensions: ['.js', '.vue'],
+      }),
+      resolve(),
+      commonjs(),
+      terser(),
+      license(getBanner(pkg)),
+    ],
+  },
+  {
+    input: 'index.js',
+    external: getExternals(pkg),
+    output: {
+      file: pkg.module,
+      format: 'esm',
+    },
+    plugins: [
+      babel({
+        exclude: ['/**/node_modules/**'],
+        babelHelpers: 'runtime',
+        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
+        extensions: ['.js', '.vue'],
+      }),
+      resolve(),
+      license(getBanner(pkg)),
+    ],
+  },
+];

@@ -1,19 +1,11 @@
 {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "modules": false,
-        "useBuiltIns": "usage",
-        "corejs": 3
-      }
-    ]
-  ],
+  "presets": [["@babel/preset-env"]],
   "env": {
     "test": {
       "presets": [
         [
-          "@babel/preset-env", {
+          "@babel/preset-env",
+          {
             "targets": {
               "node": "current"
             }

@@ -3,7 +3,7 @@ import { jsx, Styled } from "theme-ui"
 import { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import SimpleBar from "simplebar-react"
-import "simplebar/dist/simplebar.min.css"
+import "simplebar-react/dist/simplebar.min.css"
 import { FiGithub } from "react-icons/fi"
 import { MdStar } from "react-icons/md"
 
@@ -25,8 +25,8 @@ function useGitHubStars() {
   const [stars, setStars] = useState(null)
   useEffect(() => {
     fetch("https://api.github.com/repos/grsmto/simplebar")
-      .then(result => result.json())
-      .then(response => setStars(response.stargazers_count))
+      .then((result) => result.json())
+      .then((response) => setStars(response.stargazers_count))
   }, [])
   return stars
 }
@@ -40,10 +40,10 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <div>
+      <div sx={{ flexShrink: 0 }}>
         <div sx={{ height: 0, paddingBottom: "20%" }}>
           <img
-            sx={{ flex: "0 0 auto", height: "auto" }}
+            sx={{ flex: "0 0 auto" }}
             src={LogoUrl}
             width={560}
             height={110}
