@@ -25,7 +25,6 @@
     "build": "rollup -c && cp ../simplebar-core/src/simplebar.css dist/simplebar.css && minify dist/simplebar.css > dist/simplebar.min.css",
     "dev": "rollup -c -w --environment BUILD:development",
     "test": "jest -c jest-unit.config.js",
-    "version": "yarn build",
     "precommit": "lint-staged"
   },
   "dependencies": {

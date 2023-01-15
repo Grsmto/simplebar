@@ -25,7 +25,6 @@
     "build": "rollup -c && minify ../simplebar-core/src/simplebar.css > dist/simplebar.min.css",
     "dev": "rollup -c -w",
     "test": "jest",
-    "version": "yarn build",
     "precommit": "lint-staged"
   },
   "dependencies": {

@@ -9,7 +9,6 @@
     "lint": "ng lint",
     "test": "ng test --no-watch --no-progress",
     "e2e": "ng e2e",
-    "version": "yarn build",
     "precommit": "lint-staged"
   },
   "publishConfig": {

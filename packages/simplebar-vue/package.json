@@ -24,7 +24,6 @@
   "scripts": {
     "build": "rollup -c && minify ../simplebar-core/src/simplebar.css > dist/simplebar.min.css && cp simplebar-vue.d.ts dist/simplebar-vue.d.ts",
     "jest": "jest -c jest-unit.config.js",
-    "version": "yarn build",
     "precommit": "lint-staged",
     "test:2.7": "yarn use-vue:2.7 && yarn jest",
     "test:3": "yarn use-vue:3 && yarn jest",
