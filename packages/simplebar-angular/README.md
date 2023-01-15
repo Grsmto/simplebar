@@ -12,6 +12,12 @@
 
 # SimplebarAngular
 
+### [🐦 Follow me on Twitter!](https://twitter.com/adriendenat)
+
+### 👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)
+
+### 🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!
+
 ### Installation
 
 **- Via npm**
@@ -34,7 +40,7 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [BrowserModule, SimplebarAngularModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
