@@ -5,11 +5,9 @@ SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **nativ
 
 SimpleBar is meant to be as easy to use as possible and lightweight. If you want something more advanced I recommend [KingSora](https://github.com/KingSora) 's [Overlay Scrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
-### [🐦 Follow me on Twitter!](https://twitter.com/adriendenat)
-
-### 👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)
-
-### 🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!
+- **🐦 Follow me on [Twitter!](https://twitter.com/adriendenat) or [Mastodon!](https://mas.to/@adrien)**
+- **👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)**
+- **🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!**
 
 ### Installation
 
@@ -75,7 +73,15 @@ To make sure your elements are scrollable when JavaScript is disabled, it's impo
     * Reinstate scrolling for non-JS clients
     */
     .simplebar-content-wrapper {
-      overflow: auto;
+      scrollbar-width: auto;
+      -ms-overflow-style: auto;
+    }
+
+    .simplebar-content-wrapper::-webkit-scrollbar,
+    .simplebar-hide-scrollbar::-webkit-scrollbar {
+      display: initial;
+      width: initial;
+      height: initial;
     }
   </style>
 </noscript>

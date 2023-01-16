@@ -9,18 +9,17 @@
   <a href="https://automate.browserstack.com/public-build/MWQwN0Z5MWFaV2pab2ZqOWRCeHZydXhIaXFkcFJ4bGNLODZ5OUYzSVI1VT0tLXlzZU9UbnpwcUpjRTB3WWF2Y09raUE9PQ==--ff8cfcc667d79c5b9cee7012446c2bd4bf789abe%"><img src='https://automate.browserstack.com/badge.svg?badge_key=MWQwN0Z5MWFaV2pab2ZqOWRCeHZydXhIaXFkcFJ4bGNLODZ5OUYzSVI1VT0tLXlzZU9UbnpwcUpjRTB3WWF2Y09raUE9PQ==--ff8cfcc667d79c5b9cee7012446c2bd4bf789abe%'/></a>
 </p>
 <br hidden />
+
 SimpleBar does only one thing: replace the browser's default scrollbar with a custom CSS-styled one without losing performances.
 Unlike some popular plugins, SimpleBar doesn't mimic scroll with Javascript, causing janks and strange scrolling behaviours...
 You keep the awesomeness of native scrolling...with a custom scrollbar!
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
-### [🐦 Follow me on Twitter!](https://twitter.com/adriendenat)
+- **🐦 Follow me on [Twitter!](https://twitter.com/adriendenat) or [Mastodon!](https://mas.to/@adrien)**
+- **👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)**
+- **🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!**
 
-### 👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)
-
-### 🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!
-
-:warning: SimpleBar v6 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/blob/master/packages/simplebar-core/CHANGELOG.md) before updating.
+⚠️ SimpleBar v6 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/blob/master/packages/simplebar-core/CHANGELOG.md) before updating.
 
 #### Design it as you want
 

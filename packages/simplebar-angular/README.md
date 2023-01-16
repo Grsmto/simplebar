@@ -12,11 +12,9 @@
 
 # SimplebarAngular
 
-### [🐦 Follow me on Twitter!](https://twitter.com/adriendenat)
-
-### 👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)
-
-### 🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!
+- **🐦 Follow me on [Twitter!](https://twitter.com/adriendenat) or [Mastodon!](https://mas.to/@adrien)**
+- **👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)**
+- **🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!**
 
 ### Installation
 
