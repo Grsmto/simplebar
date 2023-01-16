@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, Styled } from "theme-ui"
 import { useEffect, useState } from "react"
-import { graphql } from "gatsby"
+import { graphql, withPrefix } from "gatsby"
 import SimpleBar from "simplebar-react"
 import "simplebar-react/dist/simplebar.min.css"
 import { FiGithub } from "react-icons/fi"
@@ -44,7 +44,7 @@ const IndexPage = ({ data }) => {
         <div sx={{ height: 0, paddingBottom: "20%" }}>
           <img
             sx={{ flex: "0 0 auto" }}
-            src={LogoUrl}
+            src={withPrefix(LogoUrl)}
             width={560}
             height={110}
             alt="SimpleBar logo"

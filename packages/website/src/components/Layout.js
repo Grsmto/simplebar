@@ -2,8 +2,11 @@
 import { jsx, ThemeProvider } from "theme-ui"
 import PropTypes from "prop-types"
 import { Global } from "@emotion/core"
+import { withPrefix } from "gatsby"
 
 import theme from "../theme"
+
+import browserstackLogoUrl from "../images/browserstack.png"
 
 import "modern-normalize/modern-normalize.css"
 import "typeface-nunito"
@@ -104,7 +107,7 @@ const Layout = ({ children, ...otherProps }) => {
             >
               <img
                 style={{ display: "block" }}
-                src="/browserstack.png"
+                src={withPrefix(browserstackLogoUrl)}
                 width={120}
               />
             </a>
