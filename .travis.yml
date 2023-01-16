@@ -13,6 +13,7 @@ script:
 
 deploy:
   provider: script
+  skip_cleanup: true
   script: cd packages/website/ && yarn deploy
   on:
     branch: master

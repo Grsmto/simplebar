@@ -5,12 +5,12 @@
   "version": "0.1.15",
   "author": "Adrien Denat <oi@adriendenat.com>",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "yarn develop",
     "serve": "gatsby serve",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://$GITHUB_TOKEN@github.com/grsmto/simplebar.git"
+    "deploy": "gh-pages -d public -r https://$GITHUB_TOKEN@github.com/grsmto/simplebar.git"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
