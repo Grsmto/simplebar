@@ -20,6 +20,4 @@ deploy:
 addons:
   chrome: stable
   browserstack:
-    username: 'adriengrsmto'
-    access_key:
-      secure: 'HUmCxQG5gsOak0EFqAHTlIBlPL2lLjbKTaYQ0rAEFMu0E4WknH5z1qqZdw9ntAo201u+Pk/jC+YmPqSF3TjpxE5vOqeVCU27YSoUhZid1iI43z7uquuiXXsBlsaQZ0o2PNDSRoWTJ9G5Dfn+YgOIyEnFYEucAIii+tLo2lZVhlY='
+    username: adriengrsmto
