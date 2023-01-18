@@ -8,7 +8,7 @@
 }
 
 .simplebar-wrapper {
-  overflow: auto;
+  overflow: hidden;
   width: inherit;
   height: inherit;
   max-width: inherit;
@@ -53,6 +53,7 @@
   width: auto;
   max-width: 100%; /* Not required for horizontal scroll to trigger */
   max-height: 100%; /* Needed for vertical scroll to trigger */
+  overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
