@@ -8,7 +8,7 @@ exports[`simplebar snapshots renders without crashing 1`] = `
     </div>
     <div class="simplebar-mask">
       <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-        <div class="simplebar-content-wrapper" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
+        <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
           <div class="simplebar-content"></div>
         </div>
       </div>

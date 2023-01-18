@@ -43,13 +43,27 @@ function renderFn({ h, emit, slots, props }) {
           h(
             'div',
             {
+              ...(isVue3
+                ? {
+                    onScroll,
+                    class: 'simplebar-content-wrapper',
+                    tabIndex: 0,
+                    role: 'region',
+                    'aria-label':
+                      props.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
+                  }
+                : {
+                    attrs: {
+                      class: 'simplebar-content-wrapper',
+                      tabIndex: 0,
+                      role: 'region',
+                      'aria-label':
+                        props.ariaLabel ||
+                        SimpleBarCore.defaultOptions.ariaLabel,
+                    },
+                    on: { scroll: onScroll },
+                  }),
               ref: 'scrollElement',
-              class: 'simplebar-content-wrapper',
-              tabIndex: 0,
-              role: 'region',
-              'aria-label':
-                props.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
-              ...(isVue3 ? { onScroll } : { on: { scroll: onScroll } }),
             },
             [
               h(
