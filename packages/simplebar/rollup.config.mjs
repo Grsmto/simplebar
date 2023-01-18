@@ -54,10 +54,8 @@ if (process.env.BUILD !== 'development') {
       name: 'SimpleBar',
       file: pkg.unpkg,
       format: 'iife',
-      exports: 'named',
       globals: {
         'can-use-dom': 'canUseDOM',
-        'simplebar-core': 'SimpleBar',
       },
     },
     plugins: [
@@ -77,10 +75,8 @@ if (process.env.BUILD !== 'development') {
         name: 'SimpleBar',
         file: 'dist/simplebar.js',
         format: 'iife',
-        exports: 'named',
         globals: {
           'can-use-dom': 'canUseDOM',
-          'simplebar-core': 'SimpleBar',
         },
       },
       plugins: [
