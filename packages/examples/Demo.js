@@ -370,7 +370,6 @@ const ScrollContainer = ({ children }) => {
     <div
       style={{
         height: 300,
-        overflowY: 'scroll',
       }}
       ref={(ref) => {
         if (ref && !scrollElementRef.current) {

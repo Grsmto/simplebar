@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="stylesheet" href="../../packages/simplebar/dist/simplebar.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="../../packages/simplebar/dist/simplebar.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        new SimpleBar($('#container')[0]);
+      });
+    </script>
+
+    <style>
+      #container {
+        background-color: lightgray;
+        max-height: 70px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <p>↓Scrollable!↓</p>
+      <p>↓Scrollable!↓</p>
+      <p>↓Scrollable!↓</p>
+      <p>↓Scrollable!↓</p>
+      <p>↓Scrollable!↓</p>
+    </div>
+  </body>
+</html>
