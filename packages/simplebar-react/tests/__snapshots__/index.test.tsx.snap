@@ -48,7 +48,10 @@ exports[`renders with object as option 1`] = `
                   class="simplebar-offset"
                 >
                   <div
+                    aria-label="scrollable content"
                     class="simplebar-content-wrapper"
+                    role="region"
+                    tabindex="0"
                   >
                     <div
                       class="simplebar-content"

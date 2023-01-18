@@ -30,7 +30,7 @@ import { h, isVue3 } from 'vue-demi';
  * but we need to ensure it compiles to a cross-compatible render function
  * to avoid going back to the same place where we've been with the <template>
  */
-function renderFn({ h, emit, slots }) {
+function renderFn({ h, emit, slots, props }) {
   const onScroll = (event) => emit('scroll', event);
 
   return h('div', { ref: 'element' }, [
@@ -45,6 +45,10 @@ function renderFn({ h, emit, slots }) {
             {
               ref: 'scrollElement',
               class: 'simplebar-content-wrapper',
+              tabIndex: 0,
+              role: 'region',
+              'aria-label':
+                props.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
               ...(isVue3 ? { onScroll } : { on: { scroll: onScroll } }),
             },
             [
@@ -197,6 +201,7 @@ export default {
       // @ts-ignore
       emit: (...args) => this.$emit(...args),
       slots: isVue3 ? this.$slots : this.$scopedSlots,
+      props: this.$props,
     });
   },
 };

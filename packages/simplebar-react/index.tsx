@@ -34,6 +34,15 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
     const contentNodeRef = React.useRef<HTMLElement>();
     const options: any = {};
     const rest: any = {};
+    const scrollableNodeFullProps = {
+      ...scrollableNodeProps,
+      className: `simplebar-content-wrapper${
+        scrollableNodeProps.className ? ` ${scrollableNodeProps.className}` : ''
+      }`,
+      tabIndex: 0,
+      role: 'region',
+      'aria-label': options.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
+    };
 
     Object.keys(otherProps).forEach((key) => {
       if (
@@ -47,8 +56,8 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
 
     React.useEffect(() => {
       let instance: SimpleBarCore | null;
-      scrollableNodeRef.current = scrollableNodeProps.ref
-        ? scrollableNodeProps.ref.current
+      scrollableNodeRef.current = scrollableNodeFullProps.ref
+        ? scrollableNodeFullProps.ref.current
         : scrollableNodeRef.current;
 
       if (elRef.current) {
@@ -90,7 +99,7 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
                 children({
                   scrollableNodeRef,
                   scrollableNodeProps: {
-                    className: 'simplebar-content-wrapper',
+                    ...scrollableNodeFullProps,
                     ref: scrollableNodeRef,
                   },
                   contentNodeRef,
@@ -100,14 +109,7 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
                   },
                 })
               ) : (
-                <div
-                  {...scrollableNodeProps}
-                  className={`simplebar-content-wrapper${
-                    scrollableNodeProps.className
-                      ? ` ${scrollableNodeProps.className}`
-                      : ''
-                  }`}
-                >
+                <div {...scrollableNodeFullProps}>
                   <div className="simplebar-content">{children}</div>
                 </div>
               )}

@@ -284,8 +284,6 @@ export default class SimpleBarCore {
     if (canUseDOM) {
       this.initDOM();
 
-      this.setAccessibilityAttributes();
-
       this.rtlHelpers = SimpleBarCore.getRtlHelpers();
       this.scrollbarWidth = this.getScrollbarWidth();
 
@@ -367,6 +365,10 @@ export default class SimpleBarCore {
       this.wrapperEl.appendChild(this.maskEl);
       this.wrapperEl.appendChild(this.placeholderEl);
       this.el.appendChild(this.wrapperEl);
+
+      this.contentWrapperEl?.setAttribute('tabindex', '0');
+      this.contentWrapperEl?.setAttribute('role', 'region');
+      this.contentWrapperEl?.setAttribute('aria-label', this.options.ariaLabel);
     }
 
     if (!this.axis.x.track.el || !this.axis.y.track.el) {
@@ -401,14 +403,6 @@ export default class SimpleBarCore {
     }
 
     this.el.setAttribute('data-simplebar', 'init');
-  }
-
-  setAccessibilityAttributes() {
-    const ariaLabel = this.options.ariaLabel;
-
-    this.contentWrapperEl?.setAttribute('tabindex', '0');
-    this.contentWrapperEl?.setAttribute('role', 'region');
-    this.contentWrapperEl?.setAttribute('aria-label', ariaLabel);
   }
 
   initListeners() {
