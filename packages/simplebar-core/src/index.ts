@@ -689,9 +689,10 @@ export default class SimpleBarCore {
     if (!this.isScrolling) {
       this.isScrolling = true;
       this.el.classList.add(this.classNames.scrolling);
-      this.showScrollbar('x');
-      this.showScrollbar('y');
     }
+
+    this.showScrollbar('x');
+    this.showScrollbar('y');
 
     this.onStopScrolling();
   };
