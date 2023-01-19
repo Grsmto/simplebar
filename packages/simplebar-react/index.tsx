@@ -89,7 +89,7 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
 
     return (
       <div ref={elRef} {...rest}>
-        <div className="simplebar-wrapper">
+        <div className="simplebar-wrapper" data-simplebar="init">
           <div className="simplebar-height-auto-observer-wrapper">
             <div className="simplebar-height-auto-observer" />
           </div>

@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders with object as option 1`] = `
-<div
-  data-simplebar="init"
->
+<div>
   <div
     class="custom-class"
   >
@@ -33,6 +31,7 @@ exports[`renders with object as option 1`] = `
           >
             <div
               class="simplebar-wrapper"
+              data-simplebar="init"
             >
               <div
                 class="simplebar-height-auto-observer-wrapper"
@@ -126,10 +125,10 @@ exports[`renders with object as option 1`] = `
 exports[`renders with options 1`] = `
 <div
   class="simplebar-scrollable-y"
-  data-simplebar="init"
 >
   <div
     class="simplebar-wrapper"
+    data-simplebar="init"
   >
     <div
       class="simplebar-height-auto-observer-wrapper"
@@ -202,11 +201,10 @@ exports[`renders with options 1`] = `
 
 exports[`renders without crashing 1`] = `
 <div>
-  <div
-    data-simplebar="init"
-  >
+  <div>
     <div
       class="simplebar-wrapper"
+      data-simplebar="init"
     >
       <div
         class="simplebar-height-auto-observer-wrapper"
