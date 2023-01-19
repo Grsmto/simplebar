@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders with object as option 1`] = `
-<div>
+<div
+  data-simplebar="init"
+>
   <div
     class="custom-class"
   >
@@ -29,69 +31,21 @@ exports[`renders with object as option 1`] = `
           <div
             class="simplebar-content"
           >
-            <div
-              class="simplebar-wrapper"
-              data-simplebar="init"
-            >
-              <div
-                class="simplebar-height-auto-observer-wrapper"
-              >
-                <div
-                  class="simplebar-height-auto-observer"
-                />
-              </div>
-              <div
-                class="simplebar-mask"
-              >
-                <div
-                  class="simplebar-offset"
-                >
-                  <div
-                    aria-label="scrollable content"
-                    class="simplebar-content-wrapper"
-                    role="region"
-                    tabindex="0"
-                  >
-                    <div
-                      class="simplebar-content"
-                    >
-                      <p>
-                        Some content
-                      </p>
-                      <p>
-                        Some content
-                      </p>
-                      <p>
-                        Some content
-                      </p>
-                      <p>
-                        Some content
-                      </p>
-                      <p>
-                        Some content
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="simplebar-placeholder"
-              />
-            </div>
-            <div
-              class="simplebar-track simplebar-horizontal"
-            >
-              <div
-                class="simplebar-scrollbar"
-              />
-            </div>
-            <div
-              class="simplebar-track simplebar-vertical"
-            >
-              <div
-                class="simplebar-scrollbar"
-              />
-            </div>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
+            <p>
+              Some content
+            </p>
           </div>
         </div>
       </div>
@@ -125,10 +79,10 @@ exports[`renders with object as option 1`] = `
 exports[`renders with options 1`] = `
 <div
   class="simplebar-scrollable-y"
+  data-simplebar="init"
 >
   <div
     class="simplebar-wrapper"
-    data-simplebar="init"
   >
     <div
       class="simplebar-height-auto-observer-wrapper"
@@ -201,10 +155,11 @@ exports[`renders with options 1`] = `
 
 exports[`renders without crashing 1`] = `
 <div>
-  <div>
+  <div
+    data-simplebar="init"
+  >
     <div
       class="simplebar-wrapper"
-      data-simplebar="init"
     >
       <div
         class="simplebar-height-auto-observer-wrapper"

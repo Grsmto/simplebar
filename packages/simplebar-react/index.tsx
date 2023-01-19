@@ -54,6 +54,11 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
       }
     });
 
+    const classNames = {
+      ...SimpleBarCore.defaultOptions.classNames,
+      ...options.classNames,
+    };
+
     React.useEffect(() => {
       let instance: SimpleBarCore | null;
       scrollableNodeRef.current = scrollableNodeFullProps.ref
@@ -89,12 +94,12 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
 
     return (
       <div data-simplebar="init" ref={elRef} {...rest}>
-        <div className="simplebar-wrapper">
-          <div className="simplebar-height-auto-observer-wrapper">
-            <div className="simplebar-height-auto-observer" />
+        <div className={classNames.wrapper}>
+          <div className={classNames.heightAutoObserverWrapperEl}>
+            <div className={classNames.heightAutoObserverEl} />
           </div>
-          <div className="simplebar-mask">
-            <div className="simplebar-offset">
+          <div className={classNames.mask}>
+            <div className={classNames.offset}>
               {typeof children === 'function' ? (
                 children({
                   scrollableNodeRef,
@@ -104,24 +109,24 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
                   },
                   contentNodeRef,
                   contentNodeProps: {
-                    className: 'simplebar-content',
+                    className: classNames.contentEl,
                     ref: contentNodeRef,
                   },
                 })
               ) : (
                 <div {...scrollableNodeFullProps}>
-                  <div className="simplebar-content">{children}</div>
+                  <div className={classNames.contentEl}>{children}</div>
                 </div>
               )}
             </div>
           </div>
-          <div className="simplebar-placeholder" />
+          <div className={classNames.placeholder} />
         </div>
-        <div className="simplebar-track simplebar-horizontal">
-          <div className="simplebar-scrollbar" />
+        <div className={`${classNames.track} simplebar-horizontal`}>
+          <div className={classNames.scrollbar} />
         </div>
-        <div className="simplebar-track simplebar-vertical">
-          <div className="simplebar-scrollbar" />
+        <div className={`${classNames.track} simplebar-vertical`}>
+          <div className={classNames.scrollbar} />
         </div>
       </div>
     );
