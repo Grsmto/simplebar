@@ -38,6 +38,77 @@ export default class SimpleBar extends SimpleBarCore {
     SimpleBar.globalObserver?.disconnect();
   }
 
+  initDOM() {
+    // make sure this element doesn't have the elements yet
+    if (
+      !Array.prototype.filter.call(this.el.children, (child) =>
+        child.classList.contains(this.classNames.wrapper)
+      ).length
+    ) {
+      // Prepare DOM
+      this.wrapperEl = document.createElement('div');
+      this.contentWrapperEl = document.createElement('div');
+      this.offsetEl = document.createElement('div');
+      this.maskEl = document.createElement('div');
+      this.contentEl = document.createElement('div');
+      this.placeholderEl = document.createElement('div');
+      this.heightAutoObserverWrapperEl = document.createElement('div');
+      this.heightAutoObserverEl = document.createElement('div');
+      this.wrapperEl.classList.add(this.classNames.wrapper);
+      this.contentWrapperEl.classList.add(this.classNames.contentWrapper);
+      this.offsetEl.classList.add(this.classNames.offset);
+      this.maskEl.classList.add(this.classNames.mask);
+      this.contentEl.classList.add(this.classNames.contentEl);
+      this.placeholderEl.classList.add(this.classNames.placeholder);
+      this.heightAutoObserverWrapperEl.classList.add(
+        this.classNames.heightAutoObserverWrapperEl
+      );
+      this.heightAutoObserverEl.classList.add(
+        this.classNames.heightAutoObserverEl
+      );
+
+      while (this.el.firstChild) {
+        this.contentEl.appendChild(this.el.firstChild);
+      }
+
+      this.contentWrapperEl.appendChild(this.contentEl);
+      this.offsetEl.appendChild(this.contentWrapperEl);
+      this.maskEl.appendChild(this.offsetEl);
+      this.heightAutoObserverWrapperEl.appendChild(this.heightAutoObserverEl);
+      this.wrapperEl.appendChild(this.heightAutoObserverWrapperEl);
+      this.wrapperEl.appendChild(this.maskEl);
+      this.wrapperEl.appendChild(this.placeholderEl);
+      this.el.appendChild(this.wrapperEl);
+
+      this.contentWrapperEl?.setAttribute('tabindex', '0');
+      this.contentWrapperEl?.setAttribute('role', 'region');
+      this.contentWrapperEl?.setAttribute('aria-label', this.options.ariaLabel);
+    }
+
+    if (!this.axis.x.track.el || !this.axis.y.track.el) {
+      const track = document.createElement('div');
+      const scrollbar = document.createElement('div');
+
+      track.classList.add(this.classNames.track);
+      scrollbar.classList.add(this.classNames.scrollbar);
+
+      track.appendChild(scrollbar);
+
+      this.axis.x.track.el = track.cloneNode(true) as HTMLElement;
+      this.axis.x.track.el.classList.add(this.classNames.horizontal);
+
+      this.axis.y.track.el = track.cloneNode(true) as HTMLElement;
+      this.axis.y.track.el.classList.add(this.classNames.vertical);
+
+      this.el.appendChild(this.axis.x.track.el);
+      this.el.appendChild(this.axis.y.track.el);
+    }
+
+    SimpleBarCore.prototype.initDOM.call(this);
+
+    this.el.setAttribute('data-simplebar', 'init');
+  }
+
   unMount() {
     SimpleBarCore.prototype.unMount.call(this);
     SimpleBar.instances.delete(this.el);

@@ -294,115 +294,48 @@ export default class SimpleBarCore {
   }
 
   initDOM() {
-    // make sure this element doesn't have the elements yet
-    if (
-      Array.prototype.filter.call(this.el.children, (child) =>
-        child.classList.contains(this.classNames.wrapper)
-      ).length
-    ) {
-      // assume that element has his DOM already initiated
-      this.wrapperEl = this.el.querySelector(`.${this.classNames.wrapper}`);
-      this.contentWrapperEl =
-        this.options.scrollableNode ||
-        this.el.querySelector(`.${this.classNames.contentWrapper}`);
-      this.contentEl =
-        this.options.contentNode ||
-        this.el.querySelector(`.${this.classNames.contentEl}`);
+    // assume that element has his DOM already initiated
+    this.wrapperEl = this.el.querySelector(`.${this.classNames.wrapper}`);
+    this.contentWrapperEl =
+      this.options.scrollableNode ||
+      this.el.querySelector(`.${this.classNames.contentWrapper}`);
+    this.contentEl =
+      this.options.contentNode ||
+      this.el.querySelector(`.${this.classNames.contentEl}`);
 
-      this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
-      this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
+    this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
+    this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
 
-      this.placeholderEl = this.findChild(
-        this.wrapperEl,
-        `.${this.classNames.placeholder}`
-      );
-      this.heightAutoObserverWrapperEl = this.el.querySelector(
-        `.${this.classNames.heightAutoObserverWrapperEl}`
-      );
-      this.heightAutoObserverEl = this.el.querySelector(
-        `.${this.classNames.heightAutoObserverEl}`
-      );
-      this.axis.x.track.el = this.findChild(
-        this.el,
-        `.${this.classNames.track}.${this.classNames.horizontal}`
-      );
-      this.axis.y.track.el = this.findChild(
-        this.el,
-        `.${this.classNames.track}.${this.classNames.vertical}`
-      );
-    } else {
-      // Prepare DOM
-      this.wrapperEl = document.createElement('div');
-      this.contentWrapperEl = document.createElement('div');
-      this.offsetEl = document.createElement('div');
-      this.maskEl = document.createElement('div');
-      this.contentEl = document.createElement('div');
-      this.placeholderEl = document.createElement('div');
-      this.heightAutoObserverWrapperEl = document.createElement('div');
-      this.heightAutoObserverEl = document.createElement('div');
-      this.wrapperEl.classList.add(this.classNames.wrapper);
-      this.contentWrapperEl.classList.add(this.classNames.contentWrapper);
-      this.offsetEl.classList.add(this.classNames.offset);
-      this.maskEl.classList.add(this.classNames.mask);
-      this.contentEl.classList.add(this.classNames.contentEl);
-      this.placeholderEl.classList.add(this.classNames.placeholder);
-      this.heightAutoObserverWrapperEl.classList.add(
-        this.classNames.heightAutoObserverWrapperEl
-      );
-      this.heightAutoObserverEl.classList.add(
-        this.classNames.heightAutoObserverEl
-      );
-
-      while (this.el.firstChild) {
-        this.contentEl.appendChild(this.el.firstChild);
-      }
-
-      this.contentWrapperEl.appendChild(this.contentEl);
-      this.offsetEl.appendChild(this.contentWrapperEl);
-      this.maskEl.appendChild(this.offsetEl);
-      this.heightAutoObserverWrapperEl.appendChild(this.heightAutoObserverEl);
-      this.wrapperEl.appendChild(this.heightAutoObserverWrapperEl);
-      this.wrapperEl.appendChild(this.maskEl);
-      this.wrapperEl.appendChild(this.placeholderEl);
-      this.el.appendChild(this.wrapperEl);
-
-      this.contentWrapperEl?.setAttribute('tabindex', '0');
-      this.contentWrapperEl?.setAttribute('role', 'region');
-      this.contentWrapperEl?.setAttribute('aria-label', this.options.ariaLabel);
-    }
-
-    if (!this.axis.x.track.el || !this.axis.y.track.el) {
-      const track = document.createElement('div');
-      const scrollbar = document.createElement('div');
-
-      track.classList.add(this.classNames.track);
-      scrollbar.classList.add(this.classNames.scrollbar);
-
-      track.appendChild(scrollbar);
-
-      this.axis.x.track.el = track.cloneNode(true) as HTMLElement;
-      this.axis.x.track.el.classList.add(this.classNames.horizontal);
-
-      this.axis.y.track.el = track.cloneNode(true) as HTMLElement;
-      this.axis.y.track.el.classList.add(this.classNames.vertical);
-
-      this.el.appendChild(this.axis.x.track.el);
-      this.el.appendChild(this.axis.y.track.el);
-    }
-
-    this.axis.x.scrollbar.el = this.axis.x.track.el.querySelector(
-      `.${this.classNames.scrollbar}`
+    this.placeholderEl = this.findChild(
+      this.wrapperEl,
+      `.${this.classNames.placeholder}`
     );
-    this.axis.y.scrollbar.el = this.axis.y.track.el.querySelector(
-      `.${this.classNames.scrollbar}`
+    this.heightAutoObserverWrapperEl = this.el.querySelector(
+      `.${this.classNames.heightAutoObserverWrapperEl}`
     );
+    this.heightAutoObserverEl = this.el.querySelector(
+      `.${this.classNames.heightAutoObserverEl}`
+    );
+    this.axis.x.track.el = this.findChild(
+      this.el,
+      `.${this.classNames.track}.${this.classNames.horizontal}`
+    );
+    this.axis.y.track.el = this.findChild(
+      this.el,
+      `.${this.classNames.track}.${this.classNames.vertical}`
+    );
+
+    this.axis.x.scrollbar.el =
+      this.axis.x.track.el?.querySelector(`.${this.classNames.scrollbar}`) ||
+      null;
+    this.axis.y.scrollbar.el =
+      this.axis.y.track.el?.querySelector(`.${this.classNames.scrollbar}`) ||
+      null;
 
     if (!this.options.autoHide) {
       this.axis.x.scrollbar.el?.classList.add(this.classNames.visible);
       this.axis.y.scrollbar.el?.classList.add(this.classNames.visible);
     }
-
-    this.el.setAttribute('data-simplebar', 'init');
   }
 
   initListeners() {
