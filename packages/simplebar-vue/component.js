@@ -33,57 +33,79 @@ import { h, isVue3 } from 'vue-demi';
 function renderFn({ h, emit, slots, props }) {
   const onScroll = (event) => emit('scroll', event);
 
-  return h('div', { ref: 'element' }, [
-    h('div', { class: 'simplebar-wrapper' }, [
-      h('div', { class: 'simplebar-height-auto-observer-wrapper' }, [
-        h('div', { class: 'simplebar-height-auto-observer' }),
-      ]),
-      h('div', { class: 'simplebar-mask' }, [
-        h('div', { class: 'simplebar-offset' }, [
-          h(
-            'div',
-            {
-              ...(isVue3
-                ? {
-                    onScroll,
-                    class: 'simplebar-content-wrapper',
-                    tabIndex: 0,
-                    role: 'region',
-                    'aria-label':
-                      props.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
-                  }
-                : {
-                    attrs: {
-                      class: 'simplebar-content-wrapper',
-                      tabIndex: 0,
-                      role: 'region',
-                      'aria-label':
-                        props.ariaLabel ||
-                        SimpleBarCore.defaultOptions.ariaLabel,
-                    },
-                    on: { scroll: onScroll },
-                  }),
-              ref: 'scrollElement',
+  return h(
+    'div',
+    {
+      ref: 'element',
+      ...(isVue3
+        ? {
+            'data-simplebar': 'init',
+          }
+        : {
+            attrs: {
+              'data-simplebar': 'init',
             },
-            [
+          }),
+    },
+    [
+      h(
+        'div',
+        {
+          class: 'simplebar-wrapper',
+        },
+        [
+          h('div', { class: 'simplebar-height-auto-observer-wrapper' }, [
+            h('div', { class: 'simplebar-height-auto-observer' }),
+          ]),
+          h('div', { class: 'simplebar-mask' }, [
+            h('div', { class: 'simplebar-offset' }, [
               h(
                 'div',
-                { class: 'simplebar-content', ref: 'contentElement' },
-                slots.default?.()
+                {
+                  ...(isVue3
+                    ? {
+                        onScroll,
+                        class: 'simplebar-content-wrapper',
+                        tabIndex: 0,
+                        role: 'region',
+                        'aria-label':
+                          props.ariaLabel ||
+                          SimpleBarCore.defaultOptions.ariaLabel,
+                      }
+                    : {
+                        attrs: {
+                          class: 'simplebar-content-wrapper',
+                          tabIndex: 0,
+                          role: 'region',
+                          'aria-label':
+                            props.ariaLabel ||
+                            SimpleBarCore.defaultOptions.ariaLabel,
+                        },
+                        on: { scroll: onScroll },
+                      }),
+                  ref: 'scrollElement',
+                },
+                [
+                  h(
+                    'div',
+                    { class: 'simplebar-content', ref: 'contentElement' },
+                    slots.default?.()
+                  ),
+                ]
               ),
-            ]
-          ),
-        ]),
+            ]),
+          ]),
+          h('div', { class: 'simplebar-placeholder' }),
+        ]
+      ),
+      h('div', { class: 'simplebar-track simplebar-horizontal' }, [
+        h('div', { class: 'simplebar-scrollbar' }),
       ]),
-      h('div', { class: 'simplebar-placeholder' }),
-    ]),
-    h('div', { class: 'simplebar-track simplebar-horizontal' }, [
-      h('div', { class: 'simplebar-scrollbar' }),
-    ]),
-    h('div', { class: 'simplebar-track simplebar-vertical' }, [
-      h('div', { class: 'simplebar-scrollbar' }),
-    ]),
-  ]);
+      h('div', { class: 'simplebar-track simplebar-vertical' }, [
+        h('div', { class: 'simplebar-scrollbar' }),
+      ]),
+    ]
+  );
 }
 
 export default {

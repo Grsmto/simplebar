@@ -1,5 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`simplebar snapshots renders with default slot 1`] = `
+<div data-simplebar="init">
+  <div class="simplebar-wrapper">
+    <div class="simplebar-height-auto-observer-wrapper">
+      <div class="simplebar-height-auto-observer"></div>
+    </div>
+    <div class="simplebar-mask">
+      <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+        <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow-x: hidden; overflow-y: hidden;">
+          <div class="simplebar-content">
+            <div class="inner-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+  </div>
+  <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+    <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+  </div>
+  <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+    <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
+  </div>
+</div>
+`;
+
 exports[`simplebar snapshots renders without crashing 1`] = `
 <div data-simplebar="init">
   <div class="simplebar-wrapper">
