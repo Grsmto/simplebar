@@ -32,6 +32,10 @@ import { h, isVue3 } from 'vue-demi';
  */
 function renderFn({ h, emit, slots, props }) {
   const onScroll = (event) => emit('scroll', event);
+  const classNames = {
+    ...SimpleBarCore.defaultOptions.classNames,
+    ...props.classNames,
+  };
 
   return h(
     'div',
@@ -51,21 +55,21 @@ function renderFn({ h, emit, slots, props }) {
       h(
         'div',
         {
-          class: 'simplebar-wrapper',
+          class: classNames.wrapper,
         },
         [
-          h('div', { class: 'simplebar-height-auto-observer-wrapper' }, [
-            h('div', { class: 'simplebar-height-auto-observer' }),
+          h('div', { class: classNames.heightAutoObserverWrapperEl }, [
+            h('div', { class: classNames.heightAutoObserverEl }),
           ]),
-          h('div', { class: 'simplebar-mask' }, [
-            h('div', { class: 'simplebar-offset' }, [
+          h('div', { class: classNames.mask }, [
+            h('div', { class: classNames.offset }, [
               h(
                 'div',
                 {
                   ...(isVue3
                     ? {
                         onScroll,
-                        class: 'simplebar-content-wrapper',
+                        class: classNames.contentWrapper,
                         tabIndex: 0,
                         role: 'region',
                         'aria-label':
@@ -74,7 +78,7 @@ function renderFn({ h, emit, slots, props }) {
                       }
                     : {
                         attrs: {
-                          class: 'simplebar-content-wrapper',
+                          class: classNames.contentWrapper,
                           tabIndex: 0,
                           role: 'region',
                           'aria-label':
@@ -88,21 +92,21 @@ function renderFn({ h, emit, slots, props }) {
                 [
                   h(
                     'div',
-                    { class: 'simplebar-content', ref: 'contentElement' },
+                    { class: classNames.contentEl, ref: 'contentElement' },
                     slots.default?.()
                   ),
                 ]
               ),
             ]),
           ]),
-          h('div', { class: 'simplebar-placeholder' }),
+          h('div', { class: classNames.placeholder }),
         ]
       ),
-      h('div', { class: 'simplebar-track simplebar-horizontal' }, [
-        h('div', { class: 'simplebar-scrollbar' }),
+      h('div', { class: `${classNames.track} simplebar-horizontal` }, [
+        h('div', { class: classNames.scrollbar }),
       ]),
-      h('div', { class: 'simplebar-track simplebar-vertical' }, [
-        h('div', { class: 'simplebar-scrollbar' }),
+      h('div', { class: `${classNames.track} simplebar-vertical` }, [
+        h('div', { class: classNames.scrollbar }),
       ]),
     ]
   );

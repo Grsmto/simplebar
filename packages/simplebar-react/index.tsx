@@ -32,23 +32,14 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
     const elRef = React.useRef();
     const scrollableNodeRef = React.useRef<HTMLElement>();
     const contentNodeRef = React.useRef<HTMLElement>();
-    const options: any = {};
+    const options: Partial<SimpleBarOptions> = {};
     const rest: any = {};
-    const scrollableNodeFullProps = {
-      ...scrollableNodeProps,
-      className: `simplebar-content-wrapper${
-        scrollableNodeProps.className ? ` ${scrollableNodeProps.className}` : ''
-      }`,
-      tabIndex: 0,
-      role: 'region',
-      'aria-label': options.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
-    };
 
     Object.keys(otherProps).forEach((key) => {
       if (
         Object.prototype.hasOwnProperty.call(SimpleBarCore.defaultOptions, key)
       ) {
-        options[key] = otherProps[key as keyof SimpleBarOptions];
+        (options as any)[key] = otherProps[key as keyof SimpleBarOptions];
       } else {
         rest[key] = otherProps[key as keyof SimpleBarOptions];
       }
@@ -57,6 +48,16 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
     const classNames = {
       ...SimpleBarCore.defaultOptions.classNames,
       ...options.classNames,
+    } as Required<(typeof SimpleBarCore.defaultOptions)['classNames']>;
+
+    const scrollableNodeFullProps = {
+      ...scrollableNodeProps,
+      className: `${classNames.contentWrapper}${
+        scrollableNodeProps.className ? ` ${scrollableNodeProps.className}` : ''
+      }`,
+      tabIndex: 0,
+      role: 'region',
+      'aria-label': options.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
     };
 
     React.useEffect(() => {
