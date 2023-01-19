@@ -1,11 +1,30 @@
 import SimpleBar from '../src';
 
+const template = `<div class="simplebar-wrapper">
+<div class="simplebar-height-auto-observer-wrapper">
+  <div class="simplebar-height-auto-observer"></div>
+</div>
+<div class="simplebar-mask">
+  <div class="simplebar-offset">
+    <div class="simplebar-content-wrapper" tabIndex="0" role="region" [ariaLabel]="ariaLabel">
+      <div class="simplebar-content"></div>
+    </div>
+  </div>
+</div>
+<div class="simplebar-placeholder"></div>
+</div>
+<div class="simplebar-track simplebar-horizontal">
+<div class="simplebar-scrollbar"></div>
+</div>
+<div class="simplebar-track simplebar-vertical">
+<div class="simplebar-scrollbar"></div>
+</div>`;
+
 beforeEach(() => {
   jest.resetModules();
 
   // Set up our document body
-  document.body.innerHTML =
-    '<div id="simplebar" data-simplebar-force-visible="true"></div>';
+  document.body.innerHTML = `<div id="simplebar" data-simplebar="init" data-simplebar-force-visible="true">${template}</div>`;
 });
 
 test('should call constructor', () => {
@@ -120,8 +139,7 @@ describe('nested SimpleBars with initiated DOM', () => {
 
   beforeEach(() => {
     // Set up our document body
-    document.body.innerHTML =
-      '<div id="simplebar-parent"><div id="simplebar-child"></div></div>';
+    document.body.innerHTML = `<div id="simplebar-parent">${template}<div id="simplebar-child">${template}</div></div>`;
 
     parent = new SimpleBar(
       document.getElementById('simplebar-parent') as HTMLElement
