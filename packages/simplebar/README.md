@@ -127,7 +127,7 @@ or
 ```js
 Array.prototype.forEach.call(
   document.querySelectorAll('.myElements'),
-  (el) => new SimpleBar()
+  (el) => new SimpleBar(el)
 );
 ```
 
