@@ -38,7 +38,7 @@
     "vue-demi": "^0.13.11"
   },
   "peerDependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.5.17 || ^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
