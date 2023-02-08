@@ -1,5 +1,5 @@
-import { shallowMount, destroyWrapper, isVue3 } from './test-utils';
-import simplebar from '../component.js';
+import { shallowMount, destroyWrapper } from './test-utils';
+import simplebar from '../component';
 import SimpleBar from 'simplebar-core';
 
 describe('simplebar', () => {

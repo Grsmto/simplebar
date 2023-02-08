@@ -32,5 +32,5 @@ export const babelConfig = {
 
 export const tsConfig = {
   tsconfig: '../../tsconfig.json',
-  exclude: ['**/*.test.ts', '**/*.test.tsx'],
+  exclude: ['**/*.test.ts', '**/*.test.tsx', 'tests/*'],
 };

@@ -17,13 +17,13 @@
   "sideEffects": [
     "*.css"
   ],
-  "types": "dist/simplebar-vue.d.ts",
+  "types": "dist/index.d.ts",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",
   "scripts": {
     "build": "rollup -c && minify ../simplebar-core/src/simplebar.css > dist/simplebar.min.css && cp simplebar-vue.d.ts dist/simplebar-vue.d.ts",
-    "jest": "jest -c jest-unit.config.js",
+    "jest": "jest",
     "version": "yarn build",
     "precommit": "lint-staged",
     "test:2.7": "yarn use-vue:2.7 && yarn jest",
@@ -33,12 +33,11 @@
     "use-vue:3": "node scripts/swap-vue.js 3 && vue-demi-switch 3"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
     "simplebar-core": "^1.2.0",
     "vue-demi": "^0.13.11"
   },
   "peerDependencies": {
-    "vue": "^2.5.17"
+    "vue": ">=2.5.17"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

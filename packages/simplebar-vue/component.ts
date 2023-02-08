@@ -1,7 +1,7 @@
 // @ts-check
 import SimpleBarCore from 'simplebar-core';
-import { lifecycleEventNames } from './utils.js';
-import { h, isVue3 } from 'vue-demi';
+import { lifecycleEventNames } from './utils';
+import { h, isVue3, defineComponent } from 'vue-demi';
 
 /**
  * This is not as easy to read than a regular <template> block, but a
@@ -30,8 +30,8 @@ import { h, isVue3 } from 'vue-demi';
  * but we need to ensure it compiles to a cross-compatible render function
  * to avoid going back to the same place where we've been with the <template>
  */
-function renderFn({ h, emit, slots, props }) {
-  const onScroll = (event) => emit('scroll', event);
+function renderFn({ h, emit, slots, props }: any) {
+  const onScroll = (event: any) => emit('scroll', event);
   const classNames = {
     ...SimpleBarCore.defaultOptions.classNames,
     ...props.classNames,
@@ -112,7 +112,7 @@ function renderFn({ h, emit, slots, props }) {
   );
 }
 
-export default {
+export default defineComponent({
   name: 'simplebar-vue',
   props: {
     /**
@@ -152,7 +152,8 @@ export default {
      */
     forceVisible: {
       type: [Boolean, String],
-      validator: (v) => typeof v === 'boolean' || v === 'x' || v === 'y',
+      validator: (v: boolean | 'x' | 'y') =>
+        typeof v === 'boolean' || v === 'x' || v === 'y',
       default: undefined,
     },
 
@@ -167,7 +168,7 @@ export default {
      */
     direction: {
       type: String,
-      validator: (v) => v === 'ltr' || v === 'rtl',
+      validator: (v: string) => v === 'ltr' || v === 'rtl',
     },
 
     /**
@@ -210,7 +211,7 @@ export default {
 
     for (const [key, value] of Object.entries(this.$props))
       if (value != undefined && typeof value !== 'function')
-        options[key] = value;
+        (options as any)[key] = value;
 
     // @ts-ignore (unable to type cast `$refs`)
     this.SimpleBar = new SimpleBarCore(this.$refs.element, options);
@@ -228,6 +229,7 @@ export default {
   },
   methods: {
     recalculate() {
+      // @ts-ignore
       this.SimpleBar?.recalculate();
     },
   },
@@ -235,13 +237,14 @@ export default {
    * Note that createElement argument is only provided in <=vue@2.7.x,
    * in other versions it's a context object that we do not use.
    */
-  render(createElement) {
+  render(createElement: any) {
     return renderFn({
       h: typeof createElement === 'function' ? createElement : h,
       // @ts-ignore
       emit: (...args) => this.$emit(...args),
+      // @ts-ignore
       slots: isVue3 ? this.$slots : this.$scopedSlots,
       props: this.$props,
     });
   },
-};
+});

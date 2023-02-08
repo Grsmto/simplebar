@@ -1,12 +1,14 @@
+const { defaults: tsjPreset } = require('ts-jest/presets');
 const { isVue3 } = require('vue-demi');
 
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
+  preset: 'ts-jest',
   transform: {
+    ...tsjPreset.transform,
     '^.+\\.js?$': 'babel-jest',
     '^.+\\.vue$': isVue3 ? 'vue-jest' : 'vue-jest2',
   },
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
-  moduleFileExtensions: ['js', 'jsx', 'json', 'vue'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
