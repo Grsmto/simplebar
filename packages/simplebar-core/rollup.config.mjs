@@ -33,8 +33,8 @@ export default [
         globals: {
           'can-use-dom': 'canUseDOM',
           lodash: '_',
-          'lodash/debounce.js': '_.debounce',
-          'lodash/throttle.js': '_.throttle',
+          'lodash-es/debounce': '_.debounce',
+          'lodash-es/throttle': '_.throttle',
         },
         paths: {
           // Lodash-es won't work for UMD build, so we alias to lodash
