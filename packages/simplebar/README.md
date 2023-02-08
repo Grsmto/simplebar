@@ -140,7 +140,7 @@ new SimpleBar($('#myElement')[0]);
 or
 
 ```js
-$('.myElements').each(element, new SimpleBar());
+$('.myElements').each((el) => new SimpleBar(el));
 ```
 
 ### Styling
@@ -231,11 +231,15 @@ direction: 'rtl' (default to `ltr`)
 
 You will need both `data-simplebar-direction='rtl'` and a css rule with `direction: rtl`.
 
-#### timeout
+#### timeout (deprecated)
 
-Define the delay until the scrollbar hides. Has no effect if `autoHide` is `false`.
+This option is deprecated. You can now achieve this in CSS:
 
-Default value is `1000`.
+```
+.simplebar-scrollbar:before {
+  transition-delay: 2s;
+}
+```
 
 #### clickOnTrack
 
