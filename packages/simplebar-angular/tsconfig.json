@@ -16,10 +16,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "module": "ES2022",
-    "target": "ES2022",
+    "target": "ES2015",
+    "module": "es2020",
+    "lib": ["ES2015", "dom"],
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"],
     "paths": {
       "simplebar-angular": ["dist/simplebar-angular"],
       "simplebar-angular/*": ["dist/simplebar-angular/*"]

@@ -4,6 +4,7 @@ import { SimplebarAngularComponent } from './simplebar-angular.component';
 @NgModule({
   declarations: [SimplebarAngularComponent],
   imports: [],
-  exports: [SimplebarAngularComponent]
+  exports: [SimplebarAngularComponent],
+  schemas: [],
 })
 export class SimplebarAngularModule {}
