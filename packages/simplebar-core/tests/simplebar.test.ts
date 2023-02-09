@@ -6,7 +6,7 @@ const template = `<div class="simplebar-wrapper">
 </div>
 <div class="simplebar-mask">
   <div class="simplebar-offset">
-    <div class="simplebar-content-wrapper" tabIndex="0" role="region" [ariaLabel]="ariaLabel">
+    <div class="simplebar-content-wrapper custom-class" tabIndex="0" role="region" [ariaLabel]="ariaLabel">
       <div class="simplebar-content"></div>
     </div>
   </div>
@@ -86,6 +86,18 @@ test('getOptions accepts objects', () => {
       },
     ])
   ).toEqual({ classNames: { wrapper: 'custom-class' } });
+});
+
+test('classNames option works with multiple classes', () => {
+  const simpleBar = new SimpleBar(
+    document.getElementById('simplebar') as HTMLElement,
+    { classNames: { contentWrapper: 'simplebar-content-wrapper custom-class' } }
+  );
+  const scrollElement = simpleBar.getScrollElement();
+
+  expect(scrollElement?.className).toEqual(
+    'simplebar-content-wrapper custom-class'
+  );
 });
 
 test('mouse should be within bounds', () => {

@@ -1,9 +1,9 @@
-import type { DebouncedFunc } from 'lodash';
-import debounce from 'lodash/debounce.js';
-import throttle from 'lodash/throttle.js';
+import type { DebouncedFunc } from 'lodash-es';
+import debounce from 'lodash-es/debounce';
+import throttle from 'lodash-es/throttle';
 import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
-import { getElementWindow, getElementDocument, getOptions } from './helpers';
+import * as helpers from './helpers';
 
 interface Options {
   forceVisible: boolean | Axis;
@@ -71,6 +71,15 @@ type RtlHelpers = {
   isScrollingToNegative: boolean;
 } | null;
 type DefaultOptions = Options & typeof SimpleBarCore.defaultOptions;
+
+const {
+  getElementWindow,
+  getElementDocument,
+  getOptions,
+  addClasses,
+  removeClasses,
+  classNamesToQuery,
+} = helpers;
 
 export default class SimpleBarCore {
   el: HTMLElement;
@@ -200,6 +209,7 @@ export default class SimpleBarCore {
    */
 
   static getOptions = getOptions;
+  static helpers = helpers;
 
   /**
    * Helper to fix browsers inconsistency on RTL:
@@ -295,46 +305,58 @@ export default class SimpleBarCore {
 
   initDOM() {
     // assume that element has his DOM already initiated
-    this.wrapperEl = this.el.querySelector(`.${this.classNames.wrapper}`);
+    this.wrapperEl = this.el.querySelector(
+      classNamesToQuery(this.classNames.wrapper)
+    );
     this.contentWrapperEl =
       this.options.scrollableNode ||
-      this.el.querySelector(`.${this.classNames.contentWrapper}`);
+      this.el.querySelector(classNamesToQuery(this.classNames.contentWrapper));
     this.contentEl =
       this.options.contentNode ||
-      this.el.querySelector(`.${this.classNames.contentEl}`);
+      this.el.querySelector(classNamesToQuery(this.classNames.contentEl));
 
-    this.offsetEl = this.el.querySelector(`.${this.classNames.offset}`);
-    this.maskEl = this.el.querySelector(`.${this.classNames.mask}`);
+    this.offsetEl = this.el.querySelector(
+      classNamesToQuery(this.classNames.offset)
+    );
+    this.maskEl = this.el.querySelector(
+      classNamesToQuery(this.classNames.mask)
+    );
 
     this.placeholderEl = this.findChild(
       this.wrapperEl,
-      `.${this.classNames.placeholder}`
+      classNamesToQuery(this.classNames.placeholder)
     );
     this.heightAutoObserverWrapperEl = this.el.querySelector(
-      `.${this.classNames.heightAutoObserverWrapperEl}`
+      classNamesToQuery(this.classNames.heightAutoObserverWrapperEl)
     );
     this.heightAutoObserverEl = this.el.querySelector(
-      `.${this.classNames.heightAutoObserverEl}`
+      classNamesToQuery(this.classNames.heightAutoObserverEl)
     );
     this.axis.x.track.el = this.findChild(
       this.el,
-      `.${this.classNames.track}.${this.classNames.horizontal}`
+      `${classNamesToQuery(this.classNames.track)}${classNamesToQuery(
+        this.classNames.horizontal
+      )}`
     );
     this.axis.y.track.el = this.findChild(
       this.el,
-      `.${this.classNames.track}.${this.classNames.vertical}`
+      `${classNamesToQuery(this.classNames.track)}${classNamesToQuery(
+        this.classNames.vertical
+      )}`
     );
 
     this.axis.x.scrollbar.el =
-      this.axis.x.track.el?.querySelector(`.${this.classNames.scrollbar}`) ||
-      null;
+      this.axis.x.track.el?.querySelector(
+        classNamesToQuery(this.classNames.scrollbar)
+      ) || null;
     this.axis.y.scrollbar.el =
-      this.axis.y.track.el?.querySelector(`.${this.classNames.scrollbar}`) ||
-      null;
+      this.axis.y.track.el?.querySelector(
+        classNamesToQuery(this.classNames.scrollbar)
+      ) || null;
 
     if (!this.options.autoHide) {
-      this.axis.x.scrollbar.el?.classList.add(this.classNames.visible);
-      this.axis.y.scrollbar.el?.classList.add(this.classNames.visible);
+      addClasses(this.axis.x.scrollbar.el, this.classNames.visible);
+      addClasses(this.axis.y.scrollbar.el, this.classNames.visible);
     }
   }
 
@@ -578,14 +600,14 @@ export default class SimpleBarCore {
 
   showScrollbar(axis: Axis = 'y') {
     if (this.axis[axis].isOverflowing && !this.axis[axis].scrollbar.isVisible) {
-      this.axis[axis].scrollbar.el?.classList.add(this.classNames.visible);
+      addClasses(this.axis[axis].scrollbar.el, this.classNames.visible);
       this.axis[axis].scrollbar.isVisible = true;
     }
   }
 
   hideScrollbar(axis: Axis = 'y') {
     if (this.axis[axis].isOverflowing && this.axis[axis].scrollbar.isVisible) {
-      this.axis[axis].scrollbar.el?.classList.remove(this.classNames.visible);
+      removeClasses(this.axis[axis].scrollbar.el, this.classNames.visible);
       this.axis[axis].scrollbar.isVisible = false;
     }
   }
@@ -621,7 +643,7 @@ export default class SimpleBarCore {
 
     if (!this.isScrolling) {
       this.isScrolling = true;
-      this.el.classList.add(this.classNames.scrolling);
+      addClasses(this.el, this.classNames.scrolling);
     }
 
     this.showScrollbar('x');
@@ -647,7 +669,7 @@ export default class SimpleBarCore {
   };
 
   _onStopScrolling = () => {
-    this.el.classList.remove(this.classNames.scrolling);
+    removeClasses(this.el, this.classNames.scrolling);
     if (this.options.autoHide) {
       this.hideScrollbar('x');
       this.hideScrollbar('y');
@@ -657,7 +679,7 @@ export default class SimpleBarCore {
 
   onMouseEnter = () => {
     if (!this.isMouseEntering) {
-      this.el.classList.add(this.classNames.mouseEntered);
+      addClasses(this.el, this.classNames.mouseEntered);
       this.showScrollbar('x');
       this.showScrollbar('y');
       this.isMouseEntering = true;
@@ -666,7 +688,7 @@ export default class SimpleBarCore {
   };
 
   _onMouseEntered = () => {
-    this.el.classList.remove(this.classNames.mouseEntered);
+    removeClasses(this.el, this.classNames.mouseEntered);
     if (this.options.autoHide) {
       this.hideScrollbar('x');
       this.hideScrollbar('y');
@@ -697,15 +719,15 @@ export default class SimpleBarCore {
 
     if (this.isWithinBounds(currentAxis.track.rect)) {
       this.showScrollbar(axis);
-      currentAxis.track.el.classList.add(this.classNames.hover);
+      addClasses(currentAxis.track.el, this.classNames.hover);
 
       if (this.isWithinBounds(currentAxis.scrollbar.rect)) {
-        currentAxis.scrollbar.el.classList.add(this.classNames.hover);
+        addClasses(currentAxis.scrollbar.el, this.classNames.hover);
       } else {
-        currentAxis.scrollbar.el.classList.remove(this.classNames.hover);
+        removeClasses(currentAxis.scrollbar.el, this.classNames.hover);
       }
     } else {
-      currentAxis.track.el.classList.remove(this.classNames.hover);
+      removeClasses(currentAxis.track.el, this.classNames.hover);
       if (this.options.autoHide) {
         this.hideScrollbar(axis);
       }
@@ -728,8 +750,8 @@ export default class SimpleBarCore {
   };
 
   onMouseLeaveForAxis(axis: Axis = 'y') {
-    this.axis[axis].track.el?.classList.remove(this.classNames.hover);
-    this.axis[axis].scrollbar.el?.classList.remove(this.classNames.hover);
+    removeClasses(this.axis[axis].track.el, this.classNames.hover);
+    removeClasses(this.axis[axis].scrollbar.el, this.classNames.hover);
     if (this.options.autoHide) {
       this.hideScrollbar(axis);
     }
@@ -809,7 +831,7 @@ export default class SimpleBarCore {
       eventOffset - (scrollbar.rect?.[this.axis[axis].offsetAttr] || 0);
     this.draggedAxis = axis;
 
-    this.el.classList.add(this.classNames.dragging);
+    addClasses(this.el, this.classNames.dragging);
 
     elDocument.addEventListener('mousemove', this.drag, true);
     elDocument.addEventListener('mouseup', this.onEndDrag, true);
@@ -884,7 +906,7 @@ export default class SimpleBarCore {
     e.preventDefault();
     e.stopPropagation();
 
-    this.el.classList.remove(this.classNames.dragging);
+    removeClasses(this.el, this.classNames.dragging);
 
     elDocument.removeEventListener('mousemove', this.drag, true);
     elDocument.removeEventListener('mouseup', this.onEndDrag, true);

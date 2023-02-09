@@ -1,7 +1,7 @@
 import canUseDOM from 'can-use-dom';
 import SimpleBarCore from 'simplebar-core';
 
-const { getOptions } = SimpleBarCore;
+const { getOptions, addClasses } = SimpleBarCore.helpers;
 
 export default class SimpleBar extends SimpleBarCore {
   static globalObserver: MutationObserver;
@@ -54,16 +54,18 @@ export default class SimpleBar extends SimpleBarCore {
       this.placeholderEl = document.createElement('div');
       this.heightAutoObserverWrapperEl = document.createElement('div');
       this.heightAutoObserverEl = document.createElement('div');
-      this.wrapperEl.classList.add(this.classNames.wrapper);
-      this.contentWrapperEl.classList.add(this.classNames.contentWrapper);
-      this.offsetEl.classList.add(this.classNames.offset);
-      this.maskEl.classList.add(this.classNames.mask);
-      this.contentEl.classList.add(this.classNames.contentEl);
-      this.placeholderEl.classList.add(this.classNames.placeholder);
-      this.heightAutoObserverWrapperEl.classList.add(
+      addClasses(this.wrapperEl, this.classNames.wrapper);
+      addClasses(this.contentWrapperEl, this.classNames.contentWrapper);
+      addClasses(this.offsetEl, this.classNames.offset);
+      addClasses(this.maskEl, this.classNames.mask);
+      addClasses(this.contentEl, this.classNames.contentEl);
+      addClasses(this.placeholderEl, this.classNames.placeholder);
+      addClasses(
+        this.heightAutoObserverWrapperEl,
         this.classNames.heightAutoObserverWrapperEl
       );
-      this.heightAutoObserverEl.classList.add(
+      addClasses(
+        this.heightAutoObserverEl,
         this.classNames.heightAutoObserverEl
       );
 
@@ -89,16 +91,16 @@ export default class SimpleBar extends SimpleBarCore {
       const track = document.createElement('div');
       const scrollbar = document.createElement('div');
 
-      track.classList.add(this.classNames.track);
-      scrollbar.classList.add(this.classNames.scrollbar);
+      addClasses(track, this.classNames.track);
+      addClasses(scrollbar, this.classNames.scrollbar);
 
       track.appendChild(scrollbar);
 
       this.axis.x.track.el = track.cloneNode(true) as HTMLElement;
-      this.axis.x.track.el.classList.add(this.classNames.horizontal);
+      addClasses(this.axis.x.track.el, this.classNames.horizontal);
 
       this.axis.y.track.el = track.cloneNode(true) as HTMLElement;
-      this.axis.y.track.el.classList.add(this.classNames.vertical);
+      addClasses(this.axis.y.track.el, this.classNames.vertical);
 
       this.el.appendChild(this.axis.x.track.el);
       this.el.appendChild(this.axis.y.track.el);
