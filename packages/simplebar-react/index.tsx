@@ -99,29 +99,24 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
           <div className={classNames.heightAutoObserverWrapperEl}>
             <div className={classNames.heightAutoObserverEl} />
           </div>
-          <div className={classNames.mask}>
-            <div className={classNames.offset}>
-              {typeof children === 'function' ? (
-                children({
-                  scrollableNodeRef,
-                  scrollableNodeProps: {
-                    ...scrollableNodeFullProps,
-                    ref: scrollableNodeRef,
-                  },
-                  contentNodeRef,
-                  contentNodeProps: {
-                    className: classNames.contentEl,
-                    ref: contentNodeRef,
-                  },
-                })
-              ) : (
-                <div {...scrollableNodeFullProps}>
-                  <div className={classNames.contentEl}>{children}</div>
-                </div>
-              )}
+          {typeof children === 'function' ? (
+            children({
+              scrollableNodeRef,
+              scrollableNodeProps: {
+                ...scrollableNodeFullProps,
+                ref: scrollableNodeRef,
+              },
+              contentNodeRef,
+              contentNodeProps: {
+                className: classNames.contentEl,
+                ref: contentNodeRef,
+              },
+            })
+          ) : (
+            <div {...scrollableNodeFullProps}>
+              <div className={classNames.contentEl}>{children}</div>
             </div>
-          </div>
-          <div className={classNames.placeholder} />
+          )}
         </div>
         <div className={`${classNames.track} simplebar-horizontal`}>
           <div className={classNames.scrollbar} />

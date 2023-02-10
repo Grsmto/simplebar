@@ -61,45 +61,39 @@ function renderFn({ h, emit, slots, props }: any) {
           h('div', { class: classNames.heightAutoObserverWrapperEl }, [
             h('div', { class: classNames.heightAutoObserverEl }),
           ]),
-          h('div', { class: classNames.mask }, [
-            h('div', { class: classNames.offset }, [
+          h(
+            'div',
+            {
+              ...(isVue3
+                ? {
+                    onScroll,
+                    class: classNames.contentWrapper,
+                    tabIndex: 0,
+                    role: 'region',
+                    'aria-label':
+                      props.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
+                  }
+                : {
+                    attrs: {
+                      class: classNames.contentWrapper,
+                      tabIndex: 0,
+                      role: 'region',
+                      'aria-label':
+                        props.ariaLabel ||
+                        SimpleBarCore.defaultOptions.ariaLabel,
+                    },
+                    on: { scroll: onScroll },
+                  }),
+              ref: 'scrollElement',
+            },
+            [
               h(
                 'div',
-                {
-                  ...(isVue3
-                    ? {
-                        onScroll,
-                        class: classNames.contentWrapper,
-                        tabIndex: 0,
-                        role: 'region',
-                        'aria-label':
-                          props.ariaLabel ||
-                          SimpleBarCore.defaultOptions.ariaLabel,
-                      }
-                    : {
-                        attrs: {
-                          class: classNames.contentWrapper,
-                          tabIndex: 0,
-                          role: 'region',
-                          'aria-label':
-                            props.ariaLabel ||
-                            SimpleBarCore.defaultOptions.ariaLabel,
-                        },
-                        on: { scroll: onScroll },
-                      }),
-                  ref: 'scrollElement',
-                },
-                [
-                  h(
-                    'div',
-                    { class: classNames.contentEl, ref: 'contentElement' },
-                    slots.default?.()
-                  ),
-                ]
+                { class: classNames.contentEl, ref: 'contentElement' },
+                slots.default?.()
               ),
-            ]),
-          ]),
-          h('div', { class: classNames.placeholder }),
+            ]
+          ),
         ]
       ),
       h('div', { class: `${classNames.track} simplebar-horizontal` }, [

@@ -48,18 +48,12 @@ export default class SimpleBar extends SimpleBarCore {
       // Prepare DOM
       this.wrapperEl = document.createElement('div');
       this.contentWrapperEl = document.createElement('div');
-      this.offsetEl = document.createElement('div');
-      this.maskEl = document.createElement('div');
       this.contentEl = document.createElement('div');
-      this.placeholderEl = document.createElement('div');
       this.heightAutoObserverWrapperEl = document.createElement('div');
       this.heightAutoObserverEl = document.createElement('div');
       addClasses(this.wrapperEl, this.classNames.wrapper);
       addClasses(this.contentWrapperEl, this.classNames.contentWrapper);
-      addClasses(this.offsetEl, this.classNames.offset);
-      addClasses(this.maskEl, this.classNames.mask);
       addClasses(this.contentEl, this.classNames.contentEl);
-      addClasses(this.placeholderEl, this.classNames.placeholder);
       addClasses(
         this.heightAutoObserverWrapperEl,
         this.classNames.heightAutoObserverWrapperEl
@@ -74,12 +68,9 @@ export default class SimpleBar extends SimpleBarCore {
       }
 
       this.contentWrapperEl.appendChild(this.contentEl);
-      this.offsetEl.appendChild(this.contentWrapperEl);
-      this.maskEl.appendChild(this.offsetEl);
       this.heightAutoObserverWrapperEl.appendChild(this.heightAutoObserverEl);
+      this.wrapperEl.appendChild(this.contentWrapperEl);
       this.wrapperEl.appendChild(this.heightAutoObserverWrapperEl);
-      this.wrapperEl.appendChild(this.maskEl);
-      this.wrapperEl.appendChild(this.placeholderEl);
       this.el.appendChild(this.wrapperEl);
 
       this.contentWrapperEl?.setAttribute('tabindex', '0');
