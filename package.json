@@ -3,6 +3,11 @@
   "workspaces": {
     "packages": [
       "packages/*"
+    ],
+    "nohoist": [
+      "**/webpack/**",
+      "**/webpack-dev-server/**",
+      "**/webpack-cli/**"
     ]
   },
   "scripts": {
@@ -55,7 +60,8 @@
     "rollup-plugin-license": "^3.0.1",
     "rollup-plugin-terser": "^7.0.2",
     "ts-jest": "^29.0.3",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.2",
+    "webpack-cli": "^5.0.1"
   },
   "resolutions": {
     "@types/react": "18.0.26"

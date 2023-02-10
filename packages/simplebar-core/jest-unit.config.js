@@ -8,7 +8,7 @@ module.exports = {
     '^.+\\.js?$': 'babel-jest',
   },
   moduleNameMapper: {
-    '^lodash-es/(.*)$': 'lodash/$1',
+    '^lodash-es/*(.*)$': 'lodash/$1',
   },
   testEnvironment: 'jsdom',
 };
