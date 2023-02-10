@@ -518,6 +518,7 @@ export default class SimpleBarCore {
 
   showScrollbar(axis: Axis = 'y'): void {
     if (this.axis[axis].isOverflowing && !this.axis[axis].scrollbar.isVisible) {
+      addClasses(this.axis[axis].track.el, this.classNames.visible);
       addClasses(this.axis[axis].scrollbar.el, this.classNames.visible);
       this.axis[axis].scrollbar.isVisible = true;
     }
@@ -525,6 +526,7 @@ export default class SimpleBarCore {
 
   hideScrollbar(axis: Axis = 'y'): void {
     if (this.axis[axis].isOverflowing && this.axis[axis].scrollbar.isVisible) {
+      removeClasses(this.axis[axis].track.el, this.classNames.visible);
       removeClasses(this.axis[axis].scrollbar.el, this.classNames.visible);
       this.axis[axis].scrollbar.isVisible = false;
     }
