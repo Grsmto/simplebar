@@ -48,10 +48,6 @@ const Demo = () => {
 
     Array.prototype.forEach.call(perfEls, (el, i) => {
       new SimpleBar(el);
-
-      if (i + 1 === perfEls.length) {
-        console.log(performance.now() - start);
-      }
     });
 
     // this.scrollableElRef.current.addEventListener('scroll', e =>
@@ -170,16 +166,6 @@ const Demo = () => {
             <div className="box">5</div>
           </div>
         </div>
-        <div className="col">
-          <h2>Horizontal native</h2>
-          <div className="demo4" style={{ width: '200px' }}>
-            <div className="box">1</div>
-            <div className="box">2</div>
-            <div className="box">3</div>
-            <div className="box">4</div>
-            <div className="box">5</div>
-          </div>
-        </div>
       </section>
       <section>
         <div className="col">
@@ -246,24 +232,6 @@ const Demo = () => {
         </div>
       </section>
       <section>
-        <h2>Flex layout</h2>
-        <Playground width>
-          {({ width }) => (
-            <div className="demo-flex">
-              <div className="left" data-simplebar>
-                <div className="content" />
-              </div>
-              <div className="center" data-simplebar>
-                <div className="content" />
-              </div>
-              <div className="right" data-simplebar style={{ width }}>
-                <div className="content" />
-              </div>
-            </div>
-          )}
-        </Playground>
-      </section>
-      <section>
         <div className="col">
           <h2>forceVisible true</h2>
           <div className="demo-height-auto" data-simplebar>
@@ -300,18 +268,6 @@ const Demo = () => {
       </section>
       <section>
         <div className="col">
-          <h2>Performance test</h2>
-          {Array.from(Array(10)).map((x, i) => (
-            <div key={i} className="demo-perf">
-              {Array.from(Array(5)).map((x, i) => (
-                <p key={i} className="odd">
-                  Some content
-                </p>
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="col">
           <h2>Hidden init</h2>
           <button onClick={handleShowClick}>Show</button>
           <div hidden={isHidden}>
@@ -324,8 +280,6 @@ const Demo = () => {
             </div>
           </div>
         </div>
-      </section>
-      <section>
         <div className="col">
           <h2>SimpleBar-React + refs</h2>
           <SimpleBarReact className="demo1" autoHide={false} forceVisible="x">

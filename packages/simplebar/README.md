@@ -77,8 +77,7 @@ To make sure your elements are scrollable when JavaScript is disabled, it's impo
       -ms-overflow-style: auto;
     }
 
-    .simplebar-content-wrapper::-webkit-scrollbar,
-    .simplebar-hide-scrollbar::-webkit-scrollbar {
+    .simplebar-content-wrapper::-webkit-scrollbar {
       display: initial;
       width: initial;
       height: initial;
