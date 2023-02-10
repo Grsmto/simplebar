@@ -68,3 +68,22 @@ export function removeClasses(el: HTMLElement | null, classes: string) {
 export function classNamesToQuery(classNames: string) {
   return `.${classNames.split(' ').join('.')}`;
 }
+
+export function mergeClassNames(
+  defaultClassNames: ClassNames,
+  customClassNames: SimpleBarOptions['classNames']
+): ClassNames {
+  const mergedClassNames = { ...defaultClassNames };
+
+  if (!customClassNames) return defaultClassNames;
+
+  for (const key in defaultClassNames) {
+    if (!customClassNames[key as keyof SimpleBarOptions['classNames']])
+      continue;
+    mergedClassNames[key as keyof ClassNames] = `${
+      defaultClassNames[key as keyof SimpleBarOptions['classNames']]
+    } ${customClassNames[key as keyof SimpleBarOptions['classNames']]}`;
+  }
+
+  return mergedClassNames;
+}

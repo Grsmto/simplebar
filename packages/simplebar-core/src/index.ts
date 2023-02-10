@@ -18,7 +18,7 @@ interface Options {
 
 export interface SimpleBarOptions extends Partial<Options> {}
 
-type ClassNames = {
+export type ClassNames = {
   contentEl: string;
   contentWrapper: string;
   offset: string;
@@ -78,6 +78,7 @@ const {
   addClasses,
   removeClasses,
   classNamesToQuery,
+  mergeClassNames,
 } = helpers;
 
 export default class SimpleBarCore {
@@ -153,10 +154,10 @@ export default class SimpleBarCore {
   constructor(element: HTMLElement, options: Partial<Options> = {}) {
     this.el = element;
     this.options = { ...SimpleBarCore.defaultOptions, ...options };
-    this.classNames = {
-      ...SimpleBarCore.defaultOptions.classNames,
-      ...options.classNames,
-    } as ClassNames;
+    this.classNames = mergeClassNames(
+      SimpleBarCore.defaultOptions.classNames as ClassNames,
+      options.classNames
+    );
     this.axis = {
       x: {
         scrollOffsetAttr: 'scrollLeft',
