@@ -40,6 +40,13 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   },
+  "workspaces": {
+    "nohoist": [
+      "webpack",
+      "webpack-dev-server",
+      "webpack-cli"
+    ]
+  },
   "lint-staged": {
     "*.{js,jsx,json}": [
       "prettier-eslint --write",
