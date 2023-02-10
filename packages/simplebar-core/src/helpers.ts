@@ -1,6 +1,6 @@
-import type { SimpleBarOptions } from './index';
+import type { ClassNames, SimpleBarOptions } from './index';
 
-export function getElementWindow(element: Element) {
+export function getElementWindow(element: Element): Window & typeof globalThis {
   if (
     !element ||
     !element.ownerDocument ||
@@ -11,15 +11,33 @@ export function getElementWindow(element: Element) {
   return element.ownerDocument.defaultView;
 }
 
-export function getElementDocument(element: Element) {
+export function getElementDocument(element: Element): Document {
   if (!element || !element.ownerDocument) {
     return document;
   }
   return element.ownerDocument;
 }
 
+/**
+ * Get the offset of an element relative to the document
+ * @param el Element to get offset for
+ */
+export function getOffset(el: Element): { top: number; left: number } {
+  const rect = el.getBoundingClientRect();
+  const elDocument = getElementDocument(el);
+  const elWindow = getElementWindow(el);
+
+  return {
+    top:
+      rect.top + (elWindow.pageYOffset || elDocument.documentElement.scrollTop),
+    left:
+      rect.left +
+      (elWindow.pageXOffset || elDocument.documentElement.scrollLeft),
+  };
+}
+
 // Helper function to retrieve options from element attributes
-export const getOptions = function (obj: any) {
+export function getOptions(obj: any): SimpleBarOptions {
   const initialObj: SimpleBarOptions = {};
 
   const options = Array.prototype.reduce.call(
@@ -51,21 +69,21 @@ export const getOptions = function (obj: any) {
     initialObj
   );
   return options as SimpleBarOptions;
-};
+}
 
-export function addClasses(el: HTMLElement | null, classes: string) {
+export function addClasses(el: HTMLElement | null, classes: string): void {
   if (!el) return;
   el.classList.add(...classes.split(' '));
 }
 
-export function removeClasses(el: HTMLElement | null, classes: string) {
+export function removeClasses(el: HTMLElement | null, classes: string): void {
   if (!el) return;
   classes.split(' ').forEach((className) => {
     el.classList.remove(className);
   });
 }
 
-export function classNamesToQuery(classNames: string) {
+export function classNamesToQuery(classNames: string): string {
   return `.${classNames.split(' ').join('.')}`;
 }
 
