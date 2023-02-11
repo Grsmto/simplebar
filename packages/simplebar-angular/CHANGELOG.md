@@ -1,5 +1,25 @@
 # v3.2.1 (Sat Feb 11 2023)
 
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] (oi@adriendenat.com)
+
+#### ⚠️ Pushed to `master`
+
+- feat(angular): downgrade back to Angular version 12 for better support (oi@adriendenat.com)
+- Publish (oi@adriendenat.com)
+- Revert "chore: remove unnecessary build step" (oi@adriendenat.com)
+- chore(core, react, vue, angular): set missing accessibility properties (oi@adriendenat.com)
+- chore: update READMEs (oi@adriendenat.com)
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
+# v3.2.1 (Sat Feb 11 2023)
+
 #### ⚠️ Pushed to `master`
 
 - feat(angular): downgrade back to Angular version 12 for better support ([@Grsmto](https://github.com/Grsmto))

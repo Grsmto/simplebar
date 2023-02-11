@@ -1,5 +1,30 @@
 # v3.2.1 (Sat Feb 11 2023)
 
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] (oi@adriendenat.com)
+
+#### ⚠️ Pushed to `master`
+
+- chore: add Auto so we don't have to write releaes/changelogs manually (oi@adriendenat.com)
+- Publish (oi@adriendenat.com)
+- fix(vue, react): fix usage of custom classNames (oi@adriendenat.com)
+- fix(react): fix support for custom classNames (oi@adriendenat.com)
+- feat(vue): set data-attribute on Vue plugin to be 1:1 with other plugins + bring back full test suite (oi@adriendenat.com)
+- fix(react): bring back data attribute to React plugin as it breaks CSS (oi@adriendenat.com)
+- Revert "chore: remove unnecessary build step" (oi@adriendenat.com)
+- chore(core, react, vue, angular): set missing accessibility properties (oi@adriendenat.com)
+- fix(react): prevent conflict between vanilla SimpleBar and react plugin (oi@adriendenat.com)
+- chore: update READMEs (oi@adriendenat.com)
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
+# v3.2.1 (Sat Feb 11 2023)
+
 #### ⚠️ Pushed to `master`
 
 - chore: add Auto so we don't have to write releaes/changelogs manually ([@Grsmto](https://github.com/Grsmto))
