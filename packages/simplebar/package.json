@@ -1,5 +1,5 @@
 {
-  "version": "6.2.0",
+  "version": "6.2.1",
   "name": "simplebar",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "can-use-dom": "^0.1.0",
-    "simplebar-core": "^1.2.0"
+    "simplebar-core": "^1.2.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.19.6",

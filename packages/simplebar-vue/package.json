@@ -1,6 +1,6 @@
 {
   "name": "simplebar-vue",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Vue component for SimpleBar",
   "files": [
     "dist",
@@ -33,7 +33,7 @@
     "use-vue:3": "node scripts/swap-vue.js 3 && vue-demi-switch 3"
   },
   "dependencies": {
-    "simplebar-core": "^1.2.0",
+    "simplebar-core": "^1.2.1",
     "vue-demi": "^0.13.11"
   },
   "peerDependencies": {
