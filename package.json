@@ -13,7 +13,7 @@
   "scripts": {
     "build": "lerna exec yarn build",
     "test": "lerna run test",
-    "release": "yarn build && yarn test && auto shipit",
+    "release": "yarn build && yarn test && auto changelog && lerna publish --pre-dist-tag beta --preid beta",
     "start": "lerna exec --scope=simplebar yarn start",
     "dev": "lerna exec --scope=simplebar yarn dev"
   },
