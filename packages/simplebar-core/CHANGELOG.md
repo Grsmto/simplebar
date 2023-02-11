@@ -1,3 +1,28 @@
+# v1.2.1 (Sat Feb 11 2023)
+
+#### ⚠️ Pushed to `master`
+
+- chore: fix lodash-es in tests (oi@adriendenat.com)
+- fix(examples): fix Webpack version mismatch after Angular plugin downgrade (oi@adriendenat.com)
+- feat(core): start adding support for multiple classNames (ref #651) (oi@adriendenat.com)
+- chore(core): rollback to lodash-es so Angular doesn't complain of cjs (oi@adriendenat.com)
+- Publish (oi@adriendenat.com)
+- chore(core): update tests after changes (oi@adriendenat.com)
+- feat(core, vanilla): remove all unnecessary DOM manipulations from core (oi@adriendenat.com)
+- Revert "chore: remove unnecessary build step" (oi@adriendenat.com)
+- fix(core): fix scrollbar hiding even while scrolling (oi@adriendenat.com)
+- chore(core, react, vue, angular): set missing accessibility properties (oi@adriendenat.com)
+- fix(core): fix overflow: auto applied to wrong element on new v6 release (oi@adriendenat.com)
+- feat(core): set "overflow: auto" by default instead of "hidden" on scrollable element (oi@adriendenat.com)
+- fix(core): fix scrollbar not showing up initially for framework plugins when autoHide: false (oi@adriendenat.com)
+- chore: update READMEs (oi@adriendenat.com)
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 ## 6.0.0
 
 ### Major
