@@ -8,3 +8,4 @@ yarn-error.log
 .idea
 yalc.lock
 .yalc
+local.log
