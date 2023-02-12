@@ -6,7 +6,8 @@
   align-content: flex-start;
   align-items: flex-start;
 
-  --scrollbar-width: 7px;
+  --simplebar-scrollbar-thickness: 7px;
+  --simplebar-track-thickness: 11px;
 }
 
 .simplebar-wrapper {
@@ -50,40 +51,6 @@
   pointer-events: none;
 }
 
-.simplebar-height-auto-observer-wrapper {
-  box-sizing: inherit !important;
-  height: 100%;
-  width: 100%;
-  max-width: 1px;
-  position: relative;
-  float: left;
-  max-height: 1px;
-  overflow: hidden;
-  z-index: -1;
-  padding: 0;
-  margin: 0;
-  pointer-events: none;
-  flex-grow: inherit;
-  flex-shrink: 0;
-  flex-basis: 0;
-}
-
-.simplebar-height-auto-observer {
-  box-sizing: inherit;
-  display: block;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 1000%;
-  width: 1000%;
-  min-height: 1px;
-  min-width: 1px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: -1;
-}
-
 .simplebar-track {
   z-index: 1;
   position: absolute;
@@ -98,12 +65,18 @@
 .simplebar-track.simplebar-vertical {
   top: 0;
   width: 11px;
-  width: calc(var(--scrollbar-width) + 4px);
+  width: var(--simplebar-track-thickness);
 }
 
 .simplebar-track.simplebar-horizontal {
   left: 0;
   height: 11px;
+  height: var(--simplebar-track-thickness);
+}
+
+.simplebar-scrollable-x.simplebar-scrollable-y
+  .simplebar-track.simplebar-horizontal {
+  clip-path: inset(0px var(--simplebar-track-thickness) 0px 0px);
 }
 
 [data-simplebar].simplebar-dragging {
@@ -142,8 +115,12 @@
   content: '';
   background: black;
   border-radius: 7px;
+  border-radius: var(--simplebar-scrollbar-thickness);
+  top: 2px;
+  bottom: 2px;
   left: 2px;
   right: 2px;
+  margin: auto;
   opacity: 0;
   transition: opacity 0.2s 0.5s linear;
 }
@@ -152,13 +129,6 @@
   opacity: 0.5;
   transition-delay: 0s;
   transition-duration: 0s;
-}
-
-.simplebar-scrollbar:before {
-  top: 2px;
-  bottom: 2px;
-  left: 2px;
-  right: 2px;
 }
 
 .simplebar-track.simplebar-horizontal .simplebar-scrollbar {
@@ -177,7 +147,54 @@
   visibility: visible;
 }
 
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
+  height: 7px;
+  height: var(--simplebar-scrollbar-thickness);
+}
+
+.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
+  width: 7px;
+  width: var(--simplebar-scrollbar-thickness);
+}
+
+/* Utils */
+
+.simplebar-height-auto-observer-wrapper {
+  box-sizing: inherit !important;
+  height: 100%;
+  width: 100%;
+  max-width: 1px;
+  position: relative;
+  float: left;
+  max-height: 1px;
+  overflow: hidden;
+  z-index: -1;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  flex-grow: inherit;
+  flex-shrink: 0;
+  flex-basis: 0;
+}
+
+.simplebar-height-auto-observer {
+  box-sizing: inherit;
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1000%;
+  width: 1000%;
+  min-height: 1px;
+  min-width: 1px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* Rtl support */
+
 [data-simplebar-direction='rtl'] .simplebar-track.simplebar-vertical {
   right: auto;
   left: 0;
