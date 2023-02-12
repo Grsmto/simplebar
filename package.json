@@ -3,12 +3,17 @@
   "workspaces": {
     "packages": [
       "packages/*"
+    ],
+    "nohoist": [
+      "**/webpack/**",
+      "**/webpack-dev-server/**",
+      "**/webpack-cli/**"
     ]
   },
   "scripts": {
     "build": "lerna exec yarn build",
     "test": "lerna run test",
-    "release": "yarn build && yarn test && auto shipit",
+    "release": "yarn build && yarn test && auto changelog && lerna publish --pre-dist-tag beta --preid beta",
     "start": "lerna exec --scope=simplebar yarn start",
     "dev": "lerna exec --scope=simplebar yarn dev"
   },
@@ -55,7 +60,8 @@
     "rollup-plugin-license": "^3.0.1",
     "rollup-plugin-terser": "^7.0.2",
     "ts-jest": "^29.0.3",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.2",
+    "webpack-cli": "^5.0.1"
   },
   "resolutions": {
     "@types/react": "18.0.26"

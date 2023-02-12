@@ -146,13 +146,23 @@ $('.myElements').each((el) => new SimpleBar(el));
 
 The default styling is applied with CSS. There is no "built-in" way to style the scrollbar, you just need to override the default CSS.
 
-Ex, to change the color of the scrollbar:
+#### Change the scrollbar color
 
 ```css
 .simplebar-scrollbar::before {
   background-color: red;
 }
 ```
+
+#### Change the scrollbar width
+
+```css
+[data-simplebar] {
+  --scrollbar-width: 12px;
+}
+```
+
+_Since IE11 does not support CSS custom properties, you will need to override the CSS directly instead._
 
 ### Options
 
@@ -245,6 +255,8 @@ This option is deprecated. You can now achieve this in CSS:
 Controls the click on track behaviour.
 
 Default to `true`.
+
+We recommend leaving this enabled for accessibility reasons.
 
 #### scrollbarMinSize / scrollbarMaxSize
 
