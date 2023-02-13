@@ -200,6 +200,11 @@
   left: 0;
 }
 
+[data-simplebar-direction='rtl'].simplebar-scrollable-x.simplebar-scrollable-y
+  .simplebar-track.simplebar-horizontal {
+  clip-path: inset(0px 0px 0px var(--simplebar-track-thickness));
+}
+
 .simplebar-dummy-scrollbar-size {
   direction: rtl;
   position: fixed;

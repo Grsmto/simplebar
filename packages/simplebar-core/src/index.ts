@@ -100,7 +100,6 @@ export default class SimpleBarCore {
   heightAutoObserverWrapperEl: HTMLElement | null = null;
   heightAutoObserverEl: HTMLElement | null = null;
   rtlHelpers: RtlHelpers = null;
-  scrollbarWidth: number = 0;
   resizeObserver: ResizeObserver | null = null;
   mutationObserver: MutationObserver | null = null;
   elStyles: CSSStyleDeclaration | null = null;
@@ -451,6 +450,13 @@ export default class SimpleBarCore {
 
   positionScrollbar(axis: Axis = 'y'): void {
     const scrollbar = this.axis[axis].scrollbar;
+    const bothAxis = this.axis.x.isOverflowing && this.axis.y.isOverflowing;
+    const offset =
+      (bothAxis &&
+        this.axis[axis].track.rect?.[
+          axis === 'x' ? this.axis.y.sizeAttr : this.axis.x.sizeAttr
+        ]) ||
+      0;
 
     if (
       !this.axis[axis].isOverflowing ||
@@ -488,6 +494,15 @@ export default class SimpleBarCore {
       axis === 'x' && this.isRtl
         ? -handleOffset + (trackSize - scrollbar.size)
         : handleOffset;
+
+    if (this.isRtl) {
+      handleOffset =
+        axis === 'x' ? Math.max(offset, handleOffset) : handleOffset;
+      handleOffset =
+        axis === 'y' ? Math.max(0, handleOffset - offset) : handleOffset;
+    } else {
+      handleOffset = Math.max(0, handleOffset - offset);
+    }
 
     scrollbar.el.style.transform =
       axis === 'x'
