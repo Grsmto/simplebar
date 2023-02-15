@@ -109,6 +109,7 @@ export default class SimpleBarCore {
   onMouseMove: DebouncedFunc<any> | (() => void) = () => null;
   onStopScrolling: DebouncedFunc<any> | (() => void) = () => null;
   onMouseEntered: DebouncedFunc<any> | (() => void) = () => null;
+  cache: WeakMap<HTMLElement, any> = new WeakMap();
 
   static rtlHelpers: RtlHelpers = null;
 
@@ -357,6 +358,7 @@ export default class SimpleBarCore {
       !this.wrapperEl
     )
       return;
+    this.clearCache();
 
     const elWindow = getElementWindow(this.el);
     this.elStyles = elWindow.getComputedStyle(this.el);
@@ -469,8 +471,12 @@ export default class SimpleBarCore {
 
     const contentSize = this.contentWrapperEl[this.axis[axis].scrollSizeAttr];
     const trackSize =
-      this.axis[axis].track.el?.[this.axis[axis].offsetSizeAttr] || 0;
-    const hostSize = parseInt(this.elStyles[this.axis[axis].sizeAttr], 10);
+      this.getCachedValue(
+        this.axis[axis].track.el,
+        this.axis[axis].offsetSizeAttr
+      ) || 0;
+    const hostSize =
+      this.getCachedValue(this.el, this.axis[axis].offsetSizeAttr) || 0;
 
     let scrollOffset = this.contentWrapperEl[this.axis[axis].scrollOffsetAttr];
 
@@ -771,10 +777,11 @@ export default class SimpleBarCore {
     const scrollbar = this.axis[this.draggedAxis].scrollbar;
     const contentSize =
       this.contentWrapperEl?.[this.axis[this.draggedAxis].scrollSizeAttr] ?? 0;
-    const hostSize = parseInt(
-      this.elStyles?.[this.axis[this.draggedAxis].sizeAttr] ?? '0px',
-      10
-    );
+    const hostSize =
+      this.getCachedValue(
+        this.el,
+        this.axis[this.draggedAxis].offsetSizeAttr
+      ) || 0;
 
     e.preventDefault();
     e.stopPropagation();
@@ -859,10 +866,8 @@ export default class SimpleBarCore {
       currentAxis.scrollbar.el.getBoundingClientRect();
     const scrollbar = this.axis[axis].scrollbar;
     const scrollbarOffset = scrollbar.rect?.[this.axis[axis].offsetAttr] ?? 0;
-    const hostSize = parseInt(
-      this.elStyles?.[this.axis[axis].sizeAttr] ?? '0px',
-      10
-    );
+    const hostSize =
+      this.getCachedValue(this.el, this.axis[axis].offsetSizeAttr) || 0;
     let scrolled = this.contentWrapperEl[this.axis[axis].scrollOffsetAttr];
     const t =
       axis === 'y'
@@ -967,5 +972,22 @@ export default class SimpleBarCore {
     return Array.prototype.filter.call(el.children, (child) =>
       matches.call(child, query)
     )[0];
+  }
+
+  getCachedValue(el: HTMLElement | null, attribute: keyof HTMLElement): any {
+    if (!el) return null;
+
+    const cachedValue = this.cache.get(el);
+
+    if (cachedValue) {
+      return cachedValue[attribute] || null;
+    } else {
+      this.cache.set(el, { [attribute]: el[attribute] });
+      return el[attribute];
+    }
+  }
+
+  clearCache(): any {
+    this.cache = new WeakMap();
   }
 }
