@@ -96,9 +96,6 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
     return (
       <div data-simplebar="init" ref={elRef} {...rest}>
         <div className={classNames.wrapper}>
-          <div className={classNames.heightAutoObserverWrapperEl}>
-            <div className={classNames.heightAutoObserverEl} />
-          </div>
           {typeof children === 'function' ? (
             children({
               scrollableNodeRef,

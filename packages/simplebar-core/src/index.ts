@@ -23,8 +23,6 @@ export type ClassNames = {
   wrapper: string;
   scrollbar: string;
   track: string;
-  heightAutoObserverWrapperEl: string;
-  heightAutoObserverEl: string;
   visible: string;
   horizontal: string;
   vertical: string;
@@ -97,8 +95,6 @@ export default class SimpleBarCore {
   wrapperEl: HTMLElement | null = null;
   contentWrapperEl: HTMLElement | null = null;
   contentEl: HTMLElement | null = null;
-  heightAutoObserverWrapperEl: HTMLElement | null = null;
-  heightAutoObserverEl: HTMLElement | null = null;
   rtlHelpers: RtlHelpers = null;
   resizeObserver: ResizeObserver | null = null;
   mutationObserver: MutationObserver | null = null;
@@ -125,8 +121,6 @@ export default class SimpleBarCore {
       wrapper: 'simplebar-wrapper',
       scrollbar: 'simplebar-scrollbar',
       track: 'simplebar-track',
-      heightAutoObserverWrapperEl: 'simplebar-height-auto-observer-wrapper',
-      heightAutoObserverEl: 'simplebar-height-auto-observer',
       visible: 'simplebar-visible',
       horizontal: 'simplebar-horizontal',
       vertical: 'simplebar-vertical',
@@ -267,12 +261,6 @@ export default class SimpleBarCore {
       this.options.contentNode ||
       this.el.querySelector(classNamesToQuery(this.classNames.contentEl));
 
-    this.heightAutoObserverWrapperEl = this.el.querySelector(
-      classNamesToQuery(this.classNames.heightAutoObserverWrapperEl)
-    );
-    this.heightAutoObserverEl = this.el.querySelector(
-      classNamesToQuery(this.classNames.heightAutoObserverEl)
-    );
     this.axis.x.track.el = this.findChild(
       this.el,
       `${classNamesToQuery(this.classNames.track)}${classNamesToQuery(
@@ -352,7 +340,6 @@ export default class SimpleBarCore {
 
   recalculate(): void {
     if (
-      !this.heightAutoObserverEl ||
       !this.contentEl ||
       !this.contentWrapperEl ||
       !this.wrapperEl
@@ -366,7 +353,6 @@ export default class SimpleBarCore {
 
     const contentElOffsetWidth = this.contentEl.offsetWidth;
 
-    const isHeightAuto = this.heightAutoObserverEl.offsetHeight <= 1;
 
     const contentWrapperElOffsetWidth = this.contentWrapperEl.offsetWidth;
 
@@ -379,7 +365,6 @@ export default class SimpleBarCore {
     const contentElScrollHeight = this.contentEl.scrollHeight;
     const contentElScrollWidth = this.contentEl.scrollWidth;
 
-    this.contentWrapperEl.style.height = isHeightAuto ? 'auto' : '100%';
 
     const contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
 

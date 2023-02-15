@@ -49,26 +49,15 @@ export default class SimpleBar extends SimpleBarCore {
       this.wrapperEl = document.createElement('div');
       this.contentWrapperEl = document.createElement('div');
       this.contentEl = document.createElement('div');
-      this.heightAutoObserverWrapperEl = document.createElement('div');
-      this.heightAutoObserverEl = document.createElement('div');
       addClasses(this.wrapperEl, this.classNames.wrapper);
       addClasses(this.contentWrapperEl, this.classNames.contentWrapper);
       addClasses(this.contentEl, this.classNames.contentEl);
-      addClasses(
-        this.heightAutoObserverWrapperEl,
-        this.classNames.heightAutoObserverWrapperEl
-      );
-      addClasses(
-        this.heightAutoObserverEl,
-        this.classNames.heightAutoObserverEl
-      );
 
       while (this.el.firstChild) {
         this.contentEl.appendChild(this.el.firstChild);
       }
 
       this.contentWrapperEl.appendChild(this.contentEl);
-      this.heightAutoObserverWrapperEl.appendChild(this.heightAutoObserverEl);
       this.wrapperEl.appendChild(this.contentWrapperEl);
       this.wrapperEl.appendChild(this.heightAutoObserverWrapperEl);
       this.el.appendChild(this.wrapperEl);
