@@ -1,0 +1,40 @@
+.SnapCarousel-story .snap-carousel-container {
+  height: 300px;
+  padding: 30px 0;
+}
+
+.SnapCarousel-story .slide {
+  padding: 0 15px;
+}
+
+.SnapCarousel-story.full-width .slide {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .SnapCarousel-story .slide {
+    width: calc(50% - ((2 * 5vw) / 2));
+  }
+
+  .SnapCarousel-story .slide:first-child {
+    margin-left: 5vw;
+  }
+
+  .SnapCarousel-story .slide:last-child {
+    margin-right: 5vw;
+  }
+}
+
+@media (max-width: 320px) {
+  .SnapCarousel-story .slide {
+    width: 100%;
+  }
+
+  .SnapCarousel-story .slide:first-child {
+    margin-left: 20px;
+  }
+
+  .SnapCarousel-story .slide:last-child {
+    margin-right: 20px;
+  }
+}

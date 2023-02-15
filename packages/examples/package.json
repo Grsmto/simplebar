@@ -16,7 +16,10 @@
     "start": "webpack serve --open --mode=development",
     "build": "webpack --mode=production",
     "serve": "serve",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "storybook": "storybook dev --port 6006",
+    "build-storybook": "storybook build",
+    "test-storybook": "test-storybook"
   },
   "dependencies": {
     "@babel/runtime": "^7.20.7",
@@ -27,6 +30,16 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@storybook/addon-actions": "next",
+    "@storybook/addon-essentials": "next",
+    "@storybook/addon-interactions": "next",
+    "@storybook/addon-links": "next",
+    "@storybook/addons": "next",
+    "@storybook/jest": "^0.0.10",
+    "@storybook/react": "next",
+    "@storybook/react-webpack5": "next",
+    "@storybook/test-runner": "0.10.0-next.1",
+    "@storybook/testing-library": "^0.0.14-next.0",
     "babel-loader": "^9.1.0",
     "css-loader": "^0.28.11",
     "promise": "^8.0.2",
@@ -34,11 +47,9 @@
     "react-select": "^2.4.3",
     "react-window": "^1.8.1",
     "serve": "^14.1.2",
+    "storybook": "next",
     "style-loader": "^3.3.1",
-    "ts-loader": "^9.4.2",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1"
+    "ts-loader": "^9.4.2"
   },
   "workspaces": {
     "nohoist": [

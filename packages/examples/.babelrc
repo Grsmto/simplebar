@@ -2,7 +2,7 @@
   "presets": [["@babel/preset-env", {
     "useBuiltIns": "entry",
     "corejs": "3.27"
-  }], "@babel/preset-react"],
+  }], "@babel/preset-react", "@babel/preset-typescript"],
   "plugins": ["transform-class-properties"],
   "env": {
     "test": {
