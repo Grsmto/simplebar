@@ -18,6 +18,7 @@
   "module": "./dist/index.mjs",
   "unpkg": "./dist/simplebar.min.js",
   "style": "./dist/simplebar.min.css",
+  "types": "./dist/index.d.ts",
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "license": "MIT",
