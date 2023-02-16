@@ -14,10 +14,11 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "style": "./dist/simplebar.min.css",
   "sideEffects": [
     "*.css"
   ],
+  "types": "./dist/index.d.ts",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "homepage": "https://grsmto.github.io/simplebar/",
   "license": "MIT",

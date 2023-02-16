@@ -12,8 +12,9 @@
     "url": "https://github.com/grsmto/simplebar.git",
     "directory": "packages/simplebar-vue"
   },
-  "main": "dist/simplebar-vue.js",
-  "module": "dist/simplebar-vue.esm.js",
+  "main": "./dist/simplebar-vue.js",
+  "module": "./dist/simplebar-vue.esm.js",
+  "style": "./dist/simplebar.min.css",
   "sideEffects": [
     "*.css"
   ],
