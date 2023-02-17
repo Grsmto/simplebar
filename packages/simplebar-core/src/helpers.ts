@@ -95,12 +95,16 @@ export function mergeClassNames(
 
   if (!customClassNames) return defaultClassNames;
 
-  for (const key in defaultClassNames) {
-    if (!customClassNames[key as keyof SimpleBarOptions['classNames']])
+  for (const _key in defaultClassNames) {
+    const key = _key as keyof SimpleBarOptions['classNames'];
+    if (
+      !customClassNames[key] ||
+      defaultClassNames[key] === customClassNames[key]
+    )
       continue;
-    mergedClassNames[key as keyof ClassNames] = `${
-      defaultClassNames[key as keyof SimpleBarOptions['classNames']]
-    } ${customClassNames[key as keyof SimpleBarOptions['classNames']]}`;
+    mergedClassNames[
+      key as keyof ClassNames
+    ] = `${defaultClassNames[key]} ${customClassNames[key]}`;
   }
 
   return mergedClassNames;
