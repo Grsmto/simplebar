@@ -1,10 +1,8 @@
 [data-simplebar] {
   position: relative;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 
   --simplebar-scrollbar-thickness: 7px;
   --simplebar-track-thickness: 11px;
@@ -12,10 +10,8 @@
 
 .simplebar-wrapper {
   overflow: hidden;
-  width: inherit;
-  height: inherit;
-  max-width: inherit;
-  max-height: inherit;
+  flex: 1;
+  width: 100%;
 }
 
 .simplebar-content-wrapper {
@@ -36,19 +32,6 @@
   display: none;
   width: 0;
   height: 0;
-}
-
-.simplebar-content:before,
-.simplebar-content:after {
-  content: ' ';
-  display: table;
-}
-
-.simplebar-placeholder {
-  max-height: 100%;
-  max-width: 100%;
-  width: 100%;
-  pointer-events: none;
 }
 
 .simplebar-track {
@@ -155,42 +138,6 @@
 .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
   width: 7px;
   width: var(--simplebar-scrollbar-thickness);
-}
-
-/* Utils */
-
-.simplebar-height-auto-observer-wrapper {
-  box-sizing: inherit !important;
-  height: 100%;
-  width: 100%;
-  max-width: 1px;
-  position: relative;
-  float: left;
-  max-height: 1px;
-  overflow: hidden;
-  z-index: -1;
-  padding: 0;
-  margin: 0;
-  pointer-events: none;
-  flex-grow: inherit;
-  flex-shrink: 0;
-  flex-basis: 0;
-}
-
-.simplebar-height-auto-observer {
-  box-sizing: inherit;
-  display: block;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 1000%;
-  width: 1000%;
-  min-height: 1px;
-  min-width: 1px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: -1;
 }
 
 /* Rtl support */
