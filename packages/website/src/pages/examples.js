@@ -3,7 +3,7 @@ import { jsx } from "theme-ui"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import Demo from "../../../examples/Demo"
+import Demo from "../components/Demo"
 
 import "../demo.css"
 

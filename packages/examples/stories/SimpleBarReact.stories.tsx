@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import type { StoryFn } from '@storybook/react';
+import { expect, jest } from '@storybook/jest';
+import { waitFor } from '@storybook/testing-library';
 import { FixedSizeList as List } from 'react-window';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import SimpleBar from 'simplebar';
-import SimpleBarReact from 'simplebar-react';
+import SimpleBarReact, { Props } from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 
 import './SimpleBar.css';
@@ -17,10 +19,12 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<{
-  className: string;
-  style: React.CSSProperties;
-}> = ({ className = '', style, ...options }) => (
+const Template: StoryFn<
+  {
+    className: string;
+    style: React.CSSProperties;
+  } & Props
+> = ({ className = '', style, ...options }) => (
   <div className={`SimpleBar-story ${className}`}>
     <SimpleBarReact style={style} {...options}>
       {Array.from(Array(10)).map((x, i) => (
@@ -48,6 +52,23 @@ export const WithBorder = Template.bind({});
 WithBorder.args = {
   ...SimpleBar.defaultOptions,
   style: { border: '60px solid' },
+};
+
+const WithImageTemplate: StoryFn<{
+  className: string;
+  style: React.CSSProperties;
+}> = ({ className = '', style, ...options }) => (
+  <div className={`SimpleBar-story ${className}`}>
+    <SimpleBarReact style={style} {...options}>
+      <img src="https://placekitten.com/2000/3000" />
+    </SimpleBarReact>
+  </div>
+);
+
+export const BothAxis = WithImageTemplate.bind({});
+BothAxis.args = {
+  ...SimpleBar.defaultOptions,
+  className: 'both-axis',
 };
 
 export const WithVirtual: FC<{
@@ -117,4 +138,57 @@ export const WithReactWindow: FC<any> = () => {
       </SimpleBarReact>
     </div>
   );
+};
+
+const WithRefTemplate: StoryFn<
+  {
+    className: string;
+    style: React.CSSProperties;
+    onScroll: () => void;
+  } & Props
+> = ({ className = '', style, onScroll, ...options }) => {
+  const scrollableElRef = React.useRef();
+
+  useEffect(() => {
+    scrollableElRef.current?.addEventListener('scroll', (e) => {
+      console.log('scroll');
+      onScroll(e);
+    });
+  });
+
+  return (
+    <div className={`SimpleBar-story ${className}`}>
+      <SimpleBarReact
+        style={style}
+        {...options}
+        scrollableNodeProps={{ ref: scrollableElRef }}
+      >
+        {Array.from(Array(10)).map((x, i) => (
+          <p key={i} className="odd">
+            Some content
+          </p>
+        ))}
+      </SimpleBarReact>
+    </div>
+  );
+};
+
+export const WithRef = WithRefTemplate.bind({});
+
+WithRef.args = {
+  ...SimpleBar.defaultOptions,
+  scrollableNodeProps: {},
+  // onScroll: jest.fn(),
+};
+
+WithRef.play = async ({ args, canvasElement }) => {
+  // console.log(args.onScroll);
+  // const nextBtn = canvasElement.querySelector('.carousel-nav__btn--next');
+  // userEvent.click(nextBtn);
+  // await waitFor(() =>
+  //   expect(
+  //     canvasElement.getElementsByClassName('.carousel-indicator__dot.active')
+  //   ).toBeDefined()
+  // );
+  // expect(args.onScroll).toHaveBeenCalled();
 };
