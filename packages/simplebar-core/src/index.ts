@@ -941,12 +941,17 @@ export default class SimpleBarCore {
 
     const cachedValue = this.cache.get(el);
 
-    if (cachedValue) {
-      return cachedValue[attribute] || null;
-    } else {
+    if (!cachedValue) {
       this.cache.set(el, { [attribute]: el[attribute] });
       return el[attribute];
     }
+
+    if (!cachedValue[attribute]) {
+      this.cache.set(el, { ...cachedValue, [attribute]: el[attribute] });
+      return el[attribute];
+    }
+
+    return cachedValue[attribute];
   }
 
   clearCache(): any {
