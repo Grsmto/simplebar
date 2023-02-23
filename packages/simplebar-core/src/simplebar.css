@@ -9,23 +9,32 @@
 }
 
 .simplebar-wrapper {
+  display: -ms-grid;
+  display: grid;
   overflow: hidden;
   flex: 1;
   width: 100%;
+  justify-items: flex-end;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 1fr;
 }
 
 .simplebar-content-wrapper {
   direction: inherit;
   box-sizing: border-box !important;
   position: relative;
-  display: block;
+  display: flex;
   height: 100%; /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
-  width: auto;
+  width: 100%;
   max-width: 100%; /* Not required for horizontal scroll to trigger */
   max-height: 100%; /* Needed for vertical scroll to trigger */
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
 }
 
 .simplebar-content-wrapper::-webkit-scrollbar {
@@ -50,20 +59,25 @@
 }
 
 .simplebar-track.simplebar-vertical {
+  position: relative;
   top: 0;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  -ms-grid-column: 2;
   width: 11px;
   width: var(--simplebar-track-thickness);
 }
 
 .simplebar-track.simplebar-horizontal {
+  position: absolute;
   left: 0;
   height: 11px;
   height: var(--simplebar-track-thickness);
 }
 
 .simplebar-scrollable-x.simplebar-scrollable-y
-  .simplebar-track.simplebar-horizontal {
-  clip-path: inset(0px var(--simplebar-track-thickness) 0px 0px);
+  .simplebar-track.simplebar-vertical {
+  clip-path: inset(0px 0px var(--simplebar-track-thickness) 0px);
 }
 
 [data-simplebar].simplebar-dragging {
@@ -120,7 +134,7 @@
 
 .simplebar-track.simplebar-horizontal .simplebar-scrollbar {
   right: auto;
-  left: 0;
+  left: auto;
   top: 0;
   bottom: 0;
   min-height: 0;
@@ -142,18 +156,6 @@
 .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
   width: 7px;
   width: var(--simplebar-scrollbar-thickness);
-}
-
-/* Rtl support */
-
-[data-simplebar-direction='rtl'] .simplebar-track.simplebar-vertical {
-  right: auto;
-  left: 0;
-}
-
-[data-simplebar-direction='rtl'].simplebar-scrollable-x.simplebar-scrollable-y
-  .simplebar-track.simplebar-horizontal {
-  clip-path: inset(0px 0px 0px var(--simplebar-track-thickness));
 }
 
 .simplebar-dummy-scrollbar-size {

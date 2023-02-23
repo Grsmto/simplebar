@@ -348,14 +348,15 @@ export default class SimpleBarCore {
     const elOverflowX = this.elStyles.overflowX;
     const elOverflowY = this.elStyles.overflowY;
 
-    this.scrollableEl.style.padding = `${this.elStyles.paddingTop} ${this.elStyles.paddingRight} ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
-    this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
-
     const scrollHeight = this.scrollableEl.scrollHeight;
     const scrollWidth = this.scrollableEl.scrollWidth;
     const scrollableElOffsetHeight = this.scrollableEl.offsetHeight;
     const scrollableElOffsetWidth = this.scrollableEl.offsetWidth;
 
+    if (this.isRtl) addClasses(this.el, this.classNames.rtl);
+
+    this.contentEl.style.padding = `${this.elStyles.paddingTop} ${this.elStyles.paddingRight} ${this.elStyles.paddingBottom} ${this.elStyles.paddingLeft}`;
+    this.wrapperEl.style.margin = `-${this.elStyles.paddingTop} -${this.elStyles.paddingRight} -${this.elStyles.paddingBottom} -${this.elStyles.paddingLeft}`;
 
     // Set isOverflowing to false if user explicitely set hidden overflow
     this.axis.x.isOverflowing =
@@ -448,14 +449,6 @@ export default class SimpleBarCore {
 
     let scrollOffset = this.scrollableEl[this.axis[axis].scrollOffsetAttr];
 
-
-    scrollOffset =
-      axis === 'x' &&
-      this.isRtl &&
-      SimpleBarCore.getRtlHelpers()?.isScrollOriginAtZero
-        ? -scrollOffset
-        : scrollOffset;
-
     if (axis === 'x' && this.isRtl) {
       scrollOffset = SimpleBarCore.getRtlHelpers()?.isScrollingToNegative
         ? scrollOffset
@@ -465,14 +458,12 @@ export default class SimpleBarCore {
     const scrollPourcent = scrollOffset / (contentSize - hostSize);
 
     let handleOffset = ~~((trackSize - scrollbar.size) * scrollPourcent);
-    handleOffset =
-      axis === 'x' && this.isRtl
-        ? -handleOffset + (trackSize - scrollbar.size)
-        : handleOffset;
 
     if (this.isRtl) {
       handleOffset =
-        axis === 'x' ? Math.max(offset, handleOffset) : handleOffset;
+        axis === 'x'
+          ? Math.max(-(trackSize - scrollbar.size) + offset, handleOffset)
+          : handleOffset;
       handleOffset =
         axis === 'y' ? Math.max(0, handleOffset - offset) : handleOffset;
     } else {
