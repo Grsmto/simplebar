@@ -34,6 +34,10 @@
   height: 0;
 }
 
+.simplebar-content {
+  flex: 1;
+}
+
 .simplebar-track {
   z-index: 1;
   position: absolute;

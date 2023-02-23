@@ -11,12 +11,14 @@ interface Options {
   classNames: Partial<ClassNames>;
   ariaLabel: string;
   scrollableNode: HTMLElement | null;
+  contentNode: HTMLElement | null;
   autoHide: boolean;
 }
 
 export interface SimpleBarOptions extends Partial<Options> {}
 
 export type ClassNames = {
+  contentEl: string;
   contentWrapper: string;
   wrapper: string;
   scrollbar: string;
@@ -91,6 +93,7 @@ export default class SimpleBarCore {
   scrollXTicking = false;
   scrollYTicking = false;
   wrapperEl: HTMLElement | null = null;
+  contentEl: HTMLElement | null = null;
   scrollableEl: HTMLElement | null = null;
   rtlHelpers: RtlHelpers = null;
   resizeObserver: ResizeObserver | null = null;
@@ -113,6 +116,7 @@ export default class SimpleBarCore {
     scrollbarMaxSize: 0,
     ariaLabel: 'scrollable content',
     classNames: {
+      contentEl: 'simplebar-content',
       contentWrapper: 'simplebar-content-wrapper',
       wrapper: 'simplebar-wrapper',
       scrollbar: 'simplebar-scrollbar',
@@ -252,14 +256,18 @@ export default class SimpleBarCore {
     this.scrollableEl =
       this.options.scrollableNode ||
       this.el.querySelector(classNamesToQuery(this.classNames.contentWrapper));
+    this.contentEl =
+      this.options.contentNode ||
+      this.el.querySelector(classNamesToQuery(this.classNames.contentEl));
+
     this.axis.x.track.el = this.findChild(
-      this.el,
+      this.wrapperEl,
       `${classNamesToQuery(this.classNames.track)}${classNamesToQuery(
         this.classNames.horizontal
       )}`
     );
     this.axis.y.track.el = this.findChild(
-      this.el,
+      this.wrapperEl,
       `${classNamesToQuery(this.classNames.track)}${classNamesToQuery(
         this.classNames.vertical
       )}`
@@ -308,7 +316,7 @@ export default class SimpleBarCore {
       });
 
       this.resizeObserver.observe(this.el);
-      this.resizeObserver.observe(this.scrollableEl);
+      this.resizeObserver.observe(this.contentEl);
 
       elWindow.requestAnimationFrame(() => {
         resizeObserverStarted = true;
@@ -330,8 +338,7 @@ export default class SimpleBarCore {
   }
 
   recalculate(): void {
-    if (!this.scrollableEl || !this.wrapperEl) return;
-
+    if (!this.contentEl || !this.scrollableEl || !this.wrapperEl) return;
     this.clearCache();
 
     const elWindow = getElementWindow(this.el);
@@ -385,11 +392,11 @@ export default class SimpleBarCore {
    * Calculate scrollbar size
    */
   getScrollbarSize(axis: Axis = 'y'): number {
-    if (!this.axis[axis].isOverflowing || !this.scrollableEl) {
+    if (!this.axis[axis].isOverflowing || !this.contentEl) {
       return 0;
     }
 
-    const contentSize = this.scrollableEl[this.axis[axis].scrollSizeAttr];
+    const contentSize =
     const trackSize =
       this.axis[axis].track.el?.[this.axis[axis].offsetSizeAttr] ?? 0;
     const scrollbarRatio = trackSize / contentSize;
@@ -421,6 +428,7 @@ export default class SimpleBarCore {
 
     if (
       !this.axis[axis].isOverflowing ||
+      !this.contentEl ||
       !this.scrollableEl ||
       !scrollbar.el ||
       !this.elStyles
@@ -428,7 +436,7 @@ export default class SimpleBarCore {
       return;
     }
 
-    const contentSize = this.scrollableEl[this.axis[axis].scrollSizeAttr];
+    const contentSize = this.contentEl[this.axis[axis].scrollSizeAttr];
     const trackSize =
       this.getCachedValue(
         this.axis[axis].track.el,
