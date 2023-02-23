@@ -93,11 +93,13 @@ export default class SimpleBarCore {
   scrollXTicking = false;
   scrollYTicking = false;
   wrapperEl: HTMLElement | null = null;
+  observerEl: HTMLElement | null = null;
   contentEl: HTMLElement | null = null;
   scrollableEl: HTMLElement | null = null;
   rtlHelpers: RtlHelpers = null;
   resizeObserver: ResizeObserver | null = null;
   mutationObserver: MutationObserver | null = null;
+  intersectionObserver: IntersectionObserver | null = null;
   elStyles: CSSStyleDeclaration | null = null;
   isRtl: boolean | null = null;
   mouseX: number = 0;
@@ -131,6 +133,7 @@ export default class SimpleBarCore {
       mouseEntered: 'simplebar-mouse-entered',
     },
     scrollableNode: null,
+    contentNode: null,
     autoHide: true,
   };
 
@@ -211,7 +214,6 @@ export default class SimpleBarCore {
     const dummyChild = scrollbarDummyEl?.firstElementChild;
 
     if (!dummyChild) return null;
-
     document.body.appendChild(scrollbarDummyEl);
 
     scrollbarDummyEl.scrollLeft = 0;
@@ -253,6 +255,7 @@ export default class SimpleBarCore {
     this.wrapperEl = this.el.querySelector(
       classNamesToQuery(this.classNames.wrapper)
     );
+    this.observerEl = this.el.querySelector('.simplebar-observer');
     this.scrollableEl =
       this.options.scrollableNode ||
       this.el.querySelector(classNamesToQuery(this.classNames.contentWrapper));
@@ -290,18 +293,15 @@ export default class SimpleBarCore {
 
   initListeners(): void {
     const elWindow = getElementWindow(this.el);
-    // Event listeners
 
     this.el.addEventListener('mouseenter', this.onMouseEnter);
-
     this.el.addEventListener('pointerdown', this.onPointerEvent, true);
-
     this.el.addEventListener('mousemove', this.onMouseMove);
     this.el.addEventListener('mouseleave', this.onMouseLeave);
 
     this.scrollableEl?.addEventListener('scroll', this.onScroll);
 
-    if (!this.scrollableEl) return;
+    if (!this.contentEl || !this.observerEl) return;
 
     if (window.ResizeObserver) {
       // Hack for https://github.com/WICG/ResizeObserver/issues/38
@@ -310,9 +310,7 @@ export default class SimpleBarCore {
       this.resizeObserver = new resizeObserver(() => {
         if (!resizeObserverStarted) return;
 
-        elWindow.requestAnimationFrame(() => {
-          this.recalculate();
-        });
+        elWindow.requestAnimationFrame(this.recalculate.bind(this));
       });
 
       this.resizeObserver.observe(this.el);
@@ -323,18 +321,29 @@ export default class SimpleBarCore {
       });
     }
 
-    // This is required to detect horizontal scroll. Vertical scroll only needs the resizeObserver.
-    this.mutationObserver = new elWindow.MutationObserver(() => {
-      elWindow.requestAnimationFrame(() => {
-        this.recalculate();
+    if (typeof MutationObserver !== 'undefined') {
+      // This is required to detect horizontal scroll. Vertical scroll only needs the resizeObserver.
+      this.mutationObserver = new elWindow.MutationObserver(() => {
+        elWindow.requestAnimationFrame(this.recalculate.bind(this));
       });
-    });
 
-    this.mutationObserver.observe(this.scrollableEl, {
-      childList: true,
-      subtree: true,
-      characterData: true,
-    });
+      this.mutationObserver.observe(this.contentEl, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
+    }
+
+    if (typeof IntersectionObserver !== 'undefined') {
+      this.intersectionObserver = new IntersectionObserver(
+        () => {
+          elWindow.requestAnimationFrame(this.recalculate.bind(this));
+        },
+        { root: this.observerEl }
+      );
+
+      this.intersectionObserver.observe(this.observerEl.firstChild as Element);
+    }
   }
 
   recalculate(): void {

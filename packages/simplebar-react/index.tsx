@@ -114,12 +114,15 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
               <div className={classNames.contentEl}>{children}</div>
             </div>
           )}
+          <div className={`${classNames.track} simplebar-horizontal`}>
+            <div className={classNames.scrollbar} />
+          </div>
+          <div className={`${classNames.track} simplebar-vertical`}>
+            <div className={classNames.scrollbar} />
+          </div>
         </div>
-        <div className={`${classNames.track} simplebar-horizontal`}>
-          <div className={classNames.scrollbar} />
-        </div>
-        <div className={`${classNames.track} simplebar-vertical`}>
-          <div className={classNames.scrollbar} />
+        <div className="simplebar-observer">
+          <div className="simplebar-observer-inner" />
         </div>
       </div>
     );
