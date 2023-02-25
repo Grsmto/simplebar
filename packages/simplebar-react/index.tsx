@@ -23,12 +23,13 @@ export interface Props
   scrollableNodeProps?: {
     ref?: any;
     className?: string;
+    onScroll?: any;
     [key: string]: any;
   };
 }
 
 const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
-  ({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
+  ({ children, scrollableNodeProps = {}, onScroll, ...otherProps }, ref) => {
     const elRef = React.useRef();
     const scrollableNodeRef = React.useRef<HTMLElement>();
     const contentNodeRef = React.useRef<HTMLElement>();
@@ -51,6 +52,7 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
     } as Required<(typeof SimpleBarCore.defaultOptions)['classNames']>;
 
     const scrollableNodeFullProps = {
+      onScroll,
       ...scrollableNodeProps,
       className: `${classNames.contentWrapper}${
         scrollableNodeProps.className ? ` ${scrollableNodeProps.className}` : ''
