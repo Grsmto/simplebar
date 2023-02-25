@@ -4,7 +4,7 @@ module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
 
   return {
-    entry: './index.js',
+    entry: './src/index.js',
     devtool: 'cheap-module-source-map',
     output: {
       filename: 'bundle.js',

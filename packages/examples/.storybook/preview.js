@@ -1,3 +1,5 @@
+import 'core-js/stable';
+
 import '../stories/styles.css';
 
 export const parameters = {

@@ -1,0 +1,14 @@
+.playground {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.playground__content {
+  grid-column-start: span 2;
+}
+
+.playground__config {
+  display: flex;
+  justify-content: space-evenly;
+}

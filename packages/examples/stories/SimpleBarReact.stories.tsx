@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import type { StoryFn } from '@storybook/react';
 import { expect, jest } from '@storybook/jest';
-import { waitFor } from '@storybook/testing-library';
+import { fireEvent, userEvent, waitFor } from '@storybook/testing-library';
 import { FixedSizeList as List } from 'react-window';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
@@ -23,9 +23,15 @@ const Template: StoryFn<
   {
     className: string;
     style: React.CSSProperties;
+    bothAxis: boolean;
+    directionRtl: boolean;
   } & Props
-> = ({ className = '', style, ...options }) => (
-  <div className={`SimpleBar-story ${className}`}>
+> = ({ className = '', style, bothAxis, directionRtl, ...options }) => (
+  <div
+    className={`SimpleBar-story ${className} ${bothAxis ? 'both-axis' : ''} ${
+      directionRtl ? 'direction-rtl' : ''
+    }`}
+  >
     <SimpleBarReact style={style} {...options}>
       {Array.from(Array(10)).map((x, i) => (
         <p key={i} className="odd">
@@ -54,13 +60,20 @@ WithBorder.args = {
   style: { border: '60px solid' },
 };
 
+export const DirectionRtl = Template.bind({});
+DirectionRtl.args = {
+  ...SimpleBar.defaultOptions,
+  bothAxis: true,
+  directionRtl: true,
+};
+
 const WithImageTemplate: StoryFn<{
   className: string;
   style: React.CSSProperties;
 }> = ({ className = '', style, ...options }) => (
   <div className={`SimpleBar-story ${className}`}>
     <SimpleBarReact style={style} {...options}>
-      <img src="https://placekitten.com/2000/3000" />
+      <img src="https://placekitten.com/2000/2700" />
     </SimpleBarReact>
   </div>
 );
@@ -69,6 +82,16 @@ export const BothAxis = WithImageTemplate.bind({});
 BothAxis.args = {
   ...SimpleBar.defaultOptions,
   className: 'both-axis',
+};
+
+export const WithRef = WithImageTemplate.bind({});
+WithRef.args = {
+  ...SimpleBar.defaultOptions,
+  ref: jest.fn(),
+};
+
+WithRef.play = async ({ args }) => {
+  expect(args.ref).toHaveBeenCalled();
 };
 
 export const WithVirtual: FC<{
@@ -140,18 +163,17 @@ export const WithReactWindow: FC<any> = () => {
   );
 };
 
-const WithRefTemplate: StoryFn<
+const WithScrollRefTemplate: StoryFn<
   {
     className: string;
     style: React.CSSProperties;
-    onScroll: () => void;
+    onScroll: any;
   } & Props
 > = ({ className = '', style, onScroll, ...options }) => {
-  const scrollableElRef = React.useRef();
+  const scrollableElRef = React.useRef<HTMLElement>();
 
   useEffect(() => {
     scrollableElRef.current?.addEventListener('scroll', (e) => {
-      console.log('scroll');
       onScroll(e);
     });
   });
@@ -161,7 +183,7 @@ const WithRefTemplate: StoryFn<
       <SimpleBarReact
         style={style}
         {...options}
-        scrollableNodeProps={{ ref: scrollableElRef }}
+        scrollableNodeProps={{ ref: scrollableElRef, onScroll }}
       >
         {Array.from(Array(10)).map((x, i) => (
           <p key={i} className="odd">
@@ -173,22 +195,21 @@ const WithRefTemplate: StoryFn<
   );
 };
 
-export const WithRef = WithRefTemplate.bind({});
+export const WithScrollRef = WithScrollRefTemplate.bind({});
 
-WithRef.args = {
+WithScrollRef.args = {
   ...SimpleBar.defaultOptions,
   scrollableNodeProps: {},
-  // onScroll: jest.fn(),
+  onScroll: jest.fn(),
 };
 
-WithRef.play = async ({ args, canvasElement }) => {
-  // console.log(args.onScroll);
-  // const nextBtn = canvasElement.querySelector('.carousel-nav__btn--next');
-  // userEvent.click(nextBtn);
-  // await waitFor(() =>
-  //   expect(
-  //     canvasElement.getElementsByClassName('.carousel-indicator__dot.active')
-  //   ).toBeDefined()
-  // );
-  // expect(args.onScroll).toHaveBeenCalled();
+WithScrollRef.play = async ({ args, canvasElement }) => {
+  const scrollableEl = canvasElement.querySelector(
+    '.simplebar-content-wrapper'
+  );
+  if (!scrollableEl) return;
+
+  fireEvent.scroll(scrollableEl, { target: { scrollTop: 100 } });
+
+  expect(args.onScroll).toHaveBeenCalledTimes(2); // once for ref and once for onScroll prop
 };

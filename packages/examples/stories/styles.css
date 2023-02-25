@@ -12,3 +12,11 @@
 .SimpleBar-story.with-react-window .simplebar-content-wrapper > * {
   position: relative;
 }
+
+.SimpleBar-story.direction-rtl [data-simplebar] {
+  direction: rtl;
+}
+
+.SimpleBar-story.both-axis [data-simplebar] p {
+  width: 200%;
+}

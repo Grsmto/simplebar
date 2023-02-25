@@ -17,30 +17,34 @@
     "build": "webpack --mode=production",
     "serve": "serve",
     "precommit": "lint-staged",
-    "storybook": "storybook dev --port 6006",
-    "build-storybook": "storybook build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
     "test-storybook": "test-storybook"
   },
   "dependencies": {
     "@babel/runtime": "^7.20.7",
+    "@juggle/resize-observer": "^3.4.0",
+    "@storybook/addon-ie11": "^0.0.6",
     "@tanstack/react-virtual": "^3.0.0-beta.48",
     "core-js": "^3.27.1",
+    "intersection-observer": "^0.12.2",
     "simplebar": "^6.2.1",
     "simplebar-react": "^3.2.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
-    "@storybook/addon-actions": "next",
-    "@storybook/addon-essentials": "next",
-    "@storybook/addon-interactions": "next",
-    "@storybook/addon-links": "next",
-    "@storybook/addons": "next",
-    "@storybook/jest": "next",
-    "@storybook/react": "next",
-    "@storybook/react-webpack5": "next",
-    "@storybook/test-runner": "next",
-    "@storybook/testing-library": "next",
+    "@storybook/addon-actions": "6",
+    "@storybook/addon-essentials": "6",
+    "@storybook/addon-interactions": "6",
+    "@storybook/addon-links": "6",
+    "@storybook/addons": "6",
+    "@storybook/builder-webpack5": "6",
+    "@storybook/jest": "^0.0.10",
+    "@storybook/manager-webpack5": "6",
+    "@storybook/react": "6",
+    "@storybook/test-runner": "^0.9.4",
+    "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^9.1.0",
     "css-loader": "^0.28.11",
     "promise": "^8.0.2",
@@ -48,9 +52,12 @@
     "react-select": "^2.4.3",
     "react-window": "^1.8.8",
     "serve": "^14.1.2",
-    "storybook": "next",
+    "storybook": "6",
     "style-loader": "^3.3.1",
-    "ts-loader": "^9.4.2"
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
   },
   "workspaces": {
     "nohoist": [
@@ -66,6 +73,6 @@
     ]
   },
   "browserslist": [
-    "defaults"
+    "IE 11"
   ]
 }

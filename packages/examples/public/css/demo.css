@@ -71,6 +71,10 @@ p {
   color: #fff;
 }
 
+[data-simplebar][data-simplebar] {
+  --scrollbar-width: 12px;
+}
+
 /* Scrollable elements
 *****************************************************************/
 .demo1,
@@ -122,6 +126,12 @@ p {
   line-height: 150px;
   font-size: 24px;
 }
+
+.demo-rtl {
+  width: 200px;
+  height: 200px;
+}
+
 .demo-raw {
   margin: 10px 0;
   width: 250px;
@@ -132,12 +142,6 @@ p {
 .demo3 {
   height: auto;
   max-height: 300px;
-}
-
-.demo5 {
-  height: 200px;
-  height: 60px;
-  direction: rtl;
 }
 
 .demo-both-axis {
@@ -162,8 +166,23 @@ p {
   background-color: red;
 }
 
-.demo-both-axis .box,
-.demo-y-axis .box {
+.demo-visible-hover {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 200px;
+  height: 200px;
+}
+
+.demo-visible-hover:hover .simplebar-scrollbar:before {
+  opacity: 0.5;
+}
+
+.demo-basic {
+  width: 200px;
+  height: 200px;
+}
+
+.demo-basic .box {
   width: 600px;
   height: 600px;
 }
