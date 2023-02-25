@@ -3,6 +3,12 @@ import { debounce, throttle } from 'lodash-es';
 import canUseDOM from 'can-use-dom';
 import * as helpers from './helpers';
 
+type HTMLElementMeasuresProps =
+  | 'scrollHeight'
+  | 'scrollWidth'
+  | 'offsetHeight'
+  | 'offsetWidth';
+
 interface Options {
   forceVisible: boolean | Axis;
   clickOnTrack: boolean;
@@ -407,8 +413,12 @@ export default class SimpleBarCore {
     }
 
     const contentSize =
+      this.getCachedValue(this.contentEl, this.axis[axis].scrollSizeAttr) || 0;
     const trackSize =
-      this.axis[axis].track.el?.[this.axis[axis].offsetSizeAttr] ?? 0;
+      this.getCachedValue(
+        this.axis[axis].track.el,
+        this.axis[axis].offsetSizeAttr
+      ) || 0;
     const scrollbarRatio = trackSize / contentSize;
 
     let scrollbarSize;
@@ -492,10 +502,8 @@ export default class SimpleBarCore {
     if (!track || !scrollbar || !this.scrollableEl) return;
 
     if (this.axis[axis].isOverflowing || this.axis[axis].forceVisible) {
-      this.scrollableEl.style[this.axis[axis].overflowAttr] = 'scroll';
       this.el.classList.add(`${this.classNames.scrollable}-${axis}`);
     } else {
-      this.scrollableEl.style[this.axis[axis].overflowAttr] = 'hidden';
       this.el.classList.remove(`${this.classNames.scrollable}-${axis}`);
     }
 
@@ -944,7 +952,10 @@ export default class SimpleBarCore {
     )[0];
   }
 
-  getCachedValue(el: HTMLElement | null, attribute: keyof HTMLElement): any {
+  getCachedValue(
+    el: HTMLElement | null,
+    attribute: HTMLElementMeasuresProps
+  ): number | null {
     if (!el) return null;
 
     const cachedValue = this.cache.get(el);
