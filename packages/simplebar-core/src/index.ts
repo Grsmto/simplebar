@@ -397,11 +397,21 @@ export default class SimpleBarCore {
     if (this.axis.y.scrollbar.el)
       this.axis.y.scrollbar.el.style.height = `${this.axis.y.scrollbar.size}px`;
 
+    this.updateDimensionsForAxis('x');
+    this.updateDimensionsForAxis('y');
+
     this.positionScrollbar('x');
     this.positionScrollbar('y');
 
     this.toggleTrackVisibility('x');
     this.toggleTrackVisibility('y');
+  }
+
+  updateDimensionsForAxis(axis: Axis = 'y'): void {
+    const activeAxis = this.axis[axis];
+
+    if (!activeAxis.track.el) return;
+    activeAxis.track.rect = activeAxis.track.el.getBoundingClientRect();
   }
 
   /**
@@ -750,16 +760,14 @@ export default class SimpleBarCore {
     if (!this.draggedAxis || !this.scrollableEl) return;
 
     let eventOffset;
-    const track = this.axis[this.draggedAxis].track;
-    const trackSize = track.rect?.[this.axis[this.draggedAxis].sizeAttr] ?? 0;
-    const scrollbar = this.axis[this.draggedAxis].scrollbar;
-    const contentSize =
-      this.scrollableEl?.[this.axis[this.draggedAxis].scrollSizeAttr] ?? 0;
+    const axis = this.axis[this.draggedAxis];
+    const track = axis.track;
+    const trackSize = track.rect?.[axis.sizeAttr] ?? 0;
+    const scrollbar = axis.scrollbar;
+    const scrollbarSize = scrollbar.rect?.[axis.sizeAttr] ?? 0;
+    const contentSize = this.scrollableEl?.[axis.scrollSizeAttr] ?? 0;
     const hostSize =
-      this.getCachedValue(
-        this.scrollableEl,
-        this.axis[this.draggedAxis].offsetSizeAttr
-      ) || 0;
+      this.getCachedValue(this.scrollableEl, axis.offsetSizeAttr) || 0;
 
     e.preventDefault();
     e.stopPropagation();
@@ -772,16 +780,13 @@ export default class SimpleBarCore {
 
     // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
     let dragPos =
-      eventOffset -
-      (track.rect?.[this.axis[this.draggedAxis].offsetAttr] ?? 0) -
-      this.axis[this.draggedAxis].dragOffset;
+      eventOffset - (track.rect?.[axis.offsetAttr] ?? 0) - axis.dragOffset;
     dragPos = this.isRtl
-      ? (track.rect?.[this.axis[this.draggedAxis].sizeAttr] ?? 0) -
-        scrollbar.size -
-        dragPos
+      ? (track.rect?.[axis.sizeAttr] ?? 0) - scrollbarSize - dragPos
       : dragPos;
+
     // Convert the mouse position into a percentage of the scrollbar height/width.
-    const dragPerc = dragPos / (trackSize - scrollbar.size);
+    const dragPerc = dragPos / (trackSize - scrollbarSize);
 
     // Scroll the content by the same percentage.
     let scrollPos = dragPerc * (contentSize - hostSize);
