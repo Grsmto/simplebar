@@ -67,6 +67,13 @@ DirectionRtl.args = {
   directionRtl: true,
 };
 
+export const WithScale = Template.bind({});
+WithScale.args = {
+  ...SimpleBar.defaultOptions,
+  autoHide: false,
+  style: { transform: 'scale(0.5)' },
+};
+
 const WithImageTemplate: StoryFn<{
   className: string;
   style: React.CSSProperties;
