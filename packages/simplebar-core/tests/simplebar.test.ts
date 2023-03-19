@@ -1,23 +1,18 @@
 import SimpleBar from '../src';
 
 const template = `<div class="simplebar-wrapper">
-<div class="simplebar-height-auto-observer-wrapper">
-  <div class="simplebar-height-auto-observer"></div>
-</div>
-<div class="simplebar-mask">
-  <div class="simplebar-offset">
-    <div class="simplebar-content-wrapper custom-class" tabIndex="0" role="region" [ariaLabel]="ariaLabel">
-      <div class="simplebar-content"></div>
-    </div>
-  </div>
-</div>
-<div class="simplebar-placeholder"></div>
+<div class="simplebar-content-wrapper custom-class" tabIndex="0" role="region" [ariaLabel]="ariaLabel">
+  <div class="simplebar-content"></div>
 </div>
 <div class="simplebar-track simplebar-horizontal">
 <div class="simplebar-scrollbar"></div>
 </div>
 <div class="simplebar-track simplebar-vertical">
 <div class="simplebar-scrollbar"></div>
+</div>
+<div className="simplebar-observer">
+  <div className="simplebar-observer-inner" />
+</div>
 </div>`;
 
 beforeEach(() => {
@@ -51,7 +46,7 @@ test('should return the scroll element', () => {
   );
   const scrollElement = simpleBar.getScrollElement();
 
-  expect(scrollElement).toBe(simpleBar.contentWrapperEl);
+  expect(scrollElement).toBe(simpleBar.scrollableEl);
 });
 
 test('should unmount SimpleBar', () => {
@@ -168,33 +163,11 @@ describe('nested SimpleBars with initiated DOM', () => {
   });
 
   test('should select correct content wrapper element', () => {
-    expect(parent.contentWrapperEl).not.toBe(child.contentWrapperEl);
+    expect(parent.scrollableEl).not.toBe(child.scrollableEl);
   });
 
   test('should select correct content element', () => {
     expect(parent.contentEl).not.toBe(child.contentEl);
-  });
-
-  test('should select correct offset element', () => {
-    expect(parent.offsetEl).not.toBe(child.offsetEl);
-  });
-
-  test('should select correct mask element', () => {
-    expect(parent.maskEl).not.toBe(child.maskEl);
-  });
-
-  test('should select correct placeholder element', () => {
-    expect(parent.placeholderEl).not.toBe(child.placeholderEl);
-  });
-
-  test('should select correct height auto observer wrapper element', () => {
-    expect(parent.heightAutoObserverWrapperEl).not.toBe(
-      child.heightAutoObserverWrapperEl
-    );
-  });
-
-  test('should select correct height auto observer element', () => {
-    expect(parent.heightAutoObserverEl).not.toBe(child.heightAutoObserverEl);
   });
 
   test('should select correct x track element', () => {
