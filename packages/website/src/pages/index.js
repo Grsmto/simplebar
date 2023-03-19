@@ -92,9 +92,6 @@ const IndexPage = ({ data }) => {
           mt: 4,
           overflow: "auto",
           p: [3, 5],
-          ".simplebar-content": {
-            p: [3, 5],
-          },
         }}
         autoHide={false}
         scrollbarMinSize={30}

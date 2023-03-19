@@ -1850,7 +1850,7 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
-"@babel/runtime@^7.11.2", "@babel/runtime@^7.20.13", "@babel/runtime@^7.5.0":
+"@babel/runtime@^7.11.2", "@babel/runtime@^7.5.0":
   version "7.21.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.0.tgz#5b55c9d394e5fcf304909a8b00c07dc217b56673"
   integrity sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==
@@ -14576,14 +14576,6 @@ gatsby-graphiql-explorer@^2.25.0:
   integrity sha512-/NDsaW4x3/KtvzmxYvedhDwUW1kb7gQO6iOhCkillVJSYBd6mPB8aOSulM49fyCT76UXGYFtRaUI8fyOkmpWhg==
   dependencies:
     "@babel/runtime" "^7.15.4"
-
-gatsby-legacy-polyfills@3.8.0-next.0:
-  version "3.8.0-next.0"
-  resolved "https://registry.yarnpkg.com/gatsby-legacy-polyfills/-/gatsby-legacy-polyfills-3.8.0-next.0.tgz#6627b27bc3e62124e9c0d12be80c362d2c3b2f43"
-  integrity sha512-AcfU7iegcw74Cl3G1INilse/XmR0bHT9DM1UVgQ4/+by7tnCcGoGXamkP+586A/KozlmAnqgC9njC6w8AQQ+kQ==
-  dependencies:
-    "@babel/runtime" "^7.20.13"
-    core-js-compat "3.9.0"
 
 gatsby-legacy-polyfills@^2.25.0:
   version "2.25.0"

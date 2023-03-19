@@ -47,24 +47,20 @@ export default class SimpleBar extends SimpleBarCore {
     ) {
       // Prepare DOM
       this.wrapperEl = document.createElement('div');
-      this.contentWrapperEl = document.createElement('div');
-      this.contentEl = document.createElement('div');
+      this.scrollableEl = document.createElement('div');
       addClasses(this.wrapperEl, this.classNames.wrapper);
-      addClasses(this.contentWrapperEl, this.classNames.contentWrapper);
-      addClasses(this.contentEl, this.classNames.contentEl);
+      addClasses(this.scrollableEl, this.classNames.contentWrapper);
 
       while (this.el.firstChild) {
-        this.contentEl.appendChild(this.el.firstChild);
+        this.scrollableEl.appendChild(this.el.firstChild);
       }
 
-      this.contentWrapperEl.appendChild(this.contentEl);
-      this.wrapperEl.appendChild(this.contentWrapperEl);
-      this.wrapperEl.appendChild(this.heightAutoObserverWrapperEl);
+      this.wrapperEl.appendChild(this.scrollableEl);
       this.el.appendChild(this.wrapperEl);
 
-      this.contentWrapperEl?.setAttribute('tabindex', '0');
-      this.contentWrapperEl?.setAttribute('role', 'region');
-      this.contentWrapperEl?.setAttribute('aria-label', this.options.ariaLabel);
+      this.scrollableEl?.setAttribute('tabindex', '0');
+      this.scrollableEl?.setAttribute('role', 'region');
+      this.scrollableEl?.setAttribute('aria-label', this.options.ariaLabel);
     }
 
     if (!this.axis.x.track.el || !this.axis.y.track.el) {
