@@ -16,6 +16,7 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "unpkg": "./dist/simplebar.min.js",
   "style": "./dist/simplebar.min.css",
   "homepage": "https://grsmto.github.io/simplebar/",
