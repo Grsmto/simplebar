@@ -1,7 +1,8 @@
 {
   "presets": [["@babel/preset-env", {
     "useBuiltIns": "entry",
-    "corejs": "3.27"
+    "corejs": "3.27",
+    "debug": true
   }], "@babel/preset-react"],
   "plugins": ["transform-class-properties"],
   "env": {

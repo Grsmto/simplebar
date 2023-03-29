@@ -54,6 +54,6 @@
     ]
   },
   "browserslist": [
-    "defaults"
+    "ie 11"
   ]
 }
