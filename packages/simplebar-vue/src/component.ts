@@ -1,6 +1,6 @@
 // @ts-check
 import SimpleBarCore from 'simplebar-core';
-import { lifecycleEventNames } from './utils';
+import { lifecycleEventNames } from '../utils';
 import { h, isVue3, defineComponent } from 'vue-demi';
 
 /**
@@ -58,9 +58,6 @@ function renderFn({ h, emit, slots, props }: any) {
           class: classNames.wrapper,
         },
         [
-          h('div', { class: classNames.heightAutoObserverWrapperEl }, [
-            h('div', { class: classNames.heightAutoObserverEl }),
-          ]),
           h(
             'div',
             {
@@ -94,13 +91,16 @@ function renderFn({ h, emit, slots, props }: any) {
               ),
             ]
           ),
-        ]
+        ],
+        h('div', { class: `${classNames.track} simplebar-horizontal` }, [
+          h('div', { class: classNames.scrollbar }),
+        ]),
+        h('div', { class: `${classNames.track} simplebar-vertical` }, [
+          h('div', { class: classNames.scrollbar }),
+        ])
       ),
-      h('div', { class: `${classNames.track} simplebar-horizontal` }, [
-        h('div', { class: classNames.scrollbar }),
-      ]),
-      h('div', { class: `${classNames.track} simplebar-vertical` }, [
-        h('div', { class: classNames.scrollbar }),
+      h('div', { class: 'simplebar-observer' }, [
+        h('div', { class: 'simplebar-observer-inner' }),
       ]),
     ]
   );
@@ -189,8 +189,6 @@ export default defineComponent({
      */
     scrollbarMaxSize: Number,
   },
-
-  // @ts-ignore
   emits: ['scroll'],
   /**
    * @returns {{ SimpleBar?: SimpleBar; scrollElement?: HTMLDivElement; contentElement?: HTMLDivElement }}
@@ -198,7 +196,6 @@ export default defineComponent({
   data() {
     return {};
   },
-
   mounted() {
     // @ts-ignore (`getOptions` needs to be added to the type definition file)
     const options = SimpleBarCore.getOptions(this.$refs.element.attributes);

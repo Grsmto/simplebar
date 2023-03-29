@@ -1,5 +1,5 @@
 import { shallowMount, destroyWrapper } from './test-utils';
-import simplebar from '../component';
+import simplebar from '../src/component';
 import SimpleBar from 'simplebar-core';
 
 describe('simplebar', () => {
