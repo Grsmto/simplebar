@@ -19,7 +19,7 @@ SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **nativ
 - **👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)**
 - **🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!**
 
-⚠️ SimpleBar v6 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/blob/master/packages/simplebar-core/CHANGELOG.md) before updating.
+⚠️ If you want a more advanced scrollbar plugin, take a look at @KingSora [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 #### Design it as you want
 
