@@ -953,8 +953,16 @@ export default class SimpleBarCore {
         ? this.mouseY - scrollbarOffset
         : this.mouseX - scrollbarOffset;
     const dir = t < 0 ? -1 : 1;
-    const scrollSize = dir === -1 ? scrolled - hostSize : scrolled + hostSize;
+    let scrollSize = dir === -1 ? scrolled - hostSize : scrolled + hostSize;
     const speed = 40;
+    let scrollTrack = this.axis[axis].track;
+    if (scrollTrack.el && scrollbar.el && this.contentEl) {
+      let scrollRect = scrollTrack.el.getBoundingClientRect();
+      let clientAxis = "client" + axis.toUpperCase();
+      let scrollSizeAttribute = this.axis[axis].scrollSizeAttr;
+      let scrollPoint = e[clientAxis] - scrollRect[this.axis[axis].offsetAttr] - (scrollbar.el[scrollSizeAttribute] / 2);
+      scrollSize  = (scrollPoint / scrollTrack.el[this.axis[axis].offsetSizeAttr]) * this.contentEl[scrollSizeAttribute];
+    }
 
     const scrollTo = () => {
       if (!this.contentWrapperEl) return;
