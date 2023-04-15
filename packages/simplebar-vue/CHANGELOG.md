@@ -1,3 +1,26 @@
+# v2.3.3 (Sat Apr 15 2023)
+
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+
+#### ⚠️ Pushed to `master`
+
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- feat(vue): migrate plugin to TS ([@Grsmto](https://github.com/Grsmto))
+- fix(vue, react): fix usage of custom classNames ([@Grsmto](https://github.com/Grsmto))
+- feat(vue): set data-attribute on Vue plugin to be 1:1 with other plugins + bring back full test suite ([@Grsmto](https://github.com/Grsmto))
+- Revert "chore: remove unnecessary build step" ([@Grsmto](https://github.com/Grsmto))
+- chore(vue): update snapshot ([@Grsmto](https://github.com/Grsmto))
+- chore(core, react, vue, angular): set missing accessibility properties ([@Grsmto](https://github.com/Grsmto))
+- chore: update READMEs ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v2.3.2 (Wed Mar 29 2023)
 
 #### 🐛 Bug Fix
