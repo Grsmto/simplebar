@@ -874,7 +874,7 @@ export default class SimpleBarCore {
       eventOffset -
       (track.rect?.[this.axis[this.draggedAxis].offsetAttr] ?? 0) -
       this.axis[this.draggedAxis].dragOffset;
-    dragPos = this.isRtl
+    dragPos = this.draggedAxis === 'x' && this.isRtl
       ? (track.rect?.[this.axis[this.draggedAxis].sizeAttr] ?? 0) -
         scrollbar.size -
         dragPos
