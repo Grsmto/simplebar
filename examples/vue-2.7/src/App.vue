@@ -6,7 +6,7 @@
 
 <script>
 import simplebar from 'simplebar-vue';
-import 'simplebar/dist/simplebar.min.css';
+import 'simplebar-vue/dist/simplebar.min.css';
 
 export default {
   name: 'app',

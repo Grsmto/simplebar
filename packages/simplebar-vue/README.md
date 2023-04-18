@@ -26,13 +26,13 @@
 
 ### Usage
 
-Check out the [Demo project](https://github.com/Grsmto/simplebar/blob/master/examples/vue).
+Check out the [Demo project(vue2)](https://github.com/Grsmto/simplebar/blob/master/examples/vue-2.7/src/App.vue) and the [Demo project(vue3)](https://github.com/Grsmto/simplebar/blob/master/examples/vue-3/src/App.vue)
 
 First, register it in your Vue app:
 
 ```js
 import simplebar from 'simplebar-vue';
-import 'simplebar/dist/simplebar.min.css';
+import 'simplebar-vue/dist/simplebar.min.css';
 
 export default {
   components: {

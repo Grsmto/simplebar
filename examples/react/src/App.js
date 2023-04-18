@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SimpleBar from 'simplebar-react';
 
-import 'simplebar/dist/simplebar.min.css';
+import 'simplebar-react/dist/simplebar.min.css';
 import logo from './logo.svg';
 import './App.css';
 
