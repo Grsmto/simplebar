@@ -1,6 +1,6 @@
 <script setup>
 import Simplebar from 'simplebar-vue';
-// import 'simplebar-vue/dist/simplebar.min.css';
+import 'simplebar-vue/dist/simplebar.min.css';
 </script>
 
 <template>
