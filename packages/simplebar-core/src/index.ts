@@ -818,9 +818,10 @@ export default class SimpleBarCore {
     // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
     let dragPos =
       eventOffset - (track.rect?.[axis.offsetAttr] ?? 0) - axis.dragOffset;
-    dragPos = this.isRtl
-      ? (track.rect?.[axis.sizeAttr] ?? 0) - scrollbarSize - dragPos
-      : dragPos;
+    dragPos =
+      this.draggedAxis === 'x' && this.isRtl
+        ? (track.rect?.[axis.sizeAttr] ?? 0) - scrollbarSize - dragPos
+        : dragPos;
 
     // Convert the mouse position into a percentage of the scrollbar height/width.
     const dragPerc = dragPos / (trackSize - scrollbarSize);

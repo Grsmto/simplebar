@@ -65,6 +65,7 @@ DirectionRtl.args = {
   ...SimpleBar.defaultOptions,
   bothAxis: true,
   directionRtl: true,
+  style: { height: 200 },
 };
 
 export const WithScale = Template.bind({});
