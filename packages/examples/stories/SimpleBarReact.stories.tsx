@@ -75,6 +75,15 @@ WithScale.args = {
   style: { transform: 'scale(0.5)' },
 };
 
+export const WithCustomClassNames = Template.bind({});
+WithCustomClassNames.args = {
+  ...SimpleBar.defaultOptions,
+  classNames: {
+    contentEl: 'simplebar-content max-h-[1rem]',
+  },
+  style: { height: 300 },
+};
+
 const WithImageTemplate: StoryFn<{
   className: string;
   style: React.CSSProperties;

@@ -84,7 +84,11 @@ export function removeClasses(el: HTMLElement | null, classes: string): void {
 }
 
 export function classNamesToQuery(classNames: string): string {
-  return `.${classNames.split(' ').join('.')}`;
+  return `.${classNames.split(' ').map(escapeForQuerySelector).join('.')}`;
+}
+
+export function escapeForQuerySelector(str: string): string {
+  return str.replace(/([!\"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~])/g, '\\$1');
 }
 
 export function mergeClassNames(
