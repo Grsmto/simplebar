@@ -7,7 +7,7 @@ module.exports = (env, argv) => {
     entry: './src/index.js',
     devtool: 'cheap-module-source-map',
     output: {
-      filename: 'bundle.js',
+      filename: 'dist/bundle.js',
     },
     performance: {
       hints: false,

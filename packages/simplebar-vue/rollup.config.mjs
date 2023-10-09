@@ -14,7 +14,7 @@ const globals = {
 
 export default [
   {
-    input: 'index.ts',
+    input: 'src/index.ts',
     output: {
       name: 'SimpleBarVue',
       file: pkg.main,
@@ -31,7 +31,7 @@ export default [
     ],
   },
   {
-    input: 'index.ts',
+    input: 'src/index.ts',
     external: getExternals(pkg),
     output: {
       file: pkg.module,
