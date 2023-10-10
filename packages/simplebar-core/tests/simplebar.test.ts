@@ -10,8 +10,8 @@ const template = `<div class="simplebar-wrapper">
 <div class="simplebar-track simplebar-vertical">
 <div class="simplebar-scrollbar"></div>
 </div>
-<div className="simplebar-observer">
-  <div className="simplebar-observer-inner" />
+<div class="simplebar-observer">
+  <div class="simplebar-observer-inner" />
 </div>
 </div>`;
 
