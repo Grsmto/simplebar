@@ -27,7 +27,7 @@
     "serve": "serve -s demo",
     "build": "rollup -c && cp src/simplebar.css dist/simplebar.css",
     "dev": "rollup -c -w --environment BUILD:development",
-    "test": "yarn test:unit && yarn test:e2e",
+    "test": "yarn test:unit",
     "test:unit": "jest -c jest-unit.config.js",
     "test:e2e": "env-cmd --silent jest -c jest-e2e.config.js --runInBand",
     "version": "yarn build",
@@ -39,7 +39,7 @@
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "browserstack-local": "^1.5.1",
+    "browserstack-local": "^1.5.5",
     "lodash": "^4.17.21"
   },
   "lint-staged": {

@@ -45,6 +45,7 @@
     "@storybook/react": "6",
     "@storybook/test-runner": "^0.9.4",
     "@storybook/testing-library": "^0.0.13",
+    "@types/react-window": "^1.8.6",
     "babel-loader": "^9.1.0",
     "css-loader": "^0.28.11",
     "promise": "^8.0.2",

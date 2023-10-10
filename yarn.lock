@@ -6977,6 +6977,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-window@^1.8.6":
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/@types/react-window/-/react-window-1.8.6.tgz#4faba05b86abd36f40b612a5b02e28fadcf95c7c"
+  integrity sha512-AVJr3A5rIO9dQQu5TwTN0lP2c1RtuqyyZGCt7PGP8e5gUpn1PuQRMJb/u3UpdbwTHh4wbEi33UMW5NI0IXt1Mg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@18.0.26":
   version "18.0.26"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.26.tgz#8ad59fc01fef8eaf5c74f4ea392621749f0b7917"
@@ -9497,10 +9504,10 @@ browserslist@^4.12.0, browserslist@^4.16.1, browserslist@^4.21.5, browserslist@^
     node-releases "^2.0.8"
     update-browserslist-db "^1.0.10"
 
-browserstack-local@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/browserstack-local/-/browserstack-local-1.5.1.tgz#0d424474cc2b74a9d9a22d00a2282941ff636f34"
-  integrity sha512-T/wxyWDzvBHbDvl7fZKpFU7mYze6nrUkBhNy+d+8bXBqgQX10HTYvajIGO0wb49oGSLCPM0CMZTV/s7e6LF0sA==
+browserstack-local@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/browserstack-local/-/browserstack-local-1.5.5.tgz#f36b625f3b8bfd053f673d85fd1082f2d0759693"
+  integrity sha512-jKne7yosrMcptj3hqxp36TP9k0ZW2sCqhyurX24rUL4G3eT7OLgv+CSQN8iq5dtkv5IK+g+v8fWvsiC/S9KxMg==
   dependencies:
     agent-base "^6.0.2"
     https-proxy-agent "^5.0.1"

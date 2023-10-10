@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import type { StoryFn } from '@storybook/react';
 import { expect, jest } from '@storybook/jest';
-import { fireEvent, userEvent, waitFor } from '@storybook/testing-library';
+import { fireEvent } from '@storybook/testing-library';
 import { FixedSizeList as List } from 'react-window';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
@@ -26,7 +26,18 @@ const Template: StoryFn<
     bothAxis: boolean;
     directionRtl: boolean;
   } & Props
-> = ({ className = '', style, bothAxis, directionRtl, ...options }) => (
+> = ({
+  className = '',
+  style,
+  bothAxis,
+  directionRtl,
+  ...options
+}: {
+  className: string;
+  style: React.CSSProperties;
+  bothAxis: boolean;
+  directionRtl: boolean;
+} & Props) => (
   <div
     className={`SimpleBar-story ${className} ${bothAxis ? 'both-axis' : ''} ${
       directionRtl ? 'direction-rtl' : ''
@@ -84,10 +95,20 @@ WithCustomClassNames.args = {
   style: { height: 300 },
 };
 
-const WithImageTemplate: StoryFn<{
+const WithImageTemplate: StoryFn<
+  {
+    className: string;
+    style: React.CSSProperties;
+    ref: any;
+  } & Props
+> = ({
+  className = '',
+  style,
+  ...options
+}: {
   className: string;
   style: React.CSSProperties;
-}> = ({ className = '', style, ...options }) => (
+} & Props) => (
   <div className={`SimpleBar-story ${className}`}>
     <SimpleBarReact style={style} {...options}>
       <img src="https://placekitten.com/2000/2700" />
@@ -120,7 +141,7 @@ export const WithVirtual: FC<{
   // The virtualizer
   const rowVirtualizer = useVirtualizer({
     count: 1000,
-    getScrollElement: () => parentRef.current,
+    getScrollElement: () => parentRef.current ?? null,
     estimateSize: () => 35,
   });
 
@@ -166,6 +187,7 @@ export const WithReactWindow: FC<any> = () => {
       <SimpleBarReact style={{ height: 300 }}>
         {({ scrollableNodeRef }) => (
           <List
+            width={300}
             height={300}
             itemCount={1000}
             itemSize={35}
@@ -186,7 +208,16 @@ const WithScrollRefTemplate: StoryFn<
     style: React.CSSProperties;
     onScroll: any;
   } & Props
-> = ({ className = '', style, onScroll, ...options }) => {
+> = ({
+  className = '',
+  style,
+  onScroll,
+  ...options
+}: {
+  className: string;
+  style: React.CSSProperties;
+  onScroll: any;
+} & Props) => {
   const scrollableElRef = React.useRef<HTMLElement>();
 
   useEffect(() => {
