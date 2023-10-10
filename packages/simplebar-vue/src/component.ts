@@ -1,5 +1,4 @@
-// @ts-check
-import SimpleBarCore from 'simplebar-core';
+import SimpleBarCore, { ClassNames } from 'simplebar-core';
 import { lifecycleEventNames } from '../utils';
 import { h, isVue3, defineComponent } from 'vue-demi';
 
@@ -32,10 +31,10 @@ import { h, isVue3, defineComponent } from 'vue-demi';
  */
 function renderFn({ h, emit, slots, props }: any) {
   const onScroll = (event: any) => emit('scroll', event);
-  const classNames = {
-    ...SimpleBarCore.defaultOptions.classNames,
-    ...props.classNames,
-  };
+  const classNames = SimpleBarCore.helpers.mergeClassNames(
+    SimpleBarCore.defaultOptions.classNames as ClassNames,
+    props.classNames
+  );
 
   return h(
     'div',

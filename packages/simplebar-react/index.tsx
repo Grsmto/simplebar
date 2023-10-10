@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { ReactNode, MutableRefObject } from 'react';
 import SimpleBarCore from 'simplebar-core';
-import type { SimpleBarOptions } from 'simplebar-core';
+import type { ClassNames, SimpleBarOptions } from 'simplebar-core';
 
 type RenderFunc = (props: {
   scrollableNodeRef: MutableRefObject<HTMLElement | undefined>;
@@ -46,10 +46,10 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
       }
     });
 
-    const classNames = {
-      ...SimpleBarCore.defaultOptions.classNames,
-      ...options.classNames,
-    } as Required<(typeof SimpleBarCore.defaultOptions)['classNames']>;
+    const classNames = SimpleBarCore.helpers.mergeClassNames(
+      SimpleBarCore.defaultOptions.classNames as ClassNames,
+      options.classNames
+    );
 
     const scrollableNodeFullProps = {
       onScroll,
