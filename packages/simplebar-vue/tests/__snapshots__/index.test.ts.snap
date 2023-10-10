@@ -8,6 +8,12 @@ exports[`simplebar snapshots renders with default slot 1`] = `
         <div class="inner-content"></div>
       </div>
     </div>
+    <div class="simplebar-track simplebar-horizontal">
+      <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+    </div>
+    <div class="simplebar-track simplebar-vertical">
+      <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
+    </div>
   </div>
   <div class="simplebar-observer">
     <div class="simplebar-observer-inner"></div>
@@ -20,6 +26,12 @@ exports[`simplebar snapshots renders without crashing 1`] = `
   <div class="simplebar-wrapper">
     <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content">
       <div class="simplebar-content"></div>
+    </div>
+    <div class="simplebar-track simplebar-horizontal">
+      <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+    </div>
+    <div class="simplebar-track simplebar-vertical">
+      <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
     </div>
   </div>
   <div class="simplebar-observer">
