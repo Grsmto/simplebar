@@ -90,13 +90,13 @@ function renderFn({ h, emit, slots, props }: any) {
               ),
             ]
           ),
-        ],
-        h('div', { class: `${classNames.track} simplebar-horizontal` }, [
-          h('div', { class: classNames.scrollbar }),
-        ]),
-        h('div', { class: `${classNames.track} simplebar-vertical` }, [
-          h('div', { class: classNames.scrollbar }),
-        ])
+          h('div', { class: `${classNames.track} simplebar-horizontal` }, [
+            h('div', { class: classNames.scrollbar }),
+          ]),
+          h('div', { class: `${classNames.track} simplebar-vertical` }, [
+            h('div', { class: classNames.scrollbar }),
+          ]),
+        ]
       ),
       h('div', { class: 'simplebar-observer' }, [
         h('div', { class: 'simplebar-observer-inner' }),
