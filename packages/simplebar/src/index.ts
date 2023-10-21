@@ -121,7 +121,7 @@ export default class SimpleBar extends SimpleBarCore {
     mutations.forEach((mutation) => {
       mutation.addedNodes.forEach((addedNode) => {
         if (addedNode.nodeType === 1) {
-          if ((addedNode as Element).hasAttribute('data-simplebar')) {
+          if ((addedNode as Element).getAttribute('data-simplebar') === '') {
             !SimpleBar.instances.has(addedNode) &&
               document.documentElement.contains(addedNode) &&
               new SimpleBar(
