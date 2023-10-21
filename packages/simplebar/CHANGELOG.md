@@ -1,3 +1,36 @@
+# v6.2.2 (Sat Oct 21 2023)
+
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+- Fix typo in README (simplebar/src/simplebar) [#647](https://github.com/Grsmto/simplebar/pull/647) ([@DenisSvistoplasov](https://github.com/DenisSvistoplasov))
+
+#### ⚠️ Pushed to `next`
+
+- chore(vanilla): copy update ([@Grsmto](https://github.com/Grsmto))
+- fix(vanilla): make sure element is not already initialised before instantiating (ref #653) ([@Grsmto](https://github.com/Grsmto))
+- chore(vanilla): update after core DOM structure changes ([@Grsmto](https://github.com/Grsmto))
+- fix(vanilla): add missing types prop in package.json ([@Grsmto](https://github.com/Grsmto))
+- chore(core, react): remove height auto observer since not needed anymore ([@Grsmto](https://github.com/Grsmto))
+- Merge branch 'master' into next ([@Grsmto](https://github.com/Grsmto))
+- feat(core): simplify scrollbar width customisation using css custom property ([@Grsmto](https://github.com/Grsmto))
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- chore(examples): cleanup demos ([@Grsmto](https://github.com/Grsmto))
+- chore: update templates on all plugins ([@Grsmto](https://github.com/Grsmto))
+- feat(core): start adding support for multiple classNames (ref #651) ([@Grsmto](https://github.com/Grsmto))
+- fix: fix README (ref #648 #645) ([@Grsmto](https://github.com/Grsmto))
+- feat(core, vanilla): remove all unnecessary DOM manipulations from core ([@Grsmto](https://github.com/Grsmto))
+- Revert "chore: remove unnecessary build step" ([@Grsmto](https://github.com/Grsmto))
+- fix(vanilla): fix wrong browser export (fix #639) ([@Grsmto](https://github.com/Grsmto))
+- chore: update READMEs ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 2
+
+- [@DenisSvistoplasov](https://github.com/DenisSvistoplasov)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v6.2.1 (Sat Feb 11 2023)
 
 #### 🐛 Bug Fix
