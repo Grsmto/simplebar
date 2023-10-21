@@ -1,6 +1,6 @@
 {
   "name": "simplebar-examples",
-  "version": "3.0.12",
+  "version": "4.0.0-beta.0",
   "private": true,
   "description": "Scrollbars, simpler.",
   "author": "Adrien Denat <oi@adriendenat.com>",
@@ -28,8 +28,8 @@
     "@tanstack/react-virtual": "^3.0.0-beta.48",
     "core-js": "^3.27.1",
     "intersection-observer": "^0.12.2",
-    "simplebar": "^6.2.1",
-    "simplebar-react": "^3.2.1"
+    "simplebar": "^7.0.0-beta.0",
+    "simplebar-react": "^4.0.0-beta.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.19.6",
