@@ -11,7 +11,7 @@ export default class SimpleBar extends SimpleBarCore {
   constructor(...args: ConstructorParameters<typeof SimpleBarCore>) {
     super(...args);
 
-    // // Save a reference to the instance, so we know this DOM node has already been instancied
+    // Save a reference to the instance, so we know this DOM node has already been instancied
     SimpleBar.instances.set(args[0], this);
   }
 

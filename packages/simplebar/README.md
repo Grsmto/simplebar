@@ -307,7 +307,7 @@ const simpleBar = new SimpleBar(document.getElementById('myElement'));
 simpleBar.getContentElement();
 ```
 
-### Disable Mutation Observer (core package only)
+### Disable Mutation Observer (vanilla package only)
 
 ```js
 SimpleBar.removeObserver();
