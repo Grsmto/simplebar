@@ -118,11 +118,11 @@ If you define your own elements you should do:
 
 ```js
 <SimpleBar>
-  {({ scrollableNodeProps, scrollableNodeProps }) => {
+  {({ scrollableNodeProps, contentNodeProps }) => {
     return (
       <div {...scrollableNodeProps}>
         outer/scrollable element
-        <div {...scrollableNodeProps} />inner element</div>
+        <div {...contentNodeProps} />inner element</div>
       </div>
     );
   }}
