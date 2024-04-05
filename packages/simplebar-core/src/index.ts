@@ -371,9 +371,7 @@ export default class SimpleBarCore {
     this.el.addEventListener('mousemove', this.onMouseMove);
     this.el.addEventListener('mouseleave', this.onMouseLeave);
 
-    this.contentWrapperEl?.addEventListener('scroll', this.onScroll, {
-      passive: true
-    });
+    this.contentWrapperEl?.addEventListener('scroll', this.onScroll);
 
     // Browser zoom triggers a window resize
     elWindow.addEventListener('resize', this.onWindowResize);
