@@ -910,6 +910,7 @@ export default class SimpleBarCore {
     e.stopPropagation();
 
     removeClasses(this.el, this.classNames.dragging);
+    this.onStopScrolling();
 
     elDocument.removeEventListener('mousemove', this.drag, true);
     elDocument.removeEventListener('mouseup', this.onEndDrag, true);
