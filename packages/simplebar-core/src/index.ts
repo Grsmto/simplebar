@@ -94,6 +94,7 @@ export default class SimpleBarCore {
   stopScrollDelay = 175;
   isScrolling = false;
   isMouseEntering = false;
+  isDragging = false;
   scrollXTicking = false;
   scrollYTicking = false;
   wrapperEl: HTMLElement | null = null;
@@ -605,6 +606,7 @@ export default class SimpleBarCore {
   }
 
   hideScrollbar(axis: Axis = 'y') {
+    if (this.isDragging) return
     if (this.axis[axis].isOverflowing && this.axis[axis].scrollbar.isVisible) {
       removeClasses(this.axis[axis].scrollbar.el, this.classNames.visible);
       this.axis[axis].scrollbar.isVisible = false;
@@ -820,6 +822,7 @@ export default class SimpleBarCore {
    * on scrollbar handle drag movement starts
    */
   onDragStart(e: any, axis: Axis = 'y') {
+    this.isDragging = true
     const elDocument = getElementDocument(this.el);
     const elWindow = getElementWindow(this.el);
     const scrollbar = this.axis[axis].scrollbar;
@@ -900,12 +903,14 @@ export default class SimpleBarCore {
    * End scroll handle drag
    */
   onEndDrag = (e: any) => {
+    this.isDragging = false
     const elDocument = getElementDocument(this.el);
     const elWindow = getElementWindow(this.el);
     e.preventDefault();
     e.stopPropagation();
 
     removeClasses(this.el, this.classNames.dragging);
+    this.onStopScrolling();
 
     elDocument.removeEventListener('mousemove', this.drag, true);
     elDocument.removeEventListener('mouseup', this.onEndDrag, true);
