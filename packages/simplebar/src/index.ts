@@ -6,7 +6,7 @@ const { getOptions, addClasses } = SimpleBarCore.helpers;
 export default class SimpleBar extends SimpleBarCore {
   static globalObserver: MutationObserver;
 
-  static instances = new WeakMap();
+  static instances = new WeakMap<Node, SimpleBar>();
 
   constructor(...args: ConstructorParameters<typeof SimpleBarCore>) {
     super(...args);
@@ -172,18 +172,16 @@ export default class SimpleBar extends SimpleBarCore {
           if (
             (removedNode as Element).getAttribute('data-simplebar') === 'init'
           ) {
-            SimpleBar.instances.has(removedNode) &&
-              !document.documentElement.contains(removedNode) &&
-              SimpleBar.instances.get(removedNode).unMount();
+            !document.documentElement.contains(removedNode) &&
+              SimpleBar.instances.get(removedNode)?.unMount();
           } else {
             Array.prototype.forEach.call(
               (removedNode as Element).querySelectorAll(
                 '[data-simplebar="init"]'
               ),
               (el) => {
-                SimpleBar.instances.has(el) &&
-                  !document.documentElement.contains(el) &&
-                  SimpleBar.instances.get(el).unMount();
+                !document.documentElement.contains(el) &&
+                  SimpleBar.instances.get(el)?.unMount();
               }
             );
           }
