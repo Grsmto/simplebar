@@ -1,3 +1,86 @@
+# (Sun May 05 2024)
+
+#### 🐛 Bug Fix
+
+- `simplebar@6.2.6`
+  - Correct `SimpleBar.instances` type [#689](https://github.com/Grsmto/simplebar/pull/689) ([@andersk](https://github.com/andersk))
+  - Fix typo in README (simplebar/src/simplebar) [#647](https://github.com/Grsmto/simplebar/pull/647) ([@DenisSvistoplasov](https://github.com/DenisSvistoplasov))
+- `simplebar-core@1.2.5`
+  - Do not hide scrollbar if the mouse is being dragged and not yet released. [#684](https://github.com/Grsmto/simplebar/pull/684) ([@thomasdao](https://github.com/thomasdao))
+  - fix(core): Fix vertical scrollbar dragging in rtl mode [#666](https://github.com/Grsmto/simplebar/pull/666) ([@GSilidis](https://github.com/GSilidis))
+- `simplebar-react@3.2.5`
+  - Fix typo in README (react) [#682](https://github.com/Grsmto/simplebar/pull/682) (joohaem.lee@tridge.com [@joohaem](https://github.com/joohaem))
+- `simplebar-vue@2.3.4`
+  - fix(vue&react): fix some demo codes  in examples and README [#668](https://github.com/Grsmto/simplebar/pull/668) ([@X-sky](https://github.com/X-sky))
+- `simplebar-core@1.2.5`, `simplebar@6.2.6`
+  - Add types field to package.json [#661](https://github.com/Grsmto/simplebar/pull/661) ([@andersk](https://github.com/andersk))
+
+#### ⚠️ Pushed to `master`
+
+- fix(examples): fix wrong bundle path ([@Grsmto](https://github.com/Grsmto))
+- fix(examples): fix example page to work on IE11 ([@Grsmto](https://github.com/Grsmto))
+- chore: only use Auto for changelog so we control semver manually ([@Grsmto](https://github.com/Grsmto))
+- chore: add local.log to gitignore ([@Grsmto](https://github.com/Grsmto))
+- chore: upgrade lerna ([@Grsmto](https://github.com/Grsmto))
+- chore: add basic jquery example + fix the iframe demo ([@Grsmto](https://github.com/Grsmto))
+- fix(website): fix images urls ([@Grsmto](https://github.com/Grsmto))
+- chore: bring back skip cleanup in Travis config ([@Grsmto](https://github.com/Grsmto))
+- Revert "chore: remove browserstack access key from travis conf" ([@Grsmto](https://github.com/Grsmto))
+- chore: remove browserstack access key from travis conf ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-angular@3.2.5`, `simplebar-core@1.2.5`, `simplebar-react@3.2.5`, `simplebar-vue@2.3.4`, `simplebar@6.2.6`
+  - Publish ([@Grsmto](https://github.com/Grsmto))
+  - Revert "chore: remove unnecessary build step" ([@Grsmto](https://github.com/Grsmto))
+  - chore: update READMEs ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-core@1.2.5`
+  - Revert "chore(core): revert change in simplebar-core" ([@Grsmto](https://github.com/Grsmto))
+  - chore(core): revert change in simplebar-core ([@Grsmto](https://github.com/Grsmto))
+  - fix(core): fix missing Lodash dependency (fix #655) ([@Grsmto](https://github.com/Grsmto))
+  - chore: fix lodash-es in tests ([@Grsmto](https://github.com/Grsmto))
+  - fix(examples): fix Webpack version mismatch after Angular plugin downgrade ([@Grsmto](https://github.com/Grsmto))
+  - chore(core): rollback to lodash-es so Angular doesn't complain of cjs ([@Grsmto](https://github.com/Grsmto))
+  - chore(core): update tests after changes ([@Grsmto](https://github.com/Grsmto))
+  - fix(core): fix scrollbar hiding even while scrolling ([@Grsmto](https://github.com/Grsmto))
+  - fix(core): fix overflow: auto applied to wrong element on new v6 release ([@Grsmto](https://github.com/Grsmto))
+  - feat(core): set "overflow: auto" by default instead of "hidden" on scrollable element ([@Grsmto](https://github.com/Grsmto))
+  - fix(core): fix scrollbar not showing up initially for framework plugins when autoHide: false ([@Grsmto](https://github.com/Grsmto))
+- `simplebar@6.2.6`
+  - Publish ([@Grsmto](https://github.com/Grsmto))
+  - fix: fix README (ref #648 #645) ([@Grsmto](https://github.com/Grsmto))
+  - fix(vanilla): fix wrong browser export (fix #639) ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-core@1.2.5`, `simplebar@6.2.6`
+  - Revert "feat(core): simplify scrollbar width customisation using css custom property" ([@Grsmto](https://github.com/Grsmto))
+  - feat(core): simplify scrollbar width customisation using css custom property ([@Grsmto](https://github.com/Grsmto))
+  - feat(core): start adding support for multiple classNames (ref #651) ([@Grsmto](https://github.com/Grsmto))
+  - feat(core, vanilla): remove all unnecessary DOM manipulations from core ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-angular@3.2.5`
+  - feat(angular): downgrade back to Angular version 12 for better support ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-vue@2.3.4`
+  - feat(vue): migrate plugin to TS ([@Grsmto](https://github.com/Grsmto))
+  - chore(vue): update snapshot ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-react@3.2.5`
+  - chore: add Auto so we don't have to write releaes/changelogs manually ([@Grsmto](https://github.com/Grsmto))
+  - fix(react): fix support for custom classNames ([@Grsmto](https://github.com/Grsmto))
+  - fix(react): bring back data attribute to React plugin as it breaks CSS ([@Grsmto](https://github.com/Grsmto))
+  - fix(react): prevent conflict between vanilla SimpleBar and react plugin ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-react@3.2.5`, `simplebar-vue@2.3.4`
+  - fix(vue, react): fix usage of custom classNames ([@Grsmto](https://github.com/Grsmto))
+  - feat(vue): set data-attribute on Vue plugin to be 1:1 with other plugins + bring back full test suite ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-angular@3.2.5`, `simplebar-core@1.2.5`, `simplebar-react@3.2.5`, `simplebar-vue@2.3.4`
+  - chore(core, react, vue, angular): set missing accessibility properties ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 8
+
+- [@DenisSvistoplasov](https://github.com/DenisSvistoplasov)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+- Anders Kaseorg ([@andersk](https://github.com/andersk))
+- Grigorii Silidis ([@GSilidis](https://github.com/GSilidis))
+- Joohaem Lee (joohaem.lee@tridge.com)
+- SNUPI ([@joohaem](https://github.com/joohaem))
+- Thomas Dao ([@thomasdao](https://github.com/thomasdao))
+- tse0103x ([@X-sky](https://github.com/X-sky))
+
+---
+
 # (Sat Apr 15 2023)
 
 #### 🐛 Bug Fix

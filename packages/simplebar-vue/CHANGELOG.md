@@ -1,3 +1,28 @@
+# v2.3.4 (Sun May 05 2024)
+
+#### 🐛 Bug Fix
+
+- fix(vue&react): fix some demo codes  in examples and README [#668](https://github.com/Grsmto/simplebar/pull/668) ([@X-sky](https://github.com/X-sky))
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+
+#### ⚠️ Pushed to `master`
+
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- feat(vue): migrate plugin to TS ([@Grsmto](https://github.com/Grsmto))
+- fix(vue, react): fix usage of custom classNames ([@Grsmto](https://github.com/Grsmto))
+- feat(vue): set data-attribute on Vue plugin to be 1:1 with other plugins + bring back full test suite ([@Grsmto](https://github.com/Grsmto))
+- Revert "chore: remove unnecessary build step" ([@Grsmto](https://github.com/Grsmto))
+- chore(vue): update snapshot ([@Grsmto](https://github.com/Grsmto))
+- chore(core, react, vue, angular): set missing accessibility properties ([@Grsmto](https://github.com/Grsmto))
+- chore: update READMEs ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 2
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+- tse0103x ([@X-sky](https://github.com/X-sky))
+
+---
+
 # v2.3.3 (Sat Apr 15 2023)
 
 #### 🐛 Bug Fix
