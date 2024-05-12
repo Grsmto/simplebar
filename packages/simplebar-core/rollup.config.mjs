@@ -31,7 +31,6 @@ export default [
         format: 'umd',
         sourcemap: true,
         globals: {
-          'can-use-dom': 'canUseDOM',
           'lodash-es': '_',
         },
         paths: {

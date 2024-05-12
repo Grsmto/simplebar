@@ -1,9 +1,9 @@
-import canUseDOM from 'can-use-dom';
+import { canUseDOM } from "./helpers";
 
 let cachedScrollbarWidth: number | null = null;
 let cachedDevicePixelRatio: number | null = null;
 
-if (canUseDOM) {
+if (canUseDOM()) {
   window.addEventListener('resize', () => {
     if (cachedDevicePixelRatio !== window.devicePixelRatio) {
       cachedDevicePixelRatio = window.devicePixelRatio;

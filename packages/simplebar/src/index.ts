@@ -1,7 +1,6 @@
-import canUseDOM from 'can-use-dom';
 import SimpleBarCore from 'simplebar-core';
 
-const { getOptions, addClasses } = SimpleBarCore.helpers;
+const { getOptions, addClasses, canUseDOM } = SimpleBarCore.helpers;
 
 export default class SimpleBar extends SimpleBarCore {
   static globalObserver: MutationObserver;
@@ -195,6 +194,6 @@ export default class SimpleBar extends SimpleBarCore {
  * HTML API
  * Called only in a browser env.
  */
-if (canUseDOM) {
+if (canUseDOM()) {
   SimpleBar.initHtmlApi();
 }

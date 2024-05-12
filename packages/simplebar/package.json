@@ -30,7 +30,6 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "can-use-dom": "^0.1.0",
     "simplebar-core": "^1.2.5"
   },
   "devDependencies": {

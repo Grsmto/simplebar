@@ -1,6 +1,5 @@
 import type { DebouncedFunc } from 'lodash-es';
 import { debounce, throttle } from 'lodash-es';
-import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
 import * as helpers from './helpers';
 
@@ -291,7 +290,7 @@ export default class SimpleBarCore {
 
   init() {
     // We stop here on server-side
-    if (canUseDOM) {
+    if (helpers.canUseDOM()) {
       this.initDOM();
 
       this.rtlHelpers = SimpleBarCore.getRtlHelpers();

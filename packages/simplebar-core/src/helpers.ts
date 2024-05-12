@@ -1,5 +1,9 @@
 import type { SimpleBarOptions } from './index';
 
+export function canUseDOM() {
+  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+}
+
 export function getElementWindow(element: Element) {
   if (
     !element ||
