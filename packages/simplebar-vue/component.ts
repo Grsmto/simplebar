@@ -70,7 +70,8 @@ function renderFn({ h, emit, slots, props }: any) {
                     ? {
                         onScroll,
                         class: classNames.contentWrapper,
-                        tabIndex: 0,
+                        tabIndex: props.tabIndex ||
+                          SimpleBarCore.defaultOptions.tabIndex,
                         role: 'region',
                         'aria-label':
                           props.ariaLabel ||
@@ -79,7 +80,8 @@ function renderFn({ h, emit, slots, props }: any) {
                     : {
                         attrs: {
                           class: classNames.contentWrapper,
-                          tabIndex: 0,
+                        tabIndex: props.tabIndex ||
+                          SimpleBarCore.defaultOptions.tabIndex,
                           role: 'region',
                           'aria-label':
                             props.ariaLabel ||
@@ -161,6 +163,11 @@ export default defineComponent({
      * Set custom aria-label attribute for users with screen reader.
      */
     ariaLabel: String,
+
+    /**
+    * Set custom tabIndex attribute.
+    */
+    tabIndex: Number,
 
     /**
      * Activate RTL support by passing `'rtl'`.

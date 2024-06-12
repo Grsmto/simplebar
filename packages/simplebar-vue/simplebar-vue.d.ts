@@ -46,6 +46,11 @@ declare module 'simplebar-vue' {
       */
      ariaLabel?: string;
 
+      /**
+      * Set custom tabIndex attribute.
+      */
+      tabIndex?: number;
+
      /**
       * Activate RTL support by passing `'rtl'`.
       * You will also need a css rule with `direction: rtl`.
