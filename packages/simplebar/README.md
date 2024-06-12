@@ -254,6 +254,12 @@ Controls the min and max size of the scrollbar in `px`.
 Default for `scrollbarMinSize` is `25`.
 Default for `scrollbarMaxSize` is `0` (no max size).
 
+#### ariaLabel
+
+Set custom aria-label attribute for users with screen reader.
+
+The default value is `scrollable content`.
+
 #### tabIndex
 
 tabIndex to set for simplebar. Defaults to `0`.
