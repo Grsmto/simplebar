@@ -26,11 +26,14 @@ export class SimplebarAngularComponent implements OnInit, AfterViewInit {
   elRef: ElementRef;
   SimpleBar: any;
   ariaLabel: string;
+  tabIndex: string;
 
   constructor(elRef: ElementRef, private zone: NgZone) {
     this.elRef = elRef;
     this.ariaLabel =
       this.options.ariaLabel || SimpleBar.defaultOptions.ariaLabel;
+    this.tabIndex =
+      (this.options.tabIndex || SimpleBar.defaultOptions.tabIndex).toString();
   }
 
   ngOnInit() {}

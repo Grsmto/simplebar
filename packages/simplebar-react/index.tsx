@@ -55,7 +55,7 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
       className: `${classNames.contentWrapper}${
         scrollableNodeProps.className ? ` ${scrollableNodeProps.className}` : ''
       }`,
-      tabIndex: 0,
+      tabIndex: options.tabIndex || SimpleBarCore.defaultOptions.tabIndex,
       role: 'region',
       'aria-label': options.ariaLabel || SimpleBarCore.defaultOptions.ariaLabel,
     };

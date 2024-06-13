@@ -18,7 +18,7 @@ test('renders without crashing', () => {
 
 test('renders with options', () => {
   const { container } = render(
-    <SimpleBar forceVisible="y">
+    <SimpleBar forceVisible="y" tabIndex={-1}>
       {[...Array(5)].map((x, i) => (
         <p key={i}>Some content</p>
       ))}

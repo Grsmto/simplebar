@@ -53,9 +53,10 @@ describe('simplebar', () => {
 
   it('works with options as  data attributes', () => {
     const wrapper = shallowMount(simplebar, {
-      attrs: { 'data-simplebar-force-visible': 'true' },
+      attrs: { 'data-simplebar-force-visible': 'true', 'tabIndex': -1 },
     });
     expect(wrapper.vm.SimpleBar.options.forceVisible).toEqual(true);
+    expect(wrapper.vm.SimpleBar.options.tabIndex).toEqual(-1);
   });
 
   it('works with options as props', () => {

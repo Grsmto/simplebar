@@ -82,7 +82,7 @@ export default class SimpleBar extends SimpleBarCore {
       this.wrapperEl.appendChild(this.placeholderEl);
       this.el.appendChild(this.wrapperEl);
 
-      this.contentWrapperEl?.setAttribute('tabindex', '0');
+      this.contentWrapperEl?.setAttribute('tabindex', this.options.tabIndex.toString());
       this.contentWrapperEl?.setAttribute('role', 'region');
       this.contentWrapperEl?.setAttribute('aria-label', this.options.ariaLabel);
     }

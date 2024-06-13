@@ -11,6 +11,7 @@ interface Options {
   scrollbarMaxSize: number;
   classNames: Partial<ClassNames>;
   ariaLabel: string;
+  tabIndex: number;
   scrollableNode: HTMLElement | null;
   contentNode: HTMLElement | null;
   autoHide: boolean;
@@ -126,6 +127,7 @@ export default class SimpleBarCore {
     scrollbarMinSize: 25,
     scrollbarMaxSize: 0,
     ariaLabel: 'scrollable content',
+    tabIndex: 0,
     classNames: {
       contentEl: 'simplebar-content',
       contentWrapper: 'simplebar-content-wrapper',
