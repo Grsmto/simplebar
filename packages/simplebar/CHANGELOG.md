@@ -1,3 +1,35 @@
+# v6.2.7 (Thu Jun 13 2024)
+
+#### 🐛 Bug Fix
+
+- Add tabIndex as a configurable option. [#695](https://github.com/Grsmto/simplebar/pull/695) ([@shubham-padia](https://github.com/shubham-padia))
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+- Correct `SimpleBar.instances` type [#689](https://github.com/Grsmto/simplebar/pull/689) ([@andersk](https://github.com/andersk))
+- Add types field to package.json [#661](https://github.com/Grsmto/simplebar/pull/661) ([@andersk](https://github.com/andersk))
+- Fix typo in README (simplebar/src/simplebar) [#647](https://github.com/Grsmto/simplebar/pull/647) ([@DenisSvistoplasov](https://github.com/DenisSvistoplasov))
+
+#### ⚠️ Pushed to `master`
+
+- remove can-use-dom dependency ([@Grsmto](https://github.com/Grsmto))
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- Revert "feat(core): simplify scrollbar width customisation using css custom property" ([@Grsmto](https://github.com/Grsmto))
+- feat(core): simplify scrollbar width customisation using css custom property ([@Grsmto](https://github.com/Grsmto))
+- feat(core): start adding support for multiple classNames (ref #651) ([@Grsmto](https://github.com/Grsmto))
+- fix: fix README (ref #648 #645) ([@Grsmto](https://github.com/Grsmto))
+- feat(core, vanilla): remove all unnecessary DOM manipulations from core ([@Grsmto](https://github.com/Grsmto))
+- Revert "chore: remove unnecessary build step" ([@Grsmto](https://github.com/Grsmto))
+- fix(vanilla): fix wrong browser export (fix #639) ([@Grsmto](https://github.com/Grsmto))
+- chore: update READMEs ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 4
+
+- [@DenisSvistoplasov](https://github.com/DenisSvistoplasov)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+- Anders Kaseorg ([@andersk](https://github.com/andersk))
+- Shubham Padia ([@shubham-padia](https://github.com/shubham-padia))
+
+---
+
 # v6.2.6 (Sun May 05 2024)
 
 #### 🐛 Bug Fix

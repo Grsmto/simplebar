@@ -1,3 +1,46 @@
+# v1.2.6 (Thu Jun 13 2024)
+
+#### 🐛 Bug Fix
+
+- Add tabIndex as a configurable option. [#695](https://github.com/Grsmto/simplebar/pull/695) ([@shubham-padia](https://github.com/shubham-padia))
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+- Do not hide scrollbar if the mouse is being dragged and not yet released. [#684](https://github.com/Grsmto/simplebar/pull/684) ([@thomasdao](https://github.com/thomasdao))
+- fix(core): Fix vertical scrollbar dragging in rtl mode [#666](https://github.com/Grsmto/simplebar/pull/666) ([@GSilidis](https://github.com/GSilidis))
+- Add types field to package.json [#661](https://github.com/Grsmto/simplebar/pull/661) ([@andersk](https://github.com/andersk))
+
+#### ⚠️ Pushed to `master`
+
+- remove can-use-dom dependency ([@Grsmto](https://github.com/Grsmto))
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- Revert "chore(core): revert change in simplebar-core" ([@Grsmto](https://github.com/Grsmto))
+- chore(core): revert change in simplebar-core ([@Grsmto](https://github.com/Grsmto))
+- fix(core): fix missing Lodash dependency (fix #655) ([@Grsmto](https://github.com/Grsmto))
+- Revert "feat(core): simplify scrollbar width customisation using css custom property" ([@Grsmto](https://github.com/Grsmto))
+- feat(core): simplify scrollbar width customisation using css custom property ([@Grsmto](https://github.com/Grsmto))
+- chore: fix lodash-es in tests ([@Grsmto](https://github.com/Grsmto))
+- fix(examples): fix Webpack version mismatch after Angular plugin downgrade ([@Grsmto](https://github.com/Grsmto))
+- feat(core): start adding support for multiple classNames (ref #651) ([@Grsmto](https://github.com/Grsmto))
+- chore(core): rollback to lodash-es so Angular doesn't complain of cjs ([@Grsmto](https://github.com/Grsmto))
+- chore(core): update tests after changes ([@Grsmto](https://github.com/Grsmto))
+- feat(core, vanilla): remove all unnecessary DOM manipulations from core ([@Grsmto](https://github.com/Grsmto))
+- Revert "chore: remove unnecessary build step" ([@Grsmto](https://github.com/Grsmto))
+- fix(core): fix scrollbar hiding even while scrolling ([@Grsmto](https://github.com/Grsmto))
+- chore(core, react, vue, angular): set missing accessibility properties ([@Grsmto](https://github.com/Grsmto))
+- fix(core): fix overflow: auto applied to wrong element on new v6 release ([@Grsmto](https://github.com/Grsmto))
+- feat(core): set "overflow: auto" by default instead of "hidden" on scrollable element ([@Grsmto](https://github.com/Grsmto))
+- fix(core): fix scrollbar not showing up initially for framework plugins when autoHide: false ([@Grsmto](https://github.com/Grsmto))
+- chore: update READMEs ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 5
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+- Anders Kaseorg ([@andersk](https://github.com/andersk))
+- Grigorii Silidis ([@GSilidis](https://github.com/GSilidis))
+- Shubham Padia ([@shubham-padia](https://github.com/shubham-padia))
+- Thomas Dao ([@thomasdao](https://github.com/thomasdao))
+
+---
+
 # v1.2.5 (Sun May 05 2024)
 
 #### 🐛 Bug Fix
