@@ -1,6 +1,5 @@
 import type { DebouncedFunc } from 'lodash-es';
 import { debounce, throttle } from 'lodash-es';
-import canUseDOM from 'can-use-dom';
 import scrollbarWidth from './scrollbar-width';
 import * as helpers from './helpers';
 
@@ -293,7 +292,7 @@ export default class SimpleBarCore {
 
   init() {
     // We stop here on server-side
-    if (canUseDOM) {
+    if (helpers.canUseDOM) {
       this.initDOM();
 
       this.rtlHelpers = SimpleBarCore.getRtlHelpers();
@@ -608,7 +607,7 @@ export default class SimpleBarCore {
   }
 
   hideScrollbar(axis: Axis = 'y') {
-    if (this.isDragging) return
+    if (this.isDragging) return;
     if (this.axis[axis].isOverflowing && this.axis[axis].scrollbar.isVisible) {
       removeClasses(this.axis[axis].scrollbar.el, this.classNames.visible);
       this.axis[axis].scrollbar.isVisible = false;
@@ -824,7 +823,7 @@ export default class SimpleBarCore {
    * on scrollbar handle drag movement starts
    */
   onDragStart(e: any, axis: Axis = 'y') {
-    this.isDragging = true
+    this.isDragging = true;
     const elDocument = getElementDocument(this.el);
     const elWindow = getElementWindow(this.el);
     const scrollbar = this.axis[axis].scrollbar;
@@ -879,11 +878,12 @@ export default class SimpleBarCore {
       eventOffset -
       (track.rect?.[this.axis[this.draggedAxis].offsetAttr] ?? 0) -
       this.axis[this.draggedAxis].dragOffset;
-    dragPos = this.draggedAxis === 'x' && this.isRtl
-      ? (track.rect?.[this.axis[this.draggedAxis].sizeAttr] ?? 0) -
-        scrollbar.size -
-        dragPos
-      : dragPos;
+    dragPos =
+      this.draggedAxis === 'x' && this.isRtl
+        ? (track.rect?.[this.axis[this.draggedAxis].sizeAttr] ?? 0) -
+          scrollbar.size -
+          dragPos
+        : dragPos;
     // Convert the mouse position into a percentage of the scrollbar height/width.
     const dragPerc = dragPos / (trackSize - scrollbar.size);
 
@@ -905,7 +905,7 @@ export default class SimpleBarCore {
    * End scroll handle drag
    */
   onEndDrag = (e: any) => {
-    this.isDragging = false
+    this.isDragging = false;
     const elDocument = getElementDocument(this.el);
     const elWindow = getElementWindow(this.el);
     e.preventDefault();

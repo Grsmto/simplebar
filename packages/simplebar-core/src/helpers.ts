@@ -68,3 +68,9 @@ export function removeClasses(el: HTMLElement | null, classes: string) {
 export function classNamesToQuery(classNames: string) {
   return `.${classNames.split(' ').join('.')}`;
 }
+
+export const canUseDOM = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);

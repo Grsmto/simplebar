@@ -37,7 +37,6 @@ if (process.env.BUILD !== 'development') {
       format: 'umd',
       exports: 'named',
       globals: {
-        'can-use-dom': 'canUseDOM',
         'simplebar-core': 'SimpleBar',
       },
     },
@@ -54,9 +53,6 @@ if (process.env.BUILD !== 'development') {
       name: 'SimpleBar',
       file: pkg.unpkg,
       format: 'iife',
-      globals: {
-        'can-use-dom': 'canUseDOM',
-      },
     },
     plugins: [
       resolve(),
@@ -75,9 +71,6 @@ if (process.env.BUILD !== 'development') {
         name: 'SimpleBar',
         file: 'dist/simplebar.js',
         format: 'iife',
-        globals: {
-          'can-use-dom': 'canUseDOM',
-        },
       },
       plugins: [
         resolve(),

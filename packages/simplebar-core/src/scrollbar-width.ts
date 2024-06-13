@@ -1,4 +1,4 @@
-import canUseDOM from 'can-use-dom';
+import { canUseDOM } from './helpers';
 
 let cachedScrollbarWidth: number | null = null;
 let cachedDevicePixelRatio: number | null = null;

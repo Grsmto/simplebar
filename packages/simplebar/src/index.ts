@@ -1,7 +1,6 @@
-import canUseDOM from 'can-use-dom';
 import SimpleBarCore from 'simplebar-core';
 
-const { getOptions, addClasses } = SimpleBarCore.helpers;
+const { getOptions, addClasses, canUseDOM } = SimpleBarCore.helpers;
 
 export default class SimpleBar extends SimpleBarCore {
   static globalObserver: MutationObserver;
@@ -82,7 +81,10 @@ export default class SimpleBar extends SimpleBarCore {
       this.wrapperEl.appendChild(this.placeholderEl);
       this.el.appendChild(this.wrapperEl);
 
-      this.contentWrapperEl?.setAttribute('tabindex', this.options.tabIndex.toString());
+      this.contentWrapperEl?.setAttribute(
+        'tabindex',
+        this.options.tabIndex.toString()
+      );
       this.contentWrapperEl?.setAttribute('role', 'region');
       this.contentWrapperEl?.setAttribute('aria-label', this.options.ariaLabel);
     }
