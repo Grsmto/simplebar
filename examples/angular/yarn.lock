@@ -189,7 +189,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/compiler-cli@^18.0.0":
+"@angular/compiler-cli@^18.0.3":
   version "18.0.3"
   resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-18.0.3.tgz#ab2c5981d4fa5920976e43203d5d118fa812be6a"
   integrity sha512-mxwQEeP94YBM6C9A2YfkV7ug1sHgh0fU/TSBpQcm5ni4cZiVPu6q/+Ft7hyFTKe2p3tKQme33+xVjsWhtOCx0A==
@@ -2042,7 +2042,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/jasmine@~5.1.0":
+"@types/jasmine@~5.1.4":
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-5.1.4.tgz#0de3f6ca753e10d1600ce1864ae42cfd47cf9924"
   integrity sha512-px7OMFO/ncXxixDe1zR13V1iycqWae0MxTaw62RpFlksUi5QuNWgQJFkTQjIOvrmutJbI7Fp2Y2N1F6D2R4G6w==
@@ -4352,7 +4352,7 @@ karma-chrome-launcher@~3.2.0:
   dependencies:
     which "^1.2.1"
 
-karma-coverage@~2.2.0:
+karma-coverage@~2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/karma-coverage/-/karma-coverage-2.2.1.tgz#e1cc074f93ace9dc4fb7e7aeca7135879c2e358c"
   integrity sha512-yj7hbequkQP2qOSb20GuNSIyE//PgJWHwC2IydLE6XRtsnaflv+/OSGNssPjobYUlhVVagy99TQpqUt3vAUG7A==
@@ -4383,7 +4383,7 @@ karma-source-map-support@1.4.0:
   dependencies:
     source-map-support "^0.5.5"
 
-karma@~6.4.0:
+karma@~6.4.3:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/karma/-/karma-6.4.3.tgz#763e500f99597218bbb536de1a14acc4ceea7ce8"
   integrity sha512-LuucC/RE92tJ8mlCwqEoRWXP38UMAqpnq98vktmS9SznSoUPPUJQbc91dHcxcunROvfQjdORVA/YFviH+Xci9Q==
@@ -5884,7 +5884,7 @@ sigstore@^2.2.0:
     "@sigstore/tuf" "^2.3.4"
     "@sigstore/verify" "^1.2.1"
 
-simplebar-angular@^3.2.5:
+simplebar-angular@latest:
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/simplebar-angular/-/simplebar-angular-3.2.5.tgz#b2459a408a2a1f182ad8f84ef09738c606383211"
   integrity sha512-viODP2Tt6lUxU9uT3EVL/ll533pvHDumeksE3N0EtB2phDQViyZKKvUGWMkwBItjZfvDXAJ60meOEcjPCrq6sw==
