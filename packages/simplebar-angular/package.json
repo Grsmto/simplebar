@@ -21,6 +21,7 @@
       "git add"
     ]
   },
+  "license": "MIT",
   "keywords": [
     "simplebar-angular",
     "angular",
