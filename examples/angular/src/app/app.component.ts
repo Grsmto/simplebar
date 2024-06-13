@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, SimplebarAngularModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'angular';
