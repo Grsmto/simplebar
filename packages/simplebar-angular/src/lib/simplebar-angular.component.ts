@@ -48,7 +48,7 @@ export class SimplebarAngularComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy() {
-    this.SimpleBar.unMount();
+    this.SimpleBar?.unMount();
     this.SimpleBar = null;
   }
 }
