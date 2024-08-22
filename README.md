@@ -16,10 +16,9 @@ You keep the awesomeness of native scrolling...with a custom scrollbar!
 SimpleBar **does NOT implement a custom scroll behaviour**. It keeps the **native** `overflow: auto` scroll and **only** replace the scrollbar visual appearance.
 
 - **🐦 Follow me on [Twitter!](https://twitter.com/adriendenat) or [Mastodon!](https://mas.to/@adrien)**
-- **👨‍💻 I'm available for hire! [Reach out to me!](https://adriendenat.com/)**
-- **🚧 Check out my new project [Scroll Snap Carousel](https://github.com/Grsmto/scroll-snap-carousel)!**
+- **👨‍💻 If you like Simplebar, [buy me a coffee!](adriendenat)**
 
-⚠️ SimpleBar v6 is here! There are some **breaking changes!** Make sure to check out [the changelog](https://github.com/Grsmto/simplebar/blob/master/packages/simplebar-core/CHANGELOG.md) before updating.
+<a href="https://www.buymeacoffee.com/adriendenat" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 #### Design it as you want
 
