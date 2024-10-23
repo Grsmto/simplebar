@@ -1,5 +1,7 @@
 import type { DebouncedFunc } from 'lodash-es';
-import { debounce, throttle } from 'lodash-es';
+import debounce from 'lodash-es/debounce';
+import throttle from 'lodash-es/throttle';
+
 import scrollbarWidth from './scrollbar-width';
 import * as helpers from './helpers';
 
