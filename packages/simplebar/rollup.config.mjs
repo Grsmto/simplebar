@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
-import { getBanner, getExternals } from '../../rollup.config.mjs';
+import { getBanner, getExternals, tsConfig } from '../../rollup.config.mjs';
 
 const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
@@ -19,10 +19,7 @@ const builds = [
       format: 'esm',
       sourcemap: true,
     },
-    plugins: [
-      typescript({ tsconfig: '../../tsconfig.json' }),
-      license(getBanner(pkg)),
-    ],
+    plugins: [typescript(tsConfig), license(getBanner(pkg))],
   },
 ];
 
@@ -40,10 +37,7 @@ if (process.env.BUILD !== 'development') {
         'simplebar-core': 'SimpleBar',
       },
     },
-    plugins: [
-      typescript({ tsconfig: '../../tsconfig.json' }),
-      license(getBanner(pkg)),
-    ],
+    plugins: [typescript(tsConfig), license(getBanner(pkg))],
   });
 
   // browser script tag build, minified
@@ -57,7 +51,7 @@ if (process.env.BUILD !== 'development') {
     plugins: [
       resolve(),
       commonjs(),
-      typescript({ tsconfig: '../../tsconfig.json' }),
+      typescript(tsConfig),
       terser(),
       license(getBanner(pkg)),
     ],
@@ -75,7 +69,7 @@ if (process.env.BUILD !== 'development') {
       plugins: [
         resolve(),
         commonjs(),
-        typescript({ tsconfig: '../../tsconfig.json' }),
+        typescript(tsConfig),
         license(getBanner(pkg)),
       ],
     }
