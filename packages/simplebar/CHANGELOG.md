@@ -1,3 +1,20 @@
+# v6.2.8 (Tue Dec 10 2024)
+
+#### 🐛 Bug Fix
+
+- Clean up unused dependencies [#696](https://github.com/Grsmto/simplebar/pull/696) ([@CallanMcNulty](https://github.com/CallanMcNulty))
+
+#### ⚠️ Pushed to `master`
+
+- fix(simplebar): fix wrong tsconfig loaded (oi@adriendenat.com)
+
+#### Authors: 2
+
+- [@CallanMcNulty](https://github.com/CallanMcNulty)
+- Adrien Denat (oi@adriendenat.com)
+
+---
+
 # v6.2.7 (Thu Jun 13 2024)
 
 #### 🐛 Bug Fix

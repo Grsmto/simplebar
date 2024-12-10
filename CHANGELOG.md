@@ -1,3 +1,38 @@
+# (Tue Dec 10 2024)
+
+#### 🐛 Bug Fix
+
+- `simplebar-angular@3.2.7`
+  - fix(Angular): fixed applying custom tabIndex and ariaLabel [#710](https://github.com/Grsmto/simplebar/pull/710) (aleksei.koluzov@phreesia.com [@skrappyzz](https://github.com/skrappyzz))
+  - unmount only if init fixes #572 [#699](https://github.com/Grsmto/simplebar/pull/699) ([@yelhouti](https://github.com/yelhouti))
+- `simplebar-core@1.2.7`, `simplebar@6.2.8`
+  - Clean up unused dependencies [#696](https://github.com/Grsmto/simplebar/pull/696) ([@CallanMcNulty](https://github.com/CallanMcNulty))
+
+#### ⚠️ Pushed to `master`
+
+- chore(config): remove deprecated es3 target (oi@adriendenat.com)
+- fix(config): fix missing outdir in tsconfig (oi@adriendenat.com)
+- Update README.md (oi@adriendenat.com)
+- add funding.yml (oi@adriendenat.com)
+- `simplebar-core@1.2.7`
+  - chore(core): replace lodash-es by lodash (oi@adriendenat.com)
+  - fix(core): specify file extension on module for node 20+ (oi@adriendenat.com)
+  - chore(core): import lodash modules directly instead of barrel file (ref #703) (oi@adriendenat.com)
+- `simplebar@6.2.8`
+  - fix(simplebar): fix wrong tsconfig loaded (oi@adriendenat.com)
+- `simplebar-angular@3.2.7`
+  - chore: fix angular example (oi@adriendenat.com)
+
+#### Authors: 5
+
+- [@CallanMcNulty](https://github.com/CallanMcNulty)
+- [@skrappyzz](https://github.com/skrappyzz)
+- [@yelhouti](https://github.com/yelhouti)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+- Aleksei Koluzov (aleksei.koluzov@phreesia.com)
+
+---
+
 # (Thu Jun 13 2024)
 
 #### 🐛 Bug Fix

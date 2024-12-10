@@ -1,3 +1,22 @@
+# v1.2.7 (Tue Dec 10 2024)
+
+#### 🐛 Bug Fix
+
+- Clean up unused dependencies [#696](https://github.com/Grsmto/simplebar/pull/696) ([@CallanMcNulty](https://github.com/CallanMcNulty))
+
+#### ⚠️ Pushed to `master`
+
+- chore(core): replace lodash-es by lodash (oi@adriendenat.com)
+- fix(core): specify file extension on module for node 20+ (oi@adriendenat.com)
+- chore(core): import lodash modules directly instead of barrel file (ref #703) (oi@adriendenat.com)
+
+#### Authors: 2
+
+- [@CallanMcNulty](https://github.com/CallanMcNulty)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v1.2.6 (Thu Jun 13 2024)
 
 #### 🐛 Bug Fix
