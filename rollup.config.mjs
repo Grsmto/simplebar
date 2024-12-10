@@ -31,6 +31,7 @@ export const babelConfig = {
 };
 
 export const tsConfig = {
+  outDir: 'dist',
   tsconfig: '../../tsconfig.json',
   exclude: ['**/*.test.ts', '**/*.test.tsx', 'tests/*'],
 };
