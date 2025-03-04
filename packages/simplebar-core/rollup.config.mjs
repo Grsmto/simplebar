@@ -33,10 +33,8 @@ export default [
         globals: {
           'lodash-es': '_',
         },
-        paths: {
-          // Lodash-es won't work for UMD build, so we alias to lodash
-          'lodash-es': 'lodash',
-        },
+        // Lodash-es won't work for UMD build, so we alias to lodash
+        paths: (id) => id.replace('lodash-es/', 'lodash/'),
       },
     ],
     plugins: [typescript(tsConfig), license(getBanner(pkg))],

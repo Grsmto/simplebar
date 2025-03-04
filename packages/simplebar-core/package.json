@@ -34,9 +34,11 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
     "browserstack-local": "^1.5.1"
   },
   "lint-staged": {
