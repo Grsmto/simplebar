@@ -19,6 +19,13 @@
   "types": "./dist/index.d.ts",
   "unpkg": "./dist/simplebar.min.js",
   "style": "./dist/simplebar.min.css",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/simplebar.min.css": "./dist/simplebar.min.css"
+  },
   "homepage": "https://grsmto.github.io/simplebar/",
   "bugs": "https://github.com/grsmto/simplebar/issues",
   "license": "MIT",
