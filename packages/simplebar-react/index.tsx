@@ -123,10 +123,10 @@ const SimpleBar = React.forwardRef<SimpleBarCore | null, Props>(
           </div>
           <div className={classNames.placeholder} />
         </div>
-        <div className={`${classNames.track} simplebar-horizontal`}>
+        <div className={`${classNames.track} ${classNames.horizontal}`}>
           <div className={classNames.scrollbar} />
         </div>
-        <div className={`${classNames.track} simplebar-vertical`}>
+        <div className={`${classNames.track} ${classNames.vertical}`}>
           <div className={classNames.scrollbar} />
         </div>
       </div>
