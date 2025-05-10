@@ -1,3 +1,15 @@
+# v2.4.1 (Sat May 10 2025)
+
+#### ⚠️ Pushed to `master`
+
+- Publish ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v2.3.5 (Thu Jun 13 2024)
 
 #### 🐛 Bug Fix

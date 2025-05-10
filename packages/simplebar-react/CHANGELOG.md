@@ -1,3 +1,21 @@
+# v3.3.1 (Sat May 10 2025)
+
+#### 🐛 Bug Fix
+
+- fix(react): horizontal & vertical classNames [#656](https://github.com/Grsmto/simplebar/pull/656) ([@fakundo](https://github.com/fakundo))
+
+#### ⚠️ Pushed to `master`
+
+- chore(react): also add exports field ([@Grsmto](https://github.com/Grsmto))
+- Publish ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 2
+
+- [@fakundo](https://github.com/fakundo)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v3.2.6 (Thu Jun 13 2024)
 
 #### 🐛 Bug Fix

@@ -1,3 +1,25 @@
+# v3.3.1 (Sat May 10 2025)
+
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+- fix(Angular): fixed applying custom tabIndex and ariaLabel [#710](https://github.com/Grsmto/simplebar/pull/710) (aleksei.koluzov@phreesia.com [@skrappyzz](https://github.com/skrappyzz))
+- unmount only if init fixes #572 [#699](https://github.com/Grsmto/simplebar/pull/699) ([@yelhouti](https://github.com/yelhouti))
+
+#### ⚠️ Pushed to `master`
+
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- chore: fix angular example ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 4
+
+- [@skrappyzz](https://github.com/skrappyzz)
+- [@yelhouti](https://github.com/yelhouti)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+- Aleksei Koluzov (aleksei.koluzov@phreesia.com)
+
+---
+
 # v3.2.7 (Tue Dec 10 2024)
 
 #### 🐛 Bug Fix
