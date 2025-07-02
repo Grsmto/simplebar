@@ -18,7 +18,8 @@
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./dist/simplebar.min.css": "./dist/simplebar.min.css"
   },
