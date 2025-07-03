@@ -1,3 +1,27 @@
+# v1.3.2 (Thu Jul 03 2025)
+
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+- chore(core): replace lodash-es by lodash ([@Grsmto](https://github.com/Grsmto))
+- Clean up unused dependencies [#696](https://github.com/Grsmto/simplebar/pull/696) ([@CallanMcNulty](https://github.com/CallanMcNulty))
+
+#### ⚠️ Pushed to `master`
+
+- disable e2e tests since setup is broken ([@Grsmto](https://github.com/Grsmto))
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- fix missing file extension ([@Grsmto](https://github.com/Grsmto))
+- fix(core): use both lodash and lodash-es for cjs and esm correspondingly ([@Grsmto](https://github.com/Grsmto))
+- fix(core): specify file extension on module for node 20+ ([@Grsmto](https://github.com/Grsmto))
+- chore(core): import lodash modules directly instead of barrel file (ref #703) ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 2
+
+- [@CallanMcNulty](https://github.com/CallanMcNulty)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v1.3.1 (Sat May 10 2025)
 
 #### 🐛 Bug Fix

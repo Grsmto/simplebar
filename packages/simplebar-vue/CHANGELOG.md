@@ -1,3 +1,19 @@
+# v2.4.2 (Thu Jul 03 2025)
+
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+
+#### ⚠️ Pushed to `master`
+
+- Publish ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v2.4.1 (Sat May 10 2025)
 
 #### ⚠️ Pushed to `master`

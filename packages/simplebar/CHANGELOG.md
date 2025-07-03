@@ -1,3 +1,25 @@
+# v6.3.2 (Thu Jul 03 2025)
+
+#### 🐛 Bug Fix
+
+- Add types to exports [#722](https://github.com/Grsmto/simplebar/pull/722) ([@DennisCiba](https://github.com/DennisCiba))
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+- Clean up unused dependencies [#696](https://github.com/Grsmto/simplebar/pull/696) ([@CallanMcNulty](https://github.com/CallanMcNulty))
+
+#### ⚠️ Pushed to `master`
+
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- feat(simplebar): add missing exports field in pkg.json to help modern bundlers ([@Grsmto](https://github.com/Grsmto))
+- fix(simplebar): fix wrong tsconfig loaded ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 3
+
+- [@CallanMcNulty](https://github.com/CallanMcNulty)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+- Dennis Ciba ([@DennisCiba](https://github.com/DennisCiba))
+
+---
+
 # v6.3.1 (Sat May 10 2025)
 
 #### 🐛 Bug Fix

@@ -1,3 +1,23 @@
+# v3.3.2 (Thu Jul 03 2025)
+
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+- fix(react): horizontal & vertical classNames [#656](https://github.com/Grsmto/simplebar/pull/656) ([@fakundo](https://github.com/fakundo))
+
+#### ⚠️ Pushed to `master`
+
+- add missing types in exports ([@Grsmto](https://github.com/Grsmto))
+- Publish ([@Grsmto](https://github.com/Grsmto))
+- chore(react): also add exports field ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 2
+
+- [@fakundo](https://github.com/fakundo)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v3.3.1 (Sat May 10 2025)
 
 #### 🐛 Bug Fix

@@ -1,3 +1,55 @@
+# (Thu Jul 03 2025)
+
+#### 🐛 Bug Fix
+
+- `simplebar@6.3.2`
+  - Add types to exports [#722](https://github.com/Grsmto/simplebar/pull/722) ([@DennisCiba](https://github.com/DennisCiba))
+- `simplebar-react@3.3.2`
+  - fix(react): horizontal & vertical classNames [#656](https://github.com/Grsmto/simplebar/pull/656) ([@fakundo](https://github.com/fakundo))
+- `simplebar-core@1.3.2`
+  - chore(core): replace lodash-es by lodash ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-angular@3.3.2`
+  - fix(Angular): fixed applying custom tabIndex and ariaLabel [#710](https://github.com/Grsmto/simplebar/pull/710) (aleksei.koluzov@phreesia.com [@skrappyzz](https://github.com/skrappyzz))
+  - unmount only if init fixes #572 [#699](https://github.com/Grsmto/simplebar/pull/699) ([@yelhouti](https://github.com/yelhouti))
+- `simplebar-core@1.3.2`, `simplebar@6.3.2`
+  - Clean up unused dependencies [#696](https://github.com/Grsmto/simplebar/pull/696) ([@CallanMcNulty](https://github.com/CallanMcNulty))
+
+#### ⚠️ Pushed to `master`
+
+- update auto ([@Grsmto](https://github.com/Grsmto))
+- chore(config): remove deprecated es3 target ([@Grsmto](https://github.com/Grsmto))
+- fix(config): fix missing outdir in tsconfig ([@Grsmto](https://github.com/Grsmto))
+- Update README.md ([@Grsmto](https://github.com/Grsmto))
+- add funding.yml ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-core@1.3.2`
+  - disable e2e tests since setup is broken ([@Grsmto](https://github.com/Grsmto))
+  - fix missing file extension ([@Grsmto](https://github.com/Grsmto))
+  - fix(core): use both lodash and lodash-es for cjs and esm correspondingly ([@Grsmto](https://github.com/Grsmto))
+  - fix(core): specify file extension on module for node 20+ ([@Grsmto](https://github.com/Grsmto))
+  - chore(core): import lodash modules directly instead of barrel file (ref #703) ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-react@3.3.2`
+  - add missing types in exports ([@Grsmto](https://github.com/Grsmto))
+  - chore(react): also add exports field ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-examples@3.1.2`, `simplebar-angular@3.3.2`, `simplebar-core@1.3.2`, `simplebar-react@3.3.2`, `simplebar-vue@2.4.2`, `simplebar@6.3.2`, `simplebar-website@0.2.2`
+  - Publish ([@Grsmto](https://github.com/Grsmto))
+- `simplebar@6.3.2`
+  - feat(simplebar): add missing exports field in pkg.json to help modern bundlers ([@Grsmto](https://github.com/Grsmto))
+  - fix(simplebar): fix wrong tsconfig loaded ([@Grsmto](https://github.com/Grsmto))
+- `simplebar-angular@3.3.2`
+  - chore: fix angular example ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 7
+
+- [@CallanMcNulty](https://github.com/CallanMcNulty)
+- [@fakundo](https://github.com/fakundo)
+- [@skrappyzz](https://github.com/skrappyzz)
+- [@yelhouti](https://github.com/yelhouti)
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+- Aleksei Koluzov (aleksei.koluzov@phreesia.com)
+- Dennis Ciba ([@DennisCiba](https://github.com/DennisCiba))
+
+---
+
 # (Sat May 10 2025)
 
 #### 🐛 Bug Fix
