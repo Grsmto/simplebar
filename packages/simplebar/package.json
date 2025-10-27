@@ -25,6 +25,7 @@
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     },
+    "./dist/simplebar.css": "./dist/simplebar.css",
     "./dist/simplebar.min.css": "./dist/simplebar.min.css"
   },
   "homepage": "https://grsmto.github.io/simplebar/",
