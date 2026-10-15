@@ -122,6 +122,62 @@ test('mouse should be within bounds', () => {
   expect(isWithinBounds).toBeTruthy();
 });
 
+for (const axis of ['x', 'y'] as const) {
+  test(`positions and drags the ${axis} handle using the scroll viewport`, () => {
+    const host = document.getElementById('simplebar') as HTMLElement;
+    host.style.width = '300px';
+    host.style.height = '300px';
+    const simpleBar = new SimpleBar(host);
+    const props = simpleBar.axis[axis];
+    const scrollElement = simpleBar.getScrollElement() as HTMLElement;
+    const track = props.track.el as HTMLElement;
+    const handle = props.scrollbar.el as HTMLElement;
+
+    Object.defineProperty(scrollElement, props.scrollSizeAttr, { value: 1220 });
+    Object.defineProperty(
+      scrollElement,
+      axis === 'x' ? 'clientWidth' : 'clientHeight',
+      { value: 340 }
+    );
+    Object.defineProperty(track, props.offsetSizeAttr, { value: 340 });
+    props.isOverflowing = true;
+    props.scrollbar.size = 70;
+    simpleBar.elStyles = getComputedStyle(host);
+    scrollElement[props.scrollOffsetAttr] = 880;
+
+    simpleBar.positionScrollbar(axis);
+    expect(handle.style.transform).toBe(
+      axis === 'x' ? 'translate3d(270px, 0, 0)' : 'translate3d(0, 270px, 0)'
+    );
+
+    props.track.rect = { left: 0, top: 0, width: 340, height: 340 } as DOMRect;
+    props.dragOffset = 0;
+    simpleBar.draggedAxis = axis;
+    scrollElement[props.scrollOffsetAttr] = 0;
+    simpleBar.drag({
+      pageX: 270,
+      pageY: 270,
+      preventDefault() {},
+      stopPropagation() {},
+    });
+    expect(scrollElement[props.scrollOffsetAttr]).toBe(880);
+
+    scrollElement[props.scrollOffsetAttr] = 0;
+    simpleBar.mouseX = 339;
+    simpleBar.mouseY = 339;
+    const frame = jest
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation((callback) => {
+        callback(0);
+        return 0;
+      });
+    simpleBar.onTrackClick({ preventDefault() {} }, axis);
+    expect(scrollElement[props.scrollOffsetAttr]).toBe(360);
+    frame.mockRestore();
+    simpleBar.unMount();
+  });
+}
+
 test('onPointerEvent listener should be unsubscribed on unmount', () => {
   const element = document.getElementById('simplebar');
   const init = SimpleBar.prototype.init;
