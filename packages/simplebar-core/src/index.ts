@@ -47,6 +47,7 @@ type AxisProps = {
   sizeAttr: 'width' | 'height';
   scrollSizeAttr: 'scrollWidth' | 'scrollHeight';
   offsetSizeAttr: 'offsetWidth' | 'offsetHeight';
+  clientSizeAttr: 'clientWidth' | 'clientHeight';
   offsetAttr: 'left' | 'top';
   overflowAttr: 'overflowX' | 'overflowY';
   dragOffset: number;
@@ -167,6 +168,7 @@ export default class SimpleBarCore {
         sizeAttr: 'width',
         scrollSizeAttr: 'scrollWidth',
         offsetSizeAttr: 'offsetWidth',
+        clientSizeAttr: 'clientWidth',
         offsetAttr: 'left',
         overflowAttr: 'overflowX',
         dragOffset: 0,
@@ -180,6 +182,7 @@ export default class SimpleBarCore {
         sizeAttr: 'height',
         scrollSizeAttr: 'scrollHeight',
         offsetSizeAttr: 'offsetHeight',
+        clientSizeAttr: 'clientHeight',
         offsetAttr: 'top',
         overflowAttr: 'overflowY',
         dragOffset: 0,
@@ -547,7 +550,7 @@ export default class SimpleBarCore {
     const contentSize = this.contentWrapperEl[this.axis[axis].scrollSizeAttr];
     const trackSize =
       this.axis[axis].track.el?.[this.axis[axis].offsetSizeAttr] || 0;
-    const hostSize = parseInt(this.elStyles[this.axis[axis].sizeAttr], 10);
+    const hostSize = this.contentWrapperEl[this.axis[axis].clientSizeAttr];
 
     let scrollOffset = this.contentWrapperEl[this.axis[axis].scrollOffsetAttr];
 
@@ -861,10 +864,8 @@ export default class SimpleBarCore {
     const scrollbar = this.axis[this.draggedAxis].scrollbar;
     const contentSize =
       this.contentWrapperEl?.[this.axis[this.draggedAxis].scrollSizeAttr] ?? 0;
-    const hostSize = parseInt(
-      this.elStyles?.[this.axis[this.draggedAxis].sizeAttr] ?? '0px',
-      10
-    );
+    const hostSize =
+      this.contentWrapperEl[this.axis[this.draggedAxis].clientSizeAttr];
 
     e.preventDefault();
     e.stopPropagation();
@@ -952,10 +953,7 @@ export default class SimpleBarCore {
       currentAxis.scrollbar.el.getBoundingClientRect();
     const scrollbar = this.axis[axis].scrollbar;
     const scrollbarOffset = scrollbar.rect?.[this.axis[axis].offsetAttr] ?? 0;
-    const hostSize = parseInt(
-      this.elStyles?.[this.axis[axis].sizeAttr] ?? '0px',
-      10
-    );
+    const hostSize = this.contentWrapperEl[this.axis[axis].clientSizeAttr];
     let scrolled = this.contentWrapperEl[this.axis[axis].scrollOffsetAttr];
     const t =
       axis === 'y'
